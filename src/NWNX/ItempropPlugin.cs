@@ -10,10 +10,10 @@ namespace NWNX
         // / @brief Convert native itemproperty type to unpacked structure.
         // / @param ip The itemproperty to convert.
         // / @return A constructed NWNX_IPUnpacked.
-        public static IPUnpacked UnpackIP(NWN.ItemProperty ip)
+        public static IPUnpacked UnpackIP(System.IntPtr ip)
         {
             NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_ItemProperty, "UnpackIP");
-            NWN.Internal.NativeFunctions.nwnxPushItemProperty(ip.Handle);
+            NWN.Internal.NativeFunctions.nwnxPushItemProperty(ip);
             NWN.Internal.NativeFunctions.nwnxCallFunction();
             IPUnpacked retVal;
             retVal.sTag = NWN.Internal.NativeFunctions.nwnxPopString();
@@ -34,7 +34,7 @@ namespace NWNX
         // / @brief Convert unpacked itemproperty structure to native type.
         // / @param ip The NWNX_IPUnpacked structure to convert.
         // / @return The itemproperty.
-        public static NWN.ItemProperty PackIP(IPUnpacked ip)
+        public static System.IntPtr PackIP(IPUnpacked ip)
         {
             NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_ItemProperty, "PackIP");
             NWN.Internal.NativeFunctions.nwnxPushInt(ip.nProperty);
@@ -50,7 +50,7 @@ namespace NWNX
             NWN.Internal.NativeFunctions.nwnxPushObject(ip.oCreator);
             NWN.Internal.NativeFunctions.nwnxPushString(ip.sTag);
             NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return new NWN.ItemProperty(NWN.Internal.NativeFunctions.nwnxPopItemProperty());
+            return NWN.Internal.NativeFunctions.nwnxPopItemProperty();
         }
 
         // / @}

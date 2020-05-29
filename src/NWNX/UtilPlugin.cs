@@ -75,24 +75,24 @@ namespace NWNX
         // / @brief Convert an effect type to an itemproperty type.
         // / @param e The effect to convert to an itemproperty.
         // / @return The converted itemproperty.
-        public static NWN.ItemProperty EffectToItemProperty(NWN.Effect e)
+        public static System.IntPtr EffectToItemProperty(System.IntPtr e)
         {
             NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "EffectToItemProperty");
-            NWN.Internal.NativeFunctions.nwnxPushEffect(e.Handle);
+            NWN.Internal.NativeFunctions.nwnxPushEffect(e);
             NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return new NWN.ItemProperty(NWN.Internal.NativeFunctions.nwnxPopItemProperty());
+            return NWN.Internal.NativeFunctions.nwnxPopItemProperty();
         }
 
         // /
         // / @brief Convert an itemproperty type to an effect type.
         // / @param ip The itemproperty to convert to an effect.
         // / @return The converted effect.
-        public static NWN.Effect ItemPropertyToEffect(NWN.ItemProperty ip)
+        public static System.IntPtr ItemPropertyToEffect(System.IntPtr ip)
         {
             NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "ItemPropertyToEffect");
-            NWN.Internal.NativeFunctions.nwnxPushItemProperty(ip.Handle);
+            NWN.Internal.NativeFunctions.nwnxPushItemProperty(ip);
             NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return new NWN.Effect(NWN.Internal.NativeFunctions.nwnxPopEffect());
+            return NWN.Internal.NativeFunctions.nwnxPopEffect();
         }
 
         // / @brief Strip any color codes from a string.

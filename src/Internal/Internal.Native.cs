@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Security;
 
@@ -40,7 +41,7 @@ namespace NWN
 
         [SuppressUnmanagedCodeSecurity]
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void StackPushVectorDelegate(Vector value);
+        public delegate void StackPushVectorDelegate(Vector3 value);
 
         [SuppressUnmanagedCodeSecurity]
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -84,7 +85,7 @@ namespace NWN
 
         [SuppressUnmanagedCodeSecurity]
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate Vector StackPopVectorDelegate();
+        public delegate Vector3 StackPopVectorDelegate();
 
         [SuppressUnmanagedCodeSecurity]
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]

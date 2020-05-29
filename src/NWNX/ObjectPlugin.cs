@@ -82,12 +82,12 @@ namespace NWNX
         // / @brief Set an object's position.
         // / @param obj The object.
         // / @param pos A vector position.
-        public static void SetPosition(uint obj, NWN.Vector pos)
+        public static void SetPosition(uint obj, System.Numerics.Vector3 pos)
         {
             NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetPosition");
-            NWN.Internal.NativeFunctions.nwnxPushFloat(pos.z);
-            NWN.Internal.NativeFunctions.nwnxPushFloat(pos.y);
-            NWN.Internal.NativeFunctions.nwnxPushFloat(pos.x);
+            NWN.Internal.NativeFunctions.nwnxPushFloat(pos.Z);
+            NWN.Internal.NativeFunctions.nwnxPushFloat(pos.Y);
+            NWN.Internal.NativeFunctions.nwnxPushFloat(pos.X);
             NWN.Internal.NativeFunctions.nwnxPushObject(obj);
             NWN.Internal.NativeFunctions.nwnxCallFunction();
         }
@@ -227,12 +227,12 @@ namespace NWNX
         // / @param obj The object.
         // / @param area The area.
         // / @param pos The position.
-        public static void AddToArea(uint obj, uint area, NWN.Vector pos)
+        public static void AddToArea(uint obj, uint area, System.Numerics.Vector3 pos)
         {
             NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "AddToArea");
-            NWN.Internal.NativeFunctions.nwnxPushFloat(pos.z);
-            NWN.Internal.NativeFunctions.nwnxPushFloat(pos.y);
-            NWN.Internal.NativeFunctions.nwnxPushFloat(pos.x);
+            NWN.Internal.NativeFunctions.nwnxPushFloat(pos.Z);
+            NWN.Internal.NativeFunctions.nwnxPushFloat(pos.Y);
+            NWN.Internal.NativeFunctions.nwnxPushFloat(pos.X);
             NWN.Internal.NativeFunctions.nwnxPushObject(area);
             NWN.Internal.NativeFunctions.nwnxPushObject(obj);
             NWN.Internal.NativeFunctions.nwnxCallFunction();
@@ -605,12 +605,12 @@ namespace NWNX
         // / @param oTrigger The trigger.
         // / @param vPosition The position.
         // / @return TRUE if vPosition is inside oTrigger's geometry.
-        public static int GetPositionIsInTrigger(uint oTrigger, NWN.Vector vPosition)
+        public static int GetPositionIsInTrigger(uint oTrigger, System.Numerics.Vector3 vPosition)
         {
             NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetPositionIsInTrigger");
-            NWN.Internal.NativeFunctions.nwnxPushFloat(vPosition.z);
-            NWN.Internal.NativeFunctions.nwnxPushFloat(vPosition.y);
-            NWN.Internal.NativeFunctions.nwnxPushFloat(vPosition.x);
+            NWN.Internal.NativeFunctions.nwnxPushFloat(vPosition.Z);
+            NWN.Internal.NativeFunctions.nwnxPushFloat(vPosition.Y);
+            NWN.Internal.NativeFunctions.nwnxPushFloat(vPosition.X);
             NWN.Internal.NativeFunctions.nwnxPushObject(oTrigger);
             NWN.Internal.NativeFunctions.nwnxCallFunction();
             return NWN.Internal.NativeFunctions.nwnxPopInt();
