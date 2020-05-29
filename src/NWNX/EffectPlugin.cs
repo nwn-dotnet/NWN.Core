@@ -10,10 +10,10 @@ namespace NWNX
         // / @brief Convert native effect type to unpacked structure.
         // / @param e The effect to convert.
         // / @return A constructed NWNX_EffectUnpacked.
-        public static EffectUnpacked UnpackEffect(NWN.Effect e)
+        public static EffectUnpacked UnpackEffect(System.IntPtr e)
         {
             NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Effect, "UnpackEffect");
-            NWN.Internal.NativeFunctions.nwnxPushEffect(e.Handle);
+            NWN.Internal.NativeFunctions.nwnxPushEffect(e);
             NWN.Internal.NativeFunctions.nwnxCallFunction();
             EffectUnpacked retVal;
             retVal.sTag = NWN.Internal.NativeFunctions.nwnxPopString();
@@ -41,9 +41,9 @@ namespace NWNX
             retVal.nParam0 = NWN.Internal.NativeFunctions.nwnxPopInt();
             retVal.nNumIntegers = NWN.Internal.NativeFunctions.nwnxPopInt();
             retVal.bLinkRightValid = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.eLinkRight = new NWN.Effect(NWN.Internal.NativeFunctions.nwnxPopEffect());
+            retVal.eLinkRight = NWN.Internal.NativeFunctions.nwnxPopEffect();
             retVal.bLinkLeftValid = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.eLinkLeft = new NWN.Effect(NWN.Internal.NativeFunctions.nwnxPopEffect());
+            retVal.eLinkLeft = NWN.Internal.NativeFunctions.nwnxPopEffect();
             retVal.nCasterLevel = NWN.Internal.NativeFunctions.nwnxPopInt();
             retVal.bShowIcon = NWN.Internal.NativeFunctions.nwnxPopInt();
             retVal.bExpose = NWN.Internal.NativeFunctions.nwnxPopInt();
@@ -60,7 +60,7 @@ namespace NWNX
         // / @brief Convert unpacked effect structure to native type.
         // / @param e The NWNX_EffectUnpacked structure to convert.
         // / @return The effect.
-        public static NWN.Effect PackEffect(EffectUnpacked e)
+        public static System.IntPtr PackEffect(EffectUnpacked e)
         {
             NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Effect, "PackEffect");
             NWN.Internal.NativeFunctions.nwnxPushInt(e.nType);
@@ -73,9 +73,9 @@ namespace NWNX
             NWN.Internal.NativeFunctions.nwnxPushInt(e.bExpose);
             NWN.Internal.NativeFunctions.nwnxPushInt(e.bShowIcon);
             NWN.Internal.NativeFunctions.nwnxPushInt(e.nCasterLevel);
-            NWN.Internal.NativeFunctions.nwnxPushEffect(e.eLinkLeft.Handle);
+            NWN.Internal.NativeFunctions.nwnxPushEffect(e.eLinkLeft);
             NWN.Internal.NativeFunctions.nwnxPushInt(e.bLinkLeftValid);
-            NWN.Internal.NativeFunctions.nwnxPushEffect(e.eLinkRight.Handle);
+            NWN.Internal.NativeFunctions.nwnxPushEffect(e.eLinkRight);
             NWN.Internal.NativeFunctions.nwnxPushInt(e.bLinkRightValid);
             NWN.Internal.NativeFunctions.nwnxPushInt(e.nNumIntegers);
             NWN.Internal.NativeFunctions.nwnxPushInt(e.nParam0);
@@ -102,7 +102,7 @@ namespace NWNX
             NWN.Internal.NativeFunctions.nwnxPushObject(e.oParam3);
             NWN.Internal.NativeFunctions.nwnxPushString(e.sTag);
             NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return new NWN.Effect(NWN.Internal.NativeFunctions.nwnxPopEffect());
+            return NWN.Internal.NativeFunctions.nwnxPopEffect();
         }
 
         // / @brief Set a script with optional data that runs when an effect expires
@@ -111,14 +111,14 @@ namespace NWNX
         // / @param data Any other data you wish to send back to the script.
         // / @remark OBJECT_SELF in the script is the object the effect is applied to.
         // / @note Only works for TEMPORARY and PERMANENT effects applied to an object.
-        public static NWN.Effect SetEffectExpiredScript(NWN.Effect e, string script, string data = "")
+        public static System.IntPtr SetEffectExpiredScript(System.IntPtr e, string script, string data = "")
         {
             NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Effect, "SetEffectExpiredScript");
             NWN.Internal.NativeFunctions.nwnxPushString(data);
             NWN.Internal.NativeFunctions.nwnxPushString(script);
-            NWN.Internal.NativeFunctions.nwnxPushEffect(e.Handle);
+            NWN.Internal.NativeFunctions.nwnxPushEffect(e);
             NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return new NWN.Effect(NWN.Internal.NativeFunctions.nwnxPopEffect());
+            return NWN.Internal.NativeFunctions.nwnxPopEffect();
         }
 
         // / @brief Get the data set with NWNX_Effect_SetEffectExpiredScript()
@@ -156,9 +156,9 @@ namespace NWNX
             public int bExpose;
             public int bShowIcon;
             public int nCasterLevel;
-            public NWN.Effect eLinkLeft;
+            public System.IntPtr eLinkLeft;
             public int bLinkLeftValid;
-            public NWN.Effect eLinkRight;
+            public System.IntPtr eLinkRight;
             public int bLinkRightValid;
             public int nNumIntegers;
             public int nParam0;

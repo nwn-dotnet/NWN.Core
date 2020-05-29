@@ -180,12 +180,12 @@ namespace NWNX
         // / @param player The player object.
         // / @param effectId The effect id.
         // / @param position The position to play the visual effect.
-        public static void ShowVisualEffect(uint player, int effectId, NWN.Vector position)
+        public static void ShowVisualEffect(uint player, int effectId, System.Numerics.Vector3 position)
         {
             NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Player, "ShowVisualEffect");
-            NWN.Internal.NativeFunctions.nwnxPushFloat(position.z);
-            NWN.Internal.NativeFunctions.nwnxPushFloat(position.y);
-            NWN.Internal.NativeFunctions.nwnxPushFloat(position.x);
+            NWN.Internal.NativeFunctions.nwnxPushFloat(position.Z);
+            NWN.Internal.NativeFunctions.nwnxPushFloat(position.Y);
+            NWN.Internal.NativeFunctions.nwnxPushFloat(position.X);
             NWN.Internal.NativeFunctions.nwnxPushInt(effectId);
             NWN.Internal.NativeFunctions.nwnxPushObject(player);
             NWN.Internal.NativeFunctions.nwnxCallFunction();
