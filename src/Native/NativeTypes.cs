@@ -3,21 +3,6 @@ using System.Runtime.InteropServices;
 
 namespace NWN
 {
-    [StructLayout(LayoutKind.Sequential)]
-    public struct Vector
-    {
-        public float x;
-        public float y;
-        public float z;
-
-        public Vector(float x = 0.0f, float y = 0.0f, float z = 0.0f)
-        {
-            this.x = x;
-            this.y = y;
-            this.z = z;
-        }
-    }
-
     public class Effect
     {
         public IntPtr Handle;
