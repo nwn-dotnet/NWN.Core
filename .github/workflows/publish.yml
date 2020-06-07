@@ -64,4 +64,4 @@ jobs:
 
       - name: Push to Nuget.org
         if: ${{ github.event_name == 'push' }}
-        run: dotnet nuget push output/*.nupkg  --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json
+        run: dotnet nuget push output/*.nupkg  --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
