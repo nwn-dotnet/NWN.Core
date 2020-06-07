@@ -1,3 +1,5 @@
+using NWN;
+
 namespace NWNX
 {
     [NWNXPlugin(NWNX_Visibility)]
@@ -32,11 +34,11 @@ namespace NWNX
         // / @return The @ref vis_types "Visibility Type".
         public static int GetVisibilityOverride(uint player, uint target)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Visibility, "GetVisibilityOverride");
-            NWN.Internal.NativeFunctions.nwnxPushObject(target);
-            NWN.Internal.NativeFunctions.nwnxPushObject(player);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Visibility, "GetVisibilityOverride");
+            Internal.NativeFunctions.nwnxPushObject(target);
+            Internal.NativeFunctions.nwnxPushObject(player);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Overrides the default visibility rules about how player perceives the target object.
@@ -60,11 +62,11 @@ namespace NWNX
         // / @param override The visibility type from @ref vis_types "Visibility Types".
         public static void SetVisibilityOverride(uint player, uint target, int @override)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Visibility, "SetVisibilityOverride");
-            NWN.Internal.NativeFunctions.nwnxPushInt(@override);
-            NWN.Internal.NativeFunctions.nwnxPushObject(target);
-            NWN.Internal.NativeFunctions.nwnxPushObject(player);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Visibility, "SetVisibilityOverride");
+            Internal.NativeFunctions.nwnxPushInt(@override);
+            Internal.NativeFunctions.nwnxPushObject(target);
+            Internal.NativeFunctions.nwnxPushObject(player);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @}

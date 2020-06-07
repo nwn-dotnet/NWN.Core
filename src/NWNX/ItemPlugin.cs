@@ -1,3 +1,5 @@
+using NWN;
+
 namespace NWNX
 {
     [NWNXPlugin(NWNX_Item)]
@@ -12,10 +14,10 @@ namespace NWNX
         // / @param weight The weight, note this is in tenths of pounds.
         public static void SetWeight(uint oItem, int weight)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Item, "SetWeight");
-            NWN.Internal.NativeFunctions.nwnxPushInt(weight);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oItem);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Item, "SetWeight");
+            Internal.NativeFunctions.nwnxPushInt(weight);
+            Internal.NativeFunctions.nwnxPushObject(oItem);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Set an item's base value in gold pieces.
@@ -26,10 +28,10 @@ namespace NWNX
         // / @param gold The base gold value.
         public static void SetBaseGoldPieceValue(uint oItem, int gold)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Item, "SetBaseGoldPieceValue");
-            NWN.Internal.NativeFunctions.nwnxPushInt(gold);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oItem);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Item, "SetBaseGoldPieceValue");
+            Internal.NativeFunctions.nwnxPushInt(gold);
+            Internal.NativeFunctions.nwnxPushObject(oItem);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Set an item's additional value in gold pieces.
@@ -39,10 +41,10 @@ namespace NWNX
         // / @param gold The additional gold value.
         public static void SetAddGoldPieceValue(uint oItem, int gold)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Item, "SetAddGoldPieceValue");
-            NWN.Internal.NativeFunctions.nwnxPushInt(gold);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oItem);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Item, "SetAddGoldPieceValue");
+            Internal.NativeFunctions.nwnxPushInt(gold);
+            Internal.NativeFunctions.nwnxPushObject(oItem);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Get an item's base value in gold pieces.
@@ -50,10 +52,10 @@ namespace NWNX
         // / @return The base gold piece value for the item.
         public static int GetBaseGoldPieceValue(uint oItem)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Item, "GetBaseGoldPieceValue");
-            NWN.Internal.NativeFunctions.nwnxPushObject(oItem);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Item, "GetBaseGoldPieceValue");
+            Internal.NativeFunctions.nwnxPushObject(oItem);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Get an item's additional value in gold pieces.
@@ -61,10 +63,10 @@ namespace NWNX
         // / @return The additional gold piece value for the item.
         public static int GetAddGoldPieceValue(uint oItem)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Item, "GetAddGoldPieceValue");
-            NWN.Internal.NativeFunctions.nwnxPushObject(oItem);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Item, "GetAddGoldPieceValue");
+            Internal.NativeFunctions.nwnxPushObject(oItem);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Set an item's base item type.
@@ -74,10 +76,10 @@ namespace NWNX
         // / @param nBaseItem The new base item.
         public static void SetBaseItemType(uint oItem, int nBaseItem)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Item, "SetBaseItemType");
-            NWN.Internal.NativeFunctions.nwnxPushInt(nBaseItem);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oItem);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Item, "SetBaseItemType");
+            Internal.NativeFunctions.nwnxPushInt(nBaseItem);
+            Internal.NativeFunctions.nwnxPushObject(oItem);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Make a single change to the appearance of an item.
@@ -106,12 +108,12 @@ namespace NWNX
         // / function 'clear colour override', which clears the per-part override for that part.
         public static void SetItemAppearance(uint oItem, int nType, int nIndex, int nValue)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Item, "SetItemAppearance");
-            NWN.Internal.NativeFunctions.nwnxPushInt(nValue);
-            NWN.Internal.NativeFunctions.nwnxPushInt(nIndex);
-            NWN.Internal.NativeFunctions.nwnxPushInt(nType);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oItem);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Item, "SetItemAppearance");
+            Internal.NativeFunctions.nwnxPushInt(nValue);
+            Internal.NativeFunctions.nwnxPushInt(nIndex);
+            Internal.NativeFunctions.nwnxPushInt(nType);
+            Internal.NativeFunctions.nwnxPushObject(oItem);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Return a string containing the entire appearance for an item.
@@ -120,10 +122,10 @@ namespace NWNX
         // / @return A string representing the item's appearance.
         public static string GetEntireItemAppearance(uint oItem)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Item, "GetEntireItemAppearance");
-            NWN.Internal.NativeFunctions.nwnxPushObject(oItem);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopString();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Item, "GetEntireItemAppearance");
+            Internal.NativeFunctions.nwnxPushObject(oItem);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopString();
         }
 
         // / @brief Restores an item's appearance using the value retrieved through NWNX_Item_GetEntireItemAppearance().
@@ -131,10 +133,10 @@ namespace NWNX
         // / @param sApp A string representing the item's appearance.
         public static void RestoreItemAppearance(uint oItem, string sApp)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Item, "RestoreItemAppearance");
-            NWN.Internal.NativeFunctions.nwnxPushString(sApp);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oItem);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Item, "RestoreItemAppearance");
+            Internal.NativeFunctions.nwnxPushString(sApp);
+            Internal.NativeFunctions.nwnxPushObject(oItem);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Get an item's base armor class
@@ -142,10 +144,10 @@ namespace NWNX
         // / @return The base armor class.
         public static int GetBaseArmorClass(uint oItem)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Item, "GetBaseArmorClass");
-            NWN.Internal.NativeFunctions.nwnxPushObject(oItem);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Item, "GetBaseArmorClass");
+            Internal.NativeFunctions.nwnxPushObject(oItem);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Get an item's minimum level required to equip.
@@ -153,10 +155,10 @@ namespace NWNX
         // / @return The minimum level required to equip the item.
         public static int GetMinEquipLevel(uint oItem)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Item, "GetMinEquipLevel");
-            NWN.Internal.NativeFunctions.nwnxPushObject(oItem);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Item, "GetMinEquipLevel");
+            Internal.NativeFunctions.nwnxPushObject(oItem);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @}

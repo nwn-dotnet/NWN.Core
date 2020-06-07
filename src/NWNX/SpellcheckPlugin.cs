@@ -1,3 +1,5 @@
+using NWN;
+
 namespace NWNX
 {
     [NWNXPlugin(NWNX_SpellChecker)]
@@ -15,10 +17,10 @@ namespace NWNX
         // / Make use of **DelayCommands** and **AssignCommands**
         public static string FindMisspell(string sentence)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_SpellChecker, "FindMisspell");
-            NWN.Internal.NativeFunctions.nwnxPushString(sentence);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopString();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_SpellChecker, "FindMisspell");
+            Internal.NativeFunctions.nwnxPushString(sentence);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopString();
         }
 
         // / @brief Get suggestions on a single word, comma delimited.
@@ -29,10 +31,10 @@ namespace NWNX
         // / Make use of **DelayCommands** and **AssignCommands**
         public static string GetSuggestSpell(string word)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_SpellChecker, "GetSuggestSpell");
-            NWN.Internal.NativeFunctions.nwnxPushString(word);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopString();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_SpellChecker, "GetSuggestSpell");
+            Internal.NativeFunctions.nwnxPushString(word);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopString();
         }
 
         // / @}

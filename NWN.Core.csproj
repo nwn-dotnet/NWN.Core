@@ -9,5 +9,6 @@
         <Company>NWNDotnet</Company>
         <PackageTags>Neverwinter Nights;NWN;</PackageTags>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <RootNamespace>NWN</RootNamespace>
     </PropertyGroup>
 </Project>

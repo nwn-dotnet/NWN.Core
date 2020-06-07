@@ -1,3 +1,5 @@
+using NWN;
+
 namespace NWNX
 {
     [NWNXPlugin(NWNX_WebHook)]
@@ -14,13 +16,13 @@ namespace NWNX
         // / @param mrkdwn Set to false if you do not wish your message's markdown be parsed.
         public static void SendWebHookHTTPS(string host, string path, string message, string username = "", int mrkdwn = 1)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_WebHook, "SendWebHookHTTPS");
-            NWN.Internal.NativeFunctions.nwnxPushInt(mrkdwn);
-            NWN.Internal.NativeFunctions.nwnxPushString(username);
-            NWN.Internal.NativeFunctions.nwnxPushString(message);
-            NWN.Internal.NativeFunctions.nwnxPushString(path);
-            NWN.Internal.NativeFunctions.nwnxPushString(host);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_WebHook, "SendWebHookHTTPS");
+            Internal.NativeFunctions.nwnxPushInt(mrkdwn);
+            Internal.NativeFunctions.nwnxPushString(username);
+            Internal.NativeFunctions.nwnxPushString(message);
+            Internal.NativeFunctions.nwnxPushString(path);
+            Internal.NativeFunctions.nwnxPushString(host);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Resends a webhook message after a defined delay.
@@ -33,12 +35,12 @@ namespace NWNX
         // / @param delay The delay in seconds to send the message again.
         public static void ResendWebHookHTTPS(string host, string path, string sMessage, float delay = 0.0f)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_WebHook, "ResendWebHookHTTPS");
-            NWN.Internal.NativeFunctions.nwnxPushFloat(delay);
-            NWN.Internal.NativeFunctions.nwnxPushString(sMessage);
-            NWN.Internal.NativeFunctions.nwnxPushString(path);
-            NWN.Internal.NativeFunctions.nwnxPushString(host);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_WebHook, "ResendWebHookHTTPS");
+            Internal.NativeFunctions.nwnxPushFloat(delay);
+            Internal.NativeFunctions.nwnxPushString(sMessage);
+            Internal.NativeFunctions.nwnxPushString(path);
+            Internal.NativeFunctions.nwnxPushString(host);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @}

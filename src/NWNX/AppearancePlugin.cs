@@ -1,3 +1,5 @@
+using NWN;
+
 namespace NWNX
 {
     [NWNXPlugin(NWNX_Appearance)]
@@ -56,12 +58,12 @@ namespace NWNX
         // / @param nValue The new value for the appearance type.
         public static void SetOverride(uint oPlayer, uint oCreature, int nType, int nValue)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Appearance, "SetOverride");
-            NWN.Internal.NativeFunctions.nwnxPushInt(nValue);
-            NWN.Internal.NativeFunctions.nwnxPushInt(nType);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oCreature);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oPlayer);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Appearance, "SetOverride");
+            Internal.NativeFunctions.nwnxPushInt(nValue);
+            Internal.NativeFunctions.nwnxPushInt(nType);
+            Internal.NativeFunctions.nwnxPushObject(oCreature);
+            Internal.NativeFunctions.nwnxPushObject(oPlayer);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Get a creature's appearance type for a player.
@@ -71,12 +73,12 @@ namespace NWNX
         // / @return The value for the appearance type or -1 when not set.
         public static int GetOverride(uint oPlayer, uint oCreature, int nType)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Appearance, "GetOverride");
-            NWN.Internal.NativeFunctions.nwnxPushInt(nType);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oCreature);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oPlayer);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Appearance, "GetOverride");
+            Internal.NativeFunctions.nwnxPushInt(nType);
+            Internal.NativeFunctions.nwnxPushObject(oCreature);
+            Internal.NativeFunctions.nwnxPushObject(oPlayer);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @}

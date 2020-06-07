@@ -1,3 +1,5 @@
+using NWN;
+
 namespace NWNX
 {
     [NWNXPlugin(NWNX_Profiler)]
@@ -30,19 +32,19 @@ namespace NWNX
         // / @param tag0_value The tag's value for which to filter.
         public static void PushPerfScope(string name, string tag0_tag = "", string tag0_value = "")
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Profiler, "PushPerfScope");
-            NWN.Internal.NativeFunctions.nwnxPushString(tag0_value);
-            NWN.Internal.NativeFunctions.nwnxPushString(tag0_tag);
-            NWN.Internal.NativeFunctions.nwnxPushString(name);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Profiler, "PushPerfScope");
+            Internal.NativeFunctions.nwnxPushString(tag0_value);
+            Internal.NativeFunctions.nwnxPushString(tag0_tag);
+            Internal.NativeFunctions.nwnxPushString(name);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Pops a timing metric.
         // / @remark A metric must already be pushed.
         public static void PopPerfScope()
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Profiler, "PopPerfScope");
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Profiler, "PopPerfScope");
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @}
