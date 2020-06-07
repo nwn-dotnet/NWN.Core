@@ -68,4 +68,4 @@ jobs:
 
       - name: Push to github packages
         if: ${{ github.event_name == 'push' }}
-        run: dotnet nuget push output/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/nwn-dotnet/index.json
+        run: dotnet nuget push output/*.nupkg --api-key ${{ secrets.SECRET_KEY  }} --source https://nuget.pkg.github.com/nwn-dotnet/index.json
