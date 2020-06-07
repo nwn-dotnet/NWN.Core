@@ -1669,7 +1669,7 @@ namespace NWN
         ///    origin of the effect(normally the spell-caster's position).
         ///  Return value on error: OBJECT_INVALID
         /// </summary>
-        public static uint GetFirstObjectInShape(int nShape, float fSize, IntPtr lTarget, int bLineOfSight = FALSE, int nObjectFilter = OBJECT_TYPE_CREATURE, Vector3 vOrigin = default(Vector3))
+        public static uint GetFirstObjectInShape(int nShape, float fSize, IntPtr lTarget, int bLineOfSight = FALSE, int nObjectFilter = OBJECT_TYPE_CREATURE, Vector3 vOrigin = default)
         {
             Internal.NativeFunctions.StackPushVector(vOrigin);
             Internal.NativeFunctions.StackPushInteger(nObjectFilter);
@@ -1707,7 +1707,7 @@ namespace NWN
         ///    of the effect (normally the spell-caster's position).
         ///  Return value on error: OBJECT_INVALID
         /// </summary>
-        public static uint GetNextObjectInShape(int nShape, float fSize, IntPtr lTarget, int bLineOfSight = FALSE, int nObjectFilter = OBJECT_TYPE_CREATURE, Vector3 vOrigin = default(Vector3))
+        public static uint GetNextObjectInShape(int nShape, float fSize, IntPtr lTarget, int bLineOfSight = FALSE, int nObjectFilter = OBJECT_TYPE_CREATURE, Vector3 vOrigin = default)
         {
             Internal.NativeFunctions.StackPushVector(vOrigin);
             Internal.NativeFunctions.StackPushInteger(nObjectFilter);
