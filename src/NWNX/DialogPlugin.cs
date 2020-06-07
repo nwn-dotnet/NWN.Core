@@ -1,3 +1,5 @@
+using NWN;
+
 namespace NWNX
 {
     [NWNXPlugin(NWNX_Dialog)]
@@ -42,18 +44,18 @@ namespace NWNX
         // / @return A @ref dialog_node_types "Node Type".  If called out of dialog, returns NWNX_DIALOG_NODE_TYPE_INVALID
         public static int GetCurrentNodeType()
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Dialog, "GetCurrentNodeType");
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Dialog, "GetCurrentNodeType");
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Get the @ref dialog_script_types "Script Type" of the current text node
         // / @return A @ref dialog_script_types "Node Type". If called out of dialog, returns NWNX_DIALOG_SCRIPT_TYPE_OTHER
         public static int GetCurrentScriptType()
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Dialog, "GetCurrentScriptType");
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Dialog, "GetCurrentScriptType");
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Get the absolute ID of the current node in the conversation
@@ -62,9 +64,9 @@ namespace NWNX
         // / @return The absolute ID in the dialog. If called out of dialog, returns -1
         public static int GetCurrentNodeID()
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Dialog, "GetCurrentNodeID");
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Dialog, "GetCurrentNodeID");
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Get the index of the current node in the list of replies/entries.
@@ -72,21 +74,21 @@ namespace NWNX
         // / @return The index of the current node.
         public static int GetCurrentNodeIndex()
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Dialog, "GetCurrentNodeIndex");
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Dialog, "GetCurrentNodeIndex");
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Get the text of the current node
         // / @param language The @ref dialog_languages "language" of the text.
         // / @param gender The gender for the text.
-        public static string GetCurrentNodeText(int language = NWNX_DIALOG_LANGUAGE_ENGLISH, int gender = NWN.NWScript.GENDER_MALE)
+        public static string GetCurrentNodeText(int language = NWNX_DIALOG_LANGUAGE_ENGLISH, int gender = NWScript.GENDER_MALE)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Dialog, "GetCurrentNodeText");
-            NWN.Internal.NativeFunctions.nwnxPushInt(gender);
-            NWN.Internal.NativeFunctions.nwnxPushInt(language);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopString();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Dialog, "GetCurrentNodeText");
+            Internal.NativeFunctions.nwnxPushInt(gender);
+            Internal.NativeFunctions.nwnxPushInt(language);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopString();
         }
 
         // / @brief Set the text of the current node for given language/gender
@@ -94,13 +96,13 @@ namespace NWNX
         // / @param text The text for the node.
         // / @param language The @ref dialog_languages "language" of the text.
         // / @param gender The gender for the text.
-        public static void SetCurrentNodeText(string text, int language = NWNX_DIALOG_LANGUAGE_ENGLISH, int gender = NWN.NWScript.GENDER_MALE)
+        public static void SetCurrentNodeText(string text, int language = NWNX_DIALOG_LANGUAGE_ENGLISH, int gender = NWScript.GENDER_MALE)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Dialog, "SetCurrentNodeText");
-            NWN.Internal.NativeFunctions.nwnxPushInt(gender);
-            NWN.Internal.NativeFunctions.nwnxPushInt(language);
-            NWN.Internal.NativeFunctions.nwnxPushString(text);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Dialog, "SetCurrentNodeText");
+            Internal.NativeFunctions.nwnxPushInt(gender);
+            Internal.NativeFunctions.nwnxPushInt(language);
+            Internal.NativeFunctions.nwnxPushString(text);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief End a conversation oObject is involved in, it will fire the OnAbort script of the conversation
@@ -108,9 +110,9 @@ namespace NWNX
         // / @param oObject The object in a conversation
         public static void End(uint oObject)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Dialog, "End");
-            NWN.Internal.NativeFunctions.nwnxPushObject(oObject);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Dialog, "End");
+            Internal.NativeFunctions.nwnxPushObject(oObject);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @}

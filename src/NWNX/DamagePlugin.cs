@@ -1,3 +1,5 @@
+using NWN;
+
 namespace NWNX
 {
     [NWNXPlugin(NWNX_Damage)]
@@ -15,12 +17,12 @@ namespace NWNX
         // / @brief Sets the script to run with a damage event.
         // / @param sScript The script that will handle the damage event.
         // / @param oOwner An object if only executing for a specific object or OBJECT_INVALID for global.
-        public static void SetDamageEventScript(string sScript, uint oOwner = NWN.NWScript.OBJECT_INVALID)
+        public static void SetDamageEventScript(string sScript, uint oOwner = NWScript.OBJECT_INVALID)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Damage, "SetDamageEventScript");
-            NWN.Internal.NativeFunctions.nwnxPushObject(oOwner);
-            NWN.Internal.NativeFunctions.nwnxPushString(sScript);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Damage, "SetDamageEventScript");
+            Internal.NativeFunctions.nwnxPushObject(oOwner);
+            Internal.NativeFunctions.nwnxPushString(sScript);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Get Damage Event Data
@@ -28,23 +30,23 @@ namespace NWNX
         // / @note To use only in the Damage Event Script.
         public static DamageEventData GetDamageEventData()
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Damage, "GetDamageEventData");
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Damage, "GetDamageEventData");
+            Internal.NativeFunctions.nwnxCallFunction();
             DamageEventData retVal;
-            retVal.iBase = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.iSonic = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.iPositive = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.iNegative = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.iFire = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.iElectrical = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.iDivine = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.iCold = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.iAcid = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.iMagical = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.iSlash = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.iPierce = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.iBludgeoning = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.oDamager = NWN.Internal.NativeFunctions.nwnxPopObject();
+            retVal.iBase = Internal.NativeFunctions.nwnxPopInt();
+            retVal.iSonic = Internal.NativeFunctions.nwnxPopInt();
+            retVal.iPositive = Internal.NativeFunctions.nwnxPopInt();
+            retVal.iNegative = Internal.NativeFunctions.nwnxPopInt();
+            retVal.iFire = Internal.NativeFunctions.nwnxPopInt();
+            retVal.iElectrical = Internal.NativeFunctions.nwnxPopInt();
+            retVal.iDivine = Internal.NativeFunctions.nwnxPopInt();
+            retVal.iCold = Internal.NativeFunctions.nwnxPopInt();
+            retVal.iAcid = Internal.NativeFunctions.nwnxPopInt();
+            retVal.iMagical = Internal.NativeFunctions.nwnxPopInt();
+            retVal.iSlash = Internal.NativeFunctions.nwnxPopInt();
+            retVal.iPierce = Internal.NativeFunctions.nwnxPopInt();
+            retVal.iBludgeoning = Internal.NativeFunctions.nwnxPopInt();
+            retVal.oDamager = Internal.NativeFunctions.nwnxPopObject();
             return retVal;
         }
 
@@ -53,33 +55,33 @@ namespace NWNX
         // / @note To use only in the Damage Event Script.
         public static void SetDamageEventData(DamageEventData data)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Damage, "SetDamageEventData");
-            NWN.Internal.NativeFunctions.nwnxPushObject(data.oDamager);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iBludgeoning);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iPierce);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iSlash);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iMagical);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iAcid);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iCold);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iDivine);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iElectrical);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iFire);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iNegative);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iPositive);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iSonic);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iBase);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Damage, "SetDamageEventData");
+            Internal.NativeFunctions.nwnxPushObject(data.oDamager);
+            Internal.NativeFunctions.nwnxPushInt(data.iBludgeoning);
+            Internal.NativeFunctions.nwnxPushInt(data.iPierce);
+            Internal.NativeFunctions.nwnxPushInt(data.iSlash);
+            Internal.NativeFunctions.nwnxPushInt(data.iMagical);
+            Internal.NativeFunctions.nwnxPushInt(data.iAcid);
+            Internal.NativeFunctions.nwnxPushInt(data.iCold);
+            Internal.NativeFunctions.nwnxPushInt(data.iDivine);
+            Internal.NativeFunctions.nwnxPushInt(data.iElectrical);
+            Internal.NativeFunctions.nwnxPushInt(data.iFire);
+            Internal.NativeFunctions.nwnxPushInt(data.iNegative);
+            Internal.NativeFunctions.nwnxPushInt(data.iPositive);
+            Internal.NativeFunctions.nwnxPushInt(data.iSonic);
+            Internal.NativeFunctions.nwnxPushInt(data.iBase);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Sets the script to run with an attack event.
         // / @param sScript The script that will handle the attack event.
         // / @param oOwner An object if only executing for a specific object or OBJECT_INVALID for global.
-        public static void SetAttackEventScript(string sScript, uint oOwner = NWN.NWScript.OBJECT_INVALID)
+        public static void SetAttackEventScript(string sScript, uint oOwner = NWScript.OBJECT_INVALID)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Damage, "SetAttackEventScript");
-            NWN.Internal.NativeFunctions.nwnxPushObject(oOwner);
-            NWN.Internal.NativeFunctions.nwnxPushString(sScript);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Damage, "SetAttackEventScript");
+            Internal.NativeFunctions.nwnxPushObject(oOwner);
+            Internal.NativeFunctions.nwnxPushString(sScript);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Get Attack Event Data
@@ -87,27 +89,27 @@ namespace NWNX
         // / @note To use only in the Attack Event Script.
         public static AttackEventData GetAttackEventData()
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Damage, "GetAttackEventData");
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Damage, "GetAttackEventData");
+            Internal.NativeFunctions.nwnxCallFunction();
             AttackEventData retVal;
-            retVal.iSneakAttack = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.iAttackType = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.iAttackResult = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.iAttackNumber = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.iBase = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.iSonic = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.iPositive = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.iNegative = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.iFire = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.iElectrical = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.iDivine = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.iCold = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.iAcid = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.iMagical = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.iSlash = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.iPierce = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.iBludgeoning = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.oTarget = NWN.Internal.NativeFunctions.nwnxPopObject();
+            retVal.iSneakAttack = Internal.NativeFunctions.nwnxPopInt();
+            retVal.iAttackType = Internal.NativeFunctions.nwnxPopInt();
+            retVal.iAttackResult = Internal.NativeFunctions.nwnxPopInt();
+            retVal.iAttackNumber = Internal.NativeFunctions.nwnxPopInt();
+            retVal.iBase = Internal.NativeFunctions.nwnxPopInt();
+            retVal.iSonic = Internal.NativeFunctions.nwnxPopInt();
+            retVal.iPositive = Internal.NativeFunctions.nwnxPopInt();
+            retVal.iNegative = Internal.NativeFunctions.nwnxPopInt();
+            retVal.iFire = Internal.NativeFunctions.nwnxPopInt();
+            retVal.iElectrical = Internal.NativeFunctions.nwnxPopInt();
+            retVal.iDivine = Internal.NativeFunctions.nwnxPopInt();
+            retVal.iCold = Internal.NativeFunctions.nwnxPopInt();
+            retVal.iAcid = Internal.NativeFunctions.nwnxPopInt();
+            retVal.iMagical = Internal.NativeFunctions.nwnxPopInt();
+            retVal.iSlash = Internal.NativeFunctions.nwnxPopInt();
+            retVal.iPierce = Internal.NativeFunctions.nwnxPopInt();
+            retVal.iBludgeoning = Internal.NativeFunctions.nwnxPopInt();
+            retVal.oTarget = Internal.NativeFunctions.nwnxPopObject();
             return retVal;
         }
 
@@ -116,26 +118,26 @@ namespace NWNX
         // / @note To use only in the Attack Event Script.
         public static void SetAttackEventData(AttackEventData data)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Damage, "SetAttackEventData");
-            NWN.Internal.NativeFunctions.nwnxPushObject(data.oTarget);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iBludgeoning);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iPierce);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iSlash);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iMagical);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iAcid);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iCold);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iDivine);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iElectrical);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iFire);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iNegative);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iPositive);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iSonic);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iBase);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iAttackNumber);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iAttackResult);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iAttackType);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iSneakAttack);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Damage, "SetAttackEventData");
+            Internal.NativeFunctions.nwnxPushObject(data.oTarget);
+            Internal.NativeFunctions.nwnxPushInt(data.iBludgeoning);
+            Internal.NativeFunctions.nwnxPushInt(data.iPierce);
+            Internal.NativeFunctions.nwnxPushInt(data.iSlash);
+            Internal.NativeFunctions.nwnxPushInt(data.iMagical);
+            Internal.NativeFunctions.nwnxPushInt(data.iAcid);
+            Internal.NativeFunctions.nwnxPushInt(data.iCold);
+            Internal.NativeFunctions.nwnxPushInt(data.iDivine);
+            Internal.NativeFunctions.nwnxPushInt(data.iElectrical);
+            Internal.NativeFunctions.nwnxPushInt(data.iFire);
+            Internal.NativeFunctions.nwnxPushInt(data.iNegative);
+            Internal.NativeFunctions.nwnxPushInt(data.iPositive);
+            Internal.NativeFunctions.nwnxPushInt(data.iSonic);
+            Internal.NativeFunctions.nwnxPushInt(data.iBase);
+            Internal.NativeFunctions.nwnxPushInt(data.iAttackNumber);
+            Internal.NativeFunctions.nwnxPushInt(data.iAttackResult);
+            Internal.NativeFunctions.nwnxPushInt(data.iAttackType);
+            Internal.NativeFunctions.nwnxPushInt(data.iSneakAttack);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Deal damage to a target.
@@ -144,26 +146,26 @@ namespace NWNX
         // / @param oTarget The target object on whom the damage is dealt.
         // / @param oSource The source of the damage.
         // / @param iRanged Whether the attack should be treated as ranged by the engine (for example when considering damage inflicted by Acid Sheath and other such effects)
-        public static void DealDamage(DamageData data, uint oTarget, uint oSource = NWN.NWScript.OBJECT_INVALID, int iRanged = NWN.NWScript.FALSE)
+        public static void DealDamage(DamageData data, uint oTarget, uint oSource = NWScript.OBJECT_INVALID, int iRanged = NWScript.FALSE)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Damage, "DealDamage");
-            NWN.Internal.NativeFunctions.nwnxPushInt(iRanged);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oSource);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oTarget);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iBludgeoning);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iPierce);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iSlash);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iMagical);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iAcid);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iCold);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iDivine);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iElectrical);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iFire);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iNegative);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iPositive);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iSonic);
-            NWN.Internal.NativeFunctions.nwnxPushInt(data.iPower);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Damage, "DealDamage");
+            Internal.NativeFunctions.nwnxPushInt(iRanged);
+            Internal.NativeFunctions.nwnxPushObject(oSource);
+            Internal.NativeFunctions.nwnxPushObject(oTarget);
+            Internal.NativeFunctions.nwnxPushInt(data.iBludgeoning);
+            Internal.NativeFunctions.nwnxPushInt(data.iPierce);
+            Internal.NativeFunctions.nwnxPushInt(data.iSlash);
+            Internal.NativeFunctions.nwnxPushInt(data.iMagical);
+            Internal.NativeFunctions.nwnxPushInt(data.iAcid);
+            Internal.NativeFunctions.nwnxPushInt(data.iCold);
+            Internal.NativeFunctions.nwnxPushInt(data.iDivine);
+            Internal.NativeFunctions.nwnxPushInt(data.iElectrical);
+            Internal.NativeFunctions.nwnxPushInt(data.iFire);
+            Internal.NativeFunctions.nwnxPushInt(data.iNegative);
+            Internal.NativeFunctions.nwnxPushInt(data.iPositive);
+            Internal.NativeFunctions.nwnxPushInt(data.iSonic);
+            Internal.NativeFunctions.nwnxPushInt(data.iPower);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @}

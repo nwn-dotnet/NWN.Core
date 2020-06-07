@@ -1,3 +1,5 @@
+using NWN;
+
 namespace NWNX
 {
     [NWNXPlugin(NWNX_Ruby)]
@@ -8,10 +10,10 @@ namespace NWNX
         // /< @private
         public static string Evaluate(string sCode)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Ruby, "Evaluate");
-            NWN.Internal.NativeFunctions.nwnxPushString(sCode);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopString();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Ruby, "Evaluate");
+            Internal.NativeFunctions.nwnxPushString(sCode);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopString();
         }
 
         // / @brief Evaluates some ruby code.

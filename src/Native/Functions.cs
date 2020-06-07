@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace NWN
 {
-    public partial class NWScript
+    public static partial class NWScript
     {
         /// <summary>
         /// Assign aActionToAssign to oActionSubject.

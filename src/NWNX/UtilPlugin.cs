@@ -1,3 +1,5 @@
+using NWN;
+
 namespace NWNX
 {
     [NWNXPlugin(NWNX_Util)]
@@ -34,10 +36,10 @@ namespace NWNX
         // / @return The name of the currently executing script.
         public static string GetCurrentScriptName(int depth = 0)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "GetCurrentScriptName");
-            NWN.Internal.NativeFunctions.nwnxPushInt(depth);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopString();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "GetCurrentScriptName");
+            Internal.NativeFunctions.nwnxPushInt(depth);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopString();
         }
 
         // / @brief Gets a string that contains the ascii table.
@@ -45,9 +47,9 @@ namespace NWNX
         // / @return A string that contains all characters at their position (e.g. 'A' at 65).
         public static string GetAsciiTableString()
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "GetAsciiTableString");
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopString();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "GetAsciiTableString");
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopString();
         }
 
         // / @brief Gets an integer hash of a string.
@@ -55,10 +57,10 @@ namespace NWNX
         // / @return The hashed string as an integer.
         public static int Hash(string str)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "Hash");
-            NWN.Internal.NativeFunctions.nwnxPushString(str);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "Hash");
+            Internal.NativeFunctions.nwnxPushString(str);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Gets the value of customTokenNumber.
@@ -66,10 +68,10 @@ namespace NWNX
         // / @return The string representation of the token value.
         public static string GetCustomToken(int customTokenNumber)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "GetCustomToken");
-            NWN.Internal.NativeFunctions.nwnxPushInt(customTokenNumber);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopString();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "GetCustomToken");
+            Internal.NativeFunctions.nwnxPushInt(customTokenNumber);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopString();
         }
 
         // / @brief Convert an effect type to an itemproperty type.
@@ -77,10 +79,10 @@ namespace NWNX
         // / @return The converted itemproperty.
         public static System.IntPtr EffectToItemProperty(System.IntPtr e)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "EffectToItemProperty");
-            NWN.Internal.NativeFunctions.nwnxPushEffect(e);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopItemProperty();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "EffectToItemProperty");
+            Internal.NativeFunctions.nwnxPushEffect(e);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopItemProperty();
         }
 
         // /
@@ -89,10 +91,10 @@ namespace NWNX
         // / @return The converted effect.
         public static System.IntPtr ItemPropertyToEffect(System.IntPtr ip)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "ItemPropertyToEffect");
-            NWN.Internal.NativeFunctions.nwnxPushItemProperty(ip);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopEffect();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "ItemPropertyToEffect");
+            Internal.NativeFunctions.nwnxPushItemProperty(ip);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopEffect();
         }
 
         // / @brief Strip any color codes from a string.
@@ -100,10 +102,10 @@ namespace NWNX
         // / @return The new string without any color codes.
         public static string StripColors(string str)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "StripColors");
-            NWN.Internal.NativeFunctions.nwnxPushString(str);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopString();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "StripColors");
+            Internal.NativeFunctions.nwnxPushString(str);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopString();
         }
 
         // / @brief Determines if the supplied resref exists.
@@ -112,11 +114,11 @@ namespace NWNX
         // / @return TRUE/FALSE
         public static int IsValidResRef(string resref, int type = NWNX_UTIL_RESREF_TYPE_CREATURE)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "IsValidResRef");
-            NWN.Internal.NativeFunctions.nwnxPushInt(type);
-            NWN.Internal.NativeFunctions.nwnxPushString(resref);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "IsValidResRef");
+            Internal.NativeFunctions.nwnxPushInt(type);
+            Internal.NativeFunctions.nwnxPushString(resref);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Retrieves an environment variable.
@@ -124,28 +126,28 @@ namespace NWNX
         // / @return The value of the environment variable.
         public static string GetEnvironmentVariable(string sVarname)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "GetEnvironmentVariable");
-            NWN.Internal.NativeFunctions.nwnxPushString(sVarname);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopString();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "GetEnvironmentVariable");
+            Internal.NativeFunctions.nwnxPushString(sVarname);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopString();
         }
 
         // / @brief Gets the module real life minutes per in game hour.
         // / @return The minutes per hour.
         public static int GetMinutesPerHour()
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "GetMinutesPerHour");
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "GetMinutesPerHour");
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Set module real life minutes per in game hour.
         // / @param minutes The minutes per hour.
         public static void SetMinutesPerHour(int minutes)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "SetMinutesPerHour");
-            NWN.Internal.NativeFunctions.nwnxPushInt(minutes);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "SetMinutesPerHour");
+            Internal.NativeFunctions.nwnxPushInt(minutes);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @anchor util_encode_url
@@ -154,10 +156,10 @@ namespace NWNX
         // / @return The url encoded string.
         public static string EncodeStringForURL(string str)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "EncodeStringForURL");
-            NWN.Internal.NativeFunctions.nwnxPushString(str);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopString();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "EncodeStringForURL");
+            Internal.NativeFunctions.nwnxPushString(str);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopString();
         }
 
         // / @anchor twoda_row_count
@@ -166,10 +168,10 @@ namespace NWNX
         // / @return The amount of rows in the 2da.
         public static int Get2DARowCount(string str)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "Get2DARowCount");
-            NWN.Internal.NativeFunctions.nwnxPushString(str);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "Get2DARowCount");
+            Internal.NativeFunctions.nwnxPushString(str);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Get the first resref of nType.
@@ -179,23 +181,23 @@ namespace NWNX
         // / when using the NSS resref type.
         // / @param bModuleResourcesOnly If TRUE only custom resources will be returned.
         // / @return The first resref found or "" if none is found.
-        public static string GetFirstResRef(int nType, string sRegexFilter = "", int bModuleResourcesOnly = NWN.NWScript.TRUE)
+        public static string GetFirstResRef(int nType, string sRegexFilter = "", int bModuleResourcesOnly = NWScript.TRUE)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "GetFirstResRef");
-            NWN.Internal.NativeFunctions.nwnxPushInt(bModuleResourcesOnly);
-            NWN.Internal.NativeFunctions.nwnxPushString(sRegexFilter);
-            NWN.Internal.NativeFunctions.nwnxPushInt(nType);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopString();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "GetFirstResRef");
+            Internal.NativeFunctions.nwnxPushInt(bModuleResourcesOnly);
+            Internal.NativeFunctions.nwnxPushString(sRegexFilter);
+            Internal.NativeFunctions.nwnxPushInt(nType);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopString();
         }
 
         // / @brief Get the next resref.
         // / @return The next resref found or "" if none is found.
         public static string GetNextResRef()
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "GetNextResRef");
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopString();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "GetNextResRef");
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopString();
         }
 
         // / @brief Get the ticks per second of the server.
@@ -203,9 +205,9 @@ namespace NWNX
         // / @return The ticks per second.
         public static int GetServerTicksPerSecond()
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "GetServerTicksPerSecond");
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "GetServerTicksPerSecond");
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Get the last created object.
@@ -215,11 +217,11 @@ namespace NWNX
         // / @return The last created object. On error, this returns OBJECT_INVALID.
         public static uint GetLastCreatedObject(int nObjectType, int nNthLast = 1)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "GetLastCreatedObject");
-            NWN.Internal.NativeFunctions.nwnxPushInt(nNthLast);
-            NWN.Internal.NativeFunctions.nwnxPushInt(nObjectType);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopObject();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "GetLastCreatedObject");
+            Internal.NativeFunctions.nwnxPushInt(nNthLast);
+            Internal.NativeFunctions.nwnxPushInt(nObjectType);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopObject();
         }
 
         // / @brief Compiles and adds a script to the UserDirectory/nwnx folder.
@@ -228,14 +230,14 @@ namespace NWNX
         // / @param sScriptData The script data to compile
         // / @param bWrapIntoMain Set to TRUE to wrap sScriptData into void main(){}.
         // / @return "" on success, or the compilation error.
-        public static string AddScript(string sFileName, string sScriptData, int bWrapIntoMain = NWN.NWScript.FALSE)
+        public static string AddScript(string sFileName, string sScriptData, int bWrapIntoMain = NWScript.FALSE)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "AddScript");
-            NWN.Internal.NativeFunctions.nwnxPushInt(bWrapIntoMain);
-            NWN.Internal.NativeFunctions.nwnxPushString(sScriptData);
-            NWN.Internal.NativeFunctions.nwnxPushString(sFileName);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopString();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "AddScript");
+            Internal.NativeFunctions.nwnxPushInt(bWrapIntoMain);
+            Internal.NativeFunctions.nwnxPushString(sScriptData);
+            Internal.NativeFunctions.nwnxPushString(sFileName);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopString();
         }
 
         // / @brief Gets the contents of a .nss script file as a string.
@@ -244,11 +246,11 @@ namespace NWNX
         // / @return The script file contents or "" on error.
         public static string GetNSSContents(string sScriptName, int nMaxLength = -1)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "GetNSSContents");
-            NWN.Internal.NativeFunctions.nwnxPushInt(nMaxLength);
-            NWN.Internal.NativeFunctions.nwnxPushString(sScriptName);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopString();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "GetNSSContents");
+            Internal.NativeFunctions.nwnxPushInt(nMaxLength);
+            Internal.NativeFunctions.nwnxPushString(sScriptName);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopString();
         }
 
         // / @brief Adds a nss file to the UserDirectory/nwnx folder.
@@ -258,11 +260,11 @@ namespace NWNX
         // / @return TRUE on success.
         public static int AddNSSFile(string sFileName, string sContents)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "AddNSSFile");
-            NWN.Internal.NativeFunctions.nwnxPushString(sContents);
-            NWN.Internal.NativeFunctions.nwnxPushString(sFileName);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "AddNSSFile");
+            Internal.NativeFunctions.nwnxPushString(sContents);
+            Internal.NativeFunctions.nwnxPushString(sFileName);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Remove sFileName of nType from the UserDirectory/nwnx folder.
@@ -271,20 +273,20 @@ namespace NWNX
         // / @return TRUE on success.
         public static int RemoveNWNXResourceFile(string sFileName, int nType)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "RemoveNWNXResourceFile");
-            NWN.Internal.NativeFunctions.nwnxPushInt(nType);
-            NWN.Internal.NativeFunctions.nwnxPushString(sFileName);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "RemoveNWNXResourceFile");
+            Internal.NativeFunctions.nwnxPushInt(nType);
+            Internal.NativeFunctions.nwnxPushString(sFileName);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Set the NWScript instruction limit
         // / @param nInstructionLimit The new limit or -1 to reset to default.
         public static void SetInstructionLimit(int nInstructionLimit)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "SetInstructionLimit");
-            NWN.Internal.NativeFunctions.nwnxPushInt(nInstructionLimit);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "SetInstructionLimit");
+            Internal.NativeFunctions.nwnxPushInt(nInstructionLimit);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Register a server console command that will execute a script chunk.
@@ -294,20 +296,20 @@ namespace NWNX
         // / @return TRUE on success.
         public static int RegisterServerConsoleCommand(string sCommand, string sScriptChunk)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "RegisterServerConsoleCommand");
-            NWN.Internal.NativeFunctions.nwnxPushString(sScriptChunk);
-            NWN.Internal.NativeFunctions.nwnxPushString(sCommand);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "RegisterServerConsoleCommand");
+            Internal.NativeFunctions.nwnxPushString(sScriptChunk);
+            Internal.NativeFunctions.nwnxPushString(sCommand);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Unregister a server console command that was registered with NWNX_Util_RegisterServerConsoleCommand().
         // / @param sCommand The name of the command.
         public static void UnregisterServerConsoleCommand(string sCommand)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "UnregisterServerConsoleCommand");
-            NWN.Internal.NativeFunctions.nwnxPushString(sCommand);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "UnregisterServerConsoleCommand");
+            Internal.NativeFunctions.nwnxPushString(sCommand);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Determines if the given plugin exists and is enabled.
@@ -316,28 +318,28 @@ namespace NWNX
         // / @return TRUE if the plugin exists and is enabled, otherwise FALSE.
         public static int PluginExists(string sPlugin)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "PluginExists");
-            NWN.Internal.NativeFunctions.nwnxPushString(sPlugin);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "PluginExists");
+            Internal.NativeFunctions.nwnxPushString(sPlugin);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Gets the server's current working user folder.
         // / @return The absolute path of the server's home directory (-userDirectory)
         public static string GetUserDirectory()
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "GetUserDirectory");
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopString();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "GetUserDirectory");
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopString();
         }
 
         // / @brief Get the return value of the last run script with a StartingConditional
         // / @return Return value of the last run script.
         public static int GetScriptReturnValue()
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "GetScriptReturnValue");
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "GetScriptReturnValue");
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @}

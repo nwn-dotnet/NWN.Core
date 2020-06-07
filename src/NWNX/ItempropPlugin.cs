@@ -1,3 +1,5 @@
+using NWN;
+
 namespace NWNX
 {
     [NWNXPlugin(NWNX_ItemProperty)]
@@ -12,22 +14,22 @@ namespace NWNX
         // / @return A constructed NWNX_IPUnpacked.
         public static IPUnpacked UnpackIP(System.IntPtr ip)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_ItemProperty, "UnpackIP");
-            NWN.Internal.NativeFunctions.nwnxPushItemProperty(ip);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_ItemProperty, "UnpackIP");
+            Internal.NativeFunctions.nwnxPushItemProperty(ip);
+            Internal.NativeFunctions.nwnxCallFunction();
             IPUnpacked retVal;
-            retVal.sTag = NWN.Internal.NativeFunctions.nwnxPopString();
-            retVal.oCreator = NWN.Internal.NativeFunctions.nwnxPopObject();
-            retVal.nSpellId = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.bUsable = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.nChanceToAppear = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.nUsesPerDay = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.nParam1Value = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.nParam1 = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.nCostTableValue = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.nCostTable = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.nSubType = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.nProperty = NWN.Internal.NativeFunctions.nwnxPopInt();
+            retVal.sTag = Internal.NativeFunctions.nwnxPopString();
+            retVal.oCreator = Internal.NativeFunctions.nwnxPopObject();
+            retVal.nSpellId = Internal.NativeFunctions.nwnxPopInt();
+            retVal.bUsable = Internal.NativeFunctions.nwnxPopInt();
+            retVal.nChanceToAppear = Internal.NativeFunctions.nwnxPopInt();
+            retVal.nUsesPerDay = Internal.NativeFunctions.nwnxPopInt();
+            retVal.nParam1Value = Internal.NativeFunctions.nwnxPopInt();
+            retVal.nParam1 = Internal.NativeFunctions.nwnxPopInt();
+            retVal.nCostTableValue = Internal.NativeFunctions.nwnxPopInt();
+            retVal.nCostTable = Internal.NativeFunctions.nwnxPopInt();
+            retVal.nSubType = Internal.NativeFunctions.nwnxPopInt();
+            retVal.nProperty = Internal.NativeFunctions.nwnxPopInt();
             return retVal;
         }
 
@@ -36,21 +38,21 @@ namespace NWNX
         // / @return The itemproperty.
         public static System.IntPtr PackIP(IPUnpacked ip)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_ItemProperty, "PackIP");
-            NWN.Internal.NativeFunctions.nwnxPushInt(ip.nProperty);
-            NWN.Internal.NativeFunctions.nwnxPushInt(ip.nSubType);
-            NWN.Internal.NativeFunctions.nwnxPushInt(ip.nCostTable);
-            NWN.Internal.NativeFunctions.nwnxPushInt(ip.nCostTableValue);
-            NWN.Internal.NativeFunctions.nwnxPushInt(ip.nParam1);
-            NWN.Internal.NativeFunctions.nwnxPushInt(ip.nParam1Value);
-            NWN.Internal.NativeFunctions.nwnxPushInt(ip.nUsesPerDay);
-            NWN.Internal.NativeFunctions.nwnxPushInt(ip.nChanceToAppear);
-            NWN.Internal.NativeFunctions.nwnxPushInt(ip.bUsable);
-            NWN.Internal.NativeFunctions.nwnxPushInt(ip.nSpellId);
-            NWN.Internal.NativeFunctions.nwnxPushObject(ip.oCreator);
-            NWN.Internal.NativeFunctions.nwnxPushString(ip.sTag);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopItemProperty();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_ItemProperty, "PackIP");
+            Internal.NativeFunctions.nwnxPushInt(ip.nProperty);
+            Internal.NativeFunctions.nwnxPushInt(ip.nSubType);
+            Internal.NativeFunctions.nwnxPushInt(ip.nCostTable);
+            Internal.NativeFunctions.nwnxPushInt(ip.nCostTableValue);
+            Internal.NativeFunctions.nwnxPushInt(ip.nParam1);
+            Internal.NativeFunctions.nwnxPushInt(ip.nParam1Value);
+            Internal.NativeFunctions.nwnxPushInt(ip.nUsesPerDay);
+            Internal.NativeFunctions.nwnxPushInt(ip.nChanceToAppear);
+            Internal.NativeFunctions.nwnxPushInt(ip.bUsable);
+            Internal.NativeFunctions.nwnxPushInt(ip.nSpellId);
+            Internal.NativeFunctions.nwnxPushObject(ip.oCreator);
+            Internal.NativeFunctions.nwnxPushString(ip.sTag);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopItemProperty();
         }
 
         // / @}
