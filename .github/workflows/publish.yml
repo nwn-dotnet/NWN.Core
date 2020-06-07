@@ -13,5 +13,5 @@ jobs:
         id: publish_nuget
         uses: rohith/publish-nuget@v2
         with:
-          PROJECT_FILE_PATH: Core/Core.csproj
+          PROJECT_FILE_PATH: NWN.Core.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
