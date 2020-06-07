@@ -4,10 +4,11 @@
         <LangVersion>8.0</LangVersion>
         <Nullable>enable</Nullable>
         <PackageId>NWN.Core</PackageId>
-        <Version>1.0.2</Version>
         <Authors>jorte</Authors>
         <Company>NWNDotnet</Company>
         <PackageTags>Neverwinter Nights;NWN;</PackageTags>
+        <RepositoryUrl>https://github.com/nwn-dotnet/NWN.Core</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <RootNamespace>NWN</RootNamespace>
     </PropertyGroup>
