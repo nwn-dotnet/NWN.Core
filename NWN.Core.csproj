@@ -4,7 +4,6 @@
         <LangVersion>8.0</LangVersion>
         <Nullable>enable</Nullable>
         <PackageId>NWN.Core</PackageId>
-        <Version>1.0.2</Version>
         <Authors>jorte</Authors>
         <Company>NWNDotnet</Company>
         <PackageTags>Neverwinter Nights;NWN;</PackageTags>
