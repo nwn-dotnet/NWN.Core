@@ -1,3 +1,5 @@
+using NWN;
+
 namespace NWNX
 {
     [NWNXPlugin(NWNX_Object)]
@@ -44,10 +46,10 @@ namespace NWNX
         // / @return The count.
         public static int GetLocalVariableCount(uint obj)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetLocalVariableCount");
-            NWN.Internal.NativeFunctions.nwnxPushObject(obj);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetLocalVariableCount");
+            Internal.NativeFunctions.nwnxPushObject(obj);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Gets the local variable at the provided index of the provided object.
@@ -57,13 +59,13 @@ namespace NWNX
         // / @return An NWNX_Object_LocalVariable struct.
         public static LocalVariable GetLocalVariable(uint obj, int index)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetLocalVariable");
-            NWN.Internal.NativeFunctions.nwnxPushInt(index);
-            NWN.Internal.NativeFunctions.nwnxPushObject(obj);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetLocalVariable");
+            Internal.NativeFunctions.nwnxPushInt(index);
+            Internal.NativeFunctions.nwnxPushObject(obj);
+            Internal.NativeFunctions.nwnxCallFunction();
             LocalVariable retVal;
-            retVal.key = NWN.Internal.NativeFunctions.nwnxPopString();
-            retVal.type = NWN.Internal.NativeFunctions.nwnxPopInt();
+            retVal.key = Internal.NativeFunctions.nwnxPopString();
+            retVal.type = Internal.NativeFunctions.nwnxPopInt();
             return retVal;
         }
 
@@ -73,10 +75,10 @@ namespace NWNX
         // / @remark This is the counterpart to ObjectToString.
         public static uint StringToObject(string id)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "StringToObject");
-            NWN.Internal.NativeFunctions.nwnxPushString(id);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopObject();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "StringToObject");
+            Internal.NativeFunctions.nwnxPushString(id);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopObject();
         }
 
         // / @brief Set an object's position.
@@ -84,12 +86,12 @@ namespace NWNX
         // / @param pos A vector position.
         public static void SetPosition(uint obj, System.Numerics.Vector3 pos)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetPosition");
-            NWN.Internal.NativeFunctions.nwnxPushFloat(pos.Z);
-            NWN.Internal.NativeFunctions.nwnxPushFloat(pos.Y);
-            NWN.Internal.NativeFunctions.nwnxPushFloat(pos.X);
-            NWN.Internal.NativeFunctions.nwnxPushObject(obj);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetPosition");
+            Internal.NativeFunctions.nwnxPushFloat(pos.Z);
+            Internal.NativeFunctions.nwnxPushFloat(pos.Y);
+            Internal.NativeFunctions.nwnxPushFloat(pos.X);
+            Internal.NativeFunctions.nwnxPushObject(obj);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Set an object's hit points.
@@ -97,10 +99,10 @@ namespace NWNX
         // / @param hp The hit points.
         public static void SetCurrentHitPoints(uint obj, int hp)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetCurrentHitPoints");
-            NWN.Internal.NativeFunctions.nwnxPushInt(hp);
-            NWN.Internal.NativeFunctions.nwnxPushObject(obj);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetCurrentHitPoints");
+            Internal.NativeFunctions.nwnxPushInt(hp);
+            Internal.NativeFunctions.nwnxPushObject(obj);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Adjust an object's maximum hit points
@@ -109,10 +111,10 @@ namespace NWNX
         // / @param hp The maximum hit points.
         public static void SetMaxHitPoints(uint obj, int hp)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetMaxHitPoints");
-            NWN.Internal.NativeFunctions.nwnxPushInt(hp);
-            NWN.Internal.NativeFunctions.nwnxPushObject(obj);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetMaxHitPoints");
+            Internal.NativeFunctions.nwnxPushInt(hp);
+            Internal.NativeFunctions.nwnxPushObject(obj);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Serialize a full object to a base64 string
@@ -121,10 +123,10 @@ namespace NWNX
         // / @note includes locals, inventory, etc
         public static string Serialize(uint obj)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "Serialize");
-            NWN.Internal.NativeFunctions.nwnxPushObject(obj);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopString();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "Serialize");
+            Internal.NativeFunctions.nwnxPushObject(obj);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopString();
         }
 
         // / @brief Deserialize the object.
@@ -133,10 +135,10 @@ namespace NWNX
         // / @return The object.
         public static uint Deserialize(string serialized)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "Deserialize");
-            NWN.Internal.NativeFunctions.nwnxPushString(serialized);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopObject();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "Deserialize");
+            Internal.NativeFunctions.nwnxPushString(serialized);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopObject();
         }
 
         // / @brief Gets the dialog resref.
@@ -144,10 +146,10 @@ namespace NWNX
         // / @return The name of the dialog resref.
         public static string GetDialogResref(uint obj)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetDialogResref");
-            NWN.Internal.NativeFunctions.nwnxPushObject(obj);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopString();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetDialogResref");
+            Internal.NativeFunctions.nwnxPushObject(obj);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopString();
         }
 
         // / @brief Sets the dialog resref.
@@ -155,33 +157,33 @@ namespace NWNX
         // / @param dialog The name of the dialog resref.
         public static void SetDialogResref(uint obj, string dialog)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetDialogResref");
-            NWN.Internal.NativeFunctions.nwnxPushString(dialog);
-            NWN.Internal.NativeFunctions.nwnxPushObject(obj);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetDialogResref");
+            Internal.NativeFunctions.nwnxPushString(dialog);
+            Internal.NativeFunctions.nwnxPushObject(obj);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
-        // / @brief Set an object's appearance.
+        // / @brief Set oPlaceable's appearance.
         // / @note Will not update for PCs until they re-enter the area.
-        // / @param obj The object.
-        // / @param app The appearance id.
-        public static void SetAppearance(uint obj, int app)
+        // / @param oPlaceable The placeable.
+        // / @param nAppearance The appearance id.
+        public static void SetAppearance(uint oPlaceable, int nAppearance)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetAppearance");
-            NWN.Internal.NativeFunctions.nwnxPushInt(app);
-            NWN.Internal.NativeFunctions.nwnxPushObject(obj);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetAppearance");
+            Internal.NativeFunctions.nwnxPushInt(nAppearance);
+            Internal.NativeFunctions.nwnxPushObject(oPlaceable);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
-        // / @brief Get an object's appearance.
-        // / @param obj The object.
+        // / @brief Get oPlaceable's appearance.
+        // / @param oPlaceable The placeable.
         // / @return The appearance id.
-        public static int GetAppearance(uint obj)
+        public static int GetAppearance(uint oPlaceable)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetAppearance");
-            NWN.Internal.NativeFunctions.nwnxPushObject(obj);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetAppearance");
+            Internal.NativeFunctions.nwnxPushObject(oPlaceable);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Determine if an object has a visual effect.
@@ -190,11 +192,11 @@ namespace NWNX
         // / @return TRUE if the object has the visual effect applied to it
         public static int GetHasVisualEffect(uint obj, int nVFX)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetHasVisualEffect");
-            NWN.Internal.NativeFunctions.nwnxPushInt(nVFX);
-            NWN.Internal.NativeFunctions.nwnxPushObject(obj);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetHasVisualEffect");
+            Internal.NativeFunctions.nwnxPushInt(nVFX);
+            Internal.NativeFunctions.nwnxPushObject(obj);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Check if an item can fit in an object's inventory.
@@ -203,11 +205,11 @@ namespace NWNX
         // / @return TRUE if an item of base item type can fit in object's inventory
         public static int CheckFit(uint obj, int baseitem)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "CheckFit");
-            NWN.Internal.NativeFunctions.nwnxPushInt(baseitem);
-            NWN.Internal.NativeFunctions.nwnxPushObject(obj);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "CheckFit");
+            Internal.NativeFunctions.nwnxPushInt(baseitem);
+            Internal.NativeFunctions.nwnxPushObject(obj);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Get an object's damage immunity.
@@ -216,11 +218,11 @@ namespace NWNX
         // / @return Damage immunity as a percentage.
         public static int GetDamageImmunity(uint obj, int damageType)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetDamageImmunity");
-            NWN.Internal.NativeFunctions.nwnxPushInt(damageType);
-            NWN.Internal.NativeFunctions.nwnxPushObject(obj);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetDamageImmunity");
+            Internal.NativeFunctions.nwnxPushInt(damageType);
+            Internal.NativeFunctions.nwnxPushObject(obj);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Add or move an object.
@@ -229,13 +231,13 @@ namespace NWNX
         // / @param pos The position.
         public static void AddToArea(uint obj, uint area, System.Numerics.Vector3 pos)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "AddToArea");
-            NWN.Internal.NativeFunctions.nwnxPushFloat(pos.Z);
-            NWN.Internal.NativeFunctions.nwnxPushFloat(pos.Y);
-            NWN.Internal.NativeFunctions.nwnxPushFloat(pos.X);
-            NWN.Internal.NativeFunctions.nwnxPushObject(area);
-            NWN.Internal.NativeFunctions.nwnxPushObject(obj);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "AddToArea");
+            Internal.NativeFunctions.nwnxPushFloat(pos.Z);
+            Internal.NativeFunctions.nwnxPushFloat(pos.Y);
+            Internal.NativeFunctions.nwnxPushFloat(pos.X);
+            Internal.NativeFunctions.nwnxPushObject(area);
+            Internal.NativeFunctions.nwnxPushObject(obj);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Get placeable's static setting
@@ -243,10 +245,10 @@ namespace NWNX
         // / @return TRUE if placeable is static.
         public static int GetPlaceableIsStatic(uint obj)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetPlaceableIsStatic");
-            NWN.Internal.NativeFunctions.nwnxPushObject(obj);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetPlaceableIsStatic");
+            Internal.NativeFunctions.nwnxPushObject(obj);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Set placeable as static or not.
@@ -255,10 +257,10 @@ namespace NWNX
         // / @param isStatic TRUE/FALSE
         public static void SetPlaceableIsStatic(uint obj, int isStatic)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetPlaceableIsStatic");
-            NWN.Internal.NativeFunctions.nwnxPushInt(isStatic);
-            NWN.Internal.NativeFunctions.nwnxPushObject(obj);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetPlaceableIsStatic");
+            Internal.NativeFunctions.nwnxPushInt(isStatic);
+            Internal.NativeFunctions.nwnxPushObject(obj);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Gets if a door/placeable auto-removes the key after use.
@@ -266,10 +268,10 @@ namespace NWNX
         // / @return TRUE/FALSE or -1 on error.
         public static int GetAutoRemoveKey(uint obj)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetAutoRemoveKey");
-            NWN.Internal.NativeFunctions.nwnxPushObject(obj);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetAutoRemoveKey");
+            Internal.NativeFunctions.nwnxPushObject(obj);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Sets if a door/placeable auto-removes the key after use.
@@ -277,10 +279,10 @@ namespace NWNX
         // / @param bRemoveKey TRUE/FALSE
         public static void SetAutoRemoveKey(uint obj, int bRemoveKey)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetAutoRemoveKey");
-            NWN.Internal.NativeFunctions.nwnxPushInt(bRemoveKey);
-            NWN.Internal.NativeFunctions.nwnxPushObject(obj);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetAutoRemoveKey");
+            Internal.NativeFunctions.nwnxPushInt(bRemoveKey);
+            Internal.NativeFunctions.nwnxPushObject(obj);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Get the geometry of a trigger
@@ -288,10 +290,10 @@ namespace NWNX
         // / @return A string of vertex positions.
         public static string GetTriggerGeometry(uint oTrigger)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetTriggerGeometry");
-            NWN.Internal.NativeFunctions.nwnxPushObject(oTrigger);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopString();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetTriggerGeometry");
+            Internal.NativeFunctions.nwnxPushObject(oTrigger);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopString();
         }
 
         // / @brief Set the geometry of a trigger with a list of vertex positions
@@ -305,10 +307,10 @@ namespace NWNX
         // / @remark The minimum number of vertices is 3.
         public static void SetTriggerGeometry(uint oTrigger, string sGeometry)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetTriggerGeometry");
-            NWN.Internal.NativeFunctions.nwnxPushString(sGeometry);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oTrigger);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetTriggerGeometry");
+            Internal.NativeFunctions.nwnxPushString(sGeometry);
+            Internal.NativeFunctions.nwnxPushObject(oTrigger);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Add an effect to an object that displays an icon and has no other effect.
@@ -319,11 +321,11 @@ namespace NWNX
         // / will be permanent.
         public static void AddIconEffect(uint obj, int nIcon, float fDuration = 0.0f)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "AddIconEffect");
-            NWN.Internal.NativeFunctions.nwnxPushFloat(fDuration);
-            NWN.Internal.NativeFunctions.nwnxPushInt(nIcon);
-            NWN.Internal.NativeFunctions.nwnxPushObject(obj);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "AddIconEffect");
+            Internal.NativeFunctions.nwnxPushFloat(fDuration);
+            Internal.NativeFunctions.nwnxPushInt(nIcon);
+            Internal.NativeFunctions.nwnxPushObject(obj);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Remove an icon effect from an object that was added by the NWNX_Object_AddIconEffect() function.
@@ -331,10 +333,10 @@ namespace NWNX
         // / @param nIcon The icon id.
         public static void RemoveIconEffect(uint obj, int nIcon)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "RemoveIconEffect");
-            NWN.Internal.NativeFunctions.nwnxPushInt(nIcon);
-            NWN.Internal.NativeFunctions.nwnxPushObject(obj);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "RemoveIconEffect");
+            Internal.NativeFunctions.nwnxPushInt(nIcon);
+            Internal.NativeFunctions.nwnxPushObject(obj);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Export an object to the UserDirectory/nwnx folder.
@@ -342,10 +344,10 @@ namespace NWNX
         // / @param oObject The object to export. Valid object types: Creature, Item, Placeable, Waypoint, Door, Store, Trigger
         public static void Export(string sFileName, uint oObject)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "Export");
-            NWN.Internal.NativeFunctions.nwnxPushObject(oObject);
-            NWN.Internal.NativeFunctions.nwnxPushString(sFileName);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "Export");
+            Internal.NativeFunctions.nwnxPushObject(oObject);
+            Internal.NativeFunctions.nwnxPushString(sFileName);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Get oObject's persistent integer variable sVarName.
@@ -355,11 +357,11 @@ namespace NWNX
         // / @deprecated Please use NWNX_Object_GetInt()
         public static int GetPersistentInt(uint oObject, string sVarName)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetPersistentInt");
-            NWN.Internal.NativeFunctions.nwnxPushString(sVarName);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oObject);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetPersistentInt");
+            Internal.NativeFunctions.nwnxPushString(sVarName);
+            Internal.NativeFunctions.nwnxPushObject(oObject);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Set oObject's persistent integer variable sVarName to nValue.
@@ -370,11 +372,11 @@ namespace NWNX
         // / @deprecated Please use NWNX_Object_SetInt()
         public static void SetPersistentInt(uint oObject, string sVarName, int nValue)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetPersistentInt");
-            NWN.Internal.NativeFunctions.nwnxPushInt(nValue);
-            NWN.Internal.NativeFunctions.nwnxPushString(sVarName);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oObject);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetPersistentInt");
+            Internal.NativeFunctions.nwnxPushInt(nValue);
+            Internal.NativeFunctions.nwnxPushString(sVarName);
+            Internal.NativeFunctions.nwnxPushObject(oObject);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Delete oObject's persistent integer variable sVarName.
@@ -383,10 +385,10 @@ namespace NWNX
         // / @deprecated Please use NWNX_Object_DeleteInt()
         public static void DeletePersistentInt(uint oObject, string sVarName)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "DeletePersistentInt");
-            NWN.Internal.NativeFunctions.nwnxPushString(sVarName);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oObject);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "DeletePersistentInt");
+            Internal.NativeFunctions.nwnxPushString(sVarName);
+            Internal.NativeFunctions.nwnxPushObject(oObject);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Get oObject's persistent string variable sVarName.
@@ -396,11 +398,11 @@ namespace NWNX
         // / @deprecated Please use NWNX_Object_GetString()
         public static string GetPersistentString(uint oObject, string sVarName)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetPersistentString");
-            NWN.Internal.NativeFunctions.nwnxPushString(sVarName);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oObject);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopString();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetPersistentString");
+            Internal.NativeFunctions.nwnxPushString(sVarName);
+            Internal.NativeFunctions.nwnxPushObject(oObject);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopString();
         }
 
         // / @brief Set oObject's persistent string variable sVarName to sValue.
@@ -411,11 +413,11 @@ namespace NWNX
         // / @deprecated Please use NWNX_Object_SetString()
         public static void SetPersistentString(uint oObject, string sVarName, string sValue)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetPersistentString");
-            NWN.Internal.NativeFunctions.nwnxPushString(sValue);
-            NWN.Internal.NativeFunctions.nwnxPushString(sVarName);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oObject);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetPersistentString");
+            Internal.NativeFunctions.nwnxPushString(sValue);
+            Internal.NativeFunctions.nwnxPushString(sVarName);
+            Internal.NativeFunctions.nwnxPushObject(oObject);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Delete oObject's persistent string variable sVarName.
@@ -424,10 +426,10 @@ namespace NWNX
         // / @deprecated Please use NWNX_Object_DeleteString()
         public static void DeletePersistentString(uint oObject, string sVarName)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "DeletePersistentString");
-            NWN.Internal.NativeFunctions.nwnxPushString(sVarName);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oObject);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "DeletePersistentString");
+            Internal.NativeFunctions.nwnxPushString(sVarName);
+            Internal.NativeFunctions.nwnxPushObject(oObject);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Get oObject's persistent float variable sVarName.
@@ -437,11 +439,11 @@ namespace NWNX
         // / @deprecated Please use NWNX_Object_GetFloat()
         public static float GetPersistentFloat(uint oObject, string sVarName)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetPersistentFloat");
-            NWN.Internal.NativeFunctions.nwnxPushString(sVarName);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oObject);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopFloat();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetPersistentFloat");
+            Internal.NativeFunctions.nwnxPushString(sVarName);
+            Internal.NativeFunctions.nwnxPushObject(oObject);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopFloat();
         }
 
         // / @brief Set oObject's persistent float variable sVarName to fValue.
@@ -452,11 +454,11 @@ namespace NWNX
         // / @deprecated Please use NWNX_Object_SetFloat()
         public static void SetPersistentFloat(uint oObject, string sVarName, float fValue)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetPersistentFloat");
-            NWN.Internal.NativeFunctions.nwnxPushFloat(fValue);
-            NWN.Internal.NativeFunctions.nwnxPushString(sVarName);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oObject);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetPersistentFloat");
+            Internal.NativeFunctions.nwnxPushFloat(fValue);
+            Internal.NativeFunctions.nwnxPushString(sVarName);
+            Internal.NativeFunctions.nwnxPushObject(oObject);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Delete oObject's persistent float variable sVarName.
@@ -465,10 +467,10 @@ namespace NWNX
         // / @deprecated Please use NWNX_Object_DeleteFloat()
         public static void DeletePersistentFloat(uint oObject, string sVarName)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "DeletePersistentFloat");
-            NWN.Internal.NativeFunctions.nwnxPushString(sVarName);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oObject);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "DeletePersistentFloat");
+            Internal.NativeFunctions.nwnxPushString(sVarName);
+            Internal.NativeFunctions.nwnxPushObject(oObject);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Get oObject's integer variable sVarName.
@@ -477,11 +479,11 @@ namespace NWNX
         // / @return The value or 0 on error.
         public static int GetInt(uint oObject, string sVarName)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetInt");
-            NWN.Internal.NativeFunctions.nwnxPushString(sVarName);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oObject);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetInt");
+            Internal.NativeFunctions.nwnxPushString(sVarName);
+            Internal.NativeFunctions.nwnxPushObject(oObject);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Set oObject's integer variable sVarName to nValue.
@@ -491,12 +493,12 @@ namespace NWNX
         // / @param bPersist When TRUE, the value is persisted to GFF, this means that it'll be saved in the .bic file of a player's character or when an object is serialized.
         public static void SetInt(uint oObject, string sVarName, int nValue, int bPersist)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetInt");
-            NWN.Internal.NativeFunctions.nwnxPushInt(bPersist);
-            NWN.Internal.NativeFunctions.nwnxPushInt(nValue);
-            NWN.Internal.NativeFunctions.nwnxPushString(sVarName);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oObject);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetInt");
+            Internal.NativeFunctions.nwnxPushInt(bPersist);
+            Internal.NativeFunctions.nwnxPushInt(nValue);
+            Internal.NativeFunctions.nwnxPushString(sVarName);
+            Internal.NativeFunctions.nwnxPushObject(oObject);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Delete oObject's integer variable sVarName.
@@ -504,10 +506,10 @@ namespace NWNX
         // / @param sVarName The variable name.
         public static void DeleteInt(uint oObject, string sVarName)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "DeleteInt");
-            NWN.Internal.NativeFunctions.nwnxPushString(sVarName);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oObject);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "DeleteInt");
+            Internal.NativeFunctions.nwnxPushString(sVarName);
+            Internal.NativeFunctions.nwnxPushObject(oObject);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Get oObject's string variable sVarName.
@@ -516,11 +518,11 @@ namespace NWNX
         // / @return The value or "" on error.
         public static string GetString(uint oObject, string sVarName)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetString");
-            NWN.Internal.NativeFunctions.nwnxPushString(sVarName);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oObject);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopString();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetString");
+            Internal.NativeFunctions.nwnxPushString(sVarName);
+            Internal.NativeFunctions.nwnxPushObject(oObject);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopString();
         }
 
         // / @brief Set oObject's string variable sVarName to sValue.
@@ -530,12 +532,12 @@ namespace NWNX
         // / @param bPersist When TRUE, the value is persisted to GFF, this means that it'll be saved in the .bic file of a player's character or when an object is serialized.
         public static void SetString(uint oObject, string sVarName, string sValue, int bPersist)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetString");
-            NWN.Internal.NativeFunctions.nwnxPushInt(bPersist);
-            NWN.Internal.NativeFunctions.nwnxPushString(sValue);
-            NWN.Internal.NativeFunctions.nwnxPushString(sVarName);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oObject);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetString");
+            Internal.NativeFunctions.nwnxPushInt(bPersist);
+            Internal.NativeFunctions.nwnxPushString(sValue);
+            Internal.NativeFunctions.nwnxPushString(sVarName);
+            Internal.NativeFunctions.nwnxPushObject(oObject);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Delete oObject's string variable sVarName.
@@ -543,10 +545,10 @@ namespace NWNX
         // / @param sVarName The variable name.
         public static void DeleteString(uint oObject, string sVarName)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "DeleteString");
-            NWN.Internal.NativeFunctions.nwnxPushString(sVarName);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oObject);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "DeleteString");
+            Internal.NativeFunctions.nwnxPushString(sVarName);
+            Internal.NativeFunctions.nwnxPushObject(oObject);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Get oObject's float variable sVarName.
@@ -555,11 +557,11 @@ namespace NWNX
         // / @return The value or 0.0f on error.
         public static float GetFloat(uint oObject, string sVarName)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetFloat");
-            NWN.Internal.NativeFunctions.nwnxPushString(sVarName);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oObject);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopFloat();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetFloat");
+            Internal.NativeFunctions.nwnxPushString(sVarName);
+            Internal.NativeFunctions.nwnxPushObject(oObject);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopFloat();
         }
 
         // / @brief Set oObject's float variable sVarName to fValue.
@@ -569,12 +571,12 @@ namespace NWNX
         // / @param bPersist When TRUE, the value is persisted to GFF, this means that it'll be saved in the .bic file of a player's character or when an object is serialized.
         public static void SetFloat(uint oObject, string sVarName, float fValue, int bPersist)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetFloat");
-            NWN.Internal.NativeFunctions.nwnxPushInt(bPersist);
-            NWN.Internal.NativeFunctions.nwnxPushFloat(fValue);
-            NWN.Internal.NativeFunctions.nwnxPushString(sVarName);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oObject);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetFloat");
+            Internal.NativeFunctions.nwnxPushInt(bPersist);
+            Internal.NativeFunctions.nwnxPushFloat(fValue);
+            Internal.NativeFunctions.nwnxPushString(sVarName);
+            Internal.NativeFunctions.nwnxPushObject(oObject);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Delete oObject's persistent float variable sVarName.
@@ -582,10 +584,10 @@ namespace NWNX
         // / @param sVarName The variable name.
         public static void DeleteFloat(uint oObject, string sVarName)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "DeleteFloat");
-            NWN.Internal.NativeFunctions.nwnxPushString(sVarName);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oObject);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "DeleteFloat");
+            Internal.NativeFunctions.nwnxPushString(sVarName);
+            Internal.NativeFunctions.nwnxPushObject(oObject);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Delete any variables that match sRegex
@@ -594,10 +596,10 @@ namespace NWNX
         // / @param sRegex The regular expression, for example .*Test.* removes every variable that has Test in it.
         public static void DeleteVarRegex(uint oObject, string sRegex)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "DeleteVarRegex");
-            NWN.Internal.NativeFunctions.nwnxPushString(sRegex);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oObject);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "DeleteVarRegex");
+            Internal.NativeFunctions.nwnxPushString(sRegex);
+            Internal.NativeFunctions.nwnxPushObject(oObject);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Get if vPosition is inside oTrigger's geometry.
@@ -607,13 +609,13 @@ namespace NWNX
         // / @return TRUE if vPosition is inside oTrigger's geometry.
         public static int GetPositionIsInTrigger(uint oTrigger, System.Numerics.Vector3 vPosition)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetPositionIsInTrigger");
-            NWN.Internal.NativeFunctions.nwnxPushFloat(vPosition.Z);
-            NWN.Internal.NativeFunctions.nwnxPushFloat(vPosition.Y);
-            NWN.Internal.NativeFunctions.nwnxPushFloat(vPosition.X);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oTrigger);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetPositionIsInTrigger");
+            Internal.NativeFunctions.nwnxPushFloat(vPosition.Z);
+            Internal.NativeFunctions.nwnxPushFloat(vPosition.Y);
+            Internal.NativeFunctions.nwnxPushFloat(vPosition.X);
+            Internal.NativeFunctions.nwnxPushObject(oTrigger);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Gets the given object's internal type (NWNX_OBJECT_TYPE_INTERNAL_*)
@@ -621,10 +623,10 @@ namespace NWNX
         // / @return The object's type (NWNX_OBJECT_TYPE_INTERNAL_*)
         public static int GetInternalObjectType(uint oObject)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetInternalObjectType");
-            NWN.Internal.NativeFunctions.nwnxPushObject(oObject);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetInternalObjectType");
+            Internal.NativeFunctions.nwnxPushObject(oObject);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Have oObject acquire oItem.
@@ -634,11 +636,11 @@ namespace NWNX
         // / @return TRUE on success.
         public static int AcquireItem(uint oObject, uint oItem)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "AcquireItem");
-            NWN.Internal.NativeFunctions.nwnxPushObject(oItem);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oObject);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "AcquireItem");
+            Internal.NativeFunctions.nwnxPushObject(oItem);
+            Internal.NativeFunctions.nwnxPushObject(oObject);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Cause oObject to face fDirection.
@@ -649,19 +651,19 @@ namespace NWNX
         // / @param fDirection The direction the object should face
         public static void SetFacing(uint oObject, float fDirection)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetFacing");
-            NWN.Internal.NativeFunctions.nwnxPushFloat(fDirection);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oObject);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetFacing");
+            Internal.NativeFunctions.nwnxPushFloat(fDirection);
+            Internal.NativeFunctions.nwnxPushObject(oObject);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Clear all spell effects oObject has applied to others.
         // / @param oObject The object that applied the spell effects.
         public static void ClearSpellEffectsOnOthers(uint oObject)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "ClearSpellEffectsOnOthers");
-            NWN.Internal.NativeFunctions.nwnxPushObject(oObject);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "ClearSpellEffectsOnOthers");
+            Internal.NativeFunctions.nwnxPushObject(oObject);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Peek at the UUID of oObject without assigning one if it does not have one
@@ -669,10 +671,10 @@ namespace NWNX
         // / @return The UUID or "" when the object does not have or cannot have an UUID
         public static string PeekUUID(uint oObject)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "PeekUUID");
-            NWN.Internal.NativeFunctions.nwnxPushObject(oObject);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopString();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "PeekUUID");
+            Internal.NativeFunctions.nwnxPushObject(oObject);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopString();
         }
 
         // / @brief Get if oDoor has a visible model.
@@ -680,10 +682,21 @@ namespace NWNX
         // / @return TRUE if oDoor has a visible model
         public static int GetDoorHasVisibleModel(uint oDoor)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetDoorHasVisibleModel");
-            NWN.Internal.NativeFunctions.nwnxPushObject(oDoor);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetDoorHasVisibleModel");
+            Internal.NativeFunctions.nwnxPushObject(oDoor);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
+        }
+
+        // / @brief Get if oObject is destroyable.
+        // / @param oObject The object
+        // / @return TRUE if oObject is destroyable.
+        public static int GetIsDestroyable(uint oObject)
+        {
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetIsDestroyable");
+            Internal.NativeFunctions.nwnxPushObject(oObject);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @}

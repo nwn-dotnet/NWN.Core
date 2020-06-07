@@ -1,3 +1,5 @@
+using NWN;
+
 namespace NWNX
 {
     [NWNXPlugin(NWNX_Lua)]
@@ -10,9 +12,9 @@ namespace NWNX
         // / @param sCode The code to evaluate.
         public static void EvalVoid(string sCode)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Lua, "EvalVoid");
-            NWN.Internal.NativeFunctions.nwnxPushString(sCode);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Lua, "EvalVoid");
+            Internal.NativeFunctions.nwnxPushString(sCode);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Evaluate LUA code and return the output.
@@ -20,10 +22,10 @@ namespace NWNX
         // / @return The result of the Lua code execution.
         public static string Eval(string sCode)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Lua, "Eval");
-            NWN.Internal.NativeFunctions.nwnxPushString(sCode);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopString();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Lua, "Eval");
+            Internal.NativeFunctions.nwnxPushString(sCode);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopString();
         }
 
         // / @brief Generate events in NWScript to receive on the Lua side.
@@ -32,11 +34,11 @@ namespace NWNX
         // / For details on events just look at the three *Event() functions in preload.lua.
         public static void RunEvent(string sEvent, uint oObject, string sExtra = "")
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Lua, "RunEvent");
-            NWN.Internal.NativeFunctions.nwnxPushString(sExtra);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oObject);
-            NWN.Internal.NativeFunctions.nwnxPushString(sEvent);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Lua, "RunEvent");
+            Internal.NativeFunctions.nwnxPushString(sExtra);
+            Internal.NativeFunctions.nwnxPushObject(oObject);
+            Internal.NativeFunctions.nwnxPushString(sEvent);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @}

@@ -1,3 +1,5 @@
+using NWN;
+
 namespace NWNX
 {
     [NWNXPlugin(NWNX_Reveal)]
@@ -21,11 +23,11 @@ namespace NWNX
         // / @param iDetectionMethod Can be specified to determine whether the hidden creature is seen or heard.
         public static void RevealTo(uint oHiding, uint oObserver, int iDetectionMethod = NWNX_REVEAL_HEARD)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Reveal, "RevealTo");
-            NWN.Internal.NativeFunctions.nwnxPushInt(iDetectionMethod);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oObserver);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oHiding);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Reveal, "RevealTo");
+            Internal.NativeFunctions.nwnxPushInt(iDetectionMethod);
+            Internal.NativeFunctions.nwnxPushObject(oObserver);
+            Internal.NativeFunctions.nwnxPushObject(oHiding);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Sets whether a character remains visible to their party through stealth.
@@ -34,11 +36,11 @@ namespace NWNX
         // / @param iDetectionMethod Can be specified to determine whether the hidden creature is seen or heard.
         public static void SetRevealToParty(uint oHiding, int bReveal, int iDetectionMethod = NWNX_REVEAL_HEARD)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Reveal, "SetRevealToParty");
-            NWN.Internal.NativeFunctions.nwnxPushInt(iDetectionMethod);
-            NWN.Internal.NativeFunctions.nwnxPushInt(bReveal);
-            NWN.Internal.NativeFunctions.nwnxPushObject(oHiding);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Reveal, "SetRevealToParty");
+            Internal.NativeFunctions.nwnxPushInt(iDetectionMethod);
+            Internal.NativeFunctions.nwnxPushInt(bReveal);
+            Internal.NativeFunctions.nwnxPushObject(oHiding);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @}

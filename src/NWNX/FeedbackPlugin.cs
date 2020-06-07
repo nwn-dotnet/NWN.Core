@@ -1,3 +1,5 @@
+using NWN;
+
 namespace NWNX
 {
     [NWNXPlugin(NWNX_Feedback)]
@@ -369,13 +371,13 @@ namespace NWNX
         // / @param nMessage The message identifier from @ref feedback_msgs "Feedback Messages".
         // / @param oPC The PC or OBJECT_INVALID for a global setting.
         // / @return TRUE if the message is hidden.
-        public static int GetFeedbackMessageHidden(int nMessage, uint oPC = NWN.NWScript.OBJECT_INVALID)
+        public static int GetFeedbackMessageHidden(int nMessage, uint oPC = NWScript.OBJECT_INVALID)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Feedback, "GetFeedbackMessageHidden");
-            NWN.Internal.NativeFunctions.nwnxPushObject(oPC);
-            NWN.Internal.NativeFunctions.nwnxPushInt(nMessage);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Feedback, "GetFeedbackMessageHidden");
+            Internal.NativeFunctions.nwnxPushObject(oPC);
+            Internal.NativeFunctions.nwnxPushInt(nMessage);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Sets if feedback message is hidden.
@@ -384,26 +386,26 @@ namespace NWNX
         // / @param oPC The PC or OBJECT_INVALID for a global setting.
         // / @note Personal state overrides the global state which means if a global state is set
         // / to TRUE but the personal state is set to FALSE, the message will be shown to the PC.
-        public static void SetFeedbackMessageHidden(int nMessage, int isHidden, uint oPC = NWN.NWScript.OBJECT_INVALID)
+        public static void SetFeedbackMessageHidden(int nMessage, int isHidden, uint oPC = NWScript.OBJECT_INVALID)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Feedback, "SetFeedbackMessageHidden");
-            NWN.Internal.NativeFunctions.nwnxPushObject(oPC);
-            NWN.Internal.NativeFunctions.nwnxPushInt(isHidden);
-            NWN.Internal.NativeFunctions.nwnxPushInt(nMessage);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Feedback, "SetFeedbackMessageHidden");
+            Internal.NativeFunctions.nwnxPushObject(oPC);
+            Internal.NativeFunctions.nwnxPushInt(isHidden);
+            Internal.NativeFunctions.nwnxPushInt(nMessage);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Gets if combat log message is hidden.
         // / @param nMessage The message identifier from @ref combat_log_msgs "Combat Log Messages".
         // / @param oPC The PC or OBJECT_INVALID for a global setting.
         // / @return TRUE if the message is hidden.
-        public static int GetCombatLogMessageHidden(int nMessage, uint oPC = NWN.NWScript.OBJECT_INVALID)
+        public static int GetCombatLogMessageHidden(int nMessage, uint oPC = NWScript.OBJECT_INVALID)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Feedback, "GetCombatLogMessageHidden");
-            NWN.Internal.NativeFunctions.nwnxPushObject(oPC);
-            NWN.Internal.NativeFunctions.nwnxPushInt(nMessage);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Feedback, "GetCombatLogMessageHidden");
+            Internal.NativeFunctions.nwnxPushObject(oPC);
+            Internal.NativeFunctions.nwnxPushInt(nMessage);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Sets if combat log message is hidden.
@@ -412,24 +414,24 @@ namespace NWNX
         // / @param oPC The PC or OBJECT_INVALID for a global setting.
         // / @note Personal state overrides the global state which means if a global state is set
         // / to TRUE but the personal state is set to FALSE, the message will be shown to the PC.
-        public static void SetCombatLogMessageHidden(int nMessage, int isHidden, uint oPC = NWN.NWScript.OBJECT_INVALID)
+        public static void SetCombatLogMessageHidden(int nMessage, int isHidden, uint oPC = NWScript.OBJECT_INVALID)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Feedback, "SetCombatLogMessageHidden");
-            NWN.Internal.NativeFunctions.nwnxPushObject(oPC);
-            NWN.Internal.NativeFunctions.nwnxPushInt(isHidden);
-            NWN.Internal.NativeFunctions.nwnxPushInt(nMessage);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Feedback, "SetCombatLogMessageHidden");
+            Internal.NativeFunctions.nwnxPushObject(oPC);
+            Internal.NativeFunctions.nwnxPushInt(isHidden);
+            Internal.NativeFunctions.nwnxPushInt(nMessage);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Gets if the journal update message is hidden.
         // / @param oPC The PC or OBJECT_INVALID for a global setting.
         // / @return TRUE if the message is hidden.
-        public static int GetJournalUpdatedMessageHidden(uint oPC = NWN.NWScript.OBJECT_INVALID)
+        public static int GetJournalUpdatedMessageHidden(uint oPC = NWScript.OBJECT_INVALID)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Feedback, "GetJournalUpdatedMessageHidden");
-            NWN.Internal.NativeFunctions.nwnxPushObject(oPC);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Feedback, "GetJournalUpdatedMessageHidden");
+            Internal.NativeFunctions.nwnxPushObject(oPC);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Sets if journal update message is hidden.
@@ -437,21 +439,21 @@ namespace NWNX
         // / @param oPC The PC or OBJECT_INVALID for a global setting.
         // / @note Personal state overrides the global state which means if a global state is set
         // / to TRUE but the personal state is set to FALSE, the message will be shown to the PC.
-        public static void SetJournalUpdatedMessageHidden(int isHidden, uint oPC = NWN.NWScript.OBJECT_INVALID)
+        public static void SetJournalUpdatedMessageHidden(int isHidden, uint oPC = NWScript.OBJECT_INVALID)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Feedback, "SetJournalUpdatedMessageHidden");
-            NWN.Internal.NativeFunctions.nwnxPushObject(oPC);
-            NWN.Internal.NativeFunctions.nwnxPushInt(isHidden);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Feedback, "SetJournalUpdatedMessageHidden");
+            Internal.NativeFunctions.nwnxPushObject(oPC);
+            Internal.NativeFunctions.nwnxPushInt(isHidden);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Set whether to use a blacklist or whitelist mode for feedback messages
         // / @param bWhitelist TRUE for all messages to be hidden by default, default FALSE.
         public static void SetFeedbackMessageMode(int bWhitelist)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Feedback, "SetFeedbackMessageMode");
-            NWN.Internal.NativeFunctions.nwnxPushInt(bWhitelist);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Feedback, "SetFeedbackMessageMode");
+            Internal.NativeFunctions.nwnxPushInt(bWhitelist);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Set whether to use a blacklist or whitelist mode for combat log messages
@@ -459,9 +461,9 @@ namespace NWNX
         // / @note If using Whitelist, be sure to whitelist NWNX_FEEDBACK_COMBATLOG_FEEDBACK for feedback messages to work.
         public static void SetCombatLogMessageMode(int bWhitelist)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Feedback, "SetCombatLogMessageMode");
-            NWN.Internal.NativeFunctions.nwnxPushInt(bWhitelist);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Feedback, "SetCombatLogMessageMode");
+            Internal.NativeFunctions.nwnxPushInt(bWhitelist);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @}

@@ -1,3 +1,5 @@
+using NWN;
+
 namespace NWNX
 {
     [NWNXPlugin(NWNX_Effect)]
@@ -12,48 +14,48 @@ namespace NWNX
         // / @return A constructed NWNX_EffectUnpacked.
         public static EffectUnpacked UnpackEffect(System.IntPtr e)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Effect, "UnpackEffect");
-            NWN.Internal.NativeFunctions.nwnxPushEffect(e);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Effect, "UnpackEffect");
+            Internal.NativeFunctions.nwnxPushEffect(e);
+            Internal.NativeFunctions.nwnxCallFunction();
             EffectUnpacked retVal;
-            retVal.sTag = NWN.Internal.NativeFunctions.nwnxPopString();
-            retVal.oParam3 = NWN.Internal.NativeFunctions.nwnxPopObject();
-            retVal.oParam2 = NWN.Internal.NativeFunctions.nwnxPopObject();
-            retVal.oParam1 = NWN.Internal.NativeFunctions.nwnxPopObject();
-            retVal.oParam0 = NWN.Internal.NativeFunctions.nwnxPopObject();
-            retVal.sParam5 = NWN.Internal.NativeFunctions.nwnxPopString();
-            retVal.sParam4 = NWN.Internal.NativeFunctions.nwnxPopString();
-            retVal.sParam3 = NWN.Internal.NativeFunctions.nwnxPopString();
-            retVal.sParam2 = NWN.Internal.NativeFunctions.nwnxPopString();
-            retVal.sParam1 = NWN.Internal.NativeFunctions.nwnxPopString();
-            retVal.sParam0 = NWN.Internal.NativeFunctions.nwnxPopString();
-            retVal.fParam3 = NWN.Internal.NativeFunctions.nwnxPopFloat();
-            retVal.fParam2 = NWN.Internal.NativeFunctions.nwnxPopFloat();
-            retVal.fParam1 = NWN.Internal.NativeFunctions.nwnxPopFloat();
-            retVal.fParam0 = NWN.Internal.NativeFunctions.nwnxPopFloat();
-            retVal.nParam7 = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.nParam6 = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.nParam5 = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.nParam4 = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.nParam3 = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.nParam2 = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.nParam1 = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.nParam0 = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.nNumIntegers = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.bLinkRightValid = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.eLinkRight = NWN.Internal.NativeFunctions.nwnxPopEffect();
-            retVal.bLinkLeftValid = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.eLinkLeft = NWN.Internal.NativeFunctions.nwnxPopEffect();
-            retVal.nCasterLevel = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.bShowIcon = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.bExpose = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.nSpellId = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.oCreator = NWN.Internal.NativeFunctions.nwnxPopObject();
-            retVal.nExpiryTimeOfDay = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.nExpiryCalendarDay = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.fDuration = NWN.Internal.NativeFunctions.nwnxPopFloat();
-            retVal.nSubType = NWN.Internal.NativeFunctions.nwnxPopInt();
-            retVal.nType = NWN.Internal.NativeFunctions.nwnxPopInt();
+            retVal.sTag = Internal.NativeFunctions.nwnxPopString();
+            retVal.oParam3 = Internal.NativeFunctions.nwnxPopObject();
+            retVal.oParam2 = Internal.NativeFunctions.nwnxPopObject();
+            retVal.oParam1 = Internal.NativeFunctions.nwnxPopObject();
+            retVal.oParam0 = Internal.NativeFunctions.nwnxPopObject();
+            retVal.sParam5 = Internal.NativeFunctions.nwnxPopString();
+            retVal.sParam4 = Internal.NativeFunctions.nwnxPopString();
+            retVal.sParam3 = Internal.NativeFunctions.nwnxPopString();
+            retVal.sParam2 = Internal.NativeFunctions.nwnxPopString();
+            retVal.sParam1 = Internal.NativeFunctions.nwnxPopString();
+            retVal.sParam0 = Internal.NativeFunctions.nwnxPopString();
+            retVal.fParam3 = Internal.NativeFunctions.nwnxPopFloat();
+            retVal.fParam2 = Internal.NativeFunctions.nwnxPopFloat();
+            retVal.fParam1 = Internal.NativeFunctions.nwnxPopFloat();
+            retVal.fParam0 = Internal.NativeFunctions.nwnxPopFloat();
+            retVal.nParam7 = Internal.NativeFunctions.nwnxPopInt();
+            retVal.nParam6 = Internal.NativeFunctions.nwnxPopInt();
+            retVal.nParam5 = Internal.NativeFunctions.nwnxPopInt();
+            retVal.nParam4 = Internal.NativeFunctions.nwnxPopInt();
+            retVal.nParam3 = Internal.NativeFunctions.nwnxPopInt();
+            retVal.nParam2 = Internal.NativeFunctions.nwnxPopInt();
+            retVal.nParam1 = Internal.NativeFunctions.nwnxPopInt();
+            retVal.nParam0 = Internal.NativeFunctions.nwnxPopInt();
+            retVal.nNumIntegers = Internal.NativeFunctions.nwnxPopInt();
+            retVal.bLinkRightValid = Internal.NativeFunctions.nwnxPopInt();
+            retVal.eLinkRight = Internal.NativeFunctions.nwnxPopEffect();
+            retVal.bLinkLeftValid = Internal.NativeFunctions.nwnxPopInt();
+            retVal.eLinkLeft = Internal.NativeFunctions.nwnxPopEffect();
+            retVal.nCasterLevel = Internal.NativeFunctions.nwnxPopInt();
+            retVal.bShowIcon = Internal.NativeFunctions.nwnxPopInt();
+            retVal.bExpose = Internal.NativeFunctions.nwnxPopInt();
+            retVal.nSpellId = Internal.NativeFunctions.nwnxPopInt();
+            retVal.oCreator = Internal.NativeFunctions.nwnxPopObject();
+            retVal.nExpiryTimeOfDay = Internal.NativeFunctions.nwnxPopInt();
+            retVal.nExpiryCalendarDay = Internal.NativeFunctions.nwnxPopInt();
+            retVal.fDuration = Internal.NativeFunctions.nwnxPopFloat();
+            retVal.nSubType = Internal.NativeFunctions.nwnxPopInt();
+            retVal.nType = Internal.NativeFunctions.nwnxPopInt();
             return retVal;
         }
 
@@ -62,47 +64,47 @@ namespace NWNX
         // / @return The effect.
         public static System.IntPtr PackEffect(EffectUnpacked e)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Effect, "PackEffect");
-            NWN.Internal.NativeFunctions.nwnxPushInt(e.nType);
-            NWN.Internal.NativeFunctions.nwnxPushInt(e.nSubType);
-            NWN.Internal.NativeFunctions.nwnxPushFloat(e.fDuration);
-            NWN.Internal.NativeFunctions.nwnxPushInt(e.nExpiryCalendarDay);
-            NWN.Internal.NativeFunctions.nwnxPushInt(e.nExpiryTimeOfDay);
-            NWN.Internal.NativeFunctions.nwnxPushObject(e.oCreator);
-            NWN.Internal.NativeFunctions.nwnxPushInt(e.nSpellId);
-            NWN.Internal.NativeFunctions.nwnxPushInt(e.bExpose);
-            NWN.Internal.NativeFunctions.nwnxPushInt(e.bShowIcon);
-            NWN.Internal.NativeFunctions.nwnxPushInt(e.nCasterLevel);
-            NWN.Internal.NativeFunctions.nwnxPushEffect(e.eLinkLeft);
-            NWN.Internal.NativeFunctions.nwnxPushInt(e.bLinkLeftValid);
-            NWN.Internal.NativeFunctions.nwnxPushEffect(e.eLinkRight);
-            NWN.Internal.NativeFunctions.nwnxPushInt(e.bLinkRightValid);
-            NWN.Internal.NativeFunctions.nwnxPushInt(e.nNumIntegers);
-            NWN.Internal.NativeFunctions.nwnxPushInt(e.nParam0);
-            NWN.Internal.NativeFunctions.nwnxPushInt(e.nParam1);
-            NWN.Internal.NativeFunctions.nwnxPushInt(e.nParam2);
-            NWN.Internal.NativeFunctions.nwnxPushInt(e.nParam3);
-            NWN.Internal.NativeFunctions.nwnxPushInt(e.nParam4);
-            NWN.Internal.NativeFunctions.nwnxPushInt(e.nParam5);
-            NWN.Internal.NativeFunctions.nwnxPushInt(e.nParam6);
-            NWN.Internal.NativeFunctions.nwnxPushInt(e.nParam7);
-            NWN.Internal.NativeFunctions.nwnxPushFloat(e.fParam0);
-            NWN.Internal.NativeFunctions.nwnxPushFloat(e.fParam1);
-            NWN.Internal.NativeFunctions.nwnxPushFloat(e.fParam2);
-            NWN.Internal.NativeFunctions.nwnxPushFloat(e.fParam3);
-            NWN.Internal.NativeFunctions.nwnxPushString(e.sParam0);
-            NWN.Internal.NativeFunctions.nwnxPushString(e.sParam1);
-            NWN.Internal.NativeFunctions.nwnxPushString(e.sParam2);
-            NWN.Internal.NativeFunctions.nwnxPushString(e.sParam3);
-            NWN.Internal.NativeFunctions.nwnxPushString(e.sParam4);
-            NWN.Internal.NativeFunctions.nwnxPushString(e.sParam5);
-            NWN.Internal.NativeFunctions.nwnxPushObject(e.oParam0);
-            NWN.Internal.NativeFunctions.nwnxPushObject(e.oParam1);
-            NWN.Internal.NativeFunctions.nwnxPushObject(e.oParam2);
-            NWN.Internal.NativeFunctions.nwnxPushObject(e.oParam3);
-            NWN.Internal.NativeFunctions.nwnxPushString(e.sTag);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopEffect();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Effect, "PackEffect");
+            Internal.NativeFunctions.nwnxPushInt(e.nType);
+            Internal.NativeFunctions.nwnxPushInt(e.nSubType);
+            Internal.NativeFunctions.nwnxPushFloat(e.fDuration);
+            Internal.NativeFunctions.nwnxPushInt(e.nExpiryCalendarDay);
+            Internal.NativeFunctions.nwnxPushInt(e.nExpiryTimeOfDay);
+            Internal.NativeFunctions.nwnxPushObject(e.oCreator);
+            Internal.NativeFunctions.nwnxPushInt(e.nSpellId);
+            Internal.NativeFunctions.nwnxPushInt(e.bExpose);
+            Internal.NativeFunctions.nwnxPushInt(e.bShowIcon);
+            Internal.NativeFunctions.nwnxPushInt(e.nCasterLevel);
+            Internal.NativeFunctions.nwnxPushEffect(e.eLinkLeft);
+            Internal.NativeFunctions.nwnxPushInt(e.bLinkLeftValid);
+            Internal.NativeFunctions.nwnxPushEffect(e.eLinkRight);
+            Internal.NativeFunctions.nwnxPushInt(e.bLinkRightValid);
+            Internal.NativeFunctions.nwnxPushInt(e.nNumIntegers);
+            Internal.NativeFunctions.nwnxPushInt(e.nParam0);
+            Internal.NativeFunctions.nwnxPushInt(e.nParam1);
+            Internal.NativeFunctions.nwnxPushInt(e.nParam2);
+            Internal.NativeFunctions.nwnxPushInt(e.nParam3);
+            Internal.NativeFunctions.nwnxPushInt(e.nParam4);
+            Internal.NativeFunctions.nwnxPushInt(e.nParam5);
+            Internal.NativeFunctions.nwnxPushInt(e.nParam6);
+            Internal.NativeFunctions.nwnxPushInt(e.nParam7);
+            Internal.NativeFunctions.nwnxPushFloat(e.fParam0);
+            Internal.NativeFunctions.nwnxPushFloat(e.fParam1);
+            Internal.NativeFunctions.nwnxPushFloat(e.fParam2);
+            Internal.NativeFunctions.nwnxPushFloat(e.fParam3);
+            Internal.NativeFunctions.nwnxPushString(e.sParam0);
+            Internal.NativeFunctions.nwnxPushString(e.sParam1);
+            Internal.NativeFunctions.nwnxPushString(e.sParam2);
+            Internal.NativeFunctions.nwnxPushString(e.sParam3);
+            Internal.NativeFunctions.nwnxPushString(e.sParam4);
+            Internal.NativeFunctions.nwnxPushString(e.sParam5);
+            Internal.NativeFunctions.nwnxPushObject(e.oParam0);
+            Internal.NativeFunctions.nwnxPushObject(e.oParam1);
+            Internal.NativeFunctions.nwnxPushObject(e.oParam2);
+            Internal.NativeFunctions.nwnxPushObject(e.oParam3);
+            Internal.NativeFunctions.nwnxPushString(e.sTag);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopEffect();
         }
 
         // / @brief Set a script with optional data that runs when an effect expires
@@ -113,12 +115,12 @@ namespace NWNX
         // / @note Only works for TEMPORARY and PERMANENT effects applied to an object.
         public static System.IntPtr SetEffectExpiredScript(System.IntPtr e, string script, string data = "")
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Effect, "SetEffectExpiredScript");
-            NWN.Internal.NativeFunctions.nwnxPushString(data);
-            NWN.Internal.NativeFunctions.nwnxPushString(script);
-            NWN.Internal.NativeFunctions.nwnxPushEffect(e);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopEffect();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Effect, "SetEffectExpiredScript");
+            Internal.NativeFunctions.nwnxPushString(data);
+            Internal.NativeFunctions.nwnxPushString(script);
+            Internal.NativeFunctions.nwnxPushEffect(e);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopEffect();
         }
 
         // / @brief Get the data set with NWNX_Effect_SetEffectExpiredScript()
@@ -126,9 +128,9 @@ namespace NWNX
         // / @return The data attached to the effect.
         public static string GetEffectExpiredData()
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Effect, "GetEffectExpiredData");
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopString();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Effect, "GetEffectExpiredData");
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopString();
         }
 
         // / @brief Get the effect creator.
@@ -136,9 +138,9 @@ namespace NWNX
         // / @return The object from which the effect originated.
         public static uint GetEffectExpiredCreator()
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Effect, "GetEffectExpiredCreator");
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopObject();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Effect, "GetEffectExpiredCreator");
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopObject();
         }
 
         // / @}

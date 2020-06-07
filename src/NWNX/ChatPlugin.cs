@@ -1,3 +1,5 @@
+using NWN;
+
 namespace NWNX
 {
     [NWNXPlugin(NWNX_Chat)]
@@ -33,15 +35,15 @@ namespace NWNX
         // / @param sender The sender of the message.
         // / @param target The receiver of the message.
         // / @return TRUE if successful, FALSE otherwise.
-        public static int SendMessage(int channel, string message, uint sender = NWN.NWScript.OBJECT_INVALID, uint target = NWN.NWScript.OBJECT_INVALID)
+        public static int SendMessage(int channel, string message, uint sender = NWScript.OBJECT_INVALID, uint target = NWScript.OBJECT_INVALID)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Chat, "SendMessage");
-            NWN.Internal.NativeFunctions.nwnxPushObject(target);
-            NWN.Internal.NativeFunctions.nwnxPushObject(sender);
-            NWN.Internal.NativeFunctions.nwnxPushString(message);
-            NWN.Internal.NativeFunctions.nwnxPushInt(channel);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Chat, "SendMessage");
+            Internal.NativeFunctions.nwnxPushObject(target);
+            Internal.NativeFunctions.nwnxPushObject(sender);
+            Internal.NativeFunctions.nwnxPushString(message);
+            Internal.NativeFunctions.nwnxPushInt(channel);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Registers the script which receives all chat messages.
@@ -49,17 +51,17 @@ namespace NWNX
         // / @param script The script name to handle the chat events.
         public static void RegisterChatScript(string script)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Chat, "RegisterChatScript");
-            NWN.Internal.NativeFunctions.nwnxPushString(script);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Chat, "RegisterChatScript");
+            Internal.NativeFunctions.nwnxPushString(script);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Skips a chat message
         // / @note Must be called from a chat or system script handler.
         public static void SkipMessage()
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Chat, "SkipMessage");
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Chat, "SkipMessage");
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Gets the chat @ref chat_channels "channel".
@@ -67,9 +69,9 @@ namespace NWNX
         // / @return The @ref chat_channels "channel" the message is sent.
         public static int GetChannel()
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Chat, "GetChannel");
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopInt();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Chat, "GetChannel");
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Gets the message.
@@ -77,9 +79,9 @@ namespace NWNX
         // / @return The message sent.
         public static string GetMessage()
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Chat, "GetMessage");
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopString();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Chat, "GetMessage");
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopString();
         }
 
         // / @brief Gets the sender of the message.
@@ -87,9 +89,9 @@ namespace NWNX
         // / @return The object sending the message.
         public static uint GetSender()
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Chat, "GetSender");
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopObject();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Chat, "GetSender");
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopObject();
         }
 
         // / @brief Gets the target of the message.
@@ -97,9 +99,9 @@ namespace NWNX
         // / @return The target of the message or OBJECT_INVALID if no target.
         public static uint GetTarget()
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Chat, "GetTarget");
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopObject();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Chat, "GetTarget");
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopObject();
         }
 
         // / @brief Sets the distance with which the player hears talks or whispers.
@@ -107,25 +109,25 @@ namespace NWNX
         // / @param distance The distance in meters.
         // / @param listener The listener, if OBJECT_INVALID then it will be set server wide.
         // / @param channel The @ref chat_channels "channel" to modify the distance heard. Only applicable for talk and whisper.
-        public static void SetChatHearingDistance(float distance, uint listener = NWN.NWScript.OBJECT_INVALID, int channel = NWNX_CHAT_CHANNEL_PLAYER_TALK)
+        public static void SetChatHearingDistance(float distance, uint listener = NWScript.OBJECT_INVALID, int channel = NWNX_CHAT_CHANNEL_PLAYER_TALK)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Chat, "SetChatHearingDistance");
-            NWN.Internal.NativeFunctions.nwnxPushInt(channel);
-            NWN.Internal.NativeFunctions.nwnxPushObject(listener);
-            NWN.Internal.NativeFunctions.nwnxPushFloat(distance);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Chat, "SetChatHearingDistance");
+            Internal.NativeFunctions.nwnxPushInt(channel);
+            Internal.NativeFunctions.nwnxPushObject(listener);
+            Internal.NativeFunctions.nwnxPushFloat(distance);
+            Internal.NativeFunctions.nwnxCallFunction();
         }
 
         // / @brief Gets the distance with which the player hears talks or whisper
         // / @param listener The listener, if OBJECT_INVALID then will return server wide setting.
         // / @param channel The @ref chat_channels "channel". Only applicable for talk and whisper.
-        public static float GetChatHearingDistance(uint listener = NWN.NWScript.OBJECT_INVALID, int channel = NWNX_CHAT_CHANNEL_PLAYER_TALK)
+        public static float GetChatHearingDistance(uint listener = NWScript.OBJECT_INVALID, int channel = NWNX_CHAT_CHANNEL_PLAYER_TALK)
         {
-            NWN.Internal.NativeFunctions.nwnxSetFunction(NWNX_Chat, "GetChatHearingDistance");
-            NWN.Internal.NativeFunctions.nwnxPushInt(channel);
-            NWN.Internal.NativeFunctions.nwnxPushObject(listener);
-            NWN.Internal.NativeFunctions.nwnxCallFunction();
-            return NWN.Internal.NativeFunctions.nwnxPopFloat();
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Chat, "GetChatHearingDistance");
+            Internal.NativeFunctions.nwnxPushInt(channel);
+            Internal.NativeFunctions.nwnxPushObject(listener);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopFloat();
         }
 
         // / @}
