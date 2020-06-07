@@ -28,7 +28,7 @@ namespace NWN
         /// </summary>
         public static void DelayCommand(float fSeconds, ActionDelegate aActionToDelay)
         {
-            Internal.ManagedFunctions.ClosureDelayCommand(Internal.ObjectSelf(), fSeconds, aActionToDelay);
+            Internal.ManagedFunctions.ClosureDelayCommand(Internal.ObjectSelf, fSeconds, aActionToDelay);
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace NWN
         /// </summary>
         public static void ActionDoCommand(ActionDelegate aActionToDo)
         {
-            Internal.ManagedFunctions.ClosureActionDoCommand(Internal.ObjectSelf(), aActionToDo);
+            Internal.ManagedFunctions.ClosureActionDoCommand(Internal.ObjectSelf, aActionToDo);
         }
 
         /// <summary>
