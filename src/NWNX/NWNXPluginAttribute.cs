@@ -7,9 +7,6 @@ namespace NWNX
   {
     public readonly string PluginName;
 
-    public NWNXPluginAttribute(string pluginName)
-    {
-      PluginName = pluginName;
-    }
+    public NWNXPluginAttribute(string pluginName) => PluginName = pluginName;
   }
 }
