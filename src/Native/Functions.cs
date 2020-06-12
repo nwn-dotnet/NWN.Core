@@ -11824,5 +11824,98 @@ namespace NWN
         {
             Internal.NativeFunctions.CallBuiltIn(899);
         }
+
+        /// <summary>
+        /// Makes oPC load texture sNewName instead of sOldName.
+        /// If oPC is OBJECT_INVALID, it will apply the override to all active players
+        /// Setting sNewName to "" will clear the override and revert to original.
+        /// </summary>
+        public static void SetTextureOverride(string sOldName, string sNewName = "", uint oPC = OBJECT_INVALID)
+        {
+            Internal.NativeFunctions.StackPushObject(oPC);
+            Internal.NativeFunctions.StackPushString(sNewName);
+            Internal.NativeFunctions.StackPushString(sOldName);
+            Internal.NativeFunctions.CallBuiltIn(900);
+        }
+
+        /// <summary>
+        /// Displays sMsg on oPC's screen.
+        /// The message is displayed on top of whatever is on the screen, including UI elements
+        ///  nX, nY - coordinates of the first character to be displayed. The value is in terms
+        ///           of character 'slot' relative to the nAnchor anchor point.
+        ///           If the number is negative, it is applied from the bottom/right.
+        ///  nAnchor - SCREEN_ANCHOR_* constant
+        ///  fLife - Duration in seconds until the string disappears.
+        ///  nRGBA, nRGBA2 - Colors of the string in 0xRRGGBBAA format. String starts at nRGBA,
+        ///                  but as it nears end of life, it will slowly blend into nRGBA2.
+        ///  nID - Optional ID of a string. If not 0, subsequent calls to PostString will
+        ///        remove the old string with the same ID, even if it's lifetime has not elapsed.
+        ///        Only positive values are allowed.
+        ///  sFont - If specified, use this custom font instead of default console font.
+        /// </summary>
+        public static void PostString(uint oPC, string sMsg, int nX = 0, int nY = 0, int nAnchor = SCREEN_ANCHOR_TOP_LEFT, float fLife = 10.0f, int nRGBA = 2147418367, int nRGBA2 = 2147418367, int nID = 0, string sFont = "")
+        {
+            Internal.NativeFunctions.StackPushString(sFont);
+            Internal.NativeFunctions.StackPushInteger(nID);
+            Internal.NativeFunctions.StackPushInteger(nRGBA2);
+            Internal.NativeFunctions.StackPushInteger(nRGBA);
+            Internal.NativeFunctions.StackPushFloat(fLife);
+            Internal.NativeFunctions.StackPushInteger(nAnchor);
+            Internal.NativeFunctions.StackPushInteger(nY);
+            Internal.NativeFunctions.StackPushInteger(nX);
+            Internal.NativeFunctions.StackPushString(sMsg);
+            Internal.NativeFunctions.StackPushObject(oPC);
+            Internal.NativeFunctions.CallBuiltIn(901);
+        }
+
+        /// <summary>
+        /// Returns oCreature's spell school specialization in nClass (SPELL_SCHOOL_* constants)
+        /// Unless custom content is used, only Wizards have spell schools
+        /// Returns -1 on error
+        /// </summary>
+        public static int GetSpecialization(uint oCreature, int nClass = CLASS_TYPE_WIZARD)
+        {
+            Internal.NativeFunctions.StackPushInteger(nClass);
+            Internal.NativeFunctions.StackPushObject(oCreature);
+            Internal.NativeFunctions.CallBuiltIn(902);
+            return Internal.NativeFunctions.StackPopInteger();
+        }
+
+        /// <summary>
+        /// Returns oCreature's domain in nClass (DOMAIN_* constants)
+        /// nDomainIndex - 1 or 2
+        /// Unless custom content is used, only Clerics have domains
+        /// Returns -1 on error
+        /// </summary>
+        public static int GetDomain(uint oCreature, int nDomainIndex = 1, int nClass = CLASS_TYPE_CLERIC)
+        {
+            Internal.NativeFunctions.StackPushInteger(nClass);
+            Internal.NativeFunctions.StackPushInteger(nDomainIndex);
+            Internal.NativeFunctions.StackPushObject(oCreature);
+            Internal.NativeFunctions.CallBuiltIn(903);
+            return Internal.NativeFunctions.StackPopInteger();
+        }
+
+        /// <summary>
+        /// Returns the build number of oPlayer (i.e. 8193).
+        /// Returns 0 if the given object isn't a player or did not advertise their build info.
+        /// </summary>
+        public static int GetPlayerBuildVersionMajor(uint oPlayer)
+        {
+            Internal.NativeFunctions.StackPushObject(oPlayer);
+            Internal.NativeFunctions.CallBuiltIn(904);
+            return Internal.NativeFunctions.StackPopInteger();
+        }
+
+        /// <summary>
+        /// Returns the patch revision of oPlayer (i.e. 8).
+        /// Returns 0 if the given object isn't a player or did not advertise their build info.
+        /// </summary>
+        public static int GetPlayerBuildVersionMinor(uint oPlayer)
+        {
+            Internal.NativeFunctions.StackPushObject(oPlayer);
+            Internal.NativeFunctions.CallBuiltIn(905);
+            return Internal.NativeFunctions.StackPopInteger();
+        }
     }
 }
