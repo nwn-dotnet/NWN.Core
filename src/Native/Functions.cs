@@ -40,7 +40,6 @@ namespace NWN
         }
 
         /// <summary>
-
         ///  Get an integer between 0 and nMaxInteger-1.
         ///  Return value on error: 0
         /// </summary>

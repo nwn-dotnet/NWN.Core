@@ -5,7 +5,9 @@ namespace NWN
 {
     public static partial class Internal
     {
-        private static IGameManager gameManager = null!;
+        #pragma warning disable CS8618
+        private static IGameManager gameManager;
+        #pragma warning restore CS8618
 
         public static uint ObjectSelf => gameManager.ObjectSelf;
         public static NativeHandles NativeFunctions;
@@ -22,7 +24,7 @@ namespace NWN
                 return 1;
             }
 
-            var expectedLength = Marshal.SizeOf(typeof(NativeHandles));
+            int expectedLength = Marshal.SizeOf(typeof(NativeHandles));
             if (nativeHandlesLength < expectedLength)
             {
                 Console.WriteLine($"Received bootstrap structure too small - actual={nativeHandlesLength}, expected={expectedLength}");
@@ -54,8 +56,8 @@ namespace NWN
 
         private static void RegisterNativeEventHandles()
         {
-            var size = Marshal.SizeOf(typeof(NativeEventHandles));
-            var ptr = Marshal.AllocHGlobal(size);
+            int size = Marshal.SizeOf(typeof(NativeEventHandles));
+            IntPtr ptr = Marshal.AllocHGlobal(size);
             Marshal.StructureToPtr(eventHandles, ptr, false);
             NativeFunctions.RegisterHandlers(ptr, (uint) size);
             Marshal.FreeHGlobal(ptr);
