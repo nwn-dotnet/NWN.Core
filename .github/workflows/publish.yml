@@ -1,25 +1,39 @@
-﻿name: publish to nuget
+﻿name: Continuous Integration
+
 on:
   push:
     branches:
       - master
+
 jobs:
-  publish:
-    name: build, pack & publish
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
         with:
-          fetch-depth: '0'
-      - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@master
+          dotnet-version: 3.1.101
+
+      - name: Build
+        run: dotnet build --configuration Release
+
+      - name: Version and Tag
+        id: bump_version
+        uses: anothrNick/github-tag-action@1.22.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
           RELEASE_BRANCHES: master
-          INITIAL_VERSION: 8193.13.0
-      - name: publish on version change
-        id: publish_nuget
-        uses: rohith/publish-nuget@v2
-        with:
-          PROJECT_FILE_PATH: NWN.Core.csproj
-          NUGET_KEY: ${{secrets.NUGET_KEY}}
+          WITH_V: true
+
+      - name: Prep Version String
+        run: echo ::set-env name=VERSION_NUMBER::$(echo ${{ steps.bump_version.outputs.tag }} | sed 's/[v]//g')
+
+      - name: Pack
+        run: dotnet pack NWN.Core.csproj --configuration Release -p:PackageVersion=${{ env.VERSION_NUMBER }} -o output
+
+      - name: Publish Package
+        run: dotnet nuget push output/*.nupkg --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json
