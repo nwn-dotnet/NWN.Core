@@ -3,7 +3,7 @@ using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Security;
 
-namespace NWN
+namespace NWN.Core
 {
     public static partial class Internal
     {

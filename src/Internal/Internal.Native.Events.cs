@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace NWN
+namespace NWN.Core
 {
     public static partial class Internal
     {

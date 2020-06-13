@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace NWN
+namespace NWN.Core
 {
     public static partial class Internal
     {
@@ -14,7 +14,7 @@ namespace NWN
         public static ManagedHandles ManagedFunctions;
         private static NativeEventHandles eventHandles;
 
-        public static int Bootstrap(IntPtr nativeHandlesPtr, int nativeHandlesLength, IGameManager gameManager)
+        public static int Init(IntPtr nativeHandlesPtr, int nativeHandlesLength, IGameManager gameManager)
         {
             Internal.gameManager = gameManager;
 

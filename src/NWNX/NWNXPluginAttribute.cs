@@ -1,6 +1,6 @@
 using System;
 
-namespace NWNX
+namespace NWN.Core.NWNX
 {
   [AttributeUsage(AttributeTargets.Class)]
   public class NWNXPluginAttribute : Attribute
