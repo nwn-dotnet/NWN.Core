@@ -1,6 +1,6 @@
 using System;
 
-namespace NWN
+namespace NWN.Core
 {
     public class Effect
     {

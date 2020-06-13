@@ -3,7 +3,6 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <LangVersion>8.0</LangVersion>
         <PackageId>NWN.Core</PackageId>
-        <RootNamespace>NWN</RootNamespace>
         <Authors>NWN-dotnet</Authors>
         <Nullable>enable</Nullable>
         <PackageTags>Neverwinter Nights;NWN;</PackageTags>

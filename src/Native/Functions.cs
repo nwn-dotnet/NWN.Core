@@ -1,7 +1,7 @@
 using System;
 using System.Numerics;
 
-namespace NWN
+namespace NWN.Core
 {
     public static partial class NWScript
     {

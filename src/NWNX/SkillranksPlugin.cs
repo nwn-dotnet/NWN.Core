@@ -1,6 +1,4 @@
-using NWN;
-
-namespace NWNX
+namespace NWN.Core.NWNX
 {
     [NWNXPlugin(NWNX_SkillRanks)]
     public class SkillranksPlugin

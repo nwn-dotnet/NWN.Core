@@ -1,4 +1,4 @@
-namespace NWN
+namespace NWN.Core
 {
     public static partial class Internal
     {
