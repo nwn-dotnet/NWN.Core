@@ -1,7 +1,5 @@
-namespace NWN.Core
-{
-  public interface IGameManager
-  {
+namespace NWN.Core {
+  public interface IGameManager {
     uint ObjectSelf { get; }
 
     void OnMainLoop(ulong frame);
