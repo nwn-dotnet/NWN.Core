@@ -1,10 +1,13 @@
-namespace NWN.Core.NWNX {
+namespace NWN.Core.NWNX
+{
   [NWNXPlugin(NWNX_Ruby)]
-  public class RubyPlugin {
+  public class RubyPlugin
+  {
     public const string NWNX_Ruby = "NWNX_Ruby";
 
     // /< @private
-    public static string Evaluate(string sCode) {
+    public static string Evaluate(string sCode)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Ruby, "Evaluate");
       Internal.NativeFunctions.nwnxPushString(sCode);
       Internal.NativeFunctions.nwnxCallFunction();

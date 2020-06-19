@@ -1,6 +1,8 @@
-namespace NWN.Core.NWNX {
+namespace NWN.Core.NWNX
+{
   [NWNXPlugin(NWNX_Dialog)]
-  public class DialogPlugin {
+  public class DialogPlugin
+  {
     public const string NWNX_Dialog = "NWNX_Dialog";
 
     // /< @private
@@ -38,7 +40,8 @@ namespace NWN.Core.NWNX {
     // / @}
     // / @brief Get the @ref dialog_node_types "Node Type" of the current text node
     // / @return A @ref dialog_node_types "Node Type".  If called out of dialog, returns NWNX_DIALOG_NODE_TYPE_INVALID
-    public static int GetCurrentNodeType() {
+    public static int GetCurrentNodeType()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Dialog, "GetCurrentNodeType");
       Internal.NativeFunctions.nwnxCallFunction();
       return Internal.NativeFunctions.nwnxPopInt();
@@ -46,7 +49,8 @@ namespace NWN.Core.NWNX {
 
     // / @brief Get the @ref dialog_script_types "Script Type" of the current text node
     // / @return A @ref dialog_script_types "Node Type". If called out of dialog, returns NWNX_DIALOG_SCRIPT_TYPE_OTHER
-    public static int GetCurrentScriptType() {
+    public static int GetCurrentScriptType()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Dialog, "GetCurrentScriptType");
       Internal.NativeFunctions.nwnxCallFunction();
       return Internal.NativeFunctions.nwnxPopInt();
@@ -56,7 +60,8 @@ namespace NWN.Core.NWNX {
     // / @note NWNX_DIALOG_NODE_TYPE_ENTRY_NODE and NWNX_DIALOG_NODE_TYPE_REPLY_NODE nodes
     // / have different namespaces, so they can share the same ID
     // / @return The absolute ID in the dialog. If called out of dialog, returns -1
-    public static int GetCurrentNodeID() {
+    public static int GetCurrentNodeID()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Dialog, "GetCurrentNodeID");
       Internal.NativeFunctions.nwnxCallFunction();
       return Internal.NativeFunctions.nwnxPopInt();
@@ -65,7 +70,8 @@ namespace NWN.Core.NWNX {
     // / @brief Get the index of the current node in the list of replies/entries.
     // / @note The index is zero based, and counts items not displayed due to a StartingConditional.
     // / @return The index of the current node.
-    public static int GetCurrentNodeIndex() {
+    public static int GetCurrentNodeIndex()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Dialog, "GetCurrentNodeIndex");
       Internal.NativeFunctions.nwnxCallFunction();
       return Internal.NativeFunctions.nwnxPopInt();
@@ -74,8 +80,8 @@ namespace NWN.Core.NWNX {
     // / @brief Get the text of the current node
     // / @param language The @ref dialog_languages "language" of the text.
     // / @param gender The gender for the text.
-    public static string GetCurrentNodeText(int language = NWNX_DIALOG_LANGUAGE_ENGLISH,
-      int gender = NWScript.GENDER_MALE) {
+    public static string GetCurrentNodeText(int language = NWNX_DIALOG_LANGUAGE_ENGLISH, int gender = NWScript.GENDER_MALE)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Dialog, "GetCurrentNodeText");
       Internal.NativeFunctions.nwnxPushInt(gender);
       Internal.NativeFunctions.nwnxPushInt(language);
@@ -88,8 +94,8 @@ namespace NWN.Core.NWNX {
     // / @param text The text for the node.
     // / @param language The @ref dialog_languages "language" of the text.
     // / @param gender The gender for the text.
-    public static void SetCurrentNodeText(string text, int language = NWNX_DIALOG_LANGUAGE_ENGLISH,
-      int gender = NWScript.GENDER_MALE) {
+    public static void SetCurrentNodeText(string text, int language = NWNX_DIALOG_LANGUAGE_ENGLISH, int gender = NWScript.GENDER_MALE)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Dialog, "SetCurrentNodeText");
       Internal.NativeFunctions.nwnxPushInt(gender);
       Internal.NativeFunctions.nwnxPushInt(language);
@@ -100,7 +106,8 @@ namespace NWN.Core.NWNX {
     // / @brief End a conversation oObject is involved in, it will fire the OnAbort script of the conversation
     // / @warning Calling this from a conversation script will crash your server.
     // / @param oObject The object in a conversation
-    public static void End(uint oObject) {
+    public static void End(uint oObject)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Dialog, "End");
       Internal.NativeFunctions.nwnxPushObject(oObject);
       Internal.NativeFunctions.nwnxCallFunction();

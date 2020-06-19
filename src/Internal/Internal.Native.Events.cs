@@ -1,7 +1,9 @@
 using System.Runtime.InteropServices;
 
-namespace NWN.Core {
-  public static partial class Internal {
+namespace NWN.Core
+{
+  public static partial class Internal
+  {
     public delegate void MainLoopHandlerDelegate(ulong frame);
 
     public delegate int RunScriptHandlerDelegate(string script, uint oid);
@@ -9,7 +11,8 @@ namespace NWN.Core {
     public delegate void ClosureHandlerDelegate(ulong eid, uint oid);
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct NativeEventHandles {
+    public struct NativeEventHandles
+    {
       public MainLoopHandlerDelegate MainLoop;
       public RunScriptHandlerDelegate RunScript;
       public ClosureHandlerDelegate Closure;

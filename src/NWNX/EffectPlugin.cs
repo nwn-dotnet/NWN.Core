@@ -1,6 +1,8 @@
-namespace NWN.Core.NWNX {
+namespace NWN.Core.NWNX
+{
   [NWNXPlugin(NWNX_Effect)]
-  public class EffectPlugin {
+  public class EffectPlugin
+  {
     public const string NWNX_Effect = "NWNX_Effect";
 
     // /< @private
@@ -8,7 +10,8 @@ namespace NWN.Core.NWNX {
     // / @brief Convert native effect type to unpacked structure.
     // / @param e The effect to convert.
     // / @return A constructed NWNX_EffectUnpacked.
-    public static EffectUnpacked UnpackEffect(System.IntPtr e) {
+    public static EffectUnpacked UnpackEffect(System.IntPtr e)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Effect, "UnpackEffect");
       Internal.NativeFunctions.nwnxPushEffect(e);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -57,7 +60,8 @@ namespace NWN.Core.NWNX {
     // / @brief Convert unpacked effect structure to native type.
     // / @param e The NWNX_EffectUnpacked structure to convert.
     // / @return The effect.
-    public static System.IntPtr PackEffect(EffectUnpacked e) {
+    public static System.IntPtr PackEffect(EffectUnpacked e)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Effect, "PackEffect");
       Internal.NativeFunctions.nwnxPushInt(e.nType);
       Internal.NativeFunctions.nwnxPushInt(e.nSubType);
@@ -107,7 +111,8 @@ namespace NWN.Core.NWNX {
     // / @param data Any other data you wish to send back to the script.
     // / @remark OBJECT_SELF in the script is the object the effect is applied to.
     // / @note Only works for TEMPORARY and PERMANENT effects applied to an object.
-    public static System.IntPtr SetEffectExpiredScript(System.IntPtr e, string script, string data = "") {
+    public static System.IntPtr SetEffectExpiredScript(System.IntPtr e, string script, string data = "")
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Effect, "SetEffectExpiredScript");
       Internal.NativeFunctions.nwnxPushString(data);
       Internal.NativeFunctions.nwnxPushString(script);
@@ -119,7 +124,8 @@ namespace NWN.Core.NWNX {
     // / @brief Get the data set with NWNX_Effect_SetEffectExpiredScript()
     // / @note Should only be called from a script set with NWNX_Effect_SetEffectExpiredScript().
     // / @return The data attached to the effect.
-    public static string GetEffectExpiredData() {
+    public static string GetEffectExpiredData()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Effect, "GetEffectExpiredData");
       Internal.NativeFunctions.nwnxCallFunction();
       return Internal.NativeFunctions.nwnxPopString();
@@ -128,7 +134,8 @@ namespace NWN.Core.NWNX {
     // / @brief Get the effect creator.
     // / @note Should only be called from a script set with NWNX_Effect_SetEffectExpiredScript().
     // / @return The object from which the effect originated.
-    public static uint GetEffectExpiredCreator() {
+    public static uint GetEffectExpiredCreator()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Effect, "GetEffectExpiredCreator");
       Internal.NativeFunctions.nwnxCallFunction();
       return Internal.NativeFunctions.nwnxPopObject();
@@ -137,7 +144,8 @@ namespace NWN.Core.NWNX {
     // / @}
   }
 
-  public struct EffectUnpacked {
+  public struct EffectUnpacked
+  {
     public int nType;
     public int nSubType;
     public float fDuration;

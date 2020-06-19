@@ -1,6 +1,8 @@
-namespace NWN.Core.NWNX {
+namespace NWN.Core.NWNX
+{
   [NWNXPlugin(NWNX_Weapon)]
-  public class WeaponPlugin {
+  public class WeaponPlugin
+  {
     public const string NWNX_Weapon = "NWNX_Weapon";
 
     // /< @private
@@ -28,7 +30,8 @@ namespace NWN.Core.NWNX {
     // / @brief Set nFeat as weapon focus feat for a base item.
     // / @param nBaseItem The base item id.
     // / @param nFeat The feat to set.
-    public static void SetWeaponFocusFeat(int nBaseItem, int nFeat) {
+    public static void SetWeaponFocusFeat(int nBaseItem, int nFeat)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Weapon, "SetWeaponFocusFeat");
       Internal.NativeFunctions.nwnxPushInt(nFeat);
       Internal.NativeFunctions.nwnxPushInt(nBaseItem);
@@ -38,7 +41,8 @@ namespace NWN.Core.NWNX {
     // / @brief Set required creature size for a weapon base item to be finessable.
     // / @param nBaseItem The base item id.
     // / @param nSize The creature size minimum to consider this weapon finessable.
-    public static void SetWeaponFinesseSize(int nBaseItem, int nSize) {
+    public static void SetWeaponFinesseSize(int nBaseItem, int nSize)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Weapon, "SetWeaponFinesseSize");
       Internal.NativeFunctions.nwnxPushInt(nSize);
       Internal.NativeFunctions.nwnxPushInt(nBaseItem);
@@ -47,7 +51,8 @@ namespace NWN.Core.NWNX {
 
     // / @brief Get required creature size for a weapon base item to be finessable.
     // / @param nBaseItem The base item id.
-    public static int GetWeaponFinesseSize(int nBaseItem) {
+    public static int GetWeaponFinesseSize(int nBaseItem)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Weapon, "GetWeaponFinesseSize");
       Internal.NativeFunctions.nwnxPushInt(nBaseItem);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -56,7 +61,8 @@ namespace NWN.Core.NWNX {
 
     // / @brief Set weapon base item to be considered as unarmed for weapon finesse feat.
     // / @param nBaseItem The base item id.
-    public static void SetWeaponUnarmed(int nBaseItem) {
+    public static void SetWeaponUnarmed(int nBaseItem)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Weapon, "SetWeaponUnarmed");
       Internal.NativeFunctions.nwnxPushInt(nBaseItem);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -65,7 +71,8 @@ namespace NWN.Core.NWNX {
     // / @brief Set a feat as weapon improved critical for a base item.
     // / @param nBaseItem The base item id.
     // / @param nFeat The feat to set.
-    public static void SetWeaponImprovedCriticalFeat(int nBaseItem, int nFeat) {
+    public static void SetWeaponImprovedCriticalFeat(int nBaseItem, int nFeat)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Weapon, "SetWeaponImprovedCriticalFeat");
       Internal.NativeFunctions.nwnxPushInt(nFeat);
       Internal.NativeFunctions.nwnxPushInt(nBaseItem);
@@ -75,7 +82,8 @@ namespace NWN.Core.NWNX {
     // / @brief Set a feat as weapon specialization for a base item.
     // / @param nBaseItem The base item id.
     // / @param nFeat The feat to set.
-    public static void SetWeaponSpecializationFeat(int nBaseItem, int nFeat) {
+    public static void SetWeaponSpecializationFeat(int nBaseItem, int nFeat)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Weapon, "SetWeaponSpecializationFeat");
       Internal.NativeFunctions.nwnxPushInt(nFeat);
       Internal.NativeFunctions.nwnxPushInt(nBaseItem);
@@ -85,7 +93,8 @@ namespace NWN.Core.NWNX {
     // / @brief Set a feat as epic weapon focus for a base item.
     // / @param nBaseItem The base item id.
     // / @param nFeat The feat to set.
-    public static void SetEpicWeaponFocusFeat(int nBaseItem, int nFeat) {
+    public static void SetEpicWeaponFocusFeat(int nBaseItem, int nFeat)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Weapon, "SetEpicWeaponFocusFeat");
       Internal.NativeFunctions.nwnxPushInt(nFeat);
       Internal.NativeFunctions.nwnxPushInt(nBaseItem);
@@ -95,7 +104,8 @@ namespace NWN.Core.NWNX {
     // / @brief Set a feat as epic weapon specialization for a base item.
     // / @param nBaseItem The base item id.
     // / @param nFeat The feat to set.
-    public static void SetEpicWeaponSpecializationFeat(int nBaseItem, int nFeat) {
+    public static void SetEpicWeaponSpecializationFeat(int nBaseItem, int nFeat)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Weapon, "SetEpicWeaponSpecializationFeat");
       Internal.NativeFunctions.nwnxPushInt(nFeat);
       Internal.NativeFunctions.nwnxPushInt(nBaseItem);
@@ -105,7 +115,8 @@ namespace NWN.Core.NWNX {
     // / @brief Set a feat as epic weapon overwhelming critical for a base item.
     // / @param nBaseItem The base item id.
     // / @param nFeat The feat to set.
-    public static void SetEpicWeaponOverwhelmingCriticalFeat(int nBaseItem, int nFeat) {
+    public static void SetEpicWeaponOverwhelmingCriticalFeat(int nBaseItem, int nFeat)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Weapon, "SetEpicWeaponOverwhelmingCriticalFeat");
       Internal.NativeFunctions.nwnxPushInt(nFeat);
       Internal.NativeFunctions.nwnxPushInt(nBaseItem);
@@ -115,7 +126,8 @@ namespace NWN.Core.NWNX {
     // / @brief Set a feat as epic weapon devastating critical for a base item.
     // / @param nBaseItem The base item id.
     // / @param nFeat The feat to set.
-    public static void SetEpicWeaponDevastatingCriticalFeat(int nBaseItem, int nFeat) {
+    public static void SetEpicWeaponDevastatingCriticalFeat(int nBaseItem, int nFeat)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Weapon, "SetEpicWeaponDevastatingCriticalFeat");
       Internal.NativeFunctions.nwnxPushInt(nFeat);
       Internal.NativeFunctions.nwnxPushInt(nBaseItem);
@@ -125,7 +137,8 @@ namespace NWN.Core.NWNX {
     // / @brief Set a feat as weapon of choice for a base item.
     // / @param nBaseItem The base item id.
     // / @param nFeat The feat to set.
-    public static void SetWeaponOfChoiceFeat(int nBaseItem, int nFeat) {
+    public static void SetWeaponOfChoiceFeat(int nBaseItem, int nFeat)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Weapon, "SetWeaponOfChoiceFeat");
       Internal.NativeFunctions.nwnxPushInt(nFeat);
       Internal.NativeFunctions.nwnxPushInt(nBaseItem);
@@ -135,7 +148,8 @@ namespace NWN.Core.NWNX {
     // / @brief Set a feat as greater weapon specialization for a base item.
     // / @param nBaseItem The base item id.
     // / @param nFeat The feat to set.
-    public static void SetGreaterWeaponSpecializationFeat(int nBaseItem, int nFeat) {
+    public static void SetGreaterWeaponSpecializationFeat(int nBaseItem, int nFeat)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Weapon, "SetGreaterWeaponSpecializationFeat");
       Internal.NativeFunctions.nwnxPushInt(nFeat);
       Internal.NativeFunctions.nwnxPushInt(nBaseItem);
@@ -145,7 +159,8 @@ namespace NWN.Core.NWNX {
     // / @brief Set a feat as greater weapon focus for a base item.
     // / @param nBaseItem The base item id.
     // / @param nFeat The feat to set.
-    public static void SetGreaterWeaponFocusFeat(int nBaseItem, int nFeat) {
+    public static void SetGreaterWeaponFocusFeat(int nBaseItem, int nFeat)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Weapon, "SetGreaterWeaponFocusFeat");
       Internal.NativeFunctions.nwnxPushInt(nFeat);
       Internal.NativeFunctions.nwnxPushInt(nBaseItem);
@@ -154,7 +169,8 @@ namespace NWN.Core.NWNX {
 
     // / @brief Set base item as monk weapon.
     // / @param nBaseItem The base item id.
-    public static void SetWeaponIsMonkWeapon(int nBaseItem) {
+    public static void SetWeaponIsMonkWeapon(int nBaseItem)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Weapon, "SetWeaponIsMonkWeapon");
       Internal.NativeFunctions.nwnxPushInt(nBaseItem);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -163,7 +179,8 @@ namespace NWN.Core.NWNX {
     // / @brief Set plugin options.
     // / @param nOption The option to change from @ref wpn_opts "Weapon Options".
     // / @param nVal The new value of the option.
-    public static void SetOption(int nOption, int nVal) {
+    public static void SetOption(int nOption, int nVal)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Weapon, "SetOption");
       Internal.NativeFunctions.nwnxPushInt(nVal);
       Internal.NativeFunctions.nwnxPushInt(nOption);
@@ -172,7 +189,8 @@ namespace NWN.Core.NWNX {
 
     // / @brief Set Devastating Critical Event Script.
     // / @param sScript The script to call when a Devastating Critical occurs.
-    public static void SetDevastatingCriticalEventScript(string sScript) {
+    public static void SetDevastatingCriticalEventScript(string sScript)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Weapon, "SetDevastatingCriticalEventScript");
       Internal.NativeFunctions.nwnxPushString(sScript);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -181,7 +199,8 @@ namespace NWN.Core.NWNX {
     // / @brief Get Devastating Critical Event Data.
     // / @note This is only for use with the Devastating Critical Event Script.
     // / @return An NWNX_Weapon_DevastatingCriticalEvent_Data struct.
-    public static DevastatingCriticalEvent_Data GetDevastatingCriticalEventData() {
+    public static DevastatingCriticalEvent_Data GetDevastatingCriticalEventData()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Weapon, "GetDevastatingCriticalEventData");
       Internal.NativeFunctions.nwnxCallFunction();
       DevastatingCriticalEvent_Data retVal;
@@ -193,7 +212,8 @@ namespace NWN.Core.NWNX {
 
     // / @brief Bypass Devastating Critical.
     // / @note This is only for use with the Devastating Critical Event Script.
-    public static void BypassDevastatingCritical() {
+    public static void BypassDevastatingCritical()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Weapon, "BypassDevastatingCritical");
       Internal.NativeFunctions.nwnxCallFunction();
     }
@@ -201,7 +221,8 @@ namespace NWN.Core.NWNX {
     // / @}
   }
 
-  public struct DevastatingCriticalEvent_Data {
+  public struct DevastatingCriticalEvent_Data
+  {
     public uint oWeapon;
     public uint oTarget;
     public int nDamage;

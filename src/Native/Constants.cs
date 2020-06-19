@@ -1,5 +1,7 @@
-namespace NWN.Core {
-  public static partial class NWScript {
+namespace NWN.Core
+{
+  public static partial class NWScript
+  {
     public const uint OBJECT_INVALID = 0x7F000000;
 
     // Constants
@@ -195,7 +197,6 @@ namespace NWN.Core {
     public const int PLACEABLE_ACTION_UNLOCK = 1;
     public const int PLACEABLE_ACTION_BASH = 2;
     public const int PLACEABLE_ACTION_KNOCK = 4;
-
 
     public const int RACIAL_TYPE_DWARF = 0;
     public const int RACIAL_TYPE_ELF = 1;
@@ -599,7 +600,6 @@ namespace NWN.Core {
     public const int ITEM_PROPERTY_DECREASED_AC = 28;
     public const int ITEM_PROPERTY_DECREASED_SKILL_MODIFIER = 29;
 
-
     public const int ITEM_PROPERTY_ENHANCED_CONTAINER_REDUCED_WEIGHT = 32;
     public const int ITEM_PROPERTY_EXTRA_MELEE_DAMAGE_TYPE = 33;
     public const int ITEM_PROPERTY_EXTRA_RANGED_DAMAGE_TYPE = 34;
@@ -659,7 +659,6 @@ namespace NWN.Core {
     public const int ITEM_PROPERTY_MATERIAL = 85;
     public const int ITEM_PROPERTY_QUALITY = 86;
     public const int ITEM_PROPERTY_ADDITIONAL = 87;
-
 
     public const int BASE_ITEM_SHORTSWORD = 0;
     public const int BASE_ITEM_LONGSWORD = 1;
@@ -1855,7 +1854,6 @@ namespace NWN.Core {
     public const int SPELLABILITY_GAZE_PETRIFY = 497;
     public const int SPELLABILITY_MANTICORE_SPIKES = 498;
 
-
     public const int SPELL_ROD_OF_WONDER = 499;
     public const int SPELL_DECK_OF_MANY_THINGS = 500;
     public const int SPELL_ELEMENTAL_SUMMONING_ITEM = 502;
@@ -1897,14 +1895,12 @@ namespace NWN.Core {
     public const int SPELL_DEAFENING_CLANG = 536;
     public const int SPELL_CLOUD_OF_BEWILDERMENT = 569;
 
-
     public const int SPELL_KEEN_EDGE = 539;
     public const int SPELL_BLACKSTAFF = 541;
     public const int SPELL_FLAME_WEAPON = 542;
     public const int SPELL_ICE_DAGGER = 543;
     public const int SPELL_MAGIC_WEAPON = 544;
     public const int SPELL_GREATER_MAGIC_WEAPON = 545;
-
 
     public const int SPELL_STONEHOLD = 547;
     public const int SPELL_DARKFIRE = 548;
@@ -1964,7 +1960,6 @@ namespace NWN.Core {
     public const int SPELLABILITY_EPIC_MIGHTY_RAGE = 642;
     public const int SPELLABILITY_EPIC_CURSE_SONG = 644;
     public const int SPELLABILITY_EPIC_IMPROVED_WHIRLWIND = 645;
-
 
     public const int SPELLABILITY_EPIC_SHAPE_DRAGONKIN = 646;
     public const int SPELLABILITY_EPIC_SHAPE_DRAGON = 647;
@@ -2712,7 +2707,6 @@ namespace NWN.Core {
     public const int FEAT_PRESTIGE_SEEKER_ARROW_2 = 452;
     public const int FEAT_PRESTIGE_HAIL_OF_ARROWS = 453;
     public const int FEAT_PRESTIGE_ARROW_OF_DEATH = 454;
-
 
     public const int FEAT_PRESTIGE_DEATH_ATTACK_1 = 455;
     public const int FEAT_PRESTIGE_DEATH_ATTACK_2 = 456;
@@ -3931,7 +3925,6 @@ namespace NWN.Core {
     public const int TRAP_BASE_TYPE_EPIC_FROST = 46;
     public const int TRAP_BASE_TYPE_EPIC_SONIC = 47;
 
-
     public const int TRACK_RURALDAY1 = 1;
     public const int TRACK_RURALDAY2 = 2;
     public const int TRACK_RURALNIGHT = 3;
@@ -4008,14 +4001,12 @@ namespace NWN.Core {
     public const int TRACK_HOTU_BATTLE_BOSS1 = 74;
     public const int TRACK_HOTU_BATTLE_BOSS2 = 75;
 
-
     public const int STEALTH_MODE_DISABLED = 0;
     public const int STEALTH_MODE_ACTIVATED = 1;
     public const int DETECT_MODE_PASSIVE = 0;
     public const int DETECT_MODE_ACTIVE = 1;
     public const int DEFENSIVE_CASTING_MODE_DISABLED = 0;
     public const int DEFENSIVE_CASTING_MODE_ACTIVATED = 1;
-
 
     public const int APPEARANCE_TYPE_INVALID = -1;
     public const int APPEARANCE_TYPE_ALLIP = 186;
@@ -4487,7 +4478,6 @@ namespace NWN.Core {
     public const int PORTRAIT_INVALID = 65535;
 
     public const int USE_CREATURE_LEVEL = 0;
-
 
     // The following is all the item property constants...
     public const int IP_CONST_ABILITY_STR = 0;

@@ -1,6 +1,8 @@
-namespace NWN.Core.NWNX {
+namespace NWN.Core.NWNX
+{
   [NWNXPlugin(NWNX_Damage)]
-  public class DamagePlugin {
+  public class DamagePlugin
+  {
     public const string NWNX_Damage = "NWNX_Damage";
 
     // /< @private
@@ -13,7 +15,8 @@ namespace NWN.Core.NWNX {
     // / @brief Sets the script to run with a damage event.
     // / @param sScript The script that will handle the damage event.
     // / @param oOwner An object if only executing for a specific object or OBJECT_INVALID for global.
-    public static void SetDamageEventScript(string sScript, uint oOwner = NWScript.OBJECT_INVALID) {
+    public static void SetDamageEventScript(string sScript, uint oOwner = NWScript.OBJECT_INVALID)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Damage, "SetDamageEventScript");
       Internal.NativeFunctions.nwnxPushObject(oOwner);
       Internal.NativeFunctions.nwnxPushString(sScript);
@@ -23,7 +26,8 @@ namespace NWN.Core.NWNX {
     // / @brief Get Damage Event Data
     // / @return A NWNX_Damage_DamageEventData struct.
     // / @note To use only in the Damage Event Script.
-    public static DamageEventData GetDamageEventData() {
+    public static DamageEventData GetDamageEventData()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Damage, "GetDamageEventData");
       Internal.NativeFunctions.nwnxCallFunction();
       DamageEventData retVal;
@@ -47,7 +51,8 @@ namespace NWN.Core.NWNX {
     // / @brief Set Damage Event Data
     // / @param data A NWNX_Damage_DamageEventData struct.
     // / @note To use only in the Damage Event Script.
-    public static void SetDamageEventData(DamageEventData data) {
+    public static void SetDamageEventData(DamageEventData data)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Damage, "SetDamageEventData");
       Internal.NativeFunctions.nwnxPushObject(data.oDamager);
       Internal.NativeFunctions.nwnxPushInt(data.iBludgeoning);
@@ -69,7 +74,8 @@ namespace NWN.Core.NWNX {
     // / @brief Sets the script to run with an attack event.
     // / @param sScript The script that will handle the attack event.
     // / @param oOwner An object if only executing for a specific object or OBJECT_INVALID for global.
-    public static void SetAttackEventScript(string sScript, uint oOwner = NWScript.OBJECT_INVALID) {
+    public static void SetAttackEventScript(string sScript, uint oOwner = NWScript.OBJECT_INVALID)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Damage, "SetAttackEventScript");
       Internal.NativeFunctions.nwnxPushObject(oOwner);
       Internal.NativeFunctions.nwnxPushString(sScript);
@@ -79,7 +85,8 @@ namespace NWN.Core.NWNX {
     // / @brief Get Attack Event Data
     // / @return A NWNX_Damage_AttackEventData struct.
     // / @note To use only in the Attack Event Script.
-    public static AttackEventData GetAttackEventData() {
+    public static AttackEventData GetAttackEventData()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Damage, "GetAttackEventData");
       Internal.NativeFunctions.nwnxCallFunction();
       AttackEventData retVal;
@@ -107,7 +114,8 @@ namespace NWN.Core.NWNX {
     // / @brief Set Attack Event Data
     // / @param data A NWNX_Damage_AttackEventData struct.
     // / @note To use only in the Attack Event Script.
-    public static void SetAttackEventData(AttackEventData data) {
+    public static void SetAttackEventData(AttackEventData data)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Damage, "SetAttackEventData");
       Internal.NativeFunctions.nwnxPushObject(data.oTarget);
       Internal.NativeFunctions.nwnxPushInt(data.iBludgeoning);
@@ -136,8 +144,8 @@ namespace NWN.Core.NWNX {
     // / @param oTarget The target object on whom the damage is dealt.
     // / @param oSource The source of the damage.
     // / @param iRanged Whether the attack should be treated as ranged by the engine (for example when considering damage inflicted by Acid Sheath and other such effects)
-    public static void DealDamage(DamageData data, uint oTarget, uint oSource = NWScript.OBJECT_INVALID,
-      int iRanged = NWScript.FALSE) {
+    public static void DealDamage(DamageData data, uint oTarget, uint oSource = NWScript.OBJECT_INVALID, int iRanged = NWScript.FALSE)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Damage, "DealDamage");
       Internal.NativeFunctions.nwnxPushInt(iRanged);
       Internal.NativeFunctions.nwnxPushObject(oSource);
@@ -161,7 +169,8 @@ namespace NWN.Core.NWNX {
     // / @}
   }
 
-  public struct DamageEventData {
+  public struct DamageEventData
+  {
     public uint oDamager;
     public int iBludgeoning;
     public int iPierce;
@@ -178,7 +187,8 @@ namespace NWN.Core.NWNX {
     public int iBase;
   }
 
-  public struct AttackEventData {
+  public struct AttackEventData
+  {
     public uint oTarget;
     public int iBludgeoning;
     public int iPierce;
@@ -199,7 +209,8 @@ namespace NWN.Core.NWNX {
     public int iSneakAttack;
   }
 
-  public struct DamageData {
+  public struct DamageData
+  {
     public int iBludgeoning;
     public int iPierce;
     public int iSlash;

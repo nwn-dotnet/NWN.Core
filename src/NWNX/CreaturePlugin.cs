@@ -1,6 +1,8 @@
-namespace NWN.Core.NWNX {
+namespace NWN.Core.NWNX
+{
   [NWNXPlugin(NWNX_Creature)]
-  public class CreaturePlugin {
+  public class CreaturePlugin
+  {
     public const string NWNX_Creature = "NWNX_Creature";
 
     // /< @private
@@ -79,7 +81,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param feat The feat id.
     // / @remark Consider also using NWNX_Creature_AddFeatByLevel() to properly allocate the feat to a level
-    public static void AddFeat(uint creature, int feat) {
+    public static void AddFeat(uint creature, int feat)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "AddFeat");
       Internal.NativeFunctions.nwnxPushInt(feat);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -91,7 +94,8 @@ namespace NWN.Core.NWNX {
     // / @param feat The feat id.
     // / @param level The level they gained the feat.
     // / @remark Adds the feat to the stat list at the provided level.
-    public static void AddFeatByLevel(uint creature, int feat, int level) {
+    public static void AddFeatByLevel(uint creature, int feat, int level)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "AddFeatByLevel");
       Internal.NativeFunctions.nwnxPushInt(level);
       Internal.NativeFunctions.nwnxPushInt(feat);
@@ -102,7 +106,8 @@ namespace NWN.Core.NWNX {
     // / @brief Removes a feat from a creature.
     // / @param creature The creature object.
     // / @param feat The feat id.
-    public static void RemoveFeat(uint creature, int feat) {
+    public static void RemoveFeat(uint creature, int feat)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "RemoveFeat");
       Internal.NativeFunctions.nwnxPushInt(feat);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -114,7 +119,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param feat The feat id.
     // / @return TRUE if the creature has the feat, regardless if they have any usages left or not.
-    public static int GetKnowsFeat(uint creature, int feat) {
+    public static int GetKnowsFeat(uint creature, int feat)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetKnowsFeat");
       Internal.NativeFunctions.nwnxPushInt(feat);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -126,7 +132,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param level The level.
     // / @return The count of feats.
-    public static int GetFeatCountByLevel(uint creature, int level) {
+    public static int GetFeatCountByLevel(uint creature, int level)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetFeatCountByLevel");
       Internal.NativeFunctions.nwnxPushInt(level);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -139,7 +146,8 @@ namespace NWN.Core.NWNX {
     // / @param level The level.
     // / @param index The index. Index bounds: 0 <= index < NWNX_Creature_GetFeatCountByLevel().
     // / @return The feat id at the index.
-    public static int GetFeatByLevel(uint creature, int level, int index) {
+    public static int GetFeatByLevel(uint creature, int level, int index)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetFeatByLevel");
       Internal.NativeFunctions.nwnxPushInt(index);
       Internal.NativeFunctions.nwnxPushInt(level);
@@ -152,7 +160,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param feat The feat id.
     // / @return The character level that the specified feat was granted, otherwise 0 if the creature does not have this feat.
-    public static int GetFeatGrantLevel(uint creature, int feat) {
+    public static int GetFeatGrantLevel(uint creature, int feat)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetFeatGrantLevel");
       Internal.NativeFunctions.nwnxPushInt(feat);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -163,7 +172,8 @@ namespace NWN.Core.NWNX {
     // / @brief Get the total number of feats known by creature.
     // / @param creature The creature object.
     // / @return The total feat count for the creature.
-    public static int GetFeatCount(uint creature) {
+    public static int GetFeatCount(uint creature)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetFeatCount");
       Internal.NativeFunctions.nwnxPushObject(creature);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -174,7 +184,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param index The index. Index bounds: 0 <= index < NWNX_Creature_GetFeatCount();
     // / @return The feat id at the index.
-    public static int GetFeatByIndex(uint creature, int index) {
+    public static int GetFeatByIndex(uint creature, int index)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetFeatByIndex");
       Internal.NativeFunctions.nwnxPushInt(index);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -186,7 +197,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param feat The feat id.
     // / @return TRUE if creature meets all requirements to take given feat
-    public static int GetMeetsFeatRequirements(uint creature, int feat) {
+    public static int GetMeetsFeatRequirements(uint creature, int feat)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetMeetsFeatRequirements");
       Internal.NativeFunctions.nwnxPushInt(feat);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -197,7 +209,8 @@ namespace NWN.Core.NWNX {
     // / @brief Gets the count of special abilities of the creature.
     // / @param creature The creature object.
     // / @return The total special ability count.
-    public static int GetSpecialAbilityCount(uint creature) {
+    public static int GetSpecialAbilityCount(uint creature)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetSpecialAbilityCount");
       Internal.NativeFunctions.nwnxPushObject(creature);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -208,7 +221,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param index The index. Index bounds: 0 <= index < NWNX_Creature_GetSpecialAbilityCount().
     // / @return An NWNX_Creature_SpecialAbility struct.
-    public static SpecialAbility GetSpecialAbility(uint creature, int index) {
+    public static SpecialAbility GetSpecialAbility(uint creature, int index)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetSpecialAbility");
       Internal.NativeFunctions.nwnxPushInt(index);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -223,7 +237,8 @@ namespace NWN.Core.NWNX {
     // / @brief Adds a special ability to a creature.
     // / @param creature The creature object.
     // / @param ability An NWNX_Creature_SpecialAbility struct.
-    public static void AddSpecialAbility(uint creature, SpecialAbility ability) {
+    public static void AddSpecialAbility(uint creature, SpecialAbility ability)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "AddSpecialAbility");
       Internal.NativeFunctions.nwnxPushInt(ability.id);
       Internal.NativeFunctions.nwnxPushInt(ability.ready);
@@ -235,7 +250,8 @@ namespace NWN.Core.NWNX {
     // / @brief Removes a special ability from a creature.
     // / @param creature The creature object.
     // / @param index The index. Index bounds: 0 <= index < NWNX_Creature_GetSpecialAbilityCount().
-    public static void RemoveSpecialAbility(uint creature, int index) {
+    public static void RemoveSpecialAbility(uint creature, int index)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "RemoveSpecialAbility");
       Internal.NativeFunctions.nwnxPushInt(index);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -246,7 +262,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param index The index. Index bounds: 0 <= index < NWNX_Creature_GetSpecialAbilityCount().
     // / @param ability An NWNX_Creature_SpecialAbility struct.
-    public static void SetSpecialAbility(uint creature, int index, SpecialAbility ability) {
+    public static void SetSpecialAbility(uint creature, int index, SpecialAbility ability)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetSpecialAbility");
       Internal.NativeFunctions.nwnxPushInt(ability.id);
       Internal.NativeFunctions.nwnxPushInt(ability.ready);
@@ -260,7 +277,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param level The level.
     // / @return The class id.
-    public static int GetClassByLevel(uint creature, int level) {
+    public static int GetClassByLevel(uint creature, int level)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetClassByLevel");
       Internal.NativeFunctions.nwnxPushInt(level);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -271,7 +289,8 @@ namespace NWN.Core.NWNX {
     // / @brief Sets the base AC for the creature.
     // / @param creature The creature object.
     // / @param ac The base AC to set for the creature.
-    public static void SetBaseAC(uint creature, int ac) {
+    public static void SetBaseAC(uint creature, int ac)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetBaseAC");
       Internal.NativeFunctions.nwnxPushInt(ac);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -281,7 +300,8 @@ namespace NWN.Core.NWNX {
     // / @brief Get the base AC for the creature.
     // / @param creature The creature object.
     // / @return The base AC.
-    public static int GetBaseAC(uint creature) {
+    public static int GetBaseAC(uint creature)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetBaseAC");
       Internal.NativeFunctions.nwnxPushObject(creature);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -293,7 +313,8 @@ namespace NWN.Core.NWNX {
     // / @param ability The ability constant.
     // / @param value The value to set.
     // / @deprecated Use NWNX_Creature_SetRawAbilityScore(). This will be removed in future NWNX releases.
-    public static void SetAbilityScore(uint creature, int ability, int value) {
+    public static void SetAbilityScore(uint creature, int ability, int value)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetAbilityScore");
       Internal.NativeFunctions.nwnxPushInt(value);
       Internal.NativeFunctions.nwnxPushInt(ability);
@@ -306,7 +327,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param ability The ability constant.
     // / @param value The value to set.
-    public static void SetRawAbilityScore(uint creature, int ability, int value) {
+    public static void SetRawAbilityScore(uint creature, int ability, int value)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetRawAbilityScore");
       Internal.NativeFunctions.nwnxPushInt(value);
       Internal.NativeFunctions.nwnxPushInt(ability);
@@ -319,7 +341,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param ability The ability constant.
     // / @return The ability score.
-    public static int GetRawAbilityScore(uint creature, int ability) {
+    public static int GetRawAbilityScore(uint creature, int ability)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetRawAbilityScore");
       Internal.NativeFunctions.nwnxPushInt(ability);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -332,7 +355,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param ability The ability constant.
     // / @param modifier The modifier value.
-    public static void ModifyRawAbilityScore(uint creature, int ability, int modifier) {
+    public static void ModifyRawAbilityScore(uint creature, int ability, int modifier)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "ModifyRawAbilityScore");
       Internal.NativeFunctions.nwnxPushInt(modifier);
       Internal.NativeFunctions.nwnxPushInt(ability);
@@ -345,7 +369,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param ability The ability constant.
     // / @return The raw ability score.
-    public static int GetPrePolymorphAbilityScore(uint creature, int ability) {
+    public static int GetPrePolymorphAbilityScore(uint creature, int ability)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetPrePolymorphAbilityScore");
       Internal.NativeFunctions.nwnxPushInt(ability);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -358,7 +383,8 @@ namespace NWN.Core.NWNX {
     // / @param class The class id from classes.2da. (Not class index 0-2)
     // / @param level The spell level.
     // / @return The memorised spell count.
-    public static int GetMemorisedSpellCountByLevel(uint creature, int @class, int level) {
+    public static int GetMemorisedSpellCountByLevel(uint creature, int @class, int level)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetMemorisedSpellCountByLevel");
       Internal.NativeFunctions.nwnxPushInt(level);
       Internal.NativeFunctions.nwnxPushInt(@class);
@@ -373,7 +399,8 @@ namespace NWN.Core.NWNX {
     // / @param level The spell level.
     // / @param index The index. Index bounds: 0 <= index < NWNX_Creature_GetMemorisedSpellCountByLevel().
     // / @return An NWNX_Creature_MemorisedSpell() struct.
-    public static MemorisedSpell GetMemorisedSpell(uint creature, int @class, int level, int index) {
+    public static MemorisedSpell GetMemorisedSpell(uint creature, int @class, int level, int index)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetMemorisedSpell");
       Internal.NativeFunctions.nwnxPushInt(index);
       Internal.NativeFunctions.nwnxPushInt(level);
@@ -394,7 +421,8 @@ namespace NWN.Core.NWNX {
     // / @param level The spell level.
     // / @param index The index. Index bounds: 0 <= index < NWNX_Creature_GetMemorisedSpellCountByLevel().
     // / @param spell An NWNX_Creature_MemorisedSpell() struct.
-    public static void SetMemorisedSpell(uint creature, int @class, int level, int index, MemorisedSpell spell) {
+    public static void SetMemorisedSpell(uint creature, int @class, int level, int index, MemorisedSpell spell)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetMemorisedSpell");
       Internal.NativeFunctions.nwnxPushInt(spell.id);
       Internal.NativeFunctions.nwnxPushInt(spell.ready);
@@ -412,7 +440,8 @@ namespace NWN.Core.NWNX {
     // / @param class The class id from classes.2da. (Not class index 0-2)
     // / @param level The spell level.
     // / @return The remaining spell slot count.
-    public static int GetRemainingSpellSlots(uint creature, int @class, int level) {
+    public static int GetRemainingSpellSlots(uint creature, int @class, int level)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetRemainingSpellSlots");
       Internal.NativeFunctions.nwnxPushInt(level);
       Internal.NativeFunctions.nwnxPushInt(@class);
@@ -426,7 +455,8 @@ namespace NWN.Core.NWNX {
     // / @param class The class id from classes.2da. (Not class index 0-2)
     // / @param level The spell level.
     // / @param slots The remaining spell slots to set.
-    public static void SetRemainingSpellSlots(uint creature, int @class, int level, int slots) {
+    public static void SetRemainingSpellSlots(uint creature, int @class, int level, int slots)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetRemainingSpellSlots");
       Internal.NativeFunctions.nwnxPushInt(slots);
       Internal.NativeFunctions.nwnxPushInt(level);
@@ -440,7 +470,8 @@ namespace NWN.Core.NWNX {
     // / @param class The class id from classes.2da. (Not class index 0-2)
     // / @param level The spell level.
     // / @return The maximum spell slot count.
-    public static int GetMaxSpellSlots(uint creature, int @class, int level) {
+    public static int GetMaxSpellSlots(uint creature, int @class, int level)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetMaxSpellSlots");
       Internal.NativeFunctions.nwnxPushInt(level);
       Internal.NativeFunctions.nwnxPushInt(@class);
@@ -454,7 +485,8 @@ namespace NWN.Core.NWNX {
     // / @param class The class id from classes.2da. (Not class index 0-2)
     // / @param level The spell level.
     // / @return The known spell count.
-    public static int GetKnownSpellCount(uint creature, int @class, int level) {
+    public static int GetKnownSpellCount(uint creature, int @class, int level)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetKnownSpellCount");
       Internal.NativeFunctions.nwnxPushInt(level);
       Internal.NativeFunctions.nwnxPushInt(@class);
@@ -469,7 +501,8 @@ namespace NWN.Core.NWNX {
     // / @param level The spell level.
     // / @param index The index. Index bounds: 0 <= index < NWNX_Creature_GetKnownSpellCount().
     // / @return The spell id.
-    public static int GetKnownSpell(uint creature, int @class, int level, int index) {
+    public static int GetKnownSpell(uint creature, int @class, int level, int index)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetKnownSpell");
       Internal.NativeFunctions.nwnxPushInt(index);
       Internal.NativeFunctions.nwnxPushInt(level);
@@ -484,7 +517,8 @@ namespace NWN.Core.NWNX {
     // / @param class The class id from classes.2da. (Not class index 0-2)
     // / @param level The spell level.
     // / @param spellId The spell to remove.
-    public static void AddKnownSpell(uint creature, int @class, int level, int spellId) {
+    public static void AddKnownSpell(uint creature, int @class, int level, int spellId)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "AddKnownSpell");
       Internal.NativeFunctions.nwnxPushInt(spellId);
       Internal.NativeFunctions.nwnxPushInt(level);
@@ -498,7 +532,8 @@ namespace NWN.Core.NWNX {
     // / @param class The class id from classes.2da. (Not class index 0-2)
     // / @param level The spell level.
     // / @param spellId The spell to remove.
-    public static void RemoveKnownSpell(uint creature, int @class, int level, int spellId) {
+    public static void RemoveKnownSpell(uint creature, int @class, int level, int spellId)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "RemoveKnownSpell");
       Internal.NativeFunctions.nwnxPushInt(spellId);
       Internal.NativeFunctions.nwnxPushInt(level);
@@ -511,7 +546,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param class The class id from classes.2da. (Not class index 0-2)
     // / @param spellId The spell to clear.
-    public static void ClearMemorisedKnownSpells(uint creature, int @class, int spellId) {
+    public static void ClearMemorisedKnownSpells(uint creature, int @class, int spellId)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "ClearMemorisedKnownSpells");
       Internal.NativeFunctions.nwnxPushInt(spellId);
       Internal.NativeFunctions.nwnxPushInt(@class);
@@ -524,7 +560,8 @@ namespace NWN.Core.NWNX {
     // / @param class The class id from classes.2da. (Not class index 0-2)
     // / @param level The spell level.
     // / @param index The index. Index bounds: 0 <= index < NWNX_Creature_GetMemorisedSpellCountByLevel().
-    public static void ClearMemorisedSpell(uint creature, int @class, int level, int index) {
+    public static void ClearMemorisedSpell(uint creature, int @class, int level, int index)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "ClearMemorisedSpell");
       Internal.NativeFunctions.nwnxPushInt(index);
       Internal.NativeFunctions.nwnxPushInt(level);
@@ -537,7 +574,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @return TRUE if the wizard specializes.
     // / @deprecated Use GetSpecialization(). This will be removed in future NWNX releases.
-    public static int GetWizardSpecialization(uint creature) {
+    public static int GetWizardSpecialization(uint creature)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetWizardSpecialization");
       Internal.NativeFunctions.nwnxPushObject(creature);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -548,7 +586,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param school The wizard school constant.
     // / @deprecated Use NWNX_Creature_SetSpecialization(). This will be removed in future NWNX releases.
-    public static void SetWizardSpecialization(uint creature, int school) {
+    public static void SetWizardSpecialization(uint creature, int school)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetWizardSpecialization");
       Internal.NativeFunctions.nwnxPushInt(school);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -559,7 +598,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param level The level.
     // / @return The maximum hit points a creature can have for the class at the provided level.
-    public static int GetMaxHitPointsByLevel(uint creature, int level) {
+    public static int GetMaxHitPointsByLevel(uint creature, int level)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetMaxHitPointsByLevel");
       Internal.NativeFunctions.nwnxPushInt(level);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -571,7 +611,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param level The level.
     // / @param value The amount to set the max hit points.
-    public static void SetMaxHitPointsByLevel(uint creature, int level, int value) {
+    public static void SetMaxHitPointsByLevel(uint creature, int level, int value)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetMaxHitPointsByLevel");
       Internal.NativeFunctions.nwnxPushInt(value);
       Internal.NativeFunctions.nwnxPushInt(level);
@@ -582,7 +623,8 @@ namespace NWN.Core.NWNX {
     // / @brief Set creature's movement rate.
     // / @param creature The creature object.
     // / @param rate The movement rate.
-    public static void SetMovementRate(uint creature, int rate) {
+    public static void SetMovementRate(uint creature, int rate)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetMovementRate");
       Internal.NativeFunctions.nwnxPushInt(rate);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -593,7 +635,8 @@ namespace NWN.Core.NWNX {
     // / @remark Base movement rate factor is 1.0.
     // / @param creature The creature object.
     // / @return The current movement rate factor.
-    public static float GetMovementRateFactor(uint creature) {
+    public static float GetMovementRateFactor(uint creature)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetMovementRateFactor");
       Internal.NativeFunctions.nwnxPushObject(creature);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -604,7 +647,8 @@ namespace NWN.Core.NWNX {
     // / @note Base movement rate factor is 1.0.
     // / @param creature The creature object.
     // / @param rate The rate to set.
-    public static void SetMovementRateFactor(uint creature, float rate) {
+    public static void SetMovementRateFactor(uint creature, float rate)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetMovementRateFactor");
       Internal.NativeFunctions.nwnxPushFloat(rate);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -614,7 +658,8 @@ namespace NWN.Core.NWNX {
     // / @brief Returns the creature's current movement type
     // / @param creature The creature object.
     // / @return An NWNX_CREATURE_MOVEMENT_TYPE_* constant.
-    public static int GetMovementType(uint creature) {
+    public static int GetMovementType(uint creature)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetMovementType");
       Internal.NativeFunctions.nwnxPushObject(creature);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -626,7 +671,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param fWalkRate The walk rate to apply. Setting the value to -1.0 will remove the cap.
     // / Default value is 2000.0, which is the base human walk speed.
-    public static void SetWalkRateCap(uint creature, float fWalkRate = 2000.0f) {
+    public static void SetWalkRateCap(uint creature, float fWalkRate = 2000.0f)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetWalkRateCap");
       Internal.NativeFunctions.nwnxPushFloat(fWalkRate);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -636,7 +682,8 @@ namespace NWN.Core.NWNX {
     // / @brief Set creature's raw good/evil alignment value.
     // / @param creature The creature object.
     // / @param value The value to set.
-    public static void SetAlignmentGoodEvil(uint creature, int value) {
+    public static void SetAlignmentGoodEvil(uint creature, int value)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetAlignmentGoodEvil");
       Internal.NativeFunctions.nwnxPushInt(value);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -646,7 +693,8 @@ namespace NWN.Core.NWNX {
     // / @brief Set creature's raw law/chaos alignment value.
     // / @param creature The creature object.
     // / @param value The value to set.
-    public static void SetAlignmentLawChaos(uint creature, int value) {
+    public static void SetAlignmentLawChaos(uint creature, int value)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetAlignmentLawChaos");
       Internal.NativeFunctions.nwnxPushInt(value);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -657,7 +705,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param index The first or second domain.
     // / @deprecated Use GetDomain(). This will be removed in future NWNX releases.
-    public static int GetClericDomain(uint creature, int index) {
+    public static int GetClericDomain(uint creature, int index)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetClericDomain");
       Internal.NativeFunctions.nwnxPushInt(index);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -670,7 +719,8 @@ namespace NWN.Core.NWNX {
     // / @param index The first or second domain.
     // / @param domain The domain constant to set.
     // / @deprecated Use NWNX_Creature_SetDomain(). This will be removed in future NWNX releases.
-    public static void SetClericDomain(uint creature, int index, int domain) {
+    public static void SetClericDomain(uint creature, int index, int domain)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetClericDomain");
       Internal.NativeFunctions.nwnxPushInt(domain);
       Internal.NativeFunctions.nwnxPushInt(index);
@@ -681,7 +731,8 @@ namespace NWN.Core.NWNX {
     // / @brief Get the soundset index for creature.
     // / @param creature The creature object.
     // / @return The soundset used by the creature.
-    public static int GetSoundset(uint creature) {
+    public static int GetSoundset(uint creature)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetSoundset");
       Internal.NativeFunctions.nwnxPushObject(creature);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -691,7 +742,8 @@ namespace NWN.Core.NWNX {
     // / @brief Set the soundset index for creature.
     // / @param creature The creature object.
     // / @param soundset The soundset index.
-    public static void SetSoundset(uint creature, int soundset) {
+    public static void SetSoundset(uint creature, int soundset)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetSoundset");
       Internal.NativeFunctions.nwnxPushInt(soundset);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -702,7 +754,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param skill The skill id.
     // / @param rank The value to set as the skill rank.
-    public static void SetSkillRank(uint creature, int skill, int rank) {
+    public static void SetSkillRank(uint creature, int skill, int rank)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetSkillRank");
       Internal.NativeFunctions.nwnxPushInt(rank);
       Internal.NativeFunctions.nwnxPushInt(skill);
@@ -715,7 +768,8 @@ namespace NWN.Core.NWNX {
     // / @param position Should be 0, 1, or 2 depending on how many classes the creature
     // / has and which is to be modified.
     // / @param classID A valid ID number in classes.2da and between 0 and 255.
-    public static void SetClassByPosition(uint creature, int position, int classID) {
+    public static void SetClassByPosition(uint creature, int position, int classID)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetClassByPosition");
       Internal.NativeFunctions.nwnxPushInt(classID);
       Internal.NativeFunctions.nwnxPushInt(position);
@@ -729,7 +783,8 @@ namespace NWN.Core.NWNX {
     // / @param position Should be 0, 1, or 2 depending on how many classes the creature
     // / has and which is to be modified.
     // / @param level The level to set.
-    public static void SetLevelByPosition(uint creature, int position, int level) {
+    public static void SetLevelByPosition(uint creature, int position, int level)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetLevelByPosition");
       Internal.NativeFunctions.nwnxPushInt(level);
       Internal.NativeFunctions.nwnxPushInt(position);
@@ -746,7 +801,8 @@ namespace NWN.Core.NWNX {
     // / never have an actual BAB of zero.
     // / @remark The base game has a function @nwn{SetBaseAttackBonus}, which actually sets
     // / the bonus attacks per round for a creature, not the BAB.
-    public static void SetBaseAttackBonus(uint creature, int bab) {
+    public static void SetBaseAttackBonus(uint creature, int bab)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetBaseAttackBonus");
       Internal.NativeFunctions.nwnxPushInt(bab);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -758,7 +814,8 @@ namespace NWN.Core.NWNX {
     // / @param bBaseAPR If TRUE, will return the base attacks per round, based on BAB and
     // / equipped weapons, regardless of overrides set by calls to @nwn{SetBaseAttackBonus} builtin function.
     // / @return The attacks per round.
-    public static int GetAttacksPerRound(uint creature, int bBaseAPR = NWScript.FALSE) {
+    public static int GetAttacksPerRound(uint creature, int bBaseAPR = NWScript.FALSE)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetAttacksPerRound");
       Internal.NativeFunctions.nwnxPushInt(bBaseAPR);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -769,7 +826,8 @@ namespace NWN.Core.NWNX {
     // / @brief Sets the creature gender.
     // / @param creature The creature object.
     // / @param gender The GENDER_ constant.
-    public static void SetGender(uint creature, int gender) {
+    public static void SetGender(uint creature, int gender)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetGender");
       Internal.NativeFunctions.nwnxPushInt(gender);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -778,7 +836,8 @@ namespace NWN.Core.NWNX {
 
     // / @brief Restore all creature feat uses.
     // / @param creature The creature object.
-    public static void RestoreFeats(uint creature) {
+    public static void RestoreFeats(uint creature)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "RestoreFeats");
       Internal.NativeFunctions.nwnxPushObject(creature);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -786,7 +845,8 @@ namespace NWN.Core.NWNX {
 
     // / @brief Restore all creature special ability uses.
     // / @param creature The creature object.
-    public static void RestoreSpecialAbilities(uint creature) {
+    public static void RestoreSpecialAbilities(uint creature)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "RestoreSpecialAbilities");
       Internal.NativeFunctions.nwnxPushObject(creature);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -795,7 +855,8 @@ namespace NWN.Core.NWNX {
     // / @brief Restore all creature spells per day for given level.
     // / @param creature The creature object.
     // / @param level The level to restore. If -1, all spells are restored.
-    public static void RestoreSpells(uint creature, int level = -1) {
+    public static void RestoreSpells(uint creature, int level = -1)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "RestoreSpells");
       Internal.NativeFunctions.nwnxPushInt(level);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -804,7 +865,8 @@ namespace NWN.Core.NWNX {
 
     // / @brief Restore uses for all items carried by the creature.
     // / @param creature The creature object.
-    public static void RestoreItems(uint creature) {
+    public static void RestoreItems(uint creature)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "RestoreItems");
       Internal.NativeFunctions.nwnxPushObject(creature);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -813,7 +875,8 @@ namespace NWN.Core.NWNX {
     // / @brief Sets the creature size.
     // / @param creature The creature object.
     // / @param size Use CREATURE_SIZE_* constants.
-    public static void SetSize(uint creature, int size) {
+    public static void SetSize(uint creature, int size)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetSize");
       Internal.NativeFunctions.nwnxPushInt(size);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -823,7 +886,8 @@ namespace NWN.Core.NWNX {
     // / @brief Gets the creature's remaining unspent skill points.
     // / @param creature The creature object.
     // / @return The remaining unspent skill points.
-    public static int GetSkillPointsRemaining(uint creature) {
+    public static int GetSkillPointsRemaining(uint creature)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetSkillPointsRemaining");
       Internal.NativeFunctions.nwnxPushObject(creature);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -833,7 +897,8 @@ namespace NWN.Core.NWNX {
     // / @brief Sets the creature's remaining unspent skill points.
     // / @param creature The creature object.
     // / @param skillpoints The value to set.
-    public static void SetSkillPointsRemaining(uint creature, int skillpoints) {
+    public static void SetSkillPointsRemaining(uint creature, int skillpoints)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetSkillPointsRemaining");
       Internal.NativeFunctions.nwnxPushInt(skillpoints);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -843,7 +908,8 @@ namespace NWN.Core.NWNX {
     // / @brief Sets the creature's racial type
     // / @param creature The creature object.
     // / @param racialtype The racial type to set.
-    public static void SetRacialType(uint creature, int racialtype) {
+    public static void SetRacialType(uint creature, int racialtype)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetRacialType");
       Internal.NativeFunctions.nwnxPushInt(racialtype);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -853,7 +919,8 @@ namespace NWN.Core.NWNX {
     // / @brief Sets the creature's gold without sending a feedback message
     // / @param creature The creature object.
     // / @param gold The amount of gold to set for their creature.
-    public static void SetGold(uint creature, int gold) {
+    public static void SetGold(uint creature, int gold)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetGold");
       Internal.NativeFunctions.nwnxPushInt(gold);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -863,7 +930,8 @@ namespace NWN.Core.NWNX {
     // / @brief Sets corpse decay time in milliseconds
     // / @param creature The creature object.
     // / @param nDecayTime The corpse decay time.
-    public static void SetCorpseDecayTime(uint creature, int nDecayTime) {
+    public static void SetCorpseDecayTime(uint creature, int nDecayTime)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetCorpseDecayTime");
       Internal.NativeFunctions.nwnxPushInt(nDecayTime);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -875,7 +943,8 @@ namespace NWN.Core.NWNX {
     // / @param which One of SAVING_THROW_FORT, SAVING_THROW_REFLEX or SAVING_THROW_WILL
     // / @return The base save value.
     // / @note This will include any modifiers set in the toolset.
-    public static int GetBaseSavingThrow(uint creature, int which) {
+    public static int GetBaseSavingThrow(uint creature, int which)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetBaseSavingThrow");
       Internal.NativeFunctions.nwnxPushInt(which);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -887,7 +956,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param which One of SAVING_THROW_FORT, SAVING_THROW_REFLEX or SAVING_THROW_WILL
     // / @param value The base save value.
-    public static void SetBaseSavingThrow(uint creature, int which, int value) {
+    public static void SetBaseSavingThrow(uint creature, int which, int value)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetBaseSavingThrow");
       Internal.NativeFunctions.nwnxPushInt(value);
       Internal.NativeFunctions.nwnxPushInt(which);
@@ -900,7 +970,8 @@ namespace NWN.Core.NWNX {
     // / @param class The class id.
     // / @param count The amount of levels of class to add.
     // / @note This will not work on player characters.
-    public static void LevelUp(uint creature, int @class, int count = 1) {
+    public static void LevelUp(uint creature, int @class, int count = 1)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "LevelUp");
       Internal.NativeFunctions.nwnxPushInt(count);
       Internal.NativeFunctions.nwnxPushInt(@class);
@@ -912,7 +983,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param count The amount of levels to decrement.
     // / @note This will not work on player characters.
-    public static void LevelDown(uint creature, int count = 1) {
+    public static void LevelDown(uint creature, int count = 1)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "LevelDown");
       Internal.NativeFunctions.nwnxPushInt(count);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -922,7 +994,8 @@ namespace NWN.Core.NWNX {
     // / @brief Sets the creature's challenge rating
     // / @param creature The creature object.
     // / @param fCR The challenge rating.
-    public static void SetChallengeRating(uint creature, float fCR) {
+    public static void SetChallengeRating(uint creature, float fCR)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetChallengeRating");
       Internal.NativeFunctions.nwnxPushFloat(fCR);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -941,8 +1014,8 @@ namespace NWN.Core.NWNX {
     // / @param isOffhand If the attack was with the offhand.
     // / @param includeBaseAttackBonus Should the result include the base attack bonus.
     // / @return The highest attack bonus.
-    public static int GetAttackBonus(uint creature, int isMelee = -1, int isTouchAttack = NWScript.FALSE,
-      int isOffhand = NWScript.FALSE, int includeBaseAttackBonus = NWScript.TRUE) {
+    public static int GetAttackBonus(uint creature, int isMelee = -1, int isTouchAttack = NWScript.FALSE, int isOffhand = NWScript.FALSE, int includeBaseAttackBonus = NWScript.TRUE)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetAttackBonus");
       Internal.NativeFunctions.nwnxPushInt(includeBaseAttackBonus);
       Internal.NativeFunctions.nwnxPushInt(isOffhand);
@@ -958,7 +1031,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param feat The feat id.
     // / @return The highest level version of the feat.
-    public static int GetHighestLevelOfFeat(uint creature, int feat) {
+    public static int GetHighestLevelOfFeat(uint creature, int feat)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetHighestLevelOfFeat");
       Internal.NativeFunctions.nwnxPushInt(feat);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -970,7 +1044,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param feat The feat id.
     // / @return The amount of remaining uses.
-    public static int GetFeatRemainingUses(uint creature, int feat) {
+    public static int GetFeatRemainingUses(uint creature, int feat)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetFeatRemainingUses");
       Internal.NativeFunctions.nwnxPushInt(feat);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -982,7 +1057,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param feat The feat id.
     // / @return The total uses.
-    public static int GetFeatTotalUses(uint creature, int feat) {
+    public static int GetFeatTotalUses(uint creature, int feat)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetFeatTotalUses");
       Internal.NativeFunctions.nwnxPushInt(feat);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -994,7 +1070,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param feat The feat id.
     // / @param uses The amount of remaining uses.
-    public static void SetFeatRemainingUses(uint creature, int feat, int uses) {
+    public static void SetFeatRemainingUses(uint creature, int feat, int uses)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetFeatRemainingUses");
       Internal.NativeFunctions.nwnxPushInt(uses);
       Internal.NativeFunctions.nwnxPushInt(feat);
@@ -1016,9 +1093,8 @@ namespace NWN.Core.NWNX {
     // / @param abilityScore An ABILITY_* constant.
     // / @param isOffhand Whether the attack is an offhand attack.
     // / @return The bonus value.
-    public static int GetTotalEffectBonus(uint creature, int bonusType = NWNX_CREATURE_BONUS_TYPE_ATTACK,
-      uint target = NWScript.OBJECT_INVALID, int isElemental = 0, int isForceMax = 0, int savetype = -1,
-      int saveSpecificType = -1, int skill = -1, int abilityScore = -1, int isOffhand = NWScript.FALSE) {
+    public static int GetTotalEffectBonus(uint creature, int bonusType = NWNX_CREATURE_BONUS_TYPE_ATTACK, uint target = NWScript.OBJECT_INVALID, int isElemental = 0, int isForceMax = 0, int savetype = -1, int saveSpecificType = -1, int skill = -1, int abilityScore = -1, int isOffhand = NWScript.FALSE)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetTotalEffectBonus");
       Internal.NativeFunctions.nwnxPushInt(isOffhand);
       Internal.NativeFunctions.nwnxPushInt(abilityScore);
@@ -1039,7 +1115,8 @@ namespace NWN.Core.NWNX {
     // / @param name The name to give the creature.
     // / @param isLastName TRUE to change their last name, FALSE for first.
     // / @note For PCs this will persist to the .bic file if saved. Requires a relog to update.
-    public static void SetOriginalName(uint creature, string name, int isLastName) {
+    public static void SetOriginalName(uint creature, string name, int isLastName)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetOriginalName");
       Internal.NativeFunctions.nwnxPushInt(isLastName);
       Internal.NativeFunctions.nwnxPushString(name);
@@ -1051,7 +1128,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param isLastName TRUE to get last name, FALSE for first name.
     // / @return The original first or last name of the creature.
-    public static string GetOriginalName(uint creature, int isLastName) {
+    public static string GetOriginalName(uint creature, int isLastName)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetOriginalName");
       Internal.NativeFunctions.nwnxPushInt(isLastName);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -1063,7 +1141,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param sr The spell resistance.
     // / @warning This setting will be overwritten by effects and once those effects fade the old setting (typically 0) will be set.
-    public static void SetSpellResistance(uint creature, int sr) {
+    public static void SetSpellResistance(uint creature, int sr)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetSpellResistance");
       Internal.NativeFunctions.nwnxPushInt(sr);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -1073,7 +1152,8 @@ namespace NWN.Core.NWNX {
     // / @brief Set creature's animal companion creature type
     // / @param creature The master creature object.
     // / @param type The type from ANIMAL_COMPANION_CREATURE_TYPE_*.
-    public static void SetAnimalCompanionCreatureType(uint creature, int type) {
+    public static void SetAnimalCompanionCreatureType(uint creature, int type)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetAnimalCompanionCreatureType");
       Internal.NativeFunctions.nwnxPushInt(type);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -1083,7 +1163,8 @@ namespace NWN.Core.NWNX {
     // / @brief Set creature's familiar creature type
     // / @param creature The master creature object.
     // / @param type The type from FAMILIAR_CREATURE_TYPE_*.
-    public static void SetFamiliarCreatureType(uint creature, int type) {
+    public static void SetFamiliarCreatureType(uint creature, int type)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetFamiliarCreatureType");
       Internal.NativeFunctions.nwnxPushInt(type);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -1093,7 +1174,8 @@ namespace NWN.Core.NWNX {
     // / @brief Set creature's animal companion's name
     // / @param creature The master creature object.
     // / @param name The name to give their animal companion.
-    public static void SetAnimalCompanionName(uint creature, string name) {
+    public static void SetAnimalCompanionName(uint creature, string name)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetAnimalCompanionName");
       Internal.NativeFunctions.nwnxPushString(name);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -1103,7 +1185,8 @@ namespace NWN.Core.NWNX {
     // / @brief Set creature's familiar's name
     // / @param creature The master creature object.
     // / @param name The name to give their familiar.
-    public static void SetFamiliarName(uint creature, string name) {
+    public static void SetFamiliarName(uint creature, string name)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetFamiliarName");
       Internal.NativeFunctions.nwnxPushString(name);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -1113,7 +1196,8 @@ namespace NWN.Core.NWNX {
     // / @brief Get whether the creature can be disarmed.
     // / @param creature The creature object.
     // / @return TRUE if the creature can be disarmed.
-    public static int GetDisarmable(uint creature) {
+    public static int GetDisarmable(uint creature)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetDisarmable");
       Internal.NativeFunctions.nwnxPushObject(creature);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -1123,7 +1207,8 @@ namespace NWN.Core.NWNX {
     // / @brief Set whether a creature can be disarmed.
     // / @param creature The creature object.
     // / @param disarmable Set to TRUE if the creature can be disarmed.
-    public static void SetDisarmable(uint creature, int disarmable) {
+    public static void SetDisarmable(uint creature, int disarmable)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetDisarmable");
       Internal.NativeFunctions.nwnxPushInt(disarmable);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -1135,7 +1220,8 @@ namespace NWN.Core.NWNX {
     // / @param class The class id from classes.2da. (Not class index 0-2)
     // / @param index The first or second domain.
     // / @deprecated Use GetDomain(). This will be removed in future NWNX releases.
-    public static int GetDomain(uint creature, int @class, int index) {
+    public static int GetDomain(uint creature, int @class, int index)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetDomain");
       Internal.NativeFunctions.nwnxPushInt(index);
       Internal.NativeFunctions.nwnxPushInt(@class);
@@ -1149,7 +1235,8 @@ namespace NWN.Core.NWNX {
     // / @param class The class id from classes.2da. (Not class index 0-2)
     // / @param index The first or second domain.
     // / @param domain The domain constant to set.
-    public static void SetDomain(uint creature, int @class, int index, int domain) {
+    public static void SetDomain(uint creature, int @class, int index, int domain)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetDomain");
       Internal.NativeFunctions.nwnxPushInt(domain);
       Internal.NativeFunctions.nwnxPushInt(index);
@@ -1162,7 +1249,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param class The class id from classes.2da. (Not class index 0-2)
     // / @deprecated Use GetSpecialization(). This will be removed in future NWNX releases.
-    public static int GetSpecialization(uint creature, int @class) {
+    public static int GetSpecialization(uint creature, int @class)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetSpecialization");
       Internal.NativeFunctions.nwnxPushInt(@class);
       Internal.NativeFunctions.nwnxPushObject(creature);
@@ -1174,7 +1262,8 @@ namespace NWN.Core.NWNX {
     // / @param creature The creature object.
     // / @param class The class id from classes.2da. (Not class index 0-2)
     // / @param school The school constant.
-    public static void SetSpecialization(uint creature, int @class, int school) {
+    public static void SetSpecialization(uint creature, int @class, int school)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetSpecialization");
       Internal.NativeFunctions.nwnxPushInt(school);
       Internal.NativeFunctions.nwnxPushInt(@class);
@@ -1185,7 +1274,8 @@ namespace NWN.Core.NWNX {
     // / @brief Sets oCreatures faction to be the faction with id nFactionId.
     // / @param oCreature The creature.
     // / @param nFactionId The faction id we want the creature to join.
-    public static void SetFaction(uint oCreature, int nFactionId) {
+    public static void SetFaction(uint oCreature, int nFactionId)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetFaction");
       Internal.NativeFunctions.nwnxPushInt(nFactionId);
       Internal.NativeFunctions.nwnxPushObject(oCreature);
@@ -1195,7 +1285,8 @@ namespace NWN.Core.NWNX {
     // / @brief Gets the faction id from oCreature
     // / @param oCreature the creature we wish to query against
     // / @return faction id as an integer, -1 when used against invalid creature or invalid object.
-    public static int GetFaction(uint oCreature) {
+    public static int GetFaction(uint oCreature)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetFaction");
       Internal.NativeFunctions.nwnxPushObject(oCreature);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -1205,7 +1296,8 @@ namespace NWN.Core.NWNX {
     // / @brief Get whether a creature is flat-footed.
     // / @param The creature object.
     // / @return TRUE if the creature is flat-footed.
-    public static int GetFlatFooted(uint oCreature) {
+    public static int GetFlatFooted(uint oCreature)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetFlatFooted");
       Internal.NativeFunctions.nwnxPushObject(oCreature);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -1215,7 +1307,8 @@ namespace NWN.Core.NWNX {
     // / @brief Serialize oCreature's quickbar to a base64 string
     // / @param oCreature The creature.
     // / @return A base64 string representation of oCreature's quickbar.
-    public static string SerializeQuickbar(uint oCreature) {
+    public static string SerializeQuickbar(uint oCreature)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SerializeQuickbar");
       Internal.NativeFunctions.nwnxPushObject(oCreature);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -1226,7 +1319,8 @@ namespace NWN.Core.NWNX {
     // / @param oCreature The creature.
     // / @param sSerializedQuickbar A base64 string of a quickbar
     // / @return TRUE on success
-    public static int DeserializeQuickbar(uint oCreature, string sSerializedQuickbar) {
+    public static int DeserializeQuickbar(uint oCreature, string sSerializedQuickbar)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "DeserializeQuickbar");
       Internal.NativeFunctions.nwnxPushString(sSerializedQuickbar);
       Internal.NativeFunctions.nwnxPushObject(oCreature);
@@ -1239,8 +1333,8 @@ namespace NWN.Core.NWNX {
     // / @param nClass the class that this modifier will apply to
     // / @param nModifier the modifier to apply
     // / @param bPersist whether the modifier should be persisted to the .bic file if applicable
-    public static void SetCasterLevelModifier(uint oCreature, int nClass, int nModifier,
-      int bPersist = NWScript.FALSE) {
+    public static void SetCasterLevelModifier(uint oCreature, int nClass, int nModifier, int bPersist = NWScript.FALSE)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetCasterLevelModifier");
       Internal.NativeFunctions.nwnxPushInt(bPersist);
       Internal.NativeFunctions.nwnxPushInt(nModifier);
@@ -1253,7 +1347,8 @@ namespace NWN.Core.NWNX {
     // / @param oCreature the target creature
     // / @param nClass the creature caster class
     // / @return the current caster level modifier for the creature
-    public static int GetCasterLevelModifier(uint oCreature, int nClass) {
+    public static int GetCasterLevelModifier(uint oCreature, int nClass)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetCasterLevelModifier");
       Internal.NativeFunctions.nwnxPushInt(nClass);
       Internal.NativeFunctions.nwnxPushObject(oCreature);
@@ -1266,8 +1361,8 @@ namespace NWN.Core.NWNX {
     // / @param nClass the class that this modifier will apply to
     // / @param nCasterLevel the caster level override to apply
     // / @param bPersist whether the override should be persisted to the .bic file if applicable
-    public static void SetCasterLevelOverride(uint oCreature, int nClass, int nCasterLevel,
-      int bPersist = NWScript.FALSE) {
+    public static void SetCasterLevelOverride(uint oCreature, int nClass, int nCasterLevel, int bPersist = NWScript.FALSE)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetCasterLevelOverride");
       Internal.NativeFunctions.nwnxPushInt(bPersist);
       Internal.NativeFunctions.nwnxPushInt(nCasterLevel);
@@ -1280,7 +1375,8 @@ namespace NWN.Core.NWNX {
     // / @param oCreature the target creature
     // / @param nClass the creature caster class
     // / @return the current caster level override for the creature or -1 if not set
-    public static int GetCasterLevelOverride(uint oCreature, int nClass) {
+    public static int GetCasterLevelOverride(uint oCreature, int nClass)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetCasterLevelOverride");
       Internal.NativeFunctions.nwnxPushInt(nClass);
       Internal.NativeFunctions.nwnxPushObject(oCreature);
@@ -1290,7 +1386,8 @@ namespace NWN.Core.NWNX {
 
     // / @brief Move a creature to limbo.
     // / @param The creature object.
-    public static void JumpToLimbo(uint oCreature) {
+    public static void JumpToLimbo(uint oCreature)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "JumpToLimbo");
       Internal.NativeFunctions.nwnxPushObject(oCreature);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -1302,8 +1399,8 @@ namespace NWN.Core.NWNX {
     // / @param nHand 0 for all attacks, 1 for Mainhand, 2 for Offhand
     // / @param bPersist Whether the modifier should persist to .bic file if applicable
     // / @note Persistence is activated each server reset by first use of either 'SetCriticalMultiplier*' functions. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
-    public static void SetCriticalMultiplierModifier(uint oCreature, int nModifier, int nHand = 0,
-      int bPersist = NWScript.FALSE) {
+    public static void SetCriticalMultiplierModifier(uint oCreature, int nModifier, int nHand = 0, int bPersist = NWScript.FALSE)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetCriticalMultiplierModifier");
       Internal.NativeFunctions.nwnxPushInt(bPersist);
       Internal.NativeFunctions.nwnxPushInt(nHand);
@@ -1316,7 +1413,8 @@ namespace NWN.Core.NWNX {
     // / @param oCreature The target creature
     // / @param nHand 0 for all attacks, 1 for Mainhand, 2 for Offhand
     // / @return the current critical hit multiplier modifier for the creature
-    public static int GetCriticalMultiplierModifier(uint oCreature, int nHand = 0) {
+    public static int GetCriticalMultiplierModifier(uint oCreature, int nHand = 0)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetCriticalMultiplierModifier");
       Internal.NativeFunctions.nwnxPushInt(nHand);
       Internal.NativeFunctions.nwnxPushObject(oCreature);
@@ -1330,8 +1428,8 @@ namespace NWN.Core.NWNX {
     // / @param nHand 0 for all attacks, 1 for Mainhand, 2 for Offhand
     // / @param bPersist whether the modifier should be persisted to the .bic file if applicable
     // / @note Persistence is activated each server reset by first use of either 'SetCriticalMultiplier*' functions. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
-    public static void SetCriticalMultiplierOverride(uint oCreature, int nOverride, int nHand = 0,
-      int bPersist = NWScript.FALSE) {
+    public static void SetCriticalMultiplierOverride(uint oCreature, int nOverride, int nHand = 0, int bPersist = NWScript.FALSE)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetCriticalMultiplierOverride");
       Internal.NativeFunctions.nwnxPushInt(bPersist);
       Internal.NativeFunctions.nwnxPushInt(nHand);
@@ -1344,7 +1442,8 @@ namespace NWN.Core.NWNX {
     // / @param oCreature The target creature
     // / @param nHand 0 for all attacks, 1 for Mainhand, 2 for Offhand
     // / @return the current critical hit multiplier override for the creature. No override == -1
-    public static int GetCriticalMultiplierOverride(uint oCreature, int nHand = 0) {
+    public static int GetCriticalMultiplierOverride(uint oCreature, int nHand = 0)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetCriticalMultiplierOverride");
       Internal.NativeFunctions.nwnxPushInt(nHand);
       Internal.NativeFunctions.nwnxPushObject(oCreature);
@@ -1358,8 +1457,8 @@ namespace NWN.Core.NWNX {
     // / @param nHand 0 for all attacks, 1 for Mainhand, 2 for Offhand
     // / @param bPersist whether the modifier should be persisted to the .bic file if applicable
     // / @note Persistence is activated each server reset by first use of either 'SetCriticalRange*' functions. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
-    public static void SetCriticalRangeModifier(uint oCreature, int nModifier, int nHand = 0,
-      int bPersist = NWScript.FALSE) {
+    public static void SetCriticalRangeModifier(uint oCreature, int nModifier, int nHand = 0, int bPersist = NWScript.FALSE)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetCriticalRangeModifier");
       Internal.NativeFunctions.nwnxPushInt(bPersist);
       Internal.NativeFunctions.nwnxPushInt(nHand);
@@ -1372,7 +1471,8 @@ namespace NWN.Core.NWNX {
     // / @param oCreature The target creature
     // / @param nHand 0 for all attacks, 1 for Mainhand, 2 for Offhand
     // / @return the current critical hit range modifier for the creature
-    public static int GetCriticalRangeModifier(uint oCreature, int nHand = 0) {
+    public static int GetCriticalRangeModifier(uint oCreature, int nHand = 0)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetCriticalRangeModifier");
       Internal.NativeFunctions.nwnxPushInt(nHand);
       Internal.NativeFunctions.nwnxPushObject(oCreature);
@@ -1386,8 +1486,8 @@ namespace NWN.Core.NWNX {
     // / @param nHand 0 for all attacks, 1 for Mainhand, 2 for Offhand
     // / @param bPersist whether the modifier should be persisted to the .bic file if applicable
     // / @note Persistence is activated each server reset by first use of either 'SetCriticalRange*' functions. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
-    public static void SetCriticalRangeOverride(uint oCreature, int nOverride, int nHand = 0,
-      int bPersist = NWScript.FALSE) {
+    public static void SetCriticalRangeOverride(uint oCreature, int nOverride, int nHand = 0, int bPersist = NWScript.FALSE)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "SetCriticalRangeOverride");
       Internal.NativeFunctions.nwnxPushInt(bPersist);
       Internal.NativeFunctions.nwnxPushInt(nHand);
@@ -1400,7 +1500,8 @@ namespace NWN.Core.NWNX {
     // / @param oCreature The target creature
     // / @param nHand 0 for all attacks, 1 for Mainhand, 2 for Offhand
     // / @return the current critical hit range override for the creature. No override == -1.
-    public static int GetCriticalRangeOverride(uint oCreature, int nHand = 0) {
+    public static int GetCriticalRangeOverride(uint oCreature, int nHand = 0)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "GetCriticalRangeOverride");
       Internal.NativeFunctions.nwnxPushInt(nHand);
       Internal.NativeFunctions.nwnxPushObject(oCreature);
@@ -1411,13 +1512,15 @@ namespace NWN.Core.NWNX {
     // / @}
   }
 
-  public struct SpecialAbility {
+  public struct SpecialAbility
+  {
     public int id;
     public int ready;
     public int level;
   }
 
-  public struct MemorisedSpell {
+  public struct MemorisedSpell
+  {
     public int id;
     public int ready;
     public int meta;

@@ -1,6 +1,8 @@
-namespace NWN.Core.NWNX {
+namespace NWN.Core.NWNX
+{
   [NWNXPlugin(NWNX_Visibility)]
-  public class VisibilityPlugin {
+  public class VisibilityPlugin
+  {
     public const string NWNX_Visibility = "NWNX_Visibility";
 
     // /< @private
@@ -28,7 +30,8 @@ namespace NWN.Core.NWNX {
     // / @param player The PC Object or OBJECT_INVALID.
     // / @param target The object for which we're querying the visibility.
     // / @return The @ref vis_types "Visibility Type".
-    public static int GetVisibilityOverride(uint player, uint target) {
+    public static int GetVisibilityOverride(uint player, uint target)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Visibility, "GetVisibilityOverride");
       Internal.NativeFunctions.nwnxPushObject(target);
       Internal.NativeFunctions.nwnxPushObject(player);
@@ -55,7 +58,8 @@ namespace NWN.Core.NWNX {
     // / @param player The PC Object or OBJECT_INVALID.
     // / @param target The object for which we're altering the visibility.
     // / @param override The visibility type from @ref vis_types "Visibility Types".
-    public static void SetVisibilityOverride(uint player, uint target, int @override) {
+    public static void SetVisibilityOverride(uint player, uint target, int @override)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Visibility, "SetVisibilityOverride");
       Internal.NativeFunctions.nwnxPushInt(@override);
       Internal.NativeFunctions.nwnxPushObject(target);

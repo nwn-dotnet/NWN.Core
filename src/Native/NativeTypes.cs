@@ -1,11 +1,14 @@
 using System;
 
-namespace NWN.Core {
-  public class Effect {
+namespace NWN.Core
+{
+  public class Effect
+  {
     public IntPtr Handle;
     public Effect(IntPtr handle) => Handle = handle;
 
-    ~Effect() {
+    ~Effect()
+    {
       Internal.NativeFunctions.FreeEffect(Handle);
     }
 
@@ -13,11 +16,13 @@ namespace NWN.Core {
     public static implicit operator Effect(IntPtr intPtr) => new Effect(intPtr);
   }
 
-  public class Event {
+  public class Event
+  {
     public IntPtr Handle;
     public Event(IntPtr handle) => Handle = handle;
 
-    ~Event() {
+    ~Event()
+    {
       Internal.NativeFunctions.FreeEvent(Handle);
     }
 
@@ -25,11 +30,13 @@ namespace NWN.Core {
     public static implicit operator Event(IntPtr intPtr) => new Event(intPtr);
   }
 
-  public class Location {
+  public class Location
+  {
     public IntPtr Handle;
     public Location(IntPtr handle) => Handle = handle;
 
-    ~Location() {
+    ~Location()
+    {
       Internal.NativeFunctions.FreeLocation(Handle);
     }
 
@@ -37,11 +44,13 @@ namespace NWN.Core {
     public static implicit operator Location(IntPtr intPtr) => new Location(intPtr);
   }
 
-  public class Talent {
+  public class Talent
+  {
     public IntPtr Handle;
     public Talent(IntPtr handle) => Handle = handle;
 
-    ~Talent() {
+    ~Talent()
+    {
       Internal.NativeFunctions.FreeTalent(Handle);
     }
 
@@ -49,11 +58,13 @@ namespace NWN.Core {
     public static implicit operator Talent(IntPtr intPtr) => new Talent(intPtr);
   }
 
-  public class ItemProperty {
+  public class ItemProperty
+  {
     public IntPtr Handle;
     public ItemProperty(IntPtr handle) => Handle = handle;
 
-    ~ItemProperty() {
+    ~ItemProperty()
+    {
       Internal.NativeFunctions.FreeItemProperty(Handle);
     }
 

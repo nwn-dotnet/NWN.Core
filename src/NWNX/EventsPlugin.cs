@@ -1,6 +1,8 @@
-namespace NWN.Core.NWNX {
+namespace NWN.Core.NWNX
+{
   [NWNXPlugin(NWNX_Events)]
-  public class EventsPlugin {
+  public class EventsPlugin
+  {
     public const string NWNX_Events = "NWNX_Events";
 
     // /< @private
@@ -1099,7 +1101,8 @@ namespace NWN.Core.NWNX {
     // / Others can be signalled via script code via NWNX_Events_SignalEvent().
     // / @param evt The event name.
     // / @param script The script to call when the event fires.
-    public static void SubscribeEvent(string evt, string script) {
+    public static void SubscribeEvent(string evt, string script)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Events, "SubscribeEvent");
       Internal.NativeFunctions.nwnxPushString(script);
       Internal.NativeFunctions.nwnxPushString(evt);
@@ -1109,7 +1112,8 @@ namespace NWN.Core.NWNX {
     // / @brief Unsubscribe a script from an event
     // / @param evt The event name.
     // / @param script The script.
-    public static void UnsubscribeEvent(string evt, string script) {
+    public static void UnsubscribeEvent(string evt, string script)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Events, "UnsubscribeEvent");
       Internal.NativeFunctions.nwnxPushString(script);
       Internal.NativeFunctions.nwnxPushString(evt);
@@ -1118,7 +1122,8 @@ namespace NWN.Core.NWNX {
 
     // / Pushes event data at the provided tag, which subscribers can access with GetEventData.
     // / This should be called BEFORE SignalEvent.
-    public static void PushEventData(string tag, string data) {
+    public static void PushEventData(string tag, string data)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Events, "PushEventData");
       Internal.NativeFunctions.nwnxPushString(data);
       Internal.NativeFunctions.nwnxPushString(tag);
@@ -1127,7 +1132,8 @@ namespace NWN.Core.NWNX {
 
     // / Signals an event. This will dispatch a notification to all subscribed handlers.
     // / Returns TRUE if anyone was subscribed to the event, FALSE otherwise.
-    public static int SignalEvent(string evt, uint target) {
+    public static int SignalEvent(string evt, uint target)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Events, "SignalEvent");
       Internal.NativeFunctions.nwnxPushObject(target);
       Internal.NativeFunctions.nwnxPushString(evt);
@@ -1137,7 +1143,8 @@ namespace NWN.Core.NWNX {
 
     // / Retrieves the event data for the currently executing script.
     // / THIS SHOULD ONLY BE CALLED FROM WITHIN AN EVENT HANDLER.
-    public static string GetEventData(string tag) {
+    public static string GetEventData(string tag)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Events, "GetEventData");
       Internal.NativeFunctions.nwnxPushString(tag);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -1177,7 +1184,8 @@ namespace NWN.Core.NWNX {
     // / - {Enter|Exit}Stealth events
     // / - Object {Lock|Unlock} events
     // / - Quickbar Events
-    public static void SkipEvent() {
+    public static void SkipEvent()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Events, "SkipEvent");
       Internal.NativeFunctions.nwnxCallFunction();
     }
@@ -1194,7 +1202,8 @@ namespace NWN.Core.NWNX {
     // / - Ammo Reload event -> Forced ammunition returned
     // / - Trap events -> "1" or "0"
     // / - Sticky Player Name event -> "1" or "0"
-    public static void SetEventResult(string data) {
+    public static void SetEventResult(string data)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Events, "SetEventResult");
       Internal.NativeFunctions.nwnxPushString(data);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -1203,7 +1212,8 @@ namespace NWN.Core.NWNX {
     // / Returns the current event name
     // /
     // / Returns "" on error
-    public static string GetCurrentEvent() {
+    public static string GetCurrentEvent()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Events, "GetCurrentEvent");
       Internal.NativeFunctions.nwnxCallFunction();
       return Internal.NativeFunctions.nwnxPopString();
@@ -1211,7 +1221,8 @@ namespace NWN.Core.NWNX {
 
     // / Toggles DispatchListMode for sEvent+sScript
     // / If enabled, sEvent for sScript will only be signalled if the target object is on its dispatch list.
-    public static void ToggleDispatchListMode(string sEvent, string sScript, int bEnable) {
+    public static void ToggleDispatchListMode(string sEvent, string sScript, int bEnable)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Events, "ToggleDispatchListMode");
       Internal.NativeFunctions.nwnxPushInt(bEnable);
       Internal.NativeFunctions.nwnxPushString(sScript);
@@ -1220,7 +1231,8 @@ namespace NWN.Core.NWNX {
     }
 
     // / Add oObject to the dispatch list for sEvent+sScript.
-    public static void AddObjectToDispatchList(string sEvent, string sScript, uint oObject) {
+    public static void AddObjectToDispatchList(string sEvent, string sScript, uint oObject)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Events, "AddObjectToDispatchList");
       Internal.NativeFunctions.nwnxPushObject(oObject);
       Internal.NativeFunctions.nwnxPushString(sScript);
@@ -1229,7 +1241,8 @@ namespace NWN.Core.NWNX {
     }
 
     // / Remove oObject from the dispatch list for sEvent+sScript.
-    public static void RemoveObjectFromDispatchList(string sEvent, string sScript, uint oObject) {
+    public static void RemoveObjectFromDispatchList(string sEvent, string sScript, uint oObject)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Events, "RemoveObjectFromDispatchList");
       Internal.NativeFunctions.nwnxPushObject(oObject);
       Internal.NativeFunctions.nwnxPushString(sScript);

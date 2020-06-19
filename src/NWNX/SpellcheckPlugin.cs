@@ -1,6 +1,8 @@
-namespace NWN.Core.NWNX {
+namespace NWN.Core.NWNX
+{
   [NWNXPlugin(NWNX_SpellChecker)]
-  public class SpellcheckPlugin {
+  public class SpellcheckPlugin
+  {
     public const string NWNX_SpellChecker = "NWNX_SpellChecker";
 
     // /< @private
@@ -11,7 +13,8 @@ namespace NWN.Core.NWNX {
     // / @note If it returns an error in every word, even when spelled correctly, the dictionary is not set up correctly.
     // / @warning These functions can be performance heavy, do limit how many calls and/or how long of a sentence is passed.
     // / Make use of **DelayCommands** and **AssignCommands**
-    public static string FindMisspell(string sentence) {
+    public static string FindMisspell(string sentence)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_SpellChecker, "FindMisspell");
       Internal.NativeFunctions.nwnxPushString(sentence);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -24,7 +27,8 @@ namespace NWN.Core.NWNX {
     // / installed.
     // / @warning These functions can be performance heavy, do limit how many calls and/or how long of a sentence is passed.
     // / Make use of **DelayCommands** and **AssignCommands**
-    public static string GetSuggestSpell(string word) {
+    public static string GetSuggestSpell(string word)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_SpellChecker, "GetSuggestSpell");
       Internal.NativeFunctions.nwnxPushString(word);
       Internal.NativeFunctions.nwnxCallFunction();

@@ -3,8 +3,10 @@ using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Security;
 
-namespace NWN.Core {
-  public static partial class Internal {
+namespace NWN.Core
+{
+  public static partial class Internal
+  {
     [SuppressUnmanagedCodeSecurity]
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate IntPtr GetFunctionPointerDelegate(string name);
@@ -202,7 +204,8 @@ namespace NWN.Core {
     public delegate void nwnxCallFunctionDelegate();
 
     [StructLayout(LayoutKind.Sequential)]
-    public readonly struct NativeHandles {
+    public readonly struct NativeHandles
+    {
       public readonly GetFunctionPointerDelegate GetFunctionPointer;
       public readonly RegisterHandlersDelegate RegisterHandlers;
       public readonly CallBuiltInDelegate CallBuiltIn;

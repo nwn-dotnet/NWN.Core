@@ -1,6 +1,8 @@
-namespace NWN.Core.NWNX {
+namespace NWN.Core.NWNX
+{
   [NWNXPlugin(NWNX_SkillRanks)]
-  public class SkillranksPlugin {
+  public class SkillranksPlugin
+  {
     public const string NWNX_SkillRanks = "NWNX_SkillRanks";
 
     // /< @private
@@ -50,7 +52,8 @@ namespace NWN.Core.NWNX {
     // / @brief A feat that manipulates skill ranks.
     // / @param iSkill The skill to check the feat count.
     // / @return The count of feats for a specific skill.
-    public static int GetSkillFeatCountForSkill(int iSkill) {
+    public static int GetSkillFeatCountForSkill(int iSkill)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_SkillRanks, "GetSkillFeatCountForSkill");
       Internal.NativeFunctions.nwnxPushInt(iSkill);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -61,7 +64,8 @@ namespace NWN.Core.NWNX {
     // / @param iSkill The skill.
     // / @param iFeat The feat.
     // / @return A constructed NWNX_SkillRanks_SkillFeat.
-    public static SkillFeat GetSkillFeat(int iSkill, int iFeat) {
+    public static SkillFeat GetSkillFeat(int iSkill, int iFeat)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_SkillRanks, "GetSkillFeat");
       Internal.NativeFunctions.nwnxPushInt(iFeat);
       Internal.NativeFunctions.nwnxPushInt(iSkill);
@@ -86,7 +90,8 @@ namespace NWN.Core.NWNX {
     // / @param iSkill The skill.
     // / @param iIndex The index in the list of feats for the skill.
     // / @return A constructed NWNX_SkillRanks_SkillFeat.
-    public static SkillFeat GetSkillFeatForSkillByIndex(int iSkill, int iIndex) {
+    public static SkillFeat GetSkillFeatForSkillByIndex(int iSkill, int iIndex)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_SkillRanks, "GetSkillFeatForSkillByIndex");
       Internal.NativeFunctions.nwnxPushInt(iIndex);
       Internal.NativeFunctions.nwnxPushInt(iSkill);
@@ -109,7 +114,8 @@ namespace NWN.Core.NWNX {
     // / @brief Modifies or creates a skill feat.
     // / @param skillFeat The defined NWNX_SkillRanks_SkillFeat.
     // / @param createIfNonExistent TRUE to create if the feat does not exist.
-    public static void SetSkillFeat(SkillFeat skillFeat, int createIfNonExistent = NWScript.FALSE) {
+    public static void SetSkillFeat(SkillFeat skillFeat, int createIfNonExistent = NWScript.FALSE)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_SkillRanks, "SetSkillFeat");
       Internal.NativeFunctions.nwnxPushInt(createIfNonExistent);
       Internal.NativeFunctions.nwnxPushInt(skillFeat.iSkill);
@@ -133,7 +139,8 @@ namespace NWN.Core.NWNX {
     // / @param skillFeat The NWNX_SkillRanks_SkillFeat for which the sClasses field will be modifier.
     // / @param iClass The class to add to the Skill Feat.
     // / @return The updated NWNX_SkillRanks_SkillFeat.
-    public static SkillFeat AddSkillFeatClass(SkillFeat skillFeat, int iClass) {
+    public static SkillFeat AddSkillFeatClass(SkillFeat skillFeat, int iClass)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_SkillRanks, "AddSkillFeatClass");
       Internal.NativeFunctions.nwnxPushInt(iClass);
       Internal.NativeFunctions.nwnxPushInt(skillFeat.iSkill);
@@ -169,7 +176,8 @@ namespace NWN.Core.NWNX {
     // / changed with this function.
     // / @param iModifier The new value for the feat modifier.
     // / @param iEpic Set to TRUE to change the value for Epic Skill Focus.
-    public static void SetSkillFeatFocusModifier(int iModifier, int iEpic = NWScript.FALSE) {
+    public static void SetSkillFeatFocusModifier(int iModifier, int iEpic = NWScript.FALSE)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_SkillRanks, "SetSkillFeatFocusModifier");
       Internal.NativeFunctions.nwnxPushInt(iEpic);
       Internal.NativeFunctions.nwnxPushInt(iModifier);
@@ -178,7 +186,8 @@ namespace NWN.Core.NWNX {
 
     // / @brief Gets the current penalty to Dexterity based skills when blind.
     // / @return The penalty to Dexterity when blind.
-    public static int GetBlindnessPenalty() {
+    public static int GetBlindnessPenalty()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_SkillRanks, "GetBlindnessPenalty");
       Internal.NativeFunctions.nwnxCallFunction();
       return Internal.NativeFunctions.nwnxPopInt();
@@ -187,7 +196,8 @@ namespace NWN.Core.NWNX {
     // / @brief Set the value the Dexterity based skills get decreased due to blindness.
     // / @remark Default is 4.
     // / @param iModifier The penalty to Dexterity when blind.
-    public static void SetBlindnessPenalty(int iModifier) {
+    public static void SetBlindnessPenalty(int iModifier)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_SkillRanks, "SetBlindnessPenalty");
       Internal.NativeFunctions.nwnxPushInt(iModifier);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -197,7 +207,8 @@ namespace NWN.Core.NWNX {
     // / @param oArea The area.
     // / @param iSkill The skill to check.
     // / @return The modifier to that skill in the area.
-    public static int GetAreaModifier(uint oArea, int iSkill) {
+    public static int GetAreaModifier(uint oArea, int iSkill)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_SkillRanks, "GetAreaModifier");
       Internal.NativeFunctions.nwnxPushInt(iSkill);
       Internal.NativeFunctions.nwnxPushObject(oArea);
@@ -209,7 +220,8 @@ namespace NWN.Core.NWNX {
     // / @param oArea The area.
     // / @param iSkill The skill to change.
     // / @param iModifier The modifier to the skill in the area.
-    public static void SetAreaModifier(uint oArea, int iSkill, int iModifier) {
+    public static void SetAreaModifier(uint oArea, int iSkill, int iModifier)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_SkillRanks, "SetAreaModifier");
       Internal.NativeFunctions.nwnxPushInt(iModifier);
       Internal.NativeFunctions.nwnxPushInt(iSkill);
@@ -220,7 +232,8 @@ namespace NWN.Core.NWNX {
     // / @}
   }
 
-  public struct SkillFeat {
+  public struct SkillFeat
+  {
     public int iSkill;
     public int iFeat;
     public int iModifier;

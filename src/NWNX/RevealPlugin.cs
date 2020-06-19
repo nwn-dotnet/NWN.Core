@@ -1,6 +1,8 @@
-namespace NWN.Core.NWNX {
+namespace NWN.Core.NWNX
+{
   [NWNXPlugin(NWNX_Reveal)]
-  public class RevealPlugin {
+  public class RevealPlugin
+  {
     public const string NWNX_Reveal = "NWNX_Reveal";
 
     // /< @private
@@ -17,7 +19,8 @@ namespace NWN.Core.NWNX {
     // / @param oHiding The creature who is stealthed.
     // / @param oObserver The creature to whom the hider is revealed.
     // / @param iDetectionMethod Can be specified to determine whether the hidden creature is seen or heard.
-    public static void RevealTo(uint oHiding, uint oObserver, int iDetectionMethod = NWNX_REVEAL_HEARD) {
+    public static void RevealTo(uint oHiding, uint oObserver, int iDetectionMethod = NWNX_REVEAL_HEARD)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Reveal, "RevealTo");
       Internal.NativeFunctions.nwnxPushInt(iDetectionMethod);
       Internal.NativeFunctions.nwnxPushObject(oObserver);
@@ -29,7 +32,8 @@ namespace NWN.Core.NWNX {
     // / @param oHiding The creature who is stealthed.
     // / @param bReveal TRUE for visible.
     // / @param iDetectionMethod Can be specified to determine whether the hidden creature is seen or heard.
-    public static void SetRevealToParty(uint oHiding, int bReveal, int iDetectionMethod = NWNX_REVEAL_HEARD) {
+    public static void SetRevealToParty(uint oHiding, int bReveal, int iDetectionMethod = NWNX_REVEAL_HEARD)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Reveal, "SetRevealToParty");
       Internal.NativeFunctions.nwnxPushInt(iDetectionMethod);
       Internal.NativeFunctions.nwnxPushInt(bReveal);

@@ -1,6 +1,8 @@
-namespace NWN.Core.NWNX {
+namespace NWN.Core.NWNX
+{
   [NWNXPlugin(NWNX_ELC)]
-  public class ElcPlugin {
+  public class ElcPlugin
+  {
     public const string NWNX_ELC = "NWNX_ELC";
 
     // /< @private
@@ -79,7 +81,8 @@ namespace NWN.Core.NWNX {
     // / @}
     // / @brief Sets the script that runs whenever an ELC validation failure happens
     // / @param sScript The script name.
-    public static void SetELCScript(string sScript) {
+    public static void SetELCScript(string sScript)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_ELC, "SetELCScript");
       Internal.NativeFunctions.nwnxPushString(sScript);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -90,7 +93,8 @@ namespace NWN.Core.NWNX {
     // / @param bEnabled TRUE to use this check.
     // / @note Only runs if you have an ELC script set, be sure to skip this check
     // / if a player doesn't fail your custom check otherwise they won't be able to log in
-    public static void EnableCustomELCCheck(int bEnabled) {
+    public static void EnableCustomELCCheck(int bEnabled)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_ELC, "EnableCustomELCCheck");
       Internal.NativeFunctions.nwnxPushInt(bEnabled);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -98,7 +102,8 @@ namespace NWN.Core.NWNX {
 
     // / @brief Skip an ELC Validation Failure Event
     // / @note Only to be called in the ELC Script
-    public static void SkipValidationFailure() {
+    public static void SkipValidationFailure()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_ELC, "SkipValidationFailure");
       Internal.NativeFunctions.nwnxCallFunction();
     }
@@ -106,7 +111,8 @@ namespace NWN.Core.NWNX {
     // / @brief Get the validation failure type
     // / @return A @ref elc_fail_type "Validation Failure Type"
     // / @note Only to be called in the ELC Script
-    public static int GetValidationFailureType() {
+    public static int GetValidationFailureType()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_ELC, "GetValidationFailureType");
       Internal.NativeFunctions.nwnxCallFunction();
       return Internal.NativeFunctions.nwnxPopInt();
@@ -115,7 +121,8 @@ namespace NWN.Core.NWNX {
     // / @brief Get the validation failure subtype
     // / @return A @ref elc_fail_subtype "Validation Failure Subtype"
     // / @note Only to be called in the ELC Script
-    public static int GetValidationFailureSubType() {
+    public static int GetValidationFailureSubType()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_ELC, "GetValidationFailureSubType");
       Internal.NativeFunctions.nwnxCallFunction();
       return Internal.NativeFunctions.nwnxPopInt();
@@ -124,7 +131,8 @@ namespace NWN.Core.NWNX {
     // / @brief Get the failure message
     // / @return The talk table strref the player receives.
     // / @note Only to be called in the ELC Script
-    public static int GetValidationFailureMessageStrRef() {
+    public static int GetValidationFailureMessageStrRef()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_ELC, "GetValidationFailureMessageStrRef");
       Internal.NativeFunctions.nwnxCallFunction();
       return Internal.NativeFunctions.nwnxPopInt();
@@ -133,7 +141,8 @@ namespace NWN.Core.NWNX {
     // / @brief Set the failure message
     // / @param nStrRef The talk table strref the player receives, must be > 0.
     // / @note Only to be called in the ELC Script
-    public static void SetValidationFailureMessageStrRef(int nStrRef) {
+    public static void SetValidationFailureMessageStrRef(int nStrRef)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_ELC, "SetValidationFailureMessageStrRef");
       Internal.NativeFunctions.nwnxPushInt(nStrRef);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -143,7 +152,8 @@ namespace NWN.Core.NWNX {
     // / @return The object that caused the ILR validation failure. Returns OBJECT_INVALID on error.
     // / @note Only to be called in the ELC Script during a
     // / NWNX_ELC_VALIDATION_FAILURE_TYPE_ITEM validation failure.
-    public static uint GetValidationFailureItem() {
+    public static uint GetValidationFailureItem()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_ELC, "GetValidationFailureItem");
       Internal.NativeFunctions.nwnxCallFunction();
       return Internal.NativeFunctions.nwnxPopObject();
@@ -153,7 +163,8 @@ namespace NWN.Core.NWNX {
     // / @return The character level or -1 on error.
     // / @remark May not always return a level, depending on where the failure occurred.
     // / @note Only to be called in the ELC Script
-    public static int GetValidationFailureLevel() {
+    public static int GetValidationFailureLevel()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_ELC, "GetValidationFailureLevel");
       Internal.NativeFunctions.nwnxCallFunction();
       return Internal.NativeFunctions.nwnxPopInt();
@@ -164,7 +175,8 @@ namespace NWN.Core.NWNX {
     // / @remark May not always return a skill id, depending on the validation failure subtype.
     // / @note Only to be called in the ELC Script during a
     // / NWNX_ELC_VALIDATION_FAILURE_TYPE_SKILL validation failure.
-    public static int GetValidationFailureSkillID() {
+    public static int GetValidationFailureSkillID()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_ELC, "GetValidationFailureSkillID");
       Internal.NativeFunctions.nwnxCallFunction();
       return Internal.NativeFunctions.nwnxPopInt();
@@ -175,7 +187,8 @@ namespace NWN.Core.NWNX {
     // / @remark May not always return a feat id, depending on the validation failure subtype.
     // / @note Only to be called in the ELC Script during a
     // / NWNX_ELC_VALIDATION_FAILURE_TYPE_FEAT validation failure.
-    public static int GetValidationFailureFeatID() {
+    public static int GetValidationFailureFeatID()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_ELC, "GetValidationFailureFeatID");
       Internal.NativeFunctions.nwnxCallFunction();
       return Internal.NativeFunctions.nwnxPopInt();
@@ -186,7 +199,8 @@ namespace NWN.Core.NWNX {
     // / @remark May not always return a spell id, depending on the validation failure subtype.
     // / @note Only to be called in the ELC Script during a
     // / NWNX_ELC_VALIDATION_FAILURE_TYPE_SPELL validation failure.
-    public static int GetValidationFailureSpellID() {
+    public static int GetValidationFailureSpellID()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_ELC, "GetValidationFailureSpellID");
       Internal.NativeFunctions.nwnxCallFunction();
       return Internal.NativeFunctions.nwnxPopInt();

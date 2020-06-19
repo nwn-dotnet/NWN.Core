@@ -1,6 +1,8 @@
-namespace NWN.Core.NWNX {
+namespace NWN.Core.NWNX
+{
   [NWNXPlugin(NWNX_ItemProperty)]
-  public class ItempropPlugin {
+  public class ItempropPlugin
+  {
     public const string NWNX_ItemProperty = "NWNX_ItemProperty";
 
     // /< @private
@@ -8,7 +10,8 @@ namespace NWN.Core.NWNX {
     // / @brief Convert native itemproperty type to unpacked structure.
     // / @param ip The itemproperty to convert.
     // / @return A constructed NWNX_IPUnpacked.
-    public static IPUnpacked UnpackIP(System.IntPtr ip) {
+    public static IPUnpacked UnpackIP(System.IntPtr ip)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_ItemProperty, "UnpackIP");
       Internal.NativeFunctions.nwnxPushItemProperty(ip);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -31,7 +34,8 @@ namespace NWN.Core.NWNX {
     // / @brief Convert unpacked itemproperty structure to native type.
     // / @param ip The NWNX_IPUnpacked structure to convert.
     // / @return The itemproperty.
-    public static System.IntPtr PackIP(IPUnpacked ip) {
+    public static System.IntPtr PackIP(IPUnpacked ip)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_ItemProperty, "PackIP");
       Internal.NativeFunctions.nwnxPushInt(ip.nProperty);
       Internal.NativeFunctions.nwnxPushInt(ip.nSubType);
@@ -52,7 +56,8 @@ namespace NWN.Core.NWNX {
     // / @}
   }
 
-  public struct IPUnpacked {
+  public struct IPUnpacked
+  {
     public int nProperty;
     public int nSubType;
     public int nCostTable;

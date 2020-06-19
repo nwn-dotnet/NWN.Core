@@ -1,6 +1,8 @@
-namespace NWN.Core.NWNX {
+namespace NWN.Core.NWNX
+{
   [NWNXPlugin(NWNX_Rename)]
-  public class RenamePlugin {
+  public class RenamePlugin
+  {
     public const string NWNX_Rename = "NWNX_Rename";
 
     // /< @private
@@ -28,8 +30,8 @@ namespace NWN.Core.NWNX {
     // / @param iPlayerNameState How to change the Community Name, use @ref rename_comm_name_override_type "Community Name Override Type".
     // / @param oObserver If specified, the character name will appear to that specific observer as set, this overrides a global setting.
     // / @note Will not persist through saving, resets or logout.
-    public static void SetPCNameOverride(uint oTarget, string sNewName, string sPrefix = "", string sSuffix = "",
-      int iPlayerNameState = NWNX_RENAME_PLAYERNAME_DEFAULT, uint oObserver = NWScript.OBJECT_INVALID) {
+    public static void SetPCNameOverride(uint oTarget, string sNewName, string sPrefix = "", string sSuffix = "", int iPlayerNameState = NWNX_RENAME_PLAYERNAME_DEFAULT, uint oObserver = NWScript.OBJECT_INVALID)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Rename, "SetPCNameOverride");
       Internal.NativeFunctions.nwnxPushObject(oObserver);
       Internal.NativeFunctions.nwnxPushInt(iPlayerNameState);
@@ -45,7 +47,8 @@ namespace NWN.Core.NWNX {
     // / @param oObserver The specific observer.
     // / @return The PC's name as overridden either per observer or globally.
     // / @note If you wish to get a PC's true name use `GetName(oPC, TRUE)`.
-    public static string GetPCNameOverride(uint oTarget, uint oObserver = NWScript.OBJECT_INVALID) {
+    public static string GetPCNameOverride(uint oTarget, uint oObserver = NWScript.OBJECT_INVALID)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Rename, "GetPCNameOverride");
       Internal.NativeFunctions.nwnxPushObject(oObserver);
       Internal.NativeFunctions.nwnxPushObject(oTarget);
@@ -59,8 +62,8 @@ namespace NWN.Core.NWNX {
     // / If oTarget is OBJECT_INVALID then all overrides are cleared.
     // / @param clearAll If true, both the global and personal overrides will be cleared for that target PC.
     // / Requires oObserver be OBJECT_INVALID.
-    public static void ClearPCNameOverride(uint oTarget, uint oObserver = NWScript.OBJECT_INVALID,
-      int clearAll = NWScript.FALSE) {
+    public static void ClearPCNameOverride(uint oTarget, uint oObserver = NWScript.OBJECT_INVALID, int clearAll = NWScript.FALSE)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Rename, "ClearPCNameOverride");
       Internal.NativeFunctions.nwnxPushInt(clearAll);
       Internal.NativeFunctions.nwnxPushObject(oObserver);

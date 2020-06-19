@@ -1,6 +1,8 @@
-namespace NWN.Core.NWNX {
+namespace NWN.Core.NWNX
+{
   [NWNXPlugin(NWNX_Appearance)]
-  public class AppearancePlugin {
+  public class AppearancePlugin
+  {
     public const string NWNX_Appearance = "NWNX_Appearance";
 
     // /< @private
@@ -52,7 +54,8 @@ namespace NWN.Core.NWNX {
     // / @param oCreature The target creature whose appearance type to alter for oPlayer. Can be a PC.
     // / @param nType The @ref appearance_types "Appearance Type" to set or -1 to fully remove override.
     // / @param nValue The new value for the appearance type.
-    public static void SetOverride(uint oPlayer, uint oCreature, int nType, int nValue) {
+    public static void SetOverride(uint oPlayer, uint oCreature, int nType, int nValue)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Appearance, "SetOverride");
       Internal.NativeFunctions.nwnxPushInt(nValue);
       Internal.NativeFunctions.nwnxPushInt(nType);
@@ -66,7 +69,8 @@ namespace NWN.Core.NWNX {
     // / @param oCreature The target creature whose appearance type is altered for oPlayer. Can be a PC.
     // / @param nType The @ref appearance_types "Appearance Type" to get.
     // / @return The value for the appearance type or -1 when not set.
-    public static int GetOverride(uint oPlayer, uint oCreature, int nType) {
+    public static int GetOverride(uint oPlayer, uint oCreature, int nType)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Appearance, "GetOverride");
       Internal.NativeFunctions.nwnxPushInt(nType);
       Internal.NativeFunctions.nwnxPushObject(oCreature);

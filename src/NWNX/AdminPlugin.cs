@@ -1,6 +1,8 @@
-namespace NWN.Core.NWNX {
+namespace NWN.Core.NWNX
+{
   [NWNXPlugin(NWNX_Administration)]
-  public class AdminPlugin {
+  public class AdminPlugin
+  {
     public const string NWNX_Administration = "NWNX_Administration";
 
     // /< @private
@@ -103,7 +105,8 @@ namespace NWN.Core.NWNX {
     // / @}
     // / @brief Gets the current player password.
     // / @return The current player password.
-    public static string GetPlayerPassword() {
+    public static string GetPlayerPassword()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Administration, "GetPlayerPassword");
       Internal.NativeFunctions.nwnxCallFunction();
       return Internal.NativeFunctions.nwnxPopString();
@@ -111,21 +114,24 @@ namespace NWN.Core.NWNX {
 
     // / @brief Sets the password for players to login.
     // / @param password The password to use.
-    public static void SetPlayerPassword(string password) {
+    public static void SetPlayerPassword(string password)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Administration, "SetPlayerPassword");
       Internal.NativeFunctions.nwnxPushString(password);
       Internal.NativeFunctions.nwnxCallFunction();
     }
 
     // / @brief Clears the player password required to login.
-    public static void ClearPlayerPassword() {
+    public static void ClearPlayerPassword()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Administration, "ClearPlayerPassword");
       Internal.NativeFunctions.nwnxCallFunction();
     }
 
     // / @brief Gets the current DM password.
     // / @return The current DM password.
-    public static string GetDMPassword() {
+    public static string GetDMPassword()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Administration, "GetDMPassword");
       Internal.NativeFunctions.nwnxCallFunction();
       return Internal.NativeFunctions.nwnxPopString();
@@ -133,14 +139,16 @@ namespace NWN.Core.NWNX {
 
     // / @brief Sets the password for DMs to login.
     // / @param password The password to use.
-    public static void SetDMPassword(string password) {
+    public static void SetDMPassword(string password)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Administration, "SetDMPassword");
       Internal.NativeFunctions.nwnxPushString(password);
       Internal.NativeFunctions.nwnxCallFunction();
     }
 
     // / @brief Signals the server to immediately shut down.
-    public static void ShutdownServer() {
+    public static void ShutdownServer()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Administration, "ShutdownServer");
       Internal.NativeFunctions.nwnxCallFunction();
     }
@@ -151,7 +159,8 @@ namespace NWN.Core.NWNX {
     // /
     // / @param oPC The player to delete.
     // / @param bPreserveBackup If true, it will leave the file on server, only appending ".deleted0" to the bic filename.
-    public static void DeletePlayerCharacter(uint oPC, int bPreserveBackup = NWScript.TRUE) {
+    public static void DeletePlayerCharacter(uint oPC, int bPreserveBackup = NWScript.TRUE)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Administration, "DeletePlayerCharacter");
       Internal.NativeFunctions.nwnxPushInt(bPreserveBackup);
       Internal.NativeFunctions.nwnxPushObject(oPC);
@@ -160,7 +169,8 @@ namespace NWN.Core.NWNX {
 
     // / @brief Bans the provided IP.
     // / @param ip The IP Address to ban.
-    public static void AddBannedIP(string ip) {
+    public static void AddBannedIP(string ip)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Administration, "AddBannedIP");
       Internal.NativeFunctions.nwnxPushString(ip);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -168,7 +178,8 @@ namespace NWN.Core.NWNX {
 
     // / @brief Removes the ban on the provided IP.
     // / @param ip The IP Address to unban.
-    public static void RemoveBannedIP(string ip) {
+    public static void RemoveBannedIP(string ip)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Administration, "RemoveBannedIP");
       Internal.NativeFunctions.nwnxPushString(ip);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -176,7 +187,8 @@ namespace NWN.Core.NWNX {
 
     // / @brief Bans the provided Public CD Key.
     // / @param key The Public CD Key to ban.
-    public static void AddBannedCDKey(string key) {
+    public static void AddBannedCDKey(string key)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Administration, "AddBannedCDKey");
       Internal.NativeFunctions.nwnxPushString(key);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -184,7 +196,8 @@ namespace NWN.Core.NWNX {
 
     // / @brief Removes the ban on the provided Public CD Key.
     // / @param key The Public CD Key to unban.
-    public static void RemoveBannedCDKey(string key) {
+    public static void RemoveBannedCDKey(string key)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Administration, "RemoveBannedCDKey");
       Internal.NativeFunctions.nwnxPushString(key);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -193,7 +206,8 @@ namespace NWN.Core.NWNX {
     // / @brief Bans the provided playername.
     // / @param playerName The player name (community name) to ban.
     // / @warning A user can change their playername at will.
-    public static void AddBannedPlayerName(string playerName) {
+    public static void AddBannedPlayerName(string playerName)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Administration, "AddBannedPlayerName");
       Internal.NativeFunctions.nwnxPushString(playerName);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -201,7 +215,8 @@ namespace NWN.Core.NWNX {
 
     // / @brief Removes the ban on the provided playername.
     // / @param playerName The player name (community name) to unban.
-    public static void RemoveBannedPlayerName(string playerName) {
+    public static void RemoveBannedPlayerName(string playerName)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Administration, "RemoveBannedPlayerName");
       Internal.NativeFunctions.nwnxPushString(playerName);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -209,7 +224,8 @@ namespace NWN.Core.NWNX {
 
     // / @brief Get a list of all banned IPs/Keys/names as a string.
     // / @return A string with a listing of the banned IPs/Keys/names.
-    public static string GetBannedList() {
+    public static string GetBannedList()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Administration, "GetBannedList");
       Internal.NativeFunctions.nwnxCallFunction();
       return Internal.NativeFunctions.nwnxPopString();
@@ -217,7 +233,8 @@ namespace NWN.Core.NWNX {
 
     // / @brief Set the module's name as shown to the serverlist.
     // / @param name The name to give the module.
-    public static void SetModuleName(string name) {
+    public static void SetModuleName(string name)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Administration, "SetModuleName");
       Internal.NativeFunctions.nwnxPushString(name);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -225,14 +242,16 @@ namespace NWN.Core.NWNX {
 
     // / @brief Set the server's name as shown to the serverlist.
     // / @param name The name to give the server.
-    public static void SetServerName(string name) {
+    public static void SetServerName(string name)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Administration, "SetServerName");
       Internal.NativeFunctions.nwnxPushString(name);
       Internal.NativeFunctions.nwnxCallFunction();
     }
 
     // / @brief Returns the server's name as shown to the serverlist.
-    public static string GetServerName() {
+    public static string GetServerName()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Administration, "GetServerName");
       Internal.NativeFunctions.nwnxCallFunction();
       return Internal.NativeFunctions.nwnxPopString();
@@ -241,7 +260,8 @@ namespace NWN.Core.NWNX {
     // / @brief Get an @ref admin_opts "Administration Option" value.
     // / @param option An @ref admin_opts "Administration Option".
     // / @return The current setting for the supplied option from @ref admin_opts "Administration Options".
-    public static int GetPlayOption(int option) {
+    public static int GetPlayOption(int option)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Administration, "GetPlayOption");
       Internal.NativeFunctions.nwnxPushInt(option);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -251,7 +271,8 @@ namespace NWN.Core.NWNX {
     // / @brief Set an @ref admin_opts "Administration Options" to a value.
     // / @param option The option to adjust from @ref admin_opts "Administration Options".
     // / @param value The new value for the option.
-    public static void SetPlayOption(int option, int value) {
+    public static void SetPlayOption(int option, int value)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Administration, "SetPlayOption");
       Internal.NativeFunctions.nwnxPushInt(value);
       Internal.NativeFunctions.nwnxPushInt(option);
@@ -268,7 +289,8 @@ namespace NWN.Core.NWNX {
     // / @param playerName The community (login name).
     // / @param characterName The character name.
     // / @return Returns TRUE if successful
-    public static int DeleteTURD(string playerName, string characterName) {
+    public static int DeleteTURD(string playerName, string characterName)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Administration, "DeleteTURD");
       Internal.NativeFunctions.nwnxPushString(characterName);
       Internal.NativeFunctions.nwnxPushString(playerName);
@@ -279,7 +301,8 @@ namespace NWN.Core.NWNX {
     // / @brief Get an @ref admin_debug "Administration Debug Type" value.
     // / @param type An @ref admin_debug "Administration Debug Type".
     // / @return The current value for the supplied debug type from @ref admin_debug "Administration Debug Types".
-    public static int GetDebugValue(int type) {
+    public static int GetDebugValue(int type)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Administration, "GetDebugValue");
       Internal.NativeFunctions.nwnxPushInt(type);
       Internal.NativeFunctions.nwnxCallFunction();
@@ -289,7 +312,8 @@ namespace NWN.Core.NWNX {
     // / @brief Set an @ref admin_debug "Administration Debug Type" to a value.
     // / @param type The debug type to adjust from @ref admin_debug "Administration Debug Types".
     // / @param state The new state for the debug type, TRUE or FALSE
-    public static void SetDebugValue(int type, int state) {
+    public static void SetDebugValue(int type, int state)
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Administration, "SetDebugValue");
       Internal.NativeFunctions.nwnxPushInt(state);
       Internal.NativeFunctions.nwnxPushInt(type);
@@ -298,7 +322,8 @@ namespace NWN.Core.NWNX {
 
     // / @brief Reload all rules (2da stuff etc).
     // / @warning DANGER, DRAGONS. Bad things may or may not happen.
-    public static void ReloadRules() {
+    public static void ReloadRules()
+    {
       Internal.NativeFunctions.nwnxSetFunction(NWNX_Administration, "ReloadRules");
       Internal.NativeFunctions.nwnxCallFunction();
     }
