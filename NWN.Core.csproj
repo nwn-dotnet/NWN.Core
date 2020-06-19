@@ -7,6 +7,7 @@
         <Nullable>enable</Nullable>
         <PackageTags>Neverwinter Nights;NWN;</PackageTags>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <RepositoryUrl>https://github.com/nwn-dotnet/NWN.Core</RepositoryUrl>
