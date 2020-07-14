@@ -82,14 +82,27 @@ namespace NWN.Core.NWNX
         // / @brief Set an object's position.
         // / @param obj The object.
         // / @param pos A vector position.
-        public static void SetPosition(uint obj, System.Numerics.Vector3 pos)
+        public static void SetPosition(uint obj, System.Numerics.Vector3 pos, int bUpdateSubareas = 1)
         {
             Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "SetPosition");
+            Internal.NativeFunctions.nwnxPushInt(bUpdateSubareas);
             Internal.NativeFunctions.nwnxPushFloat(pos.Z);
             Internal.NativeFunctions.nwnxPushFloat(pos.Y);
             Internal.NativeFunctions.nwnxPushFloat(pos.X);
             Internal.NativeFunctions.nwnxPushObject(obj);
             Internal.NativeFunctions.nwnxCallFunction();
+        }
+
+        // / @brief Get an object's hit points.
+        // / @note Unlike the native GetCurrentHitpoints function, this excludes temporary hitpoints.
+        // / @param obj The object.
+        // / @return The hit points.
+        public static int GetCurrentHitPoints(uint obj) 
+        {
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetCurrentHitPoints");
+            Internal.NativeFunctions.nwnxPushObject(obj);
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopInt();
         }
 
         // / @brief Set an object's hit points.

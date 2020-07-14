@@ -1,3 +1,5 @@
+using System.Numerics;
+
 namespace NWN.Core.NWNX
 {
     [NWNXPlugin(NWNX_Util)]
@@ -338,6 +340,30 @@ namespace NWN.Core.NWNX
             Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "GetScriptReturnValue");
             Internal.NativeFunctions.nwnxCallFunction();
             return Internal.NativeFunctions.nwnxPopInt();
+        }
+
+        // / @brief Create a door.
+        // / @param sResRef The ResRef of the door.
+        // / @param locLocation The location to create the door at.
+        // / @param sNewTag An optional new tag for the door.
+        // / @return The door, or OBJECT_INVALID on failure.
+        public static uint CreateDoor(string sResRef, Location lLocation, string sNewTag = "") 
+        {
+            Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "CreateDoor");
+            Internal.NativeFunctions.nwnxPushString(sNewTag);
+
+            Vector3 vPosition = NWScript.GetPositionFromLocation(lLocation);
+
+            Internal.NativeFunctions.nwnxPushFloat(NWScript.GetFacingFromLocation(lLocation));
+            Internal.NativeFunctions.nwnxPushFloat(vPosition.Z);
+            Internal.NativeFunctions.nwnxPushFloat(vPosition.Y);
+            Internal.NativeFunctions.nwnxPushFloat(vPosition.X);
+            Internal.NativeFunctions.nwnxPushObject(NWScript.GetAreaFromLocation(lLocation));
+
+            Internal.NativeFunctions.nwnxPushString(sResRef);
+
+            Internal.NativeFunctions.nwnxCallFunction();
+            return Internal.NativeFunctions.nwnxPopObject();
         }
 
         // / @}
