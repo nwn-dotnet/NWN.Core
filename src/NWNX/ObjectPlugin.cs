@@ -97,7 +97,8 @@ namespace NWN.Core.NWNX
         // / @note Unlike the native GetCurrentHitpoints function, this excludes temporary hitpoints.
         // / @param obj The object.
         // / @return The hit points.
-        public static int GetCurrentHitPoints(uint obj) {
+        public static int GetCurrentHitPoints(uint obj) 
+        {
             Internal.NativeFunctions.nwnxSetFunction(NWNX_Object, "GetCurrentHitPoints");
             Internal.NativeFunctions.nwnxPushObject(obj);
             Internal.NativeFunctions.nwnxCallFunction();
