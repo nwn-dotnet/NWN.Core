@@ -546,7 +546,8 @@ namespace NWN.Core.NWNX
         // / @param oPlayer The player object.
         // / @param oCreature The creature object.
         // / @param sName The name for the creature for this player, "" to clear the override.
-        public static void SetCreatureNameOverride(uint oPlayer, uint oCreature, string sName) {
+        public static void SetCreatureNameOverride(uint oPlayer, uint oCreature, string sName) 
+        {
             Internal.NativeFunctions.nwnxSetFunction(NWNX_Player, "SetCreatureNameOverride");
             Internal.NativeFunctions.nwnxPushString(sName);
             Internal.NativeFunctions.nwnxPushObject(oCreature);
