@@ -347,7 +347,8 @@ namespace NWN.Core.NWNX
         // / @param locLocation The location to create the door at.
         // / @param sNewTag An optional new tag for the door.
         // / @return The door, or OBJECT_INVALID on failure.
-        public static uint CreateDoor(string sResRef, Location lLocation, string sNewTag = "") {
+        public static uint CreateDoor(string sResRef, Location lLocation, string sNewTag = "") 
+        {
             Internal.NativeFunctions.nwnxSetFunction(NWNX_Util, "CreateDoor");
             Internal.NativeFunctions.nwnxPushString(sNewTag);
 
