@@ -35,7 +35,7 @@ _This function is called every time that the server attempts to call a native NW
 0 : FALSE
 1 : TRUE
 ```
-_A result of either TRUE or FALSE will prevent any .ncs file with the same name from being called. The value is discarded except in the case of StartingConditional scripts, where it represents the return value of the StartingConditional() function._
+_A result of either TRUE or FALSE will prevent any .ncs file with the same name from being called. The value is discarded except in the case of StartingConditional scripts, where it represents the return value of the StartingConditional() function. Most implementations will use some method such as a dictionary of delegates to control custom behavior based on the script name passed, but the details are left up to the individual._
 
 ### Closure Functions ###
 _These functions deal with delayed commands and other engine actions that happen at a later time. They are called by the engine. It is not recommended to change or alter these unless you know what you are doing and want a specific result. A functional implementation you may use is given here:_
