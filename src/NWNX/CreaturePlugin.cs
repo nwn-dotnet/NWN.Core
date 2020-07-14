@@ -1514,7 +1514,8 @@ namespace NWN.Core.NWNX
         // / @param oCreature The creature to add oAssociate to
         // / @param oAssociate The associate, must be a NPC
         // / @param nAssociateType The associate type, one of ASSOCIATE_TYPE_*, except _NONE
-        public static void AddAssociate(uint oCreature, uint oAssociate, int nAssociateType) {
+        public static void AddAssociate(uint oCreature, uint oAssociate, int nAssociateType) 
+        {
             Internal.NativeFunctions.nwnxSetFunction(NWNX_Creature, "AddAssociate");
             Internal.NativeFunctions.nwnxPushInt(nAssociateType);
             Internal.NativeFunctions.nwnxPushObject(oAssociate);
