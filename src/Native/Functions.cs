@@ -2324,8 +2324,11 @@ namespace NWN.Core
         ///  - nMissEffect: if this is TRUE, a random vector near or past the target will
         ///    be generated, on which to play the effect
         /// </summary>
-        public static IntPtr EffectVisualEffect(int nVisualEffectId, int nMissEffect = FALSE)
+        public static IntPtr EffectVisualEffect(int nVisualEffectId, int nMissEffect = FALSE, float fScale = 1.0f, Vector3 vTranslate = default, Vector3 vRotate = default)
         {
+            Internal.NativeFunctions.StackPushVector(vRotate);
+            Internal.NativeFunctions.StackPushVector(vTranslate);
+            Internal.NativeFunctions.StackPushFloat(fScale);
             Internal.NativeFunctions.StackPushInteger(nMissEffect);
             Internal.NativeFunctions.StackPushInteger(nVisualEffectId);
             Internal.NativeFunctions.CallBuiltIn(180);
@@ -2696,8 +2699,11 @@ namespace NWN.Core
         ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nBeamVisualEffect is
         ///    not valid.
         /// </summary>
-        public static IntPtr EffectBeam(int nBeamVisualEffect, uint oEffector, int nBodyPart, int bMissEffect = FALSE)
+        public static IntPtr EffectBeam(int nBeamVisualEffect, uint oEffector, int nBodyPart, int bMissEffect = FALSE, float fScale = 1.0f, Vector3 vTranslate = default, Vector3 vRotate = default)
         {
+            Internal.NativeFunctions.StackPushVector(vRotate);
+            Internal.NativeFunctions.StackPushVector(vTranslate);
+            Internal.NativeFunctions.StackPushFloat(fScale);
             Internal.NativeFunctions.StackPushInteger(bMissEffect);
             Internal.NativeFunctions.StackPushInteger(nBodyPart);
             Internal.NativeFunctions.StackPushObject(oEffector);
@@ -11916,6 +11922,433 @@ namespace NWN.Core
             Internal.NativeFunctions.StackPushObject(oPlayer);
             Internal.NativeFunctions.CallBuiltIn(905);
             return Internal.NativeFunctions.StackPopInteger();
+        }
+
+        /// <summary>
+        /// Returns the script parameter value for a given parameter name.
+        /// Script parameters can be set for conversation scripts in the toolset's
+        /// Conversation Editor, or for any script with SetScriptParam().
+        /// * Will return "" if a parameter with the given name does not exist.
+        /// </summary>
+        public static string GetScriptParam(string sParamName)
+        {
+          Internal.NativeFunctions.StackPushString(sParamName);
+          Internal.NativeFunctions.CallBuiltIn(906);
+          return Internal.NativeFunctions.StackPopString();
+        }
+
+        /// <summary>
+        /// Set a script parameter value for the next script to be run.
+        /// Call this function to set parameters right before calling ExecuteScript().
+        /// </summary>
+        public static void SetScriptParam(string sParamName, string sParamValue)
+        {
+          Internal.NativeFunctions.StackPushString(sParamValue);
+          Internal.NativeFunctions.StackPushString(sParamName);
+          Internal.NativeFunctions.CallBuiltIn(907);
+        }
+
+        /// <summary>
+        /// Returns the number of uses per day remaining of the given item and item property.
+        /// * Will return 0 if the given item does not have the requested item property,
+        ///   or the item property is not uses/day.
+        /// </summary>
+        public static int GetItemPropertyUsesPerDayRemaining(uint oItem, IntPtr ip)
+        {
+          Internal.NativeFunctions.StackPushItemProperty(ip);
+          Internal.NativeFunctions.StackPushObject(oItem);
+          Internal.NativeFunctions.CallBuiltIn(908);
+          return Internal.NativeFunctions.StackPopInteger();
+        }
+
+        /// <summary>
+        /// Sets the number of uses per day remaining of the given item and item property.
+        /// * Will do nothing if the given item and item property is not uses/day.
+        /// * Will constrain nUsesPerDay to the maximum allowed as the cost table defines.
+        /// </summary>
+        public static void SetItemPropertyUsesPerDayRemaining(uint oItem, IntPtr ip, int nUsesPerDay)
+        {
+          Internal.NativeFunctions.StackPushInteger(nUsesPerDay);
+          Internal.NativeFunctions.StackPushItemProperty(ip);
+          Internal.NativeFunctions.StackPushObject(oItem);
+          Internal.NativeFunctions.CallBuiltIn(909);
+        }
+
+        /// <summary>
+        /// Queue an action to use an active item property.
+        /// * oItem - item that has the item property to use
+        /// * ip - item property to use
+        /// * object oTarget - target
+        /// * nSubPropertyIndex - specify if your itemproperty has subproperties (such as subradial spells)
+        /// * bDecrementCharges - decrement charges if item property is limited
+        /// </summary>
+        public static void ActionUseItemOnObject(uint oItem, IntPtr ip, uint oTarget, int nSubPropertyIndex = 0, int bDecrementCharges = TRUE)
+        {
+          Internal.NativeFunctions.StackPushInteger(bDecrementCharges);
+          Internal.NativeFunctions.StackPushInteger(nSubPropertyIndex);
+          Internal.NativeFunctions.StackPushObject(oTarget);
+          Internal.NativeFunctions.StackPushItemProperty(ip);
+          Internal.NativeFunctions.StackPushObject(oItem);
+          Internal.NativeFunctions.CallBuiltIn(910);
+        }
+
+        /// <summary>
+        /// Queue an action to use an active item property.
+        /// * oItem - item that has the item property to use
+        /// * ip - item property to use
+        /// * location lTarget - target location (must be in the same area as item possessor)
+        /// * nSubPropertyIndex - specify if your itemproperty has subproperties (such as subradial spells)
+        /// * bDecrementCharges - decrement charges if item property is limited
+        /// </summary>
+        public static void ActionUseItemAtLocation(uint oItem, IntPtr ip, IntPtr lTarget, int nSubPropertyIndex = 0, int bDecrementCharges = TRUE)
+        {
+          Internal.NativeFunctions.StackPushInteger(bDecrementCharges);
+          Internal.NativeFunctions.StackPushInteger(nSubPropertyIndex);
+          Internal.NativeFunctions.StackPushLocation(lTarget);
+          Internal.NativeFunctions.StackPushItemProperty(ip);
+          Internal.NativeFunctions.StackPushObject(oItem);
+          Internal.NativeFunctions.CallBuiltIn(911);
+        }
+
+        /// <summary>
+        /// Makes oPC enter a targeting mode, letting them select an object as a target
+        /// If a PC selects a target, it will trigger the module OnPlayerTarget event.
+        /// </summary>
+        public static void EnterTargetingMode(uint oPC, int nValidObjectTypes = OBJECT_TYPE_ALL, int nMouseCursorId = MOUSECURSOR_MAGIC, int nBadTargetCursor = MOUSECURSOR_NOMAGIC)
+        {
+          Internal.NativeFunctions.StackPushInteger(nBadTargetCursor);
+          Internal.NativeFunctions.StackPushInteger(nMouseCursorId);
+          Internal.NativeFunctions.StackPushInteger(nValidObjectTypes);
+          Internal.NativeFunctions.StackPushObject(oPC);
+          Internal.NativeFunctions.CallBuiltIn(912);
+        }
+
+        /// <summary>
+        /// Gets the target object in the module OnPlayerTarget event.
+        /// Returns the area object when the target is the ground.
+        /// </summary>
+        public static uint GetTargetingModeSelectedObject()
+        {
+          Internal.NativeFunctions.CallBuiltIn(913);
+          return Internal.NativeFunctions.StackPopObject();
+        }
+
+        /// <summary>
+        /// Gets the target position in the module OnPlayerTarget event.
+        /// </summary>
+        public static Vector3 GetTargetingModeSelectedPosition()
+        {
+          Internal.NativeFunctions.CallBuiltIn(914);
+          return Internal.NativeFunctions.StackPopVector();
+        }
+
+        /// <summary>
+        /// Gets the player object that triggered the OnPlayerTarget event.
+        /// </summary>
+        public static uint GetLastPlayerToSelectTarget()
+        {
+          Internal.NativeFunctions.CallBuiltIn(915);
+          return Internal.NativeFunctions.StackPopObject();
+        }
+
+        /// <summary>
+        /// Sets oObject's hilite color to nColor
+        /// The nColor format is 0xRRGGBB; -1 clears the color override.
+        /// </summary>
+        public static void SetObjectHiliteColor(uint oObject, int nColor = -1)
+        {
+          Internal.NativeFunctions.StackPushInteger(nColor);
+          Internal.NativeFunctions.StackPushObject(oObject);
+          Internal.NativeFunctions.CallBuiltIn(916);
+        }
+
+        /// <summary>
+        /// Sets the cursor (MOUSECURSOR_*) to use when hovering over oObject
+        /// </summary>
+        public static void SetObjectMouseCursor(uint oObject, int nCursor = -1)
+        {
+          Internal.NativeFunctions.StackPushInteger(nCursor);
+          Internal.NativeFunctions.StackPushObject(oObject);
+          Internal.NativeFunctions.CallBuiltIn(917);
+        }
+
+        /// <summary>
+        /// Returns TRUE if the given player-controlled creature has DM privileges
+        /// gained through a player login (as opposed to the DM client).
+        /// Note: GetIsDM() also returns TRUE for player creature DMs.
+        /// </summary>
+        public static int GetIsPlayerDM(uint oCreature)
+        {
+          Internal.NativeFunctions.StackPushObject(oCreature);
+          Internal.NativeFunctions.CallBuiltIn(918);
+          return Internal.NativeFunctions.StackPopInteger();
+        }
+
+        /// <summary>
+        /// Sets the detailed wind data for oArea
+        /// The predefined values in the toolset are:
+        ///   NONE:  vDirection=(1.0, 1.0, 0.0), fMagnitude=0.0, fYaw=0.0,   fPitch=0.0
+        ///   LIGHT: vDirection=(1.0, 1.0, 0.0), fMagnitude=1.0, fYaw=100.0, fPitch=3.0
+        ///   HEAVY: vDirection=(1.0, 1.0, 0.0), fMagnitude=2.0, fYaw=150.0, fPitch=5.0
+        /// </summary>
+        public static void SetAreaWind(uint oArea, Vector3 vDirection, float fMagnitude, float fYaw, float fPitch)
+        {
+          Internal.NativeFunctions.StackPushFloat(fPitch);
+          Internal.NativeFunctions.StackPushFloat(fYaw);
+          Internal.NativeFunctions.StackPushFloat(fMagnitude);
+          Internal.NativeFunctions.StackPushVector(vDirection);
+          Internal.NativeFunctions.StackPushObject(oArea);
+          Internal.NativeFunctions.CallBuiltIn(919);
+        }
+
+        /// <summary>
+        /// Replace's oObject's texture sOld with sNew.
+        /// Specifying sNew = "" will restore the original texture.
+        /// If sNew cannot be found, the original texture will be restored.
+        /// sNew must refer to a simple texture, not PLT
+        /// </summary>
+        public static void ReplaceObjectTexture(uint oObject, string sOld, string sNew = "")
+        {
+          Internal.NativeFunctions.StackPushString(sNew);
+          Internal.NativeFunctions.StackPushString(sOld);
+          Internal.NativeFunctions.StackPushObject(oObject);
+          Internal.NativeFunctions.CallBuiltIn(920);
+        }
+
+        /// <summary>
+        /// Destroys the given sqlite database, clearing out all data and schema.
+        /// This operation is _immediate_ and _irreversible_, even when
+        /// inside a transaction or running query.
+        /// Existing active/prepared sqlqueries will remain functional, but any references
+        /// to stored data or schema members will be invalidated.
+        /// oObject: Same as SqlPrepareQueryObject().
+        ///          To reset a campaign database, please use DestroyCampaignDatabase().
+        /// </summary>
+        public static void SqlDestroyDatabase(uint oObject)
+        {
+          Internal.NativeFunctions.StackPushObject(oObject);
+          Internal.NativeFunctions.CallBuiltIn(921);
+        }
+
+        /// <summary>
+        /// Returns "" if the last Sql command succeeded; or a human-readable error otherwise.
+        /// Additionally, all SQL errors are logged to the server log.
+        /// </summary>
+        public static string SqlGetError(IntPtr sqlQuery)
+        {
+          Internal.NativeFunctions.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQL_QUERY, sqlQuery);
+          Internal.NativeFunctions.CallBuiltIn(922);
+          return Internal.NativeFunctions.StackPopString();
+        }
+
+        /// <summary>
+        /// Sets up a query.
+        /// This will NOT run the query; only make it available for parameter binding.
+        /// To run the query, you need to call SqlStep(); even if you do not
+        /// expect result data.
+        /// sDatabase: The name of a campaign database.
+        ///            Note that when accessing campaign databases, you do not write access
+        ///            to the builtin tables needed for CampaignDB functionality.
+        /// N.B.: You can pass sqlqueries into DelayCommand; HOWEVER
+        ///       *** they will NOT survive a game save/load ***
+        ///       Any commands on a restored sqlquery will fail.
+        /// </summary>
+        public static IntPtr SqlPrepareQueryCampaign(string sDatabase, string sQuery)
+        {
+          Internal.NativeFunctions.StackPushString(sQuery);
+          Internal.NativeFunctions.StackPushString(sDatabase);
+          Internal.NativeFunctions.CallBuiltIn(923);
+          return Internal.NativeFunctions.StackPopGameDefinedStructure(ENGINE_STRUCTURE_SQL_QUERY);
+        }
+
+        /// <summary>
+        /// Sets up a query.
+        /// This will NOT run the query; only make it available for parameter binding.
+        /// To run the query, you need to call SqlStep(); even if you do not
+        /// expect result data.
+        /// oObject: Can be either the module (GetModule()), or a player character.
+        ///          The database is persisted to savegames in case of the module,
+        ///          and to character files in case of a player characters.
+        ///          Other objects cannot carry databases, and this function call
+        ///          will error for them.
+        /// N.B: Databases on objects (especially player characters!) should be kept
+        ///      to a reasonable size. Delete old data you no longer need.
+        ///      If you attempt to store more than a few megabytes of data on a
+        ///      player creature, you may have a bad time.
+        /// N.B.: You can pass sqlqueries into DelayCommand; HOWEVER
+        ///       *** they will NOT survive a game save/load ***
+        ///       Any commands on a restored sqlquery will fail.
+        /// </summary>
+        public static IntPtr SqlPrepareQueryObject(uint oObject, string sQuery)
+        {
+          Internal.NativeFunctions.StackPushString(sQuery);
+          Internal.NativeFunctions.StackPushObject(oObject);
+          Internal.NativeFunctions.CallBuiltIn(924);
+          return Internal.NativeFunctions.StackPopGameDefinedStructure(ENGINE_STRUCTURE_SQL_QUERY);
+        }
+
+        /// <summary>
+        /// Bind an integer to a named parameter of the given prepared query.
+        /// Example:
+        ///   sqlquery v = SqlPrepareQueryObject(GetModule(), "insert into test (col) values (@myint);");
+        ///   SqlBindInt(v, "@v", 5);
+        ///   SqlStep(v);
+        /// </summary>
+        public static void SqlBindInt(IntPtr sqlQuery, string sParam, int nValue)
+        {
+          Internal.NativeFunctions.StackPushInteger(nValue);
+          Internal.NativeFunctions.StackPushString(sParam);
+          Internal.NativeFunctions.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQL_QUERY, sqlQuery);
+          Internal.NativeFunctions.CallBuiltIn(925);
+        }
+
+        /// <summary>
+        /// Bind a float to a named parameter of the given prepared query.
+        /// </summary>
+        public static void SqlBindFloat(IntPtr sqlQuery, string sParam, float fFloat)
+        {
+          Internal.NativeFunctions.StackPushFloat(fFloat);
+          Internal.NativeFunctions.StackPushString(sParam);
+          Internal.NativeFunctions.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQL_QUERY, sqlQuery);
+          Internal.NativeFunctions.CallBuiltIn(926);
+        }
+
+        /// <summary>
+        /// Bind a string to a named parameter of the given prepared query.
+        /// </summary>
+        public static void SqlBindString(IntPtr sqlQuery, string sParam, string sString)
+        {
+          Internal.NativeFunctions.StackPushString(sString);
+          Internal.NativeFunctions.StackPushString(sParam);
+          Internal.NativeFunctions.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQL_QUERY, sqlQuery);
+          Internal.NativeFunctions.CallBuiltIn(927);
+        }
+
+        /// <summary>
+        /// Bind a vector to a named parameter of the given prepared query.
+        /// </summary>
+        public static void SqlBindVector(IntPtr sqlQuery, string sParam, Vector3 vVector)
+        {
+          Internal.NativeFunctions.StackPushVector(vVector);
+          Internal.NativeFunctions.StackPushString(sParam);
+          Internal.NativeFunctions.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQL_QUERY, sqlQuery);
+          Internal.NativeFunctions.CallBuiltIn(928);
+        }
+
+        /// <summary>
+        /// Bind a object to a named parameter of the given prepared query.
+        /// Objects are serialized, NOT stored as a reference!
+        /// Currently supported object types: Creatures, Items, Placeables, Waypoints, Stores, Doors, Triggers
+        /// </summary>
+        public static void SqlBindObject(IntPtr sqlQuery, string sParam, uint oObject)
+        {
+          Internal.NativeFunctions.StackPushObject(oObject);
+          Internal.NativeFunctions.StackPushString(sParam);
+          Internal.NativeFunctions.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQL_QUERY, sqlQuery);
+          Internal.NativeFunctions.CallBuiltIn(929);
+        }
+
+        /// <summary>
+        /// Executes the given query and fetches a row; returning true if row data was
+        /// made available; false otherwise. Note that this will return false even if
+        /// the query ran successfully but did not return data.
+        /// You need to call SqlPrepareQuery() and potentially SqlBind* before calling this.
+        /// Example:
+        ///   sqlquery n = SqlPrepareQueryObject(GetFirstPC(), "select widget from widgets;");
+        ///   while (SqlStep(n))
+        ///     SendMessageToPC(GetFirstPC(), "Found widget: " + SqlGetString(n, 0));
+        /// </summary>
+        public static int SqlStep(IntPtr sqlQuery)
+        {
+          Internal.NativeFunctions.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQL_QUERY, sqlQuery);
+          Internal.NativeFunctions.CallBuiltIn(930);
+          return Internal.NativeFunctions.StackPopInteger();
+        }
+
+        /// <summary>
+        /// Retrieve a column cast as an integer of the currently stepped row.
+        /// You can call this after SqlStep() returned TRUE.
+        /// In case of error, 0 will be returned.
+        /// In traditional fashion, nIndex starts at 0.
+        /// </summary>
+        public static int SqlGetInt(IntPtr sqlQuery, int nIndex)
+        {
+          Internal.NativeFunctions.StackPushInteger(nIndex);
+          Internal.NativeFunctions.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQL_QUERY, sqlQuery);
+          Internal.NativeFunctions.CallBuiltIn(931);
+          return Internal.NativeFunctions.StackPopInteger();
+        }
+
+        /// <summary>
+        /// Retrieve a column cast as a float of the currently stepped row.
+        /// You can call this after SqlStep() returned TRUE.
+        /// In case of error, 0.0f will be returned.
+        /// In traditional fashion, nIndex starts at 0.
+        /// </summary>
+        public static float SqlGetFloat(IntPtr sqlQuery, int nIndex)
+        {
+          Internal.NativeFunctions.StackPushInteger(nIndex);
+          Internal.NativeFunctions.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQL_QUERY, sqlQuery);
+          Internal.NativeFunctions.CallBuiltIn(932);
+          return Internal.NativeFunctions.StackPopFloat();
+        }
+
+        /// <summary>
+        /// Retrieve a column cast as a string of the currently stepped row.
+        /// You can call this after SqlStep() returned TRUE.
+        /// In case of error, a empty string will be returned.
+        /// In traditional fashion, nIndex starts at 0.
+        /// </summary>
+        public static string SqlGetString(IntPtr sqlQuery, int nIndex)
+        {
+          Internal.NativeFunctions.StackPushInteger(nIndex);
+          Internal.NativeFunctions.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQL_QUERY, sqlQuery);
+          Internal.NativeFunctions.CallBuiltIn(933);
+          return Internal.NativeFunctions.StackPopString();
+        }
+
+        /// <summary>
+        /// Retrieve a vector of the currently stepped query.
+        /// You can call this after SqlStep() returned TRUE.
+        /// In case of error, a zero vector will be returned.
+        /// In traditional fashion, nIndex starts at 0.
+        /// </summary>
+        public static Vector3 SqlGetVector(IntPtr sqlQuery, int nIndex)
+        {
+          Internal.NativeFunctions.StackPushInteger(nIndex);
+          Internal.NativeFunctions.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQL_QUERY, sqlQuery);
+          Internal.NativeFunctions.CallBuiltIn(934);
+          return Internal.NativeFunctions.StackPopVector();
+        }
+
+        /// <summary>
+        /// Retrieve a object of the currently stepped query.
+        /// You can call this after SqlStep() returned TRUE.
+        /// The object will be spawned into a inventory if it is a item and the receiver
+        /// has the capability to receive it, otherwise at lSpawnAt.
+        /// Objects are serialized, NOT stored as a reference!
+        /// In case of error, INVALID_OBJECT will be returned.
+        /// In traditional fashion, nIndex starts at 0.
+        /// </summary>
+        public static uint SqlGetObject(IntPtr sqlQuery, int nIndex, IntPtr lSpawnAt, uint oInventory = OBJECT_INVALID)
+        {
+          Internal.NativeFunctions.StackPushObject(oInventory);
+          Internal.NativeFunctions.StackPushLocation(lSpawnAt);
+          Internal.NativeFunctions.StackPushInteger(nIndex);
+          Internal.NativeFunctions.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQL_QUERY, sqlQuery);
+          Internal.NativeFunctions.CallBuiltIn(935);
+          return Internal.NativeFunctions.StackPopObject();
+        }
+
+        /// <summary>
+        /// Convert sHex, a string containing a hexadecimal object id,
+        /// into a object reference. Counterpart to StringToObject().
+        /// </summary>
+        public static uint StringToObject(string sHex)
+        {
+          Internal.NativeFunctions.StackPushString(sHex);
+          Internal.NativeFunctions.CallBuiltIn(936);
+          return Internal.NativeFunctions.StackPopObject();
         }
     }
 }

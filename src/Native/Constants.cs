@@ -4,6 +4,14 @@ namespace NWN.Core
     {
         public const uint OBJECT_INVALID = 0x7F000000;
 
+        public const int ENGINE_NUM_STRUCTURES = 6;
+        public const int ENGINE_STRUCTURE_EFFECT = 0;
+        public const int ENGINE_STRUCTURE_EVENT = 1;
+        public const int ENGINE_STRUCTURE_LOCATION = 2;
+        public const int ENGINE_STRUCTURE_TALENT = 3;
+        public const int ENGINE_STRUCTURE_ITEM_PROPERTY = 4;
+        public const int ENGINE_STRUCTURE_SQL_QUERY = 5;
+
         // Constants
         public const int NUM_INVENTORY_SLOTS = 18;
 
@@ -88,6 +96,7 @@ namespace NWN.Core
         public const int OBJECT_TYPE_PLACEABLE = 64;
         public const int OBJECT_TYPE_STORE = 128;
         public const int OBJECT_TYPE_ENCOUNTER = 256;
+        public const int OBJECT_TYPE_TILE = 512;
         public const int OBJECT_TYPE_ALL = 32767;
 
         public const int OBJECT_TYPE_INVALID = 32767;
@@ -5892,6 +5901,7 @@ namespace NWN.Core
         public const int EVENT_SCRIPT_MODULE_ON_EQUIP_ITEM = 3015;
         public const int EVENT_SCRIPT_MODULE_ON_UNEQUIP_ITEM = 3016;
         public const int EVENT_SCRIPT_MODULE_ON_PLAYER_CHAT = 3017;
+        public const int EVENT_SCRIPT_MODULE_ON_PLAYER_TARGET = 3018;
 
         public const int EVENT_SCRIPT_AREA_ON_HEARTBEAT = 4000;
         public const int EVENT_SCRIPT_AREA_ON_USER_DEFINED_EVENT = 4001;
@@ -6005,6 +6015,73 @@ namespace NWN.Core
         public const int DOMAIN_TRICKERY = 19;
         public const int DOMAIN_WAR = 20;
         public const int DOMAIN_WATER = 21;
+
+        public const int MOUSECURSOR_DEFAULT = 1;
+        public const int MOUSECURSOR_DEFAULT_DOWN = 2;
+        public const int MOUSECURSOR_WALK = 3;
+        public const int MOUSECURSOR_WALK_DOWN = 4;
+        public const int MOUSECURSOR_NOWALK = 5;
+        public const int MOUSECURSOR_NOWALK_DOWN = 6;
+        public const int MOUSECURSOR_ATTACK = 7;
+        public const int MOUSECURSOR_ATTACK_DOWN = 8;
+        public const int MOUSECURSOR_NOATTACK = 9;
+        public const int MOUSECURSOR_NOATTACK_DOWN = 10;
+        public const int MOUSECURSOR_TALK = 11;
+        public const int MOUSECURSOR_TALK_DOWN = 12;
+        public const int MOUSECURSOR_NOTALK = 13;
+        public const int MOUSECURSOR_NOTALK_DOWN = 14;
+        public const int MOUSECURSOR_FOLLOW = 15;
+        public const int MOUSECURSOR_FOLLOW_DOWN = 16;
+        public const int MOUSECURSOR_EXAMINE = 17;
+        public const int MOUSECURSOR_EXAMINE_DOWN = 18;
+        public const int MOUSECURSOR_NOEXAMINE = 19;
+        public const int MOUSECURSOR_NOEXAMINE_DOWN = 20;
+        public const int MOUSECURSOR_TRANSITION = 21;
+        public const int MOUSECURSOR_TRANSITION_DOWN = 22;
+        public const int MOUSECURSOR_DOOR = 23;
+        public const int MOUSECURSOR_DOOR_DOWN = 24;
+        public const int MOUSECURSOR_USE = 25;
+        public const int MOUSECURSOR_USE_DOWN = 26;
+        public const int MOUSECURSOR_NOUSE = 27;
+        public const int MOUSECURSOR_NOUSE_DOWN = 28;
+        public const int MOUSECURSOR_MAGIC = 29;
+        public const int MOUSECURSOR_MAGIC_DOWN = 30;
+        public const int MOUSECURSOR_NOMAGIC = 31;
+        public const int MOUSECURSOR_NOMAGIC_DOWN = 32;
+        public const int MOUSECURSOR_DISARM = 33;
+        public const int MOUSECURSOR_DISARM_DOWN = 34;
+        public const int MOUSECURSOR_NODISARM = 35;
+        public const int MOUSECURSOR_NODISARM_DOWN = 36;
+        public const int MOUSECURSOR_ACTION = 37;
+        public const int MOUSECURSOR_ACTION_DOWN = 38;
+        public const int MOUSECURSOR_NOACTION = 39;
+        public const int MOUSECURSOR_NOACTION_DOWN = 40;
+        public const int MOUSECURSOR_LOCK = 41;
+        public const int MOUSECURSOR_LOCK_DOWN = 42;
+        public const int MOUSECURSOR_NOLOCK = 43;
+        public const int MOUSECURSOR_NOLOCK_DOWN = 44;
+        public const int MOUSECURSOR_PUSHPIN = 45;
+        public const int MOUSECURSOR_PUSHPIN_DOWN = 46;
+        public const int MOUSECURSOR_CREATE = 47;
+        public const int MOUSECURSOR_CREATE_DOWN = 48;
+        public const int MOUSECURSOR_NOCREATE = 49;
+        public const int MOUSECURSOR_NOCREATE_DOWN = 50;
+        public const int MOUSECURSOR_KILL = 51;
+        public const int MOUSECURSOR_KILL_DOWN = 52;
+        public const int MOUSECURSOR_NOKILL = 53;
+        public const int MOUSECURSOR_NOKILL_DOWN = 54;
+        public const int MOUSECURSOR_HEAL = 55;
+        public const int MOUSECURSOR_HEAL_DOWN = 56;
+        public const int MOUSECURSOR_NOHEAL = 57;
+        public const int MOUSECURSOR_NOHEAL_DOWN = 58;
+        public const int MOUSECURSOR_RUNARROW = 59;
+        public const int MOUSECURSOR_WALKARROW = 75;
+        public const int MOUSECURSOR_PICKUP = 91;
+        public const int MOUSECURSOR_PICKUP_DOWN = 92;
+        public const int MOUSECURSOR_CUSTOM_00 = 93;       // gui_mp_custom00u
+        public const int MOUSECURSOR_CUSTOM_00_DOWN = 94;  // gui_mp_custom00d
+        public const int MOUSECURSOR_CUSTOM_99 = 291;      // gui_mp_custom99u
+        public const int MOUSECURSOR_CUSTOM_99_DOWN = 292; // gui_mp_custom99d
 
         public const string sLanguage = "nwscript";
     }
