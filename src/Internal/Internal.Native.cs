@@ -65,6 +65,10 @@ namespace NWN.Core
 
         [SuppressUnmanagedCodeSecurity]
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate void StackPushGameDefinedStructureDelegate(int type, IntPtr str);
+
+        [SuppressUnmanagedCodeSecurity]
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate int StackPopIntegerDelegate();
 
         [SuppressUnmanagedCodeSecurity]
@@ -109,6 +113,10 @@ namespace NWN.Core
 
         [SuppressUnmanagedCodeSecurity]
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate IntPtr StackPopGameDefinedStructureDelegate(int type);
+
+        [SuppressUnmanagedCodeSecurity]
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void FreeEffectDelegate(IntPtr ptr);
 
         [SuppressUnmanagedCodeSecurity]
@@ -126,6 +134,10 @@ namespace NWN.Core
         [SuppressUnmanagedCodeSecurity]
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void FreeItemPropertyDelegate(IntPtr ptr);
+
+        [SuppressUnmanagedCodeSecurity]
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate IntPtr FreeGameDefinedStructureDelegate(int type, IntPtr str);
 
         [SuppressUnmanagedCodeSecurity]
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -203,13 +215,6 @@ namespace NWN.Core
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void nwnxCallFunctionDelegate();
 
-        [SuppressUnmanagedCodeSecurity]
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void StackPushGameDefinedStructureDelegate(int type, IntPtr str);
-
-        [SuppressUnmanagedCodeSecurity]
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate IntPtr StackPopGameDefinedStructureDelegate(int type);
 
         [StructLayout(LayoutKind.Sequential)]
         public readonly struct NativeHandles
@@ -265,6 +270,7 @@ namespace NWN.Core
             public readonly nwnxCallFunctionDelegate nwnxCallFunction;
             public readonly StackPushGameDefinedStructureDelegate StackPushGameDefinedStructure;
             public readonly StackPopGameDefinedStructureDelegate StackPopGameDefinedStructure;
+            public readonly FreeGameDefinedStructureDelegate FreeGameDefinedStructure;
         }
     }
 }
