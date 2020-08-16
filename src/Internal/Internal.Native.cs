@@ -45,23 +45,7 @@ namespace NWN.Core
 
         [SuppressUnmanagedCodeSecurity]
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void StackPushEffectDelegate(IntPtr value);
-
-        [SuppressUnmanagedCodeSecurity]
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void StackPushEventDelegate(IntPtr value);
-
-        [SuppressUnmanagedCodeSecurity]
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void StackPushLocationDelegate(IntPtr value);
-
-        [SuppressUnmanagedCodeSecurity]
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void StackPushTalentDelegate(IntPtr value);
-
-        [SuppressUnmanagedCodeSecurity]
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void StackPushItemPropertyDelegate(IntPtr value);
+        public delegate void StackPushGameDefinedStructureDelegate(int type, IntPtr str);
 
         [SuppressUnmanagedCodeSecurity]
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -89,23 +73,7 @@ namespace NWN.Core
 
         [SuppressUnmanagedCodeSecurity]
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate IntPtr StackPopEffectDelegate();
-
-        [SuppressUnmanagedCodeSecurity]
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate IntPtr StackPopEventDelegate();
-
-        [SuppressUnmanagedCodeSecurity]
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate IntPtr StackPopLocationDelegate();
-
-        [SuppressUnmanagedCodeSecurity]
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate IntPtr StackPopTalentDelegate();
-
-        [SuppressUnmanagedCodeSecurity]
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate IntPtr StackPopItemPropertyDelegate();
+        public delegate IntPtr StackPopGameDefinedStructureDelegate(int type);
 
         [SuppressUnmanagedCodeSecurity]
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -126,6 +94,10 @@ namespace NWN.Core
         [SuppressUnmanagedCodeSecurity]
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void FreeItemPropertyDelegate(IntPtr ptr);
+
+        [SuppressUnmanagedCodeSecurity]
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate IntPtr FreeGameDefinedStructureDelegate(int type, IntPtr str);
 
         [SuppressUnmanagedCodeSecurity]
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -203,6 +175,7 @@ namespace NWN.Core
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void nwnxCallFunctionDelegate();
 
+
         [StructLayout(LayoutKind.Sequential)]
         public readonly struct NativeHandles
         {
@@ -215,27 +188,15 @@ namespace NWN.Core
             public readonly StackPushStringUTF8Delegate StackPushStringUTF8;
             public readonly StackPushObjectDelegate StackPushObject;
             public readonly StackPushVectorDelegate StackPushVector;
-            public readonly StackPushEffectDelegate StackPushEffect;
-            public readonly StackPushEventDelegate StackPushEvent;
-            public readonly StackPushLocationDelegate StackPushLocation;
-            public readonly StackPushTalentDelegate StackPushTalent;
-            public readonly StackPushItemPropertyDelegate StackPushItemProperty;
+            public readonly StackPushGameDefinedStructureDelegate StackPushGameDefinedStructure;
             public readonly StackPopIntegerDelegate StackPopInteger;
             public readonly StackPopFloatDelegate StackPopFloat;
             public readonly StackPopStringDelegate StackPopString;
             public readonly StackPopStringUTF8Delegate StackPopStringUTF8;
             public readonly StackPopObjectDelegate StackPopObject;
             public readonly StackPopVectorDelegate StackPopVector;
-            public readonly StackPopEffectDelegate StackPopEffect;
-            public readonly StackPopEventDelegate StackPopEvent;
-            public readonly StackPopLocationDelegate StackPopLocation;
-            public readonly StackPopTalentDelegate StackPopTalent;
-            public readonly StackPopItemPropertyDelegate StackPopItemProperty;
-            public readonly FreeEffectDelegate FreeEffect;
-            public readonly FreeEventDelegate FreeEvent;
-            public readonly FreeLocationDelegate FreeLocation;
-            public readonly FreeTalentDelegate FreeTalent;
-            public readonly FreeItemPropertyDelegate FreeItemProperty;
+            public readonly StackPopGameDefinedStructureDelegate StackPopGameDefinedStructure;
+            public readonly FreeGameDefinedStructureDelegate FreeGameDefinedStructure;
             public readonly ClosureAssignCommandDelegate ClosureAssignCommand;
             public readonly ClosureDelayCommandDelegate ClosureDelayCommand;
             public readonly ClosureActionDoCommandDelegate ClosureActionDoCommand;
