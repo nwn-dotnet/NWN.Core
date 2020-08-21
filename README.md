@@ -37,6 +37,13 @@ _This function is called every time that the server attempts to call a native NW
 ```
 _A result of either TRUE or FALSE will prevent any .ncs file with the same name from being called. The value is discarded except in the case of StartingConditional scripts, where it represents the return value of the StartingConditional() function. Most implementations will use some method such as a dictionary of delegates to control custom behavior based on the script name passed, but the details are left up to the individual._
 
+### OnSignal ###
+_This function is called during significant server events. The string parameter indicates which signal has occurred._
+```
+"ON_MODULE_LOAD_FINISH" - Called just before the OnModuleLoad event. Perform any init requiring NWScript usage here.
+"ON_DESTROY_SERVER" - Called just before the server will be shutdown. Perform any cleanup/flushing here.
+```
+
 ### Closure Functions ###
 _These functions deal with delayed commands and other engine actions that happen at a later time. They are called by the engine. It is not recommended to change or alter these unless you know what you are doing and want a specific result. A functional implementation you may use is given here:_
 
@@ -54,7 +61,7 @@ _These functions deal with delayed commands and other engine actions that happen
             ObjectSelf = old;
         }
 
-        //Closures are for events that happen separately on the stack, specifically AssignCommand, DelayCommand, 
+        // Closures are for events that happen separately on the stack, specifically AssignCommand, DelayCommand,
         // and ActionDoCommand. Most implementations do not change these.
         public void ClosureAssignCommand(uint obj, ActionDelegate func) {
             if (Internal.NativeFunctions.ClosureAssignCommand(obj, NextEventId) != 0)

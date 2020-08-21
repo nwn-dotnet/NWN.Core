@@ -48,6 +48,7 @@ namespace NWN.Core
             eventHandles.MainLoop = gameManager.OnMainLoop;
             eventHandles.RunScript = gameManager.OnRunScript;
             eventHandles.Closure = gameManager.OnClosure;
+            eventHandles.Signal = gameManager.OnSignal;
 
             ManagedFunctions.ClosureAssignCommand = gameManager.ClosureAssignCommand;
             ManagedFunctions.ClosureDelayCommand = gameManager.ClosureDelayCommand;
