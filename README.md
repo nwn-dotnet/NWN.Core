@@ -21,7 +21,7 @@ _This function is called when the library is loaded. It should generally take th
 ```csharp
 public static int Bootstrap(IntPtr ptr, int nativeHandlesLength) {
             // Do whatever other initialization you want to do here.
-            return Internal.Init(ptr, nativeHandlesLength, Instance);
+            return NWNCore.Init(ptr, nativeHandlesLength, Instance);
         }
 ```
 
@@ -64,17 +64,17 @@ _These functions deal with delayed commands and other engine actions that happen
         // Closures are for events that happen separately on the stack, specifically AssignCommand, DelayCommand,
         // and ActionDoCommand. Most implementations do not change these.
         public void ClosureAssignCommand(uint obj, ActionDelegate func) {
-            if (Internal.NativeFunctions.ClosureAssignCommand(obj, NextEventId) != 0)
+            if (VM.ClosureAssignCommand(obj, NextEventId) != 0)
                 Closures.Add(NextEventId++, new Closure { OwnerObject = obj, Run = func });
         }
 
         public void ClosureDelayCommand(uint obj, float duration, ActionDelegate func) {
-            if (Internal.NativeFunctions.ClosureDelayCommand(obj, duration, NextEventId) != 0)
+            if (VM.ClosureDelayCommand(obj, duration, NextEventId) != 0)
                 Closures.Add(NextEventId++, new Closure { OwnerObject = obj, Run = func });
         }
 
         public void ClosureActionDoCommand(uint obj, ActionDelegate func) {
-            if (Internal.NativeFunctions.ClosureActionDoCommand(obj, NextEventId) != 0)
+            if (VM.ClosureActionDoCommand(obj, NextEventId) != 0)
                 Closures.Add(NextEventId++, new Closure { OwnerObject = obj, Run = func });
         }
 ```
