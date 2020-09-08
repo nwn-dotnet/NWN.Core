@@ -28,6 +28,7 @@ namespace NWN.Core.NWNX
         public const int NWNX_UTIL_RESREF_TYPE_WAYPOINT = 2058;
 
         ///@}
+        /// A world time struct
         /// Gets the name of the currently executing script.
         /// @note If depth is > 0, it will return the name of the script that called this one via ExecuteScript().
         /// <param name="depth">to seek the executing script.</param>
@@ -340,6 +341,52 @@ namespace NWN.Core.NWNX
             return VM.NWNX.StackPopInt();
         }
 
+        /// Create a door.
+        /// <param name="sResRef">The ResRef of the door.</param>
+        /// <param name="locLocation">The location to create the door at.</param>
+        /// <param name="sNewTag">An optional new tag for the door.</param>
+        /// <returns>The door, or OBJECT_INVALID on failure.</returns>
+        public static uint CreateDoor(string sResRef, System.IntPtr locLocation, string sNewTag = "")
+        {
+            VM.NWNX.SetFunction(NWNX_Util, "CreateDoor");
+            VM.NWNX.StackPush(sNewTag);
+            ;
+            VM.NWNX.StackPush(sResRef);
+            VM.NWNX.Call();
+            return VM.NWNX.StackPopObject();
+        }
+
+        /// Set the object that will be returned by GetItemActivator.
+        /// <param name="oObject">An object.</param>
+        public static void SetItemActivator(uint oObject)
+        {
+            VM.NWNX.SetFunction(NWNX_Util, "SetItemActivator");
+            VM.NWNX.StackPush(oObject);
+            VM.NWNX.Call();
+        }
+
+        /// Get the world time as calendar day and time of day.
+        /// @note This function is useful for calculating effect expiry times.
+        /// <param name="fAdjustment">An adjustment in seconds, 0.0f will return the current world time,</param>
+        /// positive or negative values will return a world time in the future or past.
+        /// <returns>A NWNX_Util_WorldTime struct with the calendar day and time of day.</returns>
+        public static WorldTime GetWorldTime(float fAdjustment = 0.0f)
+        {
+            VM.NWNX.SetFunction(NWNX_Util, "GetWorldTime");
+            VM.NWNX.StackPush(fAdjustment);
+            VM.NWNX.Call();
+            WorldTime retVal;
+            retVal.nTimeOfDay = VM.NWNX.StackPopInt();
+            retVal.nCalendarDay = VM.NWNX.StackPopInt();
+            return retVal;
+        }
+
         /// @}
+    }
+
+    public struct WorldTime
+    {
+        public int nCalendarDay;
+        public int nTimeOfDay;
     }
 }

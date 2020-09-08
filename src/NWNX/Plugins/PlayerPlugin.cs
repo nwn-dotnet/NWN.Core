@@ -540,6 +540,71 @@ namespace NWN.Core.NWNX
             VM.NWNX.Call();
         }
 
+        /// Override the name of creature for player only
+        /// <param name="oPlayer">The player object.</param>
+        /// <param name="oCreature">The creature object.</param>
+        /// <param name="sName">The name for the creature for this player, "" to clear the override.</param>
+        public static void SetCreatureNameOverride(uint oPlayer, uint oCreature, string sName)
+        {
+            VM.NWNX.SetFunction(NWNX_Player, "SetCreatureNameOverride");
+            VM.NWNX.StackPush(sName);
+            VM.NWNX.StackPush(oCreature);
+            VM.NWNX.StackPush(oPlayer);
+            VM.NWNX.Call();
+        }
+
+        /// Display floaty text above oCreature for oPlayer only.
+        /// @note This will also display the floaty text above creatures that are not part of oPlayer's faction.
+        /// <param name="oPlayer">The player to display the text to.</param>
+        /// <param name="oCreature">The creature to display the text above.</param>
+        /// <param name="sText">The text to display.</param>
+        public static void FloatingTextStringOnCreature(uint oPlayer, uint oCreature, string sText)
+        {
+            VM.NWNX.SetFunction(NWNX_Player, "FloatingTextStringOnCreature");
+            VM.NWNX.StackPush(sText);
+            VM.NWNX.StackPush(oCreature);
+            VM.NWNX.StackPush(oPlayer);
+            VM.NWNX.Call();
+        }
+
+        /// Toggle oPlayer's PlayerDM status.
+        /// @note This function does nothing for actual DMClient DMs or players with a client version < 8193.14
+        /// <param name="oPlayer">The player.</param>
+        /// <param name="bIsDM">TRUE to toggle dm mode on, FALSE for off.</param>
+        public static void ToggleDM(uint oPlayer, int bIsDM)
+        {
+            VM.NWNX.SetFunction(NWNX_Player, "ToggleDM");
+            VM.NWNX.StackPush(bIsDM);
+            VM.NWNX.StackPush(oPlayer);
+            VM.NWNX.Call();
+        }
+
+        /// Override the mouse cursor of oObject for oPlayer only
+        /// <param name="oPlayer">The player object.</param>
+        /// <param name="oObject">The object.</param>
+        /// <param name="nCursor">The cursor, one of MOUSECURSOR_*. -1 to clear the override.</param>
+        public static void SetObjectMouseCursorOverride(uint oPlayer, uint oObject, int nCursor)
+        {
+            VM.NWNX.SetFunction(NWNX_Player, "SetObjectMouseCursorOverride");
+            VM.NWNX.StackPush(nCursor);
+            VM.NWNX.StackPush(oObject);
+            VM.NWNX.StackPush(oPlayer);
+            VM.NWNX.Call();
+        }
+
+        /// Override the hilite color of oObject for oPlayer only
+        /// <param name="oPlayer">The player object.</param>
+        /// <param name="oObject">The object.</param>
+        /// <param name="nColor">The color in 0xRRGGBB format, -1 to clear the override.</param>
+        public static void SetObjectHiliteColorOverride(uint oPlayer, uint oObject, int nColor)
+        {
+            VM.NWNX.SetFunction(NWNX_Player, "SetObjectHiliteColorOverride");
+            VM.NWNX.StackPush(nColor);
+            VM.NWNX.StackPush(oObject);
+            VM.NWNX.StackPush(oPlayer);
+            VM.NWNX.Call();
+        }
+
         /// @}
     }
 

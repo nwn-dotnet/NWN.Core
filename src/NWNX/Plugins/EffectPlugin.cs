@@ -17,6 +17,8 @@ namespace NWN.Core.NWNX
             VM.NWNX.Call();
             EffectUnpacked retVal;
             retVal.sTag = VM.NWNX.StackPopString();
+            retVal.vParam1 = VM.NWNX.StackPopVector();
+            retVal.vParam0 = VM.NWNX.StackPopVector();
             retVal.oParam3 = VM.NWNX.StackPopObject();
             retVal.oParam2 = VM.NWNX.StackPopObject();
             retVal.oParam1 = VM.NWNX.StackPopObject();
@@ -100,6 +102,8 @@ namespace NWN.Core.NWNX
             VM.NWNX.StackPush(e.oParam1);
             VM.NWNX.StackPush(e.oParam2);
             VM.NWNX.StackPush(e.oParam3);
+            VM.NWNX.StackPush(e.vParam0);
+            VM.NWNX.StackPush(e.vParam1);
             VM.NWNX.StackPush(e.sTag);
             VM.NWNX.Call();
             return VM.NWNX.StackPopStruct(NWScript.ENGINE_STRUCTURE_EFFECT);
@@ -139,6 +143,20 @@ namespace NWN.Core.NWNX
             VM.NWNX.SetFunction(NWNX_Effect, "GetEffectExpiredCreator");
             VM.NWNX.Call();
             return VM.NWNX.StackPopObject();
+        }
+
+        /// replace an already applied effect on an object
+        /// Only duration, subtype, tag and spell related fields can be overwritten.
+        /// @note eNew and eOld need to have the same type.
+        /// <returns>Number of internal effects updated.</returns>
+        public static int ReplaceEffect(uint obj, System.IntPtr eOld, System.IntPtr eNew)
+        {
+            VM.NWNX.SetFunction(NWNX_Effect, "ReplaceEffect");
+            VM.NWNX.StackPush(eNew, NWScript.ENGINE_STRUCTURE_EFFECT);
+            VM.NWNX.StackPush(eOld, NWScript.ENGINE_STRUCTURE_EFFECT);
+            VM.NWNX.StackPush(obj);
+            VM.NWNX.Call();
+            return VM.NWNX.StackPopInt();
         }
 
         /// @}
@@ -183,6 +201,8 @@ namespace NWN.Core.NWNX
         public uint oParam1;
         public uint oParam2;
         public uint oParam3;
+        public System.Numerics.Vector3 vParam0;
+        public System.Numerics.Vector3 vParam1;
         public string sTag;
     }
 }

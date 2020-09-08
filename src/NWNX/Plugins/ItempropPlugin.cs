@@ -53,6 +53,32 @@ namespace NWN.Core.NWNX
             return VM.NWNX.StackPopStruct(NWScript.ENGINE_STRUCTURE_ITEM_PROPERTY);
         }
 
+        /// Gets the active item property at the index
+        /// <param name="oItem">- the item with the property</param>
+        /// <param name="nIndex">- the index such as returned by some Item Events</param>
+        /// <returns>A constructed NWNX_IPUnpacked, except for creator, and spell id.</returns>
+        public static IPUnpacked GetActiveProperty(uint oItem, int nIndex)
+        {
+            VM.NWNX.SetFunction(NWNX_ItemProperty, "GetActiveProperty");
+            VM.NWNX.StackPush(nIndex);
+            VM.NWNX.StackPush(oItem);
+            VM.NWNX.Call();
+            IPUnpacked retVal;
+            retVal.sTag = VM.NWNX.StackPopString();
+            retVal.oCreator = VM.NWNX.StackPopObject();
+            retVal.nSpellId = VM.NWNX.StackPopInt();
+            retVal.bUsable = VM.NWNX.StackPopInt();
+            retVal.nChanceToAppear = VM.NWNX.StackPopInt();
+            retVal.nUsesPerDay = VM.NWNX.StackPopInt();
+            retVal.nParam1Value = VM.NWNX.StackPopInt();
+            retVal.nParam1 = VM.NWNX.StackPopInt();
+            retVal.nCostTableValue = VM.NWNX.StackPopInt();
+            retVal.nCostTable = VM.NWNX.StackPopInt();
+            retVal.nSubType = VM.NWNX.StackPopInt();
+            retVal.nProperty = VM.NWNX.StackPopInt();
+            return retVal;
+        }
+
         /// @}
     }
 

@@ -29,6 +29,7 @@ namespace NWN.Core.NWNX
             VM.NWNX.StackPush(encounter);
             VM.NWNX.Call();
             CreatureListEntry retVal;
+            retVal.alreadyUsed = VM.NWNX.StackPopInt();
             retVal.unique = VM.NWNX.StackPopInt();
             retVal.challengeRating = VM.NWNX.StackPopFloat();
             retVal.resref = VM.NWNX.StackPopString();
@@ -45,6 +46,7 @@ namespace NWN.Core.NWNX
             VM.NWNX.StackPush(creatureEntry.resref);
             VM.NWNX.StackPush(creatureEntry.challengeRating);
             VM.NWNX.StackPush(creatureEntry.unique);
+            VM.NWNX.StackPush(creatureEntry.alreadyUsed);
             VM.NWNX.StackPush(index);
             VM.NWNX.StackPush(encounter);
             VM.NWNX.Call();
@@ -74,7 +76,7 @@ namespace NWN.Core.NWNX
 
         /// Get if encounter is player triggered only.
         /// <param name="encounter">The encounter object.</param>
-        /// <returns>TRUE is encounter is player triggered only.</returns>
+        /// <returns>TRUE if encounter is player triggered only.</returns>
         public static int GetPlayerTriggeredOnly(uint encounter)
         {
             VM.NWNX.SetFunction(NWNX_Encounter, "GetPlayerTriggeredOnly");
@@ -116,6 +118,63 @@ namespace NWN.Core.NWNX
             VM.NWNX.Call();
         }
 
+        /// Get the number of spawn points of encounter.
+        /// <param name="encounter">The encounter object.</param>
+        /// <returns>The count of the spawn points for the encounter.</returns>
+        public static int GetNumberOfSpawnPoints(uint encounter)
+        {
+            VM.NWNX.SetFunction(NWNX_Encounter, "GetNumberOfSpawnPoints");
+            VM.NWNX.StackPush(encounter);
+            VM.NWNX.Call();
+            return VM.NWNX.StackPopInt();
+        }
+
+        /// Gets the spawn point list entry at the specified index
+        /// <param name="encounter">The encounter object.</param>
+        /// <param name="index">The index of the spawn point in the encounter list.</param>
+        /// <returns>Location of spawn point.</returns>
+        public static System.IntPtr GetSpawnPointByIndex(uint encounter, int index)
+        {
+            VM.NWNX.SetFunction(NWNX_Encounter, "GetSpawnPointByIndex");
+            VM.NWNX.StackPush(index);
+            VM.NWNX.StackPush(encounter);
+            VM.NWNX.Call();
+            return VM.NWNX.StackPopStruct(NWScript.ENGINE_STRUCTURE_LOCATION);
+        }
+
+        /// Get the minimum amount of creatures that encounter will spawn.
+        /// <param name="encounter">The encounter object.</param>
+        /// <returns>the minimal amount.</returns>
+        public static int GetMinNumSpawned(uint encounter)
+        {
+            VM.NWNX.SetFunction(NWNX_Encounter, "GetMinNumSpawned");
+            VM.NWNX.StackPush(encounter);
+            VM.NWNX.Call();
+            return VM.NWNX.StackPopInt();
+        }
+
+        /// Get the maximum amount of creatures that encounter will spawn.
+        /// <param name="encounter">The encounter object.</param>
+        /// <returns>the maximal amount.</returns>
+        public static int GetMaxNumSpawned(uint encounter)
+        {
+            VM.NWNX.SetFunction(NWNX_Encounter, "GetMaxNumSpawned");
+            VM.NWNX.StackPush(encounter);
+            VM.NWNX.Call();
+            return VM.NWNX.StackPopInt();
+        }
+
+        /// Get the current number of creatures that are spawned and alive
+        /// <param name="encounter">The encounter object.</param>
+        /// <returns>amount of creatures</returns>
+        public static int GetCurrentNumSpawned(uint encounter)
+        {
+            VM.NWNX.SetFunction(NWNX_Encounter, "GetCurrentNumSpawned");
+            VM.NWNX.StackPush(encounter);
+            VM.NWNX.Call();
+            return VM.NWNX.StackPopInt();
+        }
+
         /// @}
     }
 
@@ -124,5 +183,6 @@ namespace NWN.Core.NWNX
         public string resref;
         public float challengeRating;
         public int unique;
+        public int alreadyUsed;
     }
 }

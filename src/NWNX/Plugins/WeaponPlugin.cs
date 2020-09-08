@@ -218,6 +218,30 @@ namespace NWN.Core.NWNX
             VM.NWNX.Call();
         }
 
+        /// Sets weapon to gain .5 strength bonus.
+        /// <param name="oWeapon">Should be a melee weapon.</param>
+        /// <param name="nEnable">TRUE for bonus. FALSE to turn off bonus.</param>
+        /// <param name="bPersist">whether the two hand state should persist to the gff file.</param>
+        public static void SetOneHalfStrength(uint oWeapon, int nEnable, int bPersist = NWScript.FALSE)
+        {
+            VM.NWNX.SetFunction(NWNX_Weapon, "SetOneHalfStrength");
+            VM.NWNX.StackPush(bPersist);
+            VM.NWNX.StackPush(nEnable);
+            VM.NWNX.StackPush(oWeapon);
+            VM.NWNX.Call();
+        }
+
+        /// Gets if the weapon is set to gain addition .5 strength bonus
+        /// <param name="oWeapon">the weapon</param>
+        /// <returns>FALSE/0 if weapon is not receiving the bonus. TRUE/1 if it does.</returns>
+        public static int GetOneHalfStrength(uint oWeapon)
+        {
+            VM.NWNX.SetFunction(NWNX_Weapon, "GetOneHalfStrength");
+            VM.NWNX.StackPush(oWeapon);
+            VM.NWNX.Call();
+            return VM.NWNX.StackPopInt();
+        }
+
         /// @}
     }
 
