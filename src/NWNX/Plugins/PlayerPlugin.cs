@@ -605,6 +605,30 @@ namespace NWN.Core.NWNX
             VM.NWNX.Call();
         }
 
+        /// Remove effects with sEffectTag from oPlayer's TURD
+        /// @note This function should be called in the NWNX_ON_CLIENT_DISCONNECT_AFTER event, OnClientLeave is too early for the TURD to exist.
+        /// <param name="oPlayer">The player object.</param>
+        /// <param name="sEffectTag">The effect tag.</param>
+        public static void RemoveEffectFromTURD(uint oPlayer, string sEffectTag)
+        {
+            VM.NWNX.SetFunction(NWNX_Player, "RemoveEffectFromTURD");
+            VM.NWNX.StackPush(sEffectTag);
+            VM.NWNX.StackPush(oPlayer);
+            VM.NWNX.Call();
+        }
+
+        /// Set the location oPlayer will spawn when logging in to the server.
+        /// @note This function is best called in the NWNX_ON_ELC_VALIDATE_CHARACTER_BEFORE event, OnClientEnter will be too late.
+        /// <param name="The">player object.</param>
+        /// <param name="locSpawn">The location.</param>
+        public static void SetSpawnLocation(uint oPlayer, System.IntPtr locSpawn)
+        {
+            VM.NWNX.SetFunction(NWNX_Player, "SetSpawnLocation");
+            ;
+            VM.NWNX.StackPush(oPlayer);
+            VM.NWNX.Call();
+        }
+
         /// @}
     }
 

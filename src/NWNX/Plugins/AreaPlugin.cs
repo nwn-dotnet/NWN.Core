@@ -434,6 +434,45 @@ namespace NWN.Core.NWNX
             return VM.NWNX.StackPopObject();
         }
 
+        /// Add oObject to the ExportGIT exclusion list, objects on this list won't be exported when NWNX_Area_ExportGIT() is called.
+        /// <param name="oObject">The object to add</param>
+        public static void AddObjectToExclusionList(uint oObject)
+        {
+            VM.NWNX.SetFunction(NWNX_Area, "AddObjectToExclusionList");
+            VM.NWNX.StackPush(oObject);
+            VM.NWNX.Call();
+        }
+
+        /// Remove oObject from the ExportGIT exclusion list.
+        /// <param name="oObject">The object to add</param>
+        public static void RemoveObjectFromExclusionList(uint oObject)
+        {
+            VM.NWNX.SetFunction(NWNX_Area, "RemoveObjectFromExclusionList");
+            VM.NWNX.StackPush(oObject);
+            VM.NWNX.Call();
+        }
+
+        /// Export the GIT of oArea to the UserDirectory/nwnx folder.
+        /// @note Take care with local objects set on objects, they will likely not reference the same object after a server restart.
+        /// <param name="oArea">The area to export the GIT of.</param>
+        /// <param name="sFileName">The filename, 16 characters or less. If left blank the resref of oArea will be used.</param>
+        /// <param name="bExportVarTable">If TRUE, local variables set on oArea will be exported too.</param>
+        /// <param name="bExportUUID">If TRUE, the UUID of oArea will be exported, if it has one.</param>
+        /// <param name="nObjectFilter">One or more OBJECT_TYPE_* constants. These object will not be exported. For example OBJECT_TYPE_CREATURE | OBJECT_TYPE_DOOR</param>
+        /// will not export creatures and doors. Use OBJECT_TYPE_ALL to filter all objects or 0 to export all objects.
+        /// <returns>TRUE if exported successfully, FALSE if not.</returns>
+        public static int ExportGIT(uint oArea, string sFileName = "", int bExportVarTable = NWScript.TRUE, int bExportUUID = NWScript.TRUE, int nObjectFilter = 0)
+        {
+            VM.NWNX.SetFunction(NWNX_Area, "ExportGIT");
+            VM.NWNX.StackPush(nObjectFilter);
+            VM.NWNX.StackPush(bExportUUID);
+            VM.NWNX.StackPush(bExportVarTable);
+            VM.NWNX.StackPush(sFileName);
+            VM.NWNX.StackPush(oArea);
+            VM.NWNX.Call();
+            return VM.NWNX.StackPopInt();
+        }
+
         /// @}
     }
 }

@@ -381,6 +381,32 @@ namespace NWN.Core.NWNX
             return retVal;
         }
 
+        /// Set a server-side resource override.
+        /// <param name="nResType">A @ref resref_types "Resref Type".</param>
+        /// <param name="sOldName">The old resource name, 16 characters or less.</param>
+        /// <param name="sNewName">The new resource name or "" to clear a previous override, 16 characters or less.</param>
+        public static void SetResourceOverride(int nResType, string sOldName, string sNewName)
+        {
+            VM.NWNX.SetFunction(NWNX_Util, "SetResourceOverride");
+            VM.NWNX.StackPush(sNewName);
+            VM.NWNX.StackPush(sOldName);
+            VM.NWNX.StackPush(nResType);
+            VM.NWNX.Call();
+        }
+
+        /// Get a server-side resource override.
+        /// <param name="nResType">A @ref resref_types "Resref Type".</param>
+        /// <param name="sName">The name of the resource, 16 characters or less.</param>
+        /// <returns>The resource override, or "" if one is not set.</returns>
+        public static string GetResourceOverride(int nResType, string sName)
+        {
+            VM.NWNX.SetFunction(NWNX_Util, "GetResourceOverride");
+            VM.NWNX.StackPush(sName);
+            VM.NWNX.StackPush(nResType);
+            VM.NWNX.Call();
+            return VM.NWNX.StackPopString();
+        }
+
         /// @}
     }
 
