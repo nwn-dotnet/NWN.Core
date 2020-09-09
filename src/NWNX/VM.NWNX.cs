@@ -42,6 +42,14 @@ namespace NWN.Core
                     case NWScript.ENGINE_STRUCTURE_ITEM_PROPERTY:
                         NWNCore.NativeFunctions.nwnxPushItemProperty(refValue);
                         break;
+                    case NWScript.ENGINE_STRUCTURE_LOCATION:
+                        Vector3 pos = NWScript.GetPositionFromLocation(refValue);
+                        NWNCore.NativeFunctions.nwnxPushFloat(NWScript.GetFacingFromLocation(refValue));
+                        NWNCore.NativeFunctions.nwnxPushFloat(pos.Z);
+                        NWNCore.NativeFunctions.nwnxPushFloat(pos.Y);
+                        NWNCore.NativeFunctions.nwnxPushFloat(pos.X);
+                        NWNCore.NativeFunctions.nwnxPushObject(NWScript.GetAreaFromLocation(refValue));
+                        break;
                     default:
                         throw new NotSupportedException($"Native engine type not supported: {engineType}");
                 }

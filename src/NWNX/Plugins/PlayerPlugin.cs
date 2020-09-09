@@ -624,7 +624,7 @@ namespace NWN.Core.NWNX
         public static void SetSpawnLocation(uint oPlayer, System.IntPtr locSpawn)
         {
             VM.NWNX.SetFunction(NWNX_Player, "SetSpawnLocation");
-            ;
+            VM.NWNX.StackPush(locSpawn, NWScript.ENGINE_STRUCTURE_LOCATION);
             VM.NWNX.StackPush(oPlayer);
             VM.NWNX.Call();
         }

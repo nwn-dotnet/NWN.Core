@@ -350,7 +350,7 @@ namespace NWN.Core.NWNX
         {
             VM.NWNX.SetFunction(NWNX_Util, "CreateDoor");
             VM.NWNX.StackPush(sNewTag);
-            ;
+            VM.NWNX.StackPush(locLocation, NWScript.ENGINE_STRUCTURE_LOCATION);
             VM.NWNX.StackPush(sResRef);
             VM.NWNX.Call();
             return VM.NWNX.StackPopObject();
