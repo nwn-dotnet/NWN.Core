@@ -80,7 +80,7 @@ namespace NWN.Core
         /// </summary>
         public static void AssignCommand(uint oActionSubject, ActionDelegate aActionToAssign)
         {
-          NWNCore.ManagedFunctions.ClosureAssignCommand(oActionSubject, aActionToAssign);
+          NWNCore.GameManager.ClosureAssignCommand(oActionSubject, aActionToAssign);
           // Function ID 6
         }
 
@@ -96,7 +96,7 @@ namespace NWN.Core
         /// </summary>
         public static void DelayCommand(float fSeconds, ActionDelegate aActionToDelay)
         {
-          NWNCore.ManagedFunctions.ClosureDelayCommand(ObjectSelf, fSeconds, aActionToDelay);
+          NWNCore.GameManager.ClosureDelayCommand(ObjectSelf, fSeconds, aActionToDelay);
           // Function ID 7
         }
 
@@ -3760,7 +3760,7 @@ namespace NWN.Core
         /// </summary>
         public static void ActionDoCommand(ActionDelegate aActionToDo)
         {
-          NWNCore.ManagedFunctions.ClosureActionDoCommand(ObjectSelf, aActionToDo);
+          NWNCore.GameManager.ClosureActionDoCommand(ObjectSelf, aActionToDo);
           // Function ID 294
         }
 

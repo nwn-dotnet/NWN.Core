@@ -10,7 +10,6 @@ namespace NWN.Core
 #pragma warning restore CS8618
 
         internal static NativeHandles NativeFunctions;
-        internal static ManagedHandles ManagedFunctions;
         private static NativeEventHandles eventHandles;
 
         public static int Init(IntPtr nativeHandlesPtr, int nativeHandlesLength, IGameManager gameManager)
@@ -48,10 +47,6 @@ namespace NWN.Core
             eventHandles.RunScript = GameManager.OnRunScript;
             eventHandles.Closure = GameManager.OnClosure;
             eventHandles.Signal = GameManager.OnSignal;
-
-            ManagedFunctions.ClosureAssignCommand = GameManager.ClosureAssignCommand;
-            ManagedFunctions.ClosureDelayCommand = GameManager.ClosureDelayCommand;
-            ManagedFunctions.ClosureActionDoCommand = GameManager.ClosureActionDoCommand;
         }
 
         private static void RegisterNativeEventHandles()
