@@ -308,20 +308,6 @@ namespace NWN.Core.NWNX
             return VM.NWNX.StackPopInt();
         }
 
-        /// Sets the ability score of the creature to the value.
-        /// <param name="creature">The creature object.</param>
-        /// <param name="ability">The ability constant.</param>
-        /// <param name="value">The value to set.</param>
-        /// @deprecated Use NWNX_Creature_SetRawAbilityScore(). This will be removed in future NWNX releases.
-        public static void SetAbilityScore(uint creature, int ability, int value)
-        {
-            VM.NWNX.SetFunction(NWNX_Creature, "SetAbilityScore");
-            VM.NWNX.StackPush(value);
-            VM.NWNX.StackPush(ability);
-            VM.NWNX.StackPush(creature);
-            VM.NWNX.Call();
-        }
-
         /// Sets the ability score of the creature to the provided value.
         /// @note Does not apply racial bonuses/penalties.
         /// <param name="creature">The creature object.</param>
@@ -570,30 +556,6 @@ namespace NWN.Core.NWNX
             VM.NWNX.Call();
         }
 
-        /// Gets whether or not creature has a specialist school of wizardry.
-        /// <param name="creature">The creature object.</param>
-        /// <returns>TRUE if the wizard specializes.</returns>
-        /// @deprecated Use GetSpecialization(). This will be removed in future NWNX releases.
-        public static int GetWizardSpecialization(uint creature)
-        {
-            VM.NWNX.SetFunction(NWNX_Creature, "GetWizardSpecialization");
-            VM.NWNX.StackPush(creature);
-            VM.NWNX.Call();
-            return VM.NWNX.StackPopInt();
-        }
-
-        /// Sets creature's wizard specialist school.
-        /// <param name="creature">The creature object.</param>
-        /// <param name="school">The wizard school constant.</param>
-        /// @deprecated Use NWNX_Creature_SetSpecialization(). This will be removed in future NWNX releases.
-        public static void SetWizardSpecialization(uint creature, int school)
-        {
-            VM.NWNX.SetFunction(NWNX_Creature, "SetWizardSpecialization");
-            VM.NWNX.StackPush(school);
-            VM.NWNX.StackPush(creature);
-            VM.NWNX.Call();
-        }
-
         /// Gets the maximum hit points for creature for level.
         /// <param name="creature">The creature object.</param>
         /// <param name="level">The level.</param>
@@ -655,6 +617,18 @@ namespace NWN.Core.NWNX
             VM.NWNX.Call();
         }
 
+        /// Sets the creature's maximum movement rate cap.
+        /// @note Default movement rate cap is 1.5.
+        /// <param name="creature">The creature object.</param>
+        /// <param name="cap">The cap to set.</param>
+        public static void SetMovementRateFactorCap(uint creature, float cap)
+        {
+            VM.NWNX.SetFunction(NWNX_Creature, "SetMovementRateFactorCap");
+            VM.NWNX.StackPush(cap);
+            VM.NWNX.StackPush(creature);
+            VM.NWNX.Call();
+        }
+
         /// Returns the creature's current movement type
         /// <param name="creature">The creature object.</param>
         /// <returns>An NWNX_CREATURE_MOVEMENT_TYPE_* constant.</returns>
@@ -697,33 +671,6 @@ namespace NWN.Core.NWNX
         {
             VM.NWNX.SetFunction(NWNX_Creature, "SetAlignmentLawChaos");
             VM.NWNX.StackPush(value);
-            VM.NWNX.StackPush(creature);
-            VM.NWNX.Call();
-        }
-
-        /// Gets one of creature's cleric domains.
-        /// <param name="creature">The creature object.</param>
-        /// <param name="index">The first or second domain.</param>
-        /// @deprecated Use GetDomain(). This will be removed in future NWNX releases.
-        public static int GetClericDomain(uint creature, int index)
-        {
-            VM.NWNX.SetFunction(NWNX_Creature, "GetClericDomain");
-            VM.NWNX.StackPush(index);
-            VM.NWNX.StackPush(creature);
-            VM.NWNX.Call();
-            return VM.NWNX.StackPopInt();
-        }
-
-        /// Sets one of creature's cleric domains.
-        /// <param name="creature">The creature object.</param>
-        /// <param name="index">The first or second domain.</param>
-        /// <param name="domain">The domain constant to set.</param>
-        /// @deprecated Use NWNX_Creature_SetDomain(). This will be removed in future NWNX releases.
-        public static void SetClericDomain(uint creature, int index, int domain)
-        {
-            VM.NWNX.SetFunction(NWNX_Creature, "SetClericDomain");
-            VM.NWNX.StackPush(domain);
-            VM.NWNX.StackPush(index);
             VM.NWNX.StackPush(creature);
             VM.NWNX.Call();
         }
@@ -1294,7 +1241,7 @@ namespace NWN.Core.NWNX
         }
 
         /// Get whether a creature is flat-footed.
-        /// <param name="The">creature object.</param>
+        /// <param name="oCreature">The creature object.</param>
         /// <returns>TRUE if the creature is flat-footed.</returns>
         public static int GetFlatFooted(uint oCreature)
         {
@@ -1385,7 +1332,7 @@ namespace NWN.Core.NWNX
         }
 
         /// Move a creature to limbo.
-        /// <param name="The">creature object.</param>
+        /// <param name="oCreature">The creature object.</param>
         public static void JumpToLimbo(uint oCreature)
         {
             VM.NWNX.SetFunction(NWNX_Creature, "JumpToLimbo");
@@ -1505,6 +1452,115 @@ namespace NWN.Core.NWNX
             VM.NWNX.SetFunction(NWNX_Creature, "GetCriticalRangeOverride");
             VM.NWNX.StackPush(nHand);
             VM.NWNX.StackPush(oCreature);
+            VM.NWNX.Call();
+            return VM.NWNX.StackPopInt();
+        }
+
+        /// Add oAssociate as nAssociateType to oCreature
+        /// @warning Only basic checks are done so care must be taken when using this function
+        /// <param name="oCreature">The creature to add oAssociate to</param>
+        /// <param name="oAssociate">The associate, must be a NPC</param>
+        /// <param name="nAssociateType">The associate type, one of ASSOCIATE_TYPE_*, except _NONE</param>
+        public static void AddAssociate(uint oCreature, uint oAssociate, int nAssociateType)
+        {
+            VM.NWNX.SetFunction(NWNX_Creature, "AddAssociate");
+            VM.NWNX.StackPush(nAssociateType);
+            VM.NWNX.StackPush(oAssociate);
+            VM.NWNX.StackPush(oCreature);
+            VM.NWNX.Call();
+        }
+
+        /// Set whether an effect icon is flashing or not.
+        /// <param name="oCreature">The target creature.</param>
+        /// <param name="nIconId">The icon id, see effecticons.2da.</param>
+        /// <param name="bFlashing">TRUE for flashing, FALSE for not flashing.</param>
+        public static void SetEffectIconFlashing(uint oCreature, int nIconId, int bFlashing)
+        {
+            VM.NWNX.SetFunction(NWNX_Creature, "SetEffectIconFlashing");
+            VM.NWNX.StackPush(bFlashing);
+            VM.NWNX.StackPush(nIconId);
+            VM.NWNX.StackPush(oCreature);
+            VM.NWNX.Call();
+        }
+
+        /// Override the damage level of oCreature.
+        /// @note Damage levels are the damage state under a creature's name, for example: 'Near Death'
+        /// <param name="oCreature">The target creature.</param>
+        /// <param name="nDamageLevel">A damage level, see damagelevels.2da. Allowed values: 0-255 or -1 to remove the override.</param>
+        public static void OverrideDamageLevel(uint oCreature, int nDamageLevel)
+        {
+            VM.NWNX.SetFunction(NWNX_Creature, "OverrideDamageLevel");
+            VM.NWNX.StackPush(nDamageLevel);
+            VM.NWNX.StackPush(oCreature);
+            VM.NWNX.Call();
+        }
+
+        /// Set the encounter source of oCreature.
+        /// <param name="oCreature">The target creature.</param>
+        /// <param name="oEncounter">The source encounter</param>
+        public static void SetEncounter(uint oCreature, uint oEncounter)
+        {
+            VM.NWNX.SetFunction(NWNX_Creature, "SetEncounter");
+            VM.NWNX.StackPush(oEncounter);
+            VM.NWNX.StackPush(oCreature);
+            VM.NWNX.Call();
+        }
+
+        /// Get the encounter source of oCreature.
+        /// <param name="oCreature">The target creature.</param>
+        /// <returns>The encounter, OBJECT_INVALID if not part of an encounter or on error</returns>
+        public static uint GetEncounter(uint oCreature)
+        {
+            VM.NWNX.SetFunction(NWNX_Creature, "GetEncounter");
+            VM.NWNX.StackPush(oCreature);
+            VM.NWNX.Call();
+            return VM.NWNX.StackPopObject();
+        }
+
+        /// Get if oCreature is currently bartering.
+        /// <param name="oCreature">The target creature.</param>
+        /// <returns>TRUE if oCreature is bartering, FALSE if not or on error.</returns>
+        public static int GetIsBartering(uint oCreature)
+        {
+            VM.NWNX.SetFunction(NWNX_Creature, "GetIsBartering");
+            VM.NWNX.StackPush(oCreature);
+            VM.NWNX.Call();
+            return VM.NWNX.StackPopInt();
+        }
+
+        /// Sets caster level for the last item used. Use in a spellhook or spell event before to set caster level for any spells cast from the item.
+        /// <param name="oCreature">the creature who used the item.</param>
+        /// <param name="nCasterLvl">the desired caster level.</param>
+        public static void SetLastItemCasterLevel(uint oCreature, int nCasterLvl)
+        {
+            VM.NWNX.SetFunction(NWNX_Creature, "SetLastItemCasterLevel");
+            VM.NWNX.StackPush(nCasterLvl);
+            VM.NWNX.StackPush(oCreature);
+            VM.NWNX.Call();
+        }
+
+        /// Gets the caster level of the last item used.
+        /// <param name="oCreature">the creature who used the item.</param>
+        /// <returns>returns the creatures last used item's level.</returns>
+        public static int GetLastItemCasterLevel(uint oCreature)
+        {
+            VM.NWNX.SetFunction(NWNX_Creature, "GetLastItemCasterLevel");
+            VM.NWNX.StackPush(oCreature);
+            VM.NWNX.Call();
+            return VM.NWNX.StackPopInt();
+        }
+
+        /// Gets the Armor classed of attacked against versus
+        /// <param name="oAttacked">The one being attacked</param>
+        /// <param name="oVersus">The one doing the attacking</param>
+        /// <param name="nTouch">TRUE for touch attacks</param>
+        /// <returns>-255 on Error, Flat footed AC if oVersus is invalid or the Attacked AC versus oVersus.</returns>
+        public static int GetArmorClassVersus(uint oAttacked, uint oVersus, int nTouch = NWScript.FALSE)
+        {
+            VM.NWNX.SetFunction(NWNX_Creature, "GetArmorClassVersus");
+            VM.NWNX.StackPush(nTouch);
+            VM.NWNX.StackPush(oVersus);
+            VM.NWNX.StackPush(oAttacked);
             VM.NWNX.Call();
             return VM.NWNX.StackPopInt();
         }

@@ -26,9 +26,9 @@ namespace NWN.Core
             [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
             public static void StackPush(Vector3 vector)
             {
-                NWNCore.NativeFunctions.nwnxPushFloat(vector.Z);
-                NWNCore.NativeFunctions.nwnxPushFloat(vector.Y);
                 NWNCore.NativeFunctions.nwnxPushFloat(vector.X);
+                NWNCore.NativeFunctions.nwnxPushFloat(vector.Y);
+                NWNCore.NativeFunctions.nwnxPushFloat(vector.Z);
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
@@ -41,6 +41,14 @@ namespace NWN.Core
                         break;
                     case NWScript.ENGINE_STRUCTURE_ITEM_PROPERTY:
                         NWNCore.NativeFunctions.nwnxPushItemProperty(refValue);
+                        break;
+                    case NWScript.ENGINE_STRUCTURE_LOCATION:
+                        Vector3 pos = NWScript.GetPositionFromLocation(refValue);
+                        NWNCore.NativeFunctions.nwnxPushFloat(NWScript.GetFacingFromLocation(refValue));
+                        NWNCore.NativeFunctions.nwnxPushFloat(pos.Z);
+                        NWNCore.NativeFunctions.nwnxPushFloat(pos.Y);
+                        NWNCore.NativeFunctions.nwnxPushFloat(pos.X);
+                        NWNCore.NativeFunctions.nwnxPushObject(NWScript.GetAreaFromLocation(refValue));
                         break;
                     default:
                         throw new NotSupportedException($"Native engine type not supported: {engineType}");
@@ -63,8 +71,14 @@ namespace NWN.Core
             public static uint StackPopObject() => NWNCore.NativeFunctions.nwnxPopObject();
 
             [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-            public static Vector3 StackPopVector() =>
-                new Vector3(NWNCore.NativeFunctions.nwnxPopFloat(), NWNCore.NativeFunctions.nwnxPopFloat(), NWNCore.NativeFunctions.nwnxPopFloat());
+            public static Vector3 StackPopVector()
+            {
+                float z = NWNCore.NativeFunctions.nwnxPopFloat();
+                float y = NWNCore.NativeFunctions.nwnxPopFloat();
+                float x = NWNCore.NativeFunctions.nwnxPopFloat();
+
+                return new Vector3(x, y, z);
+            }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
             public static IntPtr StackPopStruct(int engineType)

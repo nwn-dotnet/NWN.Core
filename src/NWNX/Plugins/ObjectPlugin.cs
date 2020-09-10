@@ -9,6 +9,7 @@ namespace NWN.Core.NWNX
         /// @anchor object_localvar_types
         /// @name Local Variable Types
         /// @{
+        public const int NWNX_OBJECT_LOCALVAR_TYPE_UNKNOWN = 0;
         public const int NWNX_OBJECT_LOCALVAR_TYPE_INT = 1;
         public const int NWNX_OBJECT_LOCALVAR_TYPE_FLOAT = 2;
         public const int NWNX_OBJECT_LOCALVAR_TYPE_STRING = 3;
@@ -54,6 +55,14 @@ namespace NWN.Core.NWNX
         /// <param name="obj">The object.</param>
         /// <param name="index">The index.</param>
         /// @note Index bounds: 0 >= index < NWNX_Object_GetLocalVariableCount().
+        /// @note As of build 8193.14 local variables no longer have strict ordering.
+        ///       this means that any change to the variables can result in drastically
+        ///       different order when iterating.
+        /// @note As of build 8193.14, this function takes O(n) time, where n is the number
+        ///       of locals on the object. Individual variable access with GetLocalXxx()
+        ///       is now O(1) though.
+        /// @note As of build 8193.14, this function may return variable type UNKNOWN
+        ///       if the value is the default (0/0.0/""/OBJECT_INVALID) for the type.
         /// <returns>An NWNX_Object_LocalVariable struct.</returns>
         public static LocalVariable GetLocalVariable(uint obj, int index)
         {
@@ -71,6 +80,7 @@ namespace NWN.Core.NWNX
         /// <param name="id">The object id.</param>
         /// <returns>An object from the provided object ID.</returns>
         /// @remark This is the counterpart to ObjectToString.
+        /// @deprecated Use the basegame StringToObject() function. This will be removed in a future NWNX release.
         public static uint StringToObject(string id)
         {
             VM.NWNX.SetFunction(NWNX_Object, "StringToObject");
@@ -79,15 +89,29 @@ namespace NWN.Core.NWNX
             return VM.NWNX.StackPopObject();
         }
 
-        /// Set an object's position.
-        /// <param name="obj">The object.</param>
-        /// <param name="pos">A vector position.</param>
-        public static void SetPosition(uint obj, System.Numerics.Vector3 pos)
+        /// Set oObject's position.
+        /// <param name="oObject">The object.</param>
+        /// <param name="vPosition">A vector position.</param>
+        /// <param name="bUpdateSubareas">If TRUE and oObject is a creature, any triggers/traps at vPosition will fire their events.</param>
+        public static void SetPosition(uint oObject, System.Numerics.Vector3 vPosition, int bUpdateSubareas = NWScript.TRUE)
         {
             VM.NWNX.SetFunction(NWNX_Object, "SetPosition");
-            VM.NWNX.StackPush(pos);
+            VM.NWNX.StackPush(bUpdateSubareas);
+            VM.NWNX.StackPush(vPosition);
+            VM.NWNX.StackPush(oObject);
+            VM.NWNX.Call();
+        }
+
+        /// Get an object's hit points.
+        /// @note Unlike the native GetCurrentHitpoints function, this excludes temporary hitpoints.
+        /// <param name="obj">The object.</param>
+        /// <returns>The hit points.</returns>
+        public static int GetCurrentHitPoints(uint obj)
+        {
+            VM.NWNX.SetFunction(NWNX_Object, "GetCurrentHitPoints");
             VM.NWNX.StackPush(obj);
             VM.NWNX.Call();
+            return VM.NWNX.StackPopInt();
         }
 
         /// Set an object's hit points.
@@ -344,129 +368,6 @@ namespace NWN.Core.NWNX
             VM.NWNX.Call();
         }
 
-        /// Get oObject's persistent integer variable sVarName.
-        /// <param name="oObject">The object to set the variable on.</param>
-        /// <param name="sVarName">The variable name.</param>
-        /// <returns>The value or 0 on error.</returns>
-        /// @deprecated Please use NWNX_Object_GetInt()
-        public static int GetPersistentInt(uint oObject, string sVarName)
-        {
-            VM.NWNX.SetFunction(NWNX_Object, "GetPersistentInt");
-            VM.NWNX.StackPush(sVarName);
-            VM.NWNX.StackPush(oObject);
-            VM.NWNX.Call();
-            return VM.NWNX.StackPopInt();
-        }
-
-        /// Set oObject's persistent integer variable sVarName to nValue.
-        /// @note The value is persisted to GFF, this means that it'll be saved in the .bic file of a player's character or when an object is serialized.
-        /// <param name="oObject">The object to set the variable on.</param>
-        /// <param name="sVarName">The variable name.</param>
-        /// <param name="nValue">The integer value to to set</param>
-        /// @deprecated Please use NWNX_Object_SetInt()
-        public static void SetPersistentInt(uint oObject, string sVarName, int nValue)
-        {
-            VM.NWNX.SetFunction(NWNX_Object, "SetPersistentInt");
-            VM.NWNX.StackPush(nValue);
-            VM.NWNX.StackPush(sVarName);
-            VM.NWNX.StackPush(oObject);
-            VM.NWNX.Call();
-        }
-
-        /// Delete oObject's persistent integer variable sVarName.
-        /// <param name="oObject">The object to set the variable on.</param>
-        /// <param name="sVarName">The variable name.</param>
-        /// @deprecated Please use NWNX_Object_DeleteInt()
-        public static void DeletePersistentInt(uint oObject, string sVarName)
-        {
-            VM.NWNX.SetFunction(NWNX_Object, "DeletePersistentInt");
-            VM.NWNX.StackPush(sVarName);
-            VM.NWNX.StackPush(oObject);
-            VM.NWNX.Call();
-        }
-
-        /// Get oObject's persistent string variable sVarName.
-        /// <param name="oObject">The object to set the variable on.</param>
-        /// <param name="sVarName">The variable name.</param>
-        /// <returns>The value or "" on error.</returns>
-        /// @deprecated Please use NWNX_Object_GetString()
-        public static string GetPersistentString(uint oObject, string sVarName)
-        {
-            VM.NWNX.SetFunction(NWNX_Object, "GetPersistentString");
-            VM.NWNX.StackPush(sVarName);
-            VM.NWNX.StackPush(oObject);
-            VM.NWNX.Call();
-            return VM.NWNX.StackPopString();
-        }
-
-        /// Set oObject's persistent string variable sVarName to sValue.
-        /// @note The value is persisted to GFF, this means that it'll be saved in the .bic file of a player's character or when an object is serialized.
-        /// <param name="oObject">The object to set the variable on.</param>
-        /// <param name="sVarName">The variable name.</param>
-        /// <param name="sValue">The string value to to set</param>
-        /// @deprecated Please use NWNX_Object_SetString()
-        public static void SetPersistentString(uint oObject, string sVarName, string sValue)
-        {
-            VM.NWNX.SetFunction(NWNX_Object, "SetPersistentString");
-            VM.NWNX.StackPush(sValue);
-            VM.NWNX.StackPush(sVarName);
-            VM.NWNX.StackPush(oObject);
-            VM.NWNX.Call();
-        }
-
-        /// Delete oObject's persistent string variable sVarName.
-        /// <param name="oObject">The object to set the variable on.</param>
-        /// <param name="sVarName">The variable name.</param>
-        /// @deprecated Please use NWNX_Object_DeleteString()
-        public static void DeletePersistentString(uint oObject, string sVarName)
-        {
-            VM.NWNX.SetFunction(NWNX_Object, "DeletePersistentString");
-            VM.NWNX.StackPush(sVarName);
-            VM.NWNX.StackPush(oObject);
-            VM.NWNX.Call();
-        }
-
-        /// Get oObject's persistent float variable sVarName.
-        /// <param name="oObject">The object to set the variable on.</param>
-        /// <param name="sVarName">The variable name.</param>
-        /// <returns>The value or 0.0f on error.</returns>
-        /// @deprecated Please use NWNX_Object_GetFloat()
-        public static float GetPersistentFloat(uint oObject, string sVarName)
-        {
-            VM.NWNX.SetFunction(NWNX_Object, "GetPersistentFloat");
-            VM.NWNX.StackPush(sVarName);
-            VM.NWNX.StackPush(oObject);
-            VM.NWNX.Call();
-            return VM.NWNX.StackPopFloat();
-        }
-
-        /// Set oObject's persistent float variable sVarName to fValue.
-        /// @note The value is persisted to GFF, this means that it'll be saved in the .bic file of a player's character or when an object is serialized.
-        /// <param name="oObject">The object to set the variable on.</param>
-        /// <param name="sVarName">The variable name.</param>
-        /// <param name="fValue">The float value to to set</param>
-        /// @deprecated Please use NWNX_Object_SetFloat()
-        public static void SetPersistentFloat(uint oObject, string sVarName, float fValue)
-        {
-            VM.NWNX.SetFunction(NWNX_Object, "SetPersistentFloat");
-            VM.NWNX.StackPush(fValue);
-            VM.NWNX.StackPush(sVarName);
-            VM.NWNX.StackPush(oObject);
-            VM.NWNX.Call();
-        }
-
-        /// Delete oObject's persistent float variable sVarName.
-        /// <param name="oObject">The object to set the variable on.</param>
-        /// <param name="sVarName">The variable name.</param>
-        /// @deprecated Please use NWNX_Object_DeleteFloat()
-        public static void DeletePersistentFloat(uint oObject, string sVarName)
-        {
-            VM.NWNX.SetFunction(NWNX_Object, "DeletePersistentFloat");
-            VM.NWNX.StackPush(sVarName);
-            VM.NWNX.StackPush(oObject);
-            VM.NWNX.Call();
-        }
-
         /// Get oObject's integer variable sVarName.
         /// <param name="oObject">The object to get the variable from.</param>
         /// <param name="sVarName">The variable name.</param>
@@ -687,6 +588,32 @@ namespace NWN.Core.NWNX
         {
             VM.NWNX.SetFunction(NWNX_Object, "GetIsDestroyable");
             VM.NWNX.StackPush(oObject);
+            VM.NWNX.Call();
+            return VM.NWNX.StackPopInt();
+        }
+
+        /// Checks for specific spell immunity. Should only be called in spellscripts
+        /// <param name="oDefender">The object defending against the spell.</param>
+        /// <param name="oCaster">The object casting the spell.</param>
+        /// <returns>-1 if defender has no immunity, 2 if the defender is immune</returns>
+        public static int DoSpellImmunity(uint oDefender, uint oCaster)
+        {
+            VM.NWNX.SetFunction(NWNX_Object, "DoSpellImmunity");
+            VM.NWNX.StackPush(oCaster);
+            VM.NWNX.StackPush(oDefender);
+            VM.NWNX.Call();
+            return VM.NWNX.StackPopInt();
+        }
+
+        /// Checks for spell school/level immunities and mantles. Should only be called in spellscripts
+        /// <param name="oDefender">The object defending against the spell.</param>
+        /// <param name="oCaster">The object casting the spell.</param>
+        /// <returns>-1 defender no immunity. 2 if immune. 3 if immune, but the immunity has a limit (example: mantles)</returns>
+        public static int DoSpellLevelAbsorption(uint oDefender, uint oCaster)
+        {
+            VM.NWNX.SetFunction(NWNX_Object, "DoSpellLevelAbsorption");
+            VM.NWNX.StackPush(oCaster);
+            VM.NWNX.StackPush(oDefender);
             VM.NWNX.Call();
             return VM.NWNX.StackPopInt();
         }
