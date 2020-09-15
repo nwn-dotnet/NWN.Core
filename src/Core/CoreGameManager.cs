@@ -37,7 +37,7 @@ namespace NWN.Core
 
         int IGameManager.OnRunScript(string script, uint oidSelf)
         {
-            int retVal = 0;
+            int retVal = -1;
             objectSelf = oidSelf;
             scriptContexts.Push(oidSelf);
 
