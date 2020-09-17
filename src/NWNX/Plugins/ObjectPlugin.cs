@@ -618,6 +618,18 @@ namespace NWN.Core.NWNX
             return VM.NWNX.StackPopInt();
         }
 
+        /// Sets if a placeable has an inventory.
+        /// <param name="obj">The placeable.</param>
+        /// <param name="bHasInventory">TRUE/FALSE</param>
+        /// @note Only works on placeables.
+        public static void SetHasInventory(uint obj, int bHasInventory)
+        {
+            VM.NWNX.SetFunction(NWNX_Object, "SetHasInventory");
+            VM.NWNX.StackPush(bHasInventory);
+            VM.NWNX.StackPush(obj);
+            VM.NWNX.Call();
+        }
+
         /// @}
     }
 

@@ -1170,6 +1170,18 @@ namespace NWN.Core.NWNX
             PRICE                 | int    | The buy or sell price |
         
         _______________________________________
+            ## Server Send Area Events
+            - NWNX_ON_SERVER_SEND_AREA_BEFORE
+            - NWNX_ON_SERVER_SEND_AREA_AFTER
+        
+            `OBJECT_SELF` = The player
+        
+            Event Data Tag        | Type   | Notes
+            ----------------------|--------|-------
+            AREA                  | object | The area the server is sending. Convert to object with StringToObject() |
+            PLAYER_NEW_TO_MODULE  | int    | TRUE if it's the player's first time logging into the server since a restart |
+        
+        _______________________________________
         
         */
         /*

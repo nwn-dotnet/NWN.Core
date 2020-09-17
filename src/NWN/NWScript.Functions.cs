@@ -12196,7 +12196,7 @@ namespace NWN.Core
         /// Bind an integer to a named parameter of the given prepared query.
         /// Example:
         ///   sqlquery v = SqlPrepareQueryObject(GetModule(), "insert into test (col) values (@myint);");
-        ///   SqlBindInt(v, "@v", 5);
+        ///   SqlBindInt(v, "@myint", 5);
         ///   SqlStep(v);
         /// </summary>
         public static void SqlBindInt(IntPtr sqlQuery, string sParam, int nValue)
