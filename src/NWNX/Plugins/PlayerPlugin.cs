@@ -619,12 +619,21 @@ namespace NWN.Core.NWNX
 
         /// Set the location oPlayer will spawn when logging in to the server.
         /// @note This function is best called in the NWNX_ON_ELC_VALIDATE_CHARACTER_BEFORE event, OnClientEnter will be too late.
-        /// <param name="The">player object.</param>
+        /// <param name="oPlayer">The player object.</param>
         /// <param name="locSpawn">The location.</param>
         public static void SetSpawnLocation(uint oPlayer, System.IntPtr locSpawn)
         {
             VM.NWNX.SetFunction(NWNX_Player, "SetSpawnLocation");
             VM.NWNX.StackPush(locSpawn, NWScript.ENGINE_STRUCTURE_LOCATION);
+            VM.NWNX.StackPush(oPlayer);
+            VM.NWNX.Call();
+        }
+
+        /// Resends palettes to a DM.
+        /// <param name="oPlayer">- the DM to send them to.</param>
+        public static void SendDMAllCreatorLists(uint oPlayer)
+        {
+            VM.NWNX.SetFunction(NWNX_Player, "SendDMAllCreatorLists");
             VM.NWNX.StackPush(oPlayer);
             VM.NWNX.Call();
         }
