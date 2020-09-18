@@ -15,40 +15,40 @@ namespace NWN.Core.NWNX
             VM.NWNX.SetFunction(NWNX_ItemProperty, "UnpackIP");
             VM.NWNX.StackPush(ip, NWScript.ENGINE_STRUCTURE_ITEM_PROPERTY);
             VM.NWNX.Call();
-            IPUnpacked retVal;
-            retVal.sTag = VM.NWNX.StackPopString();
-            retVal.oCreator = VM.NWNX.StackPopObject();
-            retVal.nSpellId = VM.NWNX.StackPopInt();
-            retVal.bUsable = VM.NWNX.StackPopInt();
-            retVal.nChanceToAppear = VM.NWNX.StackPopInt();
-            retVal.nUsesPerDay = VM.NWNX.StackPopInt();
-            retVal.nParam1Value = VM.NWNX.StackPopInt();
-            retVal.nParam1 = VM.NWNX.StackPopInt();
-            retVal.nCostTableValue = VM.NWNX.StackPopInt();
-            retVal.nCostTable = VM.NWNX.StackPopInt();
-            retVal.nSubType = VM.NWNX.StackPopInt();
-            retVal.nProperty = VM.NWNX.StackPopInt();
-            return retVal;
+            IPUnpacked n = default;
+            n.nProperty = VM.NWNX.StackPopInt();
+            n.nSubType = VM.NWNX.StackPopInt();
+            n.nCostTable = VM.NWNX.StackPopInt();
+            n.nCostTableValue = VM.NWNX.StackPopInt();
+            n.nParam1 = VM.NWNX.StackPopInt();
+            n.nParam1Value = VM.NWNX.StackPopInt();
+            n.nUsesPerDay = VM.NWNX.StackPopInt();
+            n.nChanceToAppear = VM.NWNX.StackPopInt();
+            n.bUsable = VM.NWNX.StackPopInt();
+            n.nSpellId = VM.NWNX.StackPopInt();
+            n.oCreator = VM.NWNX.StackPopObject();
+            n.sTag = VM.NWNX.StackPopString();
+            return n;
         }
 
         /// Convert unpacked itemproperty structure to native type.
         /// <param name="ip">The NWNX_IPUnpacked structure to convert.</param>
         /// <returns>The itemproperty.</returns>
-        public static System.IntPtr PackIP(IPUnpacked ip)
+        public static System.IntPtr PackIP(IPUnpacked n)
         {
             VM.NWNX.SetFunction(NWNX_ItemProperty, "PackIP");
-            VM.NWNX.StackPush(ip.nProperty);
-            VM.NWNX.StackPush(ip.nSubType);
-            VM.NWNX.StackPush(ip.nCostTable);
-            VM.NWNX.StackPush(ip.nCostTableValue);
-            VM.NWNX.StackPush(ip.nParam1);
-            VM.NWNX.StackPush(ip.nParam1Value);
-            VM.NWNX.StackPush(ip.nUsesPerDay);
-            VM.NWNX.StackPush(ip.nChanceToAppear);
-            VM.NWNX.StackPush(ip.bUsable);
-            VM.NWNX.StackPush(ip.nSpellId);
-            VM.NWNX.StackPush(ip.oCreator);
-            VM.NWNX.StackPush(ip.sTag);
+            VM.NWNX.StackPush(n.sTag);
+            VM.NWNX.StackPush(n.oCreator);
+            VM.NWNX.StackPush(n.nSpellId);
+            VM.NWNX.StackPush(n.bUsable);
+            VM.NWNX.StackPush(n.nChanceToAppear);
+            VM.NWNX.StackPush(n.nUsesPerDay);
+            VM.NWNX.StackPush(n.nParam1Value);
+            VM.NWNX.StackPush(n.nParam1);
+            VM.NWNX.StackPush(n.nCostTableValue);
+            VM.NWNX.StackPush(n.nCostTable);
+            VM.NWNX.StackPush(n.nSubType);
+            VM.NWNX.StackPush(n.nProperty);
             VM.NWNX.Call();
             return VM.NWNX.StackPopStruct(NWScript.ENGINE_STRUCTURE_ITEM_PROPERTY);
         }
@@ -63,20 +63,18 @@ namespace NWN.Core.NWNX
             VM.NWNX.StackPush(nIndex);
             VM.NWNX.StackPush(oItem);
             VM.NWNX.Call();
-            IPUnpacked retVal;
-            retVal.sTag = VM.NWNX.StackPopString();
-            retVal.oCreator = VM.NWNX.StackPopObject();
-            retVal.nSpellId = VM.NWNX.StackPopInt();
-            retVal.bUsable = VM.NWNX.StackPopInt();
-            retVal.nChanceToAppear = VM.NWNX.StackPopInt();
-            retVal.nUsesPerDay = VM.NWNX.StackPopInt();
-            retVal.nParam1Value = VM.NWNX.StackPopInt();
-            retVal.nParam1 = VM.NWNX.StackPopInt();
-            retVal.nCostTableValue = VM.NWNX.StackPopInt();
-            retVal.nCostTable = VM.NWNX.StackPopInt();
-            retVal.nSubType = VM.NWNX.StackPopInt();
-            retVal.nProperty = VM.NWNX.StackPopInt();
-            return retVal;
+            IPUnpacked n = default;
+            n.nProperty = VM.NWNX.StackPopInt();
+            n.nSubType = VM.NWNX.StackPopInt();
+            n.nCostTable = VM.NWNX.StackPopInt();
+            n.nCostTableValue = VM.NWNX.StackPopInt();
+            n.nParam1 = VM.NWNX.StackPopInt();
+            n.nParam1Value = VM.NWNX.StackPopInt();
+            n.nUsesPerDay = VM.NWNX.StackPopInt();
+            n.nChanceToAppear = VM.NWNX.StackPopInt();
+            n.bUsable = VM.NWNX.StackPopInt();
+            n.sTag = VM.NWNX.StackPopString();
+            return n;
         }
 
         /// @}

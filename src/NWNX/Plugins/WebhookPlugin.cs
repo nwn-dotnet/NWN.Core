@@ -33,12 +33,7 @@ namespace NWN.Core.NWNX
         /// <param name="delay">The delay in seconds to send the message again.</param>
         public static void ResendWebHookHTTPS(string host, string path, string sMessage, float delay = 0.0f)
         {
-            VM.NWNX.SetFunction(NWNX_WebHook, "ResendWebHookHTTPS");
-            VM.NWNX.StackPush(delay);
-            VM.NWNX.StackPush(sMessage);
-            VM.NWNX.StackPush(path);
-            VM.NWNX.StackPush(host);
-            VM.NWNX.Call();
+            NWScript.DelayCommand(delay, () => SendWebHookHTTPS(host, path, sMessage));
         }
 
         /// @}

@@ -24,7 +24,7 @@ namespace NWN.Core.NWNX
         /// <param name="replace">The string to replace the matches with.</param>
         /// <param name="firstOnly">Set to TRUE to only replace the first match.</param>
         /// <returns>A new string with any replacements made.</returns>
-        public static string Replace(string str, string regex, string replace = "", int firstOnly = NWScript.FALSE)
+        public static string Replace(string str, string regex, string replace = "", int firstOnly = 0)
         {
             VM.NWNX.SetFunction(NWNX_Regex, "Replace");
             VM.NWNX.StackPush(firstOnly);

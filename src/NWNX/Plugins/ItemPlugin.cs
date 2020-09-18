@@ -10,10 +10,10 @@ namespace NWN.Core.NWNX
         /// @note Will not persist through saving.
         /// <param name="oItem">The item object.</param>
         /// <param name="weight">The weight, note this is in tenths of pounds.</param>
-        public static void SetWeight(uint oItem, int weight)
+        public static void SetWeight(uint oItem, int w)
         {
             VM.NWNX.SetFunction(NWNX_Item, "SetWeight");
-            VM.NWNX.StackPush(weight);
+            VM.NWNX.StackPush(w);
             VM.NWNX.StackPush(oItem);
             VM.NWNX.Call();
         }
@@ -24,10 +24,10 @@ namespace NWN.Core.NWNX
         /// @note Will not persist through saving.
         /// <param name="oItem">The item object.</param>
         /// <param name="gold">The base gold value.</param>
-        public static void SetBaseGoldPieceValue(uint oItem, int gold)
+        public static void SetBaseGoldPieceValue(uint oItem, int g)
         {
             VM.NWNX.SetFunction(NWNX_Item, "SetBaseGoldPieceValue");
-            VM.NWNX.StackPush(gold);
+            VM.NWNX.StackPush(g);
             VM.NWNX.StackPush(oItem);
             VM.NWNX.Call();
         }
@@ -37,10 +37,10 @@ namespace NWN.Core.NWNX
         /// @note Will persist through saving.
         /// <param name="oItem">The item object.</param>
         /// <param name="gold">The additional gold value.</param>
-        public static void SetAddGoldPieceValue(uint oItem, int gold)
+        public static void SetAddGoldPieceValue(uint oItem, int g)
         {
             VM.NWNX.SetFunction(NWNX_Item, "SetAddGoldPieceValue");
-            VM.NWNX.StackPush(gold);
+            VM.NWNX.StackPush(g);
             VM.NWNX.StackPush(oItem);
             VM.NWNX.Call();
         }

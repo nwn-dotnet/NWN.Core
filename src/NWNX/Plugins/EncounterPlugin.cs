@@ -25,15 +25,15 @@ namespace NWN.Core.NWNX
         public static CreatureListEntry GetEncounterCreatureByIndex(uint encounter, int index)
         {
             VM.NWNX.SetFunction(NWNX_Encounter, "GetEncounterCreatureByIndex");
+            CreatureListEntry creatureEntry = default;
             VM.NWNX.StackPush(index);
             VM.NWNX.StackPush(encounter);
             VM.NWNX.Call();
-            CreatureListEntry retVal;
-            retVal.alreadyUsed = VM.NWNX.StackPopInt();
-            retVal.unique = VM.NWNX.StackPopInt();
-            retVal.challengeRating = VM.NWNX.StackPopFloat();
-            retVal.resref = VM.NWNX.StackPopString();
-            return retVal;
+            creatureEntry.alreadyUsed = VM.NWNX.StackPopInt();
+            creatureEntry.unique = VM.NWNX.StackPopInt();
+            creatureEntry.challengeRating = VM.NWNX.StackPopFloat();
+            creatureEntry.resref = VM.NWNX.StackPopString();
+            return creatureEntry;
         }
 
         /// Set the encounter creature list entry at the specified index
@@ -43,10 +43,10 @@ namespace NWN.Core.NWNX
         public static void SetEncounterCreatureByIndex(uint encounter, int index, CreatureListEntry creatureEntry)
         {
             VM.NWNX.SetFunction(NWNX_Encounter, "SetEncounterCreatureByIndex");
-            VM.NWNX.StackPush(creatureEntry.resref);
-            VM.NWNX.StackPush(creatureEntry.challengeRating);
-            VM.NWNX.StackPush(creatureEntry.unique);
             VM.NWNX.StackPush(creatureEntry.alreadyUsed);
+            VM.NWNX.StackPush(creatureEntry.unique);
+            VM.NWNX.StackPush(creatureEntry.challengeRating);
+            VM.NWNX.StackPush(creatureEntry.resref);
             VM.NWNX.StackPush(index);
             VM.NWNX.StackPush(encounter);
             VM.NWNX.Call();
@@ -139,6 +139,10 @@ namespace NWN.Core.NWNX
             VM.NWNX.StackPush(index);
             VM.NWNX.StackPush(encounter);
             VM.NWNX.Call();
+            float o = VM.NWNX.StackPopFloat();
+            float z = VM.NWNX.StackPopFloat();
+            float y = VM.NWNX.StackPopFloat();
+            float x = VM.NWNX.StackPopFloat();
             return VM.NWNX.StackPopStruct(NWScript.ENGINE_STRUCTURE_LOCATION);
         }
 

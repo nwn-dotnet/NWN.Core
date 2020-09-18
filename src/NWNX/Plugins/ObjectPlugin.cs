@@ -70,10 +70,10 @@ namespace NWN.Core.NWNX
             VM.NWNX.StackPush(index);
             VM.NWNX.StackPush(obj);
             VM.NWNX.Call();
-            LocalVariable retVal;
-            retVal.key = VM.NWNX.StackPopString();
-            retVal.type = VM.NWNX.StackPopInt();
-            return retVal;
+            LocalVariable var = default;
+            var.key = VM.NWNX.StackPopString();
+            var.type = VM.NWNX.StackPopInt();
+            return var;
         }
 
         /// Convert an object id to the actual object.
@@ -83,9 +83,7 @@ namespace NWN.Core.NWNX
         /// @deprecated Use the basegame StringToObject() function. This will be removed in a future NWNX release.
         public static uint StringToObject(string id)
         {
-            VM.NWNX.SetFunction(NWNX_Object, "StringToObject");
-            VM.NWNX.StackPush(id);
-            VM.NWNX.Call();
+            NWScript.WriteTimestampedLogEntry("WARNING: StringToObject() is deprecated, please use the basegame's StringToObject()");
             return VM.NWNX.StackPopObject();
         }
 
@@ -97,7 +95,9 @@ namespace NWN.Core.NWNX
         {
             VM.NWNX.SetFunction(NWNX_Object, "SetPosition");
             VM.NWNX.StackPush(bUpdateSubareas);
-            VM.NWNX.StackPush(vPosition);
+            VM.NWNX.StackPush(vPosition.X);
+            VM.NWNX.StackPush(vPosition.Y);
+            VM.NWNX.StackPush(vPosition.Z);
             VM.NWNX.StackPush(oObject);
             VM.NWNX.Call();
         }
@@ -106,10 +106,10 @@ namespace NWN.Core.NWNX
         /// @note Unlike the native GetCurrentHitpoints function, this excludes temporary hitpoints.
         /// <param name="obj">The object.</param>
         /// <returns>The hit points.</returns>
-        public static int GetCurrentHitPoints(uint obj)
+        public static int GetCurrentHitPoints(uint creature)
         {
             VM.NWNX.SetFunction(NWNX_Object, "GetCurrentHitPoints");
-            VM.NWNX.StackPush(obj);
+            VM.NWNX.StackPush(creature);
             VM.NWNX.Call();
             return VM.NWNX.StackPopInt();
         }
@@ -117,11 +117,11 @@ namespace NWN.Core.NWNX
         /// Set an object's hit points.
         /// <param name="obj">The object.</param>
         /// <param name="hp">The hit points.</param>
-        public static void SetCurrentHitPoints(uint obj, int hp)
+        public static void SetCurrentHitPoints(uint creature, int hp)
         {
             VM.NWNX.SetFunction(NWNX_Object, "SetCurrentHitPoints");
             VM.NWNX.StackPush(hp);
-            VM.NWNX.StackPush(obj);
+            VM.NWNX.StackPush(creature);
             VM.NWNX.Call();
         }
 
@@ -129,11 +129,11 @@ namespace NWN.Core.NWNX
         /// @note Will not work on PCs.
         /// <param name="obj">The object.</param>
         /// <param name="hp">The maximum hit points.</param>
-        public static void SetMaxHitPoints(uint obj, int hp)
+        public static void SetMaxHitPoints(uint creature, int hp)
         {
             VM.NWNX.SetFunction(NWNX_Object, "SetMaxHitPoints");
             VM.NWNX.StackPush(hp);
-            VM.NWNX.StackPush(obj);
+            VM.NWNX.StackPush(creature);
             VM.NWNX.Call();
         }
 
@@ -252,7 +252,9 @@ namespace NWN.Core.NWNX
         public static void AddToArea(uint obj, uint area, System.Numerics.Vector3 pos)
         {
             VM.NWNX.SetFunction(NWNX_Object, "AddToArea");
-            VM.NWNX.StackPush(pos);
+            VM.NWNX.StackPush(pos.Z);
+            VM.NWNX.StackPush(pos.Y);
+            VM.NWNX.StackPush(pos.X);
             VM.NWNX.StackPush(area);
             VM.NWNX.StackPush(obj);
             VM.NWNX.Call();
@@ -505,7 +507,9 @@ namespace NWN.Core.NWNX
         public static int GetPositionIsInTrigger(uint oTrigger, System.Numerics.Vector3 vPosition)
         {
             VM.NWNX.SetFunction(NWNX_Object, "GetPositionIsInTrigger");
-            VM.NWNX.StackPush(vPosition);
+            VM.NWNX.StackPush(vPosition.Z);
+            VM.NWNX.StackPush(vPosition.Y);
+            VM.NWNX.StackPush(vPosition.X);
             VM.NWNX.StackPush(oTrigger);
             VM.NWNX.Call();
             return VM.NWNX.StackPopInt();

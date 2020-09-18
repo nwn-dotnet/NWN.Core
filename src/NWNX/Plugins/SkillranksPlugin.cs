@@ -70,19 +70,19 @@ namespace NWN.Core.NWNX
             VM.NWNX.StackPush(iFeat);
             VM.NWNX.StackPush(iSkill);
             VM.NWNX.Call();
-            SkillFeat retVal;
-            retVal.iKeyAbilityMask = VM.NWNX.StackPopInt();
-            retVal.bBypassArmorCheckPenalty = VM.NWNX.StackPopInt();
-            retVal.iDayOrNight = VM.NWNX.StackPopInt();
-            retVal.iAreaFlagsForbidden = VM.NWNX.StackPopInt();
-            retVal.iAreaFlagsRequired = VM.NWNX.StackPopInt();
-            retVal.fClassLevelMod = VM.NWNX.StackPopFloat();
-            retVal.sClasses = VM.NWNX.StackPopString();
-            retVal.iFocusFeat = VM.NWNX.StackPopInt();
-            retVal.iModifier = VM.NWNX.StackPopInt();
-            retVal.iFeat = VM.NWNX.StackPopInt();
-            retVal.iSkill = VM.NWNX.StackPopInt();
-            return retVal;
+            SkillFeat skillFeat = default;
+            skillFeat.iSkill = iSkill;
+            skillFeat.iFeat = iFeat;
+            skillFeat.iModifier = VM.NWNX.StackPopInt();
+            skillFeat.iFocusFeat = VM.NWNX.StackPopInt();
+            skillFeat.sClasses = VM.NWNX.StackPopString();
+            skillFeat.fClassLevelMod = VM.NWNX.StackPopFloat();
+            skillFeat.iAreaFlagsRequired = VM.NWNX.StackPopInt();
+            skillFeat.iAreaFlagsForbidden = VM.NWNX.StackPopInt();
+            skillFeat.iDayOrNight = VM.NWNX.StackPopInt();
+            skillFeat.bBypassArmorCheckPenalty = VM.NWNX.StackPopInt();
+            skillFeat.iKeyAbilityMask = VM.NWNX.StackPopInt();
+            return skillFeat;
         }
 
         /// Returns a skill feat by index.
@@ -96,19 +96,19 @@ namespace NWN.Core.NWNX
             VM.NWNX.StackPush(iIndex);
             VM.NWNX.StackPush(iSkill);
             VM.NWNX.Call();
-            SkillFeat retVal;
-            retVal.iKeyAbilityMask = VM.NWNX.StackPopInt();
-            retVal.bBypassArmorCheckPenalty = VM.NWNX.StackPopInt();
-            retVal.iDayOrNight = VM.NWNX.StackPopInt();
-            retVal.iAreaFlagsForbidden = VM.NWNX.StackPopInt();
-            retVal.iAreaFlagsRequired = VM.NWNX.StackPopInt();
-            retVal.fClassLevelMod = VM.NWNX.StackPopFloat();
-            retVal.sClasses = VM.NWNX.StackPopString();
-            retVal.iFocusFeat = VM.NWNX.StackPopInt();
-            retVal.iModifier = VM.NWNX.StackPopInt();
-            retVal.iFeat = VM.NWNX.StackPopInt();
-            retVal.iSkill = VM.NWNX.StackPopInt();
-            return retVal;
+            SkillFeat skillFeat = default;
+            skillFeat.iSkill = iSkill;
+            skillFeat.iFeat = VM.NWNX.StackPopInt();
+            skillFeat.iModifier = VM.NWNX.StackPopInt();
+            skillFeat.iFocusFeat = VM.NWNX.StackPopInt();
+            skillFeat.sClasses = VM.NWNX.StackPopString();
+            skillFeat.fClassLevelMod = VM.NWNX.StackPopFloat();
+            skillFeat.iAreaFlagsRequired = VM.NWNX.StackPopInt();
+            skillFeat.iAreaFlagsForbidden = VM.NWNX.StackPopInt();
+            skillFeat.iDayOrNight = VM.NWNX.StackPopInt();
+            skillFeat.bBypassArmorCheckPenalty = VM.NWNX.StackPopInt();
+            skillFeat.iKeyAbilityMask = VM.NWNX.StackPopInt();
+            return skillFeat;
         }
 
         /// Modifies or creates a skill feat.
@@ -118,17 +118,17 @@ namespace NWN.Core.NWNX
         {
             VM.NWNX.SetFunction(NWNX_SkillRanks, "SetSkillFeat");
             VM.NWNX.StackPush(createIfNonExistent);
-            VM.NWNX.StackPush(skillFeat.iSkill);
-            VM.NWNX.StackPush(skillFeat.iFeat);
-            VM.NWNX.StackPush(skillFeat.iModifier);
-            VM.NWNX.StackPush(skillFeat.iFocusFeat);
-            VM.NWNX.StackPush(skillFeat.sClasses);
-            VM.NWNX.StackPush(skillFeat.fClassLevelMod);
-            VM.NWNX.StackPush(skillFeat.iAreaFlagsRequired);
-            VM.NWNX.StackPush(skillFeat.iAreaFlagsForbidden);
-            VM.NWNX.StackPush(skillFeat.iDayOrNight);
-            VM.NWNX.StackPush(skillFeat.bBypassArmorCheckPenalty);
             VM.NWNX.StackPush(skillFeat.iKeyAbilityMask);
+            VM.NWNX.StackPush(skillFeat.bBypassArmorCheckPenalty);
+            VM.NWNX.StackPush(skillFeat.iDayOrNight);
+            VM.NWNX.StackPush(skillFeat.iAreaFlagsForbidden);
+            VM.NWNX.StackPush(skillFeat.iAreaFlagsRequired);
+            VM.NWNX.StackPush(skillFeat.fClassLevelMod);
+            VM.NWNX.StackPush(NWScript.GetStringRight( skillFeat.sClasses, NWScript.GetStringLength( skillFeat.sClasses) - NWScript.FindSubString( skillFeat.sClasses, "1") ));
+            VM.NWNX.StackPush(skillFeat.iFocusFeat);
+            VM.NWNX.StackPush(skillFeat.iModifier);
+            VM.NWNX.StackPush(skillFeat.iFeat);
+            VM.NWNX.StackPush(skillFeat.iSkill);
             VM.NWNX.Call();
         }
 
@@ -141,33 +141,18 @@ namespace NWN.Core.NWNX
         /// <returns>The updated NWNX_SkillRanks_SkillFeat.</returns>
         public static SkillFeat AddSkillFeatClass(SkillFeat skillFeat, int iClass)
         {
-            VM.NWNX.SetFunction(NWNX_SkillRanks, "AddSkillFeatClass");
-            VM.NWNX.StackPush(iClass);
-            VM.NWNX.StackPush(skillFeat.iSkill);
-            VM.NWNX.StackPush(skillFeat.iFeat);
-            VM.NWNX.StackPush(skillFeat.iModifier);
-            VM.NWNX.StackPush(skillFeat.iFocusFeat);
-            VM.NWNX.StackPush(skillFeat.sClasses);
-            VM.NWNX.StackPush(skillFeat.fClassLevelMod);
-            VM.NWNX.StackPush(skillFeat.iAreaFlagsRequired);
-            VM.NWNX.StackPush(skillFeat.iAreaFlagsForbidden);
-            VM.NWNX.StackPush(skillFeat.iDayOrNight);
-            VM.NWNX.StackPush(skillFeat.bBypassArmorCheckPenalty);
-            VM.NWNX.StackPush(skillFeat.iKeyAbilityMask);
-            VM.NWNX.Call();
-            SkillFeat retVal;
-            retVal.iKeyAbilityMask = VM.NWNX.StackPopInt();
-            retVal.bBypassArmorCheckPenalty = VM.NWNX.StackPopInt();
-            retVal.iDayOrNight = VM.NWNX.StackPopInt();
-            retVal.iAreaFlagsForbidden = VM.NWNX.StackPopInt();
-            retVal.iAreaFlagsRequired = VM.NWNX.StackPopInt();
-            retVal.fClassLevelMod = VM.NWNX.StackPopFloat();
-            retVal.sClasses = VM.NWNX.StackPopString();
-            retVal.iFocusFeat = VM.NWNX.StackPopInt();
-            retVal.iModifier = VM.NWNX.StackPopInt();
-            retVal.iFeat = VM.NWNX.StackPopInt();
-            retVal.iSkill = VM.NWNX.StackPopInt();
-            return retVal;
+            if (NWScript.GetStringLength( skillFeat.sClasses) <255)
+            {
+                int i;
+                string sPad = "";
+                for (i=0; i<255-NWScript.GetStringLength( skillFeat.sClasses); i++)
+                {
+                    sPad = sPad+"0";
+                }
+                skillFeat.sClasses = sPad+skillFeat.sClasses;
+            }
+            skillFeat.sClasses = NWScript.GetStringLeft( skillFeat.sClasses, 254-iClass) +"1"+NWScript.GetStringRight( skillFeat.sClasses, iClass);
+            return skillFeat;
         }
 
         /// Change the modifier value for Skill Focus and Epic Skill Focus feats.
@@ -176,10 +161,10 @@ namespace NWN.Core.NWNX
         /// changed with this function.
         /// <param name="iModifier">The new value for the feat modifier.</param>
         /// <param name="iEpic">Set to TRUE to change the value for Epic Skill Focus.</param>
-        public static void SetSkillFeatFocusModifier(int iModifier, int iEpic = NWScript.FALSE)
+        public static void SetSkillFeatFocusModifier(int iModifier, int epicFocus = NWScript.FALSE)
         {
             VM.NWNX.SetFunction(NWNX_SkillRanks, "SetSkillFeatFocusModifier");
-            VM.NWNX.StackPush(iEpic);
+            VM.NWNX.StackPush(epicFocus);
             VM.NWNX.StackPush(iModifier);
             VM.NWNX.Call();
         }

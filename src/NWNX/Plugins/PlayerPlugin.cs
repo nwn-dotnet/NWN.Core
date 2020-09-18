@@ -82,12 +82,17 @@ namespace NWN.Core.NWNX
         /// @remark Only one timing bar can be ran at the same time.
         public static void StartGuiTimingBar(uint player, float seconds, string script = "", int type = NWNX_PLAYER_TIMING_BAR_CUSTOM)
         {
+            if (NWScript.GetLocalInt(player,  "NWNX_PLAYER_GUI_TIMING_ACTIVE") == NWScript.TRUE)
+            return ;
             VM.NWNX.SetFunction(NWNX_Player, "StartGuiTimingBar");
             VM.NWNX.StackPush(type);
-            VM.NWNX.StackPush(script);
             VM.NWNX.StackPush(seconds);
             VM.NWNX.StackPush(player);
             VM.NWNX.Call();
+            int id = NWScript.GetLocalInt( player, "NWNX_PLAYER_GUI_TIMING_ID") +1;
+            NWScript.SetLocalInt(player,  "NWNX_PLAYER_GUI_TIMING_ACTIVE", id);
+            NWScript.SetLocalInt(player,  "NWNX_PLAYER_GUI_TIMING_ID", id);
+            NWScript.DelayCommand(seconds, () => INTERNAL_StopGuiTimingBar(player, script, id));
         }
 
         /// Stop displaying a timing bar.
@@ -95,10 +100,7 @@ namespace NWN.Core.NWNX
         /// <param name="script">The script to run when stopped.</param>
         public static void StopGuiTimingBar(uint player, string script = "")
         {
-            VM.NWNX.SetFunction(NWNX_Player, "StopGuiTimingBar");
-            VM.NWNX.StackPush(script);
-            VM.NWNX.StackPush(player);
-            VM.NWNX.Call();
+            INTERNAL_StopGuiTimingBar(player, script, -1);
         }
 
         /// Sets whether the player should always walk when given movement commands.
@@ -120,24 +122,24 @@ namespace NWN.Core.NWNX
         public static QuickBarSlot GetQuickBarSlot(uint player, int slot)
         {
             VM.NWNX.SetFunction(NWNX_Player, "GetQuickBarSlot");
+            QuickBarSlot qbs = default;
             VM.NWNX.StackPush(slot);
             VM.NWNX.StackPush(player);
             VM.NWNX.Call();
-            QuickBarSlot retVal;
-            retVal.oAssociate = VM.NWNX.StackPopObject();
-            retVal.nAssociateType = VM.NWNX.StackPopInt();
-            retVal.nDomainLevel = VM.NWNX.StackPopInt();
-            retVal.nMetaType = VM.NWNX.StackPopInt();
-            retVal.nINTParam1 = VM.NWNX.StackPopInt();
-            retVal.sToolTip = VM.NWNX.StackPopString();
-            retVal.sCommandLine = VM.NWNX.StackPopString();
-            retVal.sCommandLabel = VM.NWNX.StackPopString();
-            retVal.sResRef = VM.NWNX.StackPopString();
-            retVal.nMultiClass = VM.NWNX.StackPopInt();
-            retVal.nObjectType = VM.NWNX.StackPopInt();
-            retVal.oSecondaryItem = VM.NWNX.StackPopObject();
-            retVal.oItem = VM.NWNX.StackPopObject();
-            return retVal;
+            qbs.oAssociate = VM.NWNX.StackPopObject();
+            qbs.nAssociateType = VM.NWNX.StackPopInt();
+            qbs.nDomainLevel = VM.NWNX.StackPopInt();
+            qbs.nMetaType = VM.NWNX.StackPopInt();
+            qbs.nINTParam1 = VM.NWNX.StackPopInt();
+            qbs.sToolTip = VM.NWNX.StackPopString();
+            qbs.sCommandLine = VM.NWNX.StackPopString();
+            qbs.sCommandLabel = VM.NWNX.StackPopString();
+            qbs.sResRef = VM.NWNX.StackPopString();
+            qbs.nMultiClass = VM.NWNX.StackPopInt();
+            qbs.nObjectType = VM.NWNX.StackPopInt();
+            qbs.oSecondaryItem = VM.NWNX.StackPopObject();
+            qbs.oItem = VM.NWNX.StackPopObject();
+            return qbs;
         }
 
         /// Sets the player's quickbar slot info
@@ -183,7 +185,9 @@ namespace NWN.Core.NWNX
         public static void ShowVisualEffect(uint player, int effectId, System.Numerics.Vector3 position)
         {
             VM.NWNX.SetFunction(NWNX_Player, "ShowVisualEffect");
-            VM.NWNX.StackPush(position);
+            VM.NWNX.StackPush(position.X);
+            VM.NWNX.StackPush(position.Y);
+            VM.NWNX.StackPush(position.Z);
             VM.NWNX.StackPush(effectId);
             VM.NWNX.StackPush(player);
             VM.NWNX.Call();
@@ -194,8 +198,9 @@ namespace NWN.Core.NWNX
         /// <param name="track">The track id to play.</param>
         public static void MusicBackgroundChangeDay(uint player, int track)
         {
-            VM.NWNX.SetFunction(NWNX_Player, "MusicBackgroundChangeDay");
+            VM.NWNX.SetFunction(NWNX_Player, "ChangeBackgroundMusic");
             VM.NWNX.StackPush(track);
+            VM.NWNX.StackPush(NWScript.TRUE);
             VM.NWNX.StackPush(player);
             VM.NWNX.Call();
         }
@@ -205,8 +210,9 @@ namespace NWN.Core.NWNX
         /// <param name="track">The track id to play.</param>
         public static void MusicBackgroundChangeNight(uint player, int track)
         {
-            VM.NWNX.SetFunction(NWNX_Player, "MusicBackgroundChangeNight");
+            VM.NWNX.SetFunction(NWNX_Player, "ChangeBackgroundMusic");
             VM.NWNX.StackPush(track);
+            VM.NWNX.StackPush(NWScript.FALSE);
             VM.NWNX.StackPush(player);
             VM.NWNX.Call();
         }
@@ -215,7 +221,8 @@ namespace NWN.Core.NWNX
         /// <param name="player">The player object.</param>
         public static void MusicBackgroundStart(uint player)
         {
-            VM.NWNX.SetFunction(NWNX_Player, "MusicBackgroundStart");
+            VM.NWNX.SetFunction(NWNX_Player, "PlayBackgroundMusic");
+            VM.NWNX.StackPush(NWScript.TRUE);
             VM.NWNX.StackPush(player);
             VM.NWNX.Call();
         }
@@ -224,7 +231,8 @@ namespace NWN.Core.NWNX
         /// <param name="player">The player object.</param>
         public static void MusicBackgroundStop(uint player)
         {
-            VM.NWNX.SetFunction(NWNX_Player, "MusicBackgroundStop");
+            VM.NWNX.SetFunction(NWNX_Player, "PlayBackgroundMusic");
+            VM.NWNX.StackPush(NWScript.FALSE);
             VM.NWNX.StackPush(player);
             VM.NWNX.Call();
         }
@@ -234,7 +242,7 @@ namespace NWN.Core.NWNX
         /// <param name="track">The track id to play.</param>
         public static void MusicBattleChange(uint player, int track)
         {
-            VM.NWNX.SetFunction(NWNX_Player, "MusicBattleChange");
+            VM.NWNX.SetFunction(NWNX_Player, "ChangeBattleMusic");
             VM.NWNX.StackPush(track);
             VM.NWNX.StackPush(player);
             VM.NWNX.Call();
@@ -244,7 +252,8 @@ namespace NWN.Core.NWNX
         /// <param name="player">The player object.</param>
         public static void MusicBattleStart(uint player)
         {
-            VM.NWNX.SetFunction(NWNX_Player, "MusicBattleStart");
+            VM.NWNX.SetFunction(NWNX_Player, "PlayBattleMusic");
+            VM.NWNX.StackPush(NWScript.TRUE);
             VM.NWNX.StackPush(player);
             VM.NWNX.Call();
         }
@@ -253,7 +262,8 @@ namespace NWN.Core.NWNX
         /// <param name="player">The player object.</param>
         public static void MusicBattleStop(uint player)
         {
-            VM.NWNX.SetFunction(NWNX_Player, "MusicBattleStop");
+            VM.NWNX.SetFunction(NWNX_Player, "PlayBattleMusic");
+            VM.NWNX.StackPush(NWScript.FALSE);
             VM.NWNX.StackPush(player);
             VM.NWNX.Call();
         }
@@ -624,7 +634,12 @@ namespace NWN.Core.NWNX
         public static void SetSpawnLocation(uint oPlayer, System.IntPtr locSpawn)
         {
             VM.NWNX.SetFunction(NWNX_Player, "SetSpawnLocation");
-            VM.NWNX.StackPush(locSpawn, NWScript.ENGINE_STRUCTURE_LOCATION);
+            System.Numerics.Vector3 vPosition = NWScript.GetPositionFromLocation(locSpawn);
+            VM.NWNX.StackPush(NWScript.GetFacingFromLocation(locSpawn));
+            VM.NWNX.StackPush(vPosition.Z);
+            VM.NWNX.StackPush(vPosition.Y);
+            VM.NWNX.StackPush(vPosition.X);
+            VM.NWNX.StackPush(NWScript.GetAreaFromLocation(locSpawn));
             VM.NWNX.StackPush(oPlayer);
             VM.NWNX.Call();
         }
@@ -639,6 +654,23 @@ namespace NWN.Core.NWNX
         }
 
         /// @}
+        public static void INTERNAL_StopGuiTimingBar(uint player, string script = "", int id = -1)
+        {
+            int activeId = NWScript.GetLocalInt(player,  "NWNX_PLAYER_GUI_TIMING_ACTIVE");
+            if (activeId==0)
+            return ;
+            if (id!=-1&&id!=activeId)
+            return ;
+            NWScript.DeleteLocalInt(player,  "NWNX_PLAYER_GUI_TIMING_ACTIVE");
+            VM.NWNX.SetFunction(NWNX_Player, "StopGuiTimingBar");
+            VM.NWNX.StackPush(player);
+            VM.NWNX.Call();
+            if (script!="")
+            {
+                NWScript.ExecuteScript(script, player);
+            }
+        }
+
     }
 
     public struct QuickBarSlot
