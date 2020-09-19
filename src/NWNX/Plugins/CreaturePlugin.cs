@@ -224,14 +224,14 @@ namespace NWN.Core.NWNX
         public static SpecialAbility GetSpecialAbility(uint creature, int index)
         {
             VM.NWNX.SetFunction(NWNX_Creature, "GetSpecialAbility");
+            SpecialAbility ability = default;
             VM.NWNX.StackPush(index);
             VM.NWNX.StackPush(creature);
             VM.NWNX.Call();
-            SpecialAbility retVal;
-            retVal.level = VM.NWNX.StackPopInt();
-            retVal.ready = VM.NWNX.StackPopInt();
-            retVal.id = VM.NWNX.StackPopInt();
-            return retVal;
+            ability.level = VM.NWNX.StackPopInt();
+            ability.ready = VM.NWNX.StackPopInt();
+            ability.id = VM.NWNX.StackPopInt();
+            return ability;
         }
 
         /// Adds a special ability to a creature.
@@ -388,17 +388,17 @@ namespace NWN.Core.NWNX
         public static MemorisedSpell GetMemorisedSpell(uint creature, int @class, int level, int index)
         {
             VM.NWNX.SetFunction(NWNX_Creature, "GetMemorisedSpell");
+            MemorisedSpell spell = default;
             VM.NWNX.StackPush(index);
             VM.NWNX.StackPush(level);
             VM.NWNX.StackPush(@class);
             VM.NWNX.StackPush(creature);
             VM.NWNX.Call();
-            MemorisedSpell retVal;
-            retVal.domain = VM.NWNX.StackPopInt();
-            retVal.meta = VM.NWNX.StackPopInt();
-            retVal.ready = VM.NWNX.StackPopInt();
-            retVal.id = VM.NWNX.StackPopInt();
-            return retVal;
+            spell.domain = VM.NWNX.StackPopInt();
+            spell.meta = VM.NWNX.StackPopInt();
+            spell.ready = VM.NWNX.StackPopInt();
+            spell.id = VM.NWNX.StackPopInt();
+            return spell;
         }
 
         /// Sets the memorised spell at a class level's index.
@@ -609,10 +609,10 @@ namespace NWN.Core.NWNX
         /// @note Base movement rate factor is 1.0.
         /// <param name="creature">The creature object.</param>
         /// <param name="rate">The rate to set.</param>
-        public static void SetMovementRateFactor(uint creature, float rate)
+        public static void SetMovementRateFactor(uint creature, float factor)
         {
             VM.NWNX.SetFunction(NWNX_Creature, "SetMovementRateFactor");
-            VM.NWNX.StackPush(rate);
+            VM.NWNX.StackPush(factor);
             VM.NWNX.StackPush(creature);
             VM.NWNX.Call();
         }
@@ -964,6 +964,18 @@ namespace NWN.Core.NWNX
         public static int GetAttackBonus(uint creature, int isMelee = -1, int isTouchAttack = NWScript.FALSE, int isOffhand = NWScript.FALSE, int includeBaseAttackBonus = NWScript.TRUE)
         {
             VM.NWNX.SetFunction(NWNX_Creature, "GetAttackBonus");
+            if (isMelee==-1)
+            {
+                uint oWeapon = NWScript.GetItemInSlot(NWScript.INVENTORY_SLOT_RIGHTHAND, creature);
+                if (NWScript.GetIsObjectValid(oWeapon) == NWScript.TRUE)
+                {
+                    isMelee = NWScript.GetWeaponRanged(oWeapon);
+                }
+                else
+                {
+                    isMelee = NWScript.TRUE;
+                }
+            }
             VM.NWNX.StackPush(includeBaseAttackBonus);
             VM.NWNX.StackPush(isOffhand);
             VM.NWNX.StackPush(isTouchAttack);
@@ -1169,11 +1181,7 @@ namespace NWN.Core.NWNX
         /// @deprecated Use GetDomain(). This will be removed in future NWNX releases.
         public static int GetDomain(uint creature, int @class, int index)
         {
-            VM.NWNX.SetFunction(NWNX_Creature, "GetDomain");
-            VM.NWNX.StackPush(index);
-            VM.NWNX.StackPush(@class);
-            VM.NWNX.StackPush(creature);
-            VM.NWNX.Call();
+            NWScript.WriteTimestampedLogEntry("NWNX_Creature: GetDomain() is deprecated. Please use the basegame's GetDomain() instead");
             return VM.NWNX.StackPopInt();
         }
 
@@ -1198,10 +1206,7 @@ namespace NWN.Core.NWNX
         /// @deprecated Use GetSpecialization(). This will be removed in future NWNX releases.
         public static int GetSpecialization(uint creature, int @class)
         {
-            VM.NWNX.SetFunction(NWNX_Creature, "GetSpecialization");
-            VM.NWNX.StackPush(@class);
-            VM.NWNX.StackPush(creature);
-            VM.NWNX.Call();
+            NWScript.WriteTimestampedLogEntry("NWNX_Creature: GetSpecialization() is deprecated. Please use the basegame's GetSpecialization() instead");
             return VM.NWNX.StackPopInt();
         }
 

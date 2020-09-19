@@ -32,9 +32,12 @@ namespace NWN.Core.NWNX
         /// <returns>The ID of this query if successful, else FALSE.</returns>
         public static int ExecuteQuery(string query)
         {
-            VM.NWNX.SetFunction(NWNX_SQL, "ExecuteQuery");
-            VM.NWNX.StackPush(query);
-            VM.NWNX.Call();
+            if (PrepareQuery(query) == NWScript.TRUE)
+            {
+                int ret = ExecutePreparedQuery();
+                DestroyPreparedQuery();
+                return VM.NWNX.StackPopInt();
+            }
             return VM.NWNX.StackPopInt();
         }
 

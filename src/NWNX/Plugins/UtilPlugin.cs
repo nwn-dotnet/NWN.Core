@@ -78,7 +78,7 @@ namespace NWN.Core.NWNX
         /// <returns>The converted itemproperty.</returns>
         public static System.IntPtr EffectToItemProperty(System.IntPtr e)
         {
-            VM.NWNX.SetFunction(NWNX_Util, "EffectToItemProperty");
+            VM.NWNX.SetFunction(NWNX_Util, "EffectTypeCast");
             VM.NWNX.StackPush(e, NWScript.ENGINE_STRUCTURE_EFFECT);
             VM.NWNX.Call();
             return VM.NWNX.StackPopStruct(NWScript.ENGINE_STRUCTURE_ITEM_PROPERTY);
@@ -90,7 +90,7 @@ namespace NWN.Core.NWNX
         /// <returns>The converted effect.</returns>
         public static System.IntPtr ItemPropertyToEffect(System.IntPtr ip)
         {
-            VM.NWNX.SetFunction(NWNX_Util, "ItemPropertyToEffect");
+            VM.NWNX.SetFunction(NWNX_Util, "EffectTypeCast");
             VM.NWNX.StackPush(ip, NWScript.ENGINE_STRUCTURE_ITEM_PROPERTY);
             VM.NWNX.Call();
             return VM.NWNX.StackPopStruct(NWScript.ENGINE_STRUCTURE_EFFECT);
@@ -153,10 +153,10 @@ namespace NWN.Core.NWNX
         /// Encodes a string for usage in a URL.
         /// <param name="str">The string to encode for a URL.</param>
         /// <returns>The url encoded string.</returns>
-        public static string EncodeStringForURL(string str)
+        public static string EncodeStringForURL(string sURL)
         {
             VM.NWNX.SetFunction(NWNX_Util, "EncodeStringForURL");
-            VM.NWNX.StackPush(str);
+            VM.NWNX.StackPush(sURL);
             VM.NWNX.Call();
             return VM.NWNX.StackPopString();
         }
@@ -346,11 +346,16 @@ namespace NWN.Core.NWNX
         /// <param name="locLocation">The location to create the door at.</param>
         /// <param name="sNewTag">An optional new tag for the door.</param>
         /// <returns>The door, or OBJECT_INVALID on failure.</returns>
-        public static uint CreateDoor(string sResRef, System.IntPtr locLocation, string sNewTag = "")
+        public static uint CreateDoor(string sResRef, System.IntPtr locLocation, string sNewTag)
         {
             VM.NWNX.SetFunction(NWNX_Util, "CreateDoor");
+            System.Numerics.Vector3 vPosition = NWScript.GetPositionFromLocation(locLocation);
             VM.NWNX.StackPush(sNewTag);
-            VM.NWNX.StackPush(locLocation, NWScript.ENGINE_STRUCTURE_LOCATION);
+            VM.NWNX.StackPush(NWScript.GetFacingFromLocation(locLocation));
+            VM.NWNX.StackPush(vPosition.Z);
+            VM.NWNX.StackPush(vPosition.Y);
+            VM.NWNX.StackPush(vPosition.X);
+            VM.NWNX.StackPush(NWScript.GetAreaFromLocation(locLocation));
             VM.NWNX.StackPush(sResRef);
             VM.NWNX.Call();
             return VM.NWNX.StackPopObject();
@@ -375,10 +380,10 @@ namespace NWN.Core.NWNX
             VM.NWNX.SetFunction(NWNX_Util, "GetWorldTime");
             VM.NWNX.StackPush(fAdjustment);
             VM.NWNX.Call();
-            WorldTime retVal;
-            retVal.nTimeOfDay = VM.NWNX.StackPopInt();
-            retVal.nCalendarDay = VM.NWNX.StackPopInt();
-            return retVal;
+            WorldTime strWorldTime = default;
+            strWorldTime.nTimeOfDay = VM.NWNX.StackPopInt();
+            strWorldTime.nCalendarDay = VM.NWNX.StackPopInt();
+            return strWorldTime;
         }
 
         /// Set a server-side resource override.

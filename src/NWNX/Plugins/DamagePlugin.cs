@@ -17,9 +17,10 @@ namespace NWN.Core.NWNX
         /// <param name="oOwner">An object if only executing for a specific object or OBJECT_INVALID for global.</param>
         public static void SetDamageEventScript(string sScript, uint oOwner = NWScript.OBJECT_INVALID)
         {
-            VM.NWNX.SetFunction(NWNX_Damage, "SetDamageEventScript");
+            VM.NWNX.SetFunction(NWNX_Damage, "SetEventScript");
             VM.NWNX.StackPush(oOwner);
             VM.NWNX.StackPush(sScript);
+            VM.NWNX.StackPush( "DAMAGE");
             VM.NWNX.Call();
         }
 
@@ -29,23 +30,23 @@ namespace NWN.Core.NWNX
         public static DamageEventData GetDamageEventData()
         {
             VM.NWNX.SetFunction(NWNX_Damage, "GetDamageEventData");
+            DamageEventData data = default;
             VM.NWNX.Call();
-            DamageEventData retVal;
-            retVal.iBase = VM.NWNX.StackPopInt();
-            retVal.iSonic = VM.NWNX.StackPopInt();
-            retVal.iPositive = VM.NWNX.StackPopInt();
-            retVal.iNegative = VM.NWNX.StackPopInt();
-            retVal.iFire = VM.NWNX.StackPopInt();
-            retVal.iElectrical = VM.NWNX.StackPopInt();
-            retVal.iDivine = VM.NWNX.StackPopInt();
-            retVal.iCold = VM.NWNX.StackPopInt();
-            retVal.iAcid = VM.NWNX.StackPopInt();
-            retVal.iMagical = VM.NWNX.StackPopInt();
-            retVal.iSlash = VM.NWNX.StackPopInt();
-            retVal.iPierce = VM.NWNX.StackPopInt();
-            retVal.iBludgeoning = VM.NWNX.StackPopInt();
-            retVal.oDamager = VM.NWNX.StackPopObject();
-            return retVal;
+            data.oDamager = VM.NWNX.StackPopObject();
+            data.iBludgeoning = VM.NWNX.StackPopInt();
+            data.iPierce = VM.NWNX.StackPopInt();
+            data.iSlash = VM.NWNX.StackPopInt();
+            data.iMagical = VM.NWNX.StackPopInt();
+            data.iAcid = VM.NWNX.StackPopInt();
+            data.iCold = VM.NWNX.StackPopInt();
+            data.iDivine = VM.NWNX.StackPopInt();
+            data.iElectrical = VM.NWNX.StackPopInt();
+            data.iFire = VM.NWNX.StackPopInt();
+            data.iNegative = VM.NWNX.StackPopInt();
+            data.iPositive = VM.NWNX.StackPopInt();
+            data.iSonic = VM.NWNX.StackPopInt();
+            data.iBase = VM.NWNX.StackPopInt();
+            return data;
         }
 
         /// Set Damage Event Data
@@ -54,20 +55,19 @@ namespace NWN.Core.NWNX
         public static void SetDamageEventData(DamageEventData data)
         {
             VM.NWNX.SetFunction(NWNX_Damage, "SetDamageEventData");
-            VM.NWNX.StackPush(data.oDamager);
-            VM.NWNX.StackPush(data.iBludgeoning);
-            VM.NWNX.StackPush(data.iPierce);
-            VM.NWNX.StackPush(data.iSlash);
-            VM.NWNX.StackPush(data.iMagical);
-            VM.NWNX.StackPush(data.iAcid);
-            VM.NWNX.StackPush(data.iCold);
-            VM.NWNX.StackPush(data.iDivine);
-            VM.NWNX.StackPush(data.iElectrical);
-            VM.NWNX.StackPush(data.iFire);
-            VM.NWNX.StackPush(data.iNegative);
-            VM.NWNX.StackPush(data.iPositive);
-            VM.NWNX.StackPush(data.iSonic);
             VM.NWNX.StackPush(data.iBase);
+            VM.NWNX.StackPush(data.iSonic);
+            VM.NWNX.StackPush(data.iPositive);
+            VM.NWNX.StackPush(data.iNegative);
+            VM.NWNX.StackPush(data.iFire);
+            VM.NWNX.StackPush(data.iElectrical);
+            VM.NWNX.StackPush(data.iDivine);
+            VM.NWNX.StackPush(data.iCold);
+            VM.NWNX.StackPush(data.iAcid);
+            VM.NWNX.StackPush(data.iMagical);
+            VM.NWNX.StackPush(data.iSlash);
+            VM.NWNX.StackPush(data.iPierce);
+            VM.NWNX.StackPush(data.iBludgeoning);
             VM.NWNX.Call();
         }
 
@@ -76,9 +76,10 @@ namespace NWN.Core.NWNX
         /// <param name="oOwner">An object if only executing for a specific object or OBJECT_INVALID for global.</param>
         public static void SetAttackEventScript(string sScript, uint oOwner = NWScript.OBJECT_INVALID)
         {
-            VM.NWNX.SetFunction(NWNX_Damage, "SetAttackEventScript");
+            VM.NWNX.SetFunction(NWNX_Damage, "SetEventScript");
             VM.NWNX.StackPush(oOwner);
             VM.NWNX.StackPush(sScript);
+            VM.NWNX.StackPush( "ATTACK");
             VM.NWNX.Call();
         }
 
@@ -88,27 +89,27 @@ namespace NWN.Core.NWNX
         public static AttackEventData GetAttackEventData()
         {
             VM.NWNX.SetFunction(NWNX_Damage, "GetAttackEventData");
+            AttackEventData data = default;
             VM.NWNX.Call();
-            AttackEventData retVal;
-            retVal.iSneakAttack = VM.NWNX.StackPopInt();
-            retVal.iAttackType = VM.NWNX.StackPopInt();
-            retVal.iAttackResult = VM.NWNX.StackPopInt();
-            retVal.iAttackNumber = VM.NWNX.StackPopInt();
-            retVal.iBase = VM.NWNX.StackPopInt();
-            retVal.iSonic = VM.NWNX.StackPopInt();
-            retVal.iPositive = VM.NWNX.StackPopInt();
-            retVal.iNegative = VM.NWNX.StackPopInt();
-            retVal.iFire = VM.NWNX.StackPopInt();
-            retVal.iElectrical = VM.NWNX.StackPopInt();
-            retVal.iDivine = VM.NWNX.StackPopInt();
-            retVal.iCold = VM.NWNX.StackPopInt();
-            retVal.iAcid = VM.NWNX.StackPopInt();
-            retVal.iMagical = VM.NWNX.StackPopInt();
-            retVal.iSlash = VM.NWNX.StackPopInt();
-            retVal.iPierce = VM.NWNX.StackPopInt();
-            retVal.iBludgeoning = VM.NWNX.StackPopInt();
-            retVal.oTarget = VM.NWNX.StackPopObject();
-            return retVal;
+            data.oTarget = VM.NWNX.StackPopObject();
+            data.iBludgeoning = VM.NWNX.StackPopInt();
+            data.iPierce = VM.NWNX.StackPopInt();
+            data.iSlash = VM.NWNX.StackPopInt();
+            data.iMagical = VM.NWNX.StackPopInt();
+            data.iAcid = VM.NWNX.StackPopInt();
+            data.iCold = VM.NWNX.StackPopInt();
+            data.iDivine = VM.NWNX.StackPopInt();
+            data.iElectrical = VM.NWNX.StackPopInt();
+            data.iFire = VM.NWNX.StackPopInt();
+            data.iNegative = VM.NWNX.StackPopInt();
+            data.iPositive = VM.NWNX.StackPopInt();
+            data.iSonic = VM.NWNX.StackPopInt();
+            data.iBase = VM.NWNX.StackPopInt();
+            data.iAttackNumber = VM.NWNX.StackPopInt();
+            data.iAttackResult = VM.NWNX.StackPopInt();
+            data.iAttackType = VM.NWNX.StackPopInt();
+            data.iSneakAttack = VM.NWNX.StackPopInt();
+            return data;
         }
 
         /// Set Attack Event Data
@@ -117,24 +118,20 @@ namespace NWN.Core.NWNX
         public static void SetAttackEventData(AttackEventData data)
         {
             VM.NWNX.SetFunction(NWNX_Damage, "SetAttackEventData");
-            VM.NWNX.StackPush(data.oTarget);
-            VM.NWNX.StackPush(data.iBludgeoning);
-            VM.NWNX.StackPush(data.iPierce);
-            VM.NWNX.StackPush(data.iSlash);
-            VM.NWNX.StackPush(data.iMagical);
-            VM.NWNX.StackPush(data.iAcid);
-            VM.NWNX.StackPush(data.iCold);
-            VM.NWNX.StackPush(data.iDivine);
-            VM.NWNX.StackPush(data.iElectrical);
-            VM.NWNX.StackPush(data.iFire);
-            VM.NWNX.StackPush(data.iNegative);
-            VM.NWNX.StackPush(data.iPositive);
-            VM.NWNX.StackPush(data.iSonic);
-            VM.NWNX.StackPush(data.iBase);
-            VM.NWNX.StackPush(data.iAttackNumber);
             VM.NWNX.StackPush(data.iAttackResult);
-            VM.NWNX.StackPush(data.iAttackType);
-            VM.NWNX.StackPush(data.iSneakAttack);
+            VM.NWNX.StackPush(data.iBase);
+            VM.NWNX.StackPush(data.iSonic);
+            VM.NWNX.StackPush(data.iPositive);
+            VM.NWNX.StackPush(data.iNegative);
+            VM.NWNX.StackPush(data.iFire);
+            VM.NWNX.StackPush(data.iElectrical);
+            VM.NWNX.StackPush(data.iDivine);
+            VM.NWNX.StackPush(data.iCold);
+            VM.NWNX.StackPush(data.iAcid);
+            VM.NWNX.StackPush(data.iMagical);
+            VM.NWNX.StackPush(data.iSlash);
+            VM.NWNX.StackPush(data.iPierce);
+            VM.NWNX.StackPush(data.iBludgeoning);
             VM.NWNX.Call();
         }
 
@@ -144,25 +141,25 @@ namespace NWN.Core.NWNX
         /// <param name="oTarget">The target object on whom the damage is dealt.</param>
         /// <param name="oSource">The source of the damage.</param>
         /// <param name="iRanged">Whether the attack should be treated as ranged by the engine (for example when considering damage inflicted by Acid Sheath and other such effects)</param>
-        public static void DealDamage(DamageData data, uint oTarget, uint oSource = NWScript.OBJECT_INVALID, int iRanged = NWScript.FALSE)
+        public static void DealDamage(DamageData data, uint oTarget, uint oSource, int iRanged = NWScript.FALSE)
         {
             VM.NWNX.SetFunction(NWNX_Damage, "DealDamage");
             VM.NWNX.StackPush(iRanged);
-            VM.NWNX.StackPush(oSource);
-            VM.NWNX.StackPush(oTarget);
-            VM.NWNX.StackPush(data.iBludgeoning);
-            VM.NWNX.StackPush(data.iPierce);
-            VM.NWNX.StackPush(data.iSlash);
-            VM.NWNX.StackPush(data.iMagical);
-            VM.NWNX.StackPush(data.iAcid);
-            VM.NWNX.StackPush(data.iCold);
-            VM.NWNX.StackPush(data.iDivine);
-            VM.NWNX.StackPush(data.iElectrical);
-            VM.NWNX.StackPush(data.iFire);
-            VM.NWNX.StackPush(data.iNegative);
-            VM.NWNX.StackPush(data.iPositive);
-            VM.NWNX.StackPush(data.iSonic);
             VM.NWNX.StackPush(data.iPower);
+            VM.NWNX.StackPush(data.iSonic);
+            VM.NWNX.StackPush(data.iPositive);
+            VM.NWNX.StackPush(data.iNegative);
+            VM.NWNX.StackPush(data.iFire);
+            VM.NWNX.StackPush(data.iElectrical);
+            VM.NWNX.StackPush(data.iDivine);
+            VM.NWNX.StackPush(data.iCold);
+            VM.NWNX.StackPush(data.iAcid);
+            VM.NWNX.StackPush(data.iMagical);
+            VM.NWNX.StackPush(data.iSlash);
+            VM.NWNX.StackPush(data.iPierce);
+            VM.NWNX.StackPush(data.iBludgeoning);
+            VM.NWNX.StackPush(oTarget);
+            VM.NWNX.StackPush(oSource);
             VM.NWNX.Call();
         }
 

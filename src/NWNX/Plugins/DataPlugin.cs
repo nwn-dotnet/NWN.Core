@@ -22,40 +22,44 @@ namespace NWN.Core.NWNX
         /// @{
         public static float Array_At_Flt(uint obj, string tag, int index)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Flt");
+            VM.NWNX.SetFunction(NWNX_Data, "ArrayAt");
             VM.NWNX.StackPush(index);
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
+            VM.NWNX.StackPush(NWNX_DATA_TYPE_FLOAT);
             VM.NWNX.Call();
             return VM.NWNX.StackPopFloat();
         }
 
         public static int Array_At_Int(uint obj, string tag, int index)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Int");
+            VM.NWNX.SetFunction(NWNX_Data, "ArrayAt");
             VM.NWNX.StackPush(index);
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
+            VM.NWNX.StackPush(NWNX_DATA_TYPE_INTEGER);
             VM.NWNX.Call();
             return VM.NWNX.StackPopInt();
         }
 
         public static uint Array_At_Obj(uint obj, string tag, int index)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Obj");
+            VM.NWNX.SetFunction(NWNX_Data, "ArrayAt");
             VM.NWNX.StackPush(index);
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
+            VM.NWNX.StackPush(NWNX_DATA_TYPE_OBJECT);
             VM.NWNX.Call();
             return VM.NWNX.StackPopObject();
         }
 
         public static string Array_At_Str(uint obj, string tag, int index)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Str");
+            VM.NWNX.SetFunction(NWNX_Data, "ArrayAt");
             VM.NWNX.StackPush(index);
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
+            VM.NWNX.StackPush(NWNX_DATA_TYPE_STRING);
             VM.NWNX.Call();
             return VM.NWNX.StackPopString();
         }
@@ -64,7 +68,7 @@ namespace NWN.Core.NWNX
         /// Clears the entire array, such that size==0.
         public static void Array_Clear(int type, uint obj, string tag)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Clear");
+            VM.NWNX.SetFunction(NWNX_Data, "ArrayClear");
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
             VM.NWNX.StackPush(type);
@@ -81,40 +85,44 @@ namespace NWN.Core.NWNX
         /// @{
         public static int Array_Contains_Flt(uint obj, string tag, float element)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Flt");
+            VM.NWNX.SetFunction(NWNX_Data, "ArrayContains");
             VM.NWNX.StackPush(element);
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
+            VM.NWNX.StackPush(NWNX_DATA_TYPE_FLOAT);
             VM.NWNX.Call();
             return VM.NWNX.StackPopInt();
         }
 
         public static int Array_Contains_Int(uint obj, string tag, int element)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Int");
+            VM.NWNX.SetFunction(NWNX_Data, "ArrayContains");
             VM.NWNX.StackPush(element);
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
+            VM.NWNX.StackPush(NWNX_DATA_TYPE_INTEGER);
             VM.NWNX.Call();
             return VM.NWNX.StackPopInt();
         }
 
         public static int Array_Contains_Obj(uint obj, string tag, uint element)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Obj");
+            VM.NWNX.SetFunction(NWNX_Data, "ArrayContains");
             VM.NWNX.StackPush(element);
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
+            VM.NWNX.StackPush(NWNX_DATA_TYPE_OBJECT);
             VM.NWNX.Call();
             return VM.NWNX.StackPopInt();
         }
 
         public static int Array_Contains_Str(uint obj, string tag, string element)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Str");
+            VM.NWNX.SetFunction(NWNX_Data, "ArrayContains");
             VM.NWNX.StackPush(element);
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
+            VM.NWNX.StackPush(NWNX_DATA_TYPE_STRING);
             VM.NWNX.Call();
             return VM.NWNX.StackPopInt();
         }
@@ -123,7 +131,7 @@ namespace NWN.Core.NWNX
         /// Copies the array of name otherTag over the array of name tag.
         public static void Array_Copy(int type, uint obj, string tag, string otherTag)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Copy");
+            VM.NWNX.SetFunction(NWNX_Data, "ArrayCopy");
             VM.NWNX.StackPush(otherTag);
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
@@ -134,7 +142,7 @@ namespace NWN.Core.NWNX
         /// Erases the element at index, and shuffles any elements from index size-1 to index + 1 left.
         public static void Array_Erase(int type, uint obj, string tag, int index)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Erase");
+            VM.NWNX.SetFunction(NWNX_Data, "ArrayErase");
             VM.NWNX.StackPush(index);
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
@@ -152,40 +160,44 @@ namespace NWN.Core.NWNX
         /// @{
         public static int Array_Find_Flt(uint obj, string tag, float element)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Flt");
+            VM.NWNX.SetFunction(NWNX_Data, "ArrayFind");
             VM.NWNX.StackPush(element);
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
+            VM.NWNX.StackPush(NWNX_DATA_TYPE_FLOAT);
             VM.NWNX.Call();
             return VM.NWNX.StackPopInt();
         }
 
         public static int Array_Find_Int(uint obj, string tag, int element)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Int");
+            VM.NWNX.SetFunction(NWNX_Data, "ArrayFind");
             VM.NWNX.StackPush(element);
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
+            VM.NWNX.StackPush(NWNX_DATA_TYPE_INTEGER);
             VM.NWNX.Call();
             return VM.NWNX.StackPopInt();
         }
 
         public static int Array_Find_Obj(uint obj, string tag, uint element)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Obj");
+            VM.NWNX.SetFunction(NWNX_Data, "ArrayFind");
             VM.NWNX.StackPush(element);
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
+            VM.NWNX.StackPush(NWNX_DATA_TYPE_OBJECT);
             VM.NWNX.Call();
             return VM.NWNX.StackPopInt();
         }
 
         public static int Array_Find_Str(uint obj, string tag, string element)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Str");
+            VM.NWNX.SetFunction(NWNX_Data, "ArrayFind");
             VM.NWNX.StackPush(element);
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
+            VM.NWNX.StackPush(NWNX_DATA_TYPE_STRING);
             VM.NWNX.Call();
             return VM.NWNX.StackPopInt();
         }
@@ -201,41 +213,45 @@ namespace NWN.Core.NWNX
         /// @{
         public static void Array_Insert_Flt(uint obj, string tag, int index, float element)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Flt");
+            VM.NWNX.SetFunction(NWNX_Data, "ArrayInsert");
             VM.NWNX.StackPush(element);
             VM.NWNX.StackPush(index);
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
+            VM.NWNX.StackPush(NWNX_DATA_TYPE_FLOAT);
             VM.NWNX.Call();
         }
 
         public static void Array_Insert_Int(uint obj, string tag, int index, int element)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Int");
+            VM.NWNX.SetFunction(NWNX_Data, "ArrayInsert");
             VM.NWNX.StackPush(element);
             VM.NWNX.StackPush(index);
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
+            VM.NWNX.StackPush(NWNX_DATA_TYPE_INTEGER);
             VM.NWNX.Call();
         }
 
         public static void Array_Insert_Obj(uint obj, string tag, int index, uint element)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Obj");
+            VM.NWNX.SetFunction(NWNX_Data, "ArrayInsert");
             VM.NWNX.StackPush(element);
             VM.NWNX.StackPush(index);
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
+            VM.NWNX.StackPush(NWNX_DATA_TYPE_OBJECT);
             VM.NWNX.Call();
         }
 
         public static void Array_Insert_Str(uint obj, string tag, int index, string element)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Str");
+            VM.NWNX.SetFunction(NWNX_Data, "ArrayInsert");
             VM.NWNX.StackPush(element);
             VM.NWNX.StackPush(index);
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
+            VM.NWNX.StackPush(NWNX_DATA_TYPE_STRING);
             VM.NWNX.Call();
         }
 
@@ -250,37 +266,41 @@ namespace NWN.Core.NWNX
         /// @{
         public static void Array_PushBack_Flt(uint obj, string tag, float element)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Flt");
+            VM.NWNX.SetFunction(NWNX_Data, "ArrayPushBack");
             VM.NWNX.StackPush(element);
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
+            VM.NWNX.StackPush(NWNX_DATA_TYPE_FLOAT);
             VM.NWNX.Call();
         }
 
         public static void Array_PushBack_Int(uint obj, string tag, int element)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Int");
+            VM.NWNX.SetFunction(NWNX_Data, "ArrayPushBack");
             VM.NWNX.StackPush(element);
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
+            VM.NWNX.StackPush(NWNX_DATA_TYPE_INTEGER);
             VM.NWNX.Call();
         }
 
         public static void Array_PushBack_Obj(uint obj, string tag, uint element)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Obj");
+            VM.NWNX.SetFunction(NWNX_Data, "ArrayPushBack");
             VM.NWNX.StackPush(element);
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
+            VM.NWNX.StackPush(NWNX_DATA_TYPE_OBJECT);
             VM.NWNX.Call();
         }
 
         public static void Array_PushBack_Str(uint obj, string tag, string element)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Str");
+            VM.NWNX.SetFunction(NWNX_Data, "ArrayPushBack");
             VM.NWNX.StackPush(element);
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
+            VM.NWNX.StackPush(NWNX_DATA_TYPE_STRING);
             VM.NWNX.Call();
         }
 
@@ -288,7 +308,7 @@ namespace NWN.Core.NWNX
         /// Resizes the array. If the array is shrinking, it chops off elements at the ned.
         public static void Array_Resize(int type, uint obj, string tag, int size)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Resize");
+            VM.NWNX.SetFunction(NWNX_Data, "ArrayResize");
             VM.NWNX.StackPush(size);
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
@@ -299,7 +319,7 @@ namespace NWN.Core.NWNX
         /// Reorders the array such each possible permutation of elements has equal probability of appearance.
         public static void Array_Shuffle(int type, uint obj, string tag)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Shuffle");
+            VM.NWNX.SetFunction(NWNX_Data, "ArrayShuffle");
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
             VM.NWNX.StackPush(type);
@@ -309,7 +329,7 @@ namespace NWN.Core.NWNX
         /// Returns the size of the array.
         public static int Array_Size(int type, uint obj, string tag)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Size");
+            VM.NWNX.SetFunction(NWNX_Data, "ArraySize");
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
             VM.NWNX.StackPush(type);
@@ -320,7 +340,7 @@ namespace NWN.Core.NWNX
         /// Sorts the collection based on descending order.
         public static void Array_SortAscending(int type, uint obj, string tag)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "SortAscending");
+            VM.NWNX.SetFunction(NWNX_Data, "ArraySortAscending");
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
             VM.NWNX.StackPush(type);
@@ -330,7 +350,7 @@ namespace NWN.Core.NWNX
         /// Sorts the collection based on descending order.
         public static void Array_SortDescending(int type, uint obj, string tag)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "SortDescending");
+            VM.NWNX.SetFunction(NWNX_Data, "ArraySortDescending");
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
             VM.NWNX.StackPush(type);
@@ -347,41 +367,45 @@ namespace NWN.Core.NWNX
         /// @{
         public static void Array_Set_Flt(uint obj, string tag, int index, float element)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Flt");
+            VM.NWNX.SetFunction(NWNX_Data, "ArraySet");
             VM.NWNX.StackPush(element);
             VM.NWNX.StackPush(index);
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
+            VM.NWNX.StackPush(NWNX_DATA_TYPE_FLOAT);
             VM.NWNX.Call();
         }
 
         public static void Array_Set_Int(uint obj, string tag, int index, int element)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Int");
+            VM.NWNX.SetFunction(NWNX_Data, "ArraySet");
             VM.NWNX.StackPush(element);
             VM.NWNX.StackPush(index);
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
+            VM.NWNX.StackPush(NWNX_DATA_TYPE_INTEGER);
             VM.NWNX.Call();
         }
 
         public static void Array_Set_Obj(uint obj, string tag, int index, uint element)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Obj");
+            VM.NWNX.SetFunction(NWNX_Data, "ArraySet");
             VM.NWNX.StackPush(element);
             VM.NWNX.StackPush(index);
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
+            VM.NWNX.StackPush(NWNX_DATA_TYPE_OBJECT);
             VM.NWNX.Call();
         }
 
         public static void Array_Set_Str(uint obj, string tag, int index, string element)
         {
-            VM.NWNX.SetFunction(NWNX_Data, "Str");
+            VM.NWNX.SetFunction(NWNX_Data, "ArraySet");
             VM.NWNX.StackPush(element);
             VM.NWNX.StackPush(index);
             VM.NWNX.StackPush(tag);
             VM.NWNX.StackPush(obj);
+            VM.NWNX.StackPush(NWNX_DATA_TYPE_STRING);
             VM.NWNX.Call();
         }
 

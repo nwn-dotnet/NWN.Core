@@ -31,9 +31,12 @@ namespace NWN.Core.NWNX
         public static void PushPerfScope(string name, string tag0_tag = "", string tag0_value = "")
         {
             VM.NWNX.SetFunction(NWNX_Profiler, "PushPerfScope");
-            VM.NWNX.StackPush(tag0_value);
-            VM.NWNX.StackPush(tag0_tag);
             VM.NWNX.StackPush(name);
+            if (tag0_value!=""&&tag0_tag!="")
+            {
+                VM.NWNX.StackPush(tag0_value);
+                VM.NWNX.StackPush(tag0_tag);
+            }
             VM.NWNX.Call();
         }
 

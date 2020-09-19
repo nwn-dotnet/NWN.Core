@@ -201,20 +201,23 @@ namespace NWN.Core.NWNX
         /// <returns>An NWNX_Weapon_DevastatingCriticalEvent_Data struct.</returns>
         public static DevastatingCriticalEvent_Data GetDevastatingCriticalEventData()
         {
-            VM.NWNX.SetFunction(NWNX_Weapon, "GetDevastatingCriticalEventData");
+            VM.NWNX.SetFunction(NWNX_Weapon, "GetEventData");
+            DevastatingCriticalEvent_Data data = default;
+            VM.NWNX.StackPush(NWNX_WEAPON_GETDATA_DC);
             VM.NWNX.Call();
-            DevastatingCriticalEvent_Data retVal;
-            retVal.nDamage = VM.NWNX.StackPopInt();
-            retVal.oTarget = VM.NWNX.StackPopObject();
-            retVal.oWeapon = VM.NWNX.StackPopObject();
-            return retVal;
+            data.oWeapon = VM.NWNX.StackPopObject();
+            data.oTarget = VM.NWNX.StackPopObject();
+            data.nDamage = VM.NWNX.StackPopInt();
+            return data;
         }
 
         /// Bypass Devastating Critical.
         /// @note This is only for use with the Devastating Critical Event Script.
         public static void BypassDevastatingCritical()
         {
-            VM.NWNX.SetFunction(NWNX_Weapon, "BypassDevastatingCritical");
+            VM.NWNX.SetFunction(NWNX_Weapon, "SetEventData");
+            VM.NWNX.StackPush(1);
+            VM.NWNX.StackPush(NWNX_WEAPON_SETDATA_DC_BYPASS);
             VM.NWNX.Call();
         }
 

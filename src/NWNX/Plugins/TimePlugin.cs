@@ -36,12 +36,12 @@ namespace NWN.Core.NWNX
         /// <returns>Returns the number of microseconds since midnight on January 1, 1970.</returns>
         public static HighResTimestamp GetHighResTimeStamp()
         {
+            HighResTimestamp t = default;
             VM.NWNX.SetFunction(NWNX_Time, "GetHighResTimeStamp");
             VM.NWNX.Call();
-            HighResTimestamp retVal;
-            retVal.microseconds = VM.NWNX.StackPopInt();
-            retVal.seconds = VM.NWNX.StackPopInt();
-            return retVal;
+            t.microseconds = VM.NWNX.StackPopInt();
+            t.seconds = VM.NWNX.StackPopInt();
+            return t;
         }
 
         /// @}
