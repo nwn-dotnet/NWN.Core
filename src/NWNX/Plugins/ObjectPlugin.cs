@@ -634,6 +634,19 @@ namespace NWN.Core.NWNX
             VM.NWNX.Call();
         }
 
+        /// Get the current animation of oObject
+        /// @note The returned value will be an engine animation constant, not a NWScript ANIMATION_ constant.
+        ///       See: https://github.com/nwnxee/unified/blob/master/NWNXLib/API/Constants/Animation.hpp
+        /// <param name="oObject">The object</param>
+        /// <returns>-1 on error or the engine animation constant</returns>
+        public static int GetCurrentAnimation(uint oObject)
+        {
+            VM.NWNX.SetFunction(NWNX_Object, "GetCurrentAnimation");
+            VM.NWNX.StackPush(oObject);
+            VM.NWNX.Call();
+            return VM.NWNX.StackPopInt();
+        }
+
         /// @}
     }
 

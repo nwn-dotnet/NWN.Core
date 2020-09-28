@@ -1570,6 +1570,28 @@ namespace NWN.Core.NWNX
             return VM.NWNX.StackPopInt();
         }
 
+        /// Gets the current walk animation of oCreature.
+        /// <param name="oCreature">The target creature.</param>
+        /// <returns>-1 on Error, otherwise the walk animation number</returns>
+        public static int GetWalkAnimation(uint oCreature)
+        {
+            VM.NWNX.SetFunction(NWNX_Creature, "GetWalkAnimation");
+            VM.NWNX.StackPush(oCreature);
+            VM.NWNX.Call();
+            return VM.NWNX.StackPopInt();
+        }
+
+        /// Sets the current walk animation of oCreature.
+        /// <param name="oCreature">The target creature.</param>
+        /// <param name="nAnimation">The walk animation number.</param>
+        public static void SetWalkAnimation(uint oCreature, int nAnimation)
+        {
+            VM.NWNX.SetFunction(NWNX_Creature, "SetWalkAnimation");
+            VM.NWNX.StackPush(nAnimation);
+            VM.NWNX.StackPush(oCreature);
+            VM.NWNX.Call();
+        }
+
         /// @}
     }
 
