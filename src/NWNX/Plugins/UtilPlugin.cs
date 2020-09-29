@@ -412,6 +412,17 @@ namespace NWN.Core.NWNX
             return VM.NWNX.StackPopString();
         }
 
+        /// Get if a script param is set.
+        /// <param name="sParamName">The script parameter name to check.</param>
+        /// <returns>TRUE if the script param is set, FALSE if not or on error.</returns>
+        public static int GetScriptParamIsSet(string sParamName)
+        {
+            VM.NWNX.SetFunction(NWNX_Util, "GetScriptParamIsSet");
+            VM.NWNX.StackPush(sParamName);
+            VM.NWNX.Call();
+            return VM.NWNX.StackPopInt();
+        }
+
         /// @}
     }
 

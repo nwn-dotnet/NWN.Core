@@ -168,6 +168,7 @@ namespace NWN.Core.NWNX
         }
 
         /// Set base item as monk weapon.
+        /// @note Requires activation of CombatModes plugin for Flurry of Blows.
         /// <param name="nBaseItem">The base item id.</param>
         public static void SetWeaponIsMonkWeapon(int nBaseItem)
         {
