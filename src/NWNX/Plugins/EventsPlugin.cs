@@ -219,6 +219,7 @@ namespace NWN.Core.NWNX
             Event Data Tag        | Type   | Notes |
             ----------------------|--------|-------|
             ITEM                  | object | Convert to object with StringToObject()|
+            GIVER                 | object | Convert to object with StringToObject() (will be INVALID if picked up from ground)|
             RESULT                | int    | Returns TRUE in the _AFTER if the acquisition was successful, FALSE otherwise
         
             @note This event currently only works with creatures
@@ -239,6 +240,7 @@ namespace NWN.Core.NWNX
             TARGET_POSITION_X     | float  | |
             TARGET_POSITION_Y     | float  | |
             TARGET_POSITION_Z     | float  | |
+            ACTION_RESULT         | int    | TRUE/FALSE, only in _AFTER events
         
         _______________________________________
             ## DM Give Events
@@ -628,6 +630,7 @@ namespace NWN.Core.NWNX
             TARGET_POSITION_X     | float | |
             TARGET_POSITION_Y     | float | |
             TARGET_POSITION_Z     | float | |
+            ACTION_RESULT         | int    | TRUE/FALSE, only in _AFTER events
         
             @note Probably only really works with the following activated skills:
             `SKILL_ANIMAL_EMPATHY`, `SKILL_DISABLE_TRAP`, `SKILL_HEAL`, `SKILL_OPEN_LOCK`,
@@ -1044,6 +1047,7 @@ namespace NWN.Core.NWNX
             Event Data Tag        | Type   | Notes
             ----------------------|--------|-------
             DOOR                  | object | Convert to object with StringToObject()
+            ACTION_RESULT         | int    | TRUE/FALSE, only in _AFTER events
         
         _______________________________________
             ## Object Unlock Events
@@ -1057,6 +1061,7 @@ namespace NWN.Core.NWNX
             DOOR                  | object | Convert to object with StringToObject()
             THIEVES_TOOL          | object | Convert to object with StringToObject()
             ACTIVE_PROPERTY_INDEX | int    |
+            ACTION_RESULT         | int    | TRUE/FALSE, only in _AFTER events
         
         _______________________________________
             ## UUID Collision Events
@@ -1185,6 +1190,7 @@ namespace NWN.Core.NWNX
             ITEM                  | object | The item being bought or sold. Convert to object with StringToObject()  |
             STORE                 | object | The store the item is being sold to or bought from. Convert to object with StringToObject() |
             PRICE                 | int    | The buy or sell price |
+            RESULT                | int    | TRUE/FALSE whether the request was successful. Only in *_AFTER events.
         
         _______________________________________
             ## Server Send Area Events
