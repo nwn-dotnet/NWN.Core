@@ -888,7 +888,7 @@ namespace NWN.Core
     ///  math operations
     ///  Maths operation: absolute value of fValue
     /// </summary>
-    public static float Fabs(float fValue)
+    public static float fabs(float fValue)
     {
       VM.StackPush(fValue);
       VM.Call(67);
@@ -898,7 +898,7 @@ namespace NWN.Core
     /// <summary>
     ///  Maths operation: cosine of fValue
     /// </summary>
-    public static float Cos(float fValue)
+    public static float cos(float fValue)
     {
       VM.StackPush(fValue);
       VM.Call(68);
@@ -908,7 +908,7 @@ namespace NWN.Core
     /// <summary>
     ///  Maths operation: sine of fValue
     /// </summary>
-    public static float Sin(float fValue)
+    public static float sin(float fValue)
     {
       VM.StackPush(fValue);
       VM.Call(69);
@@ -918,7 +918,7 @@ namespace NWN.Core
     /// <summary>
     ///  Maths operation: tan of fValue
     /// </summary>
-    public static float Tan(float fValue)
+    public static float tan(float fValue)
     {
       VM.StackPush(fValue);
       VM.Call(70);
@@ -927,9 +927,9 @@ namespace NWN.Core
 
     /// <summary>
     ///  Maths operation: arccosine of fValue
-    ///  * Returns zero if fValue > 1 or fValue less than -1
+    ///  * Returns zero if fValue > 1 or fValue < -1
     /// </summary>
-    public static float Acos(float fValue)
+    public static float acos(float fValue)
     {
       VM.StackPush(fValue);
       VM.Call(71);
@@ -938,9 +938,9 @@ namespace NWN.Core
 
     /// <summary>
     ///  Maths operation: arcsine of fValue
-    ///  * Returns zero if fValue >1 or fValue less than -1
+    ///  * Returns zero if fValue >1 or fValue < -1
     /// </summary>
-    public static float Asin(float fValue)
+    public static float asin(float fValue)
     {
       VM.StackPush(fValue);
       VM.Call(72);
@@ -950,7 +950,7 @@ namespace NWN.Core
     /// <summary>
     ///  Maths operation: arctan of fValue
     /// </summary>
-    public static float Atan(float fValue)
+    public static float atan(float fValue)
     {
       VM.StackPush(fValue);
       VM.Call(73);
@@ -959,9 +959,9 @@ namespace NWN.Core
 
     /// <summary>
     ///  Maths operation: log of fValue
-    ///  * Returns zero if fValue less than or equal to zero
+    ///  * Returns zero if fValue <= zero
     /// </summary>
-    public static float Log(float fValue)
+    public static float log(float fValue)
     {
       VM.StackPush(fValue);
       VM.Call(74);
@@ -970,9 +970,9 @@ namespace NWN.Core
 
     /// <summary>
     ///  Maths operation: fValue is raised to the power of fExponent
-    ///  * Returns zero if fValue ==0 and fExponent less than 0
+    ///  * Returns zero if fValue ==0 and fExponent <0
     /// </summary>
-    public static float Pow(float fValue, float fExponent)
+    public static float pow(float fValue, float fExponent)
     {
       VM.StackPush(fExponent);
       VM.StackPush(fValue);
@@ -982,9 +982,9 @@ namespace NWN.Core
 
     /// <summary>
     ///  Maths operation: square root of fValue
-    ///  * Returns zero if fValue less than 0
+    ///  * Returns zero if fValue <0
     /// </summary>
-    public static float Sqrt(float fValue)
+    public static float sqrt(float fValue)
     {
       VM.StackPush(fValue);
       VM.Call(76);
@@ -995,7 +995,7 @@ namespace NWN.Core
     ///  Maths operation: integer absolute value of nValue
     ///  * Return value on error: 0
     /// </summary>
-    public static int Abs(int nValue)
+    public static int abs(int nValue)
     {
       VM.StackPush(nValue);
       VM.Call(77);
@@ -1004,7 +1004,7 @@ namespace NWN.Core
 
     /// <summary>
     ///  Create a Heal effect. This should be applied as an instantaneous effect.
-    ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nDamageToHeal less than 0.
+    ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nDamageToHeal < 0.
     /// </summary>
     public static IntPtr EffectHeal(int nDamageToHeal)
     {
@@ -1212,7 +1212,7 @@ namespace NWN.Core
     ///  Get the total from rolling (nNumDice x d2 dice).
     ///  - nNumDice: If this is less than 1, the value 1 will be used.
     /// </summary>
-    public static int D2(int nNumDice = 1)
+    public static int d2(int nNumDice = 1)
     {
       VM.StackPush(nNumDice);
       VM.Call(95);
@@ -1223,7 +1223,7 @@ namespace NWN.Core
     ///  Get the total from rolling (nNumDice x d3 dice).
     ///  - nNumDice: If this is less than 1, the value 1 will be used.
     /// </summary>
-    public static int D3(int nNumDice = 1)
+    public static int d3(int nNumDice = 1)
     {
       VM.StackPush(nNumDice);
       VM.Call(96);
@@ -1234,7 +1234,7 @@ namespace NWN.Core
     ///  Get the total from rolling (nNumDice x d4 dice).
     ///  - nNumDice: If this is less than 1, the value 1 will be used.
     /// </summary>
-    public static int D4(int nNumDice = 1)
+    public static int d4(int nNumDice = 1)
     {
       VM.StackPush(nNumDice);
       VM.Call(97);
@@ -1245,7 +1245,7 @@ namespace NWN.Core
     ///  Get the total from rolling (nNumDice x d6 dice).
     ///  - nNumDice: If this is less than 1, the value 1 will be used.
     /// </summary>
-    public static int D6(int nNumDice = 1)
+    public static int d6(int nNumDice = 1)
     {
       VM.StackPush(nNumDice);
       VM.Call(98);
@@ -1256,7 +1256,7 @@ namespace NWN.Core
     ///  Get the total from rolling (nNumDice x d8 dice).
     ///  - nNumDice: If this is less than 1, the value 1 will be used.
     /// </summary>
-    public static int D8(int nNumDice = 1)
+    public static int d8(int nNumDice = 1)
     {
       VM.StackPush(nNumDice);
       VM.Call(99);
@@ -1267,7 +1267,7 @@ namespace NWN.Core
     ///  Get the total from rolling (nNumDice x d10 dice).
     ///  - nNumDice: If this is less than 1, the value 1 will be used.
     /// </summary>
-    public static int D10(int nNumDice = 1)
+    public static int d10(int nNumDice = 1)
     {
       VM.StackPush(nNumDice);
       VM.Call(100);
@@ -1278,7 +1278,7 @@ namespace NWN.Core
     ///  Get the total from rolling (nNumDice x d12 dice).
     ///  - nNumDice: If this is less than 1, the value 1 will be used.
     /// </summary>
-    public static int D12(int nNumDice = 1)
+    public static int d12(int nNumDice = 1)
     {
       VM.StackPush(nNumDice);
       VM.Call(101);
@@ -1289,7 +1289,7 @@ namespace NWN.Core
     ///  Get the total from rolling (nNumDice x d20 dice).
     ///  - nNumDice: If this is less than 1, the value 1 will be used.
     /// </summary>
-    public static int D20(int nNumDice = 1)
+    public static int d20(int nNumDice = 1)
     {
       VM.StackPush(nNumDice);
       VM.Call(102);
@@ -1300,7 +1300,7 @@ namespace NWN.Core
     ///  Get the total from rolling (nNumDice x d100 dice).
     ///  - nNumDice: If this is less than 1, the value 1 will be used.
     /// </summary>
-    public static int D100(int nNumDice = 1)
+    public static int d100(int nNumDice = 1)
     {
       VM.StackPush(nNumDice);
       VM.Call(103);
@@ -4002,7 +4002,7 @@ namespace NWN.Core
     /// <summary>
     ///  Create a Temporary Hitpoints effect.
     ///  - nHitPoints: a positive integer
-    ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nHitPoints less than 0.
+    ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nHitPoints < 0.
     /// </summary>
     public static IntPtr EffectTemporaryHitpoints(int nHitPoints)
     {
@@ -4921,7 +4921,7 @@ namespace NWN.Core
     ///    the enmity lasts.
     ///  Note: If bDecays is TRUE, the personal reputation amount decreases in size
     ///  over fDurationInSeconds. Enmity will only be in effect as long as
-    ///  (faction reputation + total personal reputation) less than or equal to REPUTATION_TYPE_ENEMY.
+    ///  (faction reputation + total personal reputation) <= REPUTATION_TYPE_ENEMY.
     /// </summary>
     public static void SetIsTemporaryEnemy(uint oTarget, uint oSource = OBJECT_INVALID, int bDecays = FALSE, float fDurationInSeconds = 180.0f)
     {
@@ -4942,8 +4942,8 @@ namespace NWN.Core
     ///    the neutrality lasts.
     ///  Note: If bDecays is TRUE, the personal reputation amount decreases in size
     ///  over fDurationInSeconds. Neutrality will only be in effect as long as
-    ///  (faction reputation + total personal reputation) greater than REPUTATION_TYPE_ENEMY and
-    ///  (faction reputation + total personal reputation) less than REPUTATION_TYPE_FRIEND.
+    ///  (faction reputation + total personal reputation) > REPUTATION_TYPE_ENEMY and
+    ///  (faction reputation + total personal reputation) < REPUTATION_TYPE_FRIEND.
     /// </summary>
     public static void SetIsTemporaryNeutral(uint oTarget, uint oSource = OBJECT_INVALID, int bDecays = FALSE, float fDurationInSeconds = 180.0f)
     {
@@ -5685,7 +5685,7 @@ namespace NWN.Core
     ///  Create a Concealment effect.
     ///  - nPercentage: 1-100 inclusive
     ///  - nMissChanceType: MISS_CHANCE_TYPE_*
-    ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nPercentage less than 1 or
+    ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nPercentage < 1 or
     ///    nPercentage > 100.
     /// </summary>
     public static IntPtr EffectConcealment(int nPercentage, int nMissType = MISS_CHANCE_TYPE_NORMAL)
@@ -5754,7 +5754,7 @@ namespace NWN.Core
     /// <summary>
     ///  Create a Sanctuary effect.
     ///  - nDifficultyClass: must be a non-zero, positive number
-    ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nDifficultyClass less than or equal to 0.
+    ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nDifficultyClass <= 0.
     /// </summary>
     public static IntPtr EffectSanctuary(int nDifficultyClass)
     {
@@ -5930,7 +5930,7 @@ namespace NWN.Core
     ///  Create a Miss Chance effect.
     ///  - nPercentage: 1-100 inclusive
     ///  - nMissChanceType: MISS_CHANCE_TYPE_*
-    ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nPercentage less than 1 or
+    ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nPercentage < 1 or
     ///    nPercentage > 100.
     /// </summary>
     public static IntPtr EffectMissChance(int nPercentage, int nMissChanceType = MISS_CHANCE_TYPE_NORMAL)
@@ -8426,7 +8426,7 @@ namespace NWN.Core
     /// <summary>
     ///  Returns Item property extra melee damage type.  You must specify the extra
     ///  melee base damage type that you want applied.  It is a constant(IP_CONST_DAMAGETYPE_*).
-    ///  NOTE: only the first 3 base types (piercing, slashing, and bludgeoning are applicable
+    ///  NOTE: only the first 3 base types (piercing, slashing, & bludgeoning are applicable
     ///        here.
     ///  NOTE: It is also only applicable to melee weapons.
     /// </summary>
@@ -8440,7 +8440,7 @@ namespace NWN.Core
     /// <summary>
     ///  Returns Item property extra ranged damage type.  You must specify the extra
     ///  melee base damage type that you want applied.  It is a constant(IP_CONST_DAMAGETYPE_*).
-    ///  NOTE: only the first 3 base types (piercing, slashing, and bludgeoning are applicable
+    ///  NOTE: only the first 3 base types (piercing, slashing, & bludgeoning are applicable
     ///        here.
     ///  NOTE: It is also only applicable to ranged weapons.
     /// </summary>
@@ -10310,7 +10310,7 @@ namespace NWN.Core
     /// <summary>
     ///  Sets the body part model to be used on the creature specified.
     ///  The model names for parts need to be in the following format:
-    ///    p:male/female:race letter:phenotype:body part:model number.mdl
+    ///    p<m/f><race letter><phenotype>_<body part><model number>.mdl
     ///
     ///  - nPart (CREATURE_PART_*)
     ///       CREATURE_PART_RIGHT_FOOT
