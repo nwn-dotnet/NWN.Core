@@ -5,23 +5,23 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Rename = "NWNX_Rename";
 
-
+    ///< @private
     /// @anchor rename_comm_name_override_type
     /// @name Community Name Override Type
-
+    /// @{
     public const int NWNX_RENAME_PLAYERNAME_DEFAULT = 0;
 
-    ///Don't rename
+    ///< Don't rename
     public const int NWNX_RENAME_PLAYERNAME_OBFUSCATE = 1;
 
-    ///Generate random string for Community Name
+    ///< Generate random string for Community Name
     public const int NWNX_RENAME_PLAYERNAME_OVERRIDE = 2;
 
-    ///Use character name specified
+    ///< Use character name specified
     public const int NWNX_RENAME_PLAYERNAME_ANONYMOUS = 3;
 
-    ///Use the value of the NWNX_RENAME_ANONYMOUS_NAME environment variable
-
+    ///< Use the value of the NWNX_RENAME_ANONYMOUS_NAME environment variable
+    ///@}
     /// Set a PC's character name and community name on the player list.
     /// <param name="oTarget">The PC whose name is being overridden.</param>
     /// <param name="sNewName">The new name.</param>
@@ -71,5 +71,6 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// @}
   }
 }

@@ -5,26 +5,27 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Weapon = "NWNX_Weapon";
 
+    ///< @private
     /// @name Weapons Options
     /// @anchor wpn_opts
     ///
     /// Options constants to be used with NWNX_Weapon_SetOption function.
-
+    /// @{
     public const int NWNX_WEAPON_OPT_GRTFOCUS_AB_BONUS = 0;
 
-    /// Greater Focus Attack Bonus
+    ///< Greater Focus Attack Bonus
     public const int NWNX_WEAPON_OPT_GRTSPEC_DAM_BONUS = 1;
 
-    /// Greater Specialization Damage Bonus
-
+    ///< Greater Specialization Damage Bonus
+    ///@}
     // Get Event Data Constants
     public const int NWNX_WEAPON_GETDATA_DC = 0;
 
-    /// Get Devastating Critical Data
+    ///< Get Devastating Critical Data
     // Set Event Data Constants
     public const int NWNX_WEAPON_SETDATA_DC_BYPASS = 0;
 
-    /// Set Devastating Critical Bypass
+    ///< Set Devastating Critical Bypass
     /// Devastating critical event data
     /// Set nFeat as weapon focus feat for a base item.
     /// <param name="nBaseItem">The base item id.</param>
@@ -244,6 +245,8 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
+
+    /// @}
   }
 
   public struct DevastatingCriticalEvent_Data

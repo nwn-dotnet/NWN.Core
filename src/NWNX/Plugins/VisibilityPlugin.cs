@@ -5,9 +5,10 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Visibility = "NWNX_Visibility";
 
-
+    ///< @private
     /// @name Visibility Types
     /// @anchor vis_types
+    /// @{
     public const int NWNX_VISIBILITY_DEFAULT = -1;
     public const int NWNX_VISIBILITY_VISIBLE = 0;
     public const int NWNX_VISIBILITY_HIDDEN = 1;
@@ -15,6 +16,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_VISIBILITY_ALWAYS_VISIBLE = 3;
     public const int NWNX_VISIBILITY_ALWAYS_VISIBLE_DM_ONLY = 4;
 
+    ///@}
     /// Queries the existing visibility override for given (oPlayer, oTarget) pair.
     ///        If oPlayer is OBJECT_INVALID, the global visibility override will be returned.
     ///
@@ -64,5 +66,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.StackPush(oPlayer);
       VM.NWNX.Call();
     }
+
+    /// @}
   }
 }

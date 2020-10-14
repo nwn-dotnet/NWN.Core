@@ -5,6 +5,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Data = "NWNX_Data";
 
+    ///< @private
     public const int NWNX_DATA_INVALID_INDEX = -1;
     public const int NWNX_DATA_TYPE_FLOAT = 0;
     public const int NWNX_DATA_TYPE_INTEGER = 1;
@@ -18,7 +19,7 @@ namespace NWN.Core.NWNX
     /// <param name="tag">The tag.</param>
     /// <param name="index">The index.</param>
     /// <returns>The element of associated type.</returns>
-
+    /// @{
     public static float Array_At_Flt(uint obj, string tag, int index)
     {
       VM.NWNX.SetFunction(NWNX_Data, "ArrayAt");
@@ -63,6 +64,7 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopString();
     }
 
+    /// @}
     /// Clears the entire array, such that size==0.
     public static void Array_Clear(int type, uint obj, string tag)
     {
@@ -80,7 +82,7 @@ namespace NWN.Core.NWNX
     /// <param name="tag">The tag.</param>
     /// <param name="element">The element.</param>
     /// <returns>TRUE if the collection contains the element.</returns>
-
+    /// @{
     public static int Array_Contains_Flt(uint obj, string tag, float element)
     {
       VM.NWNX.SetFunction(NWNX_Data, "ArrayContains");
@@ -125,6 +127,7 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
+    /// @}
     /// Copies the array of name otherTag over the array of name tag.
     public static void Array_Copy(int type, uint obj, string tag, string otherTag)
     {
@@ -154,7 +157,7 @@ namespace NWN.Core.NWNX
     /// <param name="tag">The tag.</param>
     /// <param name="element">The element.</param>
     /// <returns>Returns the index at which the element is located, or ARRAY_INVALID_INDEX.</returns>
-
+    /// @{
     public static int Array_Find_Flt(uint obj, string tag, float element)
     {
       VM.NWNX.SetFunction(NWNX_Data, "ArrayFind");
@@ -199,6 +202,7 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
+    /// @}
     /// @defgroup data_array_insert Array Insert
     /// Inserts the element at the index, where size > index >= 0.
     /// @ingroup data
@@ -206,7 +210,7 @@ namespace NWN.Core.NWNX
     /// <param name="tag">The tag.</param>
     /// <param name="index">The index.</param>
     /// <param name="element">The element.</param>
-
+    /// @{
     public static void Array_Insert_Flt(uint obj, string tag, int index, float element)
     {
       VM.NWNX.SetFunction(NWNX_Data, "ArrayInsert");
@@ -251,6 +255,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// @}
     /// @defgroup data_array_pushback Array Pushback
     /// Pushes an element to the back of the collection.
     /// @remark Functionally identical to an insert at index size-1.
@@ -258,7 +263,7 @@ namespace NWN.Core.NWNX
     /// <param name="obj">The object.</param>
     /// <param name="tag">The tag.</param>
     /// <param name="element">The element.</param>
-
+    /// @{
     public static void Array_PushBack_Flt(uint obj, string tag, float element)
     {
       VM.NWNX.SetFunction(NWNX_Data, "ArrayPushBack");
@@ -299,6 +304,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// @}
     /// Resizes the array. If the array is shrinking, it chops off elements at the ned.
     public static void Array_Resize(int type, uint obj, string tag, int size)
     {
@@ -358,7 +364,7 @@ namespace NWN.Core.NWNX
     /// <param name="tag">The tag.</param>
     /// <param name="index">The index.</param>
     /// <param name="element">The element.</param>
-
+    /// @{
     public static void Array_Set_Flt(uint obj, string tag, int index, float element)
     {
       VM.NWNX.SetFunction(NWNX_Data, "ArraySet");
@@ -402,5 +408,8 @@ namespace NWN.Core.NWNX
       VM.NWNX.StackPush(NWNX_DATA_TYPE_STRING);
       VM.NWNX.Call();
     }
+
+    /// @}
+    /// @}
   }
 }

@@ -5,6 +5,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Regex = "NWNX_Regex";
 
+    ///< @private
     /// <param name="str">The string to search.</param>
     /// <param name="regex">The regular expression to use when searching.</param>
     /// <returns>TRUE if string matches the regular expression.</returns>
@@ -33,5 +34,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
     }
+
+    /// @}
   }
 }

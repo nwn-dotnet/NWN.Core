@@ -5,9 +5,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Ruby = "NWNX_Ruby";
 
-    /// Evaluates some ruby code.
-    /// <param name="sCode">The code to evaluate.</param>
-    /// <returns>The output of the call.</returns>
+    ///< @private
     public static string Evaluate(string sCode)
     {
       VM.NWNX.SetFunction(NWNX_Ruby, "Evaluate");
@@ -15,5 +13,10 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
     }
+
+    /// Evaluates some ruby code.
+    /// <param name="sCode">The code to evaluate.</param>
+    /// <returns>The output of the call.</returns>
+    /// @}
   }
 }

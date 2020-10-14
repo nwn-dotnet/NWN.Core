@@ -5,6 +5,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_SQL = "NWNX_SQL";
 
+    ///< @private
     /// Prepares the provided query for execution.
     /// @note This does not execute the query. Will also clear any previous state.
     /// <param name="query">The query to prepare.</param>
@@ -137,9 +138,7 @@ namespace NWN.Core.NWNX
     ///
     /// <param name="column">The column to read in the active row.</param>
     /// <param name="owner">The owner of the object.</param>
-    /// <param name="x">The x vector for objects to be placed in areas.</param>
-    /// <param name="y">The y vector for objects to be placed in areas.</param>
-    /// <param name="z">The z vector for objects to be placed in areas.</param>
+    /// <param name="x,">y, z The vector for objects to be placed in areas.</param>
     /// <param name="base64">Use base64-encoded string format if TRUE (default), otherwise use binary format.</param>
     /// <returns>The deserialized object.</returns>
     public static uint ReadFullObjectInActiveRow(int column = 0, uint owner = NWScript.OBJECT_INVALID, float x = 0.0f, float y = 0.0f, float z = 0.0f, int base64 = NWScript.TRUE)
@@ -200,5 +199,6 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
+    /// @}
   }
 }

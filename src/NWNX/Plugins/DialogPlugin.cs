@@ -5,21 +5,27 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Dialog = "NWNX_Dialog";
 
+    ///< @private
     /// @name Dialog Node Types
     /// @anchor dialog_node_types
+    /// @{
     public const int NWNX_DIALOG_NODE_TYPE_INVALID = -1;
     public const int NWNX_DIALOG_NODE_TYPE_STARTING_NODE = 0;
     public const int NWNX_DIALOG_NODE_TYPE_ENTRY_NODE = 1;
     public const int NWNX_DIALOG_NODE_TYPE_REPLY_NODE = 2;
 
+    /// @}
     /// @name Dialog Script Types
     /// @anchor dialog_script_types
+    /// @{
     public const int NWNX_DIALOG_SCRIPT_TYPE_OTHER = 0;
     public const int NWNX_DIALOG_SCRIPT_TYPE_STARTING_CONDITIONAL = 1;
     public const int NWNX_DIALOG_SCRIPT_TYPE_ACTION_TAKEN = 2;
 
+    /// @}
     /// @name Dialog Languages
     /// @anchor dialog_languages
+    /// @{
     public const int NWNX_DIALOG_LANGUAGE_ENGLISH = 0;
     public const int NWNX_DIALOG_LANGUAGE_FRENCH = 1;
     public const int NWNX_DIALOG_LANGUAGE_GERMAN = 2;
@@ -31,6 +37,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_DIALOG_LANGUAGE_CHINESE_SIMPLIFIED = 130;
     public const int NWNX_DIALOG_LANGUAGE_JAPANESE = 131;
 
+    /// @}
     /// Get the @ref dialog_node_types "Node Type" of the current text node
     /// <returns>A @ref dialog_node_types "Node Type".  If called out of dialog, returns NWNX_DIALOG_NODE_TYPE_INVALID</returns>
     public static int GetCurrentNodeType()
@@ -105,5 +112,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.StackPush(oObject);
       VM.NWNX.Call();
     }
+
+    /// @}
   }
 }

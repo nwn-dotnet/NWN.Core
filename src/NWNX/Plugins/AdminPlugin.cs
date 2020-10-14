@@ -5,8 +5,11 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Administration = "NWNX_Administration";
 
+    ///< @private
     /// @name Administration Options
     /// @anchor admin_opts
+    ///
+    /// @{
     public const int NWNX_ADMINISTRATION_OPTION_ALL_KILLABLE = 0;
 
     // TRUE/FALSE
@@ -82,8 +85,11 @@ namespace NWN.Core.NWNX
     public const int NWNX_ADMINISTRATION_OPTION_HIDE_HITPOINTS_GAINED = 26;
 
     // TRUE/FALSE
+    /// @}
     /// @name Administration Debug Types
     /// @anchor admin_debug
+    ///
+    /// @{
     public const int NWNX_ADMINISTRATION_DEBUG_COMBAT = 0;
 
     // TRUE/FALSE
@@ -96,6 +102,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_ADMINISTRATION_DEBUG_HIT_DIE = 3;
 
     // TRUE/FALSE
+    /// @}
     /// Gets the current player password.
     /// <returns>The current player password.</returns>
     public static string GetPlayerPassword()
@@ -320,5 +327,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.SetFunction(NWNX_Administration, "ReloadRules");
       VM.NWNX.Call();
     }
+
+    /// @}
   }
 }

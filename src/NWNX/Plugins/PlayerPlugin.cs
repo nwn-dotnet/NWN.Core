@@ -5,10 +5,13 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Player = "NWNX_Player";
 
+    ///< @private
     /// A quickbar slot.
     /// @name Timing Bar Types
     /// @anchor timing_bar_types
+    ///
     /// The various types of timing bars.
+    /// @{
     public const int NWNX_PLAYER_TIMING_BAR_TRAP_FLAG = 1;
     public const int NWNX_PLAYER_TIMING_BAR_TRAP_RECOVER = 2;
     public const int NWNX_PLAYER_TIMING_BAR_TRAP_DISARM = 3;
@@ -19,8 +22,10 @@ namespace NWN.Core.NWNX
     public const int NWNX_PLAYER_TIMING_BAR_LOCK = 8;
     public const int NWNX_PLAYER_TIMING_BAR_CUSTOM = 10;
 
+    /// @}
     /// @name Platform IDs
     /// @anchor platform_ids
+    /// @{
     public const int NWNX_PLAYER_PLATFORM_INVALID = 0;
     public const int NWNX_PLAYER_PLATFORM_WINDOWS_X86 = 1;
     public const int NWNX_PLAYER_PLATFORM_WINDOWS_X64 = 2;
@@ -38,6 +43,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_PLAYER_PLATFORM_MICROSOFT_XBOXONE = 60;
     public const int NWNX_PLAYER_PLATFORM_SONY_PS4 = 70;
 
+    /// @}
     /// Force display placeable examine window for player
     /// @note If used on a placeable in a different area than the player, the portait will not be shown.
     /// <param name="player">The player object.</param>
@@ -76,16 +82,16 @@ namespace NWN.Core.NWNX
     /// @remark Only one timing bar can be ran at the same time.
     public static void StartGuiTimingBar(uint player, float seconds, string script = "", int type = NWNX_PLAYER_TIMING_BAR_CUSTOM)
     {
-      if (NWScript.GetLocalInt(player, "NWNX_PLAYER_GUI_TIMING_ACTIVE") == NWScript.TRUE)
-        return;
+      if (NWScript.GetLocalInt(player,  "NWNX_PLAYER_GUI_TIMING_ACTIVE") == NWScript.TRUE)
+      return ;
       VM.NWNX.SetFunction(NWNX_Player, "StartGuiTimingBar");
       VM.NWNX.StackPush(type);
       VM.NWNX.StackPush(seconds);
       VM.NWNX.StackPush(player);
       VM.NWNX.Call();
-      int id = NWScript.GetLocalInt(player, "NWNX_PLAYER_GUI_TIMING_ID") + 1;
-      NWScript.SetLocalInt(player, "NWNX_PLAYER_GUI_TIMING_ACTIVE", id);
-      NWScript.SetLocalInt(player, "NWNX_PLAYER_GUI_TIMING_ID", id);
+      int id = NWScript.GetLocalInt( player, "NWNX_PLAYER_GUI_TIMING_ID") +1;
+      NWScript.SetLocalInt(player,  "NWNX_PLAYER_GUI_TIMING_ACTIVE", id);
+      NWScript.SetLocalInt(player,  "NWNX_PLAYER_GUI_TIMING_ID", id);
       NWScript.DelayCommand(seconds, () => INTERNAL_StopGuiTimingBar(player, script, id));
     }
 
@@ -572,7 +578,7 @@ namespace NWN.Core.NWNX
     }
 
     /// Toggle oPlayer's PlayerDM status.
-    /// @note This function does nothing for actual DMClient DMs or players with a client version less than 8193.14
+    /// @note This function does nothing for actual DMClient DMs or players with a client version < 8193.14
     /// <param name="oPlayer">The player.</param>
     /// <param name="bIsDM">TRUE to toggle dm mode on, FALSE for off.</param>
     public static void ToggleDM(uint oPlayer, int bIsDM)
@@ -647,18 +653,19 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// @}
     public static void INTERNAL_StopGuiTimingBar(uint player, string script = "", int id = -1)
     {
-      int activeId = NWScript.GetLocalInt(player, "NWNX_PLAYER_GUI_TIMING_ACTIVE");
-      if (activeId == 0)
-        return;
-      if (id != -1 && id != activeId)
-        return;
-      NWScript.DeleteLocalInt(player, "NWNX_PLAYER_GUI_TIMING_ACTIVE");
+      int activeId = NWScript.GetLocalInt(player,  "NWNX_PLAYER_GUI_TIMING_ACTIVE");
+      if (activeId==0)
+      return ;
+      if (id!=-1&&id!=activeId)
+      return ;
+      NWScript.DeleteLocalInt(player,  "NWNX_PLAYER_GUI_TIMING_ACTIVE");
       VM.NWNX.SetFunction(NWNX_Player, "StopGuiTimingBar");
       VM.NWNX.StackPush(player);
       VM.NWNX.Call();
-      if (script != "")
+      if (script!="")
       {
         NWScript.ExecuteScript(script, player);
       }

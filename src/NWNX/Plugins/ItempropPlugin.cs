@@ -5,7 +5,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_ItemProperty = "NWNX_ItemProperty";
 
-
+    ///< @private
     /// An unpacked itemproperty.
     /// Convert native itemproperty type to unpacked structure.
     /// <param name="ip">The itemproperty to convert.</param>
@@ -34,21 +34,21 @@ namespace NWN.Core.NWNX
     /// Convert unpacked itemproperty structure to native type.
     /// <param name="ip">The NWNX_IPUnpacked structure to convert.</param>
     /// <returns>The itemproperty.</returns>
-    public static System.IntPtr PackIP(IPUnpacked ip)
+    public static System.IntPtr PackIP(IPUnpacked n)
     {
       VM.NWNX.SetFunction(NWNX_ItemProperty, "PackIP");
-      VM.NWNX.StackPush(ip.sTag);
-      VM.NWNX.StackPush(ip.oCreator);
-      VM.NWNX.StackPush(ip.nSpellId);
-      VM.NWNX.StackPush(ip.bUsable);
-      VM.NWNX.StackPush(ip.nChanceToAppear);
-      VM.NWNX.StackPush(ip.nUsesPerDay);
-      VM.NWNX.StackPush(ip.nParam1Value);
-      VM.NWNX.StackPush(ip.nParam1);
-      VM.NWNX.StackPush(ip.nCostTableValue);
-      VM.NWNX.StackPush(ip.nCostTable);
-      VM.NWNX.StackPush(ip.nSubType);
-      VM.NWNX.StackPush(ip.nProperty);
+      VM.NWNX.StackPush(n.sTag);
+      VM.NWNX.StackPush(n.oCreator);
+      VM.NWNX.StackPush(n.nSpellId);
+      VM.NWNX.StackPush(n.bUsable);
+      VM.NWNX.StackPush(n.nChanceToAppear);
+      VM.NWNX.StackPush(n.nUsesPerDay);
+      VM.NWNX.StackPush(n.nParam1Value);
+      VM.NWNX.StackPush(n.nParam1);
+      VM.NWNX.StackPush(n.nCostTableValue);
+      VM.NWNX.StackPush(n.nCostTable);
+      VM.NWNX.StackPush(n.nSubType);
+      VM.NWNX.StackPush(n.nProperty);
       VM.NWNX.Call();
       return VM.NWNX.StackPopStruct(NWScript.ENGINE_STRUCTURE_ITEM_PROPERTY);
     }
@@ -77,6 +77,7 @@ namespace NWN.Core.NWNX
       return n;
     }
 
+    /// @}
   }
 
   public struct IPUnpacked

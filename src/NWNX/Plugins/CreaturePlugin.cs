@@ -5,10 +5,12 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Creature = "NWNX_Creature";
 
+    ///< @private
     /// @name Creature Movement Rates
     /// @anchor creature_movement_rates
     ///
     /// The various types of movement rates.
+    /// @{
     public const int NWNX_CREATURE_MOVEMENT_RATE_PC = 0;
     public const int NWNX_CREATURE_MOVEMENT_RATE_IMMOBILE = 1;
     public const int NWNX_CREATURE_MOVEMENT_RATE_VERY_SLOW = 2;
@@ -19,20 +21,24 @@ namespace NWN.Core.NWNX
     public const int NWNX_CREATURE_MOVEMENT_RATE_DEFAULT = 7;
     public const int NWNX_CREATURE_MOVEMENT_RATE_DM_FAST = 8;
 
+    /// @}
     /// @name Creature Movement Types
     /// @anchor creature_movement_types
     ///
     /// The various types of movement types.
+    /// @{
     public const int NWNX_CREATURE_MOVEMENT_TYPE_STATIONARY = 0;
     public const int NWNX_CREATURE_MOVEMENT_TYPE_WALK = 1;
     public const int NWNX_CREATURE_MOVEMENT_TYPE_RUN = 2;
     public const int NWNX_CREATURE_MOVEMENT_TYPE_SIDESTEP = 3;
     public const int NWNX_CREATURE_MOVEMENT_TYPE_WALK_BACKWARDS = 4;
 
+    /// @}
     /// @name Cleric Domains
     /// @anchor cleric_domains
     ///
     /// The clerical domains.
+    /// @{
     public const int NWNX_CREATURE_CLERIC_DOMAIN_AIR = 0;
     public const int NWNX_CREATURE_CLERIC_DOMAIN_ANIMAL = 1;
     public const int NWNX_CREATURE_CLERIC_DOMAIN_DEATH = 3;
@@ -53,10 +59,12 @@ namespace NWN.Core.NWNX
     public const int NWNX_CREATURE_CLERIC_DOMAIN_WAR = 20;
     public const int NWNX_CREATURE_CLERIC_DOMAIN_WATER = 21;
 
+    /// @}
     /// @name Bonus Types
     /// @anchor bonus_types
     ///
     /// Used with NWNX_Creature_GetTotalEffectBonus() these are the types of temporary bonuses from effects.
+    /// @{
     public const int NWNX_CREATURE_BONUS_TYPE_ATTACK = 1;
     public const int NWNX_CREATURE_BONUS_TYPE_DAMAGE = 2;
     public const int NWNX_CREATURE_BONUS_TYPE_SAVING_THROW = 3;
@@ -64,6 +72,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_CREATURE_BONUS_TYPE_SKILL = 5;
     public const int NWNX_CREATURE_BONUS_TYPE_TOUCH_ATTACK = 6;
 
+    /// @}
     /// @struct NWNX_Creature_SpecialAbility
     /// A creature special ability.
     /// @struct NWNX_Creature_MemorisedSpell
@@ -135,7 +144,7 @@ namespace NWN.Core.NWNX
     /// Returns the feat learned at the level and index.
     /// <param name="creature">The creature object.</param>
     /// <param name="level">The level.</param>
-    /// <param name="index">The index.</param>
+    /// <param name="index">The index. Index bounds: 0 <= index < NWNX_Creature_GetFeatCountByLevel().</param>
     /// <returns>The feat id at the index.</returns>
     public static int GetFeatByLevel(uint creature, int level, int index)
     {
@@ -173,7 +182,7 @@ namespace NWN.Core.NWNX
 
     /// Returns the creature's feat at a given index
     /// <param name="creature">The creature object.</param>
-    /// <param name="index">The index.</param>
+    /// <param name="index">The index. Index bounds: 0 <= index < NWNX_Creature_GetFeatCount();</param>
     /// <returns>The feat id at the index.</returns>
     public static int GetFeatByIndex(uint creature, int index)
     {
@@ -210,7 +219,7 @@ namespace NWN.Core.NWNX
 
     /// Returns the creature's special ability at a given index.
     /// <param name="creature">The creature object.</param>
-    /// <param name="index">The index.</param>
+    /// <param name="index">The index. Index bounds: 0 <= index < NWNX_Creature_GetSpecialAbilityCount().</param>
     /// <returns>An NWNX_Creature_SpecialAbility struct.</returns>
     public static SpecialAbility GetSpecialAbility(uint creature, int index)
     {
@@ -240,7 +249,7 @@ namespace NWN.Core.NWNX
 
     /// Removes a special ability from a creature.
     /// <param name="creature">The creature object.</param>
-    /// <param name="index">The index.</param>
+    /// <param name="index">The index. Index bounds: 0 <= index < NWNX_Creature_GetSpecialAbilityCount().</param>
     public static void RemoveSpecialAbility(uint creature, int index)
     {
       VM.NWNX.SetFunction(NWNX_Creature, "RemoveSpecialAbility");
@@ -251,7 +260,7 @@ namespace NWN.Core.NWNX
 
     /// Sets a special ability at the index for the creature.
     /// <param name="creature">The creature object.</param>
-    /// <param name="index">The index.</param>
+    /// <param name="index">The index. Index bounds: 0 <= index < NWNX_Creature_GetSpecialAbilityCount().</param>
     /// <param name="ability">An NWNX_Creature_SpecialAbility struct.</param>
     public static void SetSpecialAbility(uint creature, int index, SpecialAbility ability)
     {
@@ -374,7 +383,7 @@ namespace NWN.Core.NWNX
     /// <param name="creature">The creature object.</param>
     /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
     /// <param name="level">The spell level.</param>
-    /// <param name="index">The index. </param>
+    /// <param name="index">The index. Index bounds: 0 <= index < NWNX_Creature_GetMemorisedSpellCountByLevel().</param>
     /// <returns>An NWNX_Creature_MemorisedSpell() struct.</returns>
     public static MemorisedSpell GetMemorisedSpell(uint creature, int @class, int level, int index)
     {
@@ -396,7 +405,7 @@ namespace NWN.Core.NWNX
     /// <param name="creature">The creature object.</param>
     /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
     /// <param name="level">The spell level.</param>
-    /// <param name="index">The index.</param>
+    /// <param name="index">The index. Index bounds: 0 <= index < NWNX_Creature_GetMemorisedSpellCountByLevel().</param>
     /// <param name="spell">An NWNX_Creature_MemorisedSpell() struct.</param>
     public static void SetMemorisedSpell(uint creature, int @class, int level, int index, MemorisedSpell spell)
     {
@@ -476,7 +485,7 @@ namespace NWN.Core.NWNX
     /// <param name="creature">The creature object.</param>
     /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
     /// <param name="level">The spell level.</param>
-    /// <param name="index">The index.</param>
+    /// <param name="index">The index. Index bounds: 0 <= index < NWNX_Creature_GetKnownSpellCount().</param>
     /// <returns>The spell id.</returns>
     public static int GetKnownSpell(uint creature, int @class, int level, int index)
     {
@@ -536,7 +545,7 @@ namespace NWN.Core.NWNX
     /// <param name="creature">The creature object.</param>
     /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
     /// <param name="level">The spell level.</param>
-    /// <param name="index">The index. </param>
+    /// <param name="index">The index. Index bounds: 0 <= index < NWNX_Creature_GetMemorisedSpellCountByLevel().</param>
     public static void ClearMemorisedSpell(uint creature, int @class, int level, int index)
     {
       VM.NWNX.SetFunction(NWNX_Creature, "ClearMemorisedSpell");
@@ -599,7 +608,7 @@ namespace NWN.Core.NWNX
     /// Sets the creature's current movement rate factor.
     /// @note Base movement rate factor is 1.0.
     /// <param name="creature">The creature object.</param>
-    /// <param name="factor">The rate to set.</param>
+    /// <param name="rate">The rate to set.</param>
     public static void SetMovementRateFactor(uint creature, float factor)
     {
       VM.NWNX.SetFunction(NWNX_Creature, "SetMovementRateFactor");
@@ -943,11 +952,11 @@ namespace NWN.Core.NWNX
     /// Returns the creature's highest attack bonus based on its own stats.
     /// @note AB vs. Type and +AB on Gauntlets are excluded
     /// <param name="creature">The creature object.</param>
-    /// <param name="isMelee">
+    /// @param isMelee</param>
     ///   * TRUE: Get Melee/Unarmed Attack Bonus
     ///   * FALSE: Get Ranged Attack Bonus
     ///   * -1: Get Attack Bonus depending on the weapon creature has equipped in its right hand
-    ///       Defaults to Melee Attack Bonus if weapon is invalid or no weapon</param>
+    ///       Defaults to Melee Attack Bonus if weapon is invalid or no weapon
     /// <param name="isTouchAttack">If the attack was a touch attack.</param>
     /// <param name="isOffhand">If the attack was with the offhand.</param>
     /// <param name="includeBaseAttackBonus">Should the result include the base attack bonus.</param>
@@ -955,7 +964,7 @@ namespace NWN.Core.NWNX
     public static int GetAttackBonus(uint creature, int isMelee = -1, int isTouchAttack = NWScript.FALSE, int isOffhand = NWScript.FALSE, int includeBaseAttackBonus = NWScript.TRUE)
     {
       VM.NWNX.SetFunction(NWNX_Creature, "GetAttackBonus");
-      if (isMelee == -1)
+      if (isMelee==-1)
       {
         uint oWeapon = NWScript.GetItemInSlot(NWScript.INVENTORY_SLOT_RIGHTHAND, creature);
         if (NWScript.GetIsObjectValid(oWeapon) == NWScript.TRUE)
@@ -1165,6 +1174,17 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Gets one of creature's domains.
+    /// <param name="creature">The creature object.</param>
+    /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
+    /// <param name="index">The first or second domain.</param>
+    /// @deprecated Use GetDomain(). This will be removed in future NWNX releases.
+    public static int GetDomain(uint creature, int @class, int index)
+    {
+      NWScript.WriteTimestampedLogEntry("NWNX_Creature: GetDomain() is deprecated. Please use the basegame's GetDomain() instead");
+      return VM.NWNX.StackPopInt();
+    }
+
     /// Sets one of creature's domains.
     /// <param name="creature">The creature object.</param>
     /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
@@ -1178,6 +1198,16 @@ namespace NWN.Core.NWNX
       VM.NWNX.StackPush(@class);
       VM.NWNX.StackPush(creature);
       VM.NWNX.Call();
+    }
+
+    /// Gets the creature's specialist school.
+    /// <param name="creature">The creature object.</param>
+    /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
+    /// @deprecated Use GetSpecialization(). This will be removed in future NWNX releases.
+    public static int GetSpecialization(uint creature, int @class)
+    {
+      NWScript.WriteTimestampedLogEntry("NWNX_Creature: GetSpecialization() is deprecated. Please use the basegame's GetSpecialization() instead");
+      return VM.NWNX.StackPopInt();
     }
 
     /// Sets creature's specialist school.
@@ -1586,6 +1616,8 @@ namespace NWN.Core.NWNX
       VM.NWNX.StackPush(oCreature);
       VM.NWNX.Call();
     }
+
+    /// @}
   }
 
   public struct SpecialAbility

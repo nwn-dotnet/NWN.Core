@@ -5,6 +5,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Tileset = "NWNX_Tileset";
 
+    ///< @private
     /// A structure containing general tileset data.
     /// A structure containing the group data for a tileset.
     /// A structure containing the edge and corner types of a tile.
@@ -242,6 +243,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// @}
   }
 
   public struct TilesetData

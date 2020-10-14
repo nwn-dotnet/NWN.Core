@@ -5,11 +5,12 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Chat = "NWNX_Chat";
 
+    ///< @private
     /// @name Chat Channels
     /// @anchor chat_channels
     ///
     /// Constants defining the various chat channels.
-
+    /// @{
     public const int NWNX_CHAT_CHANNEL_PLAYER_TALK = 1;
     public const int NWNX_CHAT_CHANNEL_PLAYER_SHOUT = 2;
     public const int NWNX_CHAT_CHANNEL_PLAYER_WHISPER = 3;
@@ -24,6 +25,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_CHAT_CHANNEL_DM_PARTY = 22;
     public const int NWNX_CHAT_CHANNEL_DM_DM = 30;
 
+    /// @}
     /// Sends a chat message.
     /// @remark If no target is provided, then it broadcasts to all eligible targets.
     /// <param name="channel">The @ref chat_channels "channel" to send the message.</param>
@@ -125,5 +127,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
       return VM.NWNX.StackPopFloat();
     }
+
+    /// @}
   }
 }

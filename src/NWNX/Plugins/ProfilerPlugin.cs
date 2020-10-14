@@ -5,7 +5,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Profiler = "NWNX_Profiler";
 
-
+    ///< @private
     /// Push a timing metric scope - note that every push must be matched by a corresponding pop.
     ///
     /// A timing metric contains the following information.
@@ -32,7 +32,7 @@ namespace NWN.Core.NWNX
     {
       VM.NWNX.SetFunction(NWNX_Profiler, "PushPerfScope");
       VM.NWNX.StackPush(name);
-      if (tag0_value != "" && tag0_tag != "")
+      if (tag0_value!=""&&tag0_tag!="")
       {
         VM.NWNX.StackPush(tag0_value);
         VM.NWNX.StackPush(tag0_tag);
@@ -47,5 +47,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.SetFunction(NWNX_Profiler, "PopPerfScope");
       VM.NWNX.Call();
     }
+
+    /// @}
   }
 }

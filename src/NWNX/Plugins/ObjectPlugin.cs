@@ -5,9 +5,10 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Object = "NWNX_Object";
 
-
+    ///< @private
     /// @anchor object_localvar_types
     /// @name Local Variable Types
+    /// @{
     public const int NWNX_OBJECT_LOCALVAR_TYPE_UNKNOWN = 0;
     public const int NWNX_OBJECT_LOCALVAR_TYPE_INT = 1;
     public const int NWNX_OBJECT_LOCALVAR_TYPE_FLOAT = 2;
@@ -15,8 +16,10 @@ namespace NWN.Core.NWNX
     public const int NWNX_OBJECT_LOCALVAR_TYPE_OBJECT = 4;
     public const int NWNX_OBJECT_LOCALVAR_TYPE_LOCATION = 5;
 
+    /// @}
     /// @anchor object_internal_types
     /// @name Internal Object Types
+    /// @{
     public const int NWNX_OBJECT_TYPE_INTERNAL_INVALID = -1;
     public const int NWNX_OBJECT_TYPE_INTERNAL_GUI = 1;
     public const int NWNX_OBJECT_TYPE_INTERNAL_TILE = 2;
@@ -35,6 +38,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_OBJECT_TYPE_INTERNAL_PORTAL = 15;
     public const int NWNX_OBJECT_TYPE_INTERNAL_SOUND = 16;
 
+    /// @}
     /// A local variable structure.
     /// Gets the count of all local variables.
     /// <param name="obj">The object.</param>
@@ -50,7 +54,7 @@ namespace NWN.Core.NWNX
     /// Gets the local variable at the provided index of the provided object.
     /// <param name="obj">The object.</param>
     /// <param name="index">The index.</param>
-    /// @note Index bounds: 0 >= index less than NWNX_Object_GetLocalVariableCount().
+    /// @note Index bounds: 0 >= index < NWNX_Object_GetLocalVariableCount().
     /// @note As of build 8193.14 local variables no longer have strict ordering.
     ///       this means that any change to the variables can result in drastically
     ///       different order when iterating.
@@ -72,6 +76,17 @@ namespace NWN.Core.NWNX
       return var;
     }
 
+    /// Convert an object id to the actual object.
+    /// <param name="id">The object id.</param>
+    /// <returns>An object from the provided object ID.</returns>
+    /// @remark This is the counterpart to ObjectToString.
+    /// @deprecated Use the basegame StringToObject() function. This will be removed in a future NWNX release.
+    public static uint StringToObject(string id)
+    {
+      NWScript.WriteTimestampedLogEntry("WARNING: StringToObject() is deprecated, please use the basegame's StringToObject()");
+      return VM.NWNX.StackPopObject();
+    }
+
     /// Set oObject's position.
     /// <param name="oObject">The object.</param>
     /// <param name="vPosition">A vector position.</param>
@@ -89,7 +104,7 @@ namespace NWN.Core.NWNX
 
     /// Get an object's hit points.
     /// @note Unlike the native GetCurrentHitpoints function, this excludes temporary hitpoints.
-    /// <param name="creature">The object.</param>
+    /// <param name="obj">The object.</param>
     /// <returns>The hit points.</returns>
     public static int GetCurrentHitPoints(uint creature)
     {
@@ -100,7 +115,7 @@ namespace NWN.Core.NWNX
     }
 
     /// Set an object's hit points.
-    /// <param name="creature">The object.</param>
+    /// <param name="obj">The object.</param>
     /// <param name="hp">The hit points.</param>
     public static void SetCurrentHitPoints(uint creature, int hp)
     {
@@ -112,7 +127,7 @@ namespace NWN.Core.NWNX
 
     /// Adjust an object's maximum hit points
     /// @note Will not work on PCs.
-    /// <param name="creature">The object.</param>
+    /// <param name="obj">The object.</param>
     /// <param name="hp">The maximum hit points.</param>
     public static void SetMaxHitPoints(uint creature, int hp)
     {
@@ -632,6 +647,7 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
+    /// @}
   }
 
   public struct LocalVariable

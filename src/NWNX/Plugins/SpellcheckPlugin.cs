@@ -5,6 +5,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_SpellChecker = "NWNX_SpellChecker";
 
+    ///< @private
     /// Finds misspells in a string.
     /// <param name="sentence">The sentence to check.</param>
     /// <returns>The spelling mistakes in the sentence, comma delimited. Returns blank if no errors or if .so file</returns>
@@ -33,5 +34,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
     }
+
+    /// @}
   }
 }

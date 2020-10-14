@@ -5,7 +5,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Events = "NWNX_Events";
 
-
+    ///< @private
     /*
     *
      # Events
@@ -1391,5 +1391,6 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// @}
   }
 }

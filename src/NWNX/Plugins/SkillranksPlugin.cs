@@ -5,49 +5,50 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_SkillRanks = "NWNX_SkillRanks";
 
-
+    ///< @private
     /// @name SkillRanks Key Abilities
     /// @anchor skr_key_abilities
     ///
     /// The abilities as bits
+    /// @{
     public const int NWNX_SKILLRANKS_KEY_ABILITY_STRENGTH = 1;
 
-    /// Strength
+    ///< Strength
     public const int NWNX_SKILLRANKS_KEY_ABILITY_DEXTERITY = 2;
 
-    /// Dexterity
+    ///< Dexterity
     public const int NWNX_SKILLRANKS_KEY_ABILITY_CONSTITUTION = 4;
 
-    /// Constitution
+    ///< Constitution
     public const int NWNX_SKILLRANKS_KEY_ABILITY_INTELLIGENCE = 8;
 
-    /// Intelligence
+    ///< Intelligence
     public const int NWNX_SKILLRANKS_KEY_ABILITY_WISDOM = 16;
 
-    /// Wisdom
+    ///< Wisdom
     public const int NWNX_SKILLRANKS_KEY_ABILITY_CHARISMA = 32;
 
-    /// Charisma
-
+    ///< Charisma
+    ///@}
     /// @name SkillRanks Key Ability Calculation Method
     /// @anchor skr_key_ability_calc_bits
     ///
     /// Constants used to calculate the ability modifier for a skill.
-
+    /// @{
     /// @warning Use only one of these calculations in your mask! If you use more than one the first will be used.
     public const int NWNX_SKILLRANKS_KEY_ABILITY_CALC_MIN = 64;
 
-    /// Use the minimum value of the provided ability scores.
+    ///< Use the minimum value of the provided ability scores.
     public const int NWNX_SKILLRANKS_KEY_ABILITY_CALC_MAX = 128;
 
-    /// Use the maximum value of the provided ability scores.
+    ///< Use the maximum value of the provided ability scores.
     public const int NWNX_SKILLRANKS_KEY_ABILITY_CALC_AVERAGE = 256;
 
-    /// Use the average value of the provided ability scores.
+    ///< Use the average value of the provided ability scores.
     public const int NWNX_SKILLRANKS_KEY_ABILITY_CALC_SUM = 512;
 
-    /// Use the sum of the provided ability scores.
-
+    ///< Use the sum of the provided ability scores.
+    ///@}
     /// A feat that manipulates skill ranks.
     /// <param name="iSkill">The skill to check the feat count.</param>
     /// <returns>The count of feats for a specific skill.</returns>
@@ -123,7 +124,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.StackPush(skillFeat.iAreaFlagsForbidden);
       VM.NWNX.StackPush(skillFeat.iAreaFlagsRequired);
       VM.NWNX.StackPush(skillFeat.fClassLevelMod);
-      VM.NWNX.StackPush(NWScript.GetStringRight(skillFeat.sClasses, NWScript.GetStringLength(skillFeat.sClasses) - NWScript.FindSubString(skillFeat.sClasses, "1")));
+      VM.NWNX.StackPush( NWScript.GetStringRight( skillFeat.sClasses, NWScript.GetStringLength( skillFeat.sClasses) -NWScript.FindSubString( skillFeat.sClasses, "1") ));
       VM.NWNX.StackPush(skillFeat.iFocusFeat);
       VM.NWNX.StackPush(skillFeat.iModifier);
       VM.NWNX.StackPush(skillFeat.iFeat);
@@ -140,17 +141,17 @@ namespace NWN.Core.NWNX
     /// <returns>The updated NWNX_SkillRanks_SkillFeat.</returns>
     public static SkillFeat AddSkillFeatClass(SkillFeat skillFeat, int iClass)
     {
-      if (NWScript.GetStringLength(skillFeat.sClasses) < 255)
+      if (NWScript.GetStringLength( skillFeat.sClasses) <255)
       {
         int i;
         string sPad = "";
-        for (i = 0; i < 255 - NWScript.GetStringLength(skillFeat.sClasses); i++)
+        for (i=0; i<255-NWScript.GetStringLength( skillFeat.sClasses); i++)
         {
-          sPad += "0";
+          sPad = sPad+"0";
         }
-        skillFeat.sClasses = sPad + skillFeat.sClasses;
+        skillFeat.sClasses = sPad+skillFeat.sClasses;
       }
-      skillFeat.sClasses = NWScript.GetStringLeft(skillFeat.sClasses, 254 - iClass) + "1" + NWScript.GetStringRight(skillFeat.sClasses, iClass);
+      skillFeat.sClasses = NWScript.GetStringLeft( skillFeat.sClasses, 254-iClass) +"1"+NWScript.GetStringRight( skillFeat.sClasses, iClass);
       return skillFeat;
     }
 
@@ -160,10 +161,10 @@ namespace NWN.Core.NWNX
     /// changed with this function.
     /// <param name="iModifier">The new value for the feat modifier.</param>
     /// <param name="iEpic">Set to TRUE to change the value for Epic Skill Focus.</param>
-    public static void SetSkillFeatFocusModifier(int iModifier, int iEpic = NWScript.FALSE)
+    public static void SetSkillFeatFocusModifier(int iModifier, int epicFocus = NWScript.FALSE)
     {
       VM.NWNX.SetFunction(NWNX_SkillRanks, "SetSkillFeatFocusModifier");
-      VM.NWNX.StackPush(iEpic);
+      VM.NWNX.StackPush(epicFocus);
       VM.NWNX.StackPush(iModifier);
       VM.NWNX.Call();
     }
@@ -212,6 +213,8 @@ namespace NWN.Core.NWNX
       VM.NWNX.StackPush(oArea);
       VM.NWNX.Call();
     }
+
+    /// @}
   }
 
   public struct SkillFeat

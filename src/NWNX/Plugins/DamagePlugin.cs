@@ -5,6 +5,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Damage = "NWNX_Damage";
 
+    ///< @private
     /// @struct NWNX_Damage_DamageEventData
     /// Damage Event Data
     /// @struct NWNX_Damage_AttackEventData
@@ -19,7 +20,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.SetFunction(NWNX_Damage, "SetEventScript");
       VM.NWNX.StackPush(oOwner);
       VM.NWNX.StackPush(sScript);
-      VM.NWNX.StackPush("DAMAGE");
+      VM.NWNX.StackPush( "DAMAGE");
       VM.NWNX.Call();
     }
 
@@ -78,7 +79,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.SetFunction(NWNX_Damage, "SetEventScript");
       VM.NWNX.StackPush(oOwner);
       VM.NWNX.StackPush(sScript);
-      VM.NWNX.StackPush("ATTACK");
+      VM.NWNX.StackPush( "ATTACK");
       VM.NWNX.Call();
     }
 
@@ -161,6 +162,8 @@ namespace NWN.Core.NWNX
       VM.NWNX.StackPush(oSource);
       VM.NWNX.Call();
     }
+
+    /// @}
   }
 
   public struct DamageEventData

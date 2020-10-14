@@ -5,8 +5,10 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_ELC = "NWNX_ELC";
 
+    ///< @private
     /// @anchor elc_fail_type
     /// @name ELC Failure Types
+    /// @{
     public const int NWNX_ELC_VALIDATION_FAILURE_TYPE_NONE = 0;
     public const int NWNX_ELC_VALIDATION_FAILURE_TYPE_CHARACTER = 1;
     public const int NWNX_ELC_VALIDATION_FAILURE_TYPE_ITEM = 2;
@@ -15,10 +17,12 @@ namespace NWN.Core.NWNX
     public const int NWNX_ELC_VALIDATION_FAILURE_TYPE_SPELL = 5;
     public const int NWNX_ELC_VALIDATION_FAILURE_TYPE_CUSTOM = 6;
 
+    /// @}
     /// @anchor elc_fail_subtype
     /// @name ELC Failure Subtypes
     /// @note By default these constants are commented out to avoid a
     /// limitation on constants. Uncomment them as needed.
+    /// @{
     public const int NWNX_ELC_SUBTYPE_NONE = 0;
 
     /*
@@ -72,8 +76,9 @@ namespace NWN.Core.NWNX
     const int NWNX_ELC_SUBTYPE_FEAT_LIST_COMPARISON                     = 49;
     const int NWNX_ELC_SUBTYPE_MISC_SAVING_THROW                        = 50;
     const int NWNX_ELC_SUBTYPE_NUM_FEAT_COMPARISON                      = 51;
+     
     */
-
+    /// @}
     /// Sets the script that runs whenever an ELC validation failure happens
     /// <param name="sScript">The script name.</param>
     public static void SetELCScript(string sScript)
@@ -200,5 +205,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
+
+    /// @}
   }
 }

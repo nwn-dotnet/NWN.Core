@@ -5,9 +5,10 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Feedback = "NWNX_Feedback";
 
-
+    ///< @private
     /// @name Combat Log Message Types
     /// @anchor combat_log_msgs
+    /// @{
     public const int NWNX_FEEDBACK_COMBATLOG_SIMPLE_ADJECTIVE = 1;
 
     /*
@@ -52,9 +53,10 @@ namespace NWN.Core.NWNX
     // 20 -> Unused
     
     */
+    /// @}
     /// @name Feedback Message Types
     /// @anchor feedback_msgs
-
+    /// @{
     public const int NWNX_FEEDBACK_SKILL_CANT_USE = 0;
 
     /*
@@ -362,6 +364,7 @@ namespace NWN.Core.NWNX
     const int NWNX_FEEDBACK_SAVE_COMPLETE                      = 226;
     
     */
+    /// @}
     /// Gets if feedback message is hidden.
     /// <param name="nMessage">The message identifier from @ref feedback_msgs "Feedback Messages".</param>
     /// <param name="oPC">The PC or OBJECT_INVALID for a global setting.</param>
@@ -478,5 +481,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.StackPush(nMessageType);
       VM.NWNX.Call();
     }
+
+    /// @}
   }
 }

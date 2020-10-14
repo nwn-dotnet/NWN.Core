@@ -5,7 +5,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Encounter = "NWNX_Encounter";
 
-
+    ///< @private
     /// A creature list entry for an encounter.
     /// Get the number of creatures in the encounter list
     /// <param name="encounter">The encounter object.</param>
@@ -178,6 +178,8 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
+
+    /// @}
   }
 
   public struct CreatureListEntry

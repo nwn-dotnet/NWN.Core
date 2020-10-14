@@ -5,32 +5,41 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Area = "NWNX_Area";
 
+    ///< @private
     /// @name Area PVP Settings
     /// @anchor area_pvp
+    /// @{
     public const int NWNX_AREA_PVP_SETTING_NO_PVP = 0;
     public const int NWNX_AREA_PVP_SETTING_PARTY_PVP = 1;
     public const int NWNX_AREA_PVP_SETTING_FULL_PVP = 2;
     public const int NWNX_AREA_PVP_SETTING_SERVER_DEFAULT = 3;
 
+    /// @}
     /// @name Area Weather Settings
     /// @anchor area_weather
+    /// @{
     public const int NWNX_AREA_WEATHER_CHANCE_RAIN = 0;
     public const int NWNX_AREA_WEATHER_CHANCE_SNOW = 1;
     public const int NWNX_AREA_WEATHER_CHANCE_LIGHTNING = 2;
 
+    /// @}
     /// @name Area Day Night Cycle Settings
     /// @anchor area_daynight
+    /// @{
     public const int NWNX_AREA_DAYNIGHTCYCLE_CYCLE_DAY_NIGHT = 0;
     public const int NWNX_AREA_DAYNIGHTCYCLE_ALWAYS_BRIGHT = 1;
     public const int NWNX_AREA_DAYNIGHTCYCLE_ALWAYS_DARK = 2;
 
+    /// @}
     /// @name Area Sun/Moon Color Settings
     /// @anchor area_color
+    /// @{
     public const int NWNX_AREA_COLOR_TYPE_MOON_AMBIENT = 0;
     public const int NWNX_AREA_COLOR_TYPE_MOON_DIFFUSE = 1;
     public const int NWNX_AREA_COLOR_TYPE_SUN_AMBIENT = 2;
     public const int NWNX_AREA_COLOR_TYPE_SUN_DIFFUSE = 3;
 
+    /// @}
     /// A tile info struct
     /// Gets the number of players in area.
     /// <param name="area">The area object.</param>
@@ -282,7 +291,7 @@ namespace NWN.Core.NWNX
     }
 
     /// Set the Sun/Moon Ambient/Diffuse colors of area
-    /// type = NWNX_AREA_COLOR_TYPE_*
+    // type = NWNX_AREA_COLOR_TYPE_*
     /// <param name="area">The area object.</param>
     /// <param name="type">= A @ref area_color "Sun/Moon Color Setting".</param>
     /// <param name="color">= A FOG_COLOR_*.</param>
@@ -303,9 +312,7 @@ namespace NWN.Core.NWNX
     /// Create and returns a transition (square shaped of specified size) at a location.
     /// <param name="area">The area object.</param>
     /// <param name="target">A door or waypoint object.</param>
-    /// <param name="x">The x position to create the transition.</param>
-    /// <param name="y">The y position to create the transition.</param>
-    /// <param name="z">The z position to create the transition.</param>
+    /// <param name="x,y,z">The position to create the transition.</param>
     /// <param name="size">The size of the square.</param>
     /// <param name="tag">If specified, the returning object will have this tag.</param>
     /// @sa NWNX_Object_SetTriggerGeometry() if you wish to draw the transition as something other than a square.
@@ -325,8 +332,7 @@ namespace NWN.Core.NWNX
 
     /// Get the state of a tile animation loop.
     /// <param name="oArea">The area object.</param>
-    /// <param name="fTileX">The X coordinates of the tile.</param>
-    /// <param name="fTileY">The Y coordinates of the tile.</param>
+    /// <param name="fTileX,">fTileY The coordinates of the tile.</param>
     /// <param name="nAnimLoop">The loop to check. (1-3)</param>
     /// <returns>TRUE if the loop is enabled.</returns>
     public static int GetTileAnimationLoop(uint oArea, float fTileX, float fTileY, int nAnimLoop)
@@ -342,8 +348,7 @@ namespace NWN.Core.NWNX
 
     /// Set the state of a tile animation loop.
     /// <param name="oArea">The area object.</param>
-    /// <param name="fTileX">The x coordinates of the tile.</param>
-    /// <param name="fTileY">The y coordinates of the tile.</param>
+    /// <param name="fTileX,">fTileY The coordinates of the tile.</param>
     /// <param name="nAnimLoop">The loop to set (1-3).</param>
     /// <param name="bEnabled">TRUE or FALSE.</param>
     /// @note Requires clients to re-enter the area for it to take effect
@@ -360,8 +365,7 @@ namespace NWN.Core.NWNX
 
     /// Get the name of the tile model from any location.
     /// <param name="oArea">The area name.</param>
-    /// <param name="fTileX">The X coordinates of the tile.</param>
-    /// <param name="fTileY">The Y coordinates of the tile.</param>
+    /// <param name="fTileX,">fTileY The coordinates of the tile.</param>
     public static string GetTileModelResRef(uint oArea, float fTileX, float fTileY)
     {
       VM.NWNX.SetFunction(NWNX_Area, "GetTileModelResRef");
@@ -374,18 +378,16 @@ namespace NWN.Core.NWNX
 
     /// Test to see if there's a direct, walkable line between two points in the area.
     /// <param name="oArea">The area object.</param>
-    /// <param name="fStartX">The x starting points.</param>
-    /// <param name="fStartY">The y starting points.</param>
-    /// <param name="fEndX,">The x ending points.</param>
-    /// <param name="fEndY">fThe y ending points.</param>
+    /// <param name="fStartX,">fStartY The starting points.</param>
+    /// <param name="fEndX,">fEndY The ending points.</param>
     /// <param name="fPerSpace">The personal space of a creature. Found in appearance.2da.</param>
     /// <param name="fHeight">The height of a creature. Found in appearance.2da.</param>
     /// <param name="bIgnoreDoors">Whether to ignore doors in the check.</param>
-    /// <return>
+    /// @return</returns>
     ///  * 1 if there is a direct walkable line.
     ///  * -1 if the line is blocked by terrain.
     ///  * -2 if the line is blocked by a placeable.
-    ///  * -3 if the line is blocked by a creature. </return>
+    ///  * -3 if the line is blocked by a creature.
     public static int TestDirectLine(uint oArea, float fStartX, float fStartY, float fEndX, float fEndY, float fPerSpace, float fHeight, int bIgnoreDoors = NWScript.FALSE)
     {
       VM.NWNX.SetFunction(NWNX_Area, "TestDirectLine");
@@ -416,9 +418,7 @@ namespace NWN.Core.NWNX
 
     /// Create and return a generic trigger (square shaped of specified size) at a location.
     /// <param name="oArea">The area object.</param>
-    /// <param name="fX">The x position to create the trigger.</param>
-    /// <param name="fY">The y position to create the trigger.</param>
-    /// <param name="fZ">The z position to create the trigger.</param>
+    /// <param name="fX,">fY, fZ The position to create the trigger.</param>
     /// <param name="sTag">If specified, the returned trigger will have this tag.</param>
     /// <param name="fSize">The size of the square.</param>
     /// @sa NWNX_Object_SetTriggerGeometry() if you wish to draw the trigger as something other than a square.
@@ -476,8 +476,7 @@ namespace NWN.Core.NWNX
 
     /// Get the tile info of the tile at [fTileX, fTileY] in oArea.
     /// <param name="oArea">The area name.</param>
-    /// <param name="fTileX">The x coordinates of the tile.</param>
-    /// <param name="fTileY">The y coordinates of the tile.</param>
+    /// <param name="fTileX,">fTileY The coordinates of the tile.</param>
     /// <returns>A NWNX_Area_TileInfo struct with tile info.</returns>
     public static TileInfo GetTileInfo(uint oArea, float fTileX, float fTileY)
     {
@@ -494,6 +493,8 @@ namespace NWN.Core.NWNX
       str.nID = VM.NWNX.StackPopInt();
       return str;
     }
+
+    /// @}
   }
 
   public struct TileInfo

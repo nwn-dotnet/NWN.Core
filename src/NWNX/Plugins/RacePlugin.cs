@@ -5,8 +5,11 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Race = "NWNX_Race";
 
+    ///< @private
     /// @name Racial Modifiers
     /// @anchor racial_modifiers
+    ///
+    /// @{
     public const int NWNX_RACE_MODIFIER_INVALID = 0;
     public const int NWNX_RACE_MODIFIER_AB = 1;
     public const int NWNX_RACE_MODIFIER_ABVSRACE = 2;
@@ -31,12 +34,11 @@ namespace NWN.Core.NWNX
     public const int NWNX_RACE_MODIFIER_SRCHARGEN = 21;
     public const int NWNX_RACE_MODIFIER_SRINCLEVEL = 22;
 
+    ///@}
     /// Sets a racial modifier.
     /// <param name="iRace">The RACIALTYPE_ constant or value in racialtypes.2da.</param>
     /// <param name="iMod">The @ref racial_modifiers "racial modifier" to set.</param>
-    /// <param name="iParam1">The first parameters for this racial modifier.</param>
-    /// <param name="iParam2">The second parameters for this racial modifier.</param>
-    /// <param name="iParam3">The third parameters for this racial modifier.</param>
+    /// <param name="iParam1,">iParam2, iParam3 The parameters for this racial modifier.</param>
     public static void SetRacialModifier(int iRace, int iMod, int iParam1, int iParam2 = -559038737, int iParam3 = -559038737)
     {
       VM.NWNX.SetFunction(NWNX_Race, "SetRacialModifier");
@@ -58,5 +60,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
+
+    /// @}
   }
 }

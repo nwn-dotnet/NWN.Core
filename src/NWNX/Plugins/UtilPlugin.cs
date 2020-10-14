@@ -5,10 +5,12 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Util = "NWNX_Util";
 
+    ///< @private
     /// @name Resref Types
     /// @anchor resref_types
     /// Constants for the various types of resrefs.
     ///
+    /// @{
     public const int NWNX_UTIL_RESREF_TYPE_NSS = 2009;
     public const int NWNX_UTIL_RESREF_TYPE_NCS = 2010;
     public const int NWNX_UTIL_RESREF_TYPE_AREA_ARE = 2012;
@@ -25,6 +27,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_UTIL_RESREF_TYPE_STORE = 2051;
     public const int NWNX_UTIL_RESREF_TYPE_WAYPOINT = 2058;
 
+    ///@}
     /// A world time struct
     /// Gets the name of the currently executing script.
     /// @note If depth is > 0, it will return the name of the script that called this one via ExecuteScript().
@@ -148,7 +151,7 @@ namespace NWN.Core.NWNX
 
     /// @anchor util_encode_url
     /// Encodes a string for usage in a URL.
-    /// <param name="sURL">The string to encode for a URL.</param>
+    /// <param name="str">The string to encode for a URL.</param>
     /// <returns>The url encoded string.</returns>
     public static string EncodeStringForURL(string sURL)
     {
@@ -421,6 +424,8 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
+
+    /// @}
   }
 
   public struct WorldTime

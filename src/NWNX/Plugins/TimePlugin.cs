@@ -5,7 +5,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Time = "NWNX_Time";
 
-
+    ///< @private
     /// Returns the current date.
     /// <returns>The date in the format (mm/dd/yyyy).</returns>
     public static string GetSystemDate()
@@ -43,6 +43,8 @@ namespace NWN.Core.NWNX
       t.seconds = VM.NWNX.StackPopInt();
       return t;
     }
+
+    /// @}
   }
 
   public struct HighResTimestamp

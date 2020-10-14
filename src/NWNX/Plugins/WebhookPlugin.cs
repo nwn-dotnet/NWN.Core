@@ -5,6 +5,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_WebHook = "NWNX_WebHook";
 
+    ///< @private
     /// Send a slack compatible webhook.
     /// <param name="host">The web server to send the hook.</param>
     /// <param name="path">The path to the hook.</param>
@@ -34,5 +35,7 @@ namespace NWN.Core.NWNX
     {
       NWScript.DelayCommand(delay, () => SendWebHookHTTPS(host, path, sMessage));
     }
+
+    /// @}
   }
 }
