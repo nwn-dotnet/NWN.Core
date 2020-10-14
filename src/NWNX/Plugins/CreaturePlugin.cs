@@ -1592,6 +1592,31 @@ namespace NWN.Core.NWNX
             VM.NWNX.Call();
         }
 
+        /// Changes the attack modifier depending on the dice roll. Used to skip autofail on 1 and autosucceed on 20 as well.
+        /// <param name="oCreature">The attacking creature, use OBJECT_INVALID for all.</param>
+        /// <param name="nRoll">The dice roll to modify.</param>
+        /// <param name="nModifier">The modifier to the attack, use 0 to turn off autofail for 1/autosucceed for 20 with no attack modifier value.</param>
+        public static void SetAttackRollOverride(uint oCreature, int nRoll, int nModifier)
+        {
+            VM.NWNX.SetFunction(NWNX_Creature, "SetAttackRollOverride");
+            VM.NWNX.StackPush(nModifier);
+            VM.NWNX.StackPush(nRoll);
+            VM.NWNX.StackPush(oCreature);
+            VM.NWNX.Call();
+        }
+
+        /// Works like the tweak but can be turned on and off for all creatures or single ones.
+        /// <param name="oCreature">The parrying creature, use OBJECT_INVALID for all.</param>
+        /// <param name="bParry">TRUE to parry all attacks.</param>
+        /// @note Use this command on_module_load instead of the NWNX_TWEAKS_PARRY_ALL_ATTACKS tweak if using NWNX_Creature_SetAttackRollOverride()
+        public static void SetParryAllAttacks(uint oCreature, int bParry)
+        {
+            VM.NWNX.SetFunction(NWNX_Creature, "SetParryAllAttacks");
+            VM.NWNX.StackPush(bParry);
+            VM.NWNX.StackPush(oCreature);
+            VM.NWNX.Call();
+        }
+
         /// @}
     }
 

@@ -40,6 +40,7 @@ namespace NWN.Core.NWNX
         public const int NWNX_AREA_COLOR_TYPE_SUN_DIFFUSE = 3;
 
         /// @}
+        /// A tile info struct
         /// Gets the number of players in area.
         /// <param name="area">The area object.</param>
         /// <returns>The player count for the area.</returns>
@@ -473,6 +474,35 @@ namespace NWN.Core.NWNX
             return VM.NWNX.StackPopInt();
         }
 
+        /// Get the tile info of the tile at [fTileX, fTileY] in oArea.
+        /// <param name="oArea">The area name.</param>
+        /// <param name="fTileX,">fTileY The coordinates of the tile.</param>
+        /// <returns>A NWNX_Area_TileInfo struct with tile info.</returns>
+        public static TileInfo GetTileInfo(uint oArea, float fTileX, float fTileY)
+        {
+            VM.NWNX.SetFunction(NWNX_Area, "GetTileInfo");
+            VM.NWNX.StackPush(fTileY);
+            VM.NWNX.StackPush(fTileX);
+            VM.NWNX.StackPush(oArea);
+            VM.NWNX.Call();
+            TileInfo str = default;
+            str.nGridY = VM.NWNX.StackPopInt();
+            str.nGridX = VM.NWNX.StackPopInt();
+            str.nOrientation = VM.NWNX.StackPopInt();
+            str.nHeight = VM.NWNX.StackPopInt();
+            str.nID = VM.NWNX.StackPopInt();
+            return str;
+        }
+
         /// @}
+    }
+
+    public struct TileInfo
+    {
+        public int nID;
+        public int nHeight;
+        public int nOrientation;
+        public int nGridX;
+        public int nGridY;
     }
 }
