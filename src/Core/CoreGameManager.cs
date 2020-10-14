@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace NWN.Core
 {
   /// <summary>
-  /// Simple GameManager implementation. Used by default if no
+  /// Simple GameManager implementation. Used by default if no manager is specified during bootstrap.
   /// </summary>
   public class CoreGameManager : IGameManager
   {
