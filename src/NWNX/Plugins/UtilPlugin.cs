@@ -345,11 +345,13 @@ namespace NWN.Core.NWNX
         /// <param name="sResRef">The ResRef of the door.</param>
         /// <param name="locLocation">The location to create the door at.</param>
         /// <param name="sNewTag">An optional new tag for the door.</param>
+        /// <param name="nAppearanceType">An optional index into doortypes.2da for appearance.</param>
         /// <returns>The door, or OBJECT_INVALID on failure.</returns>
-        public static uint CreateDoor(string sResRef, System.IntPtr locLocation, string sNewTag)
+        public static uint CreateDoor(string sResRef, System.IntPtr locLocation, string sNewTag = "", int nAppearanceType = -1)
         {
             VM.NWNX.SetFunction(NWNX_Util, "CreateDoor");
             System.Numerics.Vector3 vPosition = NWScript.GetPositionFromLocation(locLocation);
+            VM.NWNX.StackPush(nAppearanceType);
             VM.NWNX.StackPush(sNewTag);
             VM.NWNX.StackPush(NWScript.GetFacingFromLocation(locLocation));
             VM.NWNX.StackPush(vPosition.Z);
