@@ -223,15 +223,17 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopObject();
     }
 
-    /// Compiles and adds a script to the UserDirectory/nwnx folder.
+    /// Compiles and adds a script to the UserDirectory/nwnx folder, or to the location of sAlias.
     /// @note Will override existing scripts that are in the module.
     /// <param name="sFileName">The script filename without extension, 16 or less characters.</param>
     /// <param name="sScriptData">The script data to compile</param>
     /// <param name="bWrapIntoMain">Set to TRUE to wrap sScriptData into void main(){}.</param>
+    /// <param name="sAlias">The alias of the resource directory to add the ncs file to. Default: UserDirectory/nwnx</param>
     /// <returns>"" on success, or the compilation error.</returns>
-    public static string AddScript(string sFileName, string sScriptData, int bWrapIntoMain = NWScript.FALSE)
+    public static string AddScript(string sFileName, string sScriptData, int bWrapIntoMain = NWScript.FALSE, string sAlias = "NWNX")
     {
       VM.NWNX.SetFunction(NWNX_Util, "AddScript");
+      VM.NWNX.StackPush(sAlias);
       VM.NWNX.StackPush(bWrapIntoMain);
       VM.NWNX.StackPush(sScriptData);
       VM.NWNX.StackPush(sFileName);
@@ -252,27 +254,31 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopString();
     }
 
-    /// Adds a nss file to the UserDirectory/nwnx folder.
+    /// Adds a nss file to the UserDirectory/nwnx folder, or to the location of sAlias.
     /// @note Will override existing nss files that are in the module
     /// <param name="sFileName">The script filename without extension, 16 or less characters.</param>
     /// <param name="sContents">The contents of the nss file</param>
+    /// <param name="sAlias">The alias of the resource directory to add the nss file to. Default: UserDirectory/nwnx</param>
     /// <returns>TRUE on success.</returns>
-    public static int AddNSSFile(string sFileName, string sContents)
+    public static int AddNSSFile(string sFileName, string sContents, string sAlias = "NWNX")
     {
       VM.NWNX.SetFunction(NWNX_Util, "AddNSSFile");
+      VM.NWNX.StackPush(sAlias);
       VM.NWNX.StackPush(sContents);
       VM.NWNX.StackPush(sFileName);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
 
-    /// Remove sFileName of nType from the UserDirectory/nwnx folder.
+    /// Remove sFileName of nType from the UserDirectory/nwnx folder, or from the location of sAlias.
     /// <param name="sFileName">The filename without extension, 16 or less characters.</param>
     /// <param name="nType">The @ref resref_types "Resref Type".</param>
+    /// <param name="sAlias">The alias of the resource directory to remove the file from. Default: UserDirectory/nwnx</param>
     /// <returns>TRUE on success.</returns>
-    public static int RemoveNWNXResourceFile(string sFileName, int nType)
+    public static int RemoveNWNXResourceFile(string sFileName, int nType, string sAlias = "NWNX")
     {
       VM.NWNX.SetFunction(NWNX_Util, "RemoveNWNXResourceFile");
+      VM.NWNX.StackPush(sAlias);
       VM.NWNX.StackPush(nType);
       VM.NWNX.StackPush(sFileName);
       VM.NWNX.Call();

@@ -485,6 +485,19 @@ namespace NWN.Core.NWNX
         TARGET_OBJECT_ID      | object | Convert to object with StringToObject()
     
     _______________________________________
+        ## Disarm Events
+        - NWNX_ON_DISARM_BEFORE
+        - NWNX_ON_DISARM_AFTER
+    
+        `OBJECT_SELF` = The creature who is being disarmed
+    
+        Event Data Tag        | Type   | Notes
+        ----------------------|--------|-------
+        DISARMER_OBJECT_ID    | object | The object disarming the creature
+        FEAT_ID               | int    | The feat used to perform the disarming (Normal vs Improved Disarm)
+        ACTION_RESULT         | int    | TRUE/FALSE, only in _AFTER events
+    
+    _______________________________________
         ## Cast Spell Events
         - NWNX_ON_CAST_SPELL_BEFORE
         - NWNX_ON_CAST_SPELL_AFTER
@@ -517,7 +530,6 @@ namespace NWN.Core.NWNX
         Event Data Tag        | Type   | Notes |
         ----------------------|--------|-------|
         SPELL_MULTICLASS      | int | Index of the spell casting class (0-2) |
-        SPELL_LEVEL           | int | |
         SPELL_SLOT            | int | |
         SPELL_ID              | int | |
         SPELL_DOMAIN          | int | |
@@ -537,6 +549,22 @@ namespace NWN.Core.NWNX
         SPELL_MULTICLASS      | int    | Index of the spell casting class (0-2) |
         SPELL_LEVEL           | int    | |
         SPELL_SLOT            | int    | |
+    
+    _______________________________________
+        ## Spell Interrupted Events
+        - NWNX_ON_SPELL_INTERRUPTED_BEFORE
+        - NWNX_ON_SPELL_INTERRUPTED_AFTER
+    
+        `OBJECT_SELF` = The creature whose spell was interrupted
+    
+        Event Data Tag        | Type   | Notes |
+        ----------------------|--------|-------|
+        SPELL_ID              | int | |
+        SPELL_CLASS           | int | Index of the spell casting class (0-2) |
+        SPELL_DOMAIN          | int | |
+        SPELL_METAMAGIC       | int | |
+        SPELL_FEAT            | int | |
+        SPELL_SPONTANEOUS     | int | |
     
     _______________________________________
         ## Healer Kit Use Events
@@ -1087,11 +1115,11 @@ namespace NWN.Core.NWNX
     
         Event Data Tag        | Type   | Notes
         ----------------------|--------|-------
-        ALIAS                 | string | NWNX for /nwnx, DEVELOPMENT for /development
+        ALIAS                 | string | NWNX for /nwnx, DEVELOPMENT for /development. Also supports valid aliases from the Custom Resman Definition File
         RESREF                | string | The ResRef of the file
         TYPE                  | int    | The type of the file, see NWNX_UTIL_RESREF_TYPE_*
     
-        Note: These events fire when a file gets added/removed/modified in the /nwnx or /development folder
+        Note: These events fire when a file gets added/removed/modified in resource folders like /nwnx, /development and those defined in the Custom Resman Definition File
     
     _______________________________________
         ## ELC Events
@@ -1324,6 +1352,7 @@ namespace NWN.Core.NWNX
     /// - Input Pause Event
     /// - Debug events
     /// - Store events
+    /// - Disarm event
     public static void SkipEvent()
     {
       VM.NWNX.SetFunction(NWNX_Events, "SkipEvent");

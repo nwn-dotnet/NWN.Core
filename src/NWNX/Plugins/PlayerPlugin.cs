@@ -7,6 +7,7 @@ namespace NWN.Core.NWNX
 
     ///< @private
     /// A quickbar slot.
+    /// A journal entry.
     /// @name Timing Bar Types
     /// @anchor timing_bar_types
     ///
@@ -82,16 +83,16 @@ namespace NWN.Core.NWNX
     /// @remark Only one timing bar can be ran at the same time.
     public static void StartGuiTimingBar(uint player, float seconds, string script = "", int type = NWNX_PLAYER_TIMING_BAR_CUSTOM)
     {
-      if (NWScript.GetLocalInt(player,  "NWNX_PLAYER_GUI_TIMING_ACTIVE") == NWScript.TRUE)
-      return ;
+      if (NWScript.GetLocalInt(player, "NWNX_PLAYER_GUI_TIMING_ACTIVE") == NWScript.TRUE)
+        return;
       VM.NWNX.SetFunction(NWNX_Player, "StartGuiTimingBar");
       VM.NWNX.StackPush(type);
       VM.NWNX.StackPush(seconds);
       VM.NWNX.StackPush(player);
       VM.NWNX.Call();
-      int id = NWScript.GetLocalInt( player, "NWNX_PLAYER_GUI_TIMING_ID") +1;
-      NWScript.SetLocalInt(player,  "NWNX_PLAYER_GUI_TIMING_ACTIVE", id);
-      NWScript.SetLocalInt(player,  "NWNX_PLAYER_GUI_TIMING_ID", id);
+      int id = NWScript.GetLocalInt(player, "NWNX_PLAYER_GUI_TIMING_ID") + 1;
+      NWScript.SetLocalInt(player, "NWNX_PLAYER_GUI_TIMING_ACTIVE", id);
+      NWScript.SetLocalInt(player, "NWNX_PLAYER_GUI_TIMING_ID", id);
       NWScript.DelayCommand(seconds, () => INTERNAL_StopGuiTimingBar(player, script, id));
     }
 
@@ -653,19 +654,77 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Give a custom journal entry to oPlayer.
+    /// @warning Custom entries are wiped on client enter - they must be reapplied.
+    /// <param name="oPlayer">The player object.</param>
+    /// <param name="journalEntry">The journal entry in the form of a struct.</param>
+    /// <param name="nSilentUpdate">0 = Notify player via sound effects and feedback message, 1 = Suppress sound effects and feedback message</param>
+    /// <returns>a positive number to indicate the new amount of journal entries on the player.</returns>
+    /// @note In contrast to conventional nwn journal entries - this method will overwrite entries with the same tag, so the index / count of entries
+    /// will only increase if you add new entries with unique tags
+    public static int AddCustomJournalEntry(uint oPlayer, JournalEntry journalEntry, int nSilentUpdate = 0)
+    {
+      VM.NWNX.SetFunction(NWNX_Player, "AddCustomJournalEntry");
+      VM.NWNX.StackPush(nSilentUpdate);
+      VM.NWNX.StackPush(journalEntry.nTimeOfDay);
+      VM.NWNX.StackPush(journalEntry.nCalendarDay);
+      VM.NWNX.StackPush(journalEntry.nUpdated);
+      VM.NWNX.StackPush(journalEntry.nQuestDisplayed);
+      VM.NWNX.StackPush(journalEntry.nQuestCompleted);
+      VM.NWNX.StackPush(journalEntry.nPriority);
+      VM.NWNX.StackPush(journalEntry.nState);
+      VM.NWNX.StackPush(journalEntry.sTag);
+      VM.NWNX.StackPush(journalEntry.sText);
+      VM.NWNX.StackPush(journalEntry.sName);
+      VM.NWNX.StackPush(oPlayer);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
+    /// Returns a struct containing a journal entry that can then be modified.
+    /// <param name="oPlayer">The player object.</param>
+    /// <param name="questTag">The quest tag you wish to get the journal entry for.</param>
+    /// <returns>a struct containing the journal entry data.</returns>
+    /// @note This method will return -1 for the Updated field in the event that no matching journal entry was found,
+    /// only the last matching quest tag will be returned. Eg: If you add 3 journal updates to a player, only the 3rd one will be returned as
+    /// that is the active one that the player currently sees.
+    public static JournalEntry GetJournalEntry(uint oPlayer, string questTag)
+    {
+      VM.NWNX.SetFunction(NWNX_Player, "GetJournalEntry");
+      JournalEntry entry = default;
+      VM.NWNX.StackPush(questTag);
+      VM.NWNX.StackPush(oPlayer);
+      VM.NWNX.Call();
+      entry.nUpdated = VM.NWNX.StackPopInt();
+      if (entry.nUpdated == -1)
+      {
+        return entry;
+      }
+      entry.nQuestDisplayed = VM.NWNX.StackPopInt();
+      entry.nQuestCompleted = VM.NWNX.StackPopInt();
+      entry.nPriority = VM.NWNX.StackPopInt();
+      entry.nState = VM.NWNX.StackPopInt();
+      entry.nTimeOfDay = VM.NWNX.StackPopInt();
+      entry.nCalendarDay = VM.NWNX.StackPopInt();
+      entry.sName = VM.NWNX.StackPopString();
+      entry.sText = VM.NWNX.StackPopString();
+      entry.sTag = questTag;
+      return entry;
+    }
+
     /// @}
     public static void INTERNAL_StopGuiTimingBar(uint player, string script = "", int id = -1)
     {
-      int activeId = NWScript.GetLocalInt(player,  "NWNX_PLAYER_GUI_TIMING_ACTIVE");
-      if (activeId==0)
-      return ;
-      if (id!=-1&&id!=activeId)
-      return ;
-      NWScript.DeleteLocalInt(player,  "NWNX_PLAYER_GUI_TIMING_ACTIVE");
+      int activeId = NWScript.GetLocalInt(player, "NWNX_PLAYER_GUI_TIMING_ACTIVE");
+      if (activeId == 0)
+        return;
+      if (id != -1 && id != activeId)
+        return;
+      NWScript.DeleteLocalInt(player, "NWNX_PLAYER_GUI_TIMING_ACTIVE");
       VM.NWNX.SetFunction(NWNX_Player, "StopGuiTimingBar");
       VM.NWNX.StackPush(player);
       VM.NWNX.Call();
-      if (script!="")
+      if (script != "")
       {
         NWScript.ExecuteScript(script, player);
       }
@@ -688,5 +747,19 @@ namespace NWN.Core.NWNX
     public int nDomainLevel;
     public int nAssociateType;
     public uint oAssociate;
+  }
+
+  public struct JournalEntry
+  {
+    public string sName;
+    public string sText;
+    public string sTag;
+    public int nState;
+    public int nPriority;
+    public int nQuestCompleted;
+    public int nQuestDisplayed;
+    public int nUpdated;
+    public int nCalendarDay;
+    public int nTimeOfDay;
   }
 }

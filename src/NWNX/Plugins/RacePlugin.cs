@@ -61,6 +61,20 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
+    /// Associates the race with its favored enemy feat.
+    /// <param name="iRace">The race</param>
+    /// <param name="iFeat">The feat</param>
+    /// @note If a creature has a race that has a parent race then favored enemy bonuses will work for either race against that creature.
+    /// For example a creature is a Wild Elf which has a parent race of Elf, an attacker would benefit if they had either Favored Enemy: Elf
+    /// or Favored Enemy: Wild Elf
+    public static void SetFavoredEnemyFeat(int iRace, int iFeat)
+    {
+      VM.NWNX.SetFunction(NWNX_Race, "SetFavoredEnemyFeat");
+      VM.NWNX.StackPush(iFeat);
+      VM.NWNX.StackPush(iRace);
+      VM.NWNX.Call();
+    }
+
     /// @}
   }
 }
