@@ -1,3 +1,5 @@
+using static NWN.Core.NWScript;
+
 namespace NWN.Core.NWNX
 {
   [NWNXPlugin(NWNX_Feat)]
@@ -31,6 +33,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_FEAT_MODIFIER_SPELLIMMUNITY = 18;
     public const int NWNX_FEAT_MODIFIER_SRCHARGEN = 19;
     public const int NWNX_FEAT_MODIFIER_SRINCLEVEL = 20;
+    public const int NWNX_FEAT_MODIFIER_SPELLSAVEDC = 21;
 
     ///@}
     /// Sets a feat modifier.

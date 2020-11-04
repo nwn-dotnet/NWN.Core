@@ -1,3 +1,5 @@
+using static NWN.Core.NWScript;
+
 namespace NWN.Core.NWNX
 {
   [NWNXPlugin(NWNX_Creature)]
@@ -761,7 +763,7 @@ namespace NWN.Core.NWNX
     /// <param name="bBaseAPR">If TRUE, will return the base attacks per round, based on BAB and</param>
     /// equipped weapons, regardless of overrides set by calls to @nwn{SetBaseAttackBonus} builtin function.
     /// <returns>The attacks per round.</returns>
-    public static int GetAttacksPerRound(uint creature, int bBaseAPR = NWScript.FALSE)
+    public static int GetAttacksPerRound(uint creature, int bBaseAPR = FALSE)
     {
       VM.NWNX.SetFunction(NWNX_Creature, "GetAttacksPerRound");
       VM.NWNX.StackPush(bBaseAPR);
@@ -961,19 +963,19 @@ namespace NWN.Core.NWNX
     /// <param name="isOffhand">If the attack was with the offhand.</param>
     /// <param name="includeBaseAttackBonus">Should the result include the base attack bonus.</param>
     /// <returns>The highest attack bonus.</returns>
-    public static int GetAttackBonus(uint creature, int isMelee = -1, int isTouchAttack = NWScript.FALSE, int isOffhand = NWScript.FALSE, int includeBaseAttackBonus = NWScript.TRUE)
+    public static int GetAttackBonus(uint creature, int isMelee = -1, int isTouchAttack = FALSE, int isOffhand = FALSE, int includeBaseAttackBonus = TRUE)
     {
       VM.NWNX.SetFunction(NWNX_Creature, "GetAttackBonus");
       if (isMelee==-1)
       {
-        uint oWeapon = NWScript.GetItemInSlot(NWScript.INVENTORY_SLOT_RIGHTHAND, creature);
-        if (NWScript.GetIsObjectValid(oWeapon) == NWScript.TRUE)
+        uint oWeapon = GetItemInSlot(INVENTORY_SLOT_RIGHTHAND, creature);
+        if (GetIsObjectValid(oWeapon) == TRUE)
         {
-          isMelee = NWScript.GetWeaponRanged(oWeapon);
+          isMelee = GetWeaponRanged(oWeapon);
         }
         else
         {
-          isMelee = NWScript.TRUE;
+          isMelee = TRUE;
         }
       }
       VM.NWNX.StackPush(includeBaseAttackBonus);
@@ -1052,7 +1054,7 @@ namespace NWN.Core.NWNX
     /// <param name="abilityScore">An ABILITY_* constant.</param>
     /// <param name="isOffhand">Whether the attack is an offhand attack.</param>
     /// <returns>The bonus value.</returns>
-    public static int GetTotalEffectBonus(uint creature, int bonusType = NWNX_CREATURE_BONUS_TYPE_ATTACK, uint target = NWScript.OBJECT_INVALID, int isElemental = 0, int isForceMax = 0, int savetype = -1, int saveSpecificType = -1, int skill = -1, int abilityScore = -1, int isOffhand = NWScript.FALSE)
+    public static int GetTotalEffectBonus(uint creature, int bonusType = NWNX_CREATURE_BONUS_TYPE_ATTACK, uint target = OBJECT_INVALID, int isElemental = 0, int isForceMax = 0, int savetype = -1, int saveSpecificType = -1, int skill = -1, int abilityScore = -1, int isOffhand = FALSE)
     {
       VM.NWNX.SetFunction(NWNX_Creature, "GetTotalEffectBonus");
       VM.NWNX.StackPush(isOffhand);
@@ -1181,7 +1183,7 @@ namespace NWN.Core.NWNX
     /// @deprecated Use GetDomain(). This will be removed in future NWNX releases.
     public static int GetDomain(uint creature, int @class, int index)
     {
-      NWScript.WriteTimestampedLogEntry("NWNX_Creature: GetDomain() is deprecated. Please use the basegame's GetDomain() instead");
+      WriteTimestampedLogEntry("NWNX_Creature: GetDomain() is deprecated. Please use the basegame's GetDomain() instead");
       return VM.NWNX.StackPopInt();
     }
 
@@ -1206,7 +1208,7 @@ namespace NWN.Core.NWNX
     /// @deprecated Use GetSpecialization(). This will be removed in future NWNX releases.
     public static int GetSpecialization(uint creature, int @class)
     {
-      NWScript.WriteTimestampedLogEntry("NWNX_Creature: GetSpecialization() is deprecated. Please use the basegame's GetSpecialization() instead");
+      WriteTimestampedLogEntry("NWNX_Creature: GetSpecialization() is deprecated. Please use the basegame's GetSpecialization() instead");
       return VM.NWNX.StackPopInt();
     }
 
@@ -1285,7 +1287,7 @@ namespace NWN.Core.NWNX
     /// <param name="nClass">the class that this modifier will apply to</param>
     /// <param name="nModifier">the modifier to apply</param>
     /// <param name="bPersist">whether the modifier should be persisted to the .bic file if applicable</param>
-    public static void SetCasterLevelModifier(uint oCreature, int nClass, int nModifier, int bPersist = NWScript.FALSE)
+    public static void SetCasterLevelModifier(uint oCreature, int nClass, int nModifier, int bPersist = FALSE)
     {
       VM.NWNX.SetFunction(NWNX_Creature, "SetCasterLevelModifier");
       VM.NWNX.StackPush(bPersist);
@@ -1313,7 +1315,7 @@ namespace NWN.Core.NWNX
     /// <param name="nClass">the class that this modifier will apply to</param>
     /// <param name="nCasterLevel">the caster level override to apply</param>
     /// <param name="bPersist">whether the override should be persisted to the .bic file if applicable</param>
-    public static void SetCasterLevelOverride(uint oCreature, int nClass, int nCasterLevel, int bPersist = NWScript.FALSE)
+    public static void SetCasterLevelOverride(uint oCreature, int nClass, int nCasterLevel, int bPersist = FALSE)
     {
       VM.NWNX.SetFunction(NWNX_Creature, "SetCasterLevelOverride");
       VM.NWNX.StackPush(bPersist);
@@ -1351,7 +1353,7 @@ namespace NWN.Core.NWNX
     /// <param name="nHand">0 for all attacks, 1 for Mainhand, 2 for Offhand</param>
     /// <param name="bPersist">Whether the modifier should persist to .bic file if applicable</param>
     /// @note Persistence is activated each server reset by first use of either 'SetCriticalMultiplier*' functions. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
-    public static void SetCriticalMultiplierModifier(uint oCreature, int nModifier, int nHand = 0, int bPersist = NWScript.FALSE)
+    public static void SetCriticalMultiplierModifier(uint oCreature, int nModifier, int nHand = 0, int bPersist = FALSE)
     {
       VM.NWNX.SetFunction(NWNX_Creature, "SetCriticalMultiplierModifier");
       VM.NWNX.StackPush(bPersist);
@@ -1380,7 +1382,7 @@ namespace NWN.Core.NWNX
     /// <param name="nHand">0 for all attacks, 1 for Mainhand, 2 for Offhand</param>
     /// <param name="bPersist">whether the modifier should be persisted to the .bic file if applicable</param>
     /// @note Persistence is activated each server reset by first use of either 'SetCriticalMultiplier*' functions. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
-    public static void SetCriticalMultiplierOverride(uint oCreature, int nOverride, int nHand = 0, int bPersist = NWScript.FALSE)
+    public static void SetCriticalMultiplierOverride(uint oCreature, int nOverride, int nHand = 0, int bPersist = FALSE)
     {
       VM.NWNX.SetFunction(NWNX_Creature, "SetCriticalMultiplierOverride");
       VM.NWNX.StackPush(bPersist);
@@ -1409,7 +1411,7 @@ namespace NWN.Core.NWNX
     /// <param name="nHand">0 for all attacks, 1 for Mainhand, 2 for Offhand</param>
     /// <param name="bPersist">whether the modifier should be persisted to the .bic file if applicable</param>
     /// @note Persistence is activated each server reset by first use of either 'SetCriticalRange*' functions. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
-    public static void SetCriticalRangeModifier(uint oCreature, int nModifier, int nHand = 0, int bPersist = NWScript.FALSE)
+    public static void SetCriticalRangeModifier(uint oCreature, int nModifier, int nHand = 0, int bPersist = FALSE)
     {
       VM.NWNX.SetFunction(NWNX_Creature, "SetCriticalRangeModifier");
       VM.NWNX.StackPush(bPersist);
@@ -1438,7 +1440,7 @@ namespace NWN.Core.NWNX
     /// <param name="nHand">0 for all attacks, 1 for Mainhand, 2 for Offhand</param>
     /// <param name="bPersist">whether the modifier should be persisted to the .bic file if applicable</param>
     /// @note Persistence is activated each server reset by first use of either 'SetCriticalRange*' functions. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
-    public static void SetCriticalRangeOverride(uint oCreature, int nOverride, int nHand = 0, int bPersist = NWScript.FALSE)
+    public static void SetCriticalRangeOverride(uint oCreature, int nOverride, int nHand = 0, int bPersist = FALSE)
     {
       VM.NWNX.SetFunction(NWNX_Creature, "SetCriticalRangeOverride");
       VM.NWNX.StackPush(bPersist);
@@ -1560,7 +1562,7 @@ namespace NWN.Core.NWNX
     /// <param name="oVersus">The one doing the attacking</param>
     /// <param name="nTouch">TRUE for touch attacks</param>
     /// <returns>-255 on Error, Flat footed AC if oVersus is invalid or the Attacked AC versus oVersus.</returns>
-    public static int GetArmorClassVersus(uint oAttacked, uint oVersus, int nTouch = NWScript.FALSE)
+    public static int GetArmorClassVersus(uint oAttacked, uint oVersus, int nTouch = FALSE)
     {
       VM.NWNX.SetFunction(NWNX_Creature, "GetArmorClassVersus");
       VM.NWNX.StackPush(nTouch);

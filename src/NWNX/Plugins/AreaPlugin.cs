@@ -1,3 +1,5 @@
+using static NWN.Core.NWScript;
+
 namespace NWN.Core.NWNX
 {
   [NWNXPlugin(NWNX_Area)]
@@ -388,7 +390,7 @@ namespace NWN.Core.NWNX
     ///  * -1 if the line is blocked by terrain.
     ///  * -2 if the line is blocked by a placeable.
     ///  * -3 if the line is blocked by a creature.
-    public static int TestDirectLine(uint oArea, float fStartX, float fStartY, float fEndX, float fEndY, float fPerSpace, float fHeight, int bIgnoreDoors = NWScript.FALSE)
+    public static int TestDirectLine(uint oArea, float fStartX, float fStartY, float fEndX, float fEndY, float fPerSpace, float fHeight, int bIgnoreDoors = FALSE)
     {
       VM.NWNX.SetFunction(NWNX_Area, "TestDirectLine");
       VM.NWNX.StackPush(bIgnoreDoors);
@@ -407,7 +409,7 @@ namespace NWN.Core.NWNX
     /// <param name="oArea">The area object.</param>
     /// <param name="bBattleMusic">Set to TRUE to get if the battle music is playing.</param>
     /// <returns>TRUE if music is playing</returns>
-    public static int GetMusicIsPlaying(uint oArea, int bBattleMusic = NWScript.FALSE)
+    public static int GetMusicIsPlaying(uint oArea, int bBattleMusic = FALSE)
     {
       VM.NWNX.SetFunction(NWNX_Area, "GetMusicIsPlaying");
       VM.NWNX.StackPush(bBattleMusic);
@@ -453,18 +455,20 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Export the GIT of oArea to the UserDirectory/nwnx folder.
+    /// Export the .git file of oArea to the UserDirectory/nwnx folder, or to the location of sAlias.
     /// @note Take care with local objects set on objects, they will likely not reference the same object after a server restart.
-    /// <param name="oArea">The area to export the GIT of.</param>
-    /// <param name="sFileName">The filename, 16 characters or less. If left blank the resref of oArea will be used.</param>
+    /// <param name="oArea">The area to export the .git file of.</param>
+    /// <param name="sFileName">The filename, 16 characters or less and should be lowercase. If left blank the resref of oArea will be used.</param>
     /// <param name="bExportVarTable">If TRUE, local variables set on oArea will be exported too.</param>
     /// <param name="bExportUUID">If TRUE, the UUID of oArea will be exported, if it has one.</param>
     /// <param name="nObjectFilter">One or more OBJECT_TYPE_* constants. These object will not be exported. For example OBJECT_TYPE_CREATURE | OBJECT_TYPE_DOOR</param>
     /// will not export creatures and doors. Use OBJECT_TYPE_ALL to filter all objects or 0 to export all objects.
+    /// <param name="sAlias">The alias of the resource directory to add the .git file to. Default: UserDirectory/nwnx</param>
     /// <returns>TRUE if exported successfully, FALSE if not.</returns>
-    public static int ExportGIT(uint oArea, string sFileName = "", int bExportVarTable = NWScript.TRUE, int bExportUUID = NWScript.TRUE, int nObjectFilter = 0)
+    public static int ExportGIT(uint oArea, string sFileName = "", int bExportVarTable = TRUE, int bExportUUID = TRUE, int nObjectFilter = 0, string sAlias = "NWNX")
     {
       VM.NWNX.SetFunction(NWNX_Area, "ExportGIT");
+      VM.NWNX.StackPush(sAlias);
       VM.NWNX.StackPush(nObjectFilter);
       VM.NWNX.StackPush(bExportUUID);
       VM.NWNX.StackPush(bExportVarTable);
@@ -492,6 +496,25 @@ namespace NWN.Core.NWNX
       str.nHeight = VM.NWNX.StackPopInt();
       str.nID = VM.NWNX.StackPopInt();
       return str;
+    }
+
+    /// Export the .are file of oArea to the UserDirectory/nwnx folder, or to the location of sAlias.
+    /// <param name="oArea">The area to export the .are file of.</param>
+    /// <param name="sFileName">The filename, 16 characters or less and should be lowercase. This will also be the resref of the area.</param>
+    /// <param name="sNewName">Optional new name of the area. Leave blank to use the current name.</param>
+    /// <param name="sNewTag">Optional new tag of the area. Leave blank to use the current tag.</param>
+    /// <param name="sAlias">The alias of the resource directory to add the .are file to. Default: UserDirectory/nwnx</param>
+    /// <returns>TRUE if exported successfully, FALSE if not.</returns>
+    public static int ExportARE(uint oArea, string sFileName, string sNewName = "", string sNewTag = "", string sAlias = "NWNX")
+    {
+      VM.NWNX.SetFunction(NWNX_Area, "ExportARE");
+      VM.NWNX.StackPush(sAlias);
+      VM.NWNX.StackPush(sNewTag);
+      VM.NWNX.StackPush(sNewName);
+      VM.NWNX.StackPush(sFileName);
+      VM.NWNX.StackPush(oArea);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
     }
 
     /// @}

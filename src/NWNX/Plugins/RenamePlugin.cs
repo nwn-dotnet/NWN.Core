@@ -1,3 +1,5 @@
+using static NWN.Core.NWScript;
+
 namespace NWN.Core.NWNX
 {
   [NWNXPlugin(NWNX_Rename)]
@@ -30,7 +32,7 @@ namespace NWN.Core.NWNX
     /// <param name="iPlayerNameState">How to change the Community Name, use @ref rename_comm_name_override_type "Community Name Override Type".</param>
     /// <param name="oObserver">If specified, the character name will appear to that specific observer as set, this overrides a global setting.</param>
     /// @note Will not persist through saving, resets or logout.
-    public static void SetPCNameOverride(uint oTarget, string sNewName, string sPrefix = "", string sSuffix = "", int iPlayerNameState = NWNX_RENAME_PLAYERNAME_DEFAULT, uint oObserver = NWScript.OBJECT_INVALID)
+    public static void SetPCNameOverride(uint oTarget, string sNewName, string sPrefix = "", string sSuffix = "", int iPlayerNameState = NWNX_RENAME_PLAYERNAME_DEFAULT, uint oObserver = OBJECT_INVALID)
     {
       VM.NWNX.SetFunction(NWNX_Rename, "SetPCNameOverride");
       VM.NWNX.StackPush(oObserver);
@@ -47,7 +49,7 @@ namespace NWN.Core.NWNX
     /// <param name="oObserver">The specific observer.</param>
     /// <returns>The PC's name as overridden either per observer or globally.</returns>
     /// @note If you wish to get a PC's true name use `GetName(oPC, TRUE)`.
-    public static string GetPCNameOverride(uint oTarget, uint oObserver = NWScript.OBJECT_INVALID)
+    public static string GetPCNameOverride(uint oTarget, uint oObserver = OBJECT_INVALID)
     {
       VM.NWNX.SetFunction(NWNX_Rename, "GetPCNameOverride");
       VM.NWNX.StackPush(oObserver);
@@ -62,7 +64,7 @@ namespace NWN.Core.NWNX
     /// If oTarget is OBJECT_INVALID then all overrides are cleared.
     /// <param name="clearAll">If true, both the global and personal overrides will be cleared for that target PC.</param>
     /// Requires oObserver be OBJECT_INVALID.
-    public static void ClearPCNameOverride(uint oTarget, uint oObserver = NWScript.OBJECT_INVALID, int clearAll = NWScript.FALSE)
+    public static void ClearPCNameOverride(uint oTarget, uint oObserver = OBJECT_INVALID, int clearAll = FALSE)
     {
       VM.NWNX.SetFunction(NWNX_Rename, "ClearPCNameOverride");
       VM.NWNX.StackPush(clearAll);

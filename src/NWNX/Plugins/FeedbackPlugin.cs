@@ -1,3 +1,5 @@
+using static NWN.Core.NWScript;
+
 namespace NWN.Core.NWNX
 {
   [NWNXPlugin(NWNX_Feedback)]
@@ -369,7 +371,7 @@ namespace NWN.Core.NWNX
     /// <param name="nMessage">The message identifier from @ref feedback_msgs "Feedback Messages".</param>
     /// <param name="oPC">The PC or OBJECT_INVALID for a global setting.</param>
     /// <returns>TRUE if the message is hidden.</returns>
-    public static int GetFeedbackMessageHidden(int nMessage, uint oPC = NWScript.OBJECT_INVALID)
+    public static int GetFeedbackMessageHidden(int nMessage, uint oPC = OBJECT_INVALID)
     {
       VM.NWNX.SetFunction(NWNX_Feedback, "GetMessageHidden");
       int nMessageType = 0;
@@ -386,7 +388,7 @@ namespace NWN.Core.NWNX
     /// <param name="oPC">The PC or OBJECT_INVALID for a global setting.</param>
     /// @note Personal state overrides the global state which means if a global state is set
     /// to TRUE but the personal state is set to FALSE, the message will be shown to the PC.
-    public static void SetFeedbackMessageHidden(int nMessage, int isHidden, uint oPC = NWScript.OBJECT_INVALID)
+    public static void SetFeedbackMessageHidden(int nMessage, int isHidden, uint oPC = OBJECT_INVALID)
     {
       VM.NWNX.SetFunction(NWNX_Feedback, "SetMessageHidden");
       int nMessageType = 0;
@@ -401,7 +403,7 @@ namespace NWN.Core.NWNX
     /// <param name="nMessage">The message identifier from @ref combat_log_msgs "Combat Log Messages".</param>
     /// <param name="oPC">The PC or OBJECT_INVALID for a global setting.</param>
     /// <returns>TRUE if the message is hidden.</returns>
-    public static int GetCombatLogMessageHidden(int nMessage, uint oPC = NWScript.OBJECT_INVALID)
+    public static int GetCombatLogMessageHidden(int nMessage, uint oPC = OBJECT_INVALID)
     {
       VM.NWNX.SetFunction(NWNX_Feedback, "GetMessageHidden");
       int nMessageType = 1;
@@ -418,7 +420,7 @@ namespace NWN.Core.NWNX
     /// <param name="oPC">The PC or OBJECT_INVALID for a global setting.</param>
     /// @note Personal state overrides the global state which means if a global state is set
     /// to TRUE but the personal state is set to FALSE, the message will be shown to the PC.
-    public static void SetCombatLogMessageHidden(int nMessage, int isHidden, uint oPC = NWScript.OBJECT_INVALID)
+    public static void SetCombatLogMessageHidden(int nMessage, int isHidden, uint oPC = OBJECT_INVALID)
     {
       VM.NWNX.SetFunction(NWNX_Feedback, "SetMessageHidden");
       int nMessageType = 1;
@@ -432,7 +434,7 @@ namespace NWN.Core.NWNX
     /// Gets if the journal update message is hidden.
     /// <param name="oPC">The PC or OBJECT_INVALID for a global setting.</param>
     /// <returns>TRUE if the message is hidden.</returns>
-    public static int GetJournalUpdatedMessageHidden(uint oPC = NWScript.OBJECT_INVALID)
+    public static int GetJournalUpdatedMessageHidden(uint oPC = OBJECT_INVALID)
     {
       VM.NWNX.SetFunction(NWNX_Feedback, "GetMessageHidden");
       int nMessageType = 2;
@@ -448,7 +450,7 @@ namespace NWN.Core.NWNX
     /// <param name="oPC">The PC or OBJECT_INVALID for a global setting.</param>
     /// @note Personal state overrides the global state which means if a global state is set
     /// to TRUE but the personal state is set to FALSE, the message will be shown to the PC.
-    public static void SetJournalUpdatedMessageHidden(int isHidden, uint oPC = NWScript.OBJECT_INVALID)
+    public static void SetJournalUpdatedMessageHidden(int isHidden, uint oPC = OBJECT_INVALID)
     {
       VM.NWNX.SetFunction(NWNX_Feedback, "SetMessageHidden");
       int nMessageType = 2;

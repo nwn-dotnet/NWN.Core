@@ -1,3 +1,5 @@
+using static NWN.Core.NWScript;
+
 namespace NWN.Core.NWNX
 {
   [NWNXPlugin(NWNX_SkillRanks)]
@@ -114,7 +116,7 @@ namespace NWN.Core.NWNX
     /// Modifies or creates a skill feat.
     /// <param name="skillFeat">The defined NWNX_SkillRanks_SkillFeat.</param>
     /// <param name="createIfNonExistent">TRUE to create if the feat does not exist.</param>
-    public static void SetSkillFeat(SkillFeat skillFeat, int createIfNonExistent = NWScript.FALSE)
+    public static void SetSkillFeat(SkillFeat skillFeat, int createIfNonExistent = FALSE)
     {
       VM.NWNX.SetFunction(NWNX_SkillRanks, "SetSkillFeat");
       VM.NWNX.StackPush(createIfNonExistent);
@@ -124,7 +126,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.StackPush(skillFeat.iAreaFlagsForbidden);
       VM.NWNX.StackPush(skillFeat.iAreaFlagsRequired);
       VM.NWNX.StackPush(skillFeat.fClassLevelMod);
-      VM.NWNX.StackPush( NWScript.GetStringRight( skillFeat.sClasses, NWScript.GetStringLength( skillFeat.sClasses) -NWScript.FindSubString( skillFeat.sClasses, "1") ));
+      VM.NWNX.StackPush( GetStringRight( skillFeat.sClasses, GetStringLength( skillFeat.sClasses) -FindSubString( skillFeat.sClasses, "1") ));
       VM.NWNX.StackPush(skillFeat.iFocusFeat);
       VM.NWNX.StackPush(skillFeat.iModifier);
       VM.NWNX.StackPush(skillFeat.iFeat);
@@ -141,17 +143,17 @@ namespace NWN.Core.NWNX
     /// <returns>The updated NWNX_SkillRanks_SkillFeat.</returns>
     public static SkillFeat AddSkillFeatClass(SkillFeat skillFeat, int iClass)
     {
-      if (NWScript.GetStringLength( skillFeat.sClasses) <255)
+      if (GetStringLength( skillFeat.sClasses) <255)
       {
         int i;
         string sPad = "";
-        for (i=0; i<255-NWScript.GetStringLength( skillFeat.sClasses); i++)
+        for (i=0; i<255-GetStringLength( skillFeat.sClasses); i++)
         {
           sPad = sPad+"0";
         }
         skillFeat.sClasses = sPad+skillFeat.sClasses;
       }
-      skillFeat.sClasses = NWScript.GetStringLeft( skillFeat.sClasses, 254-iClass) +"1"+NWScript.GetStringRight( skillFeat.sClasses, iClass);
+      skillFeat.sClasses = GetStringLeft( skillFeat.sClasses, 254-iClass) +"1"+GetStringRight( skillFeat.sClasses, iClass);
       return skillFeat;
     }
 
@@ -161,7 +163,7 @@ namespace NWN.Core.NWNX
     /// changed with this function.
     /// <param name="iModifier">The new value for the feat modifier.</param>
     /// <param name="iEpic">Set to TRUE to change the value for Epic Skill Focus.</param>
-    public static void SetSkillFeatFocusModifier(int iModifier, int epicFocus = NWScript.FALSE)
+    public static void SetSkillFeatFocusModifier(int iModifier, int epicFocus = FALSE)
     {
       VM.NWNX.SetFunction(NWNX_SkillRanks, "SetSkillFeatFocusModifier");
       VM.NWNX.StackPush(epicFocus);

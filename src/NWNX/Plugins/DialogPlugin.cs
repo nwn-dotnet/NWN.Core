@@ -1,3 +1,5 @@
+using static NWN.Core.NWScript;
+
 namespace NWN.Core.NWNX
 {
   [NWNXPlugin(NWNX_Dialog)]
@@ -80,7 +82,7 @@ namespace NWN.Core.NWNX
     /// Get the text of the current node
     /// <param name="language">The @ref dialog_languages "language" of the text.</param>
     /// <param name="gender">The gender for the text.</param>
-    public static string GetCurrentNodeText(int language = NWNX_DIALOG_LANGUAGE_ENGLISH, int gender = NWScript.GENDER_MALE)
+    public static string GetCurrentNodeText(int language = NWNX_DIALOG_LANGUAGE_ENGLISH, int gender = GENDER_MALE)
     {
       VM.NWNX.SetFunction(NWNX_Dialog, "GetCurrentNodeText");
       VM.NWNX.StackPush(gender);
@@ -94,7 +96,7 @@ namespace NWN.Core.NWNX
     /// <param name="text">The text for the node.</param>
     /// <param name="language">The @ref dialog_languages "language" of the text.</param>
     /// <param name="gender">The gender for the text.</param>
-    public static void SetCurrentNodeText(string text, int language = NWNX_DIALOG_LANGUAGE_ENGLISH, int gender = NWScript.GENDER_MALE)
+    public static void SetCurrentNodeText(string text, int language = NWNX_DIALOG_LANGUAGE_ENGLISH, int gender = GENDER_MALE)
     {
       VM.NWNX.SetFunction(NWNX_Dialog, "SetCurrentNodeText");
       VM.NWNX.StackPush(gender);

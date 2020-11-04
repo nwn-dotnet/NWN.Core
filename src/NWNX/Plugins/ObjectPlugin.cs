@@ -1,3 +1,5 @@
+using static NWN.Core.NWScript;
+
 namespace NWN.Core.NWNX
 {
   [NWNXPlugin(NWNX_Object)]
@@ -83,7 +85,7 @@ namespace NWN.Core.NWNX
     /// @deprecated Use the basegame StringToObject() function. This will be removed in a future NWNX release.
     public static uint StringToObject(string id)
     {
-      NWScript.WriteTimestampedLogEntry("WARNING: StringToObject() is deprecated, please use the basegame's StringToObject()");
+      WriteTimestampedLogEntry("WARNING: StringToObject() is deprecated, please use the basegame's StringToObject()");
       return VM.NWNX.StackPopObject();
     }
 
@@ -91,7 +93,7 @@ namespace NWN.Core.NWNX
     /// <param name="oObject">The object.</param>
     /// <param name="vPosition">A vector position.</param>
     /// <param name="bUpdateSubareas">If TRUE and oObject is a creature, any triggers/traps at vPosition will fire their events.</param>
-    public static void SetPosition(uint oObject, System.Numerics.Vector3 vPosition, int bUpdateSubareas = NWScript.TRUE)
+    public static void SetPosition(uint oObject, System.Numerics.Vector3 vPosition, int bUpdateSubareas = TRUE)
     {
       VM.NWNX.SetFunction(NWNX_Object, "SetPosition");
       VM.NWNX.StackPush(bUpdateSubareas);

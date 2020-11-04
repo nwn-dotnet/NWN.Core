@@ -1,3 +1,5 @@
+using static NWN.Core.NWScript;
+
 namespace NWN.Core.NWNX
 {
   [NWNXPlugin(NWNX_Weapon)]
@@ -226,7 +228,7 @@ namespace NWN.Core.NWNX
     /// <param name="oWeapon">Should be a melee weapon.</param>
     /// <param name="nEnable">TRUE for bonus. FALSE to turn off bonus.</param>
     /// <param name="bPersist">whether the two hand state should persist to the gff file.</param>
-    public static void SetOneHalfStrength(uint oWeapon, int nEnable, int bPersist = NWScript.FALSE)
+    public static void SetOneHalfStrength(uint oWeapon, int nEnable, int bPersist = FALSE)
     {
       VM.NWNX.SetFunction(NWNX_Weapon, "SetOneHalfStrength");
       VM.NWNX.StackPush(bPersist);
