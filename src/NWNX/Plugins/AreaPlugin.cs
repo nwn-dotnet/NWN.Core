@@ -1,3 +1,5 @@
+using static NWN.Core.NWScript;
+
 namespace NWN.Core.NWNX
 {
   [NWNXPlugin(NWNX_Area)]
@@ -388,7 +390,7 @@ namespace NWN.Core.NWNX
     ///  * -1 if the line is blocked by terrain.
     ///  * -2 if the line is blocked by a placeable.
     ///  * -3 if the line is blocked by a creature.
-    public static int TestDirectLine(uint oArea, float fStartX, float fStartY, float fEndX, float fEndY, float fPerSpace, float fHeight, int bIgnoreDoors = NWScript.FALSE)
+    public static int TestDirectLine(uint oArea, float fStartX, float fStartY, float fEndX, float fEndY, float fPerSpace, float fHeight, int bIgnoreDoors = FALSE)
     {
       VM.NWNX.SetFunction(NWNX_Area, "TestDirectLine");
       VM.NWNX.StackPush(bIgnoreDoors);
@@ -407,7 +409,7 @@ namespace NWN.Core.NWNX
     /// <param name="oArea">The area object.</param>
     /// <param name="bBattleMusic">Set to TRUE to get if the battle music is playing.</param>
     /// <returns>TRUE if music is playing</returns>
-    public static int GetMusicIsPlaying(uint oArea, int bBattleMusic = NWScript.FALSE)
+    public static int GetMusicIsPlaying(uint oArea, int bBattleMusic = FALSE)
     {
       VM.NWNX.SetFunction(NWNX_Area, "GetMusicIsPlaying");
       VM.NWNX.StackPush(bBattleMusic);
@@ -463,7 +465,7 @@ namespace NWN.Core.NWNX
     /// will not export creatures and doors. Use OBJECT_TYPE_ALL to filter all objects or 0 to export all objects.
     /// <param name="sAlias">The alias of the resource directory to add the .git file to. Default: UserDirectory/nwnx</param>
     /// <returns>TRUE if exported successfully, FALSE if not.</returns>
-    public static int ExportGIT(uint oArea, string sFileName = "", int bExportVarTable = NWScript.TRUE, int bExportUUID = NWScript.TRUE, int nObjectFilter = 0, string sAlias = "NWNX")
+    public static int ExportGIT(uint oArea, string sFileName = "", int bExportVarTable = TRUE, int bExportUUID = TRUE, int nObjectFilter = 0, string sAlias = "NWNX")
     {
       VM.NWNX.SetFunction(NWNX_Area, "ExportGIT");
       VM.NWNX.StackPush(sAlias);

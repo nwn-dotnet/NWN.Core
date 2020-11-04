@@ -1,3 +1,5 @@
+using static NWN.Core.NWScript;
+
 namespace NWN.Core.NWNX
 {
   [NWNXPlugin(NWNX_Effect)]
@@ -13,7 +15,7 @@ namespace NWN.Core.NWNX
     public static EffectUnpacked UnpackEffect(System.IntPtr e)
     {
       VM.NWNX.SetFunction(NWNX_Effect, "UnpackEffect");
-      VM.NWNX.StackPush(e, NWScript.ENGINE_STRUCTURE_EFFECT);
+      VM.NWNX.StackPush(e, ENGINE_STRUCTURE_EFFECT);
       VM.NWNX.Call();
       EffectUnpacked n = default;
       n.sTag = VM.NWNX.StackPopString();
@@ -49,9 +51,9 @@ namespace NWN.Core.NWNX
       n.nParam0 = VM.NWNX.StackPopInt();
       n.nNumIntegers = VM.NWNX.StackPopInt();
       n.bLinkRightValid = VM.NWNX.StackPopInt();
-      n.eLinkRight = VM.NWNX.StackPopStruct(NWScript.ENGINE_STRUCTURE_EFFECT);
+      n.eLinkRight = VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
       n.bLinkLeftValid = VM.NWNX.StackPopInt();
-      n.eLinkLeft = VM.NWNX.StackPopStruct(NWScript.ENGINE_STRUCTURE_EFFECT);
+      n.eLinkLeft = VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
       n.nCasterLevel = VM.NWNX.StackPopInt();
       n.bShowIcon = VM.NWNX.StackPopInt();
       n.bExpose = VM.NWNX.StackPopInt();
@@ -81,9 +83,9 @@ namespace NWN.Core.NWNX
       VM.NWNX.StackPush(e.bExpose);
       VM.NWNX.StackPush(e.bShowIcon);
       VM.NWNX.StackPush(e.nCasterLevel);
-      VM.NWNX.StackPush(e.eLinkLeft, NWScript.ENGINE_STRUCTURE_EFFECT);
+      VM.NWNX.StackPush(e.eLinkLeft, ENGINE_STRUCTURE_EFFECT);
       VM.NWNX.StackPush(e.bLinkLeftValid);
-      VM.NWNX.StackPush(e.eLinkRight, NWScript.ENGINE_STRUCTURE_EFFECT);
+      VM.NWNX.StackPush(e.eLinkRight, ENGINE_STRUCTURE_EFFECT);
       VM.NWNX.StackPush(e.bLinkRightValid);
       VM.NWNX.StackPush(e.nNumIntegers);
       VM.NWNX.StackPush(e.nParam0);
@@ -116,7 +118,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.StackPush(e.vParam1.Z);
       VM.NWNX.StackPush(e.sTag);
       VM.NWNX.Call();
-      return VM.NWNX.StackPopStruct(NWScript.ENGINE_STRUCTURE_EFFECT);
+      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
 
     /// Set a script with optional data that runs when an effect expires
@@ -130,9 +132,9 @@ namespace NWN.Core.NWNX
       VM.NWNX.SetFunction(NWNX_Effect, "SetEffectExpiredScript");
       VM.NWNX.StackPush(data);
       VM.NWNX.StackPush(script);
-      VM.NWNX.StackPush(e, NWScript.ENGINE_STRUCTURE_EFFECT);
+      VM.NWNX.StackPush(e, ENGINE_STRUCTURE_EFFECT);
       VM.NWNX.Call();
-      return VM.NWNX.StackPopStruct(NWScript.ENGINE_STRUCTURE_EFFECT);
+      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
 
     /// Get the data set with NWNX_Effect_SetEffectExpiredScript()
@@ -162,8 +164,8 @@ namespace NWN.Core.NWNX
     public static int ReplaceEffect(uint obj, System.IntPtr eOld, System.IntPtr eNew)
     {
       VM.NWNX.SetFunction(NWNX_Effect, "ReplaceEffect");
-      VM.NWNX.StackPush(eNew, NWScript.ENGINE_STRUCTURE_EFFECT);
-      VM.NWNX.StackPush(eOld, NWScript.ENGINE_STRUCTURE_EFFECT);
+      VM.NWNX.StackPush(eNew, ENGINE_STRUCTURE_EFFECT);
+      VM.NWNX.StackPush(eOld, ENGINE_STRUCTURE_EFFECT);
       VM.NWNX.StackPush(obj);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();

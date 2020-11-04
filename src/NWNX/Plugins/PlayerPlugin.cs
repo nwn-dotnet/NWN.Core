@@ -1,3 +1,5 @@
+using static NWN.Core.NWScript;
+
 namespace NWN.Core.NWNX
 {
   [NWNXPlugin(NWNX_Player)]
@@ -83,17 +85,17 @@ namespace NWN.Core.NWNX
     /// @remark Only one timing bar can be ran at the same time.
     public static void StartGuiTimingBar(uint player, float seconds, string script = "", int type = NWNX_PLAYER_TIMING_BAR_CUSTOM)
     {
-      if (NWScript.GetLocalInt(player, "NWNX_PLAYER_GUI_TIMING_ACTIVE") == NWScript.TRUE)
-        return;
+      if (GetLocalInt(player,  "NWNX_PLAYER_GUI_TIMING_ACTIVE") == TRUE)
+      return ;
       VM.NWNX.SetFunction(NWNX_Player, "StartGuiTimingBar");
       VM.NWNX.StackPush(type);
       VM.NWNX.StackPush(seconds);
       VM.NWNX.StackPush(player);
       VM.NWNX.Call();
-      int id = NWScript.GetLocalInt(player, "NWNX_PLAYER_GUI_TIMING_ID") + 1;
-      NWScript.SetLocalInt(player, "NWNX_PLAYER_GUI_TIMING_ACTIVE", id);
-      NWScript.SetLocalInt(player, "NWNX_PLAYER_GUI_TIMING_ID", id);
-      NWScript.DelayCommand(seconds, () => INTERNAL_StopGuiTimingBar(player, script, id));
+      int id = GetLocalInt( player, "NWNX_PLAYER_GUI_TIMING_ID") +1;
+      SetLocalInt(player,  "NWNX_PLAYER_GUI_TIMING_ACTIVE", id);
+      SetLocalInt(player,  "NWNX_PLAYER_GUI_TIMING_ID", id);
+      DelayCommand(seconds, () => INTERNAL_StopGuiTimingBar(player, script, id));
     }
 
     /// Stop displaying a timing bar.
@@ -108,7 +110,7 @@ namespace NWN.Core.NWNX
     /// <param name="player">The player object.</param>
     /// <param name="bWalk">TRUE to set the player to always walk.</param>
     /// @remark Clicking on the ground or using WASD will trigger walking instead of running.
-    public static void SetAlwaysWalk(uint player, int bWalk = NWScript.TRUE)
+    public static void SetAlwaysWalk(uint player, int bWalk = TRUE)
     {
       VM.NWNX.SetFunction(NWNX_Player, "SetAlwaysWalk");
       VM.NWNX.StackPush(bWalk);
@@ -201,7 +203,7 @@ namespace NWN.Core.NWNX
     {
       VM.NWNX.SetFunction(NWNX_Player, "ChangeBackgroundMusic");
       VM.NWNX.StackPush(track);
-      VM.NWNX.StackPush(NWScript.TRUE);
+      VM.NWNX.StackPush(TRUE);
       VM.NWNX.StackPush(player);
       VM.NWNX.Call();
     }
@@ -213,7 +215,7 @@ namespace NWN.Core.NWNX
     {
       VM.NWNX.SetFunction(NWNX_Player, "ChangeBackgroundMusic");
       VM.NWNX.StackPush(track);
-      VM.NWNX.StackPush(NWScript.FALSE);
+      VM.NWNX.StackPush(FALSE);
       VM.NWNX.StackPush(player);
       VM.NWNX.Call();
     }
@@ -223,7 +225,7 @@ namespace NWN.Core.NWNX
     public static void MusicBackgroundStart(uint player)
     {
       VM.NWNX.SetFunction(NWNX_Player, "PlayBackgroundMusic");
-      VM.NWNX.StackPush(NWScript.TRUE);
+      VM.NWNX.StackPush(TRUE);
       VM.NWNX.StackPush(player);
       VM.NWNX.Call();
     }
@@ -233,7 +235,7 @@ namespace NWN.Core.NWNX
     public static void MusicBackgroundStop(uint player)
     {
       VM.NWNX.SetFunction(NWNX_Player, "PlayBackgroundMusic");
-      VM.NWNX.StackPush(NWScript.FALSE);
+      VM.NWNX.StackPush(FALSE);
       VM.NWNX.StackPush(player);
       VM.NWNX.Call();
     }
@@ -254,7 +256,7 @@ namespace NWN.Core.NWNX
     public static void MusicBattleStart(uint player)
     {
       VM.NWNX.SetFunction(NWNX_Player, "PlayBattleMusic");
-      VM.NWNX.StackPush(NWScript.TRUE);
+      VM.NWNX.StackPush(TRUE);
       VM.NWNX.StackPush(player);
       VM.NWNX.Call();
     }
@@ -264,7 +266,7 @@ namespace NWN.Core.NWNX
     public static void MusicBattleStop(uint player)
     {
       VM.NWNX.SetFunction(NWNX_Player, "PlayBattleMusic");
-      VM.NWNX.StackPush(NWScript.FALSE);
+      VM.NWNX.StackPush(FALSE);
       VM.NWNX.StackPush(player);
       VM.NWNX.Call();
     }
@@ -274,7 +276,7 @@ namespace NWN.Core.NWNX
     /// <param name="sound">The sound resref.</param>
     /// <param name="target">The target object for the sound to originate. If target OBJECT_INVALID the sound</param>
     /// will play at the location of the player.
-    public static void PlaySound(uint player, string sound, uint target = NWScript.OBJECT_INVALID)
+    public static void PlaySound(uint player, string sound, uint target = OBJECT_INVALID)
     {
       VM.NWNX.SetFunction(NWNX_Player, "PlaySound");
       VM.NWNX.StackPush(target);
@@ -337,7 +339,7 @@ namespace NWN.Core.NWNX
     /// <param name="target">The target object, must be a creature or another player.</param>
     /// <param name="open">TRUE to open.</param>
     /// @remark Only works if player and target are in the same area.
-    public static void OpenInventory(uint player, uint target, int open = NWScript.TRUE)
+    public static void OpenInventory(uint player, uint target, int open = TRUE)
     {
       VM.NWNX.SetFunction(NWNX_Player, "OpenInventory");
       VM.NWNX.StackPush(open);
@@ -452,7 +454,7 @@ namespace NWN.Core.NWNX
     /// <param name="oWP">The waypoint object to place where the PC should start.</param>
     /// <param name="bFirstConnectOnly">Set to FALSE if you would like the PC to go to this location every time they login instead</param>
     /// of just every server restart.
-    public static void SetPersistentLocation(string sCDKeyOrCommunityName, string sBicFileName, uint oWP, int bFirstConnectOnly = NWScript.TRUE)
+    public static void SetPersistentLocation(string sCDKeyOrCommunityName, string sBicFileName, uint oWP, int bFirstConnectOnly = TRUE)
     {
       VM.NWNX.SetFunction(NWNX_Player, "SetPersistentLocation");
       VM.NWNX.StackPush(bFirstConnectOnly);
@@ -488,7 +490,7 @@ namespace NWN.Core.NWNX
     /// <param name="bMindImmune">If FALSE will remove the mind immunity effect on the possessor.</param>
     /// <param name="bCreateDefaultQB">If TRUE will populate the quick bar with default buttons.</param>
     /// <returns>TRUE if possession succeeded.</returns>
-    public static int PossessCreature(uint oPossessor, uint oPossessed, int bMindImmune = NWScript.TRUE, int bCreateDefaultQB = NWScript.FALSE)
+    public static int PossessCreature(uint oPossessor, uint oPossessed, int bMindImmune = TRUE, int bCreateDefaultQB = FALSE)
     {
       VM.NWNX.SetFunction(NWNX_Player, "PossessCreature");
       VM.NWNX.StackPush(bCreateDefaultQB);
@@ -635,12 +637,12 @@ namespace NWN.Core.NWNX
     public static void SetSpawnLocation(uint oPlayer, System.IntPtr locSpawn)
     {
       VM.NWNX.SetFunction(NWNX_Player, "SetSpawnLocation");
-      System.Numerics.Vector3 vPosition = NWScript.GetPositionFromLocation(locSpawn);
-      VM.NWNX.StackPush(NWScript.GetFacingFromLocation(locSpawn));
+      System.Numerics.Vector3 vPosition = GetPositionFromLocation(locSpawn);
+      VM.NWNX.StackPush(GetFacingFromLocation(locSpawn));
       VM.NWNX.StackPush(vPosition.Z);
       VM.NWNX.StackPush(vPosition.Y);
       VM.NWNX.StackPush(vPosition.X);
-      VM.NWNX.StackPush(NWScript.GetAreaFromLocation(locSpawn));
+      VM.NWNX.StackPush(GetAreaFromLocation(locSpawn));
       VM.NWNX.StackPush(oPlayer);
       VM.NWNX.Call();
     }
@@ -696,7 +698,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.StackPush(oPlayer);
       VM.NWNX.Call();
       entry.nUpdated = VM.NWNX.StackPopInt();
-      if (entry.nUpdated == -1)
+      if (entry.nUpdated==-1)
       {
         return entry;
       }
@@ -715,18 +717,18 @@ namespace NWN.Core.NWNX
     /// @}
     public static void INTERNAL_StopGuiTimingBar(uint player, string script = "", int id = -1)
     {
-      int activeId = NWScript.GetLocalInt(player, "NWNX_PLAYER_GUI_TIMING_ACTIVE");
-      if (activeId == 0)
-        return;
-      if (id != -1 && id != activeId)
-        return;
-      NWScript.DeleteLocalInt(player, "NWNX_PLAYER_GUI_TIMING_ACTIVE");
+      int activeId = GetLocalInt(player,  "NWNX_PLAYER_GUI_TIMING_ACTIVE");
+      if (activeId==0)
+      return ;
+      if (id!=-1&&id!=activeId)
+      return ;
+      DeleteLocalInt(player,  "NWNX_PLAYER_GUI_TIMING_ACTIVE");
       VM.NWNX.SetFunction(NWNX_Player, "StopGuiTimingBar");
       VM.NWNX.StackPush(player);
       VM.NWNX.Call();
-      if (script != "")
+      if (script!="")
       {
-        NWScript.ExecuteScript(script, player);
+        ExecuteScript(script, player);
       }
     }
 

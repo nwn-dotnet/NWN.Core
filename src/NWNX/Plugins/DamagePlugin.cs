@@ -1,3 +1,5 @@
+using static NWN.Core.NWScript;
+
 namespace NWN.Core.NWNX
 {
   [NWNXPlugin(NWNX_Damage)]
@@ -15,7 +17,7 @@ namespace NWN.Core.NWNX
     /// Sets the script to run with a damage event.
     /// <param name="sScript">The script that will handle the damage event.</param>
     /// <param name="oOwner">An object if only executing for a specific object or OBJECT_INVALID for global.</param>
-    public static void SetDamageEventScript(string sScript, uint oOwner = NWScript.OBJECT_INVALID)
+    public static void SetDamageEventScript(string sScript, uint oOwner = OBJECT_INVALID)
     {
       VM.NWNX.SetFunction(NWNX_Damage, "SetEventScript");
       VM.NWNX.StackPush(oOwner);
@@ -74,7 +76,7 @@ namespace NWN.Core.NWNX
     /// Sets the script to run with an attack event.
     /// <param name="sScript">The script that will handle the attack event.</param>
     /// <param name="oOwner">An object if only executing for a specific object or OBJECT_INVALID for global.</param>
-    public static void SetAttackEventScript(string sScript, uint oOwner = NWScript.OBJECT_INVALID)
+    public static void SetAttackEventScript(string sScript, uint oOwner = OBJECT_INVALID)
     {
       VM.NWNX.SetFunction(NWNX_Damage, "SetEventScript");
       VM.NWNX.StackPush(oOwner);
@@ -141,7 +143,7 @@ namespace NWN.Core.NWNX
     /// <param name="oTarget">The target object on whom the damage is dealt.</param>
     /// <param name="oSource">The source of the damage.</param>
     /// <param name="iRanged">Whether the attack should be treated as ranged by the engine (for example when considering damage inflicted by Acid Sheath and other such effects)</param>
-    public static void DealDamage(DamageData data, uint oTarget, uint oSource, int iRanged = NWScript.FALSE)
+    public static void DealDamage(DamageData data, uint oTarget, uint oSource, int iRanged = FALSE)
     {
       VM.NWNX.SetFunction(NWNX_Damage, "DealDamage");
       VM.NWNX.StackPush(iRanged);

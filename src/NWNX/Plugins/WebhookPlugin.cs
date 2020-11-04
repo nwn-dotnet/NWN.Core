@@ -1,3 +1,5 @@
+using static NWN.Core.NWScript;
+
 namespace NWN.Core.NWNX
 {
   [NWNXPlugin(NWNX_WebHook)]
@@ -33,7 +35,7 @@ namespace NWN.Core.NWNX
     /// <param name="delay">The delay in seconds to send the message again.</param>
     public static void ResendWebHookHTTPS(string host, string path, string sMessage, float delay = 0.0f)
     {
-      NWScript.DelayCommand(delay, () => SendWebHookHTTPS(host, path, sMessage));
+      DelayCommand(delay, () => SendWebHookHTTPS(host, path, sMessage));
     }
 
     /// @}

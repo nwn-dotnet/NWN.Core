@@ -1,3 +1,5 @@
+using static NWN.Core.NWScript;
+
 namespace NWN.Core.NWNX
 {
   [NWNXPlugin(NWNX_SQL)]
@@ -32,7 +34,7 @@ namespace NWN.Core.NWNX
     /// <returns>The ID of this query if successful, else FALSE.</returns>
     public static int ExecuteQuery(string query)
     {
-      if (PrepareQuery(query) == NWScript.TRUE)
+      if (PrepareQuery(query) == TRUE)
       {
         int ret = ExecutePreparedQuery();
         DestroyPreparedQuery();
@@ -118,7 +120,7 @@ namespace NWN.Core.NWNX
     /// <param name="position">The nth ? in a prepared statement.</param>
     /// <param name="value">The value to set.</param>
     /// <param name="base64">Use base64-encoded string format if TRUE (default), otherwise use binary format.</param>
-    public static void PreparedObjectFull(int position, uint value, int base64 = NWScript.TRUE)
+    public static void PreparedObjectFull(int position, uint value, int base64 = TRUE)
     {
       VM.NWNX.SetFunction(NWNX_SQL, "PreparedObjectFull");
       VM.NWNX.StackPush(base64);
@@ -141,7 +143,7 @@ namespace NWN.Core.NWNX
     /// <param name="x,">y, z The vector for objects to be placed in areas.</param>
     /// <param name="base64">Use base64-encoded string format if TRUE (default), otherwise use binary format.</param>
     /// <returns>The deserialized object.</returns>
-    public static uint ReadFullObjectInActiveRow(int column = 0, uint owner = NWScript.OBJECT_INVALID, float x = 0.0f, float y = 0.0f, float z = 0.0f, int base64 = NWScript.TRUE)
+    public static uint ReadFullObjectInActiveRow(int column = 0, uint owner = OBJECT_INVALID, float x = 0.0f, float y = 0.0f, float z = 0.0f, int base64 = TRUE)
     {
       VM.NWNX.SetFunction(NWNX_SQL, "ReadFullObjectInActiveRow");
       VM.NWNX.StackPush(base64);

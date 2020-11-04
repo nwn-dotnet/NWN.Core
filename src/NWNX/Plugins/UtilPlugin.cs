@@ -1,3 +1,5 @@
+using static NWN.Core.NWScript;
+
 namespace NWN.Core.NWNX
 {
   [NWNXPlugin(NWNX_Util)]
@@ -79,9 +81,9 @@ namespace NWN.Core.NWNX
     public static System.IntPtr EffectToItemProperty(System.IntPtr e)
     {
       VM.NWNX.SetFunction(NWNX_Util, "EffectTypeCast");
-      VM.NWNX.StackPush(e, NWScript.ENGINE_STRUCTURE_EFFECT);
+      VM.NWNX.StackPush(e, ENGINE_STRUCTURE_EFFECT);
       VM.NWNX.Call();
-      return VM.NWNX.StackPopStruct(NWScript.ENGINE_STRUCTURE_ITEM_PROPERTY);
+      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEM_PROPERTY);
     }
 
     ///
@@ -91,9 +93,9 @@ namespace NWN.Core.NWNX
     public static System.IntPtr ItemPropertyToEffect(System.IntPtr ip)
     {
       VM.NWNX.SetFunction(NWNX_Util, "EffectTypeCast");
-      VM.NWNX.StackPush(ip, NWScript.ENGINE_STRUCTURE_ITEM_PROPERTY);
+      VM.NWNX.StackPush(ip, ENGINE_STRUCTURE_ITEM_PROPERTY);
       VM.NWNX.Call();
-      return VM.NWNX.StackPopStruct(NWScript.ENGINE_STRUCTURE_EFFECT);
+      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
 
     /// Strip any color codes from a string.
@@ -180,7 +182,7 @@ namespace NWN.Core.NWNX
     /// when using the NSS resref type.
     /// <param name="bModuleResourcesOnly">If TRUE only custom resources will be returned.</param>
     /// <returns>The first resref found or "" if none is found.</returns>
-    public static string GetFirstResRef(int nType, string sRegexFilter = "", int bModuleResourcesOnly = NWScript.TRUE)
+    public static string GetFirstResRef(int nType, string sRegexFilter = "", int bModuleResourcesOnly = TRUE)
     {
       VM.NWNX.SetFunction(NWNX_Util, "GetFirstResRef");
       VM.NWNX.StackPush(bModuleResourcesOnly);
@@ -230,7 +232,7 @@ namespace NWN.Core.NWNX
     /// <param name="bWrapIntoMain">Set to TRUE to wrap sScriptData into void main(){}.</param>
     /// <param name="sAlias">The alias of the resource directory to add the ncs file to. Default: UserDirectory/nwnx</param>
     /// <returns>"" on success, or the compilation error.</returns>
-    public static string AddScript(string sFileName, string sScriptData, int bWrapIntoMain = NWScript.FALSE, string sAlias = "NWNX")
+    public static string AddScript(string sFileName, string sScriptData, int bWrapIntoMain = FALSE, string sAlias = "NWNX")
     {
       VM.NWNX.SetFunction(NWNX_Util, "AddScript");
       VM.NWNX.StackPush(sAlias);
@@ -356,14 +358,14 @@ namespace NWN.Core.NWNX
     public static uint CreateDoor(string sResRef, System.IntPtr locLocation, string sNewTag = "", int nAppearanceType = -1)
     {
       VM.NWNX.SetFunction(NWNX_Util, "CreateDoor");
-      System.Numerics.Vector3 vPosition = NWScript.GetPositionFromLocation(locLocation);
+      System.Numerics.Vector3 vPosition = GetPositionFromLocation(locLocation);
       VM.NWNX.StackPush(nAppearanceType);
       VM.NWNX.StackPush(sNewTag);
-      VM.NWNX.StackPush(NWScript.GetFacingFromLocation(locLocation));
+      VM.NWNX.StackPush(GetFacingFromLocation(locLocation));
       VM.NWNX.StackPush(vPosition.Z);
       VM.NWNX.StackPush(vPosition.Y);
       VM.NWNX.StackPush(vPosition.X);
-      VM.NWNX.StackPush(NWScript.GetAreaFromLocation(locLocation));
+      VM.NWNX.StackPush(GetAreaFromLocation(locLocation));
       VM.NWNX.StackPush(sResRef);
       VM.NWNX.Call();
       return VM.NWNX.StackPopObject();

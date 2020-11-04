@@ -1,3 +1,5 @@
+using static NWN.Core.NWScript;
+
 namespace NWN.Core.NWNX
 {
   [NWNXPlugin(NWNX_Encounter)]
@@ -143,7 +145,7 @@ namespace NWN.Core.NWNX
       float z = VM.NWNX.StackPopFloat();
       float y = VM.NWNX.StackPopFloat();
       float x = VM.NWNX.StackPopFloat();
-      return VM.NWNX.StackPopStruct(NWScript.ENGINE_STRUCTURE_LOCATION);
+      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_LOCATION);
     }
 
     /// Get the minimum amount of creatures that encounter will spawn.

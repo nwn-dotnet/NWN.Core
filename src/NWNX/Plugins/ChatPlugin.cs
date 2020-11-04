@@ -1,3 +1,5 @@
+using static NWN.Core.NWScript;
+
 namespace NWN.Core.NWNX
 {
   [NWNXPlugin(NWNX_Chat)]
@@ -33,7 +35,7 @@ namespace NWN.Core.NWNX
     /// <param name="sender">The sender of the message.</param>
     /// <param name="target">The receiver of the message.</param>
     /// <returns>TRUE if successful, FALSE otherwise.</returns>
-    public static int SendMessage(int channel, string message, uint sender = NWScript.OBJECT_INVALID, uint target = NWScript.OBJECT_INVALID)
+    public static int SendMessage(int channel, string message, uint sender = OBJECT_INVALID, uint target = OBJECT_INVALID)
     {
       VM.NWNX.SetFunction(NWNX_Chat, "SendMessage");
       VM.NWNX.StackPush(target);
@@ -107,7 +109,7 @@ namespace NWN.Core.NWNX
     /// <param name="distance">The distance in meters.</param>
     /// <param name="listener">The listener, if OBJECT_INVALID then it will be set server wide.</param>
     /// <param name="channel">The @ref chat_channels "channel" to modify the distance heard. Only applicable for talk and whisper.</param>
-    public static void SetChatHearingDistance(float distance, uint listener = NWScript.OBJECT_INVALID, int channel = NWNX_CHAT_CHANNEL_PLAYER_TALK)
+    public static void SetChatHearingDistance(float distance, uint listener = OBJECT_INVALID, int channel = NWNX_CHAT_CHANNEL_PLAYER_TALK)
     {
       VM.NWNX.SetFunction(NWNX_Chat, "SetChatHearingDistance");
       VM.NWNX.StackPush(channel);
@@ -119,7 +121,7 @@ namespace NWN.Core.NWNX
     /// Gets the distance with which the player hears talks or whisper
     /// <param name="listener">The listener, if OBJECT_INVALID then will return server wide setting.</param>
     /// <param name="channel">The @ref chat_channels "channel". Only applicable for talk and whisper.</param>
-    public static float GetChatHearingDistance(uint listener = NWScript.OBJECT_INVALID, int channel = NWNX_CHAT_CHANNEL_PLAYER_TALK)
+    public static float GetChatHearingDistance(uint listener = OBJECT_INVALID, int channel = NWNX_CHAT_CHANNEL_PLAYER_TALK)
     {
       VM.NWNX.SetFunction(NWNX_Chat, "GetChatHearingDistance");
       VM.NWNX.StackPush(channel);
