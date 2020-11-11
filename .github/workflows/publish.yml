@@ -29,11 +29,5 @@ jobs:
           RELEASE_BRANCHES: master
           WITH_V: true
 
-      - name: Prep Version String
-        run: echo ::set-env name=VERSION_NUMBER::$(echo ${{ steps.bump_version.outputs.tag }} | sed 's/[v]//g')
-
       - name: Pack
-        run: dotnet pack NWN.Core.csproj --configuration Release -p:PackageVersion=${{ env.VERSION_NUMBER }} -o output
-
-      - name: Publish Package
-        run: dotnet nuget push output/*.nupkg --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json
+        run: dotnet pack NWN.Core.csproj --configuration Release -p:PackageVersion=${{ steps.bump_version.outputs.tag }} -o output
