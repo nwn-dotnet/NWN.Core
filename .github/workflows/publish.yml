@@ -3,7 +3,7 @@
 on:
   push:
     branches:
-      - master
+      - environment-files
 
 jobs:
   build:
@@ -29,5 +29,9 @@ jobs:
           RELEASE_BRANCHES: master
           WITH_V: true
 
+      - name: Prep Version String
+        id: name_version
+        run: echo ::set-output name=version::$(echo ${{ steps.bump_version.outputs.tag }} | sed 's/[v]//g')
+
       - name: Pack
-        run: dotnet pack NWN.Core.csproj --configuration Release -p:PackageVersion=${{ steps.bump_version.outputs.tag }} -o output
+        run: dotnet pack NWN.Core.csproj --configuration Release -p:PackageVersion=${{ steps.name_version.version }} -o output
