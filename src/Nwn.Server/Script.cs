@@ -8,7 +8,7 @@ namespace NWN.Core.Server
 {
   public abstract class Script : IDisposable
   {
-    public const int SCRIPT_NOT_HANDLED = -1;
+    public const int NOT_HANDLED = -1;
 
     public Script(NwnServer server) => server.Scripts.Add(Name, this);
 

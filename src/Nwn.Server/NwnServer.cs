@@ -134,24 +134,24 @@ namespace NWN.Core.Server
 
     #endregion
 
-    #region Interface Implementations
+    #region Native Routines
     int RunScript(string script, uint oidSelf)
     {
       var self = new NwnReference(oidSelf);
 
-      if(_self != NwnReference.INVALID)
+      if(_self.IsValid())
         _selfStack.Push(self);
 
       _self = self;
 
       try
       {
-        return (!Scripts.TryGetValue(script, out var nwnScript)) ? Script.SCRIPT_NOT_HANDLED : nwnScript.ExecuteValue();
+        return (!Scripts.TryGetValue(script, out var nwnScript)) ? Script.NOT_HANDLED : nwnScript.ExecuteValue();
       }
       catch(Exception ex)
       {
         Console.WriteLine(ex);
-        return Script.SCRIPT_NOT_HANDLED;
+        return Script.NOT_HANDLED;
       }
       finally
       {
@@ -200,7 +200,7 @@ namespace NWN.Core.Server
       _nativeFunctions.nwnxCallFunction();
     }
 
-    private static void PushToNativeStack(object arg)
+    private void PushToNativeStack(object arg)
     {
       if (arg is int i) _nativeFunctions.nwnxPushInt(i);
       else if (arg is float f) _nativeFunctions.nwnxPushFloat(f);
@@ -211,18 +211,18 @@ namespace NWN.Core.Server
         switch (e.Type)
         {
           case EngineAssetType.Effect:
-            NWNCore.NativeFunctions.nwnxPushEffect(e.Ptr);
+            _nativeFunctions.nwnxPushEffect(e.Ptr);
             break;
           case EngineAssetType.ItemProperty:
-            NWNCore.NativeFunctions.nwnxPushItemProperty(e.Ptr);
+            _nativeFunctions.nwnxPushItemProperty(e.Ptr);
             break;
           case EngineAssetType.Location:
             Vector3 pos = NWScript.GetPositionFromLocation(e.Ptr);
-            NWNCore.NativeFunctions.nwnxPushFloat(NWScript.GetFacingFromLocation(e.Ptr));
-            NWNCore.NativeFunctions.nwnxPushFloat(pos.Z);
-            NWNCore.NativeFunctions.nwnxPushFloat(pos.Y);
-            NWNCore.NativeFunctions.nwnxPushFloat(pos.X);
-            NWNCore.NativeFunctions.nwnxPushObject(NWScript.GetAreaFromLocation(e.Ptr));
+            _nativeFunctions.nwnxPushFloat(NWScript.GetFacingFromLocation(e.Ptr));
+            _nativeFunctions.nwnxPushFloat(pos.Z);
+            _nativeFunctions.nwnxPushFloat(pos.Y);
+            _nativeFunctions.nwnxPushFloat(pos.X);
+            _nativeFunctions.nwnxPushObject(NWScript.GetAreaFromLocation(e.Ptr));
             break;
           default:
             throw new NotSupportedException($"Native engine type not supported: {e.Type}");

@@ -16,6 +16,8 @@
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
         <NoWarn>1591</NoWarn>
+        <AssemblyName>NWN.Core</AssemblyName>
+        <RootNamespace>NWN</RootNamespace>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
