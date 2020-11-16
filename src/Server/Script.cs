@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NWN.Core.Server
 {
-  public abstract class Script
+  public abstract class Script : IDisposable
   {
     public const int SCRIPT_NOT_HANDLED = -1;
 
@@ -21,5 +21,7 @@ namespace NWN.Core.Server
       Execute();
       return Value;
     }
+
+    public void Dispose() => Server.Scripts.Remove(Name);
   }
 }

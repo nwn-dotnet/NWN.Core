@@ -10,12 +10,9 @@ using static NWN.Core.NWNCore;
 
 namespace NWN.Core.Server
 {
-  public class NwnServer : IGameManager
+  public class NwnServer
   {
     #region Static Members
-    private static NativeHandles _nativeFunctions;
-    private static NativeEventHandles _eventHandles;
-
     public static NwnServer Instance { get; private set; }
     public static int IntializeInstance(IntPtr nativeHandlesPtr, int nativeHandlesLength)
     {
@@ -31,30 +28,17 @@ namespace NWN.Core.Server
       }
     }
 
-    private static void RegisterHandles()
-    {
-      _eventHandles.MainLoop = GameManager.OnMainLoop;
-      _eventHandles.RunScript = GameManager.OnRunScript;
-      _eventHandles.Closure = GameManager.OnClosure;
-      _eventHandles.Signal = GameManager.OnSignal;
-    }
-
-    private static void RegisterNativeEventHandles()
-    {
-      int size = Marshal.SizeOf(typeof(NativeEventHandles));
-      IntPtr ptr = Marshal.AllocHGlobal(size);
-      Marshal.StructureToPtr(_eventHandles, ptr, false);
-      _nativeFunctions.RegisterHandlers(ptr, (uint)size);
-      Marshal.FreeHGlobal(ptr);
-    }
     #endregion
 
     #region Fields
     private NwnReference _self = NwnReference.INVALID;
     private Stack<NwnReference> _selfStack = new Stack<NwnReference>();
-    public Dictionary<string, Script> Scripts { get; set; } = new Dictionary<string, Script>();
+    internal Dictionary<string, Script> Scripts { get; set; } = new Dictionary<string, Script>();
     private readonly Dictionary<ulong, ActionDelegate> _closures = new Dictionary<ulong, ActionDelegate>();
     private ulong nextEventId;
+
+    private NativeHandles _nativeFunctions;
+    private NativeEventHandles _eventHandles;
     #endregion
 
     #region Plugins
@@ -87,6 +71,29 @@ namespace NWN.Core.Server
     #endregion
 
     #region Private Methods
+    private void RegisterHandles()
+    {
+      _eventHandles.MainLoop = OnTick;
+      _eventHandles.RunScript = RunScript;
+      _eventHandles.Closure = Closure;
+      _eventHandles.Signal = OnSignal;
+    }
+
+    private void RegisterNativeEventHandles()
+    {
+      int size = Marshal.SizeOf(typeof(NativeEventHandles));
+      IntPtr ptr = Marshal.AllocHGlobal(size);
+      try
+      {
+        Marshal.StructureToPtr(_eventHandles, ptr, false);
+        _nativeFunctions.RegisterHandlers(ptr, (uint)size);
+      }
+      finally
+      {
+        Marshal.FreeHGlobal(ptr);
+      }
+    }
+
     private static void SafeInvoke(Action target)
     {
       try
@@ -125,39 +132,12 @@ namespace NWN.Core.Server
     protected void OnSignal(string signal) => OnSignal(new SignalEventArgs(signal));
     protected virtual void OnSignal(SignalEventArgs e) => SafeInvoke(() => Signal?.Invoke(this, e));
 
-    #region RunScriptEventArgs Subclass
-    public class RunScriptEventArgs : CancelEventArgs
-    {
-      public string Script { get; private set; }
-      public NwnReference Self { get; private set; }
-      internal RunScriptEventArgs(string script, NwnReference self)
-      {
-        Script = script;
-        Self = self;
-      }
-    }
-    #endregion
-
-    public event global::System.EventHandler<RunScriptEventArgs> RunScript;
-    protected bool OnRunScript(string script, NwnReference self) => OnRunScript(new RunScriptEventArgs(script, self));
-    protected virtual bool OnRunScript(RunScriptEventArgs e)
-    {
-      SafeInvoke(() => RunScript?.Invoke(this, e));
-      return !e.Cancel;
-    }
     #endregion
 
     #region Interface Implementations
-    uint IGameManager.ObjectSelf => _self.ID;
-    void IGameManager.OnMainLoop(ulong frame) => OnTick(frame);
-    void IGameManager.OnSignal(string signal) => OnSignal(signal);
-
-    int IGameManager.OnRunScript(string script, uint oidSelf)
+    int RunScript(string script, uint oidSelf)
     {
       var self = new NwnReference(oidSelf);
-
-      if (!OnRunScript(script, self))
-        return Script.SCRIPT_NOT_HANDLED;
 
       if(_self != NwnReference.INVALID)
         _selfStack.Push(self);
@@ -179,7 +159,7 @@ namespace NWN.Core.Server
       }
     }
 
-    void IGameManager.OnClosure(ulong eid, uint oidSelf)
+    void Closure(ulong eid, uint oidSelf)
     {
       var old = _self;
       _self = new NwnReference(oidSelf);
@@ -190,19 +170,19 @@ namespace NWN.Core.Server
       _self = old;
     }
 
-    void IGameManager.ClosureAssignCommand(uint obj, ActionDelegate func)
+    void ClosureAssignCommand(uint obj, ActionDelegate func)
     {
       if (VM.ClosureAssignCommand(obj, nextEventId) != 0)
         _closures.Add(nextEventId++, func);
     }
 
-    void IGameManager.ClosureDelayCommand(uint obj, float duration, ActionDelegate func)
+    void ClosureDelayCommand(uint obj, float duration, ActionDelegate func)
     {
       if (VM.ClosureDelayCommand(obj, duration, nextEventId) != 0)
         _closures.Add(nextEventId++, func);
     }
 
-    void IGameManager.ClosureActionDoCommand(uint obj, ActionDelegate func)
+    void ClosureActionDoCommand(uint obj, ActionDelegate func)
     {
       if (VM.ClosureActionDoCommand(obj, nextEventId) != 0)
         _closures.Add(nextEventId++, func);
@@ -260,7 +240,7 @@ namespace NWN.Core.Server
     public static void Foo()
     {
       var nwn = NwnServer.Instance;
-      nwn.Chat.ServerMsg.SendMessage("DOOOM!");
+      nwn.Chat.ServerChannel.SendMessage("DOOOM!");
       nwn.Chat.MessageArrived += (x, y) => { if (y.Message.Contains("shit")) y.Skip = true; };
     }
   }

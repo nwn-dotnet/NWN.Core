@@ -59,7 +59,7 @@ namespace NWN.Core.Server
     public Channel PlayerShout => new Channel(this, 2);
     public Channel PlayerWhisper => new Channel(this, 3);
     public Channel PlayerTell => new Channel(this, 4);
-    public Channel ServerMsg => new Channel(this, 5);
+    public Channel ServerChannel => new Channel(this, 5);
     public Channel PlayerParty => new Channel(this, 6);
     public Channel PlayerToDM => new Channel(this, 14);
     public Channel DMTalk => new Channel(this, 17);
