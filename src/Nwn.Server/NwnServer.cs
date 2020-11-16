@@ -6,9 +6,9 @@ using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using static NWN.Core.NWNCore;
+using Nwn.Server.Interop;
 
-namespace NWN.Core.Server
+namespace Nwn.Server
 {
   public class NwnServer
   {
@@ -37,8 +37,12 @@ namespace NWN.Core.Server
     private readonly Dictionary<ulong, ActionDelegate> _closures = new Dictionary<ulong, ActionDelegate>();
     private ulong nextEventId;
 
-    private NativeHandles _nativeFunctions;
-    private NativeEventHandles _eventHandles;
+    private NativeFunctions _functions;
+    private NativeEvents _events;
+    #endregion
+
+    #region Properties
+    internal NwnReference Self => _self;
     #endregion
 
     #region Plugins
@@ -51,7 +55,7 @@ namespace NWN.Core.Server
       if (nativeHandlesPtr == IntPtr.Zero)
         throw new Exception("Received NULL bootstrap structure");
 
-      int expectedLength = Marshal.SizeOf(typeof(NativeHandles));
+      int expectedLength = Marshal.SizeOf(typeof(NativeFunctions));
       if (nativeHandlesLength < expectedLength)
         throw new Exception($"Received bootstrap structure too small - actual={nativeHandlesLength}, expected={expectedLength}");
 
@@ -61,7 +65,7 @@ namespace NWN.Core.Server
         Console.WriteLine("         This usually means that native code version is ahead of the managed code");
       }
 
-      _nativeFunctions = Marshal.PtrToStructure<NativeHandles>(nativeHandlesPtr);
+      _functions = Marshal.PtrToStructure<NativeFunctions>(nativeHandlesPtr);
       RegisterHandles();
       RegisterNativeEventHandles();
 
@@ -73,20 +77,20 @@ namespace NWN.Core.Server
     #region Private Methods
     private void RegisterHandles()
     {
-      _eventHandles.MainLoop = OnTick;
-      _eventHandles.RunScript = RunScript;
-      _eventHandles.Closure = Closure;
-      _eventHandles.Signal = OnSignal;
+      _events.MainLoop = OnTick;
+      _events.RunScript = RunScript;
+      _events.Closure = Closure;
+      _events.Signal = OnSignal;
     }
 
     private void RegisterNativeEventHandles()
     {
-      int size = Marshal.SizeOf(typeof(NativeEventHandles));
+      int size = Marshal.SizeOf(typeof(NativeEvents));
       IntPtr ptr = Marshal.AllocHGlobal(size);
       try
       {
-        Marshal.StructureToPtr(_eventHandles, ptr, false);
-        _nativeFunctions.RegisterHandlers(ptr, (uint)size);
+        Marshal.StructureToPtr(_events, ptr, false);
+        _functions.RegisterHandlers(ptr, (uint)size);
       }
       finally
       {
@@ -159,6 +163,7 @@ namespace NWN.Core.Server
       }
     }
 
+    //Used by the native function wrappers for some reason.
     void Closure(ulong eid, uint oidSelf)
     {
       var old = _self;
@@ -170,21 +175,21 @@ namespace NWN.Core.Server
       _self = old;
     }
 
-    void ClosureAssignCommand(uint obj, ActionDelegate func)
+    internal void ClosureAssignCommand(uint obj, ActionDelegate func)
     {
-      if (VM.ClosureAssignCommand(obj, nextEventId) != 0)
+      if (_functions.ClosureAssignCommand(obj, nextEventId) != 0)
         _closures.Add(nextEventId++, func);
     }
 
-    void ClosureDelayCommand(uint obj, float duration, ActionDelegate func)
+    internal void ClosureDelayCommand(uint obj, float duration, ActionDelegate func)
     {
-      if (VM.ClosureDelayCommand(obj, duration, nextEventId) != 0)
+      if (_functions.ClosureDelayCommand(obj, duration, nextEventId) != 0)
         _closures.Add(nextEventId++, func);
     }
 
-    void ClosureActionDoCommand(uint obj, ActionDelegate func)
+    internal void ClosureActionDoCommand(uint obj, ActionDelegate func)
     {
-      if (VM.ClosureActionDoCommand(obj, nextEventId) != 0)
+      if (_functions.ClosureActionDoCommand(obj, nextEventId) != 0)
         _closures.Add(nextEventId++, func);
     }
     #endregion
@@ -192,37 +197,37 @@ namespace NWN.Core.Server
     #region VM
     public void Call(string plugin, string method, params object[] args)
     {
-      _nativeFunctions.nwnxSetFunction(plugin, method);
+      _functions.nwnxSetFunction(plugin, method);
 
       foreach (var arg in args)
         PushToNativeStack(arg);
 
-      _nativeFunctions.nwnxCallFunction();
+      _functions.nwnxCallFunction();
     }
 
     private void PushToNativeStack(object arg)
     {
-      if (arg is int i) _nativeFunctions.nwnxPushInt(i);
-      else if (arg is float f) _nativeFunctions.nwnxPushFloat(f);
-      else if (arg is string s) _nativeFunctions.nwnxPushString(s);
-      else if (arg is NwnReference o) _nativeFunctions.nwnxPushObject(o.ID);
+      if (arg is int i) _functions.nwnxPushInt(i);
+      else if (arg is float f) _functions.nwnxPushFloat(f);
+      else if (arg is string s) _functions.nwnxPushString(s);
+      else if (arg is NwnReference o) _functions.nwnxPushObject(o.ID);
       else if (arg is NwnEngineAsset e)
       {
         switch (e.Type)
         {
           case EngineAssetType.Effect:
-            _nativeFunctions.nwnxPushEffect(e.Ptr);
+            _functions.nwnxPushEffect(e.Ptr);
             break;
           case EngineAssetType.ItemProperty:
-            _nativeFunctions.nwnxPushItemProperty(e.Ptr);
+            _functions.nwnxPushItemProperty(e.Ptr);
             break;
           case EngineAssetType.Location:
-            Vector3 pos = NWScript.GetPositionFromLocation(e.Ptr);
-            _nativeFunctions.nwnxPushFloat(NWScript.GetFacingFromLocation(e.Ptr));
-            _nativeFunctions.nwnxPushFloat(pos.Z);
-            _nativeFunctions.nwnxPushFloat(pos.Y);
-            _nativeFunctions.nwnxPushFloat(pos.X);
-            _nativeFunctions.nwnxPushObject(NWScript.GetAreaFromLocation(e.Ptr));
+            Vector3 pos = _functions.GetPositionFromLocation(e.Ptr);
+            _functions.nwnxPushFloat(_functions.GetFacingFromLocation(e.Ptr));
+            _functions.nwnxPushFloat(pos.Z);
+            _functions.nwnxPushFloat(pos.Y);
+            _functions.nwnxPushFloat(pos.X);
+            _functions.nwnxPushObject(_functions.GetAreaFromLocation(e.Ptr));
             break;
           default:
             throw new NotSupportedException($"Native engine type not supported: {e.Type}");
@@ -230,9 +235,9 @@ namespace NWN.Core.Server
       }
       else if (arg is Vector3 v)
       {
-        _nativeFunctions.nwnxPushFloat(v.X);
-        _nativeFunctions.nwnxPushFloat(v.Y);
-        _nativeFunctions.nwnxPushFloat(v.Z);
+        _functions.nwnxPushFloat(v.X);
+        _functions.nwnxPushFloat(v.Y);
+        _functions.nwnxPushFloat(v.Z);
       }
     }
     #endregion

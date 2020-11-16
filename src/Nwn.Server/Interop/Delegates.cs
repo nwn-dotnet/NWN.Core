@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Nwn.Server
 {
-  class Settings
-  {
-  }
+  internal delegate void ActionDelegate();
 }
