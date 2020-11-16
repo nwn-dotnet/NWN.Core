@@ -19,7 +19,7 @@ namespace Nwn.Server.Interop
     internal ClosureHandlerDelegate Closure;
     internal SignalHandlerDelegate Signal;
 
-    public void Register(NativeFunctions functions)
+    internal void Register(NativeFunctions functions)
     {
       int size = Marshal.SizeOf(typeof(NativeEvents));
       IntPtr ptr = Marshal.AllocHGlobal(size);

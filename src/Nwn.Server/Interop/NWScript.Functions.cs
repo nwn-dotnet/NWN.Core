@@ -10,7 +10,7 @@ namespace Nwn.Server.Interop
     ///  Get an integer between 0 and nMaxInteger-1.
     ///  Return value on error: 0
     /// </summary>
-    public int Random(int nMaxInteger)
+    internal int Random(int nMaxInteger)
     {
       StackPush(nMaxInteger);
       Call(0);
@@ -20,7 +20,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Output sString to the log file.
     /// </summary>
-    public void PrintString(string sString)
+    internal void PrintString(string sString)
     {
       StackPush(sString);
       Call(1);
@@ -31,7 +31,7 @@ namespace Nwn.Server.Interop
     ///  - nWidth should be a value from 0 to 18 inclusive.
     ///  - nDecimals should be a value from 0 to 9 inclusive.
     /// </summary>
-    public void PrintFloat(float fFloat, int nWidth = 18, int nDecimals = 9)
+    internal void PrintFloat(float fFloat, int nWidth = 18, int nDecimals = 9)
     {
       StackPush(nDecimals);
       StackPush(nWidth);
@@ -44,7 +44,7 @@ namespace Nwn.Server.Interop
     ///  - nWidth should be a value from 0 to 18 inclusive.
     ///  - nDecimals should be a value from 0 to 9 inclusive.
     /// </summary>
-    public string FloatToString(float fFloat, int nWidth = 18, int nDecimals = 9)
+    internal string FloatToString(float fFloat, int nWidth = 18, int nDecimals = 9)
     {
       StackPush(nDecimals);
       StackPush(nWidth);
@@ -56,7 +56,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Output nInteger to the log file.
     /// </summary>
-    public void PrintInteger(int nInteger)
+    internal void PrintInteger(int nInteger)
     {
       StackPush(nInteger);
       Call(4);
@@ -65,7 +65,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Output oObject's ID to the log file.
     /// </summary>
-    public void PrintObject(uint oObject)
+    internal void PrintObject(uint oObject)
     {
       StackPush(oObject);
       Call(5);
@@ -77,7 +77,7 @@ namespace Nwn.Server.Interop
     ///   "AssignCommand failed."
     ///   (If the object doesn't exist, nothing happens.)
     /// </summary>
-    public void AssignCommand(NwnServer server, uint oActionSubject, ActionDelegate aActionToAssign)
+    internal void AssignCommand(NwnServer server, uint oActionSubject, ActionDelegate aActionToAssign)
     {
       server.ClosureAssignCommand(oActionSubject, aActionToAssign);
       // Function ID 6
@@ -93,7 +93,7 @@ namespace Nwn.Server.Interop
     /// effect eDamage = EffectDamage(nDamage, DAMAGE_TYPE_MAGICAL);
     /// DelayCommand(fDelay, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDamage, oTarget);
     /// </summary>
-    public void DelayCommand(NwnServer server, float fSeconds, ActionDelegate aActionToDelay)
+    internal void DelayCommand(NwnServer server, float fSeconds, ActionDelegate aActionToDelay)
     {
       server.ClosureDelayCommand(server.Self.ID, fSeconds, aActionToDelay);
       // Function ID 7
@@ -103,7 +103,7 @@ namespace Nwn.Server.Interop
     ///  Make oTarget run sScript and then return execution to the calling script.
     ///  If sScript does not specify a compiled script, nothing happens.
     /// </summary>
-    public void ExecuteScript(string sScript, uint oTarget)
+    internal void ExecuteScript(string sScript, uint oTarget)
     {
       StackPush(oTarget);
       StackPush(sScript);
@@ -118,7 +118,7 @@ namespace Nwn.Server.Interop
     ///    on a creature, which will stop the combat music and allow them to rest,
     ///    engage in dialog, or other actions that they would normally have to wait for.
     /// </summary>
-    public void ClearAllActions(int nClearCombatState = FALSE)
+    internal void ClearAllActions(int nClearCombatState = FALSE)
     {
       StackPush(nClearCombatState);
       Call(9);
@@ -130,7 +130,7 @@ namespace Nwn.Server.Interop
     ///    DIRECTION_EAST, DIRECTION_NORTH, DIRECTION_WEST and DIRECTION_SOUTH are
     ///    predefined. (0.0f=East, 90.0f=North, 180.0f=West, 270.0f=South)
     /// </summary>
-    public void SetFacing(float fDirection)
+    internal void SetFacing(float fDirection)
     {
       StackPush(fDirection);
       Call(10);
@@ -148,7 +148,7 @@ namespace Nwn.Server.Interop
     ///     e.g. Specifying a year of 1350, month of 33 and day of 10 will result in
     ///     the calender being set to a year of 1352, a month of 9 and a day of 10.
     /// </summary>
-    public void SetCalendar(int nYear, int nMonth, int nDay)
+    internal void SetCalendar(int nYear, int nMonth, int nDay)
     {
       StackPush(nDay);
       StackPush(nMonth);
@@ -172,7 +172,7 @@ namespace Nwn.Server.Interop
     ///     and 10 milliseconds will result in the calendar day being advanced by 2
     ///     and the time being set to 18 hours, 10 minutes, 10 milliseconds.
     /// </summary>
-    public void SetTime(int nHour, int nMinute, int nSecond, int nMillisecond)
+    internal void SetTime(int nHour, int nMinute, int nSecond, int nMillisecond)
     {
       StackPush(nMillisecond);
       StackPush(nSecond);
@@ -184,7 +184,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the current calendar year.
     /// </summary>
-    public int GetCalendarYear()
+    internal int GetCalendarYear()
     {
       Call(13);
       return StackPopInt();
@@ -193,7 +193,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the current calendar month.
     /// </summary>
-    public int GetCalendarMonth()
+    internal int GetCalendarMonth()
     {
       Call(14);
       return StackPopInt();
@@ -202,7 +202,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the current calendar day.
     /// </summary>
-    public int GetCalendarDay()
+    internal int GetCalendarDay()
     {
       Call(15);
       return StackPopInt();
@@ -211,7 +211,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the current hour.
     /// </summary>
-    public int GetTimeHour()
+    internal int GetTimeHour()
     {
       Call(16);
       return StackPopInt();
@@ -220,7 +220,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the current minute
     /// </summary>
-    public int GetTimeMinute()
+    internal int GetTimeMinute()
     {
       Call(17);
       return StackPopInt();
@@ -229,7 +229,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the current second
     /// </summary>
-    public int GetTimeSecond()
+    internal int GetTimeSecond()
     {
       Call(18);
       return StackPopInt();
@@ -238,7 +238,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the current millisecond
     /// </summary>
-    public int GetTimeMillisecond()
+    internal int GetTimeMillisecond()
     {
       Call(19);
       return StackPopInt();
@@ -252,7 +252,7 @@ namespace Nwn.Server.Interop
     ///  * No return value, but if an error occurs the log file will contain
     ///    "ActionRandomWalk failed."
     /// </summary>
-    public void ActionRandomWalk()
+    internal void ActionRandomWalk()
     {
       Call(20);
     }
@@ -265,7 +265,7 @@ namespace Nwn.Server.Interop
     ///  * No return value, but if an error occurs the log file will contain
     ///    "MoveToPoint failed."
     /// </summary>
-    public void ActionMoveToLocation(IntPtr lDestination, int bRun = FALSE)
+    internal void ActionMoveToLocation(IntPtr lDestination, int bRun = FALSE)
     {
       StackPush(bRun);
       StackPush(lDestination, ENGINE_STRUCTURE_LOCATION);
@@ -281,7 +281,7 @@ namespace Nwn.Server.Interop
     ///  * No return value, but if an error occurs the log file will contain
     ///    "ActionMoveToObject failed."
     /// </summary>
-    public void ActionMoveToObject(uint oMoveTo, int bRun = FALSE, float fRange = 1.0f)
+    internal void ActionMoveToObject(uint oMoveTo, int bRun = FALSE, float fRange = 1.0f)
     {
       StackPush(fRange);
       StackPush(bRun);
@@ -300,7 +300,7 @@ namespace Nwn.Server.Interop
     ///  * No return value, but if an error occurs the log file will contain
     ///    "ActionMoveAwayFromObject failed."
     /// </summary>
-    public void ActionMoveAwayFromObject(uint oFleeFrom, int bRun = FALSE, float fMoveAwayRange = 40.0f)
+    internal void ActionMoveAwayFromObject(uint oFleeFrom, int bRun = FALSE, float fMoveAwayRange = 40.0f)
     {
       StackPush(fMoveAwayRange);
       StackPush(bRun);
@@ -312,7 +312,7 @@ namespace Nwn.Server.Interop
     ///  Get the area that oTarget is currently in
     ///  * Return value on error: OBJECT_INVALID
     /// </summary>
-    public uint GetArea(uint oTarget)
+    internal uint GetArea(uint oTarget)
     {
       StackPush(oTarget);
       Call(24);
@@ -329,7 +329,7 @@ namespace Nwn.Server.Interop
     ///   When used for doors, this should only be called from the OnAreaTransitionClick
     ///   event.  Otherwise, it should only be called in OnEnter scripts.
     /// </summary>
-    public uint GetEnteringObject()
+    internal uint GetEnteringObject()
     {
       Call(25);
       return StackPopObject();
@@ -341,7 +341,7 @@ namespace Nwn.Server.Interop
     ///  * Return value on error: OBJECT_INVALID
     ///  Should only be called in OnExit scripts.
     /// </summary>
-    public uint GetExitingObject()
+    internal uint GetExitingObject()
     {
       Call(26);
       return StackPopObject();
@@ -351,7 +351,7 @@ namespace Nwn.Server.Interop
     ///  Get the position of oTarget
     ///  * Return value on error: vector (0.0f, 0.0f, 0.0f)
     /// </summary>
-    public Vector3 GetPosition(uint oTarget)
+    internal Vector3 GetPosition(uint oTarget)
     {
       StackPush(oTarget);
       Call(27);
@@ -363,7 +363,7 @@ namespace Nwn.Server.Interop
     ///  0.0f and 360.0f
     ///  * Return value on error: -1.0f
     /// </summary>
-    public float GetFacing(uint oTarget)
+    internal float GetFacing(uint oTarget)
     {
       StackPush(oTarget);
       Call(28);
@@ -374,7 +374,7 @@ namespace Nwn.Server.Interop
     ///  Get the possessor of oItem
     ///  * Return value on error: OBJECT_INVALID
     /// </summary>
-    public uint GetItemPossessor(uint oItem)
+    internal uint GetItemPossessor(uint oItem)
     {
       StackPush(oItem);
       Call(29);
@@ -385,7 +385,7 @@ namespace Nwn.Server.Interop
     ///  Get the object possessed by oCreature with the tag sItemTag
     ///  * Return value on error: OBJECT_INVALID
     /// </summary>
-    public uint GetItemPossessedBy(uint oCreature, string sItemTag)
+    internal uint GetItemPossessedBy(uint oCreature, string sItemTag)
     {
       StackPush(sItemTag);
       StackPush(oCreature);
@@ -403,7 +403,7 @@ namespace Nwn.Server.Interop
     ///  the function will return the merged stack object. If the merged stack
     ///  overflowed, the function will return the overflowed stack that was created.
     /// </summary>
-    public uint CreateItemOnObject(string sItemTemplate, uint oTarget = OBJECT_INVALID, int nStackSize = 1, string sNewTag = "")
+    internal uint CreateItemOnObject(string sItemTemplate, uint oTarget = OBJECT_INVALID, int nStackSize = 1, string sNewTag = "")
     {
       StackPush(sNewTag);
       StackPush(nStackSize);
@@ -430,7 +430,7 @@ namespace Nwn.Server.Interop
     ///        3) The creature has the level required to equip the item (if magical and ILR is on).
     ///        4) The creature possesses the required feats to equip the item (such as weapon proficiencies).
     /// </summary>
-    public void ActionEquipItem(uint oItem, int nInventorySlot)
+    internal void ActionEquipItem(uint oItem, int nInventorySlot)
     {
       StackPush(nInventorySlot);
       StackPush(oItem);
@@ -440,7 +440,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Unequip oItem from whatever slot it is currently in.
     /// </summary>
-    public void ActionUnequipItem(uint oItem)
+    internal void ActionUnequipItem(uint oItem)
     {
       StackPush(oItem);
       Call(33);
@@ -451,7 +451,7 @@ namespace Nwn.Server.Interop
     ///  * No return value, but if an error occurs the log file will contain
     ///    "ActionPickUpItem failed."
     /// </summary>
-    public void ActionPickUpItem(uint oItem)
+    internal void ActionPickUpItem(uint oItem)
     {
       StackPush(oItem);
       Call(34);
@@ -462,7 +462,7 @@ namespace Nwn.Server.Interop
     ///  * No return value, but if an error occurs the log file will contain
     ///    "ActionPutDownItem failed."
     /// </summary>
-    public void ActionPutDownItem(uint oItem)
+    internal void ActionPutDownItem(uint oItem)
     {
       StackPush(oItem);
       Call(35);
@@ -473,7 +473,7 @@ namespace Nwn.Server.Interop
     ///  OnAttacked events for creatures, placeables and doors.
     ///  * Return value on error: OBJECT_INVALID
     /// </summary>
-    public uint GetLastAttacker(uint oAttackee = OBJECT_INVALID)
+    internal uint GetLastAttacker(uint oAttackee = OBJECT_INVALID)
     {
       StackPush(oAttackee);
       Call(36);
@@ -484,7 +484,7 @@ namespace Nwn.Server.Interop
     ///  Attack oAttackee.
     ///  - bPassive: If this is TRUE, attack is in passive mode.
     /// </summary>
-    public void ActionAttack(uint oAttackee, int bPassive = FALSE)
+    internal void ActionAttack(uint oAttackee, int bPassive = FALSE)
     {
       StackPush(bPassive);
       StackPush(oAttackee);
@@ -519,7 +519,7 @@ namespace Nwn.Server.Interop
     ///    further specify the type of creature that we are looking for.
     ///  * Return value on error: OBJECT_INVALID
     /// </summary>
-    public uint GetNearestCreature(int nFirstCriteriaType, int nFirstCriteriaValue, uint oTarget = OBJECT_INVALID, int nNth = 1, int nSecondCriteriaType = -1, int nSecondCriteriaValue = -1, int nThirdCriteriaType = -1, int nThirdCriteriaValue = -1)
+    internal uint GetNearestCreature(int nFirstCriteriaType, int nFirstCriteriaValue, uint oTarget = OBJECT_INVALID, int nNth = 1, int nSecondCriteriaType = -1, int nSecondCriteriaValue = -1, int nThirdCriteriaType = -1, int nThirdCriteriaValue = -1)
     {
       StackPush(nThirdCriteriaValue);
       StackPush(nThirdCriteriaType);
@@ -538,7 +538,7 @@ namespace Nwn.Server.Interop
     ///  - sStringToSpeak: String to be spoken
     ///  - nTalkVolume: TALKVOLUME_*
     /// </summary>
-    public void ActionSpeakString(string sStringToSpeak, int nTalkVolume = TALKVOLUME_TALK)
+    internal void ActionSpeakString(string sStringToSpeak, int nTalkVolume = TALKVOLUME_TALK)
     {
       StackPush(nTalkVolume);
       StackPush(sStringToSpeak);
@@ -552,7 +552,7 @@ namespace Nwn.Server.Interop
     ///  - fDurationSeconds: Duration of the animation (this is not used for Fire and
     ///    Forget animations)
     /// </summary>
-    public void ActionPlayAnimation(int nAnimation, float fSpeed = 1.0f, float fDurationSeconds = 0.0f)
+    internal void ActionPlayAnimation(int nAnimation, float fSpeed = 1.0f, float fDurationSeconds = 0.0f)
     {
       StackPush(fDurationSeconds);
       StackPush(fSpeed);
@@ -564,7 +564,7 @@ namespace Nwn.Server.Interop
     ///  Get the distance from the caller to oObject in metres.
     ///  * Return value on error: -1.0f
     /// </summary>
-    public float GetDistanceToObject(uint oObject)
+    internal float GetDistanceToObject(uint oObject)
     {
       StackPush(oObject);
       Call(41);
@@ -574,7 +574,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  * Returns TRUE if oObject is a valid object.
     /// </summary>
-    public int GetIsObjectValid(uint oObject)
+    internal int GetIsObjectValid(uint oObject)
     {
       StackPush(oObject);
       Call(42);
@@ -584,7 +584,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Cause the action subject to open oDoor
     /// </summary>
-    public void ActionOpenDoor(uint oDoor)
+    internal void ActionOpenDoor(uint oDoor)
     {
       StackPush(oDoor);
       Call(43);
@@ -593,7 +593,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Cause the action subject to close oDoor
     /// </summary>
-    public void ActionCloseDoor(uint oDoor)
+    internal void ActionCloseDoor(uint oDoor)
     {
       StackPush(oDoor);
       Call(44);
@@ -617,7 +617,7 @@ namespace Nwn.Server.Interop
     ///  Distance 1-25
     ///  Pitch 1-89
     /// </summary>
-    public void SetCameraFacing(float fDirection, float fDistance = -1.0f, float fPitch = -1.0f, int nTransitionType = CAMERA_TRANSITION_TYPE_SNAP)
+    internal void SetCameraFacing(float fDirection, float fDistance = -1.0f, float fPitch = -1.0f, int nTransitionType = CAMERA_TRANSITION_TYPE_SNAP)
     {
       StackPush(nTransitionType);
       StackPush(fPitch);
@@ -631,7 +631,7 @@ namespace Nwn.Server.Interop
     ///  - sSoundName: TBD - SS
     ///  This will play a mono sound from the location of the object running the command.
     /// </summary>
-    public void PlaySound(string sSoundName)
+    internal void PlaySound(string sSoundName)
     {
       StackPush(sSoundName);
       Call(46);
@@ -641,7 +641,7 @@ namespace Nwn.Server.Interop
     ///  Get the object at which the caller last cast a spell
     ///  * Return value on error: OBJECT_INVALID
     /// </summary>
-    public uint GetSpellTargetObject()
+    internal uint GetSpellTargetObject()
     {
       Call(47);
       return StackPopObject();
@@ -660,7 +660,7 @@ namespace Nwn.Server.Interop
     ///    the end-user to simulate a high-level magic-user having lots of advance
     ///    warning of impending trouble
     /// </summary>
-    public void ActionCastSpellAtObject(int nSpell, uint oTarget, int nMetaMagic = METAMAGIC_ANY, int bCheat = FALSE, int nDomainLevel = 0, int nProjectilePathType = PROJECTILE_PATH_TYPE_DEFAULT, int bInstantSpell = FALSE)
+    internal void ActionCastSpellAtObject(int nSpell, uint oTarget, int nMetaMagic = METAMAGIC_ANY, int bCheat = FALSE, int nDomainLevel = 0, int nProjectilePathType = PROJECTILE_PATH_TYPE_DEFAULT, int bInstantSpell = FALSE)
     {
       StackPush(bInstantSpell);
       StackPush(nProjectilePathType);
@@ -676,7 +676,7 @@ namespace Nwn.Server.Interop
     ///  Get the current hitpoints of oObject
     ///  * Return value on error: 0
     /// </summary>
-    public int GetCurrentHitPoints(uint oObject = OBJECT_INVALID)
+    internal int GetCurrentHitPoints(uint oObject = OBJECT_INVALID)
     {
       StackPush(oObject);
       Call(49);
@@ -687,7 +687,7 @@ namespace Nwn.Server.Interop
     ///  Get the maximum hitpoints of oObject
     ///  * Return value on error: 0
     /// </summary>
-    public int GetMaxHitPoints(uint oObject = OBJECT_INVALID)
+    internal int GetMaxHitPoints(uint oObject = OBJECT_INVALID)
     {
       StackPush(oObject);
       Call(50);
@@ -698,7 +698,7 @@ namespace Nwn.Server.Interop
     ///  Get oObject's local integer variable sVarName
     ///  * Return value on error: 0
     /// </summary>
-    public int GetLocalInt(uint oObject, string sVarName)
+    internal int GetLocalInt(uint oObject, string sVarName)
     {
       StackPush(sVarName);
       StackPush(oObject);
@@ -710,7 +710,7 @@ namespace Nwn.Server.Interop
     ///  Get oObject's local float variable sVarName
     ///  * Return value on error: 0.0f
     /// </summary>
-    public float GetLocalFloat(uint oObject, string sVarName)
+    internal float GetLocalFloat(uint oObject, string sVarName)
     {
       StackPush(sVarName);
       StackPush(oObject);
@@ -722,7 +722,7 @@ namespace Nwn.Server.Interop
     ///  Get oObject's local string variable sVarName
     ///  * Return value on error: ""
     /// </summary>
-    public string GetLocalString(uint oObject, string sVarName)
+    internal string GetLocalString(uint oObject, string sVarName)
     {
       StackPush(sVarName);
       StackPush(oObject);
@@ -734,7 +734,7 @@ namespace Nwn.Server.Interop
     ///  Get oObject's local object variable sVarName
     ///  * Return value on error: OBJECT_INVALID
     /// </summary>
-    public uint GetLocalObject(uint oObject, string sVarName)
+    internal uint GetLocalObject(uint oObject, string sVarName)
     {
       StackPush(sVarName);
       StackPush(oObject);
@@ -745,7 +745,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Set oObject's local integer variable sVarName to nValue
     /// </summary>
-    public void SetLocalInt(uint oObject, string sVarName, int nValue)
+    internal void SetLocalInt(uint oObject, string sVarName, int nValue)
     {
       StackPush(nValue);
       StackPush(sVarName);
@@ -756,7 +756,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Set oObject's local float variable sVarName to nValue
     /// </summary>
-    public void SetLocalFloat(uint oObject, string sVarName, float fValue)
+    internal void SetLocalFloat(uint oObject, string sVarName, float fValue)
     {
       StackPush(fValue);
       StackPush(sVarName);
@@ -767,7 +767,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Set oObject's local string variable sVarName to nValue
     /// </summary>
-    public void SetLocalString(uint oObject, string sVarName, string sValue)
+    internal void SetLocalString(uint oObject, string sVarName, string sValue)
     {
       StackPush(sValue);
       StackPush(sVarName);
@@ -778,7 +778,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Set oObject's local object variable sVarName to nValue
     /// </summary>
-    public void SetLocalObject(uint oObject, string sVarName, uint oValue)
+    internal void SetLocalObject(uint oObject, string sVarName, uint oValue)
     {
       StackPush(oValue);
       StackPush(sVarName);
@@ -790,7 +790,7 @@ namespace Nwn.Server.Interop
     ///  Get the length of sString
     ///  * Return value on error: -1
     /// </summary>
-    public int GetStringLength(string sString)
+    internal int GetStringLength(string sString)
     {
       StackPush(sString);
       Call(59);
@@ -801,7 +801,7 @@ namespace Nwn.Server.Interop
     ///  Convert sString into upper case
     ///  * Return value on error: ""
     /// </summary>
-    public string GetStringUpperCase(string sString)
+    internal string GetStringUpperCase(string sString)
     {
       StackPush(sString);
       Call(60);
@@ -812,7 +812,7 @@ namespace Nwn.Server.Interop
     ///  Convert sString into lower case
     ///  * Return value on error: ""
     /// </summary>
-    public string GetStringLowerCase(string sString)
+    internal string GetStringLowerCase(string sString)
     {
       StackPush(sString);
       Call(61);
@@ -823,7 +823,7 @@ namespace Nwn.Server.Interop
     ///  Get nCount characters from the right end of sString
     ///  * Return value on error: ""
     /// </summary>
-    public string GetStringRight(string sString, int nCount)
+    internal string GetStringRight(string sString, int nCount)
     {
       StackPush(nCount);
       StackPush(sString);
@@ -835,7 +835,7 @@ namespace Nwn.Server.Interop
     ///  Get nCounter characters from the left end of sString
     ///  * Return value on error: ""
     /// </summary>
-    public string GetStringLeft(string sString, int nCount)
+    internal string GetStringLeft(string sString, int nCount)
     {
       StackPush(nCount);
       StackPush(sString);
@@ -847,7 +847,7 @@ namespace Nwn.Server.Interop
     ///  Insert sString into sDestination at nPosition
     ///  * Return value on error: ""
     /// </summary>
-    public string InsertString(string sDestination, string sString, int nPosition)
+    internal string InsertString(string sDestination, string sString, int nPosition)
     {
       StackPush(nPosition);
       StackPush(sString);
@@ -860,7 +860,7 @@ namespace Nwn.Server.Interop
     ///  Get nCount characters from sString, starting at nStart
     ///  * Return value on error: ""
     /// </summary>
-    public string GetSubString(string sString, int nStart, int nCount)
+    internal string GetSubString(string sString, int nStart, int nCount)
     {
       StackPush(nCount);
       StackPush(nStart);
@@ -874,7 +874,7 @@ namespace Nwn.Server.Interop
     ///  - nStart: The character position to start searching at (from the left end of the string).
     ///  * Return value on error: -1
     /// </summary>
-    public int FindSubString(string sString, string sSubString, int nStart = 0)
+    internal int FindSubString(string sString, string sSubString, int nStart = 0)
     {
       StackPush(nStart);
       StackPush(sSubString);
@@ -887,7 +887,7 @@ namespace Nwn.Server.Interop
     ///  math operations
     ///  Maths operation: absolute value of fValue
     /// </summary>
-    public float fabs(float fValue)
+    internal float fabs(float fValue)
     {
       StackPush(fValue);
       Call(67);
@@ -897,7 +897,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Maths operation: cosine of fValue
     /// </summary>
-    public float cos(float fValue)
+    internal float cos(float fValue)
     {
       StackPush(fValue);
       Call(68);
@@ -907,7 +907,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Maths operation: sine of fValue
     /// </summary>
-    public float sin(float fValue)
+    internal float sin(float fValue)
     {
       StackPush(fValue);
       Call(69);
@@ -917,7 +917,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Maths operation: tan of fValue
     /// </summary>
-    public float tan(float fValue)
+    internal float tan(float fValue)
     {
       StackPush(fValue);
       Call(70);
@@ -928,7 +928,7 @@ namespace Nwn.Server.Interop
     ///  Maths operation: arccosine of fValue
     ///  * Returns zero if fValue > 1 or fValue < -1
     /// </summary>
-    public float acos(float fValue)
+    internal float acos(float fValue)
     {
       StackPush(fValue);
       Call(71);
@@ -939,7 +939,7 @@ namespace Nwn.Server.Interop
     ///  Maths operation: arcsine of fValue
     ///  * Returns zero if fValue >1 or fValue < -1
     /// </summary>
-    public float asin(float fValue)
+    internal float asin(float fValue)
     {
       StackPush(fValue);
       Call(72);
@@ -949,7 +949,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Maths operation: arctan of fValue
     /// </summary>
-    public float atan(float fValue)
+    internal float atan(float fValue)
     {
       StackPush(fValue);
       Call(73);
@@ -960,7 +960,7 @@ namespace Nwn.Server.Interop
     ///  Maths operation: log of fValue
     ///  * Returns zero if fValue <= zero
     /// </summary>
-    public float log(float fValue)
+    internal float log(float fValue)
     {
       StackPush(fValue);
       Call(74);
@@ -971,7 +971,7 @@ namespace Nwn.Server.Interop
     ///  Maths operation: fValue is raised to the power of fExponent
     ///  * Returns zero if fValue ==0 and fExponent <0
     /// </summary>
-    public float pow(float fValue, float fExponent)
+    internal float pow(float fValue, float fExponent)
     {
       StackPush(fExponent);
       StackPush(fValue);
@@ -983,7 +983,7 @@ namespace Nwn.Server.Interop
     ///  Maths operation: square root of fValue
     ///  * Returns zero if fValue <0
     /// </summary>
-    public float sqrt(float fValue)
+    internal float sqrt(float fValue)
     {
       StackPush(fValue);
       Call(76);
@@ -994,7 +994,7 @@ namespace Nwn.Server.Interop
     ///  Maths operation: integer absolute value of nValue
     ///  * Return value on error: 0
     /// </summary>
-    public int abs(int nValue)
+    internal int abs(int nValue)
     {
       StackPush(nValue);
       Call(77);
@@ -1005,7 +1005,7 @@ namespace Nwn.Server.Interop
     ///  Create a Heal effect. This should be applied as an instantaneous effect.
     ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nDamageToHeal < 0.
     /// </summary>
-    public IntPtr EffectHeal(int nDamageToHeal)
+    internal IntPtr EffectHeal(int nDamageToHeal)
     {
       StackPush(nDamageToHeal);
       Call(78);
@@ -1019,7 +1019,7 @@ namespace Nwn.Server.Interop
     ///  - nDamageType: DAMAGE_TYPE_*
     ///  - nDamagePower: DAMAGE_POWER_*
     /// </summary>
-    public IntPtr EffectDamage(int nDamageAmount, int nDamageType = DAMAGE_TYPE_MAGICAL, int nDamagePower = DAMAGE_POWER_NORMAL)
+    internal IntPtr EffectDamage(int nDamageAmount, int nDamageType = DAMAGE_TYPE_MAGICAL, int nDamagePower = DAMAGE_POWER_NORMAL)
     {
       StackPush(nDamagePower);
       StackPush(nDamageType);
@@ -1032,7 +1032,7 @@ namespace Nwn.Server.Interop
     ///  Create an Ability Increase effect
     ///  - bAbilityToIncrease: ABILITY_*
     /// </summary>
-    public IntPtr EffectAbilityIncrease(int nAbilityToIncrease, int nModifyBy)
+    internal IntPtr EffectAbilityIncrease(int nAbilityToIncrease, int nModifyBy)
     {
       StackPush(nModifyBy);
       StackPush(nAbilityToIncrease);
@@ -1047,7 +1047,7 @@ namespace Nwn.Server.Interop
     ///  - nAmount
     ///  - nLimit
     /// </summary>
-    public IntPtr EffectDamageResistance(int nDamageType, int nAmount, int nLimit = 0)
+    internal IntPtr EffectDamageResistance(int nDamageType, int nAmount, int nLimit = 0)
     {
       StackPush(nLimit);
       StackPush(nAmount);
@@ -1059,7 +1059,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Create a Resurrection effect. This should be applied as an instantaneous effect.
     /// </summary>
-    public IntPtr EffectResurrection()
+    internal IntPtr EffectResurrection()
     {
       Call(82);
       return StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -1076,7 +1076,7 @@ namespace Nwn.Server.Interop
     ///    summoned. If zero, it will just fade in somewhere near the target.  If the value is 1
     ///    it will use the appear animation, and if it's 2 it will use appear2 (which doesn't exist for most creatures)
     /// </summary>
-    public IntPtr EffectSummonCreature(string sCreatureResref, int nVisualEffectId = VFX_NONE, float fDelaySeconds = 0.0f, int nUseAppearAnimation = 0)
+    internal IntPtr EffectSummonCreature(string sCreatureResref, int nVisualEffectId = VFX_NONE, float fDelaySeconds = 0.0f, int nUseAppearAnimation = 0)
     {
       StackPush(nUseAppearAnimation);
       StackPush(fDelaySeconds);
@@ -1090,7 +1090,7 @@ namespace Nwn.Server.Interop
     ///  Get the level at which this creature cast it's last spell (or spell-like ability)
     ///  * Return value on error, or if oCreature has not yet cast a spell: 0;
     /// </summary>
-    public int GetCasterLevel(uint oCreature)
+    internal int GetCasterLevel(uint oCreature)
     {
       StackPush(oCreature);
       Call(84);
@@ -1100,7 +1100,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the first in-game effect on oCreature.
     /// </summary>
-    public IntPtr GetFirstEffect(uint oCreature)
+    internal IntPtr GetFirstEffect(uint oCreature)
     {
       StackPush(oCreature);
       Call(85);
@@ -1110,7 +1110,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the next in-game effect on oCreature.
     /// </summary>
-    public IntPtr GetNextEffect(uint oCreature)
+    internal IntPtr GetNextEffect(uint oCreature)
     {
       StackPush(oCreature);
       Call(86);
@@ -1121,7 +1121,7 @@ namespace Nwn.Server.Interop
     ///  Remove eEffect from oCreature.
     ///  * No return value
     /// </summary>
-    public void RemoveEffect(uint oCreature, IntPtr eEffect)
+    internal void RemoveEffect(uint oCreature, IntPtr eEffect)
     {
       StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
       StackPush(oCreature);
@@ -1132,7 +1132,7 @@ namespace Nwn.Server.Interop
     ///  * Returns TRUE if eEffect is a valid effect. The effect must have been applied to
     ///  * an object or else it will return FALSE
     /// </summary>
-    public int GetIsEffectValid(IntPtr eEffect)
+    internal int GetIsEffectValid(IntPtr eEffect)
     {
       StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
       Call(88);
@@ -1143,7 +1143,7 @@ namespace Nwn.Server.Interop
     ///  Get the duration type (DURATION_TYPE_*) of eEffect.
     ///  * Return value if eEffect is not valid: -1
     /// </summary>
-    public int GetEffectDurationType(IntPtr eEffect)
+    internal int GetEffectDurationType(IntPtr eEffect)
     {
       StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
       Call(89);
@@ -1154,7 +1154,7 @@ namespace Nwn.Server.Interop
     ///  Get the subtype (SUBTYPE_*) of eEffect.
     ///  * Return value on error: 0
     /// </summary>
-    public int GetEffectSubType(IntPtr eEffect)
+    internal int GetEffectSubType(IntPtr eEffect)
     {
       StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
       Call(90);
@@ -1165,7 +1165,7 @@ namespace Nwn.Server.Interop
     ///  Get the object that created eEffect.
     ///  * Returns OBJECT_INVALID if eEffect is not a valid effect.
     /// </summary>
-    public uint GetEffectCreator(IntPtr eEffect)
+    internal uint GetEffectCreator(IntPtr eEffect)
     {
       StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
       Call(91);
@@ -1176,7 +1176,7 @@ namespace Nwn.Server.Interop
     ///  Convert nInteger into a string.
     ///  * Return value on error: ""
     /// </summary>
-    public string IntToString(int nInteger)
+    internal string IntToString(int nInteger)
     {
       StackPush(nInteger);
       Call(92);
@@ -1188,7 +1188,7 @@ namespace Nwn.Server.Interop
     ///  If no valid area is specified, it will use the caller's area.
     ///  * Return value on error: OBJECT_INVALID
     /// </summary>
-    public uint GetFirstObjectInArea(uint oArea = OBJECT_INVALID)
+    internal uint GetFirstObjectInArea(uint oArea = OBJECT_INVALID)
     {
       StackPush(oArea);
       Call(93);
@@ -1200,7 +1200,7 @@ namespace Nwn.Server.Interop
     ///  If no valid area is specified, it will use the caller's area.
     ///  * Return value on error: OBJECT_INVALID
     /// </summary>
-    public uint GetNextObjectInArea(uint oArea = OBJECT_INVALID)
+    internal uint GetNextObjectInArea(uint oArea = OBJECT_INVALID)
     {
       StackPush(oArea);
       Call(94);
@@ -1211,7 +1211,7 @@ namespace Nwn.Server.Interop
     ///  Get the total from rolling (nNumDice x d2 dice).
     ///  - nNumDice: If this is less than 1, the value 1 will be used.
     /// </summary>
-    public int d2(int nNumDice = 1)
+    internal int d2(int nNumDice = 1)
     {
       StackPush(nNumDice);
       Call(95);
@@ -1222,7 +1222,7 @@ namespace Nwn.Server.Interop
     ///  Get the total from rolling (nNumDice x d3 dice).
     ///  - nNumDice: If this is less than 1, the value 1 will be used.
     /// </summary>
-    public int d3(int nNumDice = 1)
+    internal int d3(int nNumDice = 1)
     {
       StackPush(nNumDice);
       Call(96);
@@ -1233,7 +1233,7 @@ namespace Nwn.Server.Interop
     ///  Get the total from rolling (nNumDice x d4 dice).
     ///  - nNumDice: If this is less than 1, the value 1 will be used.
     /// </summary>
-    public int d4(int nNumDice = 1)
+    internal int d4(int nNumDice = 1)
     {
       StackPush(nNumDice);
       Call(97);
@@ -1244,7 +1244,7 @@ namespace Nwn.Server.Interop
     ///  Get the total from rolling (nNumDice x d6 dice).
     ///  - nNumDice: If this is less than 1, the value 1 will be used.
     /// </summary>
-    public int d6(int nNumDice = 1)
+    internal int d6(int nNumDice = 1)
     {
       StackPush(nNumDice);
       Call(98);
@@ -1255,7 +1255,7 @@ namespace Nwn.Server.Interop
     ///  Get the total from rolling (nNumDice x d8 dice).
     ///  - nNumDice: If this is less than 1, the value 1 will be used.
     /// </summary>
-    public int d8(int nNumDice = 1)
+    internal int d8(int nNumDice = 1)
     {
       StackPush(nNumDice);
       Call(99);
@@ -1266,7 +1266,7 @@ namespace Nwn.Server.Interop
     ///  Get the total from rolling (nNumDice x d10 dice).
     ///  - nNumDice: If this is less than 1, the value 1 will be used.
     /// </summary>
-    public int d10(int nNumDice = 1)
+    internal int d10(int nNumDice = 1)
     {
       StackPush(nNumDice);
       Call(100);
@@ -1277,7 +1277,7 @@ namespace Nwn.Server.Interop
     ///  Get the total from rolling (nNumDice x d12 dice).
     ///  - nNumDice: If this is less than 1, the value 1 will be used.
     /// </summary>
-    public int d12(int nNumDice = 1)
+    internal int d12(int nNumDice = 1)
     {
       StackPush(nNumDice);
       Call(101);
@@ -1288,7 +1288,7 @@ namespace Nwn.Server.Interop
     ///  Get the total from rolling (nNumDice x d20 dice).
     ///  - nNumDice: If this is less than 1, the value 1 will be used.
     /// </summary>
-    public int d20(int nNumDice = 1)
+    internal int d20(int nNumDice = 1)
     {
       StackPush(nNumDice);
       Call(102);
@@ -1299,7 +1299,7 @@ namespace Nwn.Server.Interop
     ///  Get the total from rolling (nNumDice x d100 dice).
     ///  - nNumDice: If this is less than 1, the value 1 will be used.
     /// </summary>
-    public int d100(int nNumDice = 1)
+    internal int d100(int nNumDice = 1)
     {
       StackPush(nNumDice);
       Call(103);
@@ -1311,7 +1311,7 @@ namespace Nwn.Server.Interop
     ///  distance between two points.
     ///  * Return value on error: 0.0f
     /// </summary>
-    public float VectorMagnitude(Vector3 vVector)
+    internal float VectorMagnitude(Vector3 vVector)
     {
       StackPush(vVector);
       Call(104);
@@ -1322,7 +1322,7 @@ namespace Nwn.Server.Interop
     ///  Get the metamagic type (METAMAGIC_*) of the last spell cast by the caller
     ///  * Return value if the caster is not a valid object: -1
     /// </summary>
-    public int GetMetaMagicFeat()
+    internal int GetMetaMagicFeat()
     {
       Call(105);
       return StackPopInt();
@@ -1332,7 +1332,7 @@ namespace Nwn.Server.Interop
     ///  Get the object type (OBJECT_TYPE_*) of oTarget
     ///  * Return value if oTarget is not a valid object: -1
     /// </summary>
-    public int GetObjectType(uint oTarget)
+    internal int GetObjectType(uint oTarget)
     {
       StackPush(oTarget);
       Call(106);
@@ -1343,7 +1343,7 @@ namespace Nwn.Server.Interop
     ///  Get the racial type (RACIAL_TYPE_*) of oCreature
     ///  * Return value if oCreature is not a valid creature: RACIAL_TYPE_INVALID
     /// </summary>
-    public int GetRacialType(uint oCreature)
+    internal int GetRacialType(uint oCreature)
     {
       StackPush(oCreature);
       Call(107);
@@ -1362,7 +1362,7 @@ namespace Nwn.Server.Interop
     ///  Note: If used within an Area of Effect Object Script (On Enter, OnExit, OnHeartbeat), you MUST pass
     ///  GetAreaOfEffectCreator() into oSaveVersus!!
     /// </summary>
-    public int FortitudeSave(uint oCreature, int nDC, int nSaveType = SAVING_THROW_TYPE_NONE, uint oSaveVersus = OBJECT_INVALID)
+    internal int FortitudeSave(uint oCreature, int nDC, int nSaveType = SAVING_THROW_TYPE_NONE, uint oSaveVersus = OBJECT_INVALID)
     {
       StackPush(oSaveVersus);
       StackPush(nSaveType);
@@ -1384,7 +1384,7 @@ namespace Nwn.Server.Interop
     ///  Note: If used within an Area of Effect Object Script (On Enter, OnExit, OnHeartbeat), you MUST pass
     ///  GetAreaOfEffectCreator() into oSaveVersus!!
     /// </summary>
-    public int ReflexSave(uint oCreature, int nDC, int nSaveType = SAVING_THROW_TYPE_NONE, uint oSaveVersus = OBJECT_INVALID)
+    internal int ReflexSave(uint oCreature, int nDC, int nSaveType = SAVING_THROW_TYPE_NONE, uint oSaveVersus = OBJECT_INVALID)
     {
       StackPush(oSaveVersus);
       StackPush(nSaveType);
@@ -1406,7 +1406,7 @@ namespace Nwn.Server.Interop
     ///  Note: If used within an Area of Effect Object Script (On Enter, OnExit, OnHeartbeat), you MUST pass
     ///  GetAreaOfEffectCreator() into oSaveVersus!!
     /// </summary>
-    public int WillSave(uint oCreature, int nDC, int nSaveType = SAVING_THROW_TYPE_NONE, uint oSaveVersus = OBJECT_INVALID)
+    internal int WillSave(uint oCreature, int nDC, int nSaveType = SAVING_THROW_TYPE_NONE, uint oSaveVersus = OBJECT_INVALID)
     {
       StackPush(oSaveVersus);
       StackPush(nSaveType);
@@ -1420,7 +1420,7 @@ namespace Nwn.Server.Interop
     ///  Get the DC to save against for a spell (10 + spell level + relevant ability
     ///  bonus).  This can be called by a creature or by an Area of Effect object.
     /// </summary>
-    public int GetSpellSaveDC()
+    internal int GetSpellSaveDC()
     {
       Call(111);
       return StackPopInt();
@@ -1431,7 +1431,7 @@ namespace Nwn.Server.Interop
     ///  (Effects default to magical if the subtype is not set)
     ///  Magical effects are removed by resting, and by dispel magic
     /// </summary>
-    public IntPtr MagicalEffect(IntPtr eEffect)
+    internal IntPtr MagicalEffect(IntPtr eEffect)
     {
       StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
       Call(112);
@@ -1443,7 +1443,7 @@ namespace Nwn.Server.Interop
     ///  (Effects default to magical if the subtype is not set)
     ///  Permanent supernatural effects are not removed by resting
     /// </summary>
-    public IntPtr SupernaturalEffect(IntPtr eEffect)
+    internal IntPtr SupernaturalEffect(IntPtr eEffect)
     {
       StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
       Call(113);
@@ -1455,7 +1455,7 @@ namespace Nwn.Server.Interop
     ///  (Effects default to magical if the subtype is not set)
     ///  Extraordinary effects are removed by resting, but not by dispel magic
     /// </summary>
-    public IntPtr ExtraordinaryEffect(IntPtr eEffect)
+    internal IntPtr ExtraordinaryEffect(IntPtr eEffect)
     {
       StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
       Call(114);
@@ -1469,7 +1469,7 @@ namespace Nwn.Server.Interop
     ///  - nDamageType: DAMAGE_TYPE_*
     ///    * Default value for nDamageType should only ever be used in this function prototype.
     /// </summary>
-    public IntPtr EffectACIncrease(int nValue, int nModifyType = AC_DODGE_BONUS, int nDamageType = AC_VS_DAMAGE_TYPE_ALL)
+    internal IntPtr EffectACIncrease(int nValue, int nModifyType = AC_DODGE_BONUS, int nDamageType = AC_VS_DAMAGE_TYPE_ALL)
     {
       StackPush(nDamageType);
       StackPush(nModifyType);
@@ -1484,7 +1484,7 @@ namespace Nwn.Server.Interop
     ///  - nForFutureUse: this parameter is not currently used
     ///  * Return value if oObject is not a creature, item, door or placeable: -1
     /// </summary>
-    public int GetAC(uint oObject, int nForFutureUse = 0)
+    internal int GetAC(uint oObject, int nForFutureUse = 0)
     {
       StackPush(nForFutureUse);
       StackPush(oObject);
@@ -1502,7 +1502,7 @@ namespace Nwn.Server.Interop
     ///  - nValue: size of the Saving Throw increase
     ///  - nSaveType: SAVING_THROW_TYPE_* (e.g. SAVING_THROW_TYPE_ACID )
     /// </summary>
-    public IntPtr EffectSavingThrowIncrease(int nSave, int nValue, int nSaveType = SAVING_THROW_TYPE_ALL)
+    internal IntPtr EffectSavingThrowIncrease(int nSave, int nValue, int nSaveType = SAVING_THROW_TYPE_ALL)
     {
       StackPush(nSaveType);
       StackPush(nValue);
@@ -1516,7 +1516,7 @@ namespace Nwn.Server.Interop
     ///  - nBonus: size of attack bonus
     ///  - nModifierType: ATTACK_BONUS_*
     /// </summary>
-    public IntPtr EffectAttackIncrease(int nBonus, int nModifierType = ATTACK_BONUS_MISC)
+    internal IntPtr EffectAttackIncrease(int nBonus, int nModifierType = ATTACK_BONUS_MISC)
     {
       StackPush(nModifierType);
       StackPush(nBonus);
@@ -1531,7 +1531,7 @@ namespace Nwn.Server.Interop
     ///  - nLimit: How much damage the effect can absorb before disappearing.
     ///    Set to zero for infinite
     /// </summary>
-    public IntPtr EffectDamageReduction(int nAmount, int nDamagePower, int nLimit = 0)
+    internal IntPtr EffectDamageReduction(int nAmount, int nDamagePower, int nLimit = 0)
     {
       StackPush(nLimit);
       StackPush(nDamagePower);
@@ -1547,7 +1547,7 @@ namespace Nwn.Server.Interop
     ///  NOTE! You *must* use the DAMAGE_BONUS_* constants! Using other values may
     ///        result in odd behaviour.
     /// </summary>
-    public IntPtr EffectDamageIncrease(int nBonus, int nDamageType = DAMAGE_TYPE_MAGICAL)
+    internal IntPtr EffectDamageIncrease(int nBonus, int nDamageType = DAMAGE_TYPE_MAGICAL)
     {
       StackPush(nDamageType);
       StackPush(nBonus);
@@ -1559,7 +1559,7 @@ namespace Nwn.Server.Interop
     ///  Convert nRounds into a number of seconds
     ///  A round is always 6.0 seconds
     /// </summary>
-    public float RoundsToSeconds(int nRounds)
+    internal float RoundsToSeconds(int nRounds)
     {
       StackPush(nRounds);
       Call(121);
@@ -1570,7 +1570,7 @@ namespace Nwn.Server.Interop
     ///  Convert nHours into a number of seconds
     ///  The result will depend on how many minutes there are per hour (game-time)
     /// </summary>
-    public float HoursToSeconds(int nHours)
+    internal float HoursToSeconds(int nHours)
     {
       StackPush(nHours);
       Call(122);
@@ -1581,7 +1581,7 @@ namespace Nwn.Server.Interop
     ///  Convert nTurns into a number of seconds
     ///  A turn is always 60.0 seconds
     /// </summary>
-    public float TurnsToSeconds(int nTurns)
+    internal float TurnsToSeconds(int nTurns)
     {
       StackPush(nTurns);
       Call(123);
@@ -1594,7 +1594,7 @@ namespace Nwn.Server.Interop
     ///  (100=law, 0=chaos)
     ///  * Return value if oCreature is not a valid creature: -1
     /// </summary>
-    public int GetLawChaosValue(uint oCreature)
+    internal int GetLawChaosValue(uint oCreature)
     {
       StackPush(oCreature);
       Call(124);
@@ -1607,7 +1607,7 @@ namespace Nwn.Server.Interop
     ///  (100=good, 0=evil)
     ///  * Return value if oCreature is not a valid creature: -1
     /// </summary>
-    public int GetGoodEvilValue(uint oCreature)
+    internal int GetGoodEvilValue(uint oCreature)
     {
       StackPush(oCreature);
       Call(125);
@@ -1618,7 +1618,7 @@ namespace Nwn.Server.Interop
     ///  Return an ALIGNMENT_* constant to represent oCreature's law/chaos alignment
     ///  * Return value if oCreature is not a valid creature: -1
     /// </summary>
-    public int GetAlignmentLawChaos(uint oCreature)
+    internal int GetAlignmentLawChaos(uint oCreature)
     {
       StackPush(oCreature);
       Call(126);
@@ -1629,7 +1629,7 @@ namespace Nwn.Server.Interop
     ///  Return an ALIGNMENT_* constant to represent oCreature's good/evil alignment
     ///  * Return value if oCreature is not a valid creature: -1
     /// </summary>
-    public int GetAlignmentGoodEvil(uint oCreature)
+    internal int GetAlignmentGoodEvil(uint oCreature)
     {
       StackPush(oCreature);
       Call(127);
@@ -1663,7 +1663,7 @@ namespace Nwn.Server.Interop
     ///    origin of the effect(normally the spell-caster's position).
     ///  Return value on error: OBJECT_INVALID
     /// </summary>
-    public uint GetFirstObjectInShape(int nShape, float fSize, IntPtr lTarget, int bLineOfSight = FALSE, int nObjectFilter = OBJECT_TYPE_CREATURE, Vector3 vOrigin = default)
+    internal uint GetFirstObjectInShape(int nShape, float fSize, IntPtr lTarget, int bLineOfSight = FALSE, int nObjectFilter = OBJECT_TYPE_CREATURE, Vector3 vOrigin = default)
     {
       StackPush(vOrigin);
       StackPush(nObjectFilter);
@@ -1701,7 +1701,7 @@ namespace Nwn.Server.Interop
     ///    of the effect (normally the spell-caster's position).
     ///  Return value on error: OBJECT_INVALID
     /// </summary>
-    public uint GetNextObjectInShape(int nShape, float fSize, IntPtr lTarget, int bLineOfSight = FALSE, int nObjectFilter = OBJECT_TYPE_CREATURE, Vector3 vOrigin = default)
+    internal uint GetNextObjectInShape(int nShape, float fSize, IntPtr lTarget, int bLineOfSight = FALSE, int nObjectFilter = OBJECT_TYPE_CREATURE, Vector3 vOrigin = default)
     {
       StackPush(vOrigin);
       StackPush(nObjectFilter);
@@ -1718,7 +1718,7 @@ namespace Nwn.Server.Interop
     ///  When applied, this effect will restrict the creature's movement and apply a
     ///  (-2) to all attacks and a -4 to AC.
     /// </summary>
-    public IntPtr EffectEntangle()
+    internal IntPtr EffectEntangle()
     {
       Call(130);
       return StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -1739,7 +1739,7 @@ namespace Nwn.Server.Interop
     ///     EventUserDefined()  - This creates on OnUserDefined event. The script for handling this event
     ///                           can be set in the Scripts Tab of the Properties menu for the object/area/module.
     /// </summary>
-    public void SignalEvent(uint oObject, IntPtr evToRun)
+    internal void SignalEvent(uint oObject, IntPtr evToRun)
     {
       StackPush(evToRun, ENGINE_STRUCTURE_EVENT);
       StackPush(oObject);
@@ -1761,7 +1761,7 @@ namespace Nwn.Server.Interop
     ///     GetUserDefinedEventNumber() to retrieve the value of nUserDefinedEventNumber
     ///     that was used when the event was signaled.
     /// </summary>
-    public IntPtr EventUserDefined(int nUserDefinedEventNumber)
+    internal IntPtr EventUserDefined(int nUserDefinedEventNumber)
     {
       StackPush(nUserDefinedEventNumber);
       Call(132);
@@ -1774,7 +1774,7 @@ namespace Nwn.Server.Interop
     ///    applied will die in an extraordinary fashion
     ///  - nDisplayFeedback
     /// </summary>
-    public IntPtr EffectDeath(int nSpectacularDeath = FALSE, int nDisplayFeedback = TRUE)
+    internal IntPtr EffectDeath(int nSpectacularDeath = FALSE, int nDisplayFeedback = TRUE)
     {
       StackPush(nDisplayFeedback);
       StackPush(nSpectacularDeath);
@@ -1788,7 +1788,7 @@ namespace Nwn.Server.Interop
     ///  is removed. This should be applied as a temporary effect with a 3 second
     ///  duration minimum (1 second to fall, 1 second sitting, 1 second to get up).
     /// </summary>
-    public IntPtr EffectKnockdown()
+    internal IntPtr EffectKnockdown()
     {
       Call(134);
       return StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -1799,7 +1799,7 @@ namespace Nwn.Server.Interop
     ///  If oItem is not a valid item, or oGiveTo is not a valid object, nothing will
     ///  happen.
     /// </summary>
-    public void ActionGiveItem(uint oItem, uint oGiveTo)
+    internal void ActionGiveItem(uint oItem, uint oGiveTo)
     {
       StackPush(oGiveTo);
       StackPush(oItem);
@@ -1811,7 +1811,7 @@ namespace Nwn.Server.Interop
     ///  If oItem is not a valid item, or oTakeFrom is not a valid object, nothing
     ///  will happen.
     /// </summary>
-    public void ActionTakeItem(uint oItem, uint oTakeFrom)
+    internal void ActionTakeItem(uint oItem, uint oTakeFrom)
     {
       StackPush(oTakeFrom);
       StackPush(oItem);
@@ -1821,7 +1821,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Normalize vVector
     /// </summary>
-    public Vector3 VectorNormalize(Vector3 vVector)
+    internal Vector3 VectorNormalize(Vector3 vVector)
     {
       StackPush(vVector);
       Call(137);
@@ -1837,7 +1837,7 @@ namespace Nwn.Server.Interop
     ///  - nWisMod: wisdom modifier
     ///  - nChaMod: charisma modifier
     /// </summary>
-    public IntPtr EffectCurse(int nStrMod = 1, int nDexMod = 1, int nConMod = 1, int nIntMod = 1, int nWisMod = 1, int nChaMod = 1)
+    internal IntPtr EffectCurse(int nStrMod = 1, int nDexMod = 1, int nConMod = 1, int nIntMod = 1, int nWisMod = 1, int nChaMod = 1)
     {
       StackPush(nChaMod);
       StackPush(nWisMod);
@@ -1857,7 +1857,7 @@ namespace Nwn.Server.Interop
     ///                       bonuses (e.g. ability bonuses granted from equipped items).
     ///  Return value on error: 0
     /// </summary>
-    public int GetAbilityScore(uint oCreature, int nAbilityType, int nBaseAbilityScore = FALSE)
+    internal int GetAbilityScore(uint oCreature, int nAbilityType, int nBaseAbilityScore = FALSE)
     {
       StackPush(nBaseAbilityScore);
       StackPush(nAbilityType);
@@ -1869,7 +1869,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  * Returns TRUE if oCreature is a dead NPC, dead PC or a dying PC.
     /// </summary>
-    public int GetIsDead(uint oCreature)
+    internal int GetIsDead(uint oCreature)
     {
       StackPush(oCreature);
       Call(140);
@@ -1881,7 +1881,7 @@ namespace Nwn.Server.Interop
     ///  - vVector
     ///  - bPrepend: if this is TRUE, the message will be prefixed with "PRINTVECTOR:"
     /// </summary>
-    public void PrintVector(Vector3 vVector, int bPrepend)
+    internal void PrintVector(Vector3 vVector, int bPrepend)
     {
       StackPush(bPrepend);
       StackPush(vVector);
@@ -1891,7 +1891,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Create a vector with the specified values for x, y and z
     /// </summary>
-    public Vector3 Vector(float x = 0.0f, float y = 0.0f, float z = 0.0f)
+    internal Vector3 Vector(float x = 0.0f, float y = 0.0f, float z = 0.0f)
     {
       StackPush(z);
       StackPush(y);
@@ -1903,7 +1903,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Cause the caller to face vTarget
     /// </summary>
-    public void SetFacingPoint(Vector3 vTarget)
+    internal void SetFacingPoint(Vector3 vTarget)
     {
       StackPush(vTarget);
       Call(143);
@@ -1912,7 +1912,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Convert fAngle to a vector
     /// </summary>
-    public Vector3 AngleToVector(float fAngle)
+    internal Vector3 AngleToVector(float fAngle)
     {
       StackPush(fAngle);
       Call(144);
@@ -1922,7 +1922,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Convert vVector to an angle
     /// </summary>
-    public float VectorToAngle(Vector3 vVector)
+    internal float VectorToAngle(Vector3 vVector)
     {
       StackPush(vVector);
       Call(145);
@@ -1935,7 +1935,7 @@ namespace Nwn.Server.Interop
     ///  oTarget
     ///  * Returns 0 on a miss, 1 on a hit and 2 on a critical hit
     /// </summary>
-    public int TouchAttackMelee(uint oTarget, int bDisplayFeedback = TRUE)
+    internal int TouchAttackMelee(uint oTarget, int bDisplayFeedback = TRUE)
     {
       StackPush(bDisplayFeedback);
       StackPush(oTarget);
@@ -1947,7 +1947,7 @@ namespace Nwn.Server.Interop
     ///  The caller will perform a Ranged Touch Attack on oTarget
     ///  * Returns 0 on a miss, 1 on a hit and 2 on a critical hit
     /// </summary>
-    public int TouchAttackRanged(uint oTarget, int bDisplayFeedback = TRUE)
+    internal int TouchAttackRanged(uint oTarget, int bDisplayFeedback = TRUE)
     {
       StackPush(bDisplayFeedback);
       StackPush(oTarget);
@@ -1958,7 +1958,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Create a Paralyze effect
     /// </summary>
-    public IntPtr EffectParalyze()
+    internal IntPtr EffectParalyze()
     {
       Call(148);
       return StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -1973,7 +1973,7 @@ namespace Nwn.Server.Interop
     ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nImmunityToSpell is
     ///    invalid.
     /// </summary>
-    public IntPtr EffectSpellImmunity(int nImmunityToSpell = SPELL_ALL_SPELLS)
+    internal IntPtr EffectSpellImmunity(int nImmunityToSpell = SPELL_ALL_SPELLS)
     {
       StackPush(nImmunityToSpell);
       Call(149);
@@ -1983,7 +1983,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Create a Deaf effect
     /// </summary>
-    public IntPtr EffectDeaf()
+    internal IntPtr EffectDeaf()
     {
       Call(150);
       return StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -1993,7 +1993,7 @@ namespace Nwn.Server.Interop
     ///  Get the distance in metres between oObjectA and oObjectB.
     ///  * Return value if either object is invalid: 0.0f
     /// </summary>
-    public float GetDistanceBetween(uint oObjectA, uint oObjectB)
+    internal float GetDistanceBetween(uint oObjectA, uint oObjectB)
     {
       StackPush(oObjectB);
       StackPush(oObjectA);
@@ -2004,7 +2004,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Set oObject's local location variable sVarname to lValue
     /// </summary>
-    public void SetLocalLocation(uint oObject, string sVarName, IntPtr lValue)
+    internal void SetLocalLocation(uint oObject, string sVarName, IntPtr lValue)
     {
       StackPush(lValue, ENGINE_STRUCTURE_LOCATION);
       StackPush(sVarName);
@@ -2015,7 +2015,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get oObject's local location variable sVarname
     /// </summary>
-    public IntPtr GetLocalLocation(uint oObject, string sVarName)
+    internal IntPtr GetLocalLocation(uint oObject, string sVarName)
     {
       StackPush(sVarName);
       StackPush(oObject);
@@ -2026,7 +2026,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Create a Sleep effect
     /// </summary>
-    public IntPtr EffectSleep()
+    internal IntPtr EffectSleep()
     {
       Call(154);
       return StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -2039,7 +2039,7 @@ namespace Nwn.Server.Interop
     ///  * Returns OBJECT_INVALID if oCreature is not a valid creature or there is no
     ///    item in nInventorySlot.
     /// </summary>
-    public uint GetItemInSlot(int nInventorySlot, uint oCreature = OBJECT_INVALID)
+    internal uint GetItemInSlot(int nInventorySlot, uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       StackPush(nInventorySlot);
@@ -2050,7 +2050,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Create a Charm effect
     /// </summary>
-    public IntPtr EffectCharmed()
+    internal IntPtr EffectCharmed()
     {
       Call(156);
       return StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -2059,7 +2059,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Create a Confuse effect
     /// </summary>
-    public IntPtr EffectConfused()
+    internal IntPtr EffectConfused()
     {
       Call(157);
       return StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -2068,7 +2068,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Create a Frighten effect
     /// </summary>
-    public IntPtr EffectFrightened()
+    internal IntPtr EffectFrightened()
     {
       Call(158);
       return StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -2077,7 +2077,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Create a Dominate effect
     /// </summary>
-    public IntPtr EffectDominated()
+    internal IntPtr EffectDominated()
     {
       Call(159);
       return StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -2086,7 +2086,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Create a Daze effect
     /// </summary>
-    public IntPtr EffectDazed()
+    internal IntPtr EffectDazed()
     {
       Call(160);
       return StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -2095,7 +2095,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Create a Stun effect
     /// </summary>
-    public IntPtr EffectStunned()
+    internal IntPtr EffectStunned()
     {
       Call(161);
       return StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -2104,7 +2104,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Set whether oTarget's action stack can be modified
     /// </summary>
-    public void SetCommandable(int bCommandable, uint oTarget = OBJECT_INVALID)
+    internal void SetCommandable(int bCommandable, uint oTarget = OBJECT_INVALID)
     {
       StackPush(oTarget);
       StackPush(bCommandable);
@@ -2114,7 +2114,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Determine whether oTarget's action stack can be modified.
     /// </summary>
-    public int GetCommandable(uint oTarget = OBJECT_INVALID)
+    internal int GetCommandable(uint oTarget = OBJECT_INVALID)
     {
       StackPush(oTarget);
       Call(163);
@@ -2126,7 +2126,7 @@ namespace Nwn.Server.Interop
     ///  - nAmount: amount of damage to be regenerated per time interval
     ///  - fIntervalSeconds: length of interval in seconds
     /// </summary>
-    public IntPtr EffectRegenerate(int nAmount, float fIntervalSeconds)
+    internal IntPtr EffectRegenerate(int nAmount, float fIntervalSeconds)
     {
       StackPush(fIntervalSeconds);
       StackPush(nAmount);
@@ -2142,7 +2142,7 @@ namespace Nwn.Server.Interop
     ///    50 = 50% faster
     ///    99 = almost twice as fast
     /// </summary>
-    public IntPtr EffectMovementSpeedIncrease(int nPercentChange)
+    internal IntPtr EffectMovementSpeedIncrease(int nPercentChange)
     {
       StackPush(nPercentChange);
       Call(165);
@@ -2153,7 +2153,7 @@ namespace Nwn.Server.Interop
     ///  Get the number of hitdice for oCreature.
     ///  * Return value if oCreature is not a valid creature: 0
     /// </summary>
-    public int GetHitDice(uint oCreature)
+    internal int GetHitDice(uint oCreature)
     {
       StackPush(oCreature);
       Call(166);
@@ -2166,7 +2166,7 @@ namespace Nwn.Server.Interop
     ///  - fFollowDistance: follow distance in metres
     ///  * No return value
     /// </summary>
-    public void ActionForceFollowObject(uint oFollow, float fFollowDistance = 0.0f)
+    internal void ActionForceFollowObject(uint oFollow, float fFollowDistance = 0.0f)
     {
       StackPush(fFollowDistance);
       StackPush(oFollow);
@@ -2177,7 +2177,7 @@ namespace Nwn.Server.Interop
     ///  Get the Tag of oObject
     ///  * Return value if oObject is not a valid object: ""
     /// </summary>
-    public string GetTag(uint oObject)
+    internal string GetTag(uint oObject)
     {
       StackPush(oObject);
       Call(168);
@@ -2193,7 +2193,7 @@ namespace Nwn.Server.Interop
     ///  * Return value if spell resisted via magic immunity: 2
     ///  * Return value if spell resisted via spell absorption: 3
     /// </summary>
-    public int ResistSpell(uint oCaster, uint oTarget)
+    internal int ResistSpell(uint oCaster, uint oTarget)
     {
       StackPush(oTarget);
       StackPush(oCaster);
@@ -2205,7 +2205,7 @@ namespace Nwn.Server.Interop
     ///  Get the effect type (EFFECT_TYPE_*) of eEffect.
     ///  * Return value if eEffect is invalid: EFFECT_INVALIDEFFECT
     /// </summary>
-    public int GetEffectType(IntPtr eEffect)
+    internal int GetEffectType(IntPtr eEffect)
     {
       StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
       Call(170);
@@ -2216,7 +2216,7 @@ namespace Nwn.Server.Interop
     ///  Create an Area Of Effect effect in the area of the creature it is applied to.
     ///  If the scripts are not specified, default ones will be used.
     /// </summary>
-    public IntPtr EffectAreaOfEffect(int nAreaEffectId, string sOnEnterScript = "", string sHeartbeatScript = "", string sOnExitScript = "")
+    internal IntPtr EffectAreaOfEffect(int nAreaEffectId, string sOnEnterScript = "", string sHeartbeatScript = "", string sOnExitScript = "")
     {
       StackPush(sOnExitScript);
       StackPush(sHeartbeatScript);
@@ -2229,7 +2229,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  * Returns TRUE if the Faction Ids of the two objects are the same
     /// </summary>
-    public int GetFactionEqual(uint oFirstObject, uint oSecondObject = OBJECT_INVALID)
+    internal int GetFactionEqual(uint oFirstObject, uint oSecondObject = OBJECT_INVALID)
     {
       StackPush(oSecondObject);
       StackPush(oFirstObject);
@@ -2241,7 +2241,7 @@ namespace Nwn.Server.Interop
     ///  Make oObjectToChangeFaction join the faction of oMemberOfFactionToJoin.
     ///  NB. ** This will only work for two NPCs **
     /// </summary>
-    public void ChangeFaction(uint oObjectToChangeFaction, uint oMemberOfFactionToJoin)
+    internal void ChangeFaction(uint oObjectToChangeFaction, uint oMemberOfFactionToJoin)
     {
       StackPush(oMemberOfFactionToJoin);
       StackPush(oObjectToChangeFaction);
@@ -2251,7 +2251,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  * Returns TRUE if oObject is listening for something
     /// </summary>
-    public int GetIsListening(uint oObject)
+    internal int GetIsListening(uint oObject)
     {
       StackPush(oObject);
       Call(174);
@@ -2261,7 +2261,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Set whether oObject is listening.
     /// </summary>
-    public void SetListening(uint oObject, int bValue)
+    internal void SetListening(uint oObject, int bValue)
     {
       StackPush(bValue);
       StackPush(oObject);
@@ -2272,7 +2272,7 @@ namespace Nwn.Server.Interop
     ///  Set the string for oObject to listen for.
     ///  Note: this does not set oObject to be listening.
     /// </summary>
-    public void SetListenPattern(uint oObject, string sPattern, int nNumber = 0)
+    internal void SetListenPattern(uint oObject, string sPattern, int nNumber = 0)
     {
       StackPush(nNumber);
       StackPush(sPattern);
@@ -2283,7 +2283,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  * Returns TRUE if sStringToTest matches sPattern.
     /// </summary>
-    public int TestStringAgainstPattern(string sPattern, string sStringToTest)
+    internal int TestStringAgainstPattern(string sPattern, string sStringToTest)
     {
       StackPush(sStringToTest);
       StackPush(sPattern);
@@ -2296,7 +2296,7 @@ namespace Nwn.Server.Interop
     ///  OnConversation scripts).
     ///  * Returns the appropriate matched string, otherwise returns ""
     /// </summary>
-    public string GetMatchedSubstring(int nString)
+    internal string GetMatchedSubstring(int nString)
     {
       StackPush(nString);
       Call(178);
@@ -2307,7 +2307,7 @@ namespace Nwn.Server.Interop
     ///  Get the number of string parameters available.
     ///  * Returns -1 if no string matched (this could be because of a dialogue event)
     /// </summary>
-    public int GetMatchedSubstringsCount()
+    internal int GetMatchedSubstringsCount()
     {
       Call(179);
       return StackPopInt();
@@ -2319,7 +2319,7 @@ namespace Nwn.Server.Interop
     ///  - nMissEffect: if this is TRUE, a random vector near or past the target will
     ///    be generated, on which to play the effect
     /// </summary>
-    public IntPtr EffectVisualEffect(int nVisualEffectId, int nMissEffect = FALSE, float fScale = 1.0f, Vector3 vTranslate = default, Vector3 vRotate = default)
+    internal IntPtr EffectVisualEffect(int nVisualEffectId, int nMissEffect = FALSE, float fScale = 1.0f, Vector3 vTranslate = default, Vector3 vRotate = default)
     {
       StackPush(vRotate);
       StackPush(vTranslate);
@@ -2334,7 +2334,7 @@ namespace Nwn.Server.Interop
     ///  Get the weakest member of oFactionMember's faction.
     ///  * Returns OBJECT_INVALID if oFactionMember's faction is invalid.
     /// </summary>
-    public uint GetFactionWeakestMember(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
+    internal uint GetFactionWeakestMember(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
     {
       StackPush(bMustBeVisible);
       StackPush(oFactionMember);
@@ -2346,7 +2346,7 @@ namespace Nwn.Server.Interop
     ///  Get the strongest member of oFactionMember's faction.
     ///  * Returns OBJECT_INVALID if oFactionMember's faction is invalid.
     /// </summary>
-    public uint GetFactionStrongestMember(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
+    internal uint GetFactionStrongestMember(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
     {
       StackPush(bMustBeVisible);
       StackPush(oFactionMember);
@@ -2359,7 +2359,7 @@ namespace Nwn.Server.Interop
     ///  of damage.
     ///  * Returns OBJECT_INVALID if oFactionMember's faction is invalid.
     /// </summary>
-    public uint GetFactionMostDamagedMember(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
+    internal uint GetFactionMostDamagedMember(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
     {
       StackPush(bMustBeVisible);
       StackPush(oFactionMember);
@@ -2372,7 +2372,7 @@ namespace Nwn.Server.Interop
     ///  points of damage.
     ///  * Returns OBJECT_INVALID if oFactionMember's faction is invalid.
     /// </summary>
-    public uint GetFactionLeastDamagedMember(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
+    internal uint GetFactionLeastDamagedMember(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
     {
       StackPush(bMustBeVisible);
       StackPush(oFactionMember);
@@ -2384,7 +2384,7 @@ namespace Nwn.Server.Interop
     ///  Get the amount of gold held by oFactionMember's faction.
     ///  * Returns -1 if oFactionMember's faction is invalid.
     /// </summary>
-    public int GetFactionGold(uint oFactionMember)
+    internal int GetFactionGold(uint oFactionMember)
     {
       StackPush(oFactionMember);
       Call(185);
@@ -2396,7 +2396,7 @@ namespace Nwn.Server.Interop
     ///  oSourceFactionMember's faction feels about oTarget.
     ///  * Return value on error: -1
     /// </summary>
-    public int GetFactionAverageReputation(uint oSourceFactionMember, uint oTarget)
+    internal int GetFactionAverageReputation(uint oSourceFactionMember, uint oTarget)
     {
       StackPush(oTarget);
       StackPush(oSourceFactionMember);
@@ -2409,7 +2409,7 @@ namespace Nwn.Server.Interop
     ///  good/evil alignment of oFactionMember's faction.
     ///  * Return value on error: -1
     /// </summary>
-    public int GetFactionAverageGoodEvilAlignment(uint oFactionMember)
+    internal int GetFactionAverageGoodEvilAlignment(uint oFactionMember)
     {
       StackPush(oFactionMember);
       Call(187);
@@ -2421,7 +2421,7 @@ namespace Nwn.Server.Interop
     ///  law/chaos alignment of oFactionMember's faction.
     ///  * Return value on error: -1
     /// </summary>
-    public int GetFactionAverageLawChaosAlignment(uint oFactionMember)
+    internal int GetFactionAverageLawChaosAlignment(uint oFactionMember)
     {
       StackPush(oFactionMember);
       Call(188);
@@ -2432,7 +2432,7 @@ namespace Nwn.Server.Interop
     ///  Get the average level of the members of the faction.
     ///  * Return value on error: -1
     /// </summary>
-    public int GetFactionAverageLevel(uint oFactionMember)
+    internal int GetFactionAverageLevel(uint oFactionMember)
     {
       StackPush(oFactionMember);
       Call(189);
@@ -2443,7 +2443,7 @@ namespace Nwn.Server.Interop
     ///  Get the average XP of the members of the faction.
     ///  * Return value on error: -1
     /// </summary>
-    public int GetFactionAverageXP(uint oFactionMember)
+    internal int GetFactionAverageXP(uint oFactionMember)
     {
       StackPush(oFactionMember);
       Call(190);
@@ -2455,7 +2455,7 @@ namespace Nwn.Server.Interop
     ///  constants CLASS_TYPE_*.
     ///  * Return value on error: -1
     /// </summary>
-    public int GetFactionMostFrequentClass(uint oFactionMember)
+    internal int GetFactionMostFrequentClass(uint oFactionMember)
     {
       StackPush(oFactionMember);
       Call(191);
@@ -2466,7 +2466,7 @@ namespace Nwn.Server.Interop
     ///  Get the object faction member with the lowest armour class.
     ///  * Returns OBJECT_INVALID if oFactionMember's faction is invalid.
     /// </summary>
-    public uint GetFactionWorstAC(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
+    internal uint GetFactionWorstAC(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
     {
       StackPush(bMustBeVisible);
       StackPush(oFactionMember);
@@ -2478,7 +2478,7 @@ namespace Nwn.Server.Interop
     ///  Get the object faction member with the highest armour class.
     ///  * Returns OBJECT_INVALID if oFactionMember's faction is invalid.
     /// </summary>
-    public uint GetFactionBestAC(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
+    internal uint GetFactionBestAC(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
     {
       StackPush(bMustBeVisible);
       StackPush(oFactionMember);
@@ -2500,7 +2500,7 @@ namespace Nwn.Server.Interop
     ///     AssignCommand(GetLastUsedBy(),ActionSit(oChair));
     ///  }
     /// </summary>
-    public void ActionSit(uint oChair)
+    internal void ActionSit(uint oChair)
     {
       StackPush(oChair);
       Call(194);
@@ -2511,7 +2511,7 @@ namespace Nwn.Server.Interop
     ///  matched (the one that triggered the script).
     ///  * Returns -1 if no string matched
     /// </summary>
-    public int GetListenPatternNumber()
+    internal int GetListenPatternNumber()
     {
       Call(195);
       return StackPopInt();
@@ -2520,7 +2520,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Jump to an object ID, or as near to it as possible.
     /// </summary>
-    public void ActionJumpToObject(uint oToJumpTo, int bWalkStraightLineToPoint = TRUE)
+    internal void ActionJumpToObject(uint oToJumpTo, int bWalkStraightLineToPoint = TRUE)
     {
       StackPush(bWalkStraightLineToPoint);
       StackPush(oToJumpTo);
@@ -2531,7 +2531,7 @@ namespace Nwn.Server.Interop
     ///  Get the first waypoint with the specified tag.
     ///  * Returns OBJECT_INVALID if the waypoint cannot be found.
     /// </summary>
-    public uint GetWaypointByTag(string sWaypointTag)
+    internal uint GetWaypointByTag(string sWaypointTag)
     {
       StackPush(sWaypointTag);
       Call(197);
@@ -2548,7 +2548,7 @@ namespace Nwn.Server.Interop
     ///
     ///  * Returns OBJECT_INVALID if oTransition does not hold a target.
     /// </summary>
-    public uint GetTransitionTarget(uint oTransition)
+    internal uint GetTransitionTarget(uint oTransition)
     {
       StackPush(oTransition);
       Call(198);
@@ -2566,7 +2566,7 @@ namespace Nwn.Server.Interop
     ///  determining if an effect will be removed or not and as such should never be
     ///  packaged *only* with other visual effects in a link.
     /// </summary>
-    public IntPtr EffectLinkEffects(IntPtr eChildEffect, IntPtr eParentEffect)
+    internal IntPtr EffectLinkEffects(IntPtr eChildEffect, IntPtr eParentEffect)
     {
       StackPush(eParentEffect, ENGINE_STRUCTURE_EFFECT);
       StackPush(eChildEffect, ENGINE_STRUCTURE_EFFECT);
@@ -2581,7 +2581,7 @@ namespace Nwn.Server.Interop
     ///  * Returns OBJECT_INVALID if the object cannot be found.
     ///  Note: The module cannot be retrieved by GetObjectByTag(), use GetModule() instead.
     /// </summary>
-    public uint GetObjectByTag(string sTag, int nNth = 0)
+    internal uint GetObjectByTag(string sTag, int nNth = 0)
     {
       StackPush(nNth);
       StackPush(sTag);
@@ -2614,7 +2614,7 @@ namespace Nwn.Server.Interop
     ///                      When FALSE the shift only affects oSubject.
     ///  * No return value
     /// </summary>
-    public void AdjustAlignment(uint oSubject, int nAlignment, int nShift, int bAllPartyMembers = TRUE)
+    internal void AdjustAlignment(uint oSubject, int nAlignment, int nShift, int bAllPartyMembers = TRUE)
     {
       StackPush(bAllPartyMembers);
       StackPush(nShift);
@@ -2626,7 +2626,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Do nothing for fSeconds seconds.
     /// </summary>
-    public void ActionWait(float fSeconds)
+    internal void ActionWait(float fSeconds)
     {
       StackPush(fSeconds);
       Call(202);
@@ -2644,7 +2644,7 @@ namespace Nwn.Server.Interop
     ///  - sCustomAreaTransitionBMP: this is the filename of a custom, user-defined
     ///    area transition bitmap
     /// </summary>
-    public void SetAreaTransitionBMP(int nPredefinedAreaTransition, string sCustomAreaTransitionBMP = "")
+    internal void SetAreaTransitionBMP(int nPredefinedAreaTransition, string sCustomAreaTransitionBMP = "")
     {
       StackPush(sCustomAreaTransitionBMP);
       StackPush(nPredefinedAreaTransition);
@@ -2659,7 +2659,7 @@ namespace Nwn.Server.Interop
     ///  - bPrivateConversation
     ///  Turn off bPlayHello if you don't want the initial greeting to play
     /// </summary>
-    public void ActionStartConversation(uint oObjectToConverseWith, string sDialogResRef = "", int bPrivateConversation = FALSE, int bPlayHello = TRUE)
+    internal void ActionStartConversation(uint oObjectToConverseWith, string sDialogResRef = "", int bPrivateConversation = FALSE, int bPlayHello = TRUE)
     {
       StackPush(bPlayHello);
       StackPush(bPrivateConversation);
@@ -2671,7 +2671,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Pause the current conversation.
     /// </summary>
-    public void ActionPauseConversation()
+    internal void ActionPauseConversation()
     {
       Call(205);
     }
@@ -2679,7 +2679,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Resume a conversation after it has been paused.
     /// </summary>
-    public void ActionResumeConversation()
+    internal void ActionResumeConversation()
     {
       Call(206);
     }
@@ -2694,7 +2694,7 @@ namespace Nwn.Server.Interop
     ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nBeamVisualEffect is
     ///    not valid.
     /// </summary>
-    public IntPtr EffectBeam(int nBeamVisualEffect, uint oEffector, int nBodyPart, int bMissEffect = FALSE, float fScale = 1.0f, Vector3 vTranslate = default, Vector3 vRotate = default)
+    internal IntPtr EffectBeam(int nBeamVisualEffect, uint oEffector, int nBodyPart, int bMissEffect = FALSE, float fScale = 1.0f, Vector3 vTranslate = default, Vector3 vRotate = default)
     {
       StackPush(vRotate);
       StackPush(vTranslate);
@@ -2715,7 +2715,7 @@ namespace Nwn.Server.Interop
     ///  -> 90-100 means oSource is friendly to oTarget
     ///  * Returns -1 if oSource or oTarget does not identify a valid object
     /// </summary>
-    public int GetReputation(uint oSource, uint oTarget)
+    internal int GetReputation(uint oSource, uint oTarget)
     {
       StackPush(oTarget);
       StackPush(oSource);
@@ -2738,7 +2738,7 @@ namespace Nwn.Server.Interop
     ///        AdjustReputation(oPC,oNPC,-100);
     ///  Note: Will fail if oSourceFactionMember is a plot object.
     /// </summary>
-    public void AdjustReputation(uint oTarget, uint oSourceFactionMember, int nAdjustment)
+    internal void AdjustReputation(uint oTarget, uint oSourceFactionMember, int nAdjustment)
     {
       StackPush(nAdjustment);
       StackPush(oSourceFactionMember);
@@ -2751,7 +2751,7 @@ namespace Nwn.Server.Interop
     ///  - oChair
     ///  * Returns OBJECT_INVALID if oChair is not a valid placeable.
     /// </summary>
-    public uint GetSittingCreature(uint oChair)
+    internal uint GetSittingCreature(uint oChair)
     {
       StackPush(oChair);
       Call(210);
@@ -2765,7 +2765,7 @@ namespace Nwn.Server.Interop
     ///  from the master creature (and this creature is a henchman)
     ///  * Returns OBJECT_INVALID if oTarget is not a valid creature.
     /// </summary>
-    public uint GetGoingToBeAttackedBy(uint oTarget)
+    internal uint GetGoingToBeAttackedBy(uint oTarget)
     {
       StackPush(oTarget);
       Call(211);
@@ -2776,7 +2776,7 @@ namespace Nwn.Server.Interop
     ///  Create a Spell Resistance Increase effect.
     ///  - nValue: size of spell resistance increase
     /// </summary>
-    public IntPtr EffectSpellResistanceIncrease(int nValue)
+    internal IntPtr EffectSpellResistanceIncrease(int nValue)
     {
       StackPush(nValue);
       Call(212);
@@ -2786,7 +2786,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the location of oObject.
     /// </summary>
-    public IntPtr GetLocation(uint oObject)
+    internal IntPtr GetLocation(uint oObject)
     {
       StackPush(oObject);
       Call(213);
@@ -2797,7 +2797,7 @@ namespace Nwn.Server.Interop
     ///  The subject will jump to lLocation instantly (even between areas).
     ///  If lLocation is invalid, nothing will happen.
     /// </summary>
-    public void ActionJumpToLocation(IntPtr lLocation)
+    internal void ActionJumpToLocation(IntPtr lLocation)
     {
       StackPush(lLocation, ENGINE_STRUCTURE_LOCATION);
       Call(214);
@@ -2806,7 +2806,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Create a location.
     /// </summary>
-    public IntPtr Location(uint oArea, Vector3 vPosition, float fOrientation)
+    internal IntPtr Location(uint oArea, Vector3 vPosition, float fOrientation)
     {
       StackPush(fOrientation);
       StackPush(vPosition);
@@ -2818,7 +2818,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Apply eEffect at lLocation.
     /// </summary>
-    public void ApplyEffectAtLocation(int nDurationType, IntPtr eEffect, IntPtr lLocation, float fDuration = 0.0f)
+    internal void ApplyEffectAtLocation(int nDurationType, IntPtr eEffect, IntPtr lLocation, float fDuration = 0.0f)
     {
       StackPush(fDuration);
       StackPush(lLocation, ENGINE_STRUCTURE_LOCATION);
@@ -2830,7 +2830,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  * Returns TRUE if oCreature is a Player Controlled character.
     /// </summary>
-    public int GetIsPC(uint oCreature)
+    internal int GetIsPC(uint oCreature)
     {
       StackPush(oCreature);
       Call(217);
@@ -2840,7 +2840,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Convert fFeet into a number of meters.
     /// </summary>
-    public float FeetToMeters(float fFeet)
+    internal float FeetToMeters(float fFeet)
     {
       StackPush(fFeet);
       Call(218);
@@ -2850,7 +2850,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Convert fYards into a number of meters.
     /// </summary>
-    public float YardsToMeters(float fYards)
+    internal float YardsToMeters(float fYards)
     {
       StackPush(fYards);
       Call(219);
@@ -2860,7 +2860,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Apply eEffect to oTarget.
     /// </summary>
-    public void ApplyEffectToObject(int nDurationType, IntPtr eEffect, uint oTarget, float fDuration = 0.0f)
+    internal void ApplyEffectToObject(int nDurationType, IntPtr eEffect, uint oTarget, float fDuration = 0.0f)
     {
       StackPush(fDuration);
       StackPush(oTarget);
@@ -2875,7 +2875,7 @@ namespace Nwn.Server.Interop
     ///  - sStringToSpeak
     ///  - nTalkVolume: TALKVOLUME_*
     /// </summary>
-    public void SpeakString(string sStringToSpeak, int nTalkVolume = TALKVOLUME_TALK)
+    internal void SpeakString(string sStringToSpeak, int nTalkVolume = TALKVOLUME_TALK)
     {
       StackPush(nTalkVolume);
       StackPush(sStringToSpeak);
@@ -2885,7 +2885,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the location of the caller's last spell target.
     /// </summary>
-    public IntPtr GetSpellTargetLocation()
+    internal IntPtr GetSpellTargetLocation()
     {
       Call(222);
       return StackPopStruct(ENGINE_STRUCTURE_LOCATION);
@@ -2894,7 +2894,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the position vector from lLocation.
     /// </summary>
-    public Vector3 GetPositionFromLocation(IntPtr lLocation)
+    internal Vector3 GetPositionFromLocation(IntPtr lLocation)
     {
       StackPush(lLocation, ENGINE_STRUCTURE_LOCATION);
       Call(223);
@@ -2904,7 +2904,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the area's object ID from lLocation.
     /// </summary>
-    public uint GetAreaFromLocation(IntPtr lLocation)
+    internal uint GetAreaFromLocation(IntPtr lLocation)
     {
       StackPush(lLocation, ENGINE_STRUCTURE_LOCATION);
       Call(224);
@@ -2914,7 +2914,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the orientation value from lLocation.
     /// </summary>
-    public float GetFacingFromLocation(IntPtr lLocation)
+    internal float GetFacingFromLocation(IntPtr lLocation)
     {
       StackPush(lLocation, ENGINE_STRUCTURE_LOCATION);
       Call(225);
@@ -2949,7 +2949,7 @@ namespace Nwn.Server.Interop
     ///    further specify the type of creature that we are looking for.
     ///  * Return value on error: OBJECT_INVALID
     /// </summary>
-    public uint GetNearestCreatureToLocation(int nFirstCriteriaType, int nFirstCriteriaValue, IntPtr lLocation, int nNth = 1, int nSecondCriteriaType = -1, int nSecondCriteriaValue = -1, int nThirdCriteriaType = -1, int nThirdCriteriaValue = -1)
+    internal uint GetNearestCreatureToLocation(int nFirstCriteriaType, int nFirstCriteriaValue, IntPtr lLocation, int nNth = 1, int nSecondCriteriaType = -1, int nSecondCriteriaValue = -1, int nThirdCriteriaType = -1, int nThirdCriteriaValue = -1)
     {
       StackPush(nThirdCriteriaValue);
       StackPush(nThirdCriteriaType);
@@ -2970,7 +2970,7 @@ namespace Nwn.Server.Interop
     ///  - nNth
     ///  * Return value on error: OBJECT_INVALID
     /// </summary>
-    public uint GetNearestObject(int nObjectType = OBJECT_TYPE_ALL, uint oTarget = OBJECT_INVALID, int nNth = 1)
+    internal uint GetNearestObject(int nObjectType = OBJECT_TYPE_ALL, uint oTarget = OBJECT_INVALID, int nNth = 1)
     {
       StackPush(nNth);
       StackPush(oTarget);
@@ -2986,7 +2986,7 @@ namespace Nwn.Server.Interop
     ///  - nNth
     ///  * Return value on error: OBJECT_INVALID
     /// </summary>
-    public uint GetNearestObjectToLocation(int nObjectType, IntPtr lLocation, int nNth = 1)
+    internal uint GetNearestObjectToLocation(int nObjectType, IntPtr lLocation, int nNth = 1)
     {
       StackPush(nNth);
       StackPush(lLocation, ENGINE_STRUCTURE_LOCATION);
@@ -2999,7 +2999,7 @@ namespace Nwn.Server.Interop
     ///  Get the nth Object nearest to oTarget that has sTag as its tag.
     ///  * Return value on error: OBJECT_INVALID
     /// </summary>
-    public uint GetNearestObjectByTag(string sTag, uint oTarget = OBJECT_INVALID, int nNth = 1)
+    internal uint GetNearestObjectByTag(string sTag, uint oTarget = OBJECT_INVALID, int nNth = 1)
     {
       StackPush(nNth);
       StackPush(oTarget);
@@ -3011,7 +3011,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Convert nInteger into a floating point number.
     /// </summary>
-    public float IntToFloat(int nInteger)
+    internal float IntToFloat(int nInteger)
     {
       StackPush(nInteger);
       Call(230);
@@ -3021,7 +3021,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Convert fFloat into the nearest integer.
     /// </summary>
-    public int FloatToInt(float fFloat)
+    internal int FloatToInt(float fFloat)
     {
       StackPush(fFloat);
       Call(231);
@@ -3031,7 +3031,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Convert sNumber into an integer.
     /// </summary>
-    public int StringToInt(string sNumber)
+    internal int StringToInt(string sNumber)
     {
       StackPush(sNumber);
       Call(232);
@@ -3041,7 +3041,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Convert sNumber into a floating point number.
     /// </summary>
-    public float StringToFloat(string sNumber)
+    internal float StringToFloat(string sNumber)
     {
       StackPush(sNumber);
       Call(233);
@@ -3060,7 +3060,7 @@ namespace Nwn.Server.Interop
     ///    the end-user to simulate
     ///    a high-level magic user having lots of advance warning of impending trouble.
     /// </summary>
-    public void ActionCastSpellAtLocation(int nSpell, IntPtr lTargetLocation, int nMetaMagic = METAMAGIC_ANY, int bCheat = FALSE, int nProjectilePathType = PROJECTILE_PATH_TYPE_DEFAULT, int bInstantSpell = FALSE)
+    internal void ActionCastSpellAtLocation(int nSpell, IntPtr lTargetLocation, int nMetaMagic = METAMAGIC_ANY, int bCheat = FALSE, int nProjectilePathType = PROJECTILE_PATH_TYPE_DEFAULT, int bInstantSpell = FALSE)
     {
       StackPush(bInstantSpell);
       StackPush(nProjectilePathType);
@@ -3074,7 +3074,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  * Returns TRUE if oSource considers oTarget as an enemy.
     /// </summary>
-    public int GetIsEnemy(uint oTarget, uint oSource = OBJECT_INVALID)
+    internal int GetIsEnemy(uint oTarget, uint oSource = OBJECT_INVALID)
     {
       StackPush(oSource);
       StackPush(oTarget);
@@ -3085,7 +3085,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  * Returns TRUE if oSource considers oTarget as a friend.
     /// </summary>
-    public int GetIsFriend(uint oTarget, uint oSource = OBJECT_INVALID)
+    internal int GetIsFriend(uint oTarget, uint oSource = OBJECT_INVALID)
     {
       StackPush(oSource);
       StackPush(oTarget);
@@ -3096,7 +3096,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  * Returns TRUE if oSource considers oTarget as neutral.
     /// </summary>
-    public int GetIsNeutral(uint oTarget, uint oSource = OBJECT_INVALID)
+    internal int GetIsNeutral(uint oTarget, uint oSource = OBJECT_INVALID)
     {
       StackPush(oSource);
       StackPush(oTarget);
@@ -3108,7 +3108,7 @@ namespace Nwn.Server.Interop
     ///  Get the PC that is involved in the conversation.
     ///  * Returns OBJECT_INVALID on error.
     /// </summary>
-    public uint GetPCSpeaker()
+    internal uint GetPCSpeaker()
     {
       Call(238);
       return StackPopObject();
@@ -3117,7 +3117,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get a string from the talk table using nStrRef.
     /// </summary>
-    public string GetStringByStrRef(int nStrRef, int nGender = GENDER_MALE)
+    internal string GetStringByStrRef(int nStrRef, int nGender = GENDER_MALE)
     {
       StackPush(nGender);
       StackPush(nStrRef);
@@ -3130,7 +3130,7 @@ namespace Nwn.Server.Interop
     ///  - nStrRef: Reference of the string in the talk table
     ///  - nTalkVolume: TALKVOLUME_*
     /// </summary>
-    public void ActionSpeakStringByStrRef(int nStrRef, int nTalkVolume = TALKVOLUME_TALK)
+    internal void ActionSpeakStringByStrRef(int nStrRef, int nTalkVolume = TALKVOLUME_TALK)
     {
       StackPush(nTalkVolume);
       StackPush(nStrRef);
@@ -3141,7 +3141,7 @@ namespace Nwn.Server.Interop
     ///  Destroy oObject (irrevocably).
     ///  This will not work on modules and areas.
     /// </summary>
-    public void DestroyObject(uint oDestroy, float fDelay = 0.0f)
+    internal void DestroyObject(uint oDestroy, float fDelay = 0.0f)
     {
       StackPush(fDelay);
       StackPush(oDestroy);
@@ -3152,7 +3152,7 @@ namespace Nwn.Server.Interop
     ///  Get the module.
     ///  * Return value on error: OBJECT_INVALID
     /// </summary>
-    public uint GetModule()
+    internal uint GetModule()
     {
       Call(242);
       return StackPopObject();
@@ -3167,7 +3167,7 @@ namespace Nwn.Server.Interop
     ///  - bUseAppearAnimation
     ///  - sNewTag - if this string is not empty, it will replace the default tag from the template
     /// </summary>
-    public uint CreateObject(int nObjectType, string sTemplate, IntPtr lLocation, int bUseAppearAnimation = FALSE, string sNewTag = "")
+    internal uint CreateObject(int nObjectType, string sTemplate, IntPtr lLocation, int bUseAppearAnimation = FALSE, string sNewTag = "")
     {
       StackPush(sNewTag);
       StackPush(bUseAppearAnimation);
@@ -3195,7 +3195,7 @@ namespace Nwn.Server.Interop
     ///      GetLastSpell() to get the type of spell cast (nSpell)
     ///      GetLastSpellHarmful() to determine if the spell cast at the object was harmful.
     /// </summary>
-    public IntPtr EventSpellCastAt(uint oCaster, int nSpell, int bHarmful = TRUE)
+    internal IntPtr EventSpellCastAt(uint oCaster, int nSpell, int bHarmful = TRUE)
     {
       StackPush(bHarmful);
       StackPush(nSpell);
@@ -3209,7 +3209,7 @@ namespace Nwn.Server.Interop
     ///  The spell could have been cast by a creature, placeable or door.
     ///  * Returns OBJECT_INVALID if the caller is not a creature, placeable or door.
     /// </summary>
-    public uint GetLastSpellCaster()
+    internal uint GetLastSpellCaster()
     {
       Call(245);
       return StackPopObject();
@@ -3219,7 +3219,7 @@ namespace Nwn.Server.Interop
     ///  This is for use in a "Spell Cast" script, it gets the ID of the spell that
     ///  was cast.
     /// </summary>
-    public int GetLastSpell()
+    internal int GetLastSpell()
     {
       Call(246);
       return StackPopInt();
@@ -3228,7 +3228,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  This is for use in a user-defined script, it gets the event number.
     /// </summary>
-    public int GetUserDefinedEventNumber()
+    internal int GetUserDefinedEventNumber()
     {
       Call(247);
       return StackPopInt();
@@ -3238,7 +3238,7 @@ namespace Nwn.Server.Interop
     ///  This is for use in a Spell script, it gets the ID of the spell that is being
     ///  cast (SPELL_*).
     /// </summary>
-    public int GetSpellId()
+    internal int GetSpellId()
     {
       Call(248);
       return StackPopInt();
@@ -3248,7 +3248,7 @@ namespace Nwn.Server.Interop
     ///  Generate a random name.
     ///  nNameType: The type of random name to be generated (NAME_*)
     /// </summary>
-    public string RandomName(int nNameType = NAME_FIRST_GENERIC_MALE)
+    internal string RandomName(int nNameType = NAME_FIRST_GENERIC_MALE)
     {
       StackPush(nNameType);
       Call(249);
@@ -3259,7 +3259,7 @@ namespace Nwn.Server.Interop
     ///  Create a Poison effect.
     ///  - nPoisonType: POISON_*
     /// </summary>
-    public IntPtr EffectPoison(int nPoisonType)
+    internal IntPtr EffectPoison(int nPoisonType)
     {
       StackPush(nPoisonType);
       Call(250);
@@ -3270,7 +3270,7 @@ namespace Nwn.Server.Interop
     ///  Create a Disease effect.
     ///  - nDiseaseType: DISEASE_*
     /// </summary>
-    public IntPtr EffectDisease(int nDiseaseType)
+    internal IntPtr EffectDisease(int nDiseaseType)
     {
       StackPush(nDiseaseType);
       Call(251);
@@ -3280,7 +3280,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Create a Silence effect.
     /// </summary>
-    public IntPtr EffectSilence()
+    internal IntPtr EffectSilence()
     {
       Call(252);
       return StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -3296,7 +3296,7 @@ namespace Nwn.Server.Interop
     ///        revert to using the name it had originally before any
     ///        SetName() calls were made on the object.
     /// </summary>
-    public string GetName(uint oObject, int bOriginalName = FALSE)
+    internal string GetName(uint oObject, int bOriginalName = FALSE)
     {
       StackPush(bOriginalName);
       StackPush(oObject);
@@ -3308,7 +3308,7 @@ namespace Nwn.Server.Interop
     ///  Use this in a conversation script to get the person with whom you are conversing.
     ///  * Returns OBJECT_INVALID if the caller is not a valid creature.
     /// </summary>
-    public uint GetLastSpeaker()
+    internal uint GetLastSpeaker()
     {
       Call(254);
       return StackPopObject();
@@ -3320,7 +3320,7 @@ namespace Nwn.Server.Interop
     ///  - oObjectToDialog: if this is not specified the person that triggered the
     ///    event will be used
     /// </summary>
-    public int BeginConversation(string sResRef = "", uint oObjectToDialog = OBJECT_INVALID)
+    internal int BeginConversation(string sResRef = "", uint oObjectToDialog = OBJECT_INVALID)
     {
       StackPush(oObjectToDialog);
       StackPush(sResRef);
@@ -3332,7 +3332,7 @@ namespace Nwn.Server.Interop
     ///  Use this in an OnPerception script to get the object that was perceived.
     ///  * Returns OBJECT_INVALID if the caller is not a valid creature.
     /// </summary>
-    public uint GetLastPerceived()
+    internal uint GetLastPerceived()
     {
       Call(256);
       return StackPopObject();
@@ -3342,7 +3342,7 @@ namespace Nwn.Server.Interop
     ///  Use this in an OnPerception script to determine whether the object that was
     ///  perceived was heard.
     /// </summary>
-    public int GetLastPerceptionHeard()
+    internal int GetLastPerceptionHeard()
     {
       Call(257);
       return StackPopInt();
@@ -3352,7 +3352,7 @@ namespace Nwn.Server.Interop
     ///  Use this in an OnPerception script to determine whether the object that was
     ///  perceived has become inaudible.
     /// </summary>
-    public int GetLastPerceptionInaudible()
+    internal int GetLastPerceptionInaudible()
     {
       Call(258);
       return StackPopInt();
@@ -3362,7 +3362,7 @@ namespace Nwn.Server.Interop
     ///  Use this in an OnPerception script to determine whether the object that was
     ///  perceived was seen.
     /// </summary>
-    public int GetLastPerceptionSeen()
+    internal int GetLastPerceptionSeen()
     {
       Call(259);
       return StackPopInt();
@@ -3372,7 +3372,7 @@ namespace Nwn.Server.Interop
     ///  Use this in an OnClosed script to get the object that closed the door or placeable.
     ///  * Returns OBJECT_INVALID if the caller is not a valid door or placeable.
     /// </summary>
-    public uint GetLastClosedBy()
+    internal uint GetLastClosedBy()
     {
       Call(260);
       return StackPopObject();
@@ -3382,7 +3382,7 @@ namespace Nwn.Server.Interop
     ///  Use this in an OnPerception script to determine whether the object that was
     ///  perceived has vanished.
     /// </summary>
-    public int GetLastPerceptionVanished()
+    internal int GetLastPerceptionVanished()
     {
       Call(261);
       return StackPopInt();
@@ -3396,7 +3396,7 @@ namespace Nwn.Server.Interop
     ///    PERSISTENT_ZONE_FOLLOW, but this is no longer used.]
     ///  * Returns OBJECT_INVALID if no object is found.
     /// </summary>
-    public uint GetFirstInPersistentObject(uint oPersistentObject = OBJECT_INVALID, int nResidentObjectType = OBJECT_TYPE_CREATURE, int nPersistentZone = PERSISTENT_ZONE_ACTIVE)
+    internal uint GetFirstInPersistentObject(uint oPersistentObject = OBJECT_INVALID, int nResidentObjectType = OBJECT_TYPE_CREATURE, int nPersistentZone = PERSISTENT_ZONE_ACTIVE)
     {
       StackPush(nPersistentZone);
       StackPush(nResidentObjectType);
@@ -3413,7 +3413,7 @@ namespace Nwn.Server.Interop
     ///    PERSISTENT_ZONE_FOLLOW, but this is no longer used.]
     ///  * Returns OBJECT_INVALID if no object is found.
     /// </summary>
-    public uint GetNextInPersistentObject(uint oPersistentObject = OBJECT_INVALID, int nResidentObjectType = OBJECT_TYPE_CREATURE, int nPersistentZone = PERSISTENT_ZONE_ACTIVE)
+    internal uint GetNextInPersistentObject(uint oPersistentObject = OBJECT_INVALID, int nResidentObjectType = OBJECT_TYPE_CREATURE, int nPersistentZone = PERSISTENT_ZONE_ACTIVE)
     {
       StackPush(nPersistentZone);
       StackPush(nResidentObjectType);
@@ -3426,7 +3426,7 @@ namespace Nwn.Server.Interop
     ///  This returns the creator of oAreaOfEffectObject.
     ///  * Returns OBJECT_INVALID if oAreaOfEffectObject is not a valid Area of Effect object.
     /// </summary>
-    public uint GetAreaOfEffectCreator(uint oAreaOfEffectObject = OBJECT_INVALID)
+    internal uint GetAreaOfEffectCreator(uint oAreaOfEffectObject = OBJECT_INVALID)
     {
       StackPush(oAreaOfEffectObject);
       Call(264);
@@ -3436,7 +3436,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Delete oObject's local integer variable sVarName
     /// </summary>
-    public void DeleteLocalInt(uint oObject, string sVarName)
+    internal void DeleteLocalInt(uint oObject, string sVarName)
     {
       StackPush(sVarName);
       StackPush(oObject);
@@ -3446,7 +3446,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Delete oObject's local float variable sVarName
     /// </summary>
-    public void DeleteLocalFloat(uint oObject, string sVarName)
+    internal void DeleteLocalFloat(uint oObject, string sVarName)
     {
       StackPush(sVarName);
       StackPush(oObject);
@@ -3456,7 +3456,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Delete oObject's local string variable sVarName
     /// </summary>
-    public void DeleteLocalString(uint oObject, string sVarName)
+    internal void DeleteLocalString(uint oObject, string sVarName)
     {
       StackPush(sVarName);
       StackPush(oObject);
@@ -3466,7 +3466,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Delete oObject's local object variable sVarName
     /// </summary>
-    public void DeleteLocalObject(uint oObject, string sVarName)
+    internal void DeleteLocalObject(uint oObject, string sVarName)
     {
       StackPush(sVarName);
       StackPush(oObject);
@@ -3476,7 +3476,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Delete oObject's local location variable sVarName
     /// </summary>
-    public void DeleteLocalLocation(uint oObject, string sVarName)
+    internal void DeleteLocalLocation(uint oObject, string sVarName)
     {
       StackPush(sVarName);
       StackPush(oObject);
@@ -3486,7 +3486,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Create a Haste effect.
     /// </summary>
-    public IntPtr EffectHaste()
+    internal IntPtr EffectHaste()
     {
       Call(270);
       return StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -3495,7 +3495,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Create a Slow effect.
     /// </summary>
-    public IntPtr EffectSlow()
+    internal IntPtr EffectSlow()
     {
       Call(271);
       return StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -3504,7 +3504,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Convert oObject into a hexadecimal string.
     /// </summary>
-    public string ObjectToString(uint oObject)
+    internal string ObjectToString(uint oObject)
     {
       StackPush(oObject);
       Call(272);
@@ -3515,7 +3515,7 @@ namespace Nwn.Server.Interop
     ///  Create an Immunity effect.
     ///  - nImmunityType: IMMUNITY_TYPE_*
     /// </summary>
-    public IntPtr EffectImmunity(int nImmunityType)
+    internal IntPtr EffectImmunity(int nImmunityType)
     {
       StackPush(nImmunityType);
       Call(273);
@@ -3529,7 +3529,7 @@ namespace Nwn.Server.Interop
     ///    alignment of oVersus
     ///  * Returns TRUE if oCreature has immunity of type nImmunity versus oVersus.
     /// </summary>
-    public int GetIsImmune(uint oCreature, int nImmunityType, uint oVersus = OBJECT_INVALID)
+    internal int GetIsImmune(uint oCreature, int nImmunityType, uint oVersus = OBJECT_INVALID)
     {
       StackPush(oVersus);
       StackPush(nImmunityType);
@@ -3543,7 +3543,7 @@ namespace Nwn.Server.Interop
     ///  - nDamageType: DAMAGE_TYPE_*
     ///  - nPercentImmunity
     /// </summary>
-    public IntPtr EffectDamageImmunityIncrease(int nDamageType, int nPercentImmunity)
+    internal IntPtr EffectDamageImmunityIncrease(int nDamageType, int nPercentImmunity)
     {
       StackPush(nPercentImmunity);
       StackPush(nDamageType);
@@ -3554,7 +3554,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Determine whether oEncounter is active.
     /// </summary>
-    public int GetEncounterActive(uint oEncounter = OBJECT_INVALID)
+    internal int GetEncounterActive(uint oEncounter = OBJECT_INVALID)
     {
       StackPush(oEncounter);
       Call(276);
@@ -3566,7 +3566,7 @@ namespace Nwn.Server.Interop
     ///  - nNewValue: TRUE/FALSE
     ///  - oEncounter
     /// </summary>
-    public void SetEncounterActive(int nNewValue, uint oEncounter = OBJECT_INVALID)
+    internal void SetEncounterActive(int nNewValue, uint oEncounter = OBJECT_INVALID)
     {
       StackPush(oEncounter);
       StackPush(nNewValue);
@@ -3576,7 +3576,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the maximum number of times that oEncounter will spawn.
     /// </summary>
-    public int GetEncounterSpawnsMax(uint oEncounter = OBJECT_INVALID)
+    internal int GetEncounterSpawnsMax(uint oEncounter = OBJECT_INVALID)
     {
       StackPush(oEncounter);
       Call(278);
@@ -3586,7 +3586,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Set the maximum number of times that oEncounter can spawn
     /// </summary>
-    public void SetEncounterSpawnsMax(int nNewValue, uint oEncounter = OBJECT_INVALID)
+    internal void SetEncounterSpawnsMax(int nNewValue, uint oEncounter = OBJECT_INVALID)
     {
       StackPush(oEncounter);
       StackPush(nNewValue);
@@ -3596,7 +3596,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the number of times that oEncounter has spawned so far
     /// </summary>
-    public int GetEncounterSpawnsCurrent(uint oEncounter = OBJECT_INVALID)
+    internal int GetEncounterSpawnsCurrent(uint oEncounter = OBJECT_INVALID)
     {
       StackPush(oEncounter);
       Call(280);
@@ -3606,7 +3606,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Set the number of times that oEncounter has spawned so far
     /// </summary>
-    public void SetEncounterSpawnsCurrent(int nNewValue, uint oEncounter = OBJECT_INVALID)
+    internal void SetEncounterSpawnsCurrent(int nNewValue, uint oEncounter = OBJECT_INVALID)
     {
       StackPush(oEncounter);
       StackPush(nNewValue);
@@ -3617,7 +3617,7 @@ namespace Nwn.Server.Interop
     ///  Use this in an OnItemAcquired script to get the item that was acquired.
     ///  * Returns OBJECT_INVALID if the module is not valid.
     /// </summary>
-    public uint GetModuleItemAcquired()
+    internal uint GetModuleItemAcquired()
     {
       Call(282);
       return StackPopObject();
@@ -3628,7 +3628,7 @@ namespace Nwn.Server.Interop
     ///  possessed the item.
     ///  * Returns OBJECT_INVALID if the item was picked up from the ground.
     /// </summary>
-    public uint GetModuleItemAcquiredFrom()
+    internal uint GetModuleItemAcquiredFrom()
     {
       Call(283);
       return StackPopObject();
@@ -3637,7 +3637,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Set the value for a custom token.
     /// </summary>
-    public void SetCustomToken(int nCustomTokenNumber, string sTokenValue)
+    internal void SetCustomToken(int nCustomTokenNumber, string sTokenValue)
     {
       StackPush(sTokenValue);
       StackPush(nCustomTokenNumber);
@@ -3649,7 +3649,7 @@ namespace Nwn.Server.Interop
     ///  - nFeat: FEAT_*
     ///  - oCreature
     /// </summary>
-    public int GetHasFeat(int nFeat, uint oCreature = OBJECT_INVALID)
+    internal int GetHasFeat(int nFeat, uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       StackPush(nFeat);
@@ -3662,7 +3662,7 @@ namespace Nwn.Server.Interop
     ///  - nSkill: SKILL_*
     ///  - oCreature
     /// </summary>
-    public int GetHasSkill(int nSkill, uint oCreature = OBJECT_INVALID)
+    internal int GetHasSkill(int nSkill, uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       StackPush(nSkill);
@@ -3675,7 +3675,7 @@ namespace Nwn.Server.Interop
     ///  - nFeat: FEAT_*
     ///  - oTarget
     /// </summary>
-    public void ActionUseFeat(int nFeat, uint oTarget)
+    internal void ActionUseFeat(int nFeat, uint oTarget)
     {
       StackPush(oTarget);
       StackPush(nFeat);
@@ -3690,7 +3690,7 @@ namespace Nwn.Server.Interop
     ///  - nSubSkill: SUBSKILL_*
     ///  - oItemUsed: Item to use in conjunction with the skill
     /// </summary>
-    public void ActionUseSkill(int nSkill, uint oTarget, int nSubSkill = 0, uint oItemUsed = OBJECT_INVALID)
+    internal void ActionUseSkill(int nSkill, uint oTarget, int nSubSkill = 0, uint oItemUsed = OBJECT_INVALID)
     {
       StackPush(oItemUsed);
       StackPush(nSubSkill);
@@ -3704,7 +3704,7 @@ namespace Nwn.Server.Interop
     ///  NOTE: This *only* works on creatures, as visibility lists are not
     ///        maintained for non-creature objects.
     /// </summary>
-    public int GetObjectSeen(uint oTarget, uint oSource = OBJECT_INVALID)
+    internal int GetObjectSeen(uint oTarget, uint oSource = OBJECT_INVALID)
     {
       StackPush(oSource);
       StackPush(oTarget);
@@ -3717,7 +3717,7 @@ namespace Nwn.Server.Interop
     ///  NOTE: This *only* works on creatures, as visibility lists are not
     ///        maintained for non-creature objects.
     /// </summary>
-    public int GetObjectHeard(uint oTarget, uint oSource = OBJECT_INVALID)
+    internal int GetObjectHeard(uint oTarget, uint oSource = OBJECT_INVALID)
     {
       StackPush(oSource);
       StackPush(oTarget);
@@ -3728,7 +3728,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Use this in an OnPlayerDeath module script to get the last player that died.
     /// </summary>
-    public uint GetLastPlayerDied()
+    internal uint GetLastPlayerDied()
     {
       Call(291);
       return StackPopObject();
@@ -3738,7 +3738,7 @@ namespace Nwn.Server.Interop
     ///  Use this in an OnItemLost script to get the item that was lost/dropped.
     ///  * Returns OBJECT_INVALID if the module is not valid.
     /// </summary>
-    public uint GetModuleItemLost()
+    internal uint GetModuleItemLost()
     {
       Call(292);
       return StackPopObject();
@@ -3748,7 +3748,7 @@ namespace Nwn.Server.Interop
     ///  Use this in an OnItemLost script to get the creature that lost the item.
     ///  * Returns OBJECT_INVALID if the module is not valid.
     /// </summary>
-    public uint GetModuleItemLostBy()
+    internal uint GetModuleItemLostBy()
     {
       Call(293);
       return StackPopObject();
@@ -3757,7 +3757,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     /// Do aActionToDo.
     /// </summary>
-    public void ActionDoCommand(NwnServer server, ActionDelegate aActionToDo)
+    internal void ActionDoCommand(NwnServer server, ActionDelegate aActionToDo)
     {
       server.ClosureActionDoCommand(server.Self.ID, aActionToDo);
       // Function ID 294
@@ -3775,7 +3775,7 @@ namespace Nwn.Server.Interop
     ///  To specify the OnConversation script that should run, view the Creature Properties on
     ///  the creature and click on the Scripts Tab. Then specify a script for the OnConversation event.
     /// </summary>
-    public IntPtr EventConversation()
+    internal IntPtr EventConversation()
     {
       Call(295);
       return StackPopStruct(ENGINE_STRUCTURE_EVENT);
@@ -3786,7 +3786,7 @@ namespace Nwn.Server.Interop
     ///  - nEncounterDifficulty: ENCOUNTER_DIFFICULTY_*
     ///  - oEncounter
     /// </summary>
-    public void SetEncounterDifficulty(int nEncounterDifficulty, uint oEncounter = OBJECT_INVALID)
+    internal void SetEncounterDifficulty(int nEncounterDifficulty, uint oEncounter = OBJECT_INVALID)
     {
       StackPush(oEncounter);
       StackPush(nEncounterDifficulty);
@@ -3796,7 +3796,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the difficulty level of oEncounter.
     /// </summary>
-    public int GetEncounterDifficulty(uint oEncounter = OBJECT_INVALID)
+    internal int GetEncounterDifficulty(uint oEncounter = OBJECT_INVALID)
     {
       StackPush(oEncounter);
       Call(297);
@@ -3806,7 +3806,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the distance between lLocationA and lLocationB.
     /// </summary>
-    public float GetDistanceBetweenLocations(IntPtr lLocationA, IntPtr lLocationB)
+    internal float GetDistanceBetweenLocations(IntPtr lLocationA, IntPtr lLocationB)
     {
       StackPush(lLocationB, ENGINE_STRUCTURE_LOCATION);
       StackPush(lLocationA, ENGINE_STRUCTURE_LOCATION);
@@ -3823,7 +3823,7 @@ namespace Nwn.Server.Interop
     ///  - nSaveType: SAVING_THROW_TYPE_*
     ///  - oSaveVersus
     /// </summary>
-    public int GetReflexAdjustedDamage(int nDamage, uint oTarget, int nDC, int nSaveType = SAVING_THROW_TYPE_NONE, uint oSaveVersus = OBJECT_INVALID)
+    internal int GetReflexAdjustedDamage(int nDamage, uint oTarget, int nDC, int nSaveType = SAVING_THROW_TYPE_NONE, uint oSaveVersus = OBJECT_INVALID)
     {
       StackPush(oSaveVersus);
       StackPush(nSaveType);
@@ -3840,7 +3840,7 @@ namespace Nwn.Server.Interop
     ///  - fSpeed
     ///  - fSeconds
     /// </summary>
-    public void PlayAnimation(int nAnimation, float fSpeed = 1.0f, float fSeconds = 0.0f)
+    internal void PlayAnimation(int nAnimation, float fSpeed = 1.0f, float fSeconds = 0.0f)
     {
       StackPush(fSeconds);
       StackPush(fSpeed);
@@ -3852,7 +3852,7 @@ namespace Nwn.Server.Interop
     ///  Create a Spell Talent.
     ///  - nSpell: SPELL_*
     /// </summary>
-    public IntPtr TalentSpell(int nSpell)
+    internal IntPtr TalentSpell(int nSpell)
     {
       StackPush(nSpell);
       Call(301);
@@ -3863,7 +3863,7 @@ namespace Nwn.Server.Interop
     ///  Create a Feat Talent.
     ///  - nFeat: FEAT_*
     /// </summary>
-    public IntPtr TalentFeat(int nFeat)
+    internal IntPtr TalentFeat(int nFeat)
     {
       StackPush(nFeat);
       Call(302);
@@ -3874,7 +3874,7 @@ namespace Nwn.Server.Interop
     ///  Create a Skill Talent.
     ///  - nSkill: SKILL_*
     /// </summary>
-    public IntPtr TalentSkill(int nSkill)
+    internal IntPtr TalentSkill(int nSkill)
     {
       StackPush(nSkill);
       Call(303);
@@ -3889,7 +3889,7 @@ namespace Nwn.Server.Interop
     ///    when the spell script runs. If it is created in a delayed command
     ///    then the spell id on the effect will be invalid.
     /// </summary>
-    public int GetHasSpellEffect(int nSpell, uint oObject = OBJECT_INVALID)
+    internal int GetHasSpellEffect(int nSpell, uint oObject = OBJECT_INVALID)
     {
       StackPush(oObject);
       StackPush(nSpell);
@@ -3901,7 +3901,7 @@ namespace Nwn.Server.Interop
     ///  Get the spell (SPELL_*) that applied eSpellEffect.
     ///  * Returns -1 if eSpellEffect was applied outside a spell script.
     /// </summary>
-    public int GetEffectSpellId(IntPtr eSpellEffect)
+    internal int GetEffectSpellId(IntPtr eSpellEffect)
     {
       StackPush(eSpellEffect, ENGINE_STRUCTURE_EFFECT);
       Call(305);
@@ -3911,7 +3911,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Determine whether oCreature has tTalent.
     /// </summary>
-    public int GetCreatureHasTalent(IntPtr tTalent, uint oCreature = OBJECT_INVALID)
+    internal int GetCreatureHasTalent(IntPtr tTalent, uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       StackPush(tTalent, ENGINE_STRUCTURE_TALENT);
@@ -3924,7 +3924,7 @@ namespace Nwn.Server.Interop
     ///  - nCategory: TALENT_CATEGORY_*
     ///  - oCreature
     /// </summary>
-    public IntPtr GetCreatureTalentRandom(int nCategory, uint oCreature = OBJECT_INVALID)
+    internal IntPtr GetCreatureTalentRandom(int nCategory, uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       StackPush(nCategory);
@@ -3939,7 +3939,7 @@ namespace Nwn.Server.Interop
     ///  - nCRMax: Challenge Rating of the talent
     ///  - oCreature
     /// </summary>
-    public IntPtr GetCreatureTalentBest(int nCategory, int nCRMax, uint oCreature = OBJECT_INVALID)
+    internal IntPtr GetCreatureTalentBest(int nCategory, int nCRMax, uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       StackPush(nCRMax);
@@ -3951,7 +3951,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Use tChosenTalent on oTarget.
     /// </summary>
-    public void ActionUseTalentOnObject(IntPtr tChosenTalent, uint oTarget)
+    internal void ActionUseTalentOnObject(IntPtr tChosenTalent, uint oTarget)
     {
       StackPush(oTarget);
       StackPush(tChosenTalent, ENGINE_STRUCTURE_TALENT);
@@ -3961,7 +3961,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Use tChosenTalent at lTargetLocation.
     /// </summary>
-    public void ActionUseTalentAtLocation(IntPtr tChosenTalent, IntPtr lTargetLocation)
+    internal void ActionUseTalentAtLocation(IntPtr tChosenTalent, IntPtr lTargetLocation)
     {
       StackPush(lTargetLocation, ENGINE_STRUCTURE_LOCATION);
       StackPush(tChosenTalent, ENGINE_STRUCTURE_TALENT);
@@ -3972,7 +3972,7 @@ namespace Nwn.Server.Interop
     ///  Get the gold piece value of oItem.
     ///  * Returns 0 if oItem is not a valid item.
     /// </summary>
-    public int GetGoldPieceValue(uint oItem)
+    internal int GetGoldPieceValue(uint oItem)
     {
       StackPush(oItem);
       Call(311);
@@ -3982,7 +3982,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  * Returns TRUE if oCreature is of a playable racial type.
     /// </summary>
-    public int GetIsPlayableRacialType(uint oCreature)
+    internal int GetIsPlayableRacialType(uint oCreature)
     {
       StackPush(oCreature);
       Call(312);
@@ -3992,7 +3992,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Jump to lDestination.  The action is added to the TOP of the action queue.
     /// </summary>
-    public void JumpToLocation(IntPtr lDestination)
+    internal void JumpToLocation(IntPtr lDestination)
     {
       StackPush(lDestination, ENGINE_STRUCTURE_LOCATION);
       Call(313);
@@ -4003,7 +4003,7 @@ namespace Nwn.Server.Interop
     ///  - nHitPoints: a positive integer
     ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nHitPoints < 0.
     /// </summary>
-    public IntPtr EffectTemporaryHitpoints(int nHitPoints)
+    internal IntPtr EffectTemporaryHitpoints(int nHitPoints)
     {
       StackPush(nHitPoints);
       Call(314);
@@ -4019,7 +4019,7 @@ namespace Nwn.Server.Interop
     ///  * Returns -1 if oTarget doesn't have nSkill.
     ///  * Returns 0 if nSkill is untrained.
     /// </summary>
-    public int GetSkillRank(int nSkill, uint oTarget = OBJECT_INVALID, int nBaseSkillRank = FALSE)
+    internal int GetSkillRank(int nSkill, uint oTarget = OBJECT_INVALID, int nBaseSkillRank = FALSE)
     {
       StackPush(nBaseSkillRank);
       StackPush(oTarget);
@@ -4032,7 +4032,7 @@ namespace Nwn.Server.Interop
     ///  Get the attack target of oCreature.
     ///  This only works when oCreature is in combat.
     /// </summary>
-    public uint GetAttackTarget(uint oCreature = OBJECT_INVALID)
+    internal uint GetAttackTarget(uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       Call(316);
@@ -4043,7 +4043,7 @@ namespace Nwn.Server.Interop
     ///  Get the attack type (SPECIAL_ATTACK_*) of oCreature's last attack.
     ///  This only works when oCreature is in combat.
     /// </summary>
-    public int GetLastAttackType(uint oCreature = OBJECT_INVALID)
+    internal int GetLastAttackType(uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       Call(317);
@@ -4054,7 +4054,7 @@ namespace Nwn.Server.Interop
     ///  Get the attack mode (COMBAT_MODE_*) of oCreature's last attack.
     ///  This only works when oCreature is in combat.
     /// </summary>
-    public int GetLastAttackMode(uint oCreature = OBJECT_INVALID)
+    internal int GetLastAttackMode(uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       Call(318);
@@ -4064,7 +4064,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the master of oAssociate.
     /// </summary>
-    public uint GetMaster(uint oAssociate = OBJECT_INVALID)
+    internal uint GetMaster(uint oAssociate = OBJECT_INVALID)
     {
       StackPush(oAssociate);
       Call(319);
@@ -4074,7 +4074,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  * Returns TRUE if oCreature is in combat.
     /// </summary>
-    public int GetIsInCombat(uint oCreature = OBJECT_INVALID)
+    internal int GetIsInCombat(uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       Call(320);
@@ -4084,7 +4084,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the last command (ASSOCIATE_COMMAND_*) issued to oAssociate.
     /// </summary>
-    public int GetLastAssociateCommand(uint oAssociate = OBJECT_INVALID)
+    internal int GetLastAssociateCommand(uint oAssociate = OBJECT_INVALID)
     {
       StackPush(oAssociate);
       Call(321);
@@ -4094,7 +4094,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Give nGP gold to oCreature.
     /// </summary>
-    public void GiveGoldToCreature(uint oCreature, int nGP)
+    internal void GiveGoldToCreature(uint oCreature, int nGP)
     {
       StackPush(nGP);
       StackPush(oCreature);
@@ -4108,7 +4108,7 @@ namespace Nwn.Server.Interop
     ///  - bRaiseable: If this is TRUE, the caller can be raised via resurrection.
     ///  - bSelectableWhenDead: If this is TRUE, the caller is selectable after death.
     /// </summary>
-    public void SetIsDestroyable(int bDestroyable, int bRaiseable = TRUE, int bSelectableWhenDead = FALSE)
+    internal void SetIsDestroyable(int bDestroyable, int bRaiseable = TRUE, int bSelectableWhenDead = FALSE)
     {
       StackPush(bSelectableWhenDead);
       StackPush(bRaiseable);
@@ -4119,7 +4119,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Set the locked state of oTarget, which can be a door or a placeable object.
     /// </summary>
-    public void SetLocked(uint oTarget, int bLocked)
+    internal void SetLocked(uint oTarget, int bLocked)
     {
       StackPush(bLocked);
       StackPush(oTarget);
@@ -4129,7 +4129,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the locked state of oTarget, which can be a door or a placeable object.
     /// </summary>
-    public int GetLocked(uint oTarget)
+    internal int GetLocked(uint oTarget)
     {
       StackPush(oTarget);
       Call(325);
@@ -4143,7 +4143,7 @@ namespace Nwn.Server.Interop
     ///  GetClickingObject() should not be called from a placeable's OnClick event,
     ///  instead use GetPlaceableLastClickedBy();
     /// </summary>
-    public uint GetClickingObject()
+    internal uint GetClickingObject()
     {
       Call(326);
       return StackPopObject();
@@ -4152,7 +4152,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Initialise oTarget to listen for the standard Associates commands.
     /// </summary>
-    public void SetAssociateListenPatterns(uint oTarget = OBJECT_INVALID)
+    internal void SetAssociateListenPatterns(uint oTarget = OBJECT_INVALID)
     {
       StackPush(oTarget);
       Call(327);
@@ -4162,7 +4162,7 @@ namespace Nwn.Server.Interop
     ///  Get the last weapon that oCreature used in an attack.
     ///  * Returns OBJECT_INVALID if oCreature did not attack, or has no weapon equipped.
     /// </summary>
-    public uint GetLastWeaponUsed(uint oCreature)
+    internal uint GetLastWeaponUsed(uint oCreature)
     {
       StackPush(oCreature);
       Call(328);
@@ -4172,7 +4172,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Use oPlaceable.
     /// </summary>
-    public void ActionInteractObject(uint oPlaceable)
+    internal void ActionInteractObject(uint oPlaceable)
     {
       StackPush(oPlaceable);
       Call(329);
@@ -4183,7 +4183,7 @@ namespace Nwn.Server.Interop
     ///  * Returns OBJECT_INVALID if it is called by something other than a placeable or
     ///    a door.
     /// </summary>
-    public uint GetLastUsedBy()
+    internal uint GetLastUsedBy()
     {
       Call(330);
       return StackPopObject();
@@ -4195,7 +4195,7 @@ namespace Nwn.Server.Interop
     ///  - nAbility: ABILITY_*
     ///  - oCreature
     /// </summary>
-    public int GetAbilityModifier(int nAbility, uint oCreature = OBJECT_INVALID)
+    internal int GetAbilityModifier(int nAbility, uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       StackPush(nAbility);
@@ -4206,7 +4206,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Determined whether oItem has been identified.
     /// </summary>
-    public int GetIdentified(uint oItem)
+    internal int GetIdentified(uint oItem)
     {
       StackPush(oItem);
       Call(332);
@@ -4216,7 +4216,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Set whether oItem has been identified.
     /// </summary>
-    public void SetIdentified(uint oItem, int bIdentified)
+    internal void SetIdentified(uint oItem, int bIdentified)
     {
       StackPush(bIdentified);
       StackPush(oItem);
@@ -4226,7 +4226,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Summon an Animal Companion
     /// </summary>
-    public void SummonAnimalCompanion(uint oMaster = OBJECT_INVALID)
+    internal void SummonAnimalCompanion(uint oMaster = OBJECT_INVALID)
     {
       StackPush(oMaster);
       Call(334);
@@ -4235,7 +4235,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Summon a Familiar
     /// </summary>
-    public void SummonFamiliar(uint oMaster = OBJECT_INVALID)
+    internal void SummonFamiliar(uint oMaster = OBJECT_INVALID)
     {
       StackPush(oMaster);
       Call(335);
@@ -4245,7 +4245,7 @@ namespace Nwn.Server.Interop
     ///  Get the last blocking door encountered by the caller of this function.
     ///  * Returns OBJECT_INVALID if the caller is not a valid creature.
     /// </summary>
-    public uint GetBlockingDoor()
+    internal uint GetBlockingDoor()
     {
       Call(336);
       return StackPopObject();
@@ -4256,7 +4256,7 @@ namespace Nwn.Server.Interop
     ///  - nDoorAction: DOOR_ACTION_*
     ///  * Returns TRUE if nDoorAction can be performed on oTargetDoor.
     /// </summary>
-    public int GetIsDoorActionPossible(uint oTargetDoor, int nDoorAction)
+    internal int GetIsDoorActionPossible(uint oTargetDoor, int nDoorAction)
     {
       StackPush(nDoorAction);
       StackPush(oTargetDoor);
@@ -4267,7 +4267,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Perform nDoorAction on oTargetDoor.
     /// </summary>
-    public void DoDoorAction(uint oTargetDoor, int nDoorAction)
+    internal void DoDoorAction(uint oTargetDoor, int nDoorAction)
     {
       StackPush(nDoorAction);
       StackPush(oTargetDoor);
@@ -4280,7 +4280,7 @@ namespace Nwn.Server.Interop
     ///  * Returns OBJECT_INVALID if the caller is not a creature, item, placeable or store,
     ///    or if no item is found.
     /// </summary>
-    public uint GetFirstItemInInventory(uint oTarget = OBJECT_INVALID)
+    internal uint GetFirstItemInInventory(uint oTarget = OBJECT_INVALID)
     {
       StackPush(oTarget);
       Call(339);
@@ -4293,7 +4293,7 @@ namespace Nwn.Server.Interop
     ///  * Returns OBJECT_INVALID if the caller is not a creature, item, placeable or store,
     ///    or if no item is found.
     /// </summary>
-    public uint GetNextItemInInventory(uint oTarget = OBJECT_INVALID)
+    internal uint GetNextItemInInventory(uint oTarget = OBJECT_INVALID)
     {
       StackPush(oTarget);
       Call(340);
@@ -4309,7 +4309,7 @@ namespace Nwn.Server.Interop
     ///    nClassPosition (i.e. a single-class creature will only have a value in
     ///    nClassLocation=1) or if oCreature is not a valid creature.
     /// </summary>
-    public int GetClassByPosition(int nClassPosition, uint oCreature = OBJECT_INVALID)
+    internal int GetClassByPosition(int nClassPosition, uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       StackPush(nClassPosition);
@@ -4326,7 +4326,7 @@ namespace Nwn.Server.Interop
     ///    (i.e. a single-class creature will only have a value in nClassLocation=1)
     ///    or if oCreature is not a valid creature.
     /// </summary>
-    public int GetLevelByPosition(int nClassPosition, uint oCreature = OBJECT_INVALID)
+    internal int GetLevelByPosition(int nClassPosition, uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       StackPush(nClassPosition);
@@ -4339,7 +4339,7 @@ namespace Nwn.Server.Interop
     ///  - nClassType: CLASS_TYPE_*
     ///  - oCreature
     /// </summary>
-    public int GetLevelByClass(int nClassType, uint oCreature = OBJECT_INVALID)
+    internal int GetLevelByClass(int nClassType, uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       StackPush(nClassType);
@@ -4351,7 +4351,7 @@ namespace Nwn.Server.Interop
     ///  Get the amount of damage of type nDamageType that has been dealt to the caller.
     ///  - nDamageType: DAMAGE_TYPE_*
     /// </summary>
-    public int GetDamageDealtByType(int nDamageType)
+    internal int GetDamageDealtByType(int nDamageType)
     {
       StackPush(nDamageType);
       Call(344);
@@ -4361,7 +4361,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the total amount of damage that has been dealt to the caller.
     /// </summary>
-    public int GetTotalDamageDealt()
+    internal int GetTotalDamageDealt()
     {
       Call(345);
       return StackPopInt();
@@ -4371,7 +4371,7 @@ namespace Nwn.Server.Interop
     ///  Get the last object that damaged oObject
     ///  * Returns OBJECT_INVALID if the passed in object is not a valid object.
     /// </summary>
-    public uint GetLastDamager(uint oObject = OBJECT_INVALID)
+    internal uint GetLastDamager(uint oObject = OBJECT_INVALID)
     {
       StackPush(oObject);
       Call(346);
@@ -4383,7 +4383,7 @@ namespace Nwn.Server.Interop
     ///  * Returns OBJECT_INVALID if the caller is not a valid placeable, trigger or
     ///    door.
     /// </summary>
-    public uint GetLastDisarmed()
+    internal uint GetLastDisarmed()
     {
       Call(347);
       return StackPopObject();
@@ -4393,7 +4393,7 @@ namespace Nwn.Server.Interop
     ///  Get the last object that disturbed the inventory of the caller.
     ///  * Returns OBJECT_INVALID if the caller is not a valid creature or placeable.
     /// </summary>
-    public uint GetLastDisturbed()
+    internal uint GetLastDisturbed()
     {
       Call(348);
       return StackPopObject();
@@ -4403,7 +4403,7 @@ namespace Nwn.Server.Interop
     ///  Get the last object that locked the caller.
     ///  * Returns OBJECT_INVALID if the caller is not a valid door or placeable.
     /// </summary>
-    public uint GetLastLocked()
+    internal uint GetLastLocked()
     {
       Call(349);
       return StackPopObject();
@@ -4413,7 +4413,7 @@ namespace Nwn.Server.Interop
     ///  Get the last object that unlocked the caller.
     ///  * Returns OBJECT_INVALID if the caller is not a valid door or placeable.
     /// </summary>
-    public uint GetLastUnlocked()
+    internal uint GetLastUnlocked()
     {
       Call(350);
       return StackPopObject();
@@ -4425,7 +4425,7 @@ namespace Nwn.Server.Interop
     ///  - nValue
     ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nSkill is invalid.
     /// </summary>
-    public IntPtr EffectSkillIncrease(int nSkill, int nValue)
+    internal IntPtr EffectSkillIncrease(int nSkill, int nValue)
     {
       StackPush(nValue);
       StackPush(nSkill);
@@ -4438,7 +4438,7 @@ namespace Nwn.Server.Interop
     ///  OnInventoryDisturbed script to fire.  This will only work for creatures and
     ///  placeables.
     /// </summary>
-    public int GetInventoryDisturbType()
+    internal int GetInventoryDisturbType()
     {
       Call(352);
       return StackPopInt();
@@ -4448,7 +4448,7 @@ namespace Nwn.Server.Interop
     ///  get the item that caused the caller's OnInventoryDisturbed script to fire.
     ///  * Returns OBJECT_INVALID if the caller is not a valid object.
     /// </summary>
-    public uint GetInventoryDisturbItem()
+    internal uint GetInventoryDisturbItem()
     {
       Call(353);
       return StackPopObject();
@@ -4459,7 +4459,7 @@ namespace Nwn.Server.Interop
     ///  * Return OBJECT_INVALID if oMaster does not have a henchman.
     ///  -nNth: Which henchman to return.
     /// </summary>
-    public uint GetHenchman(uint oMaster = OBJECT_INVALID, int nNth = 1)
+    internal uint GetHenchman(uint oMaster = OBJECT_INVALID, int nNth = 1)
     {
       StackPush(nNth);
       StackPush(oMaster);
@@ -4473,7 +4473,7 @@ namespace Nwn.Server.Interop
     ///  - nLawChaos: ALIGNMENT_LAWFUL/ALIGNMENT_CHAOTIC/ALIGNMENT_ALL
     ///  - nGoodEvil: ALIGNMENT_GOOD/ALIGNMENT_EVIL/ALIGNMENT_ALL
     /// </summary>
-    public IntPtr VersusAlignmentEffect(IntPtr eEffect, int nLawChaos = ALIGNMENT_ALL, int nGoodEvil = ALIGNMENT_ALL)
+    internal IntPtr VersusAlignmentEffect(IntPtr eEffect, int nLawChaos = ALIGNMENT_ALL, int nGoodEvil = ALIGNMENT_ALL)
     {
       StackPush(nGoodEvil);
       StackPush(nLawChaos);
@@ -4487,7 +4487,7 @@ namespace Nwn.Server.Interop
     ///  - eEffect
     ///  - nRacialType: RACIAL_TYPE_*
     /// </summary>
-    public IntPtr VersusRacialTypeEffect(IntPtr eEffect, int nRacialType)
+    internal IntPtr VersusRacialTypeEffect(IntPtr eEffect, int nRacialType)
     {
       StackPush(nRacialType);
       StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
@@ -4498,7 +4498,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Set eEffect to be versus traps.
     /// </summary>
-    public IntPtr VersusTrapEffect(IntPtr eEffect)
+    internal IntPtr VersusTrapEffect(IntPtr eEffect)
     {
       StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
       Call(357);
@@ -4508,7 +4508,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the gender of oCreature.
     /// </summary>
-    public int GetGender(uint oCreature)
+    internal int GetGender(uint oCreature)
     {
       StackPush(oCreature);
       Call(358);
@@ -4518,7 +4518,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  * Returns TRUE if tTalent is valid.
     /// </summary>
-    public int GetIsTalentValid(IntPtr tTalent)
+    internal int GetIsTalentValid(IntPtr tTalent)
     {
       StackPush(tTalent, ENGINE_STRUCTURE_TALENT);
       Call(359);
@@ -4528,7 +4528,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Causes the action subject to move away from lMoveAwayFrom.
     /// </summary>
-    public void ActionMoveAwayFromLocation(IntPtr lMoveAwayFrom, int bRun = FALSE, float fMoveAwayRange = 40.0f)
+    internal void ActionMoveAwayFromLocation(IntPtr lMoveAwayFrom, int bRun = FALSE, float fMoveAwayRange = 40.0f)
     {
       StackPush(fMoveAwayRange);
       StackPush(bRun);
@@ -4542,7 +4542,7 @@ namespace Nwn.Server.Interop
     ///  made, and is reset at the end of combat.
     ///  * Returns OBJECT_INVALID if the caller is not a valid creature.
     /// </summary>
-    public uint GetAttemptedAttackTarget()
+    internal uint GetAttemptedAttackTarget()
     {
       Call(361);
       return StackPopObject();
@@ -4551,7 +4551,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the type (TALENT_TYPE_*) of tTalent.
     /// </summary>
-    public int GetTypeFromTalent(IntPtr tTalent)
+    internal int GetTypeFromTalent(IntPtr tTalent)
     {
       StackPush(tTalent, ENGINE_STRUCTURE_TALENT);
       Call(362);
@@ -4561,7 +4561,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the ID of tTalent.  This could be a SPELL_*, FEAT_* or SKILL_*.
     /// </summary>
-    public int GetIdFromTalent(IntPtr tTalent)
+    internal int GetIdFromTalent(IntPtr tTalent)
     {
       StackPush(tTalent, ENGINE_STRUCTURE_TALENT);
       Call(363);
@@ -4575,7 +4575,7 @@ namespace Nwn.Server.Interop
     ///  - nTh: Which associate of the specified type to return
     ///  * Returns OBJECT_INVALID if no such associate exists.
     /// </summary>
-    public uint GetAssociate(int nAssociateType, uint oMaster = OBJECT_INVALID, int nTh = 1)
+    internal uint GetAssociate(int nAssociateType, uint oMaster = OBJECT_INVALID, int nTh = 1)
     {
       StackPush(nTh);
       StackPush(oMaster);
@@ -4588,7 +4588,7 @@ namespace Nwn.Server.Interop
     ///  Add oHenchman as a henchman to oMaster
     ///  If oHenchman is either a DM or a player character, this will have no effect.
     /// </summary>
-    public void AddHenchman(uint oMaster, uint oHenchman = OBJECT_INVALID)
+    internal void AddHenchman(uint oMaster, uint oHenchman = OBJECT_INVALID)
     {
       StackPush(oHenchman);
       StackPush(oMaster);
@@ -4598,7 +4598,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Remove oHenchman from the service of oMaster, returning them to their original faction.
     /// </summary>
-    public void RemoveHenchman(uint oMaster, uint oHenchman = OBJECT_INVALID)
+    internal void RemoveHenchman(uint oMaster, uint oHenchman = OBJECT_INVALID)
     {
       StackPush(oHenchman);
       StackPush(oMaster);
@@ -4617,7 +4617,7 @@ namespace Nwn.Server.Interop
     ///  - bAllowOverrideHigher: If this is TRUE, you can set the state to a lower
     ///    number than the one it is currently on
     /// </summary>
-    public void AddJournalQuestEntry(string szPlotID, int nState, uint oCreature, int bAllPartyMembers = TRUE, int bAllPlayers = FALSE, int bAllowOverrideHigher = FALSE)
+    internal void AddJournalQuestEntry(string szPlotID, int nState, uint oCreature, int bAllPartyMembers = TRUE, int bAllPlayers = FALSE, int bAllowOverrideHigher = FALSE)
     {
       StackPush(bAllowOverrideHigher);
       StackPush(bAllPlayers);
@@ -4637,7 +4637,7 @@ namespace Nwn.Server.Interop
     ///  - bAllPlayers: If this is TRUE, the entry will be removed from the journal of
     ///    everyone in the world
     /// </summary>
-    public void RemoveJournalQuestEntry(string szPlotID, uint oCreature, int bAllPartyMembers = TRUE, int bAllPlayers = FALSE)
+    internal void RemoveJournalQuestEntry(string szPlotID, uint oCreature, int bAllPartyMembers = TRUE, int bAllPlayers = FALSE)
     {
       StackPush(bAllPlayers);
       StackPush(bAllPartyMembers);
@@ -4647,12 +4647,12 @@ namespace Nwn.Server.Interop
     }
 
     /// <summary>
-    ///  Get the public part of the CD Key that oPlayer used when logging in.
-    ///  - nSinglePlayerCDKey: If set to TRUE, the player's public CD Key will
+    ///  Get the internal part of the CD Key that oPlayer used when logging in.
+    ///  - nSinglePlayerCDKey: If set to TRUE, the player's internal CD Key will
     ///    be returned when the player is playing in single player mode
     ///    (otherwise returns an empty string in single player mode).
     /// </summary>
-    public string GetPCPublicCDKey(uint oPlayer, int nSinglePlayerCDKey = FALSE)
+    internal string GetPCinternalCDKey(uint oPlayer, int nSinglePlayerCDKey = FALSE)
     {
       StackPush(nSinglePlayerCDKey);
       StackPush(oPlayer);
@@ -4663,7 +4663,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the IP address from which oPlayer has connected.
     /// </summary>
-    public string GetPCIPAddress(uint oPlayer)
+    internal string GetPCIPAddress(uint oPlayer)
     {
       StackPush(oPlayer);
       Call(370);
@@ -4673,7 +4673,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the name of oPlayer.
     /// </summary>
-    public string GetPCPlayerName(uint oPlayer)
+    internal string GetPCPlayerName(uint oPlayer)
     {
       StackPush(oPlayer);
       Call(371);
@@ -4683,7 +4683,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Sets oPlayer and oTarget to like each other.
     /// </summary>
-    public void SetPCLike(uint oPlayer, uint oTarget)
+    internal void SetPCLike(uint oPlayer, uint oTarget)
     {
       StackPush(oTarget);
       StackPush(oPlayer);
@@ -4693,7 +4693,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Sets oPlayer and oTarget to dislike each other.
     /// </summary>
-    public void SetPCDislike(uint oPlayer, uint oTarget)
+    internal void SetPCDislike(uint oPlayer, uint oTarget)
     {
       StackPush(oTarget);
       StackPush(oPlayer);
@@ -4703,7 +4703,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Send a server message (szMessage) to the oPlayer.
     /// </summary>
-    public void SendMessageToPC(uint oPlayer, string szMessage)
+    internal void SendMessageToPC(uint oPlayer, string szMessage)
     {
       StackPush(szMessage);
       StackPush(oPlayer);
@@ -4716,7 +4716,7 @@ namespace Nwn.Server.Interop
     ///  combat.
     ///  * Returns OBJECT_INVALID if the caller is not a valid creature.
     /// </summary>
-    public uint GetAttemptedSpellTarget()
+    internal uint GetAttemptedSpellTarget()
     {
       Call(375);
       return StackPopObject();
@@ -4726,7 +4726,7 @@ namespace Nwn.Server.Interop
     ///  Get the last creature that opened the caller.
     ///  * Returns OBJECT_INVALID if the caller is not a valid door, placeable or store.
     /// </summary>
-    public uint GetLastOpenedBy()
+    internal uint GetLastOpenedBy()
     {
       Call(376);
       return StackPopObject();
@@ -4737,7 +4737,7 @@ namespace Nwn.Server.Interop
     ///  - nSpell: SPELL_*
     ///  - oCreature
     /// </summary>
-    public int GetHasSpell(int nSpell, uint oCreature = OBJECT_INVALID)
+    internal int GetHasSpell(int nSpell, uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       StackPush(nSpell);
@@ -4750,7 +4750,7 @@ namespace Nwn.Server.Interop
     ///  - nBonusMarkUp is added to the stores default mark up percentage on items sold (-100 to 100)
     ///  - nBonusMarkDown is added to the stores default mark down percentage on items bought (-100 to 100)
     /// </summary>
-    public void OpenStore(uint oStore, uint oPC, int nBonusMarkUp = 0, int nBonusMarkDown = 0)
+    internal void OpenStore(uint oStore, uint oPC, int nBonusMarkUp = 0, int nBonusMarkDown = 0)
     {
       StackPush(nBonusMarkDown);
       StackPush(nBonusMarkUp);
@@ -4763,7 +4763,7 @@ namespace Nwn.Server.Interop
     ///  Create a Turned effect.
     ///  Turned effects are supernatural by default.
     /// </summary>
-    public IntPtr EffectTurned()
+    internal IntPtr EffectTurned()
     {
       Call(379);
       return StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -4774,7 +4774,7 @@ namespace Nwn.Server.Interop
     ///  oMemberOfFaction's faction).
     ///  * Returns OBJECT_INVALID if oMemberOfFaction's faction is invalid.
     /// </summary>
-    public uint GetFirstFactionMember(uint oMemberOfFaction, int bPCOnly = TRUE)
+    internal uint GetFirstFactionMember(uint oMemberOfFaction, int bPCOnly = TRUE)
     {
       StackPush(bPCOnly);
       StackPush(oMemberOfFaction);
@@ -4787,7 +4787,7 @@ namespace Nwn.Server.Interop
     ///  oMemberOfFaction's faction).
     ///  * Returns OBJECT_INVALID if oMemberOfFaction's faction is invalid.
     /// </summary>
-    public uint GetNextFactionMember(uint oMemberOfFaction, int bPCOnly = TRUE)
+    internal uint GetNextFactionMember(uint oMemberOfFaction, int bPCOnly = TRUE)
     {
       StackPush(bPCOnly);
       StackPush(oMemberOfFaction);
@@ -4798,7 +4798,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Force the action subject to move to lDestination.
     /// </summary>
-    public void ActionForceMoveToLocation(IntPtr lDestination, int bRun = FALSE, float fTimeout = 30.0f)
+    internal void ActionForceMoveToLocation(IntPtr lDestination, int bRun = FALSE, float fTimeout = 30.0f)
     {
       StackPush(fTimeout);
       StackPush(bRun);
@@ -4809,7 +4809,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Force the action subject to move to oMoveTo.
     /// </summary>
-    public void ActionForceMoveToObject(uint oMoveTo, int bRun = FALSE, float fRange = 1.0f, float fTimeout = 30.0f)
+    internal void ActionForceMoveToObject(uint oMoveTo, int bRun = FALSE, float fRange = 1.0f, float fTimeout = 30.0f)
     {
       StackPush(fTimeout);
       StackPush(fRange);
@@ -4821,7 +4821,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the experience assigned in the journal editor for szPlotID.
     /// </summary>
-    public int GetJournalQuestExperience(string szPlotID)
+    internal int GetJournalQuestExperience(string szPlotID)
     {
       StackPush(szPlotID);
       Call(384);
@@ -4831,7 +4831,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Jump to oToJumpTo (the action is added to the top of the action queue).
     /// </summary>
-    public void JumpToObject(uint oToJumpTo, int nWalkStraightLineToPoint = 1)
+    internal void JumpToObject(uint oToJumpTo, int nWalkStraightLineToPoint = 1)
     {
       StackPush(nWalkStraightLineToPoint);
       StackPush(oToJumpTo);
@@ -4843,7 +4843,7 @@ namespace Nwn.Server.Interop
     ///  - oMapPin
     ///  - nEnabled: 0=Off, 1=On
     /// </summary>
-    public void SetMapPinEnabled(uint oMapPin, int nEnabled)
+    internal void SetMapPinEnabled(uint oMapPin, int nEnabled)
     {
       StackPush(nEnabled);
       StackPush(oMapPin);
@@ -4855,7 +4855,7 @@ namespace Nwn.Server.Interop
     ///  - fHitPointChangePerRound: this can be positive or negative, but not zero.
     ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if fHitPointChangePerRound is 0.
     /// </summary>
-    public IntPtr EffectHitPointChangeWhenDying(float fHitPointChangePerRound)
+    internal IntPtr EffectHitPointChangeWhenDying(float fHitPointChangePerRound)
     {
       StackPush(fHitPointChangePerRound);
       Call(387);
@@ -4869,7 +4869,7 @@ namespace Nwn.Server.Interop
     ///  * Nothing happens if oPC is not a player character or if an invalid value is
     ///    used for nGUIPanel.
     /// </summary>
-    public void PopUpGUIPanel(uint oPC, int nGUIPanel)
+    internal void PopUpGUIPanel(uint oPC, int nGUIPanel)
     {
       StackPush(nGUIPanel);
       StackPush(oPC);
@@ -4879,7 +4879,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Clear all personal feelings that oSource has about oTarget.
     /// </summary>
-    public void ClearPersonalReputation(uint oTarget, uint oSource = OBJECT_INVALID)
+    internal void ClearPersonalReputation(uint oTarget, uint oSource = OBJECT_INVALID)
     {
       StackPush(oSource);
       StackPush(oTarget);
@@ -4901,7 +4901,7 @@ namespace Nwn.Server.Interop
     ///  over fDurationInSeconds. Friendship will only be in effect as long as
     ///  (faction reputation + total personal reputation) >= REPUTATION_TYPE_FRIEND.
     /// </summary>
-    public void SetIsTemporaryFriend(uint oTarget, uint oSource = OBJECT_INVALID, int bDecays = FALSE, float fDurationInSeconds = 180.0f)
+    internal void SetIsTemporaryFriend(uint oTarget, uint oSource = OBJECT_INVALID, int bDecays = FALSE, float fDurationInSeconds = 180.0f)
     {
       StackPush(fDurationInSeconds);
       StackPush(bDecays);
@@ -4922,7 +4922,7 @@ namespace Nwn.Server.Interop
     ///  over fDurationInSeconds. Enmity will only be in effect as long as
     ///  (faction reputation + total personal reputation) <= REPUTATION_TYPE_ENEMY.
     /// </summary>
-    public void SetIsTemporaryEnemy(uint oTarget, uint oSource = OBJECT_INVALID, int bDecays = FALSE, float fDurationInSeconds = 180.0f)
+    internal void SetIsTemporaryEnemy(uint oTarget, uint oSource = OBJECT_INVALID, int bDecays = FALSE, float fDurationInSeconds = 180.0f)
     {
       StackPush(fDurationInSeconds);
       StackPush(bDecays);
@@ -4944,7 +4944,7 @@ namespace Nwn.Server.Interop
     ///  (faction reputation + total personal reputation) > REPUTATION_TYPE_ENEMY and
     ///  (faction reputation + total personal reputation) < REPUTATION_TYPE_FRIEND.
     /// </summary>
-    public void SetIsTemporaryNeutral(uint oTarget, uint oSource = OBJECT_INVALID, int bDecays = FALSE, float fDurationInSeconds = 180.0f)
+    internal void SetIsTemporaryNeutral(uint oTarget, uint oSource = OBJECT_INVALID, int bDecays = FALSE, float fDurationInSeconds = 180.0f)
     {
       StackPush(fDurationInSeconds);
       StackPush(bDecays);
@@ -4956,7 +4956,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Gives nXpAmount to oCreature.
     /// </summary>
-    public void GiveXPToCreature(uint oCreature, int nXpAmount)
+    internal void GiveXPToCreature(uint oCreature, int nXpAmount)
     {
       StackPush(nXpAmount);
       StackPush(oCreature);
@@ -4966,7 +4966,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Sets oCreature's experience to nXpAmount.
     /// </summary>
-    public void SetXP(uint oCreature, int nXpAmount)
+    internal void SetXP(uint oCreature, int nXpAmount)
     {
       StackPush(nXpAmount);
       StackPush(oCreature);
@@ -4976,7 +4976,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get oCreature's experience.
     /// </summary>
-    public int GetXP(uint oCreature)
+    internal int GetXP(uint oCreature)
     {
       StackPush(oCreature);
       Call(395);
@@ -4988,7 +4988,7 @@ namespace Nwn.Server.Interop
     ///  * Return value has the format "0x????????" where each ? will be a hex digit
     ///    (8 digits in total).
     /// </summary>
-    public string IntToHexString(int nInteger)
+    internal string IntToHexString(int nInteger)
     {
       StackPush(nInteger);
       Call(396);
@@ -4999,7 +4999,7 @@ namespace Nwn.Server.Interop
     ///  Get the base item type (BASE_ITEM_*) of oItem.
     ///  * Returns BASE_ITEM_INVALID if oItem is an invalid item.
     /// </summary>
-    public int GetBaseItemType(uint oItem)
+    internal int GetBaseItemType(uint oItem)
     {
       StackPush(oItem);
       Call(397);
@@ -5013,7 +5013,7 @@ namespace Nwn.Server.Interop
     ///  * Returns FALSE if oItem is not a valid item, or if oItem does not have
     ///    nProperty.
     /// </summary>
-    public int GetItemHasItemProperty(uint oItem, int nProperty)
+    internal int GetItemHasItemProperty(uint oItem, int nProperty)
     {
       StackPush(nProperty);
       StackPush(oItem);
@@ -5030,7 +5030,7 @@ namespace Nwn.Server.Interop
     ///  - oVersus: You can try to get the most damaging weapon against oVersus
     ///  - bOffHand
     /// </summary>
-    public void ActionEquipMostDamagingMelee(uint oVersus = OBJECT_INVALID, int bOffHand = FALSE)
+    internal void ActionEquipMostDamagingMelee(uint oVersus = OBJECT_INVALID, int bOffHand = FALSE)
     {
       StackPush(bOffHand);
       StackPush(oVersus);
@@ -5044,7 +5044,7 @@ namespace Nwn.Server.Interop
     ///  weapon.
     ///  - oVersus: You can try to get the most damaging weapon against oVersus
     /// </summary>
-    public void ActionEquipMostDamagingRanged(uint oVersus = OBJECT_INVALID)
+    internal void ActionEquipMostDamagingRanged(uint oVersus = OBJECT_INVALID)
     {
       StackPush(oVersus);
       Call(400);
@@ -5054,7 +5054,7 @@ namespace Nwn.Server.Interop
     ///  Get the Armour Class of oItem.
     ///  * Return 0 if the oItem is not a valid item, or if oItem has no armour value.
     /// </summary>
-    public int GetItemACValue(uint oItem)
+    internal int GetItemACValue(uint oItem)
     {
       StackPush(oItem);
       Call(401);
@@ -5070,7 +5070,7 @@ namespace Nwn.Server.Interop
     ///                                      can see them, such as if an enemy is close by,
     ///                                      but is in a different room behind a closed door.
     /// </summary>
-    public void ActionRest(int bCreatureToEnemyLineOfSightCheck = FALSE)
+    internal void ActionRest(int bCreatureToEnemyLineOfSightCheck = FALSE)
     {
       StackPush(bCreatureToEnemyLineOfSightCheck);
       Call(402);
@@ -5082,7 +5082,7 @@ namespace Nwn.Server.Interop
     ///  - oPlayer: The player the map will be exposed/hidden for.
     ///  - bExplored: TRUE/FALSE. Whether the map should be completely explored or hidden.
     /// </summary>
-    public void ExploreAreaForPlayer(uint oArea, uint oPlayer, int bExplored = TRUE)
+    internal void ExploreAreaForPlayer(uint oArea, uint oPlayer, int bExplored = TRUE)
     {
       StackPush(bExplored);
       StackPush(oPlayer);
@@ -5094,7 +5094,7 @@ namespace Nwn.Server.Interop
     ///  The creature will equip the armour in its possession that has the highest
     ///  armour class.
     /// </summary>
-    public void ActionEquipMostEffectiveArmor()
+    internal void ActionEquipMostEffectiveArmor()
     {
       Call(404);
     }
@@ -5102,7 +5102,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  * Returns TRUE if it is currently day.
     /// </summary>
-    public int GetIsDay()
+    internal int GetIsDay()
     {
       Call(405);
       return StackPopInt();
@@ -5111,7 +5111,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  * Returns TRUE if it is currently night.
     /// </summary>
-    public int GetIsNight()
+    internal int GetIsNight()
     {
       Call(406);
       return StackPopInt();
@@ -5120,7 +5120,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  * Returns TRUE if it is currently dawn.
     /// </summary>
-    public int GetIsDawn()
+    internal int GetIsDawn()
     {
       Call(407);
       return StackPopInt();
@@ -5129,7 +5129,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  * Returns TRUE if it is currently dusk.
     /// </summary>
-    public int GetIsDusk()
+    internal int GetIsDusk()
     {
       Call(408);
       return StackPopInt();
@@ -5138,7 +5138,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  * Returns TRUE if oCreature was spawned from an encounter.
     /// </summary>
-    public int GetIsEncounterCreature(uint oCreature = OBJECT_INVALID)
+    internal int GetIsEncounterCreature(uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       Call(409);
@@ -5148,7 +5148,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Use this in an OnPlayerDying module script to get the last player who is dying.
     /// </summary>
-    public uint GetLastPlayerDying()
+    internal uint GetLastPlayerDying()
     {
       Call(410);
       return StackPopObject();
@@ -5157,7 +5157,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the starting location of the module.
     /// </summary>
-    public IntPtr GetStartingLocation()
+    internal IntPtr GetStartingLocation()
     {
       Call(411);
       return StackPopStruct(ENGINE_STRUCTURE_LOCATION);
@@ -5168,7 +5168,7 @@ namespace Nwn.Server.Interop
     ///  ** This will only work on an NPC **
     ///  - nStandardFaction: STANDARD_FACTION_*
     /// </summary>
-    public void ChangeToStandardFaction(uint oCreatureToChange, int nStandardFaction)
+    internal void ChangeToStandardFaction(uint oCreatureToChange, int nStandardFaction)
     {
       StackPush(nStandardFaction);
       StackPush(oCreatureToChange);
@@ -5178,7 +5178,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Play oSound.
     /// </summary>
-    public void SoundObjectPlay(uint oSound)
+    internal void SoundObjectPlay(uint oSound)
     {
       StackPush(oSound);
       Call(413);
@@ -5187,7 +5187,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Stop playing oSound.
     /// </summary>
-    public void SoundObjectStop(uint oSound)
+    internal void SoundObjectStop(uint oSound)
     {
       StackPush(oSound);
       Call(414);
@@ -5198,7 +5198,7 @@ namespace Nwn.Server.Interop
     ///  - oSound
     ///  - nVolume: 0-127
     /// </summary>
-    public void SoundObjectSetVolume(uint oSound, int nVolume)
+    internal void SoundObjectSetVolume(uint oSound, int nVolume)
     {
       StackPush(nVolume);
       StackPush(oSound);
@@ -5208,7 +5208,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Set the position of oSound.
     /// </summary>
-    public void SoundObjectSetPosition(uint oSound, Vector3 vPosition)
+    internal void SoundObjectSetPosition(uint oSound, Vector3 vPosition)
     {
       StackPush(vPosition);
       StackPush(oSound);
@@ -5221,7 +5221,7 @@ namespace Nwn.Server.Interop
     ///  - oTokenTarget: This must be specified if there are creature-specific tokens
     ///    in the string.
     /// </summary>
-    public void SpeakOneLinerConversation(string sDialogResRef = "", uint oTokenTarget = OBJECT_INVALID)
+    internal void SpeakOneLinerConversation(string sDialogResRef = "", uint oTokenTarget = OBJECT_INVALID)
     {
       StackPush(oTokenTarget);
       StackPush(sDialogResRef);
@@ -5231,7 +5231,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the amount of gold possessed by oTarget.
     /// </summary>
-    public int GetGold(uint oTarget = OBJECT_INVALID)
+    internal int GetGold(uint oTarget = OBJECT_INVALID)
     {
       StackPush(oTarget);
       Call(418);
@@ -5242,7 +5242,7 @@ namespace Nwn.Server.Interop
     ///  Use this in an OnRespawnButtonPressed module script to get the object id of
     ///  the player who last pressed the respawn button.
     /// </summary>
-    public uint GetLastRespawnButtonPresser()
+    internal uint GetLastRespawnButtonPresser()
     {
       Call(419);
       return StackPopObject();
@@ -5253,7 +5253,7 @@ namespace Nwn.Server.Interop
     ///  Note: This will return FALSE if oCreature is a DM Possessed creature.
     ///  To determine if oCreature is a DM Possessed creature, use GetIsDMPossessed()
     /// </summary>
-    public int GetIsDM(uint oCreature)
+    internal int GetIsDM(uint oCreature)
     {
       StackPush(oCreature);
       Call(420);
@@ -5265,7 +5265,7 @@ namespace Nwn.Server.Interop
     ///  - nVoiceChatID: VOICE_CHAT_*
     ///  - oTarget
     /// </summary>
-    public void PlayVoiceChat(int nVoiceChatID, uint oTarget = OBJECT_INVALID)
+    internal void PlayVoiceChat(int nVoiceChatID, uint oTarget = OBJECT_INVALID)
     {
       StackPush(oTarget);
       StackPush(nVoiceChatID);
@@ -5275,7 +5275,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  * Returns TRUE if the weapon equipped is capable of damaging oVersus.
     /// </summary>
-    public int GetIsWeaponEffective(uint oVersus = OBJECT_INVALID, int bOffHand = FALSE)
+    internal int GetIsWeaponEffective(uint oVersus = OBJECT_INVALID, int bOffHand = FALSE)
     {
       StackPush(bOffHand);
       StackPush(oVersus);
@@ -5288,7 +5288,7 @@ namespace Nwn.Server.Interop
     ///  harmful.
     ///  * Returns TRUE if the last spell cast was harmful.
     /// </summary>
-    public int GetLastSpellHarmful()
+    internal int GetLastSpellHarmful()
     {
       Call(423);
       return StackPopInt();
@@ -5297,7 +5297,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Activate oItem.
     /// </summary>
-    public IntPtr EventActivateItem(uint oItem, IntPtr lTarget, uint oTarget = OBJECT_INVALID)
+    internal IntPtr EventActivateItem(uint oItem, IntPtr lTarget, uint oTarget = OBJECT_INVALID)
     {
       StackPush(oTarget);
       StackPush(lTarget, ENGINE_STRUCTURE_LOCATION);
@@ -5309,7 +5309,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Play the background music for oArea.
     /// </summary>
-    public void MusicBackgroundPlay(uint oArea)
+    internal void MusicBackgroundPlay(uint oArea)
     {
       StackPush(oArea);
       Call(425);
@@ -5318,7 +5318,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Stop the background music for oArea.
     /// </summary>
-    public void MusicBackgroundStop(uint oArea)
+    internal void MusicBackgroundStop(uint oArea)
     {
       StackPush(oArea);
       Call(426);
@@ -5329,7 +5329,7 @@ namespace Nwn.Server.Interop
     ///  - oArea
     ///  - nDelay: delay in milliseconds
     /// </summary>
-    public void MusicBackgroundSetDelay(uint oArea, int nDelay)
+    internal void MusicBackgroundSetDelay(uint oArea, int nDelay)
     {
       StackPush(nDelay);
       StackPush(oArea);
@@ -5341,7 +5341,7 @@ namespace Nwn.Server.Interop
     ///  - oArea
     ///  - nTrack
     /// </summary>
-    public void MusicBackgroundChangeDay(uint oArea, int nTrack)
+    internal void MusicBackgroundChangeDay(uint oArea, int nTrack)
     {
       StackPush(nTrack);
       StackPush(oArea);
@@ -5353,7 +5353,7 @@ namespace Nwn.Server.Interop
     ///  - oArea
     ///  - nTrack
     /// </summary>
-    public void MusicBackgroundChangeNight(uint oArea, int nTrack)
+    internal void MusicBackgroundChangeNight(uint oArea, int nTrack)
     {
       StackPush(nTrack);
       StackPush(oArea);
@@ -5363,7 +5363,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Play the battle music for oArea.
     /// </summary>
-    public void MusicBattlePlay(uint oArea)
+    internal void MusicBattlePlay(uint oArea)
     {
       StackPush(oArea);
       Call(430);
@@ -5372,7 +5372,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Stop the battle music for oArea.
     /// </summary>
-    public void MusicBattleStop(uint oArea)
+    internal void MusicBattleStop(uint oArea)
     {
       StackPush(oArea);
       Call(431);
@@ -5383,7 +5383,7 @@ namespace Nwn.Server.Interop
     ///  - oArea
     ///  - nTrack
     /// </summary>
-    public void MusicBattleChange(uint oArea, int nTrack)
+    internal void MusicBattleChange(uint oArea, int nTrack)
     {
       StackPush(nTrack);
       StackPush(oArea);
@@ -5393,7 +5393,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Play the ambient sound for oArea.
     /// </summary>
-    public void AmbientSoundPlay(uint oArea)
+    internal void AmbientSoundPlay(uint oArea)
     {
       StackPush(oArea);
       Call(433);
@@ -5402,7 +5402,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Stop the ambient sound for oArea.
     /// </summary>
-    public void AmbientSoundStop(uint oArea)
+    internal void AmbientSoundStop(uint oArea)
     {
       StackPush(oArea);
       Call(434);
@@ -5413,7 +5413,7 @@ namespace Nwn.Server.Interop
     ///  - oArea
     ///  - nTrack
     /// </summary>
-    public void AmbientSoundChangeDay(uint oArea, int nTrack)
+    internal void AmbientSoundChangeDay(uint oArea, int nTrack)
     {
       StackPush(nTrack);
       StackPush(oArea);
@@ -5425,7 +5425,7 @@ namespace Nwn.Server.Interop
     ///  - oArea
     ///  - nTrack
     /// </summary>
-    public void AmbientSoundChangeNight(uint oArea, int nTrack)
+    internal void AmbientSoundChangeNight(uint oArea, int nTrack)
     {
       StackPush(nTrack);
       StackPush(oArea);
@@ -5435,7 +5435,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the object that killed the caller.
     /// </summary>
-    public uint GetLastKiller()
+    internal uint GetLastKiller()
     {
       Call(437);
       return StackPopObject();
@@ -5444,7 +5444,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Use this in a spell script to get the item used to cast the spell.
     /// </summary>
-    public uint GetSpellCastItem()
+    internal uint GetSpellCastItem()
     {
       Call(438);
       return StackPopObject();
@@ -5453,7 +5453,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Use this in an OnItemActivated module script to get the item that was activated.
     /// </summary>
-    public uint GetItemActivated()
+    internal uint GetItemActivated()
     {
       Call(439);
       return StackPopObject();
@@ -5463,7 +5463,7 @@ namespace Nwn.Server.Interop
     ///  Use this in an OnItemActivated module script to get the creature that
     ///  activated the item.
     /// </summary>
-    public uint GetItemActivator()
+    internal uint GetItemActivator()
     {
       Call(440);
       return StackPopObject();
@@ -5473,7 +5473,7 @@ namespace Nwn.Server.Interop
     ///  Use this in an OnItemActivated module script to get the location of the item's
     ///  target.
     /// </summary>
-    public IntPtr GetItemActivatedTargetLocation()
+    internal IntPtr GetItemActivatedTargetLocation()
     {
       Call(441);
       return StackPopStruct(ENGINE_STRUCTURE_LOCATION);
@@ -5482,7 +5482,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Use this in an OnItemActivated module script to get the item's target.
     /// </summary>
-    public uint GetItemActivatedTarget()
+    internal uint GetItemActivatedTarget()
     {
       Call(442);
       return StackPopObject();
@@ -5491,7 +5491,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  * Returns TRUE if oObject (which is a placeable or a door) is currently open.
     /// </summary>
-    public int GetIsOpen(uint oObject)
+    internal int GetIsOpen(uint oObject)
     {
       StackPush(oObject);
       Call(443);
@@ -5505,7 +5505,7 @@ namespace Nwn.Server.Interop
     ///  - bDestroy: If this is TRUE, the caller will not get the gold.  Instead, the
     ///    gold will be destroyed and will vanish from the game.
     /// </summary>
-    public void TakeGoldFromCreature(int nAmount, uint oCreatureToTakeFrom, int bDestroy = FALSE)
+    internal void TakeGoldFromCreature(int nAmount, uint oCreatureToTakeFrom, int bDestroy = FALSE)
     {
       StackPush(bDestroy);
       StackPush(oCreatureToTakeFrom);
@@ -5516,7 +5516,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Determine whether oObject is in conversation.
     /// </summary>
-    public int IsInConversation(uint oObject)
+    internal int IsInConversation(uint oObject)
     {
       StackPush(oObject);
       Call(445);
@@ -5528,7 +5528,7 @@ namespace Nwn.Server.Interop
     ///  - nAbility: ABILITY_*
     ///  - nModifyBy: This is the amount by which to decrement the ability
     /// </summary>
-    public IntPtr EffectAbilityDecrease(int nAbility, int nModifyBy)
+    internal IntPtr EffectAbilityDecrease(int nAbility, int nModifyBy)
     {
       StackPush(nModifyBy);
       StackPush(nAbility);
@@ -5541,7 +5541,7 @@ namespace Nwn.Server.Interop
     ///  - nPenalty
     ///  - nModifierType: ATTACK_BONUS_*
     /// </summary>
-    public IntPtr EffectAttackDecrease(int nPenalty, int nModifierType = ATTACK_BONUS_MISC)
+    internal IntPtr EffectAttackDecrease(int nPenalty, int nModifierType = ATTACK_BONUS_MISC)
     {
       StackPush(nModifierType);
       StackPush(nPenalty);
@@ -5554,7 +5554,7 @@ namespace Nwn.Server.Interop
     ///  - nPenalty
     ///  - nDamageType: DAMAGE_TYPE_*
     /// </summary>
-    public IntPtr EffectDamageDecrease(int nPenalty, int nDamageType = DAMAGE_TYPE_MAGICAL)
+    internal IntPtr EffectDamageDecrease(int nPenalty, int nDamageType = DAMAGE_TYPE_MAGICAL)
     {
       StackPush(nDamageType);
       StackPush(nPenalty);
@@ -5567,7 +5567,7 @@ namespace Nwn.Server.Interop
     ///  - nDamageType: DAMAGE_TYPE_*
     ///  - nPercentImmunity
     /// </summary>
-    public IntPtr EffectDamageImmunityDecrease(int nDamageType, int nPercentImmunity)
+    internal IntPtr EffectDamageImmunityDecrease(int nDamageType, int nPercentImmunity)
     {
       StackPush(nPercentImmunity);
       StackPush(nDamageType);
@@ -5582,7 +5582,7 @@ namespace Nwn.Server.Interop
     ///  - nDamageType: DAMAGE_TYPE_*
     ///    * Default value for nDamageType should only ever be used in this function prototype.
     /// </summary>
-    public IntPtr EffectACDecrease(int nValue, int nModifyType = AC_DODGE_BONUS, int nDamageType = AC_VS_DAMAGE_TYPE_ALL)
+    internal IntPtr EffectACDecrease(int nValue, int nModifyType = AC_DODGE_BONUS, int nDamageType = AC_VS_DAMAGE_TYPE_ALL)
     {
       StackPush(nDamageType);
       StackPush(nModifyType);
@@ -5599,7 +5599,7 @@ namespace Nwn.Server.Interop
     ///    50 = 50% slower
     ///    99 = almost immobile
     /// </summary>
-    public IntPtr EffectMovementSpeedDecrease(int nPercentChange)
+    internal IntPtr EffectMovementSpeedDecrease(int nPercentChange)
     {
       StackPush(nPercentChange);
       Call(451);
@@ -5616,7 +5616,7 @@ namespace Nwn.Server.Interop
     ///  - nValue: size of the Saving Throw decrease
     ///  - nSaveType: SAVING_THROW_TYPE_* (e.g. SAVING_THROW_TYPE_ACID )
     /// </summary>
-    public IntPtr EffectSavingThrowDecrease(int nSave, int nValue, int nSaveType = SAVING_THROW_TYPE_ALL)
+    internal IntPtr EffectSavingThrowDecrease(int nSave, int nValue, int nSaveType = SAVING_THROW_TYPE_ALL)
     {
       StackPush(nSaveType);
       StackPush(nValue);
@@ -5629,7 +5629,7 @@ namespace Nwn.Server.Interop
     ///  Create a Skill Decrease effect.
     ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nSkill is invalid.
     /// </summary>
-    public IntPtr EffectSkillDecrease(int nSkill, int nValue)
+    internal IntPtr EffectSkillDecrease(int nSkill, int nValue)
     {
       StackPush(nValue);
       StackPush(nSkill);
@@ -5640,7 +5640,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Create a Spell Resistance Decrease effect.
     /// </summary>
-    public IntPtr EffectSpellResistanceDecrease(int nValue)
+    internal IntPtr EffectSpellResistanceDecrease(int nValue)
     {
       StackPush(nValue);
       Call(454);
@@ -5650,7 +5650,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Determine whether oTarget is a plot object.
     /// </summary>
-    public int GetPlotFlag(uint oTarget = OBJECT_INVALID)
+    internal int GetPlotFlag(uint oTarget = OBJECT_INVALID)
     {
       StackPush(oTarget);
       Call(455);
@@ -5660,7 +5660,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Set oTarget's plot object status.
     /// </summary>
-    public void SetPlotFlag(uint oTarget, int nPlotFlag)
+    internal void SetPlotFlag(uint oTarget, int nPlotFlag)
     {
       StackPush(nPlotFlag);
       StackPush(oTarget);
@@ -5673,7 +5673,7 @@ namespace Nwn.Server.Interop
     ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nInvisibilityType
     ///    is invalid.
     /// </summary>
-    public IntPtr EffectInvisibility(int nInvisibilityType)
+    internal IntPtr EffectInvisibility(int nInvisibilityType)
     {
       StackPush(nInvisibilityType);
       Call(457);
@@ -5687,7 +5687,7 @@ namespace Nwn.Server.Interop
     ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nPercentage < 1 or
     ///    nPercentage > 100.
     /// </summary>
-    public IntPtr EffectConcealment(int nPercentage, int nMissType = MISS_CHANCE_TYPE_NORMAL)
+    internal IntPtr EffectConcealment(int nPercentage, int nMissType = MISS_CHANCE_TYPE_NORMAL)
     {
       StackPush(nMissType);
       StackPush(nPercentage);
@@ -5698,7 +5698,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Create a Darkness effect.
     /// </summary>
-    public IntPtr EffectDarkness()
+    internal IntPtr EffectDarkness()
     {
       Call(459);
       return StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -5710,7 +5710,7 @@ namespace Nwn.Server.Interop
     ///  cause the dispel effect to use the level of the creature that created the
     ///  effect.
     /// </summary>
-    public IntPtr EffectDispelMagicAll(int nCasterLevel = USE_CREATURE_LEVEL)
+    internal IntPtr EffectDispelMagicAll(int nCasterLevel = USE_CREATURE_LEVEL)
     {
       StackPush(nCasterLevel);
       Call(460);
@@ -5720,7 +5720,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Create an Ultravision effect.
     /// </summary>
-    public IntPtr EffectUltravision()
+    internal IntPtr EffectUltravision()
     {
       Call(461);
       return StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -5731,7 +5731,7 @@ namespace Nwn.Server.Interop
     ///  - nNumLevels: the number of negative levels to apply.
     ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nNumLevels > 100.
     /// </summary>
-    public IntPtr EffectNegativeLevel(int nNumLevels, int bHPBonus = FALSE)
+    internal IntPtr EffectNegativeLevel(int nNumLevels, int bHPBonus = FALSE)
     {
       StackPush(bHPBonus);
       StackPush(nNumLevels);
@@ -5742,7 +5742,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Create a Polymorph effect.
     /// </summary>
-    public IntPtr EffectPolymorph(int nPolymorphSelection, int nLocked = FALSE)
+    internal IntPtr EffectPolymorph(int nPolymorphSelection, int nLocked = FALSE)
     {
       StackPush(nLocked);
       StackPush(nPolymorphSelection);
@@ -5755,7 +5755,7 @@ namespace Nwn.Server.Interop
     ///  - nDifficultyClass: must be a non-zero, positive number
     ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nDifficultyClass <= 0.
     /// </summary>
-    public IntPtr EffectSanctuary(int nDifficultyClass)
+    internal IntPtr EffectSanctuary(int nDifficultyClass)
     {
       StackPush(nDifficultyClass);
       Call(464);
@@ -5765,7 +5765,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Create a True Seeing effect.
     /// </summary>
-    public IntPtr EffectTrueSeeing()
+    internal IntPtr EffectTrueSeeing()
     {
       Call(465);
       return StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -5774,7 +5774,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Create a See Invisible effect.
     /// </summary>
-    public IntPtr EffectSeeInvisible()
+    internal IntPtr EffectSeeInvisible()
     {
       Call(466);
       return StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -5783,7 +5783,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Create a Time Stop effect.
     /// </summary>
-    public IntPtr EffectTimeStop()
+    internal IntPtr EffectTimeStop()
     {
       Call(467);
       return StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -5792,7 +5792,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Create a Blindness effect.
     /// </summary>
-    public IntPtr EffectBlindness()
+    internal IntPtr EffectBlindness()
     {
       Call(468);
       return StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -5806,7 +5806,7 @@ namespace Nwn.Server.Interop
     ///  of faction and personal reputation, use GetIsFriend() instead.
     ///  * Returns TRUE if oSource has a friendly reaction towards oTarget
     /// </summary>
-    public int GetIsReactionTypeFriendly(uint oTarget, uint oSource = OBJECT_INVALID)
+    internal int GetIsReactionTypeFriendly(uint oTarget, uint oSource = OBJECT_INVALID)
     {
       StackPush(oSource);
       StackPush(oTarget);
@@ -5822,7 +5822,7 @@ namespace Nwn.Server.Interop
     ///  of faction and personal reputation, use GetIsNeutral() instead.
     ///  * Returns TRUE if oSource has a neutral reaction towards oTarget
     /// </summary>
-    public int GetIsReactionTypeNeutral(uint oTarget, uint oSource = OBJECT_INVALID)
+    internal int GetIsReactionTypeNeutral(uint oTarget, uint oSource = OBJECT_INVALID)
     {
       StackPush(oSource);
       StackPush(oTarget);
@@ -5838,7 +5838,7 @@ namespace Nwn.Server.Interop
     ///  of faction and personal reputation, use GetIsEnemy() instead.
     ///  * Returns TRUE if oSource has a hostile reaction towards oTarget
     /// </summary>
-    public int GetIsReactionTypeHostile(uint oTarget, uint oSource = OBJECT_INVALID)
+    internal int GetIsReactionTypeHostile(uint oTarget, uint oSource = OBJECT_INVALID)
     {
       StackPush(oSource);
       StackPush(oTarget);
@@ -5857,7 +5857,7 @@ namespace Nwn.Server.Interop
     ///    nMaxSpellLevelAbsorbed is not between -1 and 9 inclusive, or nSpellSchool
     ///    is invalid.
     /// </summary>
-    public IntPtr EffectSpellLevelAbsorption(int nMaxSpellLevelAbsorbed, int nTotalSpellLevelsAbsorbed = 0, int nSpellSchool = SPELL_SCHOOL_GENERAL)
+    internal IntPtr EffectSpellLevelAbsorption(int nMaxSpellLevelAbsorbed, int nTotalSpellLevelsAbsorbed = 0, int nSpellSchool = SPELL_SCHOOL_GENERAL)
     {
       StackPush(nSpellSchool);
       StackPush(nTotalSpellLevelsAbsorbed);
@@ -5872,7 +5872,7 @@ namespace Nwn.Server.Interop
     ///  cause the dispel effect to use the level of the creature that created the
     ///  effect.
     /// </summary>
-    public IntPtr EffectDispelMagicBest(int nCasterLevel = USE_CREATURE_LEVEL)
+    internal IntPtr EffectDispelMagicBest(int nCasterLevel = USE_CREATURE_LEVEL)
     {
       StackPush(nCasterLevel);
       Call(473);
@@ -5894,7 +5894,7 @@ namespace Nwn.Server.Interop
     ///    allowed to save a copy of their character if they are using a local vault
     ///    character.
     /// </summary>
-    public void ActivatePortal(uint oTarget, string sIPaddress = "", string sPassword = "", string sWaypointTag = "", int bSeemless = FALSE)
+    internal void ActivatePortal(uint oTarget, string sIPaddress = "", string sPassword = "", string sWaypointTag = "", int bSeemless = FALSE)
     {
       StackPush(bSeemless);
       StackPush(sWaypointTag);
@@ -5907,7 +5907,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the number of stacked items that oItem comprises.
     /// </summary>
-    public int GetNumStackedItems(uint oItem)
+    internal int GetNumStackedItems(uint oItem)
     {
       StackPush(oItem);
       Call(475);
@@ -5920,7 +5920,7 @@ namespace Nwn.Server.Interop
     ///  neutral towards the NPC for roughly 3 minutes. If this command is run on a PC
     ///  or an object that is not a creature, nothing will happen.
     /// </summary>
-    public void SurrenderToEnemies()
+    internal void SurrenderToEnemies()
     {
       Call(476);
     }
@@ -5932,7 +5932,7 @@ namespace Nwn.Server.Interop
     ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nPercentage < 1 or
     ///    nPercentage > 100.
     /// </summary>
-    public IntPtr EffectMissChance(int nPercentage, int nMissChanceType = MISS_CHANCE_TYPE_NORMAL)
+    internal IntPtr EffectMissChance(int nPercentage, int nMissChanceType = MISS_CHANCE_TYPE_NORMAL)
     {
       StackPush(nMissChanceType);
       StackPush(nPercentage);
@@ -5944,7 +5944,7 @@ namespace Nwn.Server.Interop
     ///  Get the number of Hitdice worth of Turn Resistance that oUndead may have.
     ///  This will only work on undead creatures.
     /// </summary>
-    public int GetTurnResistanceHD(uint oUndead = OBJECT_INVALID)
+    internal int GetTurnResistanceHD(uint oUndead = OBJECT_INVALID)
     {
       StackPush(oUndead);
       Call(478);
@@ -5954,7 +5954,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the size (CREATURE_SIZE_*) of oCreature.
     /// </summary>
-    public int GetCreatureSize(uint oCreature)
+    internal int GetCreatureSize(uint oCreature)
     {
       StackPush(oCreature);
       Call(479);
@@ -5968,7 +5968,7 @@ namespace Nwn.Server.Interop
     ///  - nAnimation determines which appear and disappear animations to use. Most creatures
     ///  only have animation 1, although a few have 2 (like beholders)
     /// </summary>
-    public IntPtr EffectDisappearAppear(IntPtr lLocation, int nAnimation = 1)
+    internal IntPtr EffectDisappearAppear(IntPtr lLocation, int nAnimation = 1)
     {
       StackPush(nAnimation);
       StackPush(lLocation, ENGINE_STRUCTURE_LOCATION);
@@ -5982,7 +5982,7 @@ namespace Nwn.Server.Interop
     ///  - nAnimation determines which appear and disappear animations to use. Most creatures
     ///  only have animation 1, although a few have 2 (like beholders)
     /// </summary>
-    public IntPtr EffectDisappear(int nAnimation = 1)
+    internal IntPtr EffectDisappear(int nAnimation = 1)
     {
       StackPush(nAnimation);
       Call(481);
@@ -5994,7 +5994,7 @@ namespace Nwn.Server.Interop
     ///  - nAnimation determines which appear and disappear animations to use. Most creatures
     ///  only have animation 1, although a few have 2 (like beholders)
     /// </summary>
-    public IntPtr EffectAppear(int nAnimation = 1)
+    internal IntPtr EffectAppear(int nAnimation = 1)
     {
       StackPush(nAnimation);
       Call(482);
@@ -6005,7 +6005,7 @@ namespace Nwn.Server.Interop
     ///  The action subject will unlock oTarget, which can be a door or a placeable
     ///  object.
     /// </summary>
-    public void ActionUnlockObject(uint oTarget)
+    internal void ActionUnlockObject(uint oTarget)
     {
       StackPush(oTarget);
       Call(483);
@@ -6015,7 +6015,7 @@ namespace Nwn.Server.Interop
     ///  The action subject will lock oTarget, which can be a door or a placeable
     ///  object.
     /// </summary>
-    public void ActionLockObject(uint oTarget)
+    internal void ActionLockObject(uint oTarget)
     {
       StackPush(oTarget);
       Call(484);
@@ -6026,7 +6026,7 @@ namespace Nwn.Server.Interop
     ///  - nAttacks: maximum is 5, even with the effect stacked
     ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nAttacks > 5.
     /// </summary>
-    public IntPtr EffectModifyAttacks(int nAttacks)
+    internal IntPtr EffectModifyAttacks(int nAttacks)
     {
       StackPush(nAttacks);
       Call(485);
@@ -6037,7 +6037,7 @@ namespace Nwn.Server.Interop
     ///  Get the last trap detected by oTarget.
     ///  * Return value on error: OBJECT_INVALID
     /// </summary>
-    public uint GetLastTrapDetected(uint oTarget = OBJECT_INVALID)
+    internal uint GetLastTrapDetected(uint oTarget = OBJECT_INVALID)
     {
       StackPush(oTarget);
       Call(486);
@@ -6053,7 +6053,7 @@ namespace Nwn.Server.Interop
     ///  NOTE! You *must* use the DAMAGE_BONUS_* constants! Using other values may
     ///        result in odd behaviour.
     /// </summary>
-    public IntPtr EffectDamageShield(int nDamageAmount, int nRandomAmount, int nDamageType)
+    internal IntPtr EffectDamageShield(int nDamageAmount, int nRandomAmount, int nDamageType)
     {
       StackPush(nDamageType);
       StackPush(nRandomAmount);
@@ -6070,7 +6070,7 @@ namespace Nwn.Server.Interop
     ///  - nTrapDetected: if this is TRUE, the trap returned has to have been detected
     ///    by oTarget.
     /// </summary>
-    public uint GetNearestTrapToObject(uint oTarget = OBJECT_INVALID, int nTrapDetected = TRUE)
+    internal uint GetNearestTrapToObject(uint oTarget = OBJECT_INVALID, int nTrapDetected = TRUE)
     {
       StackPush(nTrapDetected);
       StackPush(oTarget);
@@ -6083,7 +6083,7 @@ namespace Nwn.Server.Interop
     ///  * Returns "" if oCreature is invalid (or if the deity name is blank for
     ///    oCreature).
     /// </summary>
-    public string GetDeity(uint oCreature)
+    internal string GetDeity(uint oCreature)
     {
       StackPush(oCreature);
       Call(489);
@@ -6094,7 +6094,7 @@ namespace Nwn.Server.Interop
     ///  Get the name of oCreature's sub race.
     ///  * Returns "" if oCreature is invalid (or if sub race is blank for oCreature).
     /// </summary>
-    public string GetSubRace(uint oTarget)
+    internal string GetSubRace(uint oTarget)
     {
       StackPush(oTarget);
       Call(490);
@@ -6106,7 +6106,7 @@ namespace Nwn.Server.Interop
     ///  creatures, doors, and placeables).
     ///  * Returns 0 if oTarget is invalid.
     /// </summary>
-    public int GetFortitudeSavingThrow(uint oTarget)
+    internal int GetFortitudeSavingThrow(uint oTarget)
     {
       StackPush(oTarget);
       Call(491);
@@ -6118,7 +6118,7 @@ namespace Nwn.Server.Interop
     ///  doors, and placeables).
     ///  * Returns 0 if oTarget is invalid.
     /// </summary>
-    public int GetWillSavingThrow(uint oTarget)
+    internal int GetWillSavingThrow(uint oTarget)
     {
       StackPush(oTarget);
       Call(492);
@@ -6130,7 +6130,7 @@ namespace Nwn.Server.Interop
     ///  creatures, doors, and placeables).
     ///  * Returns 0 if oTarget is invalid.
     /// </summary>
-    public int GetReflexSavingThrow(uint oTarget)
+    internal int GetReflexSavingThrow(uint oTarget)
     {
       StackPush(oTarget);
       Call(493);
@@ -6141,7 +6141,7 @@ namespace Nwn.Server.Interop
     ///  Get oCreature's challenge rating.
     ///  * Returns 0.0 if oCreature is invalid.
     /// </summary>
-    public float GetChallengeRating(uint oCreature)
+    internal float GetChallengeRating(uint oCreature)
     {
       StackPush(oCreature);
       Call(494);
@@ -6152,7 +6152,7 @@ namespace Nwn.Server.Interop
     ///  Get oCreature's age.
     ///  * Returns 0 if oCreature is invalid.
     /// </summary>
-    public int GetAge(uint oCreature)
+    internal int GetAge(uint oCreature)
     {
       StackPush(oCreature);
       Call(495);
@@ -6163,7 +6163,7 @@ namespace Nwn.Server.Interop
     ///  Get oCreature's movement rate.
     ///  * Returns 0 if oCreature is invalid.
     /// </summary>
-    public int GetMovementRate(uint oCreature)
+    internal int GetMovementRate(uint oCreature)
     {
       StackPush(oCreature);
       Call(496);
@@ -6175,7 +6175,7 @@ namespace Nwn.Server.Interop
     ///  * Returns FAMILIAR_CREATURE_TYPE_NONE if oCreature is invalid or does not
     ///    currently have a familiar.
     /// </summary>
-    public int GetFamiliarCreatureType(uint oCreature)
+    internal int GetFamiliarCreatureType(uint oCreature)
     {
       StackPush(oCreature);
       Call(497);
@@ -6188,7 +6188,7 @@ namespace Nwn.Server.Interop
     ///  * Returns ANIMAL_COMPANION_CREATURE_TYPE_NONE if oCreature is invalid or does
     ///    not currently have an animal companion.
     /// </summary>
-    public int GetAnimalCompanionCreatureType(uint oCreature)
+    internal int GetAnimalCompanionCreatureType(uint oCreature)
     {
       StackPush(oCreature);
       Call(498);
@@ -6200,7 +6200,7 @@ namespace Nwn.Server.Interop
     ///  * Returns "" if oCreature is invalid, does not currently
     ///  have a familiar or if the familiar's name is blank.
     /// </summary>
-    public string GetFamiliarName(uint oCreature)
+    internal string GetFamiliarName(uint oCreature)
     {
       StackPush(oCreature);
       Call(499);
@@ -6212,7 +6212,7 @@ namespace Nwn.Server.Interop
     ///  * Returns "" if oCreature is invalid, does not currently
     ///  have an animal companion or if the animal companion's name is blank.
     /// </summary>
-    public string GetAnimalCompanionName(uint oTarget)
+    internal string GetAnimalCompanionName(uint oTarget)
     {
       StackPush(oTarget);
       Call(500);
@@ -6226,7 +6226,7 @@ namespace Nwn.Server.Interop
     ///  - oTarget
     ///  - nProjectilePathType: PROJECTILE_PATH_TYPE_*
     /// </summary>
-    public void ActionCastFakeSpellAtObject(int nSpell, uint oTarget, int nProjectilePathType = PROJECTILE_PATH_TYPE_DEFAULT)
+    internal void ActionCastFakeSpellAtObject(int nSpell, uint oTarget, int nProjectilePathType = PROJECTILE_PATH_TYPE_DEFAULT)
     {
       StackPush(nProjectilePathType);
       StackPush(oTarget);
@@ -6241,7 +6241,7 @@ namespace Nwn.Server.Interop
     ///  - lTarget
     ///  - nProjectilePathType: PROJECTILE_PATH_TYPE_*
     /// </summary>
-    public void ActionCastFakeSpellAtLocation(int nSpell, IntPtr lTarget, int nProjectilePathType = PROJECTILE_PATH_TYPE_DEFAULT)
+    internal void ActionCastFakeSpellAtLocation(int nSpell, IntPtr lTarget, int nProjectilePathType = PROJECTILE_PATH_TYPE_DEFAULT)
     {
       StackPush(nProjectilePathType);
       StackPush(lTarget, ENGINE_STRUCTURE_LOCATION);
@@ -6253,7 +6253,7 @@ namespace Nwn.Server.Interop
     ///  Removes oAssociate from the service of oMaster, returning them to their
     ///  original faction.
     /// </summary>
-    public void RemoveSummonedAssociate(uint oMaster, uint oAssociate = OBJECT_INVALID)
+    internal void RemoveSummonedAssociate(uint oMaster, uint oAssociate = OBJECT_INVALID)
     {
       StackPush(oAssociate);
       StackPush(oMaster);
@@ -6267,7 +6267,7 @@ namespace Nwn.Server.Interop
     ///  * If oPlayer is not player-controlled or nCameraMode is invalid, nothing
     ///    happens.
     /// </summary>
-    public void SetCameraMode(uint oPlayer, int nCameraMode)
+    internal void SetCameraMode(uint oPlayer, int nCameraMode)
     {
       StackPush(nCameraMode);
       StackPush(oPlayer);
@@ -6277,7 +6277,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  * Returns TRUE if oCreature is resting.
     /// </summary>
-    public int GetIsResting(uint oCreature = OBJECT_INVALID)
+    internal int GetIsResting(uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       Call(505);
@@ -6287,7 +6287,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the last PC that has rested in the module.
     /// </summary>
-    public uint GetLastPCRested()
+    internal uint GetLastPCRested()
     {
       Call(506);
       return StackPopObject();
@@ -6303,7 +6303,7 @@ namespace Nwn.Server.Interop
     ///    -> WEATHER_CLEAR, WEATHER_RAIN, WEATHER_SNOW will make the weather go to
     ///       the appropriate precipitation *without stopping*.
     /// </summary>
-    public void SetWeather(uint oTarget, int nWeather)
+    internal void SetWeather(uint oTarget, int nWeather)
     {
       StackPush(nWeather);
       StackPush(oTarget);
@@ -6314,7 +6314,7 @@ namespace Nwn.Server.Interop
     ///  Determine the type (REST_EVENTTYPE_REST_*) of the last rest event (as
     ///  returned from the OnPCRested module event).
     /// </summary>
-    public int GetLastRestEventType()
+    internal int GetLastRestEventType()
     {
       Call(508);
       return StackPopInt();
@@ -6324,7 +6324,7 @@ namespace Nwn.Server.Interop
     ///  Shut down the currently loaded module and start a new one (moving all
     ///  currently-connected players to the starting point.
     /// </summary>
-    public void StartNewModule(string sModuleName)
+    internal void StartNewModule(string sModuleName)
     {
       StackPush(sModuleName);
       Call(509);
@@ -6341,7 +6341,7 @@ namespace Nwn.Server.Interop
     ///  - sCreatureTemplate3
     ///  - sCreatureTemplate4
     /// </summary>
-    public IntPtr EffectSwarm(int nLooping, string sCreatureTemplate1, string sCreatureTemplate2 = "", string sCreatureTemplate3 = "", string sCreatureTemplate4 = "")
+    internal IntPtr EffectSwarm(int nLooping, string sCreatureTemplate1, string sCreatureTemplate2 = "", string sCreatureTemplate3 = "", string sCreatureTemplate4 = "")
     {
       StackPush(sCreatureTemplate4);
       StackPush(sCreatureTemplate3);
@@ -6355,7 +6355,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  * Returns TRUE if oItem is a ranged weapon.
     /// </summary>
-    public int GetWeaponRanged(uint oItem)
+    internal int GetWeaponRanged(uint oItem)
     {
       StackPush(oItem);
       Call(511);
@@ -6365,7 +6365,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Only if we are in a single player game, AutoSave the game.
     /// </summary>
-    public void DoSinglePlayerAutoSave()
+    internal void DoSinglePlayerAutoSave()
     {
       Call(512);
     }
@@ -6373,7 +6373,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the game difficulty (GAME_DIFFICULTY_*).
     /// </summary>
-    public int GetGameDifficulty()
+    internal int GetGameDifficulty()
     {
       Call(513);
       return StackPopInt();
@@ -6386,7 +6386,7 @@ namespace Nwn.Server.Interop
     ///  - nMainLight1Color: TILE_MAIN_LIGHT_COLOR_*
     ///  - nMainLight2Color: TILE_MAIN_LIGHT_COLOR_*
     /// </summary>
-    public void SetTileMainLightColor(IntPtr lTileLocation, int nMainLight1Color, int nMainLight2Color)
+    internal void SetTileMainLightColor(IntPtr lTileLocation, int nMainLight1Color, int nMainLight2Color)
     {
       StackPush(nMainLight2Color);
       StackPush(nMainLight1Color);
@@ -6401,7 +6401,7 @@ namespace Nwn.Server.Interop
     ///  - nSourceLight1Color: TILE_SOURCE_LIGHT_COLOR_*
     ///  - nSourceLight2Color: TILE_SOURCE_LIGHT_COLOR_*
     /// </summary>
-    public void SetTileSourceLightColor(IntPtr lTileLocation, int nSourceLight1Color, int nSourceLight2Color)
+    internal void SetTileSourceLightColor(IntPtr lTileLocation, int nSourceLight1Color, int nSourceLight2Color)
     {
       StackPush(nSourceLight2Color);
       StackPush(nSourceLight1Color);
@@ -6414,7 +6414,7 @@ namespace Nwn.Server.Interop
     ///  This can be used to update the lighting after changing any tile lights or if
     ///  placeables with lights have been added/deleted.
     /// </summary>
-    public void RecomputeLighting(uint oArea)
+    internal void RecomputeLighting(uint oArea)
     {
       StackPush(oArea);
       Call(516);
@@ -6425,7 +6425,7 @@ namespace Nwn.Server.Interop
     ///  lTile.
     ///  - lTile: the vector part of this is the tile grid (x,y) coordinate of the tile.
     /// </summary>
-    public int GetTileMainLight1Color(IntPtr lTile)
+    internal int GetTileMainLight1Color(IntPtr lTile)
     {
       StackPush(lTile, ENGINE_STRUCTURE_LOCATION);
       Call(517);
@@ -6438,7 +6438,7 @@ namespace Nwn.Server.Interop
     ///  - lTile: the vector part of this is the tile grid (x,y) coordinate of the
     ///    tile.
     /// </summary>
-    public int GetTileMainLight2Color(IntPtr lTile)
+    internal int GetTileMainLight2Color(IntPtr lTile)
     {
       StackPush(lTile, ENGINE_STRUCTURE_LOCATION);
       Call(518);
@@ -6451,7 +6451,7 @@ namespace Nwn.Server.Interop
     ///  - lTile: the vector part of this is the tile grid (x,y) coordinate of the
     ///    tile.
     /// </summary>
-    public int GetTileSourceLight1Color(IntPtr lTile)
+    internal int GetTileSourceLight1Color(IntPtr lTile)
     {
       StackPush(lTile, ENGINE_STRUCTURE_LOCATION);
       Call(519);
@@ -6464,7 +6464,7 @@ namespace Nwn.Server.Interop
     ///  - lTile: the vector part of this is the tile grid (x,y) coordinate of the
     ///    tile.
     /// </summary>
-    public int GetTileSourceLight2Color(IntPtr lTile)
+    internal int GetTileSourceLight2Color(IntPtr lTile)
     {
       StackPush(lTile, ENGINE_STRUCTURE_LOCATION);
       Call(520);
@@ -6479,7 +6479,7 @@ namespace Nwn.Server.Interop
     ///  - nEnableFlash: if this is TRUE nButton will start flashing.  It if is FALSE,
     ///    nButton will stop flashing.
     /// </summary>
-    public void SetPanelButtonFlash(uint oPlayer, int nButton, int nEnableFlash)
+    internal void SetPanelButtonFlash(uint oPlayer, int nButton, int nEnableFlash)
     {
       StackPush(nEnableFlash);
       StackPush(nButton);
@@ -6490,7 +6490,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the current action (ACTION_*) that oObject is executing.
     /// </summary>
-    public int GetCurrentAction(uint oObject = OBJECT_INVALID)
+    internal int GetCurrentAction(uint oObject = OBJECT_INVALID)
     {
       StackPush(oObject);
       Call(522);
@@ -6503,7 +6503,7 @@ namespace Nwn.Server.Interop
     ///  - nNewReputation: 0-100 (inclusive)
     ///  - oCreature
     /// </summary>
-    public void SetStandardFactionReputation(int nStandardFaction, int nNewReputation, uint oCreature = OBJECT_INVALID)
+    internal void SetStandardFactionReputation(int nStandardFaction, int nNewReputation, uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       StackPush(nNewReputation);
@@ -6521,7 +6521,7 @@ namespace Nwn.Server.Interop
     ///  11-89  :  Neutral.
     ///  90-100 :  Friendly.
     /// </summary>
-    public int GetStandardFactionReputation(int nStandardFaction, uint oCreature = OBJECT_INVALID)
+    internal int GetStandardFactionReputation(int nStandardFaction, uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       StackPush(nStandardFaction);
@@ -6539,7 +6539,7 @@ namespace Nwn.Server.Interop
     ///    as oCreatureToFloatAbove
     ///    will see the floaty text, and only if they are within range (30 metres).
     /// </summary>
-    public void FloatingTextStrRefOnCreature(int nStrRefToDisplay, uint oCreatureToFloatAbove, int bBroadcastToFaction = TRUE)
+    internal void FloatingTextStrRefOnCreature(int nStrRefToDisplay, uint oCreatureToFloatAbove, int bBroadcastToFaction = TRUE)
     {
       StackPush(bBroadcastToFaction);
       StackPush(oCreatureToFloatAbove);
@@ -6557,7 +6557,7 @@ namespace Nwn.Server.Interop
     ///    as oCreatureToFloatAbove
     ///    will see the floaty text, and only if they are within range (30 metres).
     /// </summary>
-    public void FloatingTextStringOnCreature(string sStringToDisplay, uint oCreatureToFloatAbove, int bBroadcastToFaction = TRUE)
+    internal void FloatingTextStringOnCreature(string sStringToDisplay, uint oCreatureToFloatAbove, int bBroadcastToFaction = TRUE)
     {
       StackPush(bBroadcastToFaction);
       StackPush(oCreatureToFloatAbove);
@@ -6569,7 +6569,7 @@ namespace Nwn.Server.Interop
     ///  - oTrapObject: a placeable, door or trigger
     ///  * Returns TRUE if oTrapObject is disarmable.
     /// </summary>
-    public int GetTrapDisarmable(uint oTrapObject)
+    internal int GetTrapDisarmable(uint oTrapObject)
     {
       StackPush(oTrapObject);
       Call(527);
@@ -6580,7 +6580,7 @@ namespace Nwn.Server.Interop
     ///  - oTrapObject: a placeable, door or trigger
     ///  * Returns TRUE if oTrapObject is detectable.
     /// </summary>
-    public int GetTrapDetectable(uint oTrapObject)
+    internal int GetTrapDetectable(uint oTrapObject)
     {
       StackPush(oTrapObject);
       Call(528);
@@ -6592,7 +6592,7 @@ namespace Nwn.Server.Interop
     ///  - oCreature
     ///  * Returns TRUE if oCreature has detected oTrapObject
     /// </summary>
-    public int GetTrapDetectedBy(uint oTrapObject, uint oCreature)
+    internal int GetTrapDetectedBy(uint oTrapObject, uint oCreature)
     {
       StackPush(oCreature);
       StackPush(oTrapObject);
@@ -6604,7 +6604,7 @@ namespace Nwn.Server.Interop
     ///  - oTrapObject: a placeable, door or trigger
     ///  * Returns TRUE if oTrapObject has been flagged as visible to all creatures.
     /// </summary>
-    public int GetTrapFlagged(uint oTrapObject)
+    internal int GetTrapFlagged(uint oTrapObject)
     {
       StackPush(oTrapObject);
       Call(530);
@@ -6615,7 +6615,7 @@ namespace Nwn.Server.Interop
     ///  Get the trap base type (TRAP_BASE_TYPE_*) of oTrapObject.
     ///  - oTrapObject: a placeable, door or trigger
     /// </summary>
-    public int GetTrapBaseType(uint oTrapObject)
+    internal int GetTrapBaseType(uint oTrapObject)
     {
       StackPush(oTrapObject);
       Call(531);
@@ -6627,7 +6627,7 @@ namespace Nwn.Server.Interop
     ///  * Returns TRUE if oTrapObject is one-shot (i.e. it does not reset itself
     ///    after firing.
     /// </summary>
-    public int GetTrapOneShot(uint oTrapObject)
+    internal int GetTrapOneShot(uint oTrapObject)
     {
       StackPush(oTrapObject);
       Call(532);
@@ -6639,7 +6639,7 @@ namespace Nwn.Server.Interop
     ///  - oTrapObject: a placeable, door or trigger
     ///  * Returns OBJECT_INVALID if oTrapObject was created in the toolset.
     /// </summary>
-    public uint GetTrapCreator(uint oTrapObject)
+    internal uint GetTrapCreator(uint oTrapObject)
     {
       StackPush(oTrapObject);
       Call(533);
@@ -6650,7 +6650,7 @@ namespace Nwn.Server.Interop
     ///  Get the tag of the key that will disarm oTrapObject.
     ///  - oTrapObject: a placeable, door or trigger
     /// </summary>
-    public string GetTrapKeyTag(uint oTrapObject)
+    internal string GetTrapKeyTag(uint oTrapObject)
     {
       StackPush(oTrapObject);
       Call(534);
@@ -6661,7 +6661,7 @@ namespace Nwn.Server.Interop
     ///  Get the DC for disarming oTrapObject.
     ///  - oTrapObject: a placeable, door or trigger
     /// </summary>
-    public int GetTrapDisarmDC(uint oTrapObject)
+    internal int GetTrapDisarmDC(uint oTrapObject)
     {
       StackPush(oTrapObject);
       Call(535);
@@ -6672,7 +6672,7 @@ namespace Nwn.Server.Interop
     ///  Get the DC for detecting oTrapObject.
     ///  - oTrapObject: a placeable, door or trigger
     /// </summary>
-    public int GetTrapDetectDC(uint oTrapObject)
+    internal int GetTrapDetectDC(uint oTrapObject)
     {
       StackPush(oTrapObject);
       Call(536);
@@ -6682,7 +6682,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  * Returns TRUE if a specific key is required to open the lock on oObject.
     /// </summary>
-    public int GetLockKeyRequired(uint oObject)
+    internal int GetLockKeyRequired(uint oObject)
     {
       StackPush(oObject);
       Call(537);
@@ -6692,7 +6692,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the tag of the key that will open the lock on oObject.
     /// </summary>
-    public string GetLockKeyTag(uint oObject)
+    internal string GetLockKeyTag(uint oObject)
     {
       StackPush(oObject);
       Call(538);
@@ -6702,7 +6702,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  * Returns TRUE if the lock on oObject is lockable.
     /// </summary>
-    public int GetLockLockable(uint oObject)
+    internal int GetLockLockable(uint oObject)
     {
       StackPush(oObject);
       Call(539);
@@ -6712,7 +6712,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the DC for unlocking oObject.
     /// </summary>
-    public int GetLockUnlockDC(uint oObject)
+    internal int GetLockUnlockDC(uint oObject)
     {
       StackPush(oObject);
       Call(540);
@@ -6722,7 +6722,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the DC for locking oObject.
     /// </summary>
-    public int GetLockLockDC(uint oObject)
+    internal int GetLockLockDC(uint oObject)
     {
       StackPush(oObject);
       Call(541);
@@ -6732,7 +6732,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the last PC that levelled up.
     /// </summary>
-    public uint GetPCLevellingUp()
+    internal uint GetPCLevellingUp()
     {
       Call(542);
       return StackPopObject();
@@ -6743,7 +6743,7 @@ namespace Nwn.Server.Interop
     ///  - oObject
     ///  * Returns TRUE if oObject has effects on it originating from nFeat.
     /// </summary>
-    public int GetHasFeatEffect(int nFeat, uint oObject = OBJECT_INVALID)
+    internal int GetHasFeatEffect(int nFeat, uint oObject = OBJECT_INVALID)
     {
       StackPush(oObject);
       StackPush(nFeat);
@@ -6766,7 +6766,7 @@ namespace Nwn.Server.Interop
     ///  * If oPlaceable is not a placeable object, or oPlaceable is a placeable that
     ///    doesn't have a light, nothing will happen.
     /// </summary>
-    public void SetPlaceableIllumination(uint oPlaceable = OBJECT_INVALID, int bIlluminate = TRUE)
+    internal void SetPlaceableIllumination(uint oPlaceable = OBJECT_INVALID, int bIlluminate = TRUE)
     {
       StackPush(bIlluminate);
       StackPush(oPlaceable);
@@ -6776,7 +6776,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  * Returns TRUE if the illumination for oPlaceable is on
     /// </summary>
-    public int GetPlaceableIllumination(uint oPlaceable = OBJECT_INVALID)
+    internal int GetPlaceableIllumination(uint oPlaceable = OBJECT_INVALID)
     {
       StackPush(oPlaceable);
       Call(545);
@@ -6788,7 +6788,7 @@ namespace Nwn.Server.Interop
     ///  - nPlaceableAction: PLACEABLE_ACTION_*
     ///  * Returns TRUE if nPlacebleAction is valid for oPlaceable.
     /// </summary>
-    public int GetIsPlaceableObjectActionPossible(uint oPlaceable, int nPlaceableAction)
+    internal int GetIsPlaceableObjectActionPossible(uint oPlaceable, int nPlaceableAction)
     {
       StackPush(nPlaceableAction);
       StackPush(oPlaceable);
@@ -6801,7 +6801,7 @@ namespace Nwn.Server.Interop
     ///  - oPlaceable
     ///  - nPlaceableAction: PLACEABLE_ACTION_*
     /// </summary>
-    public void DoPlaceableObjectAction(uint oPlaceable, int nPlaceableAction)
+    internal void DoPlaceableObjectAction(uint oPlaceable, int nPlaceableAction)
     {
       StackPush(nPlaceableAction);
       StackPush(oPlaceable);
@@ -6812,7 +6812,7 @@ namespace Nwn.Server.Interop
     ///  Get the first PC in the player list.
     ///  This resets the position in the player list for GetNextPC().
     /// </summary>
-    public uint GetFirstPC()
+    internal uint GetFirstPC()
     {
       Call(548);
       return StackPopObject();
@@ -6822,7 +6822,7 @@ namespace Nwn.Server.Interop
     ///  Get the next PC in the player list.
     ///  This picks up where the last GetFirstPC() or GetNextPC() left off.
     /// </summary>
-    public uint GetNextPC()
+    internal uint GetNextPC()
     {
       Call(549);
       return StackPopObject();
@@ -6834,7 +6834,7 @@ namespace Nwn.Server.Interop
     ///  - oDetector: This is the creature that the detected status of the trap is being adjusted for.
     ///  - bDetected: A Boolean that sets whether the trapped object has been detected or not.
     /// </summary>
-    public int SetTrapDetectedBy(uint oTrap, uint oDetector, int bDetected = TRUE)
+    internal int SetTrapDetectedBy(uint oTrap, uint oDetector, int bDetected = TRUE)
     {
       StackPush(bDetected);
       StackPush(oDetector);
@@ -6847,7 +6847,7 @@ namespace Nwn.Server.Interop
     ///  Note: Only placeables, doors and triggers can be trapped.
     ///  * Returns TRUE if oObject is trapped.
     /// </summary>
-    public int GetIsTrapped(uint oObject)
+    internal int GetIsTrapped(uint oObject)
     {
       StackPush(oObject);
       Call(551);
@@ -6859,7 +6859,7 @@ namespace Nwn.Server.Interop
     ///  - nHitDice: a positive number representing the number of hit dice for the
     /// /  decrease
     /// </summary>
-    public IntPtr EffectTurnResistanceDecrease(int nHitDice)
+    internal IntPtr EffectTurnResistanceDecrease(int nHitDice)
     {
       StackPush(nHitDice);
       Call(552);
@@ -6871,7 +6871,7 @@ namespace Nwn.Server.Interop
     ///  - nHitDice: a positive number representing the number of hit dice for the
     ///    increase
     /// </summary>
-    public IntPtr EffectTurnResistanceIncrease(int nHitDice)
+    internal IntPtr EffectTurnResistanceIncrease(int nHitDice)
     {
       StackPush(nHitDice);
       Call(553);
@@ -6891,7 +6891,7 @@ namespace Nwn.Server.Interop
     ///  - nHelpStringReference
     ///  - sHelpString
     /// </summary>
-    public void PopUpDeathGUIPanel(uint oPC, int bRespawnButtonEnabled = TRUE, int bWaitForHelpButtonEnabled = TRUE, int nHelpStringReference = 0, string sHelpString = "")
+    internal void PopUpDeathGUIPanel(uint oPC, int bRespawnButtonEnabled = TRUE, int bWaitForHelpButtonEnabled = TRUE, int nHelpStringReference = 0, string sHelpString = "")
     {
       StackPush(sHelpString);
       StackPush(nHelpStringReference);
@@ -6905,7 +6905,7 @@ namespace Nwn.Server.Interop
     ///  Disable oTrap.
     ///  - oTrap: a placeable, door or trigger.
     /// </summary>
-    public void SetTrapDisabled(uint oTrap)
+    internal void SetTrapDisabled(uint oTrap)
     {
       StackPush(oTrap);
       Call(555);
@@ -6924,7 +6924,7 @@ namespace Nwn.Server.Interop
     ///  5) This value will never be overwritten by another non-creature object.
     ///  6) This value will never be a dead/destroyed creature
     /// </summary>
-    public uint GetLastHostileActor(uint oVictim = OBJECT_INVALID)
+    internal uint GetLastHostileActor(uint oVictim = OBJECT_INVALID)
     {
       StackPush(oVictim);
       Call(556);
@@ -6935,7 +6935,7 @@ namespace Nwn.Server.Interop
     ///  Force all the characters of the players who are currently in the game to
     ///  be exported to their respective directories i.e. LocalVault/ServerVault/ etc.
     /// </summary>
-    public void ExportAllCharacters()
+    internal void ExportAllCharacters()
     {
       Call(557);
     }
@@ -6943,7 +6943,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the Day Track for oArea.
     /// </summary>
-    public int MusicBackgroundGetDayTrack(uint oArea)
+    internal int MusicBackgroundGetDayTrack(uint oArea)
     {
       StackPush(oArea);
       Call(558);
@@ -6953,7 +6953,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the Night Track for oArea.
     /// </summary>
-    public int MusicBackgroundGetNightTrack(uint oArea)
+    internal int MusicBackgroundGetNightTrack(uint oArea)
     {
       StackPush(oArea);
       Call(559);
@@ -6963,7 +6963,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Write sLogEntry as a timestamped entry into the log file
     /// </summary>
-    public void WriteTimestampedLogEntry(string sLogEntry)
+    internal void WriteTimestampedLogEntry(string sLogEntry)
     {
       StackPush(sLogEntry);
       Call(560);
@@ -6974,7 +6974,7 @@ namespace Nwn.Server.Interop
     ///  * If there is no entry for the language of the server, it will return an
     ///    empty string
     /// </summary>
-    public string GetModuleName()
+    internal string GetModuleName()
     {
       Call(561);
       return StackPopString();
@@ -6985,7 +6985,7 @@ namespace Nwn.Server.Interop
     ///  * Returns OBJECT_INVALID if oMemberOfFaction is not a valid creature,
     ///    or oMemberOfFaction is a member of a NPC faction.
     /// </summary>
-    public uint GetFactionLeader(uint oMemberOfFaction)
+    internal uint GetFactionLeader(uint oMemberOfFaction)
     {
       StackPush(oMemberOfFaction);
       Call(562);
@@ -6995,7 +6995,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Sends szMessage to all the Dungeon Masters currently on the server.
     /// </summary>
-    public void SendMessageToAllDMs(string szMessage)
+    internal void SendMessageToAllDMs(string szMessage)
     {
       StackPush(szMessage);
       Call(563);
@@ -7005,7 +7005,7 @@ namespace Nwn.Server.Interop
     ///  End the currently running game, play sEndMovie then return all players to the
     ///  game's main menu.
     /// </summary>
-    public void EndGame(string sEndMovie)
+    internal void EndGame(string sEndMovie)
     {
       StackPush(sEndMovie);
       Call(564);
@@ -7015,7 +7015,7 @@ namespace Nwn.Server.Interop
     ///  Remove oPlayer from the server.
     ///  You can optionally specify a reason to override the text shown to the player.
     /// </summary>
-    public void BootPC(uint oPlayer, string sReason = "")
+    internal void BootPC(uint oPlayer, string sReason = "")
     {
       StackPush(sReason);
       StackPush(oPlayer);
@@ -7025,7 +7025,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Counterspell oCounterSpellTarget.
     /// </summary>
-    public void ActionCounterSpell(uint oCounterSpellTarget)
+    internal void ActionCounterSpell(uint oCounterSpellTarget)
     {
       StackPush(oCounterSpellTarget);
       Call(566);
@@ -7036,7 +7036,7 @@ namespace Nwn.Server.Interop
     ///  - oArea
     ///  - nVolume: 0 - 100
     /// </summary>
-    public void AmbientSoundSetDayVolume(uint oArea, int nVolume)
+    internal void AmbientSoundSetDayVolume(uint oArea, int nVolume)
     {
       StackPush(nVolume);
       StackPush(oArea);
@@ -7048,7 +7048,7 @@ namespace Nwn.Server.Interop
     ///  - oArea
     ///  - nVolume: 0 - 100
     /// </summary>
-    public void AmbientSoundSetNightVolume(uint oArea, int nVolume)
+    internal void AmbientSoundSetNightVolume(uint oArea, int nVolume)
     {
       StackPush(nVolume);
       StackPush(oArea);
@@ -7058,7 +7058,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the Battle Track for oArea.
     /// </summary>
-    public int MusicBackgroundGetBattleTrack(uint oArea)
+    internal int MusicBackgroundGetBattleTrack(uint oArea)
     {
       StackPush(oArea);
       Call(569);
@@ -7070,7 +7070,7 @@ namespace Nwn.Server.Interop
     ///  * Returns TRUE for creatures and stores, and checks to see if an item or placeable object is a container.
     ///  * Returns FALSE for all other object types.
     /// </summary>
-    public int GetHasInventory(uint oObject)
+    internal int GetHasInventory(uint oObject)
     {
       StackPush(oObject);
       Call(570);
@@ -7081,7 +7081,7 @@ namespace Nwn.Server.Interop
     ///  Get the duration (in seconds) of the sound attached to nStrRef
     ///  * Returns 0.0f if no duration is stored or if no sound is attached
     /// </summary>
-    public float GetStrRefSoundDuration(int nStrRef)
+    internal float GetStrRefSoundDuration(int nStrRef)
     {
       StackPush(nStrRef);
       Call(571);
@@ -7093,7 +7093,7 @@ namespace Nwn.Server.Interop
     ///  - oPC: player to add to a party
     ///  - oPartyLeader: player already in the party
     /// </summary>
-    public void AddToParty(uint oPC, uint oPartyLeader)
+    internal void AddToParty(uint oPC, uint oPartyLeader)
     {
       StackPush(oPartyLeader);
       StackPush(oPC);
@@ -7104,7 +7104,7 @@ namespace Nwn.Server.Interop
     ///  Remove oPC from their current party. This will only work on a PC.
     ///  - oPC: removes this player from whatever party they're currently in.
     /// </summary>
-    public void RemoveFromParty(uint oPC)
+    internal void RemoveFromParty(uint oPC)
     {
       StackPush(oPC);
       Call(573);
@@ -7115,7 +7115,7 @@ namespace Nwn.Server.Interop
     ///  - oCreature
     ///  * Returns a constant STEALTH_MODE_*
     /// </summary>
-    public int GetStealthMode(uint oCreature)
+    internal int GetStealthMode(uint oCreature)
     {
       StackPush(oCreature);
       Call(574);
@@ -7127,7 +7127,7 @@ namespace Nwn.Server.Interop
     ///  - oCreature
     ///  * Returns a constant DETECT_MODE_*
     /// </summary>
-    public int GetDetectMode(uint oCreature)
+    internal int GetDetectMode(uint oCreature)
     {
       StackPush(oCreature);
       Call(575);
@@ -7139,7 +7139,7 @@ namespace Nwn.Server.Interop
     ///  - oCreature
     ///  * Returns a constant DEFENSIVE_CASTING_MODE_*
     /// </summary>
-    public int GetDefensiveCastingMode(uint oCreature)
+    internal int GetDefensiveCastingMode(uint oCreature)
     {
       StackPush(oCreature);
       Call(576);
@@ -7151,7 +7151,7 @@ namespace Nwn.Server.Interop
     ///  * returns a constant APPEARANCE_TYPE_* for valid creatures
     ///  * returns APPEARANCE_TYPE_INVALID for non creatures/invalid creatures
     /// </summary>
-    public int GetAppearanceType(uint oCreature)
+    internal int GetAppearanceType(uint oCreature)
     {
       StackPush(oCreature);
       Call(577);
@@ -7168,7 +7168,7 @@ namespace Nwn.Server.Interop
     ///  Remove any SpawnScriptDebugger() calls once you have finished
     ///  debugging the script.
     /// </summary>
-    public void SpawnScriptDebugger()
+    internal void SpawnScriptDebugger()
     {
       Call(578);
     }
@@ -7178,7 +7178,7 @@ namespace Nwn.Server.Interop
     ///  that was just acquired.
     ///  * returns the stack size of the item acquired
     /// </summary>
-    public int GetModuleItemAcquiredStackSize()
+    internal int GetModuleItemAcquiredStackSize()
     {
       Call(579);
       return StackPopInt();
@@ -7189,7 +7189,7 @@ namespace Nwn.Server.Interop
     ///  - oCreature: creature to modify
     ///  - nFeat: constant FEAT_*
     /// </summary>
-    public void DecrementRemainingFeatUses(uint oCreature, int nFeat)
+    internal void DecrementRemainingFeatUses(uint oCreature, int nFeat)
     {
       StackPush(nFeat);
       StackPush(oCreature);
@@ -7201,7 +7201,7 @@ namespace Nwn.Server.Interop
     ///  - oCreature: creature to modify
     ///  - nSpell: constant SPELL_*
     /// </summary>
-    public void DecrementRemainingSpellUses(uint oCreature, int nSpell)
+    internal void DecrementRemainingSpellUses(uint oCreature, int nSpell)
     {
       StackPush(nSpell);
       StackPush(oCreature);
@@ -7212,7 +7212,7 @@ namespace Nwn.Server.Interop
     ///  returns the template used to create this object (if appropriate)
     ///  * returns an empty string when no template found
     /// </summary>
-    public string GetResRef(uint oObject)
+    internal string GetResRef(uint oObject)
     {
       StackPush(oObject);
       Call(582);
@@ -7223,7 +7223,7 @@ namespace Nwn.Server.Interop
     ///  returns an effect that will petrify the target
     ///  * currently applies EffectParalyze and the stoneskin visual effect.
     /// </summary>
-    public IntPtr EffectPetrify()
+    internal IntPtr EffectPetrify()
     {
       Call(583);
       return StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -7242,7 +7242,7 @@ namespace Nwn.Server.Interop
     ///  * if it is possible to merge this item with any others in the target location,
     ///    then it will do so and return the merged object.
     /// </summary>
-    public uint CopyItem(uint oItem, uint oTargetInventory = OBJECT_INVALID, int bCopyVars = FALSE)
+    internal uint CopyItem(uint oItem, uint oTargetInventory = OBJECT_INVALID, int bCopyVars = FALSE)
     {
       StackPush(bCopyVars);
       StackPush(oTargetInventory);
@@ -7255,7 +7255,7 @@ namespace Nwn.Server.Interop
     ///  returns an effect that is guaranteed to paralyze a creature.
     ///  this effect is identical to EffectParalyze except that it cannot be resisted.
     /// </summary>
-    public IntPtr EffectCutsceneParalyze()
+    internal IntPtr EffectCutsceneParalyze()
     {
       Call(585);
       return StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -7265,7 +7265,7 @@ namespace Nwn.Server.Interop
     ///  returns TRUE if the item CAN be dropped
     ///  Droppable items will appear on a creature's remains when the creature is killed.
     /// </summary>
-    public int GetDroppableFlag(uint oItem)
+    internal int GetDroppableFlag(uint oItem)
     {
       StackPush(oItem);
       Call(586);
@@ -7275,7 +7275,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  returns TRUE if the placeable object is usable
     /// </summary>
-    public int GetUseableFlag(uint oObject = OBJECT_INVALID)
+    internal int GetUseableFlag(uint oObject = OBJECT_INVALID)
     {
       StackPush(oObject);
       Call(587);
@@ -7285,7 +7285,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  returns TRUE if the item is stolen
     /// </summary>
-    public int GetStolenFlag(uint oStolen)
+    internal int GetStolenFlag(uint oStolen)
     {
       StackPush(oStolen);
       Call(588);
@@ -7298,7 +7298,7 @@ namespace Nwn.Server.Interop
     ///  The var name must be unique across the entire database, regardless of the variable type.
     ///  If you want a variable to pertain to a specific player in the game, provide a player object.
     /// </summary>
-    public void SetCampaignFloat(string sCampaignName, string sVarName, float flFloat, uint oPlayer = OBJECT_INVALID)
+    internal void SetCampaignFloat(string sCampaignName, string sVarName, float flFloat, uint oPlayer = OBJECT_INVALID)
     {
       StackPush(oPlayer);
       StackPush(flFloat);
@@ -7313,7 +7313,7 @@ namespace Nwn.Server.Interop
     ///  The var name must be unique across the entire database, regardless of the variable type.
     ///  If you want a variable to pertain to a specific player in the game, provide a player object.
     /// </summary>
-    public void SetCampaignInt(string sCampaignName, string sVarName, int nInt, uint oPlayer = OBJECT_INVALID)
+    internal void SetCampaignInt(string sCampaignName, string sVarName, int nInt, uint oPlayer = OBJECT_INVALID)
     {
       StackPush(oPlayer);
       StackPush(nInt);
@@ -7328,7 +7328,7 @@ namespace Nwn.Server.Interop
     ///  The var name must be unique across the entire database, regardless of the variable type.
     ///  If you want a variable to pertain to a specific player in the game, provide a player object.
     /// </summary>
-    public void SetCampaignVector(string sCampaignName, string sVarName, Vector3 vVector, uint oPlayer = OBJECT_INVALID)
+    internal void SetCampaignVector(string sCampaignName, string sVarName, Vector3 vVector, uint oPlayer = OBJECT_INVALID)
     {
       StackPush(oPlayer);
       StackPush(vVector);
@@ -7343,7 +7343,7 @@ namespace Nwn.Server.Interop
     ///  The var name must be unique across the entire database, regardless of the variable type.
     ///  If you want a variable to pertain to a specific player in the game, provide a player object.
     /// </summary>
-    public void SetCampaignLocation(string sCampaignName, string sVarName, IntPtr locLocation, uint oPlayer = OBJECT_INVALID)
+    internal void SetCampaignLocation(string sCampaignName, string sVarName, IntPtr locLocation, uint oPlayer = OBJECT_INVALID)
     {
       StackPush(oPlayer);
       StackPush(locLocation, ENGINE_STRUCTURE_LOCATION);
@@ -7358,7 +7358,7 @@ namespace Nwn.Server.Interop
     ///  The var name must be unique across the entire database, regardless of the variable type.
     ///  If you want a variable to pertain to a specific player in the game, provide a player object.
     /// </summary>
-    public void SetCampaignString(string sCampaignName, string sVarName, string sString, uint oPlayer = OBJECT_INVALID)
+    internal void SetCampaignString(string sCampaignName, string sVarName, string sString, uint oPlayer = OBJECT_INVALID)
     {
       StackPush(oPlayer);
       StackPush(sString);
@@ -7370,7 +7370,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  This will delete the entire campaign database if it exists.
     /// </summary>
-    public void DestroyCampaignDatabase(string sCampaignName)
+    internal void DestroyCampaignDatabase(string sCampaignName)
     {
       StackPush(sCampaignName);
       Call(594);
@@ -7382,7 +7382,7 @@ namespace Nwn.Server.Interop
     ///  The var name must be unique across the entire database, regardless of the variable type.
     ///  If you want a variable to pertain to a specific player in the game, provide a player object.
     /// </summary>
-    public float GetCampaignFloat(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
+    internal float GetCampaignFloat(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
     {
       StackPush(oPlayer);
       StackPush(sVarName);
@@ -7397,7 +7397,7 @@ namespace Nwn.Server.Interop
     ///  The var name must be unique across the entire database, regardless of the variable type.
     ///  If you want a variable to pertain to a specific player in the game, provide a player object.
     /// </summary>
-    public int GetCampaignInt(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
+    internal int GetCampaignInt(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
     {
       StackPush(oPlayer);
       StackPush(sVarName);
@@ -7412,7 +7412,7 @@ namespace Nwn.Server.Interop
     ///  The var name must be unique across the entire database, regardless of the variable type.
     ///  If you want a variable to pertain to a specific player in the game, provide a player object.
     /// </summary>
-    public Vector3 GetCampaignVector(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
+    internal Vector3 GetCampaignVector(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
     {
       StackPush(oPlayer);
       StackPush(sVarName);
@@ -7427,7 +7427,7 @@ namespace Nwn.Server.Interop
     ///  The var name must be unique across the entire database, regardless of the variable type.
     ///  If you want a variable to pertain to a specific player in the game, provide a player object.
     /// </summary>
-    public IntPtr GetCampaignLocation(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
+    internal IntPtr GetCampaignLocation(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
     {
       StackPush(oPlayer);
       StackPush(sVarName);
@@ -7442,7 +7442,7 @@ namespace Nwn.Server.Interop
     ///  The var name must be unique across the entire database, regardless of the variable type.
     ///  If you want a variable to pertain to a specific player in the game, provide a player object.
     /// </summary>
-    public string GetCampaignString(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
+    internal string GetCampaignString(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
     {
       StackPush(oPlayer);
       StackPush(sVarName);
@@ -7458,7 +7458,7 @@ namespace Nwn.Server.Interop
     ///  If the object is a creature, they will be created at the location.
     ///  If a new tag is specified, it will be assigned to the new object.
     /// </summary>
-    public uint CopyObject(uint oSource, IntPtr locLocation, uint oOwner = OBJECT_INVALID, string sNewTag = "")
+    internal uint CopyObject(uint oSource, IntPtr locLocation, uint oOwner = OBJECT_INVALID, string sNewTag = "")
     {
       StackPush(sNewTag);
       StackPush(oOwner);
@@ -7475,7 +7475,7 @@ namespace Nwn.Server.Interop
     ///  from this command. If you want to 'pack' the database, you will have to do it externally
     ///  from the game.
     /// </summary>
-    public void DeleteCampaignVariable(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
+    internal void DeleteCampaignVariable(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
     {
       StackPush(oPlayer);
       StackPush(sVarName);
@@ -7488,7 +7488,7 @@ namespace Nwn.Server.Interop
     ///  NOTE: this command can only be used for storing Creatures and Items.
     ///  Returns 0 if it failled, 1 if it worked.
     /// </summary>
-    public int StoreCampaignObject(string sCampaignName, string sVarName, uint oObject, uint oPlayer = OBJECT_INVALID)
+    internal int StoreCampaignObject(string sCampaignName, string sVarName, uint oObject, uint oPlayer = OBJECT_INVALID)
     {
       StackPush(oPlayer);
       StackPush(oObject);
@@ -7503,7 +7503,7 @@ namespace Nwn.Server.Interop
     ///  If you specify an owner, the object will try to be created in their repository
     ///  If the owner can't handle the item (or if it's a creature) it will be created on the ground.
     /// </summary>
-    public uint RetrieveCampaignObject(string sCampaignName, string sVarName, IntPtr locLocation, uint oOwner = OBJECT_INVALID, uint oPlayer = OBJECT_INVALID)
+    internal uint RetrieveCampaignObject(string sCampaignName, string sVarName, IntPtr locLocation, uint oOwner = OBJECT_INVALID, uint oPlayer = OBJECT_INVALID)
     {
       StackPush(oPlayer);
       StackPush(oOwner);
@@ -7518,7 +7518,7 @@ namespace Nwn.Server.Interop
     ///  Returns an effect that is guaranteed to dominate a creature
     ///  Like EffectDominated but cannot be resisted
     /// </summary>
-    public IntPtr EffectCutsceneDominated()
+    internal IntPtr EffectCutsceneDominated()
     {
       Call(604);
       return StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -7528,7 +7528,7 @@ namespace Nwn.Server.Interop
     ///  Returns stack size of an item
     ///  - oItem: item to query
     /// </summary>
-    public int GetItemStackSize(uint oItem)
+    internal int GetItemStackSize(uint oItem)
     {
       StackPush(oItem);
       Call(605);
@@ -7543,7 +7543,7 @@ namespace Nwn.Server.Interop
     ///    will set the stack to 1.  If a value greater than the max is passed
     ///    then it will set the stack to the maximum size
     /// </summary>
-    public void SetItemStackSize(uint oItem, int nSize)
+    internal void SetItemStackSize(uint oItem, int nSize)
     {
       StackPush(nSize);
       StackPush(oItem);
@@ -7554,7 +7554,7 @@ namespace Nwn.Server.Interop
     ///  Returns charges left on an item
     ///  - oItem: item to query
     /// </summary>
-    public int GetItemCharges(uint oItem)
+    internal int GetItemCharges(uint oItem)
     {
       StackPush(oItem);
       Call(607);
@@ -7569,7 +7569,7 @@ namespace Nwn.Server.Interop
     ///    be set to maximum.  If the # charges drops to 0 the item
     ///    will be destroyed.
     /// </summary>
-    public void SetItemCharges(uint oItem, int nCharges)
+    internal void SetItemCharges(uint oItem, int nCharges)
     {
       StackPush(nCharges);
       StackPush(oItem);
@@ -7581,7 +7581,7 @@ namespace Nwn.Server.Interop
     ///  adds an item property to the specified item
     ///  Only temporary and permanent duration types are allowed.
     /// </summary>
-    public void AddItemProperty(int nDurationType, IntPtr ipProperty, uint oItem, float fDuration = 0.0f)
+    internal void AddItemProperty(int nDurationType, IntPtr ipProperty, uint oItem, float fDuration = 0.0f)
     {
       StackPush(fDuration);
       StackPush(oItem);
@@ -7593,7 +7593,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  removes an item property from the specified item
     /// </summary>
-    public void RemoveItemProperty(uint oItem, IntPtr ipProperty)
+    internal void RemoveItemProperty(uint oItem, IntPtr ipProperty)
     {
       StackPush(ipProperty, ENGINE_STRUCTURE_ITEM_PROPERTY);
       StackPush(oItem);
@@ -7603,7 +7603,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  if the item property is valid this will return true
     /// </summary>
-    public int GetIsItemPropertyValid(IntPtr ipProperty)
+    internal int GetIsItemPropertyValid(IntPtr ipProperty)
     {
       StackPush(ipProperty, ENGINE_STRUCTURE_ITEM_PROPERTY);
       Call(611);
@@ -7613,7 +7613,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Gets the first item property on an item
     /// </summary>
-    public IntPtr GetFirstItemProperty(uint oItem)
+    internal IntPtr GetFirstItemProperty(uint oItem)
     {
       StackPush(oItem);
       Call(612);
@@ -7624,7 +7624,7 @@ namespace Nwn.Server.Interop
     ///  Will keep retrieving the next and the next item property on an Item,
     ///  will return an invalid item property when the list is empty.
     /// </summary>
-    public IntPtr GetNextItemProperty(uint oItem)
+    internal IntPtr GetNextItemProperty(uint oItem)
     {
       StackPush(oItem);
       Call(613);
@@ -7634,7 +7634,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  will return the item property type (ie. holy avenger)
     /// </summary>
-    public int GetItemPropertyType(IntPtr ip)
+    internal int GetItemPropertyType(IntPtr ip)
     {
       StackPush(ip, ENGINE_STRUCTURE_ITEM_PROPERTY);
       Call(614);
@@ -7644,7 +7644,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  will return the duration type of the item property
     /// </summary>
-    public int GetItemPropertyDurationType(IntPtr ip)
+    internal int GetItemPropertyDurationType(IntPtr ip)
     {
       StackPush(ip, ENGINE_STRUCTURE_ITEM_PROPERTY);
       Call(615);
@@ -7656,7 +7656,7 @@ namespace Nwn.Server.Interop
     ///  ability constant(IP_CONST_ABILITY_*) and the bonus.  The bonus should
     ///  be a positive integer between 1 and 12.
     /// </summary>
-    public IntPtr ItemPropertyAbilityBonus(int nAbility, int nBonus)
+    internal IntPtr ItemPropertyAbilityBonus(int nAbility, int nBonus)
     {
       StackPush(nBonus);
       StackPush(nAbility);
@@ -7669,7 +7669,7 @@ namespace Nwn.Server.Interop
     ///  The bonus should be a positive integer between 1 and 20. The modifier
     ///  type depends on the item it is being applied to.
     /// </summary>
-    public IntPtr ItemPropertyACBonus(int nBonus)
+    internal IntPtr ItemPropertyACBonus(int nBonus)
     {
       StackPush(nBonus);
       Call(617);
@@ -7683,7 +7683,7 @@ namespace Nwn.Server.Interop
     ///  The AC bonus should be an integer between 1 and 20.  The modifier
     ///  type depends on the item it is being applied to.
     /// </summary>
-    public IntPtr ItemPropertyACBonusVsAlign(int nAlignGroup, int nACBonus)
+    internal IntPtr ItemPropertyACBonusVsAlign(int nAlignGroup, int nACBonus)
     {
       StackPush(nACBonus);
       StackPush(nAlignGroup);
@@ -7699,7 +7699,7 @@ namespace Nwn.Server.Interop
     ///  NOTE: Only the first 3 damage types may be used here, the 3 basic
     ///        physical types.
     /// </summary>
-    public IntPtr ItemPropertyACBonusVsDmgType(int nDamageType, int nACBonus)
+    internal IntPtr ItemPropertyACBonusVsDmgType(int nDamageType, int nACBonus)
     {
       StackPush(nACBonus);
       StackPush(nDamageType);
@@ -7713,7 +7713,7 @@ namespace Nwn.Server.Interop
     ///  bonus should be an integer between 1 and 20.  The modifier type depends
     ///  on the item it is being applied to.
     /// </summary>
-    public IntPtr ItemPropertyACBonusVsRace(int nRace, int nACBonus)
+    internal IntPtr ItemPropertyACBonusVsRace(int nRace, int nACBonus)
     {
       StackPush(nACBonus);
       StackPush(nRace);
@@ -7727,7 +7727,7 @@ namespace Nwn.Server.Interop
     ///  bonus.  The AC bonus should be an integer between 1 and 20.  The
     ///  modifier type depends on the item it is being applied to.
     /// </summary>
-    public IntPtr ItemPropertyACBonusVsSAlign(int nAlign, int nACBonus)
+    internal IntPtr ItemPropertyACBonusVsSAlign(int nAlign, int nACBonus)
     {
       StackPush(nACBonus);
       StackPush(nAlign);
@@ -7740,7 +7740,7 @@ namespace Nwn.Server.Interop
     ///  enhancement bonus.  The Enhancement bonus should be an integer between
     ///  1 and 20.
     /// </summary>
-    public IntPtr ItemPropertyEnhancementBonus(int nEnhancementBonus)
+    internal IntPtr ItemPropertyEnhancementBonus(int nEnhancementBonus)
     {
       StackPush(nEnhancementBonus);
       Call(622);
@@ -7753,7 +7753,7 @@ namespace Nwn.Server.Interop
     ///  and the enhancement bonus.  The Enhancement bonus should be an integer
     ///  between 1 and 20.
     /// </summary>
-    public IntPtr ItemPropertyEnhancementBonusVsAlign(int nAlignGroup, int nBonus)
+    internal IntPtr ItemPropertyEnhancementBonusVsAlign(int nAlignGroup, int nBonus)
     {
       StackPush(nBonus);
       StackPush(nAlignGroup);
@@ -7767,7 +7767,7 @@ namespace Nwn.Server.Interop
     ///  enhancement bonus.  The enhancement bonus should be an integer between
     ///  1 and 20.
     /// </summary>
-    public IntPtr ItemPropertyEnhancementBonusVsRace(int nRace, int nBonus)
+    internal IntPtr ItemPropertyEnhancementBonusVsRace(int nRace, int nBonus)
     {
       StackPush(nBonus);
       StackPush(nRace);
@@ -7781,7 +7781,7 @@ namespace Nwn.Server.Interop
     ///  enhancement bonus.  The enhancement bonus should be an integer between
     ///  1 and 20.
     /// </summary>
-    public IntPtr ItemPropertyEnhancementBonusVsSAlign(int nAlign, int nBonus)
+    internal IntPtr ItemPropertyEnhancementBonusVsSAlign(int nAlign, int nBonus)
     {
       StackPush(nBonus);
       StackPush(nAlign);
@@ -7794,7 +7794,7 @@ namespace Nwn.Server.Interop
     ///  enhancement penalty.  The enhancement penalty should be a POSITIVE
     ///  integer between 1 and 5 (ie. 1 = -1).
     /// </summary>
-    public IntPtr ItemPropertyEnhancementPenalty(int nPenalty)
+    internal IntPtr ItemPropertyEnhancementPenalty(int nPenalty)
     {
       StackPush(nPenalty);
       Call(626);
@@ -7805,7 +7805,7 @@ namespace Nwn.Server.Interop
     ///  Returns Item property weight reduction.  You need to specify the weight
     ///  reduction constant(IP_CONST_REDUCEDWEIGHT_*).
     /// </summary>
-    public IntPtr ItemPropertyWeightReduction(int nReduction)
+    internal IntPtr ItemPropertyWeightReduction(int nReduction)
     {
       StackPush(nReduction);
       Call(627);
@@ -7816,7 +7816,7 @@ namespace Nwn.Server.Interop
     ///  Returns Item property Bonus Feat.  You need to specify the the feat
     ///  constant(IP_CONST_FEAT_*).
     /// </summary>
-    public IntPtr ItemPropertyBonusFeat(int nFeat)
+    internal IntPtr ItemPropertyBonusFeat(int nFeat)
     {
       StackPush(nFeat);
       Call(628);
@@ -7829,7 +7829,7 @@ namespace Nwn.Server.Interop
     ///  spell casting class) and the level of the bonus spell.  The level of the
     ///  bonus spell should be an integer between 0 and 9.
     /// </summary>
-    public IntPtr ItemPropertyBonusLevelSpell(int nClass, int nSpellLevel)
+    internal IntPtr ItemPropertyBonusLevelSpell(int nClass, int nSpellLevel)
     {
       StackPush(nSpellLevel);
       StackPush(nClass);
@@ -8226,7 +8226,7 @@ namespace Nwn.Server.Interop
     ///           Special_Alcohol_Wine
     ///
     /// </summary>
-    public IntPtr ItemPropertyCastSpell(int nSpell, int nNumUses)
+    internal IntPtr ItemPropertyCastSpell(int nSpell, int nNumUses)
     {
       StackPush(nNumUses);
       StackPush(nSpell);
@@ -8240,7 +8240,7 @@ namespace Nwn.Server.Interop
     ///  NOTE: not all the damage types will work, use only the following: Acid, Bludgeoning,
     ///        Cold, Electrical, Fire, Piercing, Slashing, Sonic.
     /// </summary>
-    public IntPtr ItemPropertyDamageBonus(int nDamageType, int nDamage)
+    internal IntPtr ItemPropertyDamageBonus(int nDamageType, int nDamage)
     {
       StackPush(nDamage);
       StackPush(nDamageType);
@@ -8255,7 +8255,7 @@ namespace Nwn.Server.Interop
     ///  NOTE: not all the damage types will work, use only the following: Acid, Bludgeoning,
     ///        Cold, Electrical, Fire, Piercing, Slashing, Sonic.
     /// </summary>
-    public IntPtr ItemPropertyDamageBonusVsAlign(int nAlignGroup, int nDamageType, int nDamage)
+    internal IntPtr ItemPropertyDamageBonusVsAlign(int nAlignGroup, int nDamageType, int nDamage)
     {
       StackPush(nDamage);
       StackPush(nDamageType);
@@ -8271,7 +8271,7 @@ namespace Nwn.Server.Interop
     ///  NOTE: not all the damage types will work, use only the following: Acid, Bludgeoning,
     ///        Cold, Electrical, Fire, Piercing, Slashing, Sonic.
     /// </summary>
-    public IntPtr ItemPropertyDamageBonusVsRace(int nRace, int nDamageType, int nDamage)
+    internal IntPtr ItemPropertyDamageBonusVsRace(int nRace, int nDamageType, int nDamage)
     {
       StackPush(nDamage);
       StackPush(nDamageType);
@@ -8287,7 +8287,7 @@ namespace Nwn.Server.Interop
     ///  NOTE: not all the damage types will work, use only the following: Acid, Bludgeoning,
     ///        Cold, Electrical, Fire, Piercing, Slashing, Sonic.
     /// </summary>
-    public IntPtr ItemPropertyDamageBonusVsSAlign(int nAlign, int nDamageType, int nDamage)
+    internal IntPtr ItemPropertyDamageBonusVsSAlign(int nAlign, int nDamageType, int nDamage)
     {
       StackPush(nDamage);
       StackPush(nDamageType);
@@ -8303,7 +8303,7 @@ namespace Nwn.Server.Interop
     ///  NOTE: not all the damage types will work, use only the following: Acid, Bludgeoning,
     ///        Cold, Electrical, Fire, Piercing, Slashing, Sonic.
     /// </summary>
-    public IntPtr ItemPropertyDamageImmunity(int nDamageType, int nImmuneBonus)
+    internal IntPtr ItemPropertyDamageImmunity(int nDamageType, int nImmuneBonus)
     {
       StackPush(nImmuneBonus);
       StackPush(nDamageType);
@@ -8315,7 +8315,7 @@ namespace Nwn.Server.Interop
     ///  Returns Item property damage penalty.  You must specify the damage penalty.
     ///  The damage penalty should be a POSITIVE integer between 1 and 5 (ie. 1 = -1).
     /// </summary>
-    public IntPtr ItemPropertyDamagePenalty(int nPenalty)
+    internal IntPtr ItemPropertyDamagePenalty(int nPenalty)
     {
       StackPush(nPenalty);
       Call(636);
@@ -8328,7 +8328,7 @@ namespace Nwn.Server.Interop
     ///  and the amount of HP of damage constant(IP_CONST_DAMAGESOAK_*) will be soaked
     ///  up if your weapon is not of high enough enhancement.
     /// </summary>
-    public IntPtr ItemPropertyDamageReduction(int nEnhancement, int nHPSoak)
+    internal IntPtr ItemPropertyDamageReduction(int nEnhancement, int nHPSoak)
     {
       StackPush(nHPSoak);
       StackPush(nEnhancement);
@@ -8341,7 +8341,7 @@ namespace Nwn.Server.Interop
     ///  constant(IP_CONST_DAMAGETYPE_*) and the amount of HP of damage constant
     ///  (IP_CONST_DAMAGERESIST_*) that will be resisted against each round.
     /// </summary>
-    public IntPtr ItemPropertyDamageResistance(int nDamageType, int nHPResist)
+    internal IntPtr ItemPropertyDamageResistance(int nDamageType, int nHPResist)
     {
       StackPush(nHPResist);
       StackPush(nDamageType);
@@ -8354,7 +8354,7 @@ namespace Nwn.Server.Interop
     ///  constant(IP_CONST_DAMAGETYPE_*) that you want the user to be extra vulnerable to
     ///  and the percentage vulnerability constant(IP_CONST_DAMAGEVULNERABILITY_*).
     /// </summary>
-    public IntPtr ItemPropertyDamageVulnerability(int nDamageType, int nVulnerability)
+    internal IntPtr ItemPropertyDamageVulnerability(int nDamageType, int nVulnerability)
     {
       StackPush(nVulnerability);
       StackPush(nDamageType);
@@ -8365,7 +8365,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Return Item property Darkvision.
     /// </summary>
-    public IntPtr ItemPropertyDarkvision()
+    internal IntPtr ItemPropertyDarkvision()
     {
       Call(640);
       return StackPopStruct(ENGINE_STRUCTURE_ITEM_PROPERTY);
@@ -8376,7 +8376,7 @@ namespace Nwn.Server.Interop
     ///  constant(IP_CONST_ABILITY_*) and the modifier constant.  The modifier must be
     ///  a POSITIVE integer between 1 and 10 (ie. 1 = -1).
     /// </summary>
-    public IntPtr ItemPropertyDecreaseAbility(int nAbility, int nModifier)
+    internal IntPtr ItemPropertyDecreaseAbility(int nAbility, int nModifier)
     {
       StackPush(nModifier);
       StackPush(nAbility);
@@ -8389,7 +8389,7 @@ namespace Nwn.Server.Interop
     ///  modifier type constant(IP_CONST_ACMODIFIERTYPE_*) and the armor class penalty.
     ///  The penalty must be a POSITIVE integer between 1 and 5 (ie. 1 = -1).
     /// </summary>
-    public IntPtr ItemPropertyDecreaseAC(int nModifierType, int nPenalty)
+    internal IntPtr ItemPropertyDecreaseAC(int nModifierType, int nPenalty)
     {
       StackPush(nPenalty);
       StackPush(nModifierType);
@@ -8402,7 +8402,7 @@ namespace Nwn.Server.Interop
     ///  skill to be decreased(SKILL_*) and the amount of the penalty.  The penalty
     ///  must be a POSITIVE integer between 1 and 10 (ie. 1 = -1).
     /// </summary>
-    public IntPtr ItemPropertyDecreaseSkill(int nSkill, int nPenalty)
+    internal IntPtr ItemPropertyDecreaseSkill(int nSkill, int nPenalty)
     {
       StackPush(nPenalty);
       StackPush(nSkill);
@@ -8415,7 +8415,7 @@ namespace Nwn.Server.Interop
     ///  containers that reduce the weight of the objects inside them.  You must
     ///  specify the container weight reduction type constant(IP_CONST_CONTAINERWEIGHTRED_*).
     /// </summary>
-    public IntPtr ItemPropertyContainerReducedWeight(int nContainerType)
+    internal IntPtr ItemPropertyContainerReducedWeight(int nContainerType)
     {
       StackPush(nContainerType);
       Call(644);
@@ -8429,7 +8429,7 @@ namespace Nwn.Server.Interop
     ///        here.
     ///  NOTE: It is also only applicable to melee weapons.
     /// </summary>
-    public IntPtr ItemPropertyExtraMeleeDamageType(int nDamageType)
+    internal IntPtr ItemPropertyExtraMeleeDamageType(int nDamageType)
     {
       StackPush(nDamageType);
       Call(645);
@@ -8443,7 +8443,7 @@ namespace Nwn.Server.Interop
     ///        here.
     ///  NOTE: It is also only applicable to ranged weapons.
     /// </summary>
-    public IntPtr ItemPropertyExtraRangeDamageType(int nDamageType)
+    internal IntPtr ItemPropertyExtraRangeDamageType(int nDamageType)
     {
       StackPush(nDamageType);
       Call(646);
@@ -8453,7 +8453,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Returns Item property haste.
     /// </summary>
-    public IntPtr ItemPropertyHaste()
+    internal IntPtr ItemPropertyHaste()
     {
       Call(647);
       return StackPopStruct(ENGINE_STRUCTURE_ITEM_PROPERTY);
@@ -8462,7 +8462,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Returns Item property Holy Avenger.
     /// </summary>
-    public IntPtr ItemPropertyHolyAvenger()
+    internal IntPtr ItemPropertyHolyAvenger()
     {
       Call(648);
       return StackPopStruct(ENGINE_STRUCTURE_ITEM_PROPERTY);
@@ -8472,7 +8472,7 @@ namespace Nwn.Server.Interop
     ///  Returns Item property immunity to miscellaneous effects.  You must specify the
     ///  effect to which the user is immune, it is a constant(IP_CONST_IMMUNITYMISC_*).
     /// </summary>
-    public IntPtr ItemPropertyImmunityMisc(int nImmunityType)
+    internal IntPtr ItemPropertyImmunityMisc(int nImmunityType)
     {
       StackPush(nImmunityType);
       Call(649);
@@ -8482,7 +8482,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Returns Item property improved evasion.
     /// </summary>
-    public IntPtr ItemPropertyImprovedEvasion()
+    internal IntPtr ItemPropertyImprovedEvasion()
     {
       Call(650);
       return StackPopStruct(ENGINE_STRUCTURE_ITEM_PROPERTY);
@@ -8492,7 +8492,7 @@ namespace Nwn.Server.Interop
     ///  Returns Item property bonus spell resistance.  You must specify the bonus spell
     ///  resistance constant(IP_CONST_SPELLRESISTANCEBONUS_*).
     /// </summary>
-    public IntPtr ItemPropertyBonusSpellResistance(int nBonus)
+    internal IntPtr ItemPropertyBonusSpellResistance(int nBonus)
     {
       StackPush(nBonus);
       Call(651);
@@ -8505,7 +8505,7 @@ namespace Nwn.Server.Interop
     ///  applied to and the bonus that is be applied.  The bonus must be an integer
     ///  between 1 and 20.
     /// </summary>
-    public IntPtr ItemPropertyBonusSavingThrowVsX(int nBonusType, int nBonus)
+    internal IntPtr ItemPropertyBonusSavingThrowVsX(int nBonusType, int nBonus)
     {
       StackPush(nBonus);
       StackPush(nBonusType);
@@ -8519,7 +8519,7 @@ namespace Nwn.Server.Interop
     ///  to which the user gets the bonus and the bonus that he/she will get.  The
     ///  bonus must be an integer between 1 and 20.
     /// </summary>
-    public IntPtr ItemPropertyBonusSavingThrow(int nBaseSaveType, int nBonus)
+    internal IntPtr ItemPropertyBonusSavingThrow(int nBaseSaveType, int nBonus)
     {
       StackPush(nBonus);
       StackPush(nBaseSaveType);
@@ -8531,7 +8531,7 @@ namespace Nwn.Server.Interop
     ///  Returns Item property keen.  This means a critical threat range of 19-20 on a
     ///  weapon will be increased to 17-20 etc.
     /// </summary>
-    public IntPtr ItemPropertyKeen()
+    internal IntPtr ItemPropertyKeen()
     {
       Call(654);
       return StackPopStruct(ENGINE_STRUCTURE_ITEM_PROPERTY);
@@ -8542,7 +8542,7 @@ namespace Nwn.Server.Interop
     ///  light(IP_CONST_LIGHTBRIGHTNESS_*) and the color constant of the light
     ///  (IP_CONST_LIGHTCOLOR_*).
     /// </summary>
-    public IntPtr ItemPropertyLight(int nBrightness, int nColor)
+    internal IntPtr ItemPropertyLight(int nBrightness, int nColor)
     {
       StackPush(nColor);
       StackPush(nBrightness);
@@ -8555,7 +8555,7 @@ namespace Nwn.Server.Interop
     ///  specify the maximum modifier for strength that is allowed on a ranged weapon.
     ///  The modifier must be a positive integer between 1 and 20.
     /// </summary>
-    public IntPtr ItemPropertyMaxRangeStrengthMod(int nModifier)
+    internal IntPtr ItemPropertyMaxRangeStrengthMod(int nModifier)
     {
       StackPush(nModifier);
       Call(656);
@@ -8566,7 +8566,7 @@ namespace Nwn.Server.Interop
     ///  Returns Item property no damage.  This means the weapon will do no damage in
     ///  combat.
     /// </summary>
-    public IntPtr ItemPropertyNoDamage()
+    internal IntPtr ItemPropertyNoDamage()
     {
       Call(657);
       return StackPopStruct(ENGINE_STRUCTURE_ITEM_PROPERTY);
@@ -8613,7 +8613,7 @@ namespace Nwn.Server.Interop
     ///       STUN              :nSpecial is the duration/percentage of effecting victim.
     ///                          constant(IP_CONST_ONHIT_DURATION_*)
     /// </summary>
-    public IntPtr ItemPropertyOnHitProps(int nProperty, int nSaveDC, int nSpecial = 0)
+    internal IntPtr ItemPropertyOnHitProps(int nProperty, int nSaveDC, int nSpecial = 0)
     {
       StackPush(nSpecial);
       StackPush(nSaveDC);
@@ -8628,7 +8628,7 @@ namespace Nwn.Server.Interop
     ///  penalty to be applied.  The penalty must be a POSITIVE integer between 1 and 20
     ///  (ie. 1 = -1).
     /// </summary>
-    public IntPtr ItemPropertyReducedSavingThrowVsX(int nBaseSaveType, int nPenalty)
+    internal IntPtr ItemPropertyReducedSavingThrowVsX(int nBaseSaveType, int nPenalty)
     {
       StackPush(nPenalty);
       StackPush(nBaseSaveType);
@@ -8642,7 +8642,7 @@ namespace Nwn.Server.Interop
     ///  to be applied.  The constant for the base type starts with (IP_CONST_SAVEBASETYPE_*).
     ///  The penalty must be a POSITIVE integer between 1 and 20 (ie. 1 = -1).
     /// </summary>
-    public IntPtr ItemPropertyReducedSavingThrow(int nBonusType, int nPenalty)
+    internal IntPtr ItemPropertyReducedSavingThrow(int nBonusType, int nPenalty)
     {
       StackPush(nPenalty);
       StackPush(nBonusType);
@@ -8654,7 +8654,7 @@ namespace Nwn.Server.Interop
     ///  Returns Item property regeneration.  You must specify the regeneration amount.
     ///  The amount must be an integer between 1 and 20.
     /// </summary>
-    public IntPtr ItemPropertyRegeneration(int nRegenAmount)
+    internal IntPtr ItemPropertyRegeneration(int nRegenAmount)
     {
       StackPush(nRegenAmount);
       Call(661);
@@ -8666,7 +8666,7 @@ namespace Nwn.Server.Interop
     ///  will get a bonus(SKILL_*) and the amount of the bonus.  The bonus amount must
     ///  be an integer between 1 and 50.
     /// </summary>
-    public IntPtr ItemPropertySkillBonus(int nSkill, int nBonus)
+    internal IntPtr ItemPropertySkillBonus(int nSkill, int nBonus)
     {
       StackPush(nBonus);
       StackPush(nSkill);
@@ -8678,7 +8678,7 @@ namespace Nwn.Server.Interop
     ///  Returns Item property spell immunity vs. specific spell.  You must specify the
     ///  spell to which the user will be immune(IP_CONST_IMMUNITYSPELL_*).
     /// </summary>
-    public IntPtr ItemPropertySpellImmunitySpecific(int nSpell)
+    internal IntPtr ItemPropertySpellImmunitySpecific(int nSpell)
     {
       StackPush(nSpell);
       Call(663);
@@ -8689,7 +8689,7 @@ namespace Nwn.Server.Interop
     ///  Returns Item property spell immunity vs. spell school.  You must specify the
     ///  school to which the user will be immune(IP_CONST_SPELLSCHOOL_*).
     /// </summary>
-    public IntPtr ItemPropertySpellImmunitySchool(int nSchool)
+    internal IntPtr ItemPropertySpellImmunitySchool(int nSchool)
     {
       StackPush(nSchool);
       Call(664);
@@ -8700,7 +8700,7 @@ namespace Nwn.Server.Interop
     ///  Returns Item property Thieves tools.  You must specify the modifier you wish
     ///  the tools to have.  The modifier must be an integer between 1 and 12.
     /// </summary>
-    public IntPtr ItemPropertyThievesTools(int nModifier)
+    internal IntPtr ItemPropertyThievesTools(int nModifier)
     {
       StackPush(nModifier);
       Call(665);
@@ -8711,7 +8711,7 @@ namespace Nwn.Server.Interop
     ///  Returns Item property Attack bonus.  You must specify an attack bonus.  The bonus
     ///  must be an integer between 1 and 20.
     /// </summary>
-    public IntPtr ItemPropertyAttackBonus(int nBonus)
+    internal IntPtr ItemPropertyAttackBonus(int nBonus)
     {
       StackPush(nBonus);
       Call(666);
@@ -8723,7 +8723,7 @@ namespace Nwn.Server.Interop
     ///  alignment group constant(IP_CONST_ALIGNMENTGROUP_*) and the attack bonus.  The
     ///  bonus must be an integer between 1 and 20.
     /// </summary>
-    public IntPtr ItemPropertyAttackBonusVsAlign(int nAlignGroup, int nBonus)
+    internal IntPtr ItemPropertyAttackBonusVsAlign(int nAlignGroup, int nBonus)
     {
       StackPush(nBonus);
       StackPush(nAlignGroup);
@@ -8736,7 +8736,7 @@ namespace Nwn.Server.Interop
     ///  racial group constant(IP_CONST_RACIALTYPE_*) and the attack bonus.  The bonus
     ///  must be an integer between 1 and 20.
     /// </summary>
-    public IntPtr ItemPropertyAttackBonusVsRace(int nRace, int nBonus)
+    internal IntPtr ItemPropertyAttackBonusVsRace(int nRace, int nBonus)
     {
       StackPush(nBonus);
       StackPush(nRace);
@@ -8749,7 +8749,7 @@ namespace Nwn.Server.Interop
     ///  the alignment you want the bonus to work against(IP_CONST_ALIGNMENT_*) and the
     ///  attack bonus.  The bonus must be an integer between 1 and 20.
     /// </summary>
-    public IntPtr ItemPropertyAttackBonusVsSAlign(int nAlignment, int nBonus)
+    internal IntPtr ItemPropertyAttackBonusVsSAlign(int nAlignment, int nBonus)
     {
       StackPush(nBonus);
       StackPush(nAlignment);
@@ -8761,7 +8761,7 @@ namespace Nwn.Server.Interop
     ///  Returns Item property attack penalty.  You must specify the attack penalty.
     ///  The penalty must be a POSITIVE integer between 1 and 5 (ie. 1 = -1).
     /// </summary>
-    public IntPtr ItemPropertyAttackPenalty(int nPenalty)
+    internal IntPtr ItemPropertyAttackPenalty(int nPenalty)
     {
       StackPush(nPenalty);
       Call(670);
@@ -8775,7 +8775,7 @@ namespace Nwn.Server.Interop
     ///  bonus).  For this parmeter you use the constants beginning with:
     ///       (IP_CONST_UNLIMITEDAMMO_*).
     /// </summary>
-    public IntPtr ItemPropertyUnlimitedAmmo(int nAmmoDamage = IP_CONST_UNLIMITEDAMMO_BASIC)
+    internal IntPtr ItemPropertyUnlimitedAmmo(int nAmmoDamage = IP_CONST_UNLIMITEDAMMO_BASIC)
     {
       StackPush(nAmmoDamage);
       Call(671);
@@ -8786,7 +8786,7 @@ namespace Nwn.Server.Interop
     ///  Returns Item property limit use by alignment group.  You must specify the
     ///  alignment group(s) that you want to be able to use this item(IP_CONST_ALIGNMENTGROUP_*).
     /// </summary>
-    public IntPtr ItemPropertyLimitUseByAlign(int nAlignGroup)
+    internal IntPtr ItemPropertyLimitUseByAlign(int nAlignGroup)
     {
       StackPush(nAlignGroup);
       Call(672);
@@ -8797,7 +8797,7 @@ namespace Nwn.Server.Interop
     ///  Returns Item property limit use by class.  You must specify the class(es) who
     ///  are able to use this item(IP_CONST_CLASS_*).
     /// </summary>
-    public IntPtr ItemPropertyLimitUseByClass(int nClass)
+    internal IntPtr ItemPropertyLimitUseByClass(int nClass)
     {
       StackPush(nClass);
       Call(673);
@@ -8808,7 +8808,7 @@ namespace Nwn.Server.Interop
     ///  Returns Item property limit use by race.  You must specify the race(s) who are
     ///  allowed to use this item(IP_CONST_RACIALTYPE_*).
     /// </summary>
-    public IntPtr ItemPropertyLimitUseByRace(int nRace)
+    internal IntPtr ItemPropertyLimitUseByRace(int nRace)
     {
       StackPush(nRace);
       Call(674);
@@ -8819,7 +8819,7 @@ namespace Nwn.Server.Interop
     ///  Returns Item property limit use by specific alignment.  You must specify the
     ///  alignment(s) of those allowed to use the item(IP_CONST_ALIGNMENT_*).
     /// </summary>
-    public IntPtr ItemPropertyLimitUseBySAlign(int nAlignment)
+    internal IntPtr ItemPropertyLimitUseBySAlign(int nAlignment)
     {
       StackPush(nAlignment);
       Call(675);
@@ -8829,7 +8829,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  replace this function it does nothing.
     /// </summary>
-    public IntPtr BadBadReplaceMeThisDoesNothing()
+    internal IntPtr BadBadReplaceMeThisDoesNothing()
     {
       Call(676);
       return StackPopStruct(ENGINE_STRUCTURE_ITEM_PROPERTY);
@@ -8839,7 +8839,7 @@ namespace Nwn.Server.Interop
     ///  Returns Item property vampiric regeneration.  You must specify the amount of
     ///  regeneration.  The regen amount must be an integer between 1 and 20.
     /// </summary>
-    public IntPtr ItemPropertyVampiricRegeneration(int nRegenAmount)
+    internal IntPtr ItemPropertyVampiricRegeneration(int nRegenAmount)
     {
       StackPush(nRegenAmount);
       Call(677);
@@ -8850,7 +8850,7 @@ namespace Nwn.Server.Interop
     ///  Returns Item property Trap.  You must specify the trap level constant
     ///  (IP_CONST_TRAPSTRENGTH_*) and the trap type constant(IP_CONST_TRAPTYPE_*).
     /// </summary>
-    public IntPtr ItemPropertyTrap(int nTrapLevel, int nTrapType)
+    internal IntPtr ItemPropertyTrap(int nTrapLevel, int nTrapType)
     {
       StackPush(nTrapType);
       StackPush(nTrapLevel);
@@ -8861,7 +8861,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Returns Item property true seeing.
     /// </summary>
-    public IntPtr ItemPropertyTrueSeeing()
+    internal IntPtr ItemPropertyTrueSeeing()
     {
       Call(679);
       return StackPopStruct(ENGINE_STRUCTURE_ITEM_PROPERTY);
@@ -8888,7 +8888,7 @@ namespace Nwn.Server.Interop
     ///  NOTE: These can only be applied to monster NATURAL weapons (ie. bite, claw,
     ///        gore, and slam).  IT WILL NOT WORK ON NORMAL WEAPONS.
     /// </summary>
-    public IntPtr ItemPropertyOnMonsterHitProperties(int nProperty, int nSpecial = 0)
+    internal IntPtr ItemPropertyOnMonsterHitProperties(int nProperty, int nSpecial = 0)
     {
       StackPush(nSpecial);
       StackPush(nProperty);
@@ -8900,7 +8900,7 @@ namespace Nwn.Server.Interop
     ///  Returns Item property turn resistance.  You must specify the resistance bonus.
     ///  The bonus must be an integer between 1 and 50.
     /// </summary>
-    public IntPtr ItemPropertyTurnResistance(int nModifier)
+    internal IntPtr ItemPropertyTurnResistance(int nModifier)
     {
       StackPush(nModifier);
       Call(681);
@@ -8911,7 +8911,7 @@ namespace Nwn.Server.Interop
     ///  Returns Item property Massive Critical.  You must specify the extra damage
     ///  constant(IP_CONST_DAMAGEBONUS_*) of the criticals.
     /// </summary>
-    public IntPtr ItemPropertyMassiveCritical(int nDamage)
+    internal IntPtr ItemPropertyMassiveCritical(int nDamage)
     {
       StackPush(nDamage);
       Call(682);
@@ -8921,7 +8921,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Returns Item property free action.
     /// </summary>
-    public IntPtr ItemPropertyFreeAction()
+    internal IntPtr ItemPropertyFreeAction()
     {
       Call(683);
       return StackPopStruct(ENGINE_STRUCTURE_ITEM_PROPERTY);
@@ -8933,7 +8933,7 @@ namespace Nwn.Server.Interop
     ///  NOTE: These can only be applied to monster NATURAL weapons (ie. bite, claw,
     ///        gore, and slam).  IT WILL NOT WORK ON NORMAL WEAPONS.
     /// </summary>
-    public IntPtr ItemPropertyMonsterDamage(int nDamage)
+    internal IntPtr ItemPropertyMonsterDamage(int nDamage)
     {
       StackPush(nDamage);
       Call(684);
@@ -8946,7 +8946,7 @@ namespace Nwn.Server.Interop
     ///  between 1 and 9.  By putting in a 3 it will mean the user is immune to all
     ///  3rd level and lower spells.
     /// </summary>
-    public IntPtr ItemPropertyImmunityToSpellLevel(int nLevel)
+    internal IntPtr ItemPropertyImmunityToSpellLevel(int nLevel)
     {
       StackPush(nLevel);
       Call(685);
@@ -8958,7 +8958,7 @@ namespace Nwn.Server.Interop
     ///  automatically use the zombie walk.  This will apply the special walk animation
     ///  to the user.
     /// </summary>
-    public IntPtr ItemPropertySpecialWalk(int nWalkType = 0)
+    internal IntPtr ItemPropertySpecialWalk(int nWalkType = 0)
     {
       StackPush(nWalkType);
       Call(686);
@@ -8969,7 +8969,7 @@ namespace Nwn.Server.Interop
     ///  Returns Item property healers kit.  You must specify the level of the kit.
     ///  The modifier must be an integer between 1 and 12.
     /// </summary>
-    public IntPtr ItemPropertyHealersKit(int nModifier)
+    internal IntPtr ItemPropertyHealersKit(int nModifier)
     {
       StackPush(nModifier);
       Call(687);
@@ -8980,7 +8980,7 @@ namespace Nwn.Server.Interop
     ///  Returns Item property weight increase.  You must specify the weight increase
     ///  constant(IP_CONST_WEIGHTINCREASE_*).
     /// </summary>
-    public IntPtr ItemPropertyWeightIncrease(int nWeight)
+    internal IntPtr ItemPropertyWeightIncrease(int nWeight)
     {
       StackPush(nWeight);
       Call(688);
@@ -8994,7 +8994,7 @@ namespace Nwn.Server.Interop
     ///  - nSkill: the skill being used
     ///  - nDifficulty: Difficulty class of skill
     /// </summary>
-    public int GetIsSkillSuccessful(uint oTarget, int nSkill, int nDifficulty)
+    internal int GetIsSkillSuccessful(uint oTarget, int nSkill, int nDifficulty)
     {
       StackPush(nDifficulty);
       StackPush(nSkill);
@@ -9008,7 +9008,7 @@ namespace Nwn.Server.Interop
     ///  - nPercent - percentage of failure
     ///  - nSpellSchool - the school of spells affected.
     /// </summary>
-    public IntPtr EffectSpellFailure(int nPercent = 100, int nSpellSchool = SPELL_SCHOOL_GENERAL)
+    internal IntPtr EffectSpellFailure(int nPercent = 100, int nSpellSchool = SPELL_SCHOOL_GENERAL)
     {
       StackPush(nSpellSchool);
       StackPush(nPercent);
@@ -9022,7 +9022,7 @@ namespace Nwn.Server.Interop
     ///  - nStrRef: Reference of the string in the talk table
     ///  - nTalkVolume: TALKVOLUME_*
     /// </summary>
-    public void SpeakStringByStrRef(int nStrRef, int nTalkVolume = TALKVOLUME_TALK)
+    internal void SpeakStringByStrRef(int nStrRef, int nTalkVolume = TALKVOLUME_TALK)
     {
       StackPush(nTalkVolume);
       StackPush(nStrRef);
@@ -9040,7 +9040,7 @@ namespace Nwn.Server.Interop
     ///  SetCutsceneMode(oPlayer, FALSE) will restore the player's plot flag to what it
     ///  was when SetCutsceneMode(oPlayer, TRUE) was called.
     /// </summary>
-    public void SetCutsceneMode(uint oCreature, int nInCutscene = TRUE, int nLeftClickingEnabled = FALSE)
+    internal void SetCutsceneMode(uint oCreature, int nInCutscene = TRUE, int nLeftClickingEnabled = FALSE)
     {
       StackPush(nLeftClickingEnabled);
       StackPush(nInCutscene);
@@ -9051,7 +9051,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Gets the last player character to cancel from a cutscene.
     /// </summary>
-    public uint GetLastPCToCancelCutscene()
+    internal uint GetLastPCToCancelCutscene()
     {
       Call(693);
       return StackPopObject();
@@ -9061,7 +9061,7 @@ namespace Nwn.Server.Interop
     ///  Gets the length of the specified wavefile, in seconds
     ///  Only works for sounds used for dialog.
     /// </summary>
-    public float GetDialogSoundLength(int nStrRef)
+    internal float GetDialogSoundLength(int nStrRef)
     {
       StackPush(nStrRef);
       Call(694);
@@ -9072,7 +9072,7 @@ namespace Nwn.Server.Interop
     ///  Fades the screen for the given creature/player from black to regular screen
     ///  - oCreature: creature controlled by player that should fade from black
     /// </summary>
-    public void FadeFromBlack(uint oCreature, float fSpeed = FADE_SPEED_MEDIUM)
+    internal void FadeFromBlack(uint oCreature, float fSpeed = FADE_SPEED_MEDIUM)
     {
       StackPush(fSpeed);
       StackPush(oCreature);
@@ -9083,7 +9083,7 @@ namespace Nwn.Server.Interop
     ///  Fades the screen for the given creature/player from regular screen to black
     ///  - oCreature: creature controlled by player that should fade to black
     /// </summary>
-    public void FadeToBlack(uint oCreature, float fSpeed = FADE_SPEED_MEDIUM)
+    internal void FadeToBlack(uint oCreature, float fSpeed = FADE_SPEED_MEDIUM)
     {
       StackPush(fSpeed);
       StackPush(oCreature);
@@ -9094,7 +9094,7 @@ namespace Nwn.Server.Interop
     ///  Removes any fading or black screen.
     ///  - oCreature: creature controlled by player that should be cleared
     /// </summary>
-    public void StopFade(uint oCreature)
+    internal void StopFade(uint oCreature)
     {
       StackPush(oCreature);
       Call(697);
@@ -9105,7 +9105,7 @@ namespace Nwn.Server.Interop
     ///  Can be cleared by either doing a FadeFromBlack, or by calling StopFade.
     ///  - oCreature: creature controlled by player that should see black screen
     /// </summary>
-    public void BlackScreen(uint oCreature)
+    internal void BlackScreen(uint oCreature)
     {
       StackPush(oCreature);
       Call(698);
@@ -9114,7 +9114,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Returns the base attach bonus for the given creature.
     /// </summary>
-    public int GetBaseAttackBonus(uint oCreature)
+    internal int GetBaseAttackBonus(uint oCreature)
     {
       StackPush(oCreature);
       Call(699);
@@ -9128,7 +9128,7 @@ namespace Nwn.Server.Interop
     ///              FALSE = creature is not immortal and is damaged normally.
     ///  This scripting command only works on Creature objects.
     /// </summary>
-    public void SetImmortal(uint oCreature, int bImmortal)
+    internal void SetImmortal(uint oCreature, int bImmortal)
     {
       StackPush(bImmortal);
       StackPush(oCreature);
@@ -9142,7 +9142,7 @@ namespace Nwn.Server.Interop
     ///  * DM's can view any creature's inventory
     ///  * Players can view their own inventory, or that of their henchman, familiar or animal companion
     /// </summary>
-    public void OpenInventory(uint oCreature, uint oPlayer)
+    internal void OpenInventory(uint oCreature, uint oPlayer)
     {
       StackPush(oPlayer);
       StackPush(oCreature);
@@ -9153,7 +9153,7 @@ namespace Nwn.Server.Interop
     ///  Stores the current camera mode and position so that it can be restored (using
     ///  RestoreCameraFacing())
     /// </summary>
-    public void StoreCameraFacing()
+    internal void StoreCameraFacing()
     {
       Call(702);
     }
@@ -9163,7 +9163,7 @@ namespace Nwn.Server.Interop
     ///  was called.  RestoreCameraFacing can only be called once, and must correspond to a
     ///  previous call to StoreCameraFacing.
     /// </summary>
-    public void RestoreCameraFacing()
+    internal void RestoreCameraFacing()
     {
       Call(703);
     }
@@ -9179,7 +9179,7 @@ namespace Nwn.Server.Interop
     ///  If you turn on bReadyAllSpells, all memorized spells will be ready to cast without resting.
     ///  if nPackage is PACKAGE_INVALID then it will use the starting package assigned to that class or just the class package
     /// </summary>
-    public int LevelUpHenchman(uint oCreature, int nClass = CLASS_TYPE_INVALID, int bReadyAllSpells = FALSE, int nPackage = PACKAGE_INVALID)
+    internal int LevelUpHenchman(uint oCreature, int nClass = CLASS_TYPE_INVALID, int bReadyAllSpells = FALSE, int nPackage = PACKAGE_INVALID)
     {
       StackPush(nPackage);
       StackPush(bReadyAllSpells);
@@ -9195,7 +9195,7 @@ namespace Nwn.Server.Interop
     ///  - bDroppable: TRUE or FALSE, whether the item should be droppable
     ///  Droppable items will appear on a creature's remains when the creature is killed.
     /// </summary>
-    public void SetDroppableFlag(uint oItem, int bDroppable)
+    internal void SetDroppableFlag(uint oItem, int bDroppable)
     {
       StackPush(bDroppable);
       StackPush(oItem);
@@ -9207,7 +9207,7 @@ namespace Nwn.Server.Interop
     ///  of pounds (as per the baseitems.2da).
     ///  - oTarget: the item or creature for which the weight is needed
     /// </summary>
-    public int GetWeight(uint oTarget = OBJECT_INVALID)
+    internal int GetWeight(uint oTarget = OBJECT_INVALID)
     {
       StackPush(oTarget);
       Call(706);
@@ -9217,7 +9217,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Gets the object that acquired the module item.  May be a creature, item, or placeable
     /// </summary>
-    public uint GetModuleItemAcquiredBy()
+    internal uint GetModuleItemAcquiredBy()
     {
       Call(707);
       return StackPopObject();
@@ -9226,7 +9226,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the immortal flag on a creature
     /// </summary>
-    public int GetImmortal(uint oTarget = OBJECT_INVALID)
+    internal int GetImmortal(uint oTarget = OBJECT_INVALID)
     {
       StackPush(oTarget);
       Call(708);
@@ -9244,7 +9244,7 @@ namespace Nwn.Server.Interop
     ///    displayed
     ///  - int bImproved: If TRUE, the improved version of whirlwind is used
     /// </summary>
-    public void DoWhirlwindAttack(int bDisplayFeedback = TRUE, int bImproved = FALSE)
+    internal void DoWhirlwindAttack(int bDisplayFeedback = TRUE, int bImproved = FALSE)
     {
       StackPush(bImproved);
       StackPush(bDisplayFeedback);
@@ -9259,7 +9259,7 @@ namespace Nwn.Server.Interop
     ///  - nRow: the row in the 2da
     ///  * returns an empty string if file, row, or column not found
     /// </summary>
-    public string Get2DAString(string s2DA, string sColumn, int nRow)
+    internal string Get2DAString(string s2DA, string sColumn, int nRow)
     {
       StackPush(nRow);
       StackPush(sColumn);
@@ -9272,7 +9272,7 @@ namespace Nwn.Server.Interop
     ///  Returns an effect of type EFFECT_TYPE_ETHEREAL which works just like EffectSanctuary
     ///  except that the observers get no saving throw
     /// </summary>
-    public IntPtr EffectEthereal()
+    internal IntPtr EffectEthereal()
     {
       Call(711);
       return StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -9283,7 +9283,7 @@ namespace Nwn.Server.Interop
     ///  Returns one of the following:
     ///  AI_LEVEL_INVALID, AI_LEVEL_VERY_LOW, AI_LEVEL_LOW, AI_LEVEL_NORMAL, AI_LEVEL_HIGH, AI_LEVEL_VERY_HIGH
     /// </summary>
-    public int GetAILevel(uint oTarget = OBJECT_INVALID)
+    internal int GetAILevel(uint oTarget = OBJECT_INVALID)
     {
       StackPush(oTarget);
       Call(712);
@@ -9302,7 +9302,7 @@ namespace Nwn.Server.Interop
     ///  AI_LEVEL_NORMAL   - Normal priority, average AI, but more CPU usage required for AI. Typically used when creature is in combat.
     ///  AI_LEVEL_HIGH     - High priority, smartest AI, but extremely high CPU usage required for AI. Avoid using this. It is most likely only ever needed for cutscenes.
     /// </summary>
-    public void SetAILevel(uint oTarget, int nAILevel)
+    internal void SetAILevel(uint oTarget, int nAILevel)
     {
       StackPush(nAILevel);
       StackPush(oTarget);
@@ -9314,7 +9314,7 @@ namespace Nwn.Server.Interop
     ///  possessed by his master.
     ///  returns FALSE if not or if the creature object is invalid
     /// </summary>
-    public int GetIsPossessedFamiliar(uint oCreature)
+    internal int GetIsPossessedFamiliar(uint oCreature)
     {
       StackPush(oCreature);
       Call(714);
@@ -9326,7 +9326,7 @@ namespace Nwn.Server.Interop
     ///  on the player creature or the possessed familiar.  It does not work in conjunction with
     ///  any DM possession.
     /// </summary>
-    public void UnpossessFamiliar(uint oCreature)
+    internal void UnpossessFamiliar(uint oCreature)
     {
       StackPush(oCreature);
       Call(715);
@@ -9335,7 +9335,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  This will return TRUE if the area is flagged as either interior or underground.
     /// </summary>
-    public int GetIsAreaInterior(uint oArea = OBJECT_INVALID)
+    internal int GetIsAreaInterior(uint oArea = OBJECT_INVALID)
     {
       StackPush(oArea);
       Call(716);
@@ -9345,7 +9345,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Send a server message (szMessage) to the oPlayer.
     /// </summary>
-    public void SendMessageToPCByStrRef(uint oPlayer, int nStrRef)
+    internal void SendMessageToPCByStrRef(uint oPlayer, int nStrRef)
     {
       StackPush(nStrRef);
       StackPush(oPlayer);
@@ -9358,7 +9358,7 @@ namespace Nwn.Server.Interop
     ///  - oCreature: creature to modify
     ///  - nFeat: constant FEAT_*
     /// </summary>
-    public void IncrementRemainingFeatUses(uint oCreature, int nFeat)
+    internal void IncrementRemainingFeatUses(uint oCreature, int nFeat)
     {
       StackPush(nFeat);
       StackPush(oCreature);
@@ -9369,7 +9369,7 @@ namespace Nwn.Server.Interop
     ///  Force the character of the player specified to be exported to its respective directory
     ///  i.e. LocalVault/ServerVault/ etc.
     /// </summary>
-    public void ExportSingleCharacter(uint oPlayer)
+    internal void ExportSingleCharacter(uint oPlayer)
     {
       StackPush(oPlayer);
       Call(719);
@@ -9379,7 +9379,7 @@ namespace Nwn.Server.Interop
     ///  This will play a sound that is associated with a stringRef, it will be a mono sound from the location of the object running the command.
     ///  if nRunAsAction is off then the sound is forced to play intantly.
     /// </summary>
-    public void PlaySoundByStrRef(int nStrRef, int nRunAsAction = TRUE)
+    internal void PlaySoundByStrRef(int nStrRef, int nRunAsAction = TRUE)
     {
       StackPush(nRunAsAction);
       StackPush(nStrRef);
@@ -9389,7 +9389,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Set the name of oCreature's sub race to sSubRace.
     /// </summary>
-    public void SetSubRace(uint oCreature, string sSubRace)
+    internal void SetSubRace(uint oCreature, string sSubRace)
     {
       StackPush(sSubRace);
       StackPush(oCreature);
@@ -9399,7 +9399,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Set the name of oCreature's Deity to sDeity.
     /// </summary>
-    public void SetDeity(uint oCreature, string sDeity)
+    internal void SetDeity(uint oCreature, string sDeity)
     {
       StackPush(sDeity);
       StackPush(oCreature);
@@ -9412,7 +9412,7 @@ namespace Nwn.Server.Interop
     ///  Note: GetIsDMPossessed() will return FALSE if oCreature is the DM character.
     ///  To determine if oCreature is a DM character use GetIsDM()
     /// </summary>
-    public int GetIsDMPossessed(uint oCreature)
+    internal int GetIsDMPossessed(uint oCreature)
     {
       StackPush(oCreature);
       Call(723);
@@ -9424,7 +9424,7 @@ namespace Nwn.Server.Interop
     ///    Returns: WEATHER_CLEAR, WEATHER_RAIN, WEATHER_SNOW, WEATHER_INVALID
     ///    Note: If called on an Interior area, this will always return WEATHER_CLEAR.
     /// </summary>
-    public int GetWeather(uint oArea)
+    internal int GetWeather(uint oArea)
     {
       StackPush(oArea);
       Call(724);
@@ -9435,7 +9435,7 @@ namespace Nwn.Server.Interop
     ///  Returns AREA_NATURAL if the area oArea is natural, AREA_ARTIFICIAL otherwise.
     ///  Returns AREA_INVALID, on an error.
     /// </summary>
-    public int GetIsAreaNatural(uint oArea)
+    internal int GetIsAreaNatural(uint oArea)
     {
       StackPush(oArea);
       Call(725);
@@ -9446,7 +9446,7 @@ namespace Nwn.Server.Interop
     ///  Returns AREA_ABOVEGROUND if the area oArea is above ground, AREA_UNDERGROUND otherwise.
     ///  Returns AREA_INVALID, on an error.
     /// </summary>
-    public int GetIsAreaAboveGround(uint oArea)
+    internal int GetIsAreaAboveGround(uint oArea)
     {
       StackPush(oArea);
       Call(726);
@@ -9456,7 +9456,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Use this to get the item last equipped by a player character in OnPlayerEquipItem..
     /// </summary>
-    public uint GetPCItemLastEquipped()
+    internal uint GetPCItemLastEquipped()
     {
       Call(727);
       return StackPopObject();
@@ -9465,7 +9465,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Use this to get the player character who last equipped an item in OnPlayerEquipItem..
     /// </summary>
-    public uint GetPCItemLastEquippedBy()
+    internal uint GetPCItemLastEquippedBy()
     {
       Call(728);
       return StackPopObject();
@@ -9474,7 +9474,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Use this to get the item last unequipped by a player character in OnPlayerEquipItem..
     /// </summary>
-    public uint GetPCItemLastUnequipped()
+    internal uint GetPCItemLastUnequipped()
     {
       Call(729);
       return StackPopObject();
@@ -9483,7 +9483,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Use this to get the player character who last unequipped an item in OnPlayerUnEquipItem..
     /// </summary>
-    public uint GetPCItemLastUnequippedBy()
+    internal uint GetPCItemLastUnequippedBy()
     {
       Call(730);
       return StackPopObject();
@@ -9511,7 +9511,7 @@ namespace Nwn.Server.Interop
     ///  [1] When specifying per-part coloring, the value 255 is allowed and corresponds with the logical
     ///  function 'clear colour override', which clears the per-part override for that part.
     /// </summary>
-    public uint CopyItemAndModify(uint oItem, int nType, int nIndex, int nNewValue, int bCopyVars = FALSE)
+    internal uint CopyItemAndModify(uint oItem, int nType, int nIndex, int nNewValue, int bCopyVars = FALSE)
     {
       StackPush(bCopyVars);
       StackPush(nNewValue);
@@ -9526,7 +9526,7 @@ namespace Nwn.Server.Interop
     ///  Queries the current value of the appearance settings on an item. The parameters are
     ///  identical to those of CopyItemAndModify().
     /// </summary>
-    public int GetItemAppearance(uint oItem, int nType, int nIndex)
+    internal int GetItemAppearance(uint oItem, int nType, int nIndex)
     {
       StackPush(nIndex);
       StackPush(nType);
@@ -9540,7 +9540,7 @@ namespace Nwn.Server.Interop
     ///  when a successful strike is made, or (when applied to armor) is struck by an opponent.
     ///  - nSpell uses the IP_CONST_ONHIT_CASTSPELL_* constants
     /// </summary>
-    public IntPtr ItemPropertyOnHitCastSpell(int nSpell, int nLevel)
+    internal IntPtr ItemPropertyOnHitCastSpell(int nSpell, int nLevel)
     {
       StackPush(nLevel);
       StackPush(nSpell);
@@ -9551,7 +9551,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Returns the SubType number of the item property. See the 2DA files for value definitions.
     /// </summary>
-    public int GetItemPropertySubType(IntPtr iProperty)
+    internal int GetItemPropertySubType(IntPtr iProperty)
     {
       StackPush(iProperty, ENGINE_STRUCTURE_ITEM_PROPERTY);
       Call(734);
@@ -9561,7 +9561,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Gets the status of ACTION_MODE_* modes on a creature.
     /// </summary>
-    public int GetActionMode(uint oCreature, int nMode)
+    internal int GetActionMode(uint oCreature, int nMode)
     {
       StackPush(nMode);
       StackPush(oCreature);
@@ -9572,7 +9572,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Sets the status of modes ACTION_MODE_* on a creature.
     /// </summary>
-    public void SetActionMode(uint oCreature, int nMode, int nStatus)
+    internal void SetActionMode(uint oCreature, int nMode, int nStatus)
     {
       StackPush(nStatus);
       StackPush(nMode);
@@ -9583,7 +9583,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Returns the current arcane spell failure factor of a creature
     /// </summary>
-    public int GetArcaneSpellFailure(uint oCreature)
+    internal int GetArcaneSpellFailure(uint oCreature)
     {
       StackPush(oCreature);
       Call(737);
@@ -9594,7 +9594,7 @@ namespace Nwn.Server.Interop
     ///  Makes a player examine the object oExamine. This causes the examination
     ///  pop-up box to appear for the object specified.
     /// </summary>
-    public void ActionExamine(uint oExamine)
+    internal void ActionExamine(uint oExamine)
     {
       StackPush(oExamine);
       Call(738);
@@ -9604,7 +9604,7 @@ namespace Nwn.Server.Interop
     ///  Creates a visual effect (ITEM_VISUAL_*) that may be applied to
     ///  melee weapons only.
     /// </summary>
-    public IntPtr ItemPropertyVisualEffect(int nEffect)
+    internal IntPtr ItemPropertyVisualEffect(int nEffect)
     {
       StackPush(nEffect);
       Call(739);
@@ -9615,7 +9615,7 @@ namespace Nwn.Server.Interop
     ///  Sets the lootable state of a *living* NPC creature.
     ///  This function will *not* work on players or dead creatures.
     /// </summary>
-    public void SetLootable(uint oCreature, int bLootable)
+    internal void SetLootable(uint oCreature, int bLootable)
     {
       StackPush(bLootable);
       StackPush(oCreature);
@@ -9625,7 +9625,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Returns the lootable state of a creature.
     /// </summary>
-    public int GetLootable(uint oCreature)
+    internal int GetLootable(uint oCreature)
     {
       StackPush(oCreature);
       Call(741);
@@ -9637,7 +9637,7 @@ namespace Nwn.Server.Interop
     ///  of the cutscene 'camera man'.
     ///  NOTE: This will be a value between 0.1, 2.0 (10%-200%)
     /// </summary>
-    public float GetCutsceneCameraMoveRate(uint oCreature)
+    internal float GetCutsceneCameraMoveRate(uint oCreature)
     {
       StackPush(oCreature);
       Call(742);
@@ -9649,7 +9649,7 @@ namespace Nwn.Server.Interop
     ///  camera man.
     ///  NOTE: You can only set values between 0.1, 2.0 (10%-200%)
     /// </summary>
-    public void SetCutsceneCameraMoveRate(uint oCreature, float fRate)
+    internal void SetCutsceneCameraMoveRate(uint oCreature, float fRate)
     {
       StackPush(fRate);
       StackPush(oCreature);
@@ -9659,7 +9659,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Returns TRUE if the item is cursed and cannot be dropped
     /// </summary>
-    public int GetItemCursedFlag(uint oItem)
+    internal int GetItemCursedFlag(uint oItem)
     {
       StackPush(oItem);
       Call(744);
@@ -9669,7 +9669,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  When cursed, items cannot be dropped
     /// </summary>
-    public void SetItemCursedFlag(uint oItem, int nCursed)
+    internal void SetItemCursedFlag(uint oItem, int nCursed)
     {
       StackPush(nCursed);
       StackPush(oItem);
@@ -9679,7 +9679,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Sets the maximum number of henchmen
     /// </summary>
-    public void SetMaxHenchmen(int nNumHenchmen)
+    internal void SetMaxHenchmen(int nNumHenchmen)
     {
       StackPush(nNumHenchmen);
       Call(746);
@@ -9688,7 +9688,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Gets the maximum number of henchmen
     /// </summary>
-    public int GetMaxHenchmen()
+    internal int GetMaxHenchmen()
     {
       Call(747);
       return StackPopInt();
@@ -9698,7 +9698,7 @@ namespace Nwn.Server.Interop
     ///  Returns the associate type of the specified creature.
     ///  - Returns ASSOCIATE_TYPE_NONE if the creature is not the associate of anyone.
     /// </summary>
-    public int GetAssociateType(uint oAssociate)
+    internal int GetAssociateType(uint oAssociate)
     {
       StackPush(oAssociate);
       Call(748);
@@ -9710,7 +9710,7 @@ namespace Nwn.Server.Interop
     ///  - Returns 0 if the creature has no spell resistance or an invalid
     ///    creature is passed in.
     /// </summary>
-    public int GetSpellResistance(uint oCreature)
+    internal int GetSpellResistance(uint oCreature)
     {
       StackPush(oCreature);
       Call(749);
@@ -9722,7 +9722,7 @@ namespace Nwn.Server.Interop
     ///  - oPlayer: which player to change the lighting for
     ///  - fTransitionTime: how long the transition should take
     /// </summary>
-    public void DayToNight(uint oPlayer, float fTransitionTime = 0.0f)
+    internal void DayToNight(uint oPlayer, float fTransitionTime = 0.0f)
     {
       StackPush(fTransitionTime);
       StackPush(oPlayer);
@@ -9734,7 +9734,7 @@ namespace Nwn.Server.Interop
     ///  - oPlayer: which player to change the lighting for
     ///  - fTransitionTime: how long the transition should take
     /// </summary>
-    public void NightToDay(uint oPlayer, float fTransitionTime = 0.0f)
+    internal void NightToDay(uint oPlayer, float fTransitionTime = 0.0f)
     {
       StackPush(fTransitionTime);
       StackPush(oPlayer);
@@ -9748,7 +9748,7 @@ namespace Nwn.Server.Interop
     ///  PLEASE NOTE: This is an expensive function and may
     ///               degrade performance if used frequently.
     /// </summary>
-    public int LineOfSightObject(uint oSource, uint oTarget)
+    internal int LineOfSightObject(uint oSource, uint oTarget)
     {
       StackPush(oTarget);
       StackPush(oSource);
@@ -9766,7 +9766,7 @@ namespace Nwn.Server.Interop
     ///  PLEASE NOTE: This is an expensive function and may
     ///               degrade performance if used frequently.
     /// </summary>
-    public int LineOfSightVector(Vector3 vSource, Vector3 vTarget)
+    internal int LineOfSightVector(Vector3 vSource, Vector3 vTarget)
     {
       StackPush(vTarget);
       StackPush(vSource);
@@ -9780,7 +9780,7 @@ namespace Nwn.Server.Interop
     ///  - Returns CLASS_TYPE_INVALID if the caster has
     ///    no valid class (placeables, etc...)
     /// </summary>
-    public int GetLastSpellCastClass()
+    internal int GetLastSpellCastClass()
     {
       Call(754);
       return StackPopInt();
@@ -9792,7 +9792,7 @@ namespace Nwn.Server.Interop
     ///  1 to 6
     ///  Note: This function does not work on Player Characters
     /// </summary>
-    public void SetBaseAttackBonus(int nBaseAttackBonus, uint oCreature = OBJECT_INVALID)
+    internal void SetBaseAttackBonus(int nBaseAttackBonus, uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       StackPush(nBaseAttackBonus);
@@ -9803,7 +9803,7 @@ namespace Nwn.Server.Interop
     ///  Restores the number of base attacks back to it's
     ///  original state.
     /// </summary>
-    public void RestoreBaseAttackBonus(uint oCreature = OBJECT_INVALID)
+    internal void RestoreBaseAttackBonus(uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       Call(756);
@@ -9814,7 +9814,7 @@ namespace Nwn.Server.Interop
     ///  to pathfind through other creatures without bumping into them
     ///  for the duration of the effect.
     /// </summary>
-    public IntPtr EffectCutsceneGhost()
+    internal IntPtr EffectCutsceneGhost()
     {
       Call(757);
       return StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -9824,7 +9824,7 @@ namespace Nwn.Server.Interop
     ///  Creates an item property that offsets the effect on arcane spell failure
     ///  that a particular item has. Parameters come from the ITEM_PROP_ASF_* group.
     /// </summary>
-    public IntPtr ItemPropertyArcaneSpellFailure(int nModLevel)
+    internal IntPtr ItemPropertyArcaneSpellFailure(int nModLevel)
     {
       StackPush(nModLevel);
       Call(758);
@@ -9835,7 +9835,7 @@ namespace Nwn.Server.Interop
     ///  Returns the amount of gold a store currently has. -1 indicates it is not using gold.
     ///  -2 indicates the store could not be located.
     /// </summary>
-    public int GetStoreGold(uint oidStore)
+    internal int GetStoreGold(uint oidStore)
     {
       StackPush(oidStore);
       Call(759);
@@ -9845,7 +9845,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Sets the amount of gold a store has. -1 means the store does not use gold.
     /// </summary>
-    public void SetStoreGold(uint oidStore, int nGold)
+    internal void SetStoreGold(uint oidStore, int nGold)
     {
       StackPush(nGold);
       StackPush(oidStore);
@@ -9856,7 +9856,7 @@ namespace Nwn.Server.Interop
     ///  Gets the maximum amount a store will pay for any item. -1 means price unlimited.
     ///  -2 indicates the store could not be located.
     /// </summary>
-    public int GetStoreMaxBuyPrice(uint oidStore)
+    internal int GetStoreMaxBuyPrice(uint oidStore)
     {
       StackPush(oidStore);
       Call(761);
@@ -9866,7 +9866,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Sets the maximum amount a store will pay for any item. -1 means price unlimited.
     /// </summary>
-    public void SetStoreMaxBuyPrice(uint oidStore, int nMaxBuy)
+    internal void SetStoreMaxBuyPrice(uint oidStore, int nMaxBuy)
     {
       StackPush(nMaxBuy);
       StackPush(oidStore);
@@ -9878,7 +9878,7 @@ namespace Nwn.Server.Interop
     ///  the store will not identify items.
     ///  -2 indicates the store could not be located.
     /// </summary>
-    public int GetStoreIdentifyCost(uint oidStore)
+    internal int GetStoreIdentifyCost(uint oidStore)
     {
       StackPush(oidStore);
       Call(763);
@@ -9889,7 +9889,7 @@ namespace Nwn.Server.Interop
     ///  Sets the amount a store charges for identifying an item. Default is 100. -1 means
     ///  the store will not identify items.
     /// </summary>
-    public void SetStoreIdentifyCost(uint oidStore, int nCost)
+    internal void SetStoreIdentifyCost(uint oidStore, int nCost)
     {
       StackPush(nCost);
       StackPush(oidStore);
@@ -9899,7 +9899,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Sets the creature's appearance type to the value specified (uses the APPEARANCE_TYPE_XXX constants)
     /// </summary>
-    public void SetCreatureAppearanceType(uint oCreature, int nAppearanceType)
+    internal void SetCreatureAppearanceType(uint oCreature, int nAppearanceType)
     {
       StackPush(nAppearanceType);
       StackPush(oCreature);
@@ -9910,7 +9910,7 @@ namespace Nwn.Server.Interop
     ///  Returns the default package selected for this creature to level up with
     ///  - returns PACKAGE_INVALID if error occurs
     /// </summary>
-    public int GetCreatureStartingPackage(uint oCreature)
+    internal int GetCreatureStartingPackage(uint oCreature)
     {
       StackPush(oCreature);
       Call(766);
@@ -9921,7 +9921,7 @@ namespace Nwn.Server.Interop
     ///  Returns an effect that when applied will paralyze the target's legs, rendering
     ///  them unable to walk but otherwise unpenalized. This effect cannot be resisted.
     /// </summary>
-    public IntPtr EffectCutsceneImmobilize()
+    internal IntPtr EffectCutsceneImmobilize()
     {
       Call(767);
       return StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -9932,7 +9932,7 @@ namespace Nwn.Server.Interop
     ///  This function will tell you if the creature has triggered an onEnter event,
     ///  not if it is physically within the space of the subarea
     /// </summary>
-    public int GetIsInSubArea(uint oCreature, uint oSubArea = OBJECT_INVALID)
+    internal int GetIsInSubArea(uint oCreature, uint oSubArea = OBJECT_INVALID)
     {
       StackPush(oSubArea);
       StackPush(oCreature);
@@ -9943,7 +9943,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Returns the Cost Table number of the item property. See the 2DA files for value definitions.
     /// </summary>
-    public int GetItemPropertyCostTable(IntPtr iProp)
+    internal int GetItemPropertyCostTable(IntPtr iProp)
     {
       StackPush(iProp, ENGINE_STRUCTURE_ITEM_PROPERTY);
       Call(769);
@@ -9954,7 +9954,7 @@ namespace Nwn.Server.Interop
     ///  Returns the Cost Table value (index of the cost table) of the item property.
     ///  See the 2DA files for value definitions.
     /// </summary>
-    public int GetItemPropertyCostTableValue(IntPtr iProp)
+    internal int GetItemPropertyCostTableValue(IntPtr iProp)
     {
       StackPush(iProp, ENGINE_STRUCTURE_ITEM_PROPERTY);
       Call(770);
@@ -9964,7 +9964,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Returns the Param1 number of the item property. See the 2DA files for value definitions.
     /// </summary>
-    public int GetItemPropertyParam1(IntPtr iProp)
+    internal int GetItemPropertyParam1(IntPtr iProp)
     {
       StackPush(iProp, ENGINE_STRUCTURE_ITEM_PROPERTY);
       Call(771);
@@ -9974,7 +9974,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Returns the Param1 value of the item property. See the 2DA files for value definitions.
     /// </summary>
-    public int GetItemPropertyParam1Value(IntPtr iProp)
+    internal int GetItemPropertyParam1Value(IntPtr iProp)
     {
       StackPush(iProp, ENGINE_STRUCTURE_ITEM_PROPERTY);
       Call(772);
@@ -9985,7 +9985,7 @@ namespace Nwn.Server.Interop
     ///  Is this creature able to be disarmed? (checks disarm flag on creature, and if
     ///  the creature actually has a weapon equipped in their right hand that is droppable)
     /// </summary>
-    public int GetIsCreatureDisarmable(uint oCreature)
+    internal int GetIsCreatureDisarmable(uint oCreature)
     {
       StackPush(oCreature);
       Call(773);
@@ -9995,7 +9995,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Sets whether this item is 'stolen' or not
     /// </summary>
-    public void SetStolenFlag(uint oItem, int nStolenFlag)
+    internal void SetStolenFlag(uint oItem, int nStolenFlag)
     {
       StackPush(nStolenFlag);
       StackPush(oItem);
@@ -10005,7 +10005,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Instantly gives this creature the benefits of a rest (restored hitpoints, spells, feats, etc..)
     /// </summary>
-    public void ForceRest(uint oCreature)
+    internal void ForceRest(uint oCreature)
     {
       StackPush(oCreature);
       Call(775);
@@ -10015,7 +10015,7 @@ namespace Nwn.Server.Interop
     ///  Forces this player's camera to be set to this height. Setting this value to zero will
     ///  restore the camera to the racial default height.
     /// </summary>
-    public void SetCameraHeight(uint oPlayer, float fHeight = 0.0f)
+    internal void SetCameraHeight(uint oPlayer, float fHeight = 0.0f)
     {
       StackPush(fHeight);
       StackPush(oPlayer);
@@ -10028,7 +10028,7 @@ namespace Nwn.Server.Interop
     ///  If no valid area (or object) is specified, it uses the area of caller.
     ///  If an object other than an area is specified, will use the area that the object is currently in.
     /// </summary>
-    public void SetSkyBox(int nSkyBox, uint oArea = OBJECT_INVALID)
+    internal void SetSkyBox(int nSkyBox, uint oArea = OBJECT_INVALID)
     {
       StackPush(oArea);
       StackPush(nSkyBox);
@@ -10038,7 +10038,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Returns the creature's currently set PhenoType (body type).
     /// </summary>
-    public int GetPhenoType(uint oCreature)
+    internal int GetPhenoType(uint oCreature)
     {
       StackPush(oCreature);
       Call(778);
@@ -10056,7 +10056,7 @@ namespace Nwn.Server.Interop
     ///  SetPhenoType will only work on part based creature (i.e. the starting
     ///  default playable races).
     /// </summary>
-    public void SetPhenoType(int nPhenoType, uint oCreature = OBJECT_INVALID)
+    internal void SetPhenoType(int nPhenoType, uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       StackPush(nPhenoType);
@@ -10076,7 +10076,7 @@ namespace Nwn.Server.Interop
     ///  If no valid area (or object) is specified, it uses the area of caller.
     ///  If an object other than an area is specified, will use the area that the object is currently in.
     /// </summary>
-    public void SetFogColor(int nFogType, int nFogColor, uint oArea = OBJECT_INVALID)
+    internal void SetFogColor(int nFogType, int nFogColor, uint oArea = OBJECT_INVALID)
     {
       StackPush(oArea);
       StackPush(nFogColor);
@@ -10090,7 +10090,7 @@ namespace Nwn.Server.Interop
     ///  Returns FALSE if the player is not in cutscene mode, or on an error
     ///  (such as specifying a non creature object).
     /// </summary>
-    public int GetCutsceneMode(uint oCreature = OBJECT_INVALID)
+    internal int GetCutsceneMode(uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       Call(781);
@@ -10104,7 +10104,7 @@ namespace Nwn.Server.Interop
     ///  If no valid area (or object) is specified, it uses the area of caller.
     ///  If an object other than an area is specified, will use the area that the object is currently in.
     /// </summary>
-    public int GetSkyBox(uint oArea = OBJECT_INVALID)
+    internal int GetSkyBox(uint oArea = OBJECT_INVALID)
     {
       StackPush(oArea);
       Call(782);
@@ -10118,7 +10118,7 @@ namespace Nwn.Server.Interop
     ///  If no valid area (or object) is specified, it uses the area of caller.
     ///  If an object other than an area is specified, will use the area that the object is currently in.
     /// </summary>
-    public int GetFogColor(int nFogType, uint oArea = OBJECT_INVALID)
+    internal int GetFogColor(int nFogType, uint oArea = OBJECT_INVALID)
     {
       StackPush(oArea);
       StackPush(nFogType);
@@ -10133,7 +10133,7 @@ namespace Nwn.Server.Interop
     ///  If no valid area (or object) is specified, it uses the area of caller.
     ///  If an object other than an area is specified, will use the area that the object is currently in.
     /// </summary>
-    public void SetFogAmount(int nFogType, int nFogAmount, uint oArea = OBJECT_INVALID)
+    internal void SetFogAmount(int nFogType, int nFogAmount, uint oArea = OBJECT_INVALID)
     {
       StackPush(oArea);
       StackPush(nFogAmount);
@@ -10148,7 +10148,7 @@ namespace Nwn.Server.Interop
     ///  If no valid area (or object) is specified, it uses the area of caller.
     ///  If an object other than an area is specified, will use the area that the object is currently in.
     /// </summary>
-    public int GetFogAmount(int nFogType, uint oArea = OBJECT_INVALID)
+    internal int GetFogAmount(int nFogType, uint oArea = OBJECT_INVALID)
     {
       StackPush(oArea);
       StackPush(nFogType);
@@ -10159,7 +10159,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  returns TRUE if the item CAN be pickpocketed
     /// </summary>
-    public int GetPickpocketableFlag(uint oItem)
+    internal int GetPickpocketableFlag(uint oItem)
     {
       StackPush(oItem);
       Call(786);
@@ -10171,7 +10171,7 @@ namespace Nwn.Server.Interop
     ///  - oItem: the item to change
     ///  - bPickpocketable: TRUE or FALSE, whether the item can be pickpocketed.
     /// </summary>
-    public void SetPickpocketableFlag(uint oItem, int bPickpocketable)
+    internal void SetPickpocketableFlag(uint oItem, int bPickpocketable)
     {
       StackPush(bPickpocketable);
       StackPush(oItem);
@@ -10185,7 +10185,7 @@ namespace Nwn.Server.Interop
     ///  returns FOOTSTEP_TYPE_INVALID if used on a non-creature object, or if
     ///  used on creature that has no footstep sounds by default (e.g. Will-O'-Wisp).
     /// </summary>
-    public int GetFootstepType(uint oCreature = OBJECT_INVALID)
+    internal int GetFootstepType(uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       Call(788);
@@ -10216,7 +10216,7 @@ namespace Nwn.Server.Interop
     ///       FOOTSTEP_TYPE_NONE
     ///  - oCreature: the creature to change the footstep sound for.
     /// </summary>
-    public void SetFootstepType(int nFootstepType, uint oCreature = OBJECT_INVALID)
+    internal void SetFootstepType(int nFootstepType, uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       StackPush(nFootstepType);
@@ -10236,7 +10236,7 @@ namespace Nwn.Server.Interop
     ///  if the creature has no wings, or if the creature can not have its
     ///  wing type changed in the toolset.
     /// </summary>
-    public int GetCreatureWingType(uint oCreature = OBJECT_INVALID)
+    internal int GetCreatureWingType(uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       Call(790);
@@ -10258,7 +10258,7 @@ namespace Nwn.Server.Interop
     ///  The MODELTYPE for the part based (playable races) 'P'
     ///  and MODELTYPE 'W'in the appearance.2da
     /// </summary>
-    public void SetCreatureWingType(int nWingType, uint oCreature = OBJECT_INVALID)
+    internal void SetCreatureWingType(int nWingType, uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       StackPush(nWingType);
@@ -10298,7 +10298,7 @@ namespace Nwn.Server.Interop
     ///       CREATURE_PART_LEFT_HAND
     ///       CREATURE_PART_HEAD
     /// </summary>
-    public int GetCreatureBodyPart(int nPart, uint oCreature = OBJECT_INVALID)
+    internal int GetCreatureBodyPart(int nPart, uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       StackPush(nPart);
@@ -10340,7 +10340,7 @@ namespace Nwn.Server.Interop
     ///  Note: Only part based creature appearance types are supported.
     ///  i.e. The model types for the playable races ('P') in the appearance.2da
     /// </summary>
-    public void SetCreatureBodyPart(int nPart, int nModelNumber, uint oCreature = OBJECT_INVALID)
+    internal void SetCreatureBodyPart(int nPart, int nModelNumber, uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       StackPush(nModelNumber);
@@ -10358,7 +10358,7 @@ namespace Nwn.Server.Interop
     ///  if the creature has no Tail, or if the creature can not have its
     ///  Tail type changed in the toolset.
     /// </summary>
-    public int GetCreatureTailType(uint oCreature = OBJECT_INVALID)
+    internal int GetCreatureTailType(uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       Call(794);
@@ -10377,7 +10377,7 @@ namespace Nwn.Server.Interop
     ///  The MODELTYPE for the part based (playable) races 'P'
     ///  and MODELTYPE 'T'in the appearance.2da
     /// </summary>
-    public void SetCreatureTailType(int nTailType, uint oCreature = OBJECT_INVALID)
+    internal void SetCreatureTailType(int nTailType, uint oCreature = OBJECT_INVALID)
     {
       StackPush(oCreature);
       StackPush(nTailType);
@@ -10390,7 +10390,7 @@ namespace Nwn.Server.Interop
     ///  returns -1 on an error or if used on an object that is
     ///  neither a door nor a placeable object.
     /// </summary>
-    public int GetHardness(uint oObject = OBJECT_INVALID)
+    internal int GetHardness(uint oObject = OBJECT_INVALID)
     {
       StackPush(oObject);
       Call(796);
@@ -10404,7 +10404,7 @@ namespace Nwn.Server.Interop
     ///  Does nothing if used on an object that is neither
     ///  a door nor a placeable.
     /// </summary>
-    public void SetHardness(int nHardness, uint oObject = OBJECT_INVALID)
+    internal void SetHardness(int nHardness, uint oObject = OBJECT_INVALID)
     {
       StackPush(oObject);
       StackPush(nHardness);
@@ -10419,7 +10419,7 @@ namespace Nwn.Server.Interop
     ///  - oObject: a door, or placeable.
     ///  - nKeyRequired: TRUE/FALSE
     /// </summary>
-    public void SetLockKeyRequired(uint oObject, int nKeyRequired = TRUE)
+    internal void SetLockKeyRequired(uint oObject, int nKeyRequired = TRUE)
     {
       StackPush(nKeyRequired);
       StackPush(oObject);
@@ -10434,7 +10434,7 @@ namespace Nwn.Server.Interop
     ///  - oObject: a door, placeable or trigger.
     ///  - sNewKeyTag: the key tag required to open the locked object.
     /// </summary>
-    public void SetLockKeyTag(uint oObject, string sNewKeyTag)
+    internal void SetLockKeyTag(uint oObject, string sNewKeyTag)
     {
       StackPush(sNewKeyTag);
       StackPush(oObject);
@@ -10446,7 +10446,7 @@ namespace Nwn.Server.Interop
     ///  - oObject: a door or placeable.
     ///  - nLockable: TRUE/FALSE
     /// </summary>
-    public void SetLockLockable(uint oObject, int nLockable = TRUE)
+    internal void SetLockLockable(uint oObject, int nLockable = TRUE)
     {
       StackPush(nLockable);
       StackPush(oObject);
@@ -10458,7 +10458,7 @@ namespace Nwn.Server.Interop
     ///  - oObject: a door or placeable object.
     ///  - nNewUnlockDC: must be between 0 and 250.
     /// </summary>
-    public void SetLockUnlockDC(uint oObject, int nNewUnlockDC)
+    internal void SetLockUnlockDC(uint oObject, int nNewUnlockDC)
     {
       StackPush(nNewUnlockDC);
       StackPush(oObject);
@@ -10470,7 +10470,7 @@ namespace Nwn.Server.Interop
     ///  - oObject: a door or placeable object.
     ///  - nNewLockDC: must be between 0 and 250.
     /// </summary>
-    public void SetLockLockDC(uint oObject, int nNewLockDC)
+    internal void SetLockLockDC(uint oObject, int nNewLockDC)
     {
       StackPush(nNewLockDC);
       StackPush(oObject);
@@ -10482,7 +10482,7 @@ namespace Nwn.Server.Interop
     ///  - oTrapObject: a placeable, door or trigger
     ///  - nDisarmable: TRUE/FALSE
     /// </summary>
-    public void SetTrapDisarmable(uint oTrapObject, int nDisarmable = TRUE)
+    internal void SetTrapDisarmable(uint oTrapObject, int nDisarmable = TRUE)
     {
       StackPush(nDisarmable);
       StackPush(oTrapObject);
@@ -10496,7 +10496,7 @@ namespace Nwn.Server.Interop
     ///  Note: Setting a trapped object to not be detectable will
     ///  not make the trap disappear if it has already been detected.
     /// </summary>
-    public void SetTrapDetectable(uint oTrapObject, int nDetectable = TRUE)
+    internal void SetTrapDetectable(uint oTrapObject, int nDetectable = TRUE)
     {
       StackPush(nDetectable);
       StackPush(oTrapObject);
@@ -10509,7 +10509,7 @@ namespace Nwn.Server.Interop
     ///  - oTrapObject: a placeable, door or trigger
     ///  - nOneShot: TRUE/FALSE
     /// </summary>
-    public void SetTrapOneShot(uint oTrapObject, int nOneShot = TRUE)
+    internal void SetTrapOneShot(uint oTrapObject, int nOneShot = TRUE)
     {
       StackPush(nOneShot);
       StackPush(oTrapObject);
@@ -10520,7 +10520,7 @@ namespace Nwn.Server.Interop
     ///  Set the tag of the key that will disarm oTrapObject.
     ///  - oTrapObject: a placeable, door or trigger
     /// </summary>
-    public void SetTrapKeyTag(uint oTrapObject, string sKeyTag)
+    internal void SetTrapKeyTag(uint oTrapObject, string sKeyTag)
     {
       StackPush(sKeyTag);
       StackPush(oTrapObject);
@@ -10532,7 +10532,7 @@ namespace Nwn.Server.Interop
     ///  - oTrapObject: a placeable, door or trigger
     ///  - nDisarmDC: must be between 0 and 250.
     /// </summary>
-    public void SetTrapDisarmDC(uint oTrapObject, int nDisarmDC)
+    internal void SetTrapDisarmDC(uint oTrapObject, int nDisarmDC)
     {
       StackPush(nDisarmDC);
       StackPush(oTrapObject);
@@ -10544,7 +10544,7 @@ namespace Nwn.Server.Interop
     ///  - oTrapObject: a placeable, door or trigger
     ///  - nDetectDC: must be between 0 and 250.
     /// </summary>
-    public void SetTrapDetectDC(uint oTrapObject, int nDetectDC)
+    internal void SetTrapDetectDC(uint oTrapObject, int nDetectDC)
     {
       StackPush(nDetectDC);
       StackPush(oTrapObject);
@@ -10566,7 +10566,7 @@ namespace Nwn.Server.Interop
     ///                            type specified will fire instead (as specified in the
     ///                            traps.2da).
     /// </summary>
-    public uint CreateTrapAtLocation(int nTrapType, IntPtr lLocation, float fSize = 2.0f, string sTag = "", int nFaction = STANDARD_FACTION_HOSTILE, string sOnDisarmScript = "", string sOnTrapTriggeredScript = "")
+    internal uint CreateTrapAtLocation(int nTrapType, IntPtr lLocation, float fSize = 2.0f, string sTag = "", int nFaction = STANDARD_FACTION_HOSTILE, string sOnDisarmScript = "", string sOnTrapTriggeredScript = "")
     {
       StackPush(sOnTrapTriggeredScript);
       StackPush(sOnDisarmScript);
@@ -10595,7 +10595,7 @@ namespace Nwn.Server.Interop
     ///        using the various SetTrap* scripting commands by passing in the object
     ///        that the trap was created on (i.e. oObject) to any subsequent SetTrap* commands.
     /// </summary>
-    public void CreateTrapOnObject(int nTrapType, uint oObject, int nFaction = STANDARD_FACTION_HOSTILE, string sOnDisarmScript = "", string sOnTrapTriggeredScript = "")
+    internal void CreateTrapOnObject(int nTrapType, uint oObject, int nFaction = STANDARD_FACTION_HOSTILE, string sOnDisarmScript = "", string sOnTrapTriggeredScript = "")
     {
       StackPush(sOnTrapTriggeredScript);
       StackPush(sOnDisarmScript);
@@ -10610,7 +10610,7 @@ namespace Nwn.Server.Interop
     ///  - oObject: a door or placeable object.
     ///  - nWillSave: must be between 0 and 250.
     /// </summary>
-    public void SetWillSavingThrow(uint oObject, int nWillSave)
+    internal void SetWillSavingThrow(uint oObject, int nWillSave)
     {
       StackPush(nWillSave);
       StackPush(oObject);
@@ -10622,7 +10622,7 @@ namespace Nwn.Server.Interop
     ///  - oObject: a door or placeable object.
     ///  - nReflexSave: must be between 0 and 250.
     /// </summary>
-    public void SetReflexSavingThrow(uint oObject, int nReflexSave)
+    internal void SetReflexSavingThrow(uint oObject, int nReflexSave)
     {
       StackPush(nReflexSave);
       StackPush(oObject);
@@ -10634,7 +10634,7 @@ namespace Nwn.Server.Interop
     ///  - oObject: a door or placeable object.
     ///  - nFortitudeSave: must be between 0 and 250.
     /// </summary>
-    public void SetFortitudeSavingThrow(uint oObject, int nFortitudeSave)
+    internal void SetFortitudeSavingThrow(uint oObject, int nFortitudeSave)
     {
       StackPush(nFortitudeSave);
       StackPush(oObject);
@@ -10663,7 +10663,7 @@ namespace Nwn.Server.Interop
     ///       TILESET_RESREF_UNDERDARK
     ///  * returns an empty string on an error.
     /// </summary>
-    public string GetTilesetResRef(uint oArea)
+    internal string GetTilesetResRef(uint oArea)
     {
       StackPush(oArea);
       Call(814);
@@ -10674,7 +10674,7 @@ namespace Nwn.Server.Interop
     ///  - oTrapObject: a placeable, door or trigger
     ///  * Returns TRUE if oTrapObject can be recovered.
     /// </summary>
-    public int GetTrapRecoverable(uint oTrapObject)
+    internal int GetTrapRecoverable(uint oTrapObject)
     {
       StackPush(oTrapObject);
       Call(815);
@@ -10685,7 +10685,7 @@ namespace Nwn.Server.Interop
     ///  Sets whether or not the trapped object can be recovered.
     ///  - oTrapObject: a placeable, door or trigger
     /// </summary>
-    public void SetTrapRecoverable(uint oTrapObject, int nRecoverable = TRUE)
+    internal void SetTrapRecoverable(uint oTrapObject, int nRecoverable = TRUE)
     {
       StackPush(nRecoverable);
       StackPush(oTrapObject);
@@ -10695,7 +10695,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Get the XP scale being used for the module.
     /// </summary>
-    public int GetModuleXPScale()
+    internal int GetModuleXPScale()
     {
       Call(817);
       return StackPopInt();
@@ -10705,7 +10705,7 @@ namespace Nwn.Server.Interop
     ///  Set the XP scale used by the module.
     ///  - nXPScale: The XP scale to be used. Must be between 0 and 200.
     /// </summary>
-    public void SetModuleXPScale(int nXPScale)
+    internal void SetModuleXPScale(int nXPScale)
     {
       StackPush(nXPScale);
       Call(818);
@@ -10716,7 +10716,7 @@ namespace Nwn.Server.Interop
     ///  - oObject: a door or placeable.
     ///  Returns an empty string "" on an error or if the game's default feedback message is being used
     /// </summary>
-    public string GetKeyRequiredFeedback(uint oObject)
+    internal string GetKeyRequiredFeedback(uint oObject)
     {
       StackPush(oObject);
       Call(819);
@@ -10732,7 +10732,7 @@ namespace Nwn.Server.Interop
     ///  - sFeedbackMessage: the string to be displayed in the player's text window.
     ///                      to use the game's default message, set sFeedbackMessage to ""
     /// </summary>
-    public void SetKeyRequiredFeedback(uint oObject, string sFeedbackMessage)
+    internal void SetKeyRequiredFeedback(uint oObject, string sFeedbackMessage)
     {
       StackPush(sFeedbackMessage);
       StackPush(oObject);
@@ -10743,7 +10743,7 @@ namespace Nwn.Server.Interop
     ///  - oTrapObject: a placeable, door or trigger
     ///  * Returns TRUE if oTrapObject is active
     /// </summary>
-    public int GetTrapActive(uint oTrapObject)
+    internal int GetTrapActive(uint oTrapObject)
     {
       StackPush(oTrapObject);
       Call(821);
@@ -10760,7 +10760,7 @@ namespace Nwn.Server.Interop
     ///  Call SetTrapDetectedBy() to make a detected trap disappear.
     ///  To make an inactive trap not detectable call SetTrapDetectable()
     /// </summary>
-    public void SetTrapActive(uint oTrapObject, int nActive = TRUE)
+    internal void SetTrapActive(uint oTrapObject, int nActive = TRUE)
     {
       StackPush(nActive);
       StackPush(oTrapObject);
@@ -10774,7 +10774,7 @@ namespace Nwn.Server.Interop
     ///  - oPlayer: A player object.
     ///  - bLocked: TRUE/FALSE.
     /// </summary>
-    public void LockCameraPitch(uint oPlayer, int bLocked = TRUE)
+    internal void LockCameraPitch(uint oPlayer, int bLocked = TRUE)
     {
       StackPush(bLocked);
       StackPush(oPlayer);
@@ -10788,7 +10788,7 @@ namespace Nwn.Server.Interop
     ///  - oPlayer: A player object.
     ///  - bLocked: TRUE/FALSE.
     /// </summary>
-    public void LockCameraDistance(uint oPlayer, int bLocked = TRUE)
+    internal void LockCameraDistance(uint oPlayer, int bLocked = TRUE)
     {
       StackPush(bLocked);
       StackPush(oPlayer);
@@ -10803,7 +10803,7 @@ namespace Nwn.Server.Interop
     ///  - oPlayer: A player object.
     ///  - bLocked: TRUE/FALSE.
     /// </summary>
-    public void LockCameraDirection(uint oPlayer, int bLocked = TRUE)
+    internal void LockCameraDirection(uint oPlayer, int bLocked = TRUE)
     {
       StackPush(bLocked);
       StackPush(oPlayer);
@@ -10816,7 +10816,7 @@ namespace Nwn.Server.Interop
     ///  Should only be called from a placeables OnClick event.
     ///  * Returns OBJECT_INVALID if it is called by something other than a placeable.
     /// </summary>
-    public uint GetPlaceableLastClickedBy()
+    internal uint GetPlaceableLastClickedBy()
     {
       Call(826);
       return StackPopObject();
@@ -10829,7 +10829,7 @@ namespace Nwn.Server.Interop
     ///  An infinite item will still be available to purchase from a store after a player
     ///  buys the item (non-infinite items will disappear from the store when purchased).
     /// </summary>
-    public int GetInfiniteFlag(uint oItem)
+    internal int GetInfiniteFlag(uint oItem)
     {
       StackPush(oItem);
       Call(827);
@@ -10844,7 +10844,7 @@ namespace Nwn.Server.Interop
     ///  An infinite item will still be available to purchase from a store after a player
     ///  buys the item (non-infinite items will disappear from the store when purchased).
     /// </summary>
-    public void SetInfiniteFlag(uint oItem, int bInfinite = TRUE)
+    internal void SetInfiniteFlag(uint oItem, int bInfinite = TRUE)
     {
       StackPush(bInfinite);
       StackPush(oItem);
@@ -10861,7 +10861,7 @@ namespace Nwn.Server.Interop
     ///  If no valid area (or object) is specified, it uses the area of the caller.
     ///  If an object other than an area is specified, will use the area that the object is currently in.
     /// </summary>
-    public int GetAreaSize(int nAreaDimension, uint oArea = OBJECT_INVALID)
+    internal int GetAreaSize(int nAreaDimension, uint oArea = OBJECT_INVALID)
     {
       StackPush(oArea);
       StackPush(nAreaDimension);
@@ -10878,7 +10878,7 @@ namespace Nwn.Server.Interop
     ///        revert to using the name it had originally before any
     ///        SetName() calls were made on the object.
     /// </summary>
-    public void SetName(uint oObject, string sNewName = "")
+    internal void SetName(uint oObject, string sNewName = "")
     {
       StackPush(sNewName);
       StackPush(oObject);
@@ -10895,7 +10895,7 @@ namespace Nwn.Server.Interop
     ///           or on an error returns PORTRAIT_INVALID. In these instances
     ///           try using GetPortraitResRef() instead.
     /// </summary>
-    public int GetPortraitId(uint oTarget = OBJECT_INVALID)
+    internal int GetPortraitId(uint oTarget = OBJECT_INVALID)
     {
       StackPush(oTarget);
       Call(831);
@@ -10911,7 +10911,7 @@ namespace Nwn.Server.Interop
     ///        Setting the portrait Id will also cause the portrait ResRef
     ///        to be set to the appropriate portrait ResRef for the Id specified.
     /// </summary>
-    public void SetPortraitId(uint oTarget, int nPortraitId)
+    internal void SetPortraitId(uint oTarget, int nPortraitId)
     {
       StackPush(nPortraitId);
       StackPush(oTarget);
@@ -10924,7 +10924,7 @@ namespace Nwn.Server.Interop
     ///  Returns: The Portrait ResRef being used for the object oTarget.
     ///           The Portrait ResRef will not include a trailing size letter.
     /// </summary>
-    public string GetPortraitResRef(uint oTarget = OBJECT_INVALID)
+    internal string GetPortraitResRef(uint oTarget = OBJECT_INVALID)
     {
       StackPush(oTarget);
       Call(833);
@@ -10940,7 +10940,7 @@ namespace Nwn.Server.Interop
     ///        Setting the portrait ResRef will also cause the portrait Id
     ///        to be set to PORTRAIT_INVALID.
     /// </summary>
-    public void SetPortraitResRef(uint oTarget, string sPortraitResRef)
+    internal void SetPortraitResRef(uint oTarget, string sPortraitResRef)
     {
       StackPush(sPortraitResRef);
       StackPush(oTarget);
@@ -10951,7 +10951,7 @@ namespace Nwn.Server.Interop
     ///  Set oPlaceable's useable object status.
     ///  Note: Only works on non- placeables.
     /// </summary>
-    public void SetUseableFlag(uint oPlaceable, int nUseableFlag)
+    internal void SetUseableFlag(uint oPlaceable, int nUseableFlag)
     {
       StackPush(nUseableFlag);
       StackPush(oPlaceable);
@@ -10968,7 +10968,7 @@ namespace Nwn.Server.Interop
     ///                 setting this to FALSE will return the unidentified description. This flag has no
     ///                 effect on objects other than items.
     /// </summary>
-    public string GetDescription(uint oObject, int bOriginalDescription = FALSE, int bIdentifiedDescription = TRUE)
+    internal string GetDescription(uint oObject, int bOriginalDescription = FALSE, int bIdentifiedDescription = TRUE)
     {
       StackPush(bIdentifiedDescription);
       StackPush(bOriginalDescription);
@@ -10989,7 +10989,7 @@ namespace Nwn.Server.Interop
     ///        revert to using the description it originally had before any
     ///        SetDescription() calls were made on the object.
     /// </summary>
-    public void SetDescription(uint oObject, string sNewDescription = "", int bIdentifiedDescription = TRUE)
+    internal void SetDescription(uint oObject, string sNewDescription = "", int bIdentifiedDescription = TRUE)
     {
       StackPush(bIdentifiedDescription);
       StackPush(sNewDescription);
@@ -11003,7 +11003,7 @@ namespace Nwn.Server.Interop
     ///  * Returns OBJECT_INVALID on error.
     ///  Note: Private tells do not trigger a OnPlayerChat event.
     /// </summary>
-    public uint GetPCChatSpeaker()
+    internal uint GetPCChatSpeaker()
     {
       Call(838);
       return StackPopObject();
@@ -11015,7 +11015,7 @@ namespace Nwn.Server.Interop
     ///  * Returns empty string "" on error.
     ///  Note: Private tells do not trigger a OnPlayerChat event.
     /// </summary>
-    public string GetPCChatMessage()
+    internal string GetPCChatMessage()
     {
       Call(839);
       return StackPopString();
@@ -11034,7 +11034,7 @@ namespace Nwn.Server.Interop
     ///  * Returns -1 on error.
     ///  Note: Private tells do not trigger a OnPlayerChat event.
     /// </summary>
-    public int GetPCChatVolume()
+    internal int GetPCChatVolume()
     {
       Call(840);
       return StackPopInt();
@@ -11048,7 +11048,7 @@ namespace Nwn.Server.Interop
     ///                     (i.e. it will not be sent to other players).
     ///  Note: The new chat message gets sent after the OnPlayerChat script exits.
     /// </summary>
-    public void SetPCChatMessage(string sNewChatMessage = "")
+    internal void SetPCChatMessage(string sNewChatMessage = "")
     {
       StackPush(sNewChatMessage);
       Call(841);
@@ -11065,7 +11065,7 @@ namespace Nwn.Server.Interop
     ///                 TALKVOLUME_TELL (sends the chat message privately back to the original speaker)
     ///  Note: The new chat message gets sent after the OnPlayerChat script exits.
     /// </summary>
-    public void SetPCChatVolume(int nTalkVolume = TALKVOLUME_TALK)
+    internal void SetPCChatVolume(int nTalkVolume = TALKVOLUME_TALK)
     {
       StackPush(nTalkVolume);
       Call(842);
@@ -11082,7 +11082,7 @@ namespace Nwn.Server.Interop
     ///                    COLOR_CHANNEL_TATTOO_2
     ///  * Returns -1 on error.
     /// </summary>
-    public int GetColor(uint oObject, int nColorChannel)
+    internal int GetColor(uint oObject, int nColorChannel)
     {
       StackPush(nColorChannel);
       StackPush(oObject);
@@ -11101,7 +11101,7 @@ namespace Nwn.Server.Interop
     ///                    COLOR_CHANNEL_TATTOO_2
     ///  - nColorValue: The color you want to set (0-175).
     /// </summary>
-    public void SetColor(uint oObject, int nColorChannel, int nColorValue)
+    internal void SetColor(uint oObject, int nColorChannel, int nColorValue)
     {
       StackPush(nColorValue);
       StackPush(nColorChannel);
@@ -11114,7 +11114,7 @@ namespace Nwn.Server.Interop
     ///  - nMasterialType: The Material Type should be a positive integer between 0 and 77 (see iprp_matcost.2da).
     ///  Note: The Material Type property will only affect the cost of the item if you modify the cost in the iprp_matcost.2da.
     /// </summary>
-    public IntPtr ItemPropertyMaterial(int nMaterialType)
+    internal IntPtr ItemPropertyMaterial(int nMaterialType)
     {
       StackPush(nMaterialType);
       Call(845);
@@ -11127,7 +11127,7 @@ namespace Nwn.Server.Interop
     ///               IP_CONST_QUALITY_*
     ///  Note: The quality property will only affect the cost of the item if you modify the cost in the iprp_qualcost.2da.
     /// </summary>
-    public IntPtr ItemPropertyQuality(int nQuality)
+    internal IntPtr ItemPropertyQuality(int nQuality)
     {
       StackPush(nQuality);
       Call(846);
@@ -11140,7 +11140,7 @@ namespace Nwn.Server.Interop
     ///               IP_CONST_ADDITIONAL_*
     ///  Note: The additional property only affects the cost of the item if you modify the cost in the iprp_addcost.2da.
     /// </summary>
-    public IntPtr ItemPropertyAdditional(int nAdditionalProperty)
+    internal IntPtr ItemPropertyAdditional(int nAdditionalProperty)
     {
       StackPush(nAdditionalProperty);
       Call(847);
@@ -11155,7 +11155,7 @@ namespace Nwn.Server.Interop
     ///        Changing the tag for creature with waypoints will make them stop walking them.
     ///        Changing waypoint, door or trigger tags will break their area transitions.
     /// </summary>
-    public void SetTag(uint oObject, string sNewTag)
+    internal void SetTag(uint oObject, string sNewTag)
     {
       StackPush(sNewTag);
       StackPush(oObject);
@@ -11166,7 +11166,7 @@ namespace Nwn.Server.Interop
     ///  Returns the string tag set for the provided effect.
     ///  - If no tag has been set, returns an empty string.
     /// </summary>
-    public string GetEffectTag(IntPtr eEffect)
+    internal string GetEffectTag(IntPtr eEffect)
     {
       StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
       Call(849);
@@ -11177,7 +11177,7 @@ namespace Nwn.Server.Interop
     ///  Tags the effect with the provided string.
     ///  - Any other tags in the link will be overwritten.
     /// </summary>
-    public IntPtr TagEffect(IntPtr eEffect, string sNewTag)
+    internal IntPtr TagEffect(IntPtr eEffect, string sNewTag)
     {
       StackPush(sNewTag);
       StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
@@ -11190,7 +11190,7 @@ namespace Nwn.Server.Interop
     ///  - If not created by a creature, returns 0.
     ///  - If created by a spell-like ability, returns 0.
     /// </summary>
-    public int GetEffectCasterLevel(IntPtr eEffect)
+    internal int GetEffectCasterLevel(IntPtr eEffect)
     {
       StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
       Call(851);
@@ -11201,7 +11201,7 @@ namespace Nwn.Server.Interop
     ///  Returns the total duration of the effect in seconds.
     ///  - Returns 0 if the duration type of the effect is not DURATION_TYPE_TEMPORARY.
     /// </summary>
-    public int GetEffectDuration(IntPtr eEffect)
+    internal int GetEffectDuration(IntPtr eEffect)
     {
       StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
       Call(852);
@@ -11212,7 +11212,7 @@ namespace Nwn.Server.Interop
     ///  Returns the remaining duration of the effect in seconds.
     ///  - Returns 0 if the duration type of the effect is not DURATION_TYPE_TEMPORARY.
     /// </summary>
-    public int GetEffectDurationRemaining(IntPtr eEffect)
+    internal int GetEffectDurationRemaining(IntPtr eEffect)
     {
       StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
       Call(853);
@@ -11223,7 +11223,7 @@ namespace Nwn.Server.Interop
     ///  Returns the string tag set for the provided item property.
     ///  - If no tag has been set, returns an empty string.
     /// </summary>
-    public string GetItemPropertyTag(IntPtr nProperty)
+    internal string GetItemPropertyTag(IntPtr nProperty)
     {
       StackPush(nProperty, ENGINE_STRUCTURE_ITEM_PROPERTY);
       Call(854);
@@ -11234,7 +11234,7 @@ namespace Nwn.Server.Interop
     ///  Tags the item property with the provided string.
     ///  - Any tags currently set on the item property will be overwritten.
     /// </summary>
-    public IntPtr TagItemProperty(IntPtr nProperty, string sNewTag)
+    internal IntPtr TagItemProperty(IntPtr nProperty, string sNewTag)
     {
       StackPush(sNewTag);
       StackPush(nProperty, ENGINE_STRUCTURE_ITEM_PROPERTY);
@@ -11246,7 +11246,7 @@ namespace Nwn.Server.Interop
     ///  Returns the total duration of the item property in seconds.
     ///  - Returns 0 if the duration type of the item property is not DURATION_TYPE_TEMPORARY.
     /// </summary>
-    public int GetItemPropertyDuration(IntPtr nProperty)
+    internal int GetItemPropertyDuration(IntPtr nProperty)
     {
       StackPush(nProperty, ENGINE_STRUCTURE_ITEM_PROPERTY);
       Call(856);
@@ -11257,7 +11257,7 @@ namespace Nwn.Server.Interop
     ///  Returns the remaining duration of the item property in seconds.
     ///  - Returns 0 if the duration type of the item property is not DURATION_TYPE_TEMPORARY.
     /// </summary>
-    public int GetItemPropertyDurationRemaining(IntPtr nProperty)
+    internal int GetItemPropertyDurationRemaining(IntPtr nProperty)
     {
       StackPush(nProperty, ENGINE_STRUCTURE_ITEM_PROPERTY);
       Call(857);
@@ -11276,7 +11276,7 @@ namespace Nwn.Server.Interop
     ///        adjust all transitions (doors, triggers) with the relevant script commands,
     ///        or players might end up in the wrong area.
     /// </summary>
-    public uint CreateArea(string sResRef, string sNewTag = "", string sNewName = "")
+    internal uint CreateArea(string sResRef, string sNewTag = "", string sNewName = "")
     {
       StackPush(sNewName);
       StackPush(sNewTag);
@@ -11294,7 +11294,7 @@ namespace Nwn.Server.Interop
     ///    -2: Players in area.
     ///     1: Area destroyed successfully.
     /// </summary>
-    public int DestroyArea(uint oArea)
+    internal int DestroyArea(uint oArea)
     {
       StackPush(oArea);
       Call(859);
@@ -11309,7 +11309,7 @@ namespace Nwn.Server.Interop
     ///  Note: You will have to manually adjust all transitions (doors, triggers) with the
     ///        relevant script commands, or players might end up in the wrong area.
     /// </summary>
-    public uint CopyArea(uint oArea)
+    internal uint CopyArea(uint oArea)
     {
       StackPush(oArea);
       Call(860);
@@ -11319,7 +11319,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Returns the first area in the module.
     /// </summary>
-    public uint GetFirstArea()
+    internal uint GetFirstArea()
     {
       Call(861);
       return StackPopObject();
@@ -11329,7 +11329,7 @@ namespace Nwn.Server.Interop
     ///  Returns the next area in the module (after GetFirstArea), or OBJECT_INVALID if no more
     ///  areas are loaded.
     /// </summary>
-    public uint GetNextArea()
+    internal uint GetNextArea()
     {
       Call(862);
       return StackPopObject();
@@ -11350,7 +11350,7 @@ namespace Nwn.Server.Interop
     ///    used for a lookup only once, at first use. Thus, attempting to use SetTag() to change the
     ///    destination for a transition will not work in a predictable fashion.
     /// </summary>
-    public void SetTransitionTarget(uint oTransition, uint oTarget)
+    internal void SetTransitionTarget(uint oTransition, uint oTarget)
     {
       StackPush(oTarget);
       StackPush(oTransition);
@@ -11364,7 +11364,7 @@ namespace Nwn.Server.Interop
     ///    e.g.: armour, helm, cloak, left hand, and right hand.
     ///  - nValue should be TRUE or FALSE.
     /// </summary>
-    public void SetHiddenWhenEquipped(uint oItem, int nValue)
+    internal void SetHiddenWhenEquipped(uint oItem, int nValue)
     {
       StackPush(nValue);
       StackPush(oItem);
@@ -11374,7 +11374,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     ///  Returns whether the provided item is hidden when equipped.
     /// </summary>
-    public int GetHiddenWhenEquipped(uint oItem)
+    internal int GetHiddenWhenEquipped(uint oItem)
     {
       StackPush(oItem);
       Call(865);
@@ -11393,7 +11393,7 @@ namespace Nwn.Server.Interop
     ///    0: Tile was not explored before setting newState.
     ///    1: Tile was explored before setting newState.
     /// </summary>
-    public int SetTileExplored(uint creature, uint area, int x, int y, int newState)
+    internal int SetTileExplored(uint creature, uint area, int x, int y, int newState)
     {
       StackPush(newState);
       StackPush(y);
@@ -11417,7 +11417,7 @@ namespace Nwn.Server.Interop
     ///    0: Tile is not explored yet.
     ///    1: Tile is explored.
     /// </summary>
-    public int GetTileExplored(uint creature, uint area, int x, int y)
+    internal int GetTileExplored(uint creature, uint area, int x, int y)
     {
       StackPush(y);
       StackPush(x);
@@ -11440,7 +11440,7 @@ namespace Nwn.Server.Interop
     ///  Does nothing for non-creatures.
     ///  Returns the previous state (or -1 if non-creature).
     /// </summary>
-    public int SetCreatureExploresMinimap(uint creature, int newState)
+    internal int SetCreatureExploresMinimap(uint creature, int newState)
     {
       StackPush(newState);
       StackPush(creature);
@@ -11452,7 +11452,7 @@ namespace Nwn.Server.Interop
     ///  Returns TRUE if the creature is set to auto-explore the map as it walks around (on by default).
     ///  Returns FALSE if creature is not actually a creature.
     /// </summary>
-    public int GetCreatureExploresMinimap(uint creature)
+    internal int GetCreatureExploresMinimap(uint creature)
     {
       StackPush(creature);
       Call(869);
@@ -11464,7 +11464,7 @@ namespace Nwn.Server.Interop
     ///  equivalent to the walkmesh type).
     ///  Returns 0 if the location is invalid or has no surface type.
     /// </summary>
-    public int GetSurfaceMaterial(IntPtr at)
+    internal int GetSurfaceMaterial(IntPtr at)
     {
       StackPush(at, ENGINE_STRUCTURE_LOCATION);
       Call(870);
@@ -11475,7 +11475,7 @@ namespace Nwn.Server.Interop
     ///  Returns the z-offset at which the walkmesh is at the given location.
     ///  Returns -6.0 for invalid locations.
     /// </summary>
-    public float GetGroundHeight(IntPtr at)
+    internal float GetGroundHeight(IntPtr at)
     {
       StackPush(at, ENGINE_STRUCTURE_LOCATION);
       Call(871);
@@ -11486,7 +11486,7 @@ namespace Nwn.Server.Interop
     ///  Gets the attack bonus limit.
     ///  - The default value is 20.
     /// </summary>
-    public int GetAttackBonusLimit()
+    internal int GetAttackBonusLimit()
     {
       Call(872);
       return StackPopInt();
@@ -11496,7 +11496,7 @@ namespace Nwn.Server.Interop
     ///  Gets the damage bonus limit.
     ///  - The default value is 100.
     /// </summary>
-    public int GetDamageBonusLimit()
+    internal int GetDamageBonusLimit()
     {
       Call(873);
       return StackPopInt();
@@ -11506,7 +11506,7 @@ namespace Nwn.Server.Interop
     ///  Gets the saving throw bonus limit.
     ///  - The default value is 20.
     /// </summary>
-    public int GetSavingThrowBonusLimit()
+    internal int GetSavingThrowBonusLimit()
     {
       Call(874);
       return StackPopInt();
@@ -11516,7 +11516,7 @@ namespace Nwn.Server.Interop
     ///  Gets the ability bonus limit.
     ///  - The default value is 12.
     /// </summary>
-    public int GetAbilityBonusLimit()
+    internal int GetAbilityBonusLimit()
     {
       Call(875);
       return StackPopInt();
@@ -11526,7 +11526,7 @@ namespace Nwn.Server.Interop
     ///  Gets the ability penalty limit.
     ///  - The default value is 30.
     /// </summary>
-    public int GetAbilityPenaltyLimit()
+    internal int GetAbilityPenaltyLimit()
     {
       Call(876);
       return StackPopInt();
@@ -11536,7 +11536,7 @@ namespace Nwn.Server.Interop
     ///  Gets the skill bonus limit.
     ///  - The default value is 50.
     /// </summary>
-    public int GetSkillBonusLimit()
+    internal int GetSkillBonusLimit()
     {
       Call(877);
       return StackPopInt();
@@ -11546,7 +11546,7 @@ namespace Nwn.Server.Interop
     ///  Sets the attack bonus limit.
     ///  - The minimum value is 0.
     /// </summary>
-    public void SetAttackBonusLimit(int nNewLimit)
+    internal void SetAttackBonusLimit(int nNewLimit)
     {
       StackPush(nNewLimit);
       Call(878);
@@ -11556,7 +11556,7 @@ namespace Nwn.Server.Interop
     ///  Sets the damage bonus limit.
     ///  - The minimum value is 0.
     /// </summary>
-    public void SetDamageBonusLimit(int nNewLimit)
+    internal void SetDamageBonusLimit(int nNewLimit)
     {
       StackPush(nNewLimit);
       Call(879);
@@ -11566,7 +11566,7 @@ namespace Nwn.Server.Interop
     ///  Sets the saving throw bonus limit.
     ///  - The minimum value is 0.
     /// </summary>
-    public void SetSavingThrowBonusLimit(int nNewLimit)
+    internal void SetSavingThrowBonusLimit(int nNewLimit)
     {
       StackPush(nNewLimit);
       Call(880);
@@ -11576,7 +11576,7 @@ namespace Nwn.Server.Interop
     ///  Sets the ability bonus limit.
     ///  - The minimum value is 0.
     /// </summary>
-    public void SetAbilityBonusLimit(int nNewLimit)
+    internal void SetAbilityBonusLimit(int nNewLimit)
     {
       StackPush(nNewLimit);
       Call(881);
@@ -11586,7 +11586,7 @@ namespace Nwn.Server.Interop
     ///  Sets the ability penalty limit.
     ///  - The minimum value is 0.
     /// </summary>
-    public void SetAbilityPenaltyLimit(int nNewLimit)
+    internal void SetAbilityPenaltyLimit(int nNewLimit)
     {
       StackPush(nNewLimit);
       Call(882);
@@ -11596,7 +11596,7 @@ namespace Nwn.Server.Interop
     ///  Sets the skill bonus limit.
     ///  - The minimum value is 0.
     /// </summary>
-    public void SetSkillBonusLimit(int nNewLimit)
+    internal void SetSkillBonusLimit(int nNewLimit)
     {
       StackPush(nNewLimit);
       Call(883);
@@ -11606,7 +11606,7 @@ namespace Nwn.Server.Interop
     ///  Get if oPlayer is currently connected over a relay (instead of directly).
     ///  Returns FALSE for any other object, including OBJECT_INVALID.
     /// </summary>
-    public int GetIsPlayerConnectionRelayed(uint oPlayer)
+    internal int GetIsPlayerConnectionRelayed(uint oPlayer)
     {
       StackPush(oPlayer);
       Call(884);
@@ -11618,7 +11618,7 @@ namespace Nwn.Server.Interop
     ///  Will return "" if unset, the object is invalid, or the object cannot
     ///  have the requested handler.
     /// </summary>
-    public string GetEventScript(uint oObject, int nHandler)
+    internal string GetEventScript(uint oObject, int nHandler)
     {
       StackPush(nHandler);
       StackPush(oObject);
@@ -11631,7 +11631,7 @@ namespace Nwn.Server.Interop
     ///  Returns 1 on success, 0 on failure.
     ///  Will fail if oObject is invalid or does not have the requested handler.
     /// </summary>
-    public int SetEventScript(uint oObject, int nHandler, string sScript)
+    internal int SetEventScript(uint oObject, int nHandler, string sScript)
     {
       StackPush(sScript);
       StackPush(nHandler);
@@ -11646,7 +11646,7 @@ namespace Nwn.Server.Interop
     /// - nTransform is one of OBJECT_VISUAL_TRANSFORM_*
     /// Returns the current (or default) value.
     /// </summary>
-    public float GetObjectVisualTransform(uint oObject, int nTransform)
+    internal float GetObjectVisualTransform(uint oObject, int nTransform)
     {
       StackPush(nTransform);
       StackPush(oObject);
@@ -11661,7 +11661,7 @@ namespace Nwn.Server.Interop
     /// - fValue depends on the transformation to apply.
     /// Returns the old/previous value.
     /// </summary>
-    public float SetObjectVisualTransform(uint oObject, int nTransform, float fValue)
+    internal float SetObjectVisualTransform(uint oObject, int nTransform, float fValue)
     {
       StackPush(fValue);
       StackPush(nTransform);
@@ -11675,7 +11675,7 @@ namespace Nwn.Server.Interop
     /// - sMaterial needs to be a material on that object.
     /// - sParam needs to be a valid shader parameter already defined on the material.
     /// </summary>
-    public void SetMaterialShaderUniformInt(uint oObject, string sMaterial, string sParam, int nValue)
+    internal void SetMaterialShaderUniformInt(uint oObject, string sMaterial, string sParam, int nValue)
     {
       StackPush(nValue);
       StackPush(sParam);
@@ -11690,7 +11690,7 @@ namespace Nwn.Server.Interop
     /// - sParam needs to be a valid shader parameter already defined on the material.
     /// - You can specify a single float value to set just a float, instead of a vec4.
     /// </summary>
-    public void SetMaterialShaderUniformVec4(uint oObject, string sMaterial, string sParam, float fValue1, float fValue2 = 0.0f, float fValue3 = 0.0f, float fValue4 = 0.0f)
+    internal void SetMaterialShaderUniformVec4(uint oObject, string sMaterial, string sParam, float fValue1, float fValue2 = 0.0f, float fValue3 = 0.0f, float fValue4 = 0.0f)
     {
       StackPush(fValue4);
       StackPush(fValue3);
@@ -11708,7 +11708,7 @@ namespace Nwn.Server.Interop
     /// - Supply a parameter to only reset shader uniforms of that name.
     /// - Supply both to only reset shader uniforms of that name on meshes with that material.
     /// </summary>
-    public void ResetMaterialShaderUniforms(uint oObject, string sMaterial = "", string sParam = "")
+    internal void ResetMaterialShaderUniforms(uint oObject, string sMaterial = "", string sParam = "")
     {
       StackPush(sParam);
       StackPush(sMaterial);
@@ -11722,7 +11722,7 @@ namespace Nwn.Server.Interop
     /// - fStrength is between 0.0 and 1.0
     /// - fSeconds is the number of seconds to vibrate
     /// </summary>
-    public void Vibrate(uint oPlayer, int nMotor, float fStrength, float fSeconds)
+    internal void Vibrate(uint oPlayer, int nMotor, float fStrength, float fSeconds)
     {
       StackPush(fSeconds);
       StackPush(fStrength);
@@ -11738,7 +11738,7 @@ namespace Nwn.Server.Interop
     /// - nCurValue is the current value of the associated achievement stat
     /// - nMaxValue is the maximum value of the associate achievement stat
     /// </summary>
-    public void UnlockAchievement(uint oPlayer, string sId, int nLastValue = 0, int nCurValue = 0, int nMaxValue = 0)
+    internal void UnlockAchievement(uint oPlayer, string sId, int nLastValue = 0, int nCurValue = 0, int nMaxValue = 0)
     {
       StackPush(nMaxValue);
       StackPush(nCurValue);
@@ -11756,7 +11756,7 @@ namespace Nwn.Server.Interop
     /// By default, the script chunk is wrapped into void main() {}. Pass in bWrapIntoMain = FALSE to override.
     /// Returns "" on success, or the compilation error.
     /// </summary>
-    public string ExecuteScriptChunk(string sScriptChunk, uint oObject, int bWrapIntoMain = TRUE)
+    internal string ExecuteScriptChunk(string sScriptChunk, uint oObject, int bWrapIntoMain = TRUE)
     {
       StackPush(bWrapIntoMain);
       StackPush(oObject);
@@ -11769,7 +11769,7 @@ namespace Nwn.Server.Interop
     /// Returns a UUID. This UUID will not be associated with any object.
     /// The generated UUID is currently a v4.
     /// </summary>
-    public string GetRandomUUID()
+    internal string GetRandomUUID()
     {
       Call(895);
       return StackPopString();
@@ -11800,7 +11800,7 @@ namespace Nwn.Server.Interop
     ///
     /// Will return "" (empty string) when the given object cannot carry a UUID.
     /// </summary>
-    public string GetObjectUUID(uint oObject)
+    internal string GetObjectUUID(uint oObject)
     {
       StackPush(oObject);
       Call(896);
@@ -11810,7 +11810,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     /// Forces the given object to receive a new UUID, discarding the current value.
     /// </summary>
-    public void ForceRefreshObjectUUID(uint oObject)
+    internal void ForceRefreshObjectUUID(uint oObject)
     {
       StackPush(oObject);
       Call(897);
@@ -11820,7 +11820,7 @@ namespace Nwn.Server.Interop
     /// Looks up a object on the server by it's UUID.
     /// Returns OBJECT_INVALID if the UUID is not on the server.
     /// </summary>
-    public uint GetObjectByUUID(string sUUID)
+    internal uint GetObjectByUUID(string sUUID)
     {
       StackPush(sUUID);
       Call(898);
@@ -11830,7 +11830,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     /// Do not call. This does nothing on this platform except to return an error.
     /// </summary>
-    public void Reserved899()
+    internal void Reserved899()
     {
       Call(899);
     }
@@ -11840,7 +11840,7 @@ namespace Nwn.Server.Interop
     /// If oPC is OBJECT_INVALID, it will apply the override to all active players
     /// Setting sNewName to "" will clear the override and revert to original.
     /// </summary>
-    public void SetTextureOverride(string sOldName, string sNewName = "", uint oPC = OBJECT_INVALID)
+    internal void SetTextureOverride(string sOldName, string sNewName = "", uint oPC = OBJECT_INVALID)
     {
       StackPush(oPC);
       StackPush(sNewName);
@@ -11863,7 +11863,7 @@ namespace Nwn.Server.Interop
     ///        Only positive values are allowed.
     ///  sFont - If specified, use this custom font instead of default console font.
     /// </summary>
-    public void PostString(uint oPC, string sMsg, int nX = 0, int nY = 0, int nAnchor = SCREEN_ANCHOR_TOP_LEFT, float fLife = 10.0f, int nRGBA = 2147418367, int nRGBA2 = 2147418367, int nID = 0, string sFont = "")
+    internal void PostString(uint oPC, string sMsg, int nX = 0, int nY = 0, int nAnchor = SCREEN_ANCHOR_TOP_LEFT, float fLife = 10.0f, int nRGBA = 2147418367, int nRGBA2 = 2147418367, int nID = 0, string sFont = "")
     {
       StackPush(sFont);
       StackPush(nID);
@@ -11883,7 +11883,7 @@ namespace Nwn.Server.Interop
     /// Unless custom content is used, only Wizards have spell schools
     /// Returns -1 on error
     /// </summary>
-    public int GetSpecialization(uint oCreature, int nClass = CLASS_TYPE_WIZARD)
+    internal int GetSpecialization(uint oCreature, int nClass = CLASS_TYPE_WIZARD)
     {
       StackPush(nClass);
       StackPush(oCreature);
@@ -11897,7 +11897,7 @@ namespace Nwn.Server.Interop
     /// Unless custom content is used, only Clerics have domains
     /// Returns -1 on error
     /// </summary>
-    public int GetDomain(uint oCreature, int nDomainIndex = 1, int nClass = CLASS_TYPE_CLERIC)
+    internal int GetDomain(uint oCreature, int nDomainIndex = 1, int nClass = CLASS_TYPE_CLERIC)
     {
       StackPush(nClass);
       StackPush(nDomainIndex);
@@ -11910,7 +11910,7 @@ namespace Nwn.Server.Interop
     /// Returns the build number of oPlayer (i.e. 8193).
     /// Returns 0 if the given object isn't a player or did not advertise their build info.
     /// </summary>
-    public int GetPlayerBuildVersionMajor(uint oPlayer)
+    internal int GetPlayerBuildVersionMajor(uint oPlayer)
     {
       StackPush(oPlayer);
       Call(904);
@@ -11921,7 +11921,7 @@ namespace Nwn.Server.Interop
     /// Returns the patch revision of oPlayer (i.e. 8).
     /// Returns 0 if the given object isn't a player or did not advertise their build info.
     /// </summary>
-    public int GetPlayerBuildVersionMinor(uint oPlayer)
+    internal int GetPlayerBuildVersionMinor(uint oPlayer)
     {
       StackPush(oPlayer);
       Call(905);
@@ -11934,7 +11934,7 @@ namespace Nwn.Server.Interop
     /// Conversation Editor, or for any script with SetScriptParam().
     /// * Will return "" if a parameter with the given name does not exist.
     /// </summary>
-    public string GetScriptParam(string sParamName)
+    internal string GetScriptParam(string sParamName)
     {
       StackPush(sParamName);
       Call(906);
@@ -11945,7 +11945,7 @@ namespace Nwn.Server.Interop
     /// Set a script parameter value for the next script to be run.
     /// Call this function to set parameters right before calling ExecuteScript().
     /// </summary>
-    public void SetScriptParam(string sParamName, string sParamValue)
+    internal void SetScriptParam(string sParamName, string sParamValue)
     {
       StackPush(sParamValue);
       StackPush(sParamName);
@@ -11957,7 +11957,7 @@ namespace Nwn.Server.Interop
     /// * Will return 0 if the given item does not have the requested item property,
     ///   or the item property is not uses/day.
     /// </summary>
-    public int GetItemPropertyUsesPerDayRemaining(uint oItem, IntPtr ip)
+    internal int GetItemPropertyUsesPerDayRemaining(uint oItem, IntPtr ip)
     {
       StackPush(ip, ENGINE_STRUCTURE_ITEM_PROPERTY);
       StackPush(oItem);
@@ -11970,7 +11970,7 @@ namespace Nwn.Server.Interop
     /// * Will do nothing if the given item and item property is not uses/day.
     /// * Will constrain nUsesPerDay to the maximum allowed as the cost table defines.
     /// </summary>
-    public void SetItemPropertyUsesPerDayRemaining(uint oItem, IntPtr ip, int nUsesPerDay)
+    internal void SetItemPropertyUsesPerDayRemaining(uint oItem, IntPtr ip, int nUsesPerDay)
     {
       StackPush(nUsesPerDay);
       StackPush(ip, ENGINE_STRUCTURE_ITEM_PROPERTY);
@@ -11986,7 +11986,7 @@ namespace Nwn.Server.Interop
     /// * nSubPropertyIndex - specify if your itemproperty has subproperties (such as subradial spells)
     /// * bDecrementCharges - decrement charges if item property is limited
     /// </summary>
-    public void ActionUseItemOnObject(uint oItem, IntPtr ip, uint oTarget, int nSubPropertyIndex = 0, int bDecrementCharges = TRUE)
+    internal void ActionUseItemOnObject(uint oItem, IntPtr ip, uint oTarget, int nSubPropertyIndex = 0, int bDecrementCharges = TRUE)
     {
       StackPush(bDecrementCharges);
       StackPush(nSubPropertyIndex);
@@ -12004,7 +12004,7 @@ namespace Nwn.Server.Interop
     /// * nSubPropertyIndex - specify if your itemproperty has subproperties (such as subradial spells)
     /// * bDecrementCharges - decrement charges if item property is limited
     /// </summary>
-    public void ActionUseItemAtLocation(uint oItem, IntPtr ip, IntPtr lTarget, int nSubPropertyIndex = 0, int bDecrementCharges = TRUE)
+    internal void ActionUseItemAtLocation(uint oItem, IntPtr ip, IntPtr lTarget, int nSubPropertyIndex = 0, int bDecrementCharges = TRUE)
     {
       StackPush(bDecrementCharges);
       StackPush(nSubPropertyIndex);
@@ -12018,7 +12018,7 @@ namespace Nwn.Server.Interop
     /// Makes oPC enter a targeting mode, letting them select an object as a target
     /// If a PC selects a target, it will trigger the module OnPlayerTarget event.
     /// </summary>
-    public void EnterTargetingMode(uint oPC, int nValidObjectTypes = OBJECT_TYPE_ALL, int nMouseCursorId = MOUSECURSOR_MAGIC, int nBadTargetCursor = MOUSECURSOR_NOMAGIC)
+    internal void EnterTargetingMode(uint oPC, int nValidObjectTypes = OBJECT_TYPE_ALL, int nMouseCursorId = MOUSECURSOR_MAGIC, int nBadTargetCursor = MOUSECURSOR_NOMAGIC)
     {
       StackPush(nBadTargetCursor);
       StackPush(nMouseCursorId);
@@ -12031,7 +12031,7 @@ namespace Nwn.Server.Interop
     /// Gets the target object in the module OnPlayerTarget event.
     /// Returns the area object when the target is the ground.
     /// </summary>
-    public uint GetTargetingModeSelectedObject()
+    internal uint GetTargetingModeSelectedObject()
     {
       Call(913);
       return StackPopObject();
@@ -12040,7 +12040,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     /// Gets the target position in the module OnPlayerTarget event.
     /// </summary>
-    public Vector3 GetTargetingModeSelectedPosition()
+    internal Vector3 GetTargetingModeSelectedPosition()
     {
       Call(914);
       return StackPopVector();
@@ -12049,7 +12049,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     /// Gets the player object that triggered the OnPlayerTarget event.
     /// </summary>
-    public uint GetLastPlayerToSelectTarget()
+    internal uint GetLastPlayerToSelectTarget()
     {
       Call(915);
       return StackPopObject();
@@ -12059,7 +12059,7 @@ namespace Nwn.Server.Interop
     /// Sets oObject's hilite color to nColor
     /// The nColor format is 0xRRGGBB; -1 clears the color override.
     /// </summary>
-    public void SetObjectHiliteColor(uint oObject, int nColor = -1)
+    internal void SetObjectHiliteColor(uint oObject, int nColor = -1)
     {
       StackPush(nColor);
       StackPush(oObject);
@@ -12069,7 +12069,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     /// Sets the cursor (MOUSECURSOR_*) to use when hovering over oObject
     /// </summary>
-    public void SetObjectMouseCursor(uint oObject, int nCursor = -1)
+    internal void SetObjectMouseCursor(uint oObject, int nCursor = -1)
     {
       StackPush(nCursor);
       StackPush(oObject);
@@ -12081,7 +12081,7 @@ namespace Nwn.Server.Interop
     /// gained through a player login (as opposed to the DM client).
     /// Note: GetIsDM() also returns TRUE for player creature DMs.
     /// </summary>
-    public int GetIsPlayerDM(uint oCreature)
+    internal int GetIsPlayerDM(uint oCreature)
     {
       StackPush(oCreature);
       Call(918);
@@ -12095,7 +12095,7 @@ namespace Nwn.Server.Interop
     ///   LIGHT: vDirection=(1.0, 1.0, 0.0), fMagnitude=1.0, fYaw=100.0, fPitch=3.0
     ///   HEAVY: vDirection=(1.0, 1.0, 0.0), fMagnitude=2.0, fYaw=150.0, fPitch=5.0
     /// </summary>
-    public void SetAreaWind(uint oArea, Vector3 vDirection, float fMagnitude, float fYaw, float fPitch)
+    internal void SetAreaWind(uint oArea, Vector3 vDirection, float fMagnitude, float fYaw, float fPitch)
     {
       StackPush(fPitch);
       StackPush(fYaw);
@@ -12111,7 +12111,7 @@ namespace Nwn.Server.Interop
     /// If sNew cannot be found, the original texture will be restored.
     /// sNew must refer to a simple texture, not PLT
     /// </summary>
-    public void ReplaceObjectTexture(uint oObject, string sOld, string sNew = "")
+    internal void ReplaceObjectTexture(uint oObject, string sOld, string sNew = "")
     {
       StackPush(sNew);
       StackPush(sOld);
@@ -12128,7 +12128,7 @@ namespace Nwn.Server.Interop
     /// oObject: Same as SqlPrepareQueryObject().
     ///          To reset a campaign database, please use DestroyCampaignDatabase().
     /// </summary>
-    public void SqlDestroyDatabase(uint oObject)
+    internal void SqlDestroyDatabase(uint oObject)
     {
       StackPush(oObject);
       Call(921);
@@ -12138,7 +12138,7 @@ namespace Nwn.Server.Interop
     /// Returns "" if the last Sql command succeeded; or a human-readable error otherwise.
     /// Additionally, all SQL errors are logged to the server log.
     /// </summary>
-    public string SqlGetError(IntPtr sqlQuery)
+    internal string SqlGetError(IntPtr sqlQuery)
     {
       StackPush(sqlQuery, ENGINE_STRUCTURE_SQL_QUERY);
       Call(922);
@@ -12157,7 +12157,7 @@ namespace Nwn.Server.Interop
     ///       *** they will NOT survive a game save/load ***
     ///       Any commands on a restored sqlquery will fail.
     /// </summary>
-    public IntPtr SqlPrepareQueryCampaign(string sDatabase, string sQuery)
+    internal IntPtr SqlPrepareQueryCampaign(string sDatabase, string sQuery)
     {
       StackPush(sQuery);
       StackPush(sDatabase);
@@ -12183,7 +12183,7 @@ namespace Nwn.Server.Interop
     ///       *** they will NOT survive a game save/load ***
     ///       Any commands on a restored sqlquery will fail.
     /// </summary>
-    public IntPtr SqlPrepareQueryObject(uint oObject, string sQuery)
+    internal IntPtr SqlPrepareQueryObject(uint oObject, string sQuery)
     {
       StackPush(sQuery);
       StackPush(oObject);
@@ -12198,7 +12198,7 @@ namespace Nwn.Server.Interop
     ///   SqlBindInt(v, "@myint", 5);
     ///   SqlStep(v);
     /// </summary>
-    public void SqlBindInt(IntPtr sqlQuery, string sParam, int nValue)
+    internal void SqlBindInt(IntPtr sqlQuery, string sParam, int nValue)
     {
       StackPush(nValue);
       StackPush(sParam);
@@ -12209,7 +12209,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     /// Bind a float to a named parameter of the given prepared query.
     /// </summary>
-    public void SqlBindFloat(IntPtr sqlQuery, string sParam, float fFloat)
+    internal void SqlBindFloat(IntPtr sqlQuery, string sParam, float fFloat)
     {
       StackPush(fFloat);
       StackPush(sParam);
@@ -12220,7 +12220,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     /// Bind a string to a named parameter of the given prepared query.
     /// </summary>
-    public void SqlBindString(IntPtr sqlQuery, string sParam, string sString)
+    internal void SqlBindString(IntPtr sqlQuery, string sParam, string sString)
     {
       StackPush(sString);
       StackPush(sParam);
@@ -12231,7 +12231,7 @@ namespace Nwn.Server.Interop
     /// <summary>
     /// Bind a vector to a named parameter of the given prepared query.
     /// </summary>
-    public void SqlBindVector(IntPtr sqlQuery, string sParam, Vector3 vVector)
+    internal void SqlBindVector(IntPtr sqlQuery, string sParam, Vector3 vVector)
     {
       StackPush(vVector);
       StackPush(sParam);
@@ -12244,7 +12244,7 @@ namespace Nwn.Server.Interop
     /// Objects are serialized, NOT stored as a reference!
     /// Currently supported object types: Creatures, Items, Placeables, Waypoints, Stores, Doors, Triggers
     /// </summary>
-    public void SqlBindObject(IntPtr sqlQuery, string sParam, uint oObject)
+    internal void SqlBindObject(IntPtr sqlQuery, string sParam, uint oObject)
     {
       StackPush(oObject);
       StackPush(sParam);
@@ -12262,7 +12262,7 @@ namespace Nwn.Server.Interop
     ///   while (SqlStep(n))
     ///     SendMessageToPC(GetFirstPC(), "Found widget: " + SqlGetString(n, 0));
     /// </summary>
-    public int SqlStep(IntPtr sqlQuery)
+    internal int SqlStep(IntPtr sqlQuery)
     {
       StackPush(sqlQuery, ENGINE_STRUCTURE_SQL_QUERY);
       Call(930);
@@ -12275,7 +12275,7 @@ namespace Nwn.Server.Interop
     /// In case of error, 0 will be returned.
     /// In traditional fashion, nIndex starts at 0.
     /// </summary>
-    public int SqlGetInt(IntPtr sqlQuery, int nIndex)
+    internal int SqlGetInt(IntPtr sqlQuery, int nIndex)
     {
       StackPush(nIndex);
       StackPush(sqlQuery, ENGINE_STRUCTURE_SQL_QUERY);
@@ -12289,7 +12289,7 @@ namespace Nwn.Server.Interop
     /// In case of error, 0.0f will be returned.
     /// In traditional fashion, nIndex starts at 0.
     /// </summary>
-    public float SqlGetFloat(IntPtr sqlQuery, int nIndex)
+    internal float SqlGetFloat(IntPtr sqlQuery, int nIndex)
     {
       StackPush(nIndex);
       StackPush(sqlQuery, ENGINE_STRUCTURE_SQL_QUERY);
@@ -12303,7 +12303,7 @@ namespace Nwn.Server.Interop
     /// In case of error, a empty string will be returned.
     /// In traditional fashion, nIndex starts at 0.
     /// </summary>
-    public string SqlGetString(IntPtr sqlQuery, int nIndex)
+    internal string SqlGetString(IntPtr sqlQuery, int nIndex)
     {
       StackPush(nIndex);
       StackPush(sqlQuery, ENGINE_STRUCTURE_SQL_QUERY);
@@ -12317,7 +12317,7 @@ namespace Nwn.Server.Interop
     /// In case of error, a zero vector will be returned.
     /// In traditional fashion, nIndex starts at 0.
     /// </summary>
-    public Vector3 SqlGetVector(IntPtr sqlQuery, int nIndex)
+    internal Vector3 SqlGetVector(IntPtr sqlQuery, int nIndex)
     {
       StackPush(nIndex);
       StackPush(sqlQuery, ENGINE_STRUCTURE_SQL_QUERY);
@@ -12334,7 +12334,7 @@ namespace Nwn.Server.Interop
     /// In case of error, INVALID_OBJECT will be returned.
     /// In traditional fashion, nIndex starts at 0.
     /// </summary>
-    public uint SqlGetObject(IntPtr sqlQuery, int nIndex, IntPtr lSpawnAt, uint oInventory = OBJECT_INVALID)
+    internal uint SqlGetObject(IntPtr sqlQuery, int nIndex, IntPtr lSpawnAt, uint oInventory = OBJECT_INVALID)
     {
       StackPush(oInventory);
       StackPush(lSpawnAt, ENGINE_STRUCTURE_LOCATION);
@@ -12348,7 +12348,7 @@ namespace Nwn.Server.Interop
     /// Convert sHex, a string containing a hexadecimal object id,
     /// into a object reference. Counterpart to StringToObject().
     /// </summary>
-    public uint StringToObject(string sHex)
+    internal uint StringToObject(string sHex)
     {
       StackPush(sHex);
       Call(936);

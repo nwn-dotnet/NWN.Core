@@ -232,7 +232,7 @@ namespace Nwn.Server
     {
       var nwn = NwnServer.Instance;
       nwn.Chat.ServerChannel.SendMessage("DOOOM!");
-      nwn.Chat.MessageArrived += (x, y) => { if (y.Message.Contains("shit")) y.Skip = true; };
+      nwn.Chat.MessageArrived += (x, y) => { if (y.Message.Contains("shit")) y.Suppress = true; };
     }
   }
 }

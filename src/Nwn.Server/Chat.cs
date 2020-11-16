@@ -48,7 +48,7 @@ namespace Nwn.Server
           Chat.CallObj("GetTarget")
         );
 
-        if (e.Skip)
+        if (e.Suppress)
           Chat.Call("SkipMessage");
       }
     }
@@ -87,7 +87,7 @@ namespace Nwn.Server
       public string Message { get; private set; }
       public NwnReference Sender { get; private set; }
       public NwnReference Target { get; private set; }
-      public bool Skip { get; set; }
+      public bool Suppress { get; set; }
 
       internal MessageArrivedEventArgs(Channel channel, string message, NwnReference sender, NwnReference target)
       {
