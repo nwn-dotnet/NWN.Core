@@ -10,9 +10,16 @@ namespace NWN.Core.Server
   {
     public const int SCRIPT_NOT_HANDLED = -1;
 
+    public Script(NwnServer server) => server.Scripts.Add(Name, this);
+
     public int Value = 0;
     public NwnServer Server { get; set; }
-    public string Name { get; set; }
+    public abstract string Name { get; }
     public abstract void Execute();
+    public int ExecuteValue()
+    {
+      Execute();
+      return Value;
+    }
   }
 }

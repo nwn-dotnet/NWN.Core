@@ -37,11 +37,12 @@ namespace NWN.Core.Server
     private class ChatScript : Script
     {
       public Chat Chat { get; }
-      public ChatScript(Chat chat) => Chat = chat;
+      public ChatScript(Chat chat) : base(chat.Server) => Chat = chat;
+      public override string Name => "__csharp__chat";
       public override void Execute()
       {
         var e = Chat.OnMessageArrived(
-          new Channel(Chat,[Chat.CallInt32("GetChannel")]),
+          new Channel(Chat,Chat.CallInt32("GetChannel")),
           Chat.CallString("GetMessage"),
           Chat.CallObj("GetSender"),
           Chat.CallObj("GetTarget")

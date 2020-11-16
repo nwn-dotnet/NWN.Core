@@ -166,7 +166,7 @@ namespace NWN.Core.Server
 
       try
       {
-        return (!Scripts.TryGetValue(script, out var nwnScript)) ? Script.SCRIPT_NOT_HANDLED : nwnScript.Execute();
+        return (!Scripts.TryGetValue(script, out var nwnScript)) ? Script.SCRIPT_NOT_HANDLED : nwnScript.ExecuteValue();
       }
       catch(Exception ex)
       {
@@ -257,10 +257,11 @@ namespace NWN.Core.Server
     }
     #endregion
 
-    public void Foo()
+    public static void Foo()
     {
-      Chat.ServerMsg.SendMessage("DOOOM!");
-      Chat.MessageArrived += (x, y) => { if (y.Message.Contains("shit")) y.Skip = true; };
+      var nwn = NwnServer.Instance;
+      nwn.Chat.ServerMsg.SendMessage("DOOOM!");
+      nwn.Chat.MessageArrived += (x, y) => { if (y.Message.Contains("shit")) y.Skip = true; };
     }
   }
 }
