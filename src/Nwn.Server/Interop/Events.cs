@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.InteropServices;
 
 namespace Nwn.Server.Interop
@@ -17,5 +18,20 @@ namespace Nwn.Server.Interop
     internal RunScriptHandlerDelegate RunScript;
     internal ClosureHandlerDelegate Closure;
     internal SignalHandlerDelegate Signal;
+
+    public void Register(NativeFunctions functions)
+    {
+      int size = Marshal.SizeOf(typeof(NativeEvents));
+      IntPtr ptr = Marshal.AllocHGlobal(size);
+      try
+      {
+        Marshal.StructureToPtr(this, ptr, false);
+        functions.RegisterHandlers(ptr, (uint)size);
+      }
+      finally
+      {
+        Marshal.FreeHGlobal(ptr);
+      }
+    }
   }
 }

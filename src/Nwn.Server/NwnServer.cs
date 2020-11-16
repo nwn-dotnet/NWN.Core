@@ -38,7 +38,6 @@ namespace Nwn.Server
     private ulong nextEventId;
 
     private NativeFunctions _functions;
-    private NativeEvents _events;
     #endregion
 
     #region Properties
@@ -52,6 +51,8 @@ namespace Nwn.Server
     #region Constructors
     public NwnServer(IntPtr nativeHandlesPtr, int nativeHandlesLength)
     {
+      #region Validation
+
       if (nativeHandlesPtr == IntPtr.Zero)
         throw new Exception("Received NULL bootstrap structure");
 
@@ -64,10 +65,17 @@ namespace Nwn.Server
         Console.WriteLine($"WARNING: Received bootstrap structure bigger than expected - actual={nativeHandlesLength}, expected={expectedLength}");
         Console.WriteLine("         This usually means that native code version is ahead of the managed code");
       }
+      #endregion
 
+      //Native Interface
       _functions = Marshal.PtrToStructure<NativeFunctions>(nativeHandlesPtr);
-      RegisterHandles();
-      RegisterNativeEventHandles();
+      new NativeEvents()
+      {
+        MainLoop = OnTick,
+        RunScript = RunScript,
+        Closure = Closure,
+        Signal = OnSignal,
+      }.Register(_functions);
 
       //Setup Plugins
       Chat = new Chat(this);
@@ -75,28 +83,6 @@ namespace Nwn.Server
     #endregion
 
     #region Private Methods
-    private void RegisterHandles()
-    {
-      _events.MainLoop = OnTick;
-      _events.RunScript = RunScript;
-      _events.Closure = Closure;
-      _events.Signal = OnSignal;
-    }
-
-    private void RegisterNativeEventHandles()
-    {
-      int size = Marshal.SizeOf(typeof(NativeEvents));
-      IntPtr ptr = Marshal.AllocHGlobal(size);
-      try
-      {
-        Marshal.StructureToPtr(_events, ptr, false);
-        _functions.RegisterHandlers(ptr, (uint)size);
-      }
-      finally
-      {
-        Marshal.FreeHGlobal(ptr);
-      }
-    }
 
     private static void SafeInvoke(Action target)
     {
@@ -143,7 +129,7 @@ namespace Nwn.Server
     {
       var self = new NwnReference(oidSelf);
 
-      if(_self.IsValid())
+      if (_self.IsValid())
         _selfStack.Push(self);
 
       _self = self;
@@ -152,7 +138,7 @@ namespace Nwn.Server
       {
         return (!Scripts.TryGetValue(script, out var nwnScript)) ? Script.NOT_HANDLED : nwnScript.ExecuteValue();
       }
-      catch(Exception ex)
+      catch (Exception ex)
       {
         Console.WriteLine(ex);
         return Script.NOT_HANDLED;
