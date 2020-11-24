@@ -34,4 +34,4 @@ jobs:
         run: echo ::set-output name=version::$(echo ${{ steps.bump_version.outputs.tag }} | sed 's/[v]//g')
 
       - name: Pack
-        run: dotnet pack NWN.Core.csproj --configuration Release -p:PackageVersion=${{ steps.name_version.version }} -o output
+        run: dotnet pack NWN.Core.csproj --configuration Release -p:PackageVersion=${{ steps.name_version.outputs.version }} -o output
