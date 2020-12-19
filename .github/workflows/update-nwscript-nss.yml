@@ -17,5 +17,5 @@ jobs:
           wget https://raw.githubusercontent.com/urothis/nwn-assets/main/key-file/pkg5.bif/nwscript.nss
           mkdir ${GITHUB_WORKSPACE}/src/test
           ls ${GITHUB_WORKSPACE}/src/
-          dotnet /app/Nss2CSharp.dll nwscript.nss ${GITHUB_WORKSPACE}/src/test
+          dotnet /app/Nss2CSharp.dll ./nwscript.nss ${GITHUB_WORKSPACE}/src/test/
           ls ${GITHUB_WORKSPACE}/src/test
