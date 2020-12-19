@@ -39,7 +39,7 @@ namespace NWN.Core
           case NWScript.ENGINE_STRUCTURE_EFFECT:
             NWNCore.NativeFunctions.nwnxPushEffect(refValue);
             break;
-          case NWScript.ENGINE_STRUCTURE_ITEM_PROPERTY:
+          case NWScript.ENGINE_STRUCTURE_ITEMPROPERTY:
             NWNCore.NativeFunctions.nwnxPushItemProperty(refValue);
             break;
           case NWScript.ENGINE_STRUCTURE_LOCATION:
@@ -86,7 +86,7 @@ namespace NWN.Core
         return engineType switch
         {
           NWScript.ENGINE_STRUCTURE_EFFECT => NWNCore.NativeFunctions.nwnxPopEffect(),
-          NWScript.ENGINE_STRUCTURE_ITEM_PROPERTY => NWNCore.NativeFunctions.nwnxPopItemProperty(),
+          NWScript.ENGINE_STRUCTURE_ITEMPROPERTY => NWNCore.NativeFunctions.nwnxPopItemProperty(),
           _ => throw new NotSupportedException($"Native engine type not supported: {engineType}")
         };
       }

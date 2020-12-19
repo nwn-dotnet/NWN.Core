@@ -83,7 +83,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.SetFunction(NWNX_Util, "EffectTypeCast");
       VM.NWNX.StackPush(e, ENGINE_STRUCTURE_EFFECT);
       VM.NWNX.Call();
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEM_PROPERTY);
+      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///
@@ -93,7 +93,7 @@ namespace NWN.Core.NWNX
     public static System.IntPtr ItemPropertyToEffect(System.IntPtr ip)
     {
       VM.NWNX.SetFunction(NWNX_Util, "EffectTypeCast");
-      VM.NWNX.StackPush(ip, ENGINE_STRUCTURE_ITEM_PROPERTY);
+      VM.NWNX.StackPush(ip, ENGINE_STRUCTURE_ITEMPROPERTY);
       VM.NWNX.Call();
       return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }

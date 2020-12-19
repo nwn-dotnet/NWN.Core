@@ -15,7 +15,7 @@ namespace NWN.Core.NWNX
     public static IPUnpacked UnpackIP(System.IntPtr ip)
     {
       VM.NWNX.SetFunction(NWNX_ItemProperty, "UnpackIP");
-      VM.NWNX.StackPush(ip, ENGINE_STRUCTURE_ITEM_PROPERTY);
+      VM.NWNX.StackPush(ip, ENGINE_STRUCTURE_ITEMPROPERTY);
       VM.NWNX.Call();
       IPUnpacked n = default;
       n.nProperty = VM.NWNX.StackPopInt();
@@ -52,7 +52,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.StackPush(n.nSubType);
       VM.NWNX.StackPush(n.nProperty);
       VM.NWNX.Call();
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEM_PROPERTY);
+      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     /// Gets the active item property at the index
