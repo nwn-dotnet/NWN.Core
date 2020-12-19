@@ -5678,6 +5678,21 @@ namespace NWN.Core
     public const string TILESET_RESREF_RURAL_WINTER = "tts01";
     public const string TILESET_RESREF_SEWERS = "tds01";
     public const string TILESET_RESREF_UNDERDARK = "ttu01";
+    public const string TILESET_RESREF_LIZARDFOLK_INTERIOR = "dag01";
+    public const string TILESET_RESREF_MEDIEVAL_CITY_2 = "tcm02";
+    public const string TILESET_RESREF_MEDIEVAL_RURAL_2 = "trm02";
+    public const string TILESET_RESREF_EARLY_WINTER_2 = "trs02";
+    public const string TILESET_RESREF_SEASHIPS = "tss13";
+    public const string TILESET_RESREF_FOREST_FACELIFT = "ttf02";
+    public const string TILESET_RESREF_RURAL_WINTER_FACELIFT = "tts02";
+    public const string TILESET_RESREF_STEAMWORKS = "tsw01";
+    public const string TILESET_RESREF_BARROWS_INTERIOR = "tbw01";
+    public const string TILESET_RESREF_SEA_CAVES = "tdt01";
+    public const string TILESET_RESREF_CITY_INTERIOR_2 = "tni01";
+    public const string TILESET_RESREF_CASTLE_INTERIOR_2 = "tni02";
+    public const string TILESET_RESREF_CASTLE_EXTERIOR_RURAL = "tno01";
+    public const string TILESET_RESREF_TROPICAL = "ttz01";
+    public const string TILESET_RESREF_FORT_INTERIOR = "twc03";
 
     ///  These constants determine which name table to use when generating random names.
     public const int NAME_FIRST_GENERIC_MALE = -1;
@@ -16113,7 +16128,7 @@ namespace NWN.Core
     }
 
     ///  Makes oPC enter a targeting mode, letting them select an object as a target<br/>
-    ///  If a PC selects a target, it will trigger the module OnPlayerTarget event.
+    ///  If a PC selects a target or cancels out, it will trigger the module OnPlayerTarget event.
     public static void EnterTargetingMode(uint oPC, int nValidObjectTypes = OBJECT_TYPE_ALL, int nMouseCursorId = MOUSECURSOR_MAGIC, int nBadTargetCursor = MOUSECURSOR_NOMAGIC)
     {
       VM.StackPush(nBadTargetCursor);
@@ -16124,7 +16139,8 @@ namespace NWN.Core
     }
 
     ///  Gets the target object in the module OnPlayerTarget event.<br/>
-    ///  Returns the area object when the target is the ground.
+    ///  Returns the area object when the target is the ground.<br/>
+    ///  Note: returns OBJECT_INVALID if the player cancelled out of targeting mode.
     public static uint GetTargetingModeSelectedObject()
     {
       VM.Call(913);
@@ -16401,6 +16417,20 @@ namespace NWN.Core
       VM.StackPush(sHex);
       VM.Call(936);
       return VM.StackPopObject();
+    }
+
+    ///  Sets the current hitpoints of oObject.<br/>
+    ///  * You cannot destroy or revive objects or creatures with this function.<br/>
+    ///  * For currently dying PCs, you can only set hitpoints in the range of -9 to 0.<br/>
+    ///  * All other objects need to be alive and the range is clamped to 1 and max hitpoints.<br/>
+    ///  * This is not considered damage (or healing). It circumvents all combat logic, including damage resistance and reduction.<br/>
+    ///  * This is not considered a friendly or hostile combat action. It will not affect factions, nor will it trigger script events.<br/>
+    ///  * This will not advise player parties in the combat log.
+    public static void SetCurrentHitPoints(uint oObject, int nHitPoints)
+    {
+      VM.StackPush(nHitPoints);
+      VM.StackPush(oObject);
+      VM.Call(937);
     }
 
   }

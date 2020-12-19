@@ -714,6 +714,15 @@ namespace NWN.Core.NWNX
       return entry;
     }
 
+    /// Closes any store oPlayer may have open.
+    /// <param name="oPlayer">The player object.</param>
+    public static void CloseStore(uint oPlayer)
+    {
+      VM.NWNX.SetFunction(NWNX_Player, "CloseStore");
+      VM.NWNX.StackPush(oPlayer);
+      VM.NWNX.Call();
+    }
+
     /// @}
     public static void INTERNAL_StopGuiTimingBar(uint player, string script = "", int id = -1)
     {

@@ -161,9 +161,11 @@ namespace NWN.Core.NWNX
     ///
     /// <param name="oPC">The player to delete.</param>
     /// <param name="bPreserveBackup">If true, it will leave the file on server, only appending ".deleted0" to the bic filename.</param>
-    public static void DeletePlayerCharacter(uint oPC, int bPreserveBackup)
+    /// <param name="sKickMessage">An optional kick message, if left blank it will default to "Delete Character" as reason.</param>
+    public static void DeletePlayerCharacter(uint oPC, int bPreserveBackup = TRUE, string sKickMessage = "")
     {
       VM.NWNX.SetFunction(NWNX_Administration, "DeletePlayerCharacter");
+      VM.NWNX.StackPush(sKickMessage);
       VM.NWNX.StackPush(bPreserveBackup);
       VM.NWNX.StackPush(oPC);
       VM.NWNX.Call();

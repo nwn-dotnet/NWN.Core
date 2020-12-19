@@ -433,6 +433,24 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
+    /// Set the module dawn hour.
+    /// <param name="nDawnHour">The new dawn hour</param>
+    public static void SetDawnHour(int nDawnHour)
+    {
+      VM.NWNX.SetFunction(NWNX_Util, "SetDawnHour");
+      VM.NWNX.StackPush(nDawnHour);
+      VM.NWNX.Call();
+    }
+
+    /// Set the module dusk hour.
+    /// <param name="nDuskHour">The new dusk hour</param>
+    public static void SetDuskHour(int nDuskHour)
+    {
+      VM.NWNX.SetFunction(NWNX_Util, "SetDuskHour");
+      VM.NWNX.StackPush(nDuskHour);
+      VM.NWNX.Call();
+    }
+
     /// @}
   }
 
