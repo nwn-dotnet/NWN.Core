@@ -52,6 +52,9 @@ namespace NWN.Core
     public static IntPtr GetFunctionPointer(string name) => NWNCore.NativeFunctions.GetFunctionPointer(name);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
+    public static NWNCore.NWNXExportedGlobals GetNWNXExportedGlobals() => NWNCore.NativeFunctions.GetNWNXExportedGlobals();
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
     public static int ClosureAssignCommand(uint oid, ulong eventId) => NWNCore.NativeFunctions.ClosureAssignCommand(oid, eventId);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
