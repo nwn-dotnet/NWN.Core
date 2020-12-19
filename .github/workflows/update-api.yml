@@ -1,0 +1,49 @@
+name: Update API Bindings
+
+on:
+  push:
+    branches:
+      - api-auto-update
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    container:
+      image: docker://nwndotnet/nss2csharp:latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          path: "./repo"
+
+      - name: Load Revisions
+        id: "revision"
+        run: |
+          NWNX_SHA=$(curl -u "u:${{github.token}}" https://api.github.com/repos/nwnxee/unified/git/ref/heads/master | jq .object.sha | tr -d '"')
+          echo ::set-output name=nwnx_sha::$( echo $NWNX_SHA )
+          echo ::set-output name=nwnx_sha_short::$( echo $NWNX_SHA | cut -c1-8 )
+          NWN_SHA=$(curl -u "u:${{github.token}}" https://api.github.com/repos/urothis/nwn-assets/git/ref/heads/main | jq .object.sha | tr -d '"')
+          echo ::set-output name=nwn_sha::$( echo $NWN_SHA )
+          echo ::set-output name=nwn_sha_short::$( echo $NWN_SHA | cut -c1-8 )
+
+      - name: Checkout NWNX
+        uses: actions/checkout@v2
+        with:
+          repository: "nwnxee/unified"
+          path: "./nwnx"
+          ref: ${{ steps.revision.outputs.nwnx_sha }}
+
+      - name: Checkout nwscript.nss
+        run: |
+          wget -P "${GITHUB_WORKSPACE}/nwn" https://raw.githubusercontent.com/urothis/nwn-assets/${{ steps.revision.outputs.nwn_sha }}/key-file/pkg5.bif/nwscript.nss
+
+      - name: Convert
+        run: |
+          dotnet /app/Nss2CSharp.dll "${GITHUB_WORKSPACE}/nwn" "${GITHUB_WORKSPACE}/repo/src/NWN" "${GITHUB_WORKSPACE}/nwnx/Plugins" "${GITHUB_WORKSPACE}/repo/src/NWNX/Plugins"
+
+      - name: Commit Changes
+        uses: EndBug/add-and-commit@v5
+        with:
+          cwd: "./repo"
+          add: "src/NWN/NWScript.cs src/NWNX/Plugins/*"
+          message: "Update APIs (NWNX: ${{ steps.revision.outputs.nwnx_sha_short }}, NWN: ${{ steps.revision.outputs.nwn_sha_short }})."
