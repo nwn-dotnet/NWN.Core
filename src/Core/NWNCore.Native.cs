@@ -216,6 +216,7 @@ namespace NWN.Core
       public readonly nwnxPopEffectDelegate nwnxPopEffect;
       public readonly nwnxPopItemPropertyDelegate nwnxPopItemProperty;
       public readonly nwnxCallFunctionDelegate nwnxCallFunction;
+      public readonly GetNWNXExportedGlobalsDelegate GetNWNXExportedGlobals;
     }
   }
 }
