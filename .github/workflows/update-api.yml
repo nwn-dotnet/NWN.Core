@@ -1,9 +1,8 @@
 name: Update API Bindings
 
 on:
-  push:
-    branches:
-      - api-auto-update
+  schedule:
+    - cron: "0 0 * * *"
 
 jobs:
   build:
