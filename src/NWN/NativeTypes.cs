@@ -65,7 +65,7 @@ namespace NWN.Core
 
     ~ItemProperty()
     {
-      VM.FreeGameDefinedStructure(NWScript.ENGINE_STRUCTURE_ITEM_PROPERTY, Handle);
+      VM.FreeGameDefinedStructure(NWScript.ENGINE_STRUCTURE_ITEMPROPERTY, Handle);
     }
 
     public static implicit operator IntPtr(ItemProperty effect) => effect.Handle;
@@ -79,7 +79,7 @@ namespace NWN.Core
 
     ~SQLQuery()
     {
-      VM.FreeGameDefinedStructure(NWScript.ENGINE_STRUCTURE_SQL_QUERY, Handle);
+      VM.FreeGameDefinedStructure(NWScript.ENGINE_STRUCTURE_SQLQUERY, Handle);
     }
 
     public static implicit operator IntPtr(SQLQuery effect) => effect.Handle;

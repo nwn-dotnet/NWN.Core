@@ -1619,6 +1619,28 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Gets the NoPermanentDeath flag of oCreature.
+    /// <param name="oCreature">The target creature.</param>
+    /// <returns>TRUE/FALSE or -1 on error.</returns>
+    public static int GetNoPermanentDeath(uint oCreature)
+    {
+      VM.NWNX.SetFunction(NWNX_Creature, "GetNoPermanentDeath");
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
+    /// Sets the NoPermanentDeath flag of oCreature.
+    /// <param name="oCreature">The target creature.</param>
+    /// <param name="bNoPermanentDeath">TRUE/FALSE.</param>
+    public static void SetNoPermanentDeath(uint oCreature, int bNoPermanentDeath)
+    {
+      VM.NWNX.SetFunction(NWNX_Creature, "SetNoPermanentDeath");
+      VM.NWNX.StackPush(bNoPermanentDeath);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+    }
+
     /// @}
   }
 

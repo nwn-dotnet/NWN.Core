@@ -83,7 +83,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.SetFunction(NWNX_Util, "EffectTypeCast");
       VM.NWNX.StackPush(e, ENGINE_STRUCTURE_EFFECT);
       VM.NWNX.Call();
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEM_PROPERTY);
+      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///
@@ -93,7 +93,7 @@ namespace NWN.Core.NWNX
     public static System.IntPtr ItemPropertyToEffect(System.IntPtr ip)
     {
       VM.NWNX.SetFunction(NWNX_Util, "EffectTypeCast");
-      VM.NWNX.StackPush(ip, ENGINE_STRUCTURE_ITEM_PROPERTY);
+      VM.NWNX.StackPush(ip, ENGINE_STRUCTURE_ITEMPROPERTY);
       VM.NWNX.Call();
       return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
@@ -431,6 +431,24 @@ namespace NWN.Core.NWNX
       VM.NWNX.StackPush(sParamName);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
+    }
+
+    /// Set the module dawn hour.
+    /// <param name="nDawnHour">The new dawn hour</param>
+    public static void SetDawnHour(int nDawnHour)
+    {
+      VM.NWNX.SetFunction(NWNX_Util, "SetDawnHour");
+      VM.NWNX.StackPush(nDawnHour);
+      VM.NWNX.Call();
+    }
+
+    /// Set the module dusk hour.
+    /// <param name="nDuskHour">The new dusk hour</param>
+    public static void SetDuskHour(int nDuskHour)
+    {
+      VM.NWNX.SetFunction(NWNX_Util, "SetDuskHour");
+      VM.NWNX.StackPush(nDuskHour);
+      VM.NWNX.Call();
     }
 
     /// @}

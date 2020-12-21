@@ -34,13 +34,19 @@ namespace NWN.Core.NWNX
     public const int NWNX_FEAT_MODIFIER_SRCHARGEN = 19;
     public const int NWNX_FEAT_MODIFIER_SRINCLEVEL = 20;
     public const int NWNX_FEAT_MODIFIER_SPELLSAVEDC = 21;
+    public const int NWNX_FEAT_MODIFIER_BONUSSPELL = 22;
+    public const int NWNX_FEAT_MODIFIER_TRUESEEING = 23;
+    public const int NWNX_FEAT_MODIFIER_SEEINVISIBLE = 24;
+    public const int NWNX_FEAT_MODIFIER_ULTRAVISION = 25;
+    public const int NWNX_FEAT_MODIFIER_HASTE = 26;
+    public const int NWNX_FEAT_MODIFIER_VISUALEFFECT = 27;
 
     ///@}
     /// Sets a feat modifier.
     /// <param name="iFeat">The Feat constant or value in feat.2da.</param>
     /// <param name="iMod">The @ref feat_modifiers "feat modifier" to set.</param>
     /// <param name="iParam1,">iParam2, iParam3, iParam4 The parameters for this feat modifier.</param>
-    public static void SetFeatModifier(int iFeat, int iMod, int iParam1, int iParam2 = -559038737, int iParam3 = -559038737, int iParam4 = -559038737)
+    public static void SetFeatModifier(int iFeat, int iMod, int iParam1 = -559038737, int iParam2 = -559038737, int iParam3 = -559038737, int iParam4 = -559038737)
     {
       VM.NWNX.SetFunction(NWNX_Feat, "SetFeatModifier");
       VM.NWNX.StackPush(iParam4);
