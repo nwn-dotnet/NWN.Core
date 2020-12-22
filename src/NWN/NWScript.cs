@@ -12316,7 +12316,7 @@ namespace NWN.Core
     {
       VM.StackPush(oItem);
       VM.Call(612);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Will keep retrieving the next and the next item property on an Item,<br/>
@@ -12325,7 +12325,7 @@ namespace NWN.Core
     {
       VM.StackPush(oItem);
       VM.Call(613);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  will return the item property type (ie. holy avenger)
@@ -12352,7 +12352,7 @@ namespace NWN.Core
       VM.StackPush(nBonus);
       VM.StackPush(nAbility);
       VM.Call(616);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property AC bonus.  You need to specify the bonus.<br/>
@@ -12362,7 +12362,7 @@ namespace NWN.Core
     {
       VM.StackPush(nBonus);
       VM.Call(617);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property AC bonus vs. alignment group.  An example of<br/>
@@ -12375,7 +12375,7 @@ namespace NWN.Core
       VM.StackPush(nACBonus);
       VM.StackPush(nAlignGroup);
       VM.Call(618);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property AC bonus vs. Damage type (ie. piercing).  You<br/>
@@ -12389,7 +12389,7 @@ namespace NWN.Core
       VM.StackPush(nACBonus);
       VM.StackPush(nDamageType);
       VM.Call(619);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property AC bonus vs. Racial group.  You need to specify<br/>
@@ -12401,7 +12401,7 @@ namespace NWN.Core
       VM.StackPush(nACBonus);
       VM.StackPush(nRace);
       VM.Call(620);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property AC bonus vs. Specific alignment.  You need to<br/>
@@ -12413,7 +12413,7 @@ namespace NWN.Core
       VM.StackPush(nACBonus);
       VM.StackPush(nAlign);
       VM.Call(621);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Enhancement bonus.  You need to specify the<br/>
@@ -12423,7 +12423,7 @@ namespace NWN.Core
     {
       VM.StackPush(nEnhancementBonus);
       VM.Call(622);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Enhancement bonus vs. an Alignment group.  You<br/>
@@ -12435,7 +12435,7 @@ namespace NWN.Core
       VM.StackPush(nBonus);
       VM.StackPush(nAlignGroup);
       VM.Call(623);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Enhancement bonus vs. Racial group.  You need<br/>
@@ -12447,7 +12447,7 @@ namespace NWN.Core
       VM.StackPush(nBonus);
       VM.StackPush(nRace);
       VM.Call(624);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Enhancement bonus vs. a specific alignment.  You<br/>
@@ -12459,7 +12459,7 @@ namespace NWN.Core
       VM.StackPush(nBonus);
       VM.StackPush(nAlign);
       VM.Call(625);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Enhancment penalty.  You need to specify the<br/>
@@ -12469,7 +12469,7 @@ namespace NWN.Core
     {
       VM.StackPush(nPenalty);
       VM.Call(626);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property weight reduction.  You need to specify the weight<br/>
@@ -12478,7 +12478,7 @@ namespace NWN.Core
     {
       VM.StackPush(nReduction);
       VM.Call(627);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Bonus Feat.  You need to specify the the feat<br/>
@@ -12487,7 +12487,7 @@ namespace NWN.Core
     {
       VM.StackPush(nFeat);
       VM.Call(628);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Bonus level spell (Bonus spell of level).  You must<br/>
@@ -12499,7 +12499,7 @@ namespace NWN.Core
       VM.StackPush(nSpellLevel);
       VM.StackPush(nClass);
       VM.Call(629);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Cast spell.  You must specify the spell constant<br/>
@@ -12894,7 +12894,7 @@ namespace NWN.Core
       VM.StackPush(nNumUses);
       VM.StackPush(nSpell);
       VM.Call(630);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property damage bonus.  You must specify the damage type constant<br/>
@@ -12906,7 +12906,7 @@ namespace NWN.Core
       VM.StackPush(nDamage);
       VM.StackPush(nDamageType);
       VM.Call(631);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property damage bonus vs. Alignment groups.  You must specify the<br/>
@@ -12920,7 +12920,7 @@ namespace NWN.Core
       VM.StackPush(nDamageType);
       VM.StackPush(nAlignGroup);
       VM.Call(632);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property damage bonus vs. specific race.  You must specify the<br/>
@@ -12934,7 +12934,7 @@ namespace NWN.Core
       VM.StackPush(nDamageType);
       VM.StackPush(nRace);
       VM.Call(633);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property damage bonus vs. specific alignment.  You must specify the<br/>
@@ -12948,7 +12948,7 @@ namespace NWN.Core
       VM.StackPush(nDamageType);
       VM.StackPush(nAlign);
       VM.Call(634);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property damage immunity.  You must specify the damage type constant<br/>
@@ -12961,7 +12961,7 @@ namespace NWN.Core
       VM.StackPush(nImmuneBonus);
       VM.StackPush(nDamageType);
       VM.Call(635);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property damage penalty.  You must specify the damage penalty.<br/>
@@ -12970,7 +12970,7 @@ namespace NWN.Core
     {
       VM.StackPush(nPenalty);
       VM.Call(636);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property damage reduction.  You must specify the enhancment level<br/>
@@ -12982,7 +12982,7 @@ namespace NWN.Core
       VM.StackPush(nHPSoak);
       VM.StackPush(nEnhancement);
       VM.Call(637);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property damage resistance.  You must specify the damage type<br/>
@@ -12993,7 +12993,7 @@ namespace NWN.Core
       VM.StackPush(nHPResist);
       VM.StackPush(nDamageType);
       VM.Call(638);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property damage vulnerability.  You must specify the damage type<br/>
@@ -13004,14 +13004,14 @@ namespace NWN.Core
       VM.StackPush(nVulnerability);
       VM.StackPush(nDamageType);
       VM.Call(639);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Return Item property Darkvision.
     public static System.IntPtr ItemPropertyDarkvision()
     {
       VM.Call(640);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Return Item property decrease ability score.  You must specify the ability<br/>
@@ -13022,7 +13022,7 @@ namespace NWN.Core
       VM.StackPush(nModifier);
       VM.StackPush(nAbility);
       VM.Call(641);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property decrease Armor Class.  You must specify the armor<br/>
@@ -13033,7 +13033,7 @@ namespace NWN.Core
       VM.StackPush(nPenalty);
       VM.StackPush(nModifierType);
       VM.Call(642);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property decrease skill.  You must specify the constant for the<br/>
@@ -13044,7 +13044,7 @@ namespace NWN.Core
       VM.StackPush(nPenalty);
       VM.StackPush(nSkill);
       VM.Call(643);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property container reduced weight.  This is used for special<br/>
@@ -13054,7 +13054,7 @@ namespace NWN.Core
     {
       VM.StackPush(nContainerType);
       VM.Call(644);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property extra melee damage type.  You must specify the extra<br/>
@@ -13066,7 +13066,7 @@ namespace NWN.Core
     {
       VM.StackPush(nDamageType);
       VM.Call(645);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property extra ranged damage type.  You must specify the extra<br/>
@@ -13078,21 +13078,21 @@ namespace NWN.Core
     {
       VM.StackPush(nDamageType);
       VM.Call(646);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property haste.
     public static System.IntPtr ItemPropertyHaste()
     {
       VM.Call(647);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Holy Avenger.
     public static System.IntPtr ItemPropertyHolyAvenger()
     {
       VM.Call(648);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property immunity to miscellaneous effects.  You must specify the<br/>
@@ -13101,14 +13101,14 @@ namespace NWN.Core
     {
       VM.StackPush(nImmunityType);
       VM.Call(649);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property improved evasion.
     public static System.IntPtr ItemPropertyImprovedEvasion()
     {
       VM.Call(650);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property bonus spell resistance.  You must specify the bonus spell<br/>
@@ -13117,7 +13117,7 @@ namespace NWN.Core
     {
       VM.StackPush(nBonus);
       VM.Call(651);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property saving throw bonus vs. a specific effect or damage type.<br/>
@@ -13129,7 +13129,7 @@ namespace NWN.Core
       VM.StackPush(nBonus);
       VM.StackPush(nBonusType);
       VM.Call(652);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property saving throw bonus to the base type (ie. will, reflex,<br/>
@@ -13141,7 +13141,7 @@ namespace NWN.Core
       VM.StackPush(nBonus);
       VM.StackPush(nBaseSaveType);
       VM.Call(653);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property keen.  This means a critical threat range of 19-20 on a<br/>
@@ -13149,7 +13149,7 @@ namespace NWN.Core
     public static System.IntPtr ItemPropertyKeen()
     {
       VM.Call(654);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property light.  You must specify the intesity constant of the<br/>
@@ -13160,7 +13160,7 @@ namespace NWN.Core
       VM.StackPush(nColor);
       VM.StackPush(nBrightness);
       VM.Call(655);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Max range strength modification (ie. mighty).  You must<br/>
@@ -13170,7 +13170,7 @@ namespace NWN.Core
     {
       VM.StackPush(nModifier);
       VM.Call(656);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property no damage.  This means the weapon will do no damage in<br/>
@@ -13178,7 +13178,7 @@ namespace NWN.Core
     public static System.IntPtr ItemPropertyNoDamage()
     {
       VM.Call(657);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property on hit -> do effect property.  You must specify the on<br/>
@@ -13226,7 +13226,7 @@ namespace NWN.Core
       VM.StackPush(nSaveDC);
       VM.StackPush(nProperty);
       VM.Call(658);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property reduced saving throw vs. an effect or damage type.  You must<br/>
@@ -13238,7 +13238,7 @@ namespace NWN.Core
       VM.StackPush(nPenalty);
       VM.StackPush(nBaseSaveType);
       VM.Call(659);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property reduced saving to base type.  You must specify the base<br/>
@@ -13250,7 +13250,7 @@ namespace NWN.Core
       VM.StackPush(nPenalty);
       VM.StackPush(nBonusType);
       VM.Call(660);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property regeneration.  You must specify the regeneration amount.<br/>
@@ -13259,7 +13259,7 @@ namespace NWN.Core
     {
       VM.StackPush(nRegenAmount);
       VM.Call(661);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property skill bonus.  You must specify the skill to which the user<br/>
@@ -13270,7 +13270,7 @@ namespace NWN.Core
       VM.StackPush(nBonus);
       VM.StackPush(nSkill);
       VM.Call(662);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property spell immunity vs. specific spell.  You must specify the<br/>
@@ -13279,7 +13279,7 @@ namespace NWN.Core
     {
       VM.StackPush(nSpell);
       VM.Call(663);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property spell immunity vs. spell school.  You must specify the<br/>
@@ -13288,7 +13288,7 @@ namespace NWN.Core
     {
       VM.StackPush(nSchool);
       VM.Call(664);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Thieves tools.  You must specify the modifier you wish<br/>
@@ -13297,7 +13297,7 @@ namespace NWN.Core
     {
       VM.StackPush(nModifier);
       VM.Call(665);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Attack bonus.  You must specify an attack bonus.  The bonus<br/>
@@ -13306,7 +13306,7 @@ namespace NWN.Core
     {
       VM.StackPush(nBonus);
       VM.Call(666);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Attack bonus vs. alignment group.  You must specify the<br/>
@@ -13317,7 +13317,7 @@ namespace NWN.Core
       VM.StackPush(nBonus);
       VM.StackPush(nAlignGroup);
       VM.Call(667);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property attack bonus vs. racial group.  You must specify the<br/>
@@ -13328,7 +13328,7 @@ namespace NWN.Core
       VM.StackPush(nBonus);
       VM.StackPush(nRace);
       VM.Call(668);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property attack bonus vs. a specific alignment.  You must specify<br/>
@@ -13339,7 +13339,7 @@ namespace NWN.Core
       VM.StackPush(nBonus);
       VM.StackPush(nAlignment);
       VM.Call(669);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property attack penalty.  You must specify the attack penalty.<br/>
@@ -13348,7 +13348,7 @@ namespace NWN.Core
     {
       VM.StackPush(nPenalty);
       VM.Call(670);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property unlimited ammo.  If you leave the parameter field blank<br/>
@@ -13360,7 +13360,7 @@ namespace NWN.Core
     {
       VM.StackPush(nAmmoDamage);
       VM.Call(671);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property limit use by alignment group.  You must specify the<br/>
@@ -13369,7 +13369,7 @@ namespace NWN.Core
     {
       VM.StackPush(nAlignGroup);
       VM.Call(672);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property limit use by class.  You must specify the class(es) who<br/>
@@ -13378,7 +13378,7 @@ namespace NWN.Core
     {
       VM.StackPush(nClass);
       VM.Call(673);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property limit use by race.  You must specify the race(s) who are<br/>
@@ -13387,7 +13387,7 @@ namespace NWN.Core
     {
       VM.StackPush(nRace);
       VM.Call(674);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property limit use by specific alignment.  You must specify the<br/>
@@ -13396,14 +13396,14 @@ namespace NWN.Core
     {
       VM.StackPush(nAlignment);
       VM.Call(675);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  replace this function it does nothing.
     public static System.IntPtr BadBadReplaceMeThisDoesNothing()
     {
       VM.Call(676);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property vampiric regeneration.  You must specify the amount of<br/>
@@ -13412,7 +13412,7 @@ namespace NWN.Core
     {
       VM.StackPush(nRegenAmount);
       VM.Call(677);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Trap.  You must specify the trap level constant<br/>
@@ -13422,14 +13422,14 @@ namespace NWN.Core
       VM.StackPush(nTrapType);
       VM.StackPush(nTrapLevel);
       VM.Call(678);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property true seeing.
     public static System.IntPtr ItemPropertyTrueSeeing()
     {
       VM.Call(679);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Monster on hit apply effect property.  You must specify<br/>
@@ -13456,7 +13456,7 @@ namespace NWN.Core
       VM.StackPush(nSpecial);
       VM.StackPush(nProperty);
       VM.Call(680);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property turn resistance.  You must specify the resistance bonus.<br/>
@@ -13465,7 +13465,7 @@ namespace NWN.Core
     {
       VM.StackPush(nModifier);
       VM.Call(681);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Massive Critical.  You must specify the extra damage<br/>
@@ -13474,14 +13474,14 @@ namespace NWN.Core
     {
       VM.StackPush(nDamage);
       VM.Call(682);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property free action.
     public static System.IntPtr ItemPropertyFreeAction()
     {
       VM.Call(683);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property monster damage.  You must specify the amount of damage<br/>
@@ -13492,7 +13492,7 @@ namespace NWN.Core
     {
       VM.StackPush(nDamage);
       VM.Call(684);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property immunity to spell level.  You must specify the level of<br/>
@@ -13503,7 +13503,7 @@ namespace NWN.Core
     {
       VM.StackPush(nLevel);
       VM.Call(685);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property special walk.  If no parameters are specified it will<br/>
@@ -13513,7 +13513,7 @@ namespace NWN.Core
     {
       VM.StackPush(nWalkType);
       VM.Call(686);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property healers kit.  You must specify the level of the kit.<br/>
@@ -13522,7 +13522,7 @@ namespace NWN.Core
     {
       VM.StackPush(nModifier);
       VM.Call(687);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property weight increase.  You must specify the weight increase<br/>
@@ -13531,7 +13531,7 @@ namespace NWN.Core
     {
       VM.StackPush(nWeight);
       VM.Call(688);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  ***********************  END OF ITEM PROPERTY FUNCTIONS  **************************<br/>
@@ -14002,7 +14002,7 @@ namespace NWN.Core
       VM.StackPush(nLevel);
       VM.StackPush(nSpell);
       VM.Call(733);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns the SubType number of the item property. See the 2DA files for value definitions.
@@ -14053,7 +14053,7 @@ namespace NWN.Core
     {
       VM.StackPush(nEffect);
       VM.Call(739);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Sets the lootable state of a *living* NPC creature.<br/>
@@ -14235,7 +14235,7 @@ namespace NWN.Core
     {
       VM.StackPush(nModLevel);
       VM.Call(758);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns the amount of gold a store currently has. -1 indicates it is not using gold.<br/>
@@ -15351,7 +15351,7 @@ namespace NWN.Core
     {
       VM.StackPush(nMaterialType);
       VM.Call(845);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Quality. You need to specify the Quality.<br/>
@@ -15362,7 +15362,7 @@ namespace NWN.Core
     {
       VM.StackPush(nQuality);
       VM.Call(846);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns a generic Additional Item property. You need to specify the Additional property.<br/>
@@ -15373,7 +15373,7 @@ namespace NWN.Core
     {
       VM.StackPush(nAdditionalProperty);
       VM.Call(847);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Sets a new tag for oObject.<br/>
@@ -15452,7 +15452,7 @@ namespace NWN.Core
       VM.StackPush(sNewTag);
       VM.StackPush(nProperty, ENGINE_STRUCTURE_ITEMPROPERTY);
       VM.Call(855);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns the total duration of the item property in seconds.<br/>
@@ -16252,7 +16252,7 @@ namespace NWN.Core
       VM.StackPush(sQuery);
       VM.StackPush(sDatabase);
       VM.Call(923);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_SQLQUERY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_SQLQUERY);
     }
 
     ///  Sets up a query.<br/>
@@ -16276,7 +16276,7 @@ namespace NWN.Core
       VM.StackPush(sQuery);
       VM.StackPush(oObject);
       VM.Call(924);
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_SQLQUERY);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_SQLQUERY);
     }
 
     ///  Bind an integer to a named parameter of the given prepared query.<br/>
