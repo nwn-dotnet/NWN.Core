@@ -287,13 +287,38 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// Set the NWScript instruction limit
+    /// Set the NWScript instruction limit.
     /// <param name="nInstructionLimit">The new limit or -1 to reset to default.</param>
     public static void SetInstructionLimit(int nInstructionLimit)
     {
       VM.NWNX.SetFunction(NWNX_Util, "SetInstructionLimit");
       VM.NWNX.StackPush(nInstructionLimit);
       VM.NWNX.Call();
+    }
+
+    /// Get the NWScript instruction limit.
+    public static int GetInstructionLimit()
+    {
+      VM.NWNX.SetFunction(NWNX_Util, "GetInstructionLimit");
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
+    /// Set the number of NWScript instructions currently executed.
+    /// <param name="nInstructions">The number of instructions, must be >= 0.</param>
+    public static void SetInstructionsExecuted(int nInstructions)
+    {
+      VM.NWNX.SetFunction(NWNX_Util, "SetInstructionsExecuted");
+      VM.NWNX.StackPush(nInstructions);
+      VM.NWNX.Call();
+    }
+
+    /// Get the number of NWScript instructions currently executed.
+    public static int GetInstructionsExecuted()
+    {
+      VM.NWNX.SetFunction(NWNX_Util, "GetInstructionsExecuted");
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
     }
 
     /// Register a server console command that will execute a script chunk.
