@@ -53,5 +53,4 @@ jobs:
           git config user.name Jorteck
           git config user.email jorteckdev@gmail.com
           git add -A src/NWN/NWScript.cs src/NWNX/Plugins/*
-          git commit -m "Update APIs (NWNX: ${{ steps.revision.outputs.nwnx_sha_short }}, NWN: ${{ steps.revision.outputs.nwn_sha_short }})."
-          git push
+          git diff-index --quiet HEAD || git commit -m "Update APIs (NWNX: ${{ steps.revision.outputs.nwnx_sha_short }}, NWN: ${{ steps.revision.outputs.nwn_sha_short }})." && git push
