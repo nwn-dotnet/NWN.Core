@@ -15,6 +15,8 @@ jobs:
         uses: actions/checkout@v2
         with:
           path: "./repo"
+          ssh-key: ${{ secrets.API_PUSH_KEY }}
+          persist-credentials: true
 
       - name: Load Revisions
         id: "revision"
@@ -39,11 +41,15 @@ jobs:
 
       - name: Convert
         run: |
+          rm -rfv "${GITHUB_WORKSPACE}/repo/src/NWNX/Plugins/*"
           dotnet /app/Nss2CSharp.dll "${GITHUB_WORKSPACE}/nwn" "${GITHUB_WORKSPACE}/repo/src/NWN" "${GITHUB_WORKSPACE}/nwnx/Plugins" "${GITHUB_WORKSPACE}/repo/src/NWNX/Plugins"
+          if [ -z "$(ls -A ${GITHUB_WORKSPACE}/repo/src/NWNX/Plugins)" ]; then
+            exit 1
+          fi
 
       - name: Commit Changes
-        uses: EndBug/add-and-commit@v5
-        with:
-          cwd: "./repo"
-          add: "src/NWN/NWScript.cs src/NWNX/Plugins/*"
-          message: "Update APIs (NWNX: ${{ steps.revision.outputs.nwnx_sha_short }}, NWN: ${{ steps.revision.outputs.nwn_sha_short }})."
+        run: |
+          cd ${GITHUB_WORKSPACE}/repo
+          git add -A src/NWN/NWScript.cs src/NWNX/Plugins/*
+          git commit -m "Update APIs (NWNX: ${{ steps.revision.outputs.nwnx_sha_short }}, NWN: ${{ steps.revision.outputs.nwn_sha_short }})."
+          git push
