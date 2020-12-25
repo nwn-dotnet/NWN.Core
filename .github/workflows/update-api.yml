@@ -50,6 +50,8 @@ jobs:
       - name: Commit Changes
         run: |
           cd ${GITHUB_WORKSPACE}/repo
+          git config user.name Jorteck
+          git config user.email jorteckdev@gmail.com
           git add -A src/NWN/NWScript.cs src/NWNX/Plugins/*
           git commit -m "Update APIs (NWNX: ${{ steps.revision.outputs.nwnx_sha_short }}, NWN: ${{ steps.revision.outputs.nwn_sha_short }})."
           git push
