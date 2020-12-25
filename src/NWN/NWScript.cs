@@ -6,7 +6,7 @@ namespace NWN.Core
   public static class NWScript
   {
     public const uint OBJECT_INVALID = 0x7F000000;
-    public static uint OBJECT_SELF = OBJECT_INVALID;
+    public static uint OBJECT_SELF => NWNCore.GameManager.ObjectSelf;
     public const int ENGINE_NUM_STRUCTURES = 6;
     public const int ENGINE_STRUCTURE_EFFECT = 0;
     public const int ENGINE_STRUCTURE_EVENT = 1;
