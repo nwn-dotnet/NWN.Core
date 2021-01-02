@@ -1641,6 +1641,29 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Compute a safe location for oCreature.
+    /// <param name="oCreature">The target creature.</param>
+    /// <param name="vPosition">The starting position.</param>
+    /// <param name="fRadius">The search radius around vPosition.</param>
+    /// <param name="bWalkStraightLineRequired">Whether the creature must be able to walk in a straight line to the position.</param>
+    /// <returns>A safe location as vector, will return vPosition if one wasn't found. Returns {0.0, 0.0, 0.0} on error.</returns>
+    public static System.Numerics.Vector3 ComputeSafeLocation(uint oCreature, System.Numerics.Vector3 vPosition, float fRadius = 20.0f, int bWalkStraightLineRequired = TRUE)
+    {
+      VM.NWNX.SetFunction(NWNX_Creature, "ComputeSafeLocation");
+      VM.NWNX.StackPush(bWalkStraightLineRequired);
+      VM.NWNX.StackPush(fRadius);
+      VM.NWNX.StackPush(vPosition.X);
+      VM.NWNX.StackPush(vPosition.Y);
+      VM.NWNX.StackPush(vPosition.Z);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+      System.Numerics.Vector3 v;
+      v.z = VM.NWNX.StackPopFloat();
+      v.y = VM.NWNX.StackPopFloat();
+      v.x = VM.NWNX.StackPopFloat();
+      return VM.NWNX.StackPopVector();
+    }
+
     /// @}
   }
 
