@@ -1657,11 +1657,11 @@ namespace NWN.Core.NWNX
       VM.NWNX.StackPush(vPosition.Z);
       VM.NWNX.StackPush(oCreature);
       VM.NWNX.Call();
-      System.Numerics.Vector3 v;
-      v.z = VM.NWNX.StackPopFloat();
-      v.y = VM.NWNX.StackPopFloat();
-      v.x = VM.NWNX.StackPopFloat();
-      return VM.NWNX.StackPopVector();
+      System.Numerics.Vector3 v = default;
+      v.Z = VM.NWNX.StackPopFloat();
+      v.Y = VM.NWNX.StackPopFloat();
+      v.X = VM.NWNX.StackPopFloat();
+      return v;
     }
 
     /// @}
