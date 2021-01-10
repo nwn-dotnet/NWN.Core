@@ -1347,15 +1347,17 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Sets the critical hit multiplier modifier for the creature
+    /// Sets the critical hit multiplier modifier for the Creature
     /// <param name="oCreature">The target creature</param>
     /// <param name="nModifier">The modifier to apply</param>
     /// <param name="nHand">0 for all attacks, 1 for Mainhand, 2 for Offhand</param>
     /// <param name="bPersist">Whether the modifier should persist to .bic file if applicable</param>
-    /// @note Persistence is activated each server reset by first use of either 'SetCriticalMultiplier*' functions. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
-    public static void SetCriticalMultiplierModifier(uint oCreature, int nModifier, int nHand = 0, int bPersist = FALSE)
+    /// <param name="nBaseItem">Applies the.modifier only when the attack used this baseitem. BASE_ITEM_GLOVES for Unarmed, '-1' for all</param>
+    /// @note Persistence is activated each server reset by the first use of either 'SetCriticalMultiplier*' functions. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
+    public static void SetCriticalMultiplierModifier(uint oCreature, int nModifier, int nHand = 0, int bPersist = FALSE, int nBaseItem = -1)
     {
       VM.NWNX.SetFunction(NWNX_Creature, "SetCriticalMultiplierModifier");
+      VM.NWNX.StackPush(nBaseItem);
       VM.NWNX.StackPush(bPersist);
       VM.NWNX.StackPush(nHand);
       VM.NWNX.StackPush(nModifier);
@@ -1366,25 +1368,29 @@ namespace NWN.Core.NWNX
     /// Gets the critical hit multiplier modifier for the Creature
     /// <param name="oCreature">The target creature</param>
     /// <param name="nHand">0 for all attacks, 1 for Mainhand, 2 for Offhand</param>
+    /// <param name="nBaseItem">The baseitem modifer to retrieve. BASE_ITEM_GLOVES for Unarmed, '-1' for all</param>
     /// <returns>the current critical hit multiplier modifier for the creature</returns>
-    public static int GetCriticalMultiplierModifier(uint oCreature, int nHand = 0)
+    public static int GetCriticalMultiplierModifier(uint oCreature, int nHand = 0, int nBaseItem = -1)
     {
       VM.NWNX.SetFunction(NWNX_Creature, "GetCriticalMultiplierModifier");
+      VM.NWNX.StackPush(nBaseItem);
       VM.NWNX.StackPush(nHand);
       VM.NWNX.StackPush(oCreature);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
 
-    /// Sets the critical hit multiplier override for the creature.
+    /// Sets the critical hit multiplier override for the Creature.
     /// <param name="oCreature">The target creature</param>
     /// <param name="nOverride">The override value to apply. -1 to clear override.</param>
     /// <param name="nHand">0 for all attacks, 1 for Mainhand, 2 for Offhand</param>
-    /// <param name="bPersist">whether the modifier should be persisted to the .bic file if applicable</param>
-    /// @note Persistence is activated each server reset by first use of either 'SetCriticalMultiplier*' functions. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
-    public static void SetCriticalMultiplierOverride(uint oCreature, int nOverride, int nHand = 0, int bPersist = FALSE)
+    /// <param name="bPersist">Whether the modifier should persist to .bic file if applicable</param>
+    /// <param name="nBaseItem">Applies the.Override only when the attack used this baseitem. BASE_ITEM_GLOVES for Unarmed, '-1' for all</param>
+    /// @note Persistence is activated each server reset by the first use of either 'SetCriticalMultiplier*' functions. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
+    public static void SetCriticalMultiplierOverride(uint oCreature, int nOverride, int nHand = 0, int bPersist = FALSE, int nBaseItem = -1)
     {
       VM.NWNX.SetFunction(NWNX_Creature, "SetCriticalMultiplierOverride");
+      VM.NWNX.StackPush(nBaseItem);
       VM.NWNX.StackPush(bPersist);
       VM.NWNX.StackPush(nHand);
       VM.NWNX.StackPush(nOverride);
@@ -1395,10 +1401,12 @@ namespace NWN.Core.NWNX
     /// Gets the critical hit multiplier override for the Creature
     /// <param name="oCreature">The target creature</param>
     /// <param name="nHand">0 for all attacks, 1 for Mainhand, 2 for Offhand</param>
+    /// <param name="nBaseItem">The baseitem Override to retrieve. BASE_ITEM_GLOVES for Unarmed, '-1' for all</param>
     /// <returns>the current critical hit multiplier override for the creature. No override == -1</returns>
-    public static int GetCriticalMultiplierOverride(uint oCreature, int nHand = 0)
+    public static int GetCriticalMultiplierOverride(uint oCreature, int nHand = 0, int nBaseItem = -1)
     {
       VM.NWNX.SetFunction(NWNX_Creature, "GetCriticalMultiplierOverride");
+      VM.NWNX.StackPush(nBaseItem);
       VM.NWNX.StackPush(nHand);
       VM.NWNX.StackPush(oCreature);
       VM.NWNX.Call();
@@ -1409,11 +1417,13 @@ namespace NWN.Core.NWNX
     /// <param name="oCreature">The target creature</param>
     /// <param name="nModifier">The modifier to apply. Positive modifiers reduce critical chance. (I.e. From 18-20, a +1 results in crit range of 19-20)</param>
     /// <param name="nHand">0 for all attacks, 1 for Mainhand, 2 for Offhand</param>
-    /// <param name="bPersist">whether the modifier should be persisted to the .bic file if applicable</param>
-    /// @note Persistence is activated each server reset by first use of either 'SetCriticalRange*' functions. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
-    public static void SetCriticalRangeModifier(uint oCreature, int nModifier, int nHand = 0, int bPersist = FALSE)
+    /// <param name="bPersist">Whether the modifier should persist to .bic file if applicable</param>
+    /// <param name="nBaseItem">Applies the.modifier only when the attack used this baseitem. BASE_ITEM_GLOVES for Unarmed, '-1' for all</param>
+    /// @note Persistence is activated each server reset by the first use of either 'SetCriticalRange*' functions. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
+    public static void SetCriticalRangeModifier(uint oCreature, int nModifier, int nHand = 0, int bPersist = FALSE, int nBaseItem = -1)
     {
       VM.NWNX.SetFunction(NWNX_Creature, "SetCriticalRangeModifier");
+      VM.NWNX.StackPush(nBaseItem);
       VM.NWNX.StackPush(bPersist);
       VM.NWNX.StackPush(nHand);
       VM.NWNX.StackPush(nModifier);
@@ -1424,10 +1434,12 @@ namespace NWN.Core.NWNX
     /// Gets the critical hit range modifier for the creature.
     /// <param name="oCreature">The target creature</param>
     /// <param name="nHand">0 for all attacks, 1 for Mainhand, 2 for Offhand</param>
+    /// <param name="nBaseItem">The baseitem modifer to retrieve. BASE_ITEM_GLOVES for Unarmed, '-1' for all</param>
     /// <returns>the current critical hit range modifier for the creature</returns>
-    public static int GetCriticalRangeModifier(uint oCreature, int nHand = 0)
+    public static int GetCriticalRangeModifier(uint oCreature, int nHand = 0, int nBaseItem = -1)
     {
       VM.NWNX.SetFunction(NWNX_Creature, "GetCriticalRangeModifier");
+      VM.NWNX.StackPush(nBaseItem);
       VM.NWNX.StackPush(nHand);
       VM.NWNX.StackPush(oCreature);
       VM.NWNX.Call();
@@ -1438,11 +1450,13 @@ namespace NWN.Core.NWNX
     /// <param name="oCreature">The target creature</param>
     /// <param name="nOverride">The new minimum roll to crit. i.e nOverride of 15 results in crit range of 15-20. -1 to clear override.</param>
     /// <param name="nHand">0 for all attacks, 1 for Mainhand, 2 for Offhand</param>
-    /// <param name="bPersist">whether the modifier should be persisted to the .bic file if applicable</param>
-    /// @note Persistence is activated each server reset by first use of either 'SetCriticalRange*' functions. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
-    public static void SetCriticalRangeOverride(uint oCreature, int nOverride, int nHand = 0, int bPersist = FALSE)
+    /// <param name="bPersist">Whether the modifier should persist to .bic file if applicable</param>
+    /// <param name="nBaseItem">Applies the.Override only when the attack used this baseitem. BASE_ITEM_GLOVES for Unarmed, '-1' for all</param>
+    /// @note Persistence is activated each server reset by the first use of either 'SetCriticalRange*' functions. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
+    public static void SetCriticalRangeOverride(uint oCreature, int nOverride, int nHand = 0, int bPersist = FALSE, int nBaseItem = -1)
     {
       VM.NWNX.SetFunction(NWNX_Creature, "SetCriticalRangeOverride");
+      VM.NWNX.StackPush(nBaseItem);
       VM.NWNX.StackPush(bPersist);
       VM.NWNX.StackPush(nHand);
       VM.NWNX.StackPush(nOverride);
@@ -1453,10 +1467,12 @@ namespace NWN.Core.NWNX
     /// Sets the critical hit range Override for the creature.
     /// <param name="oCreature">The target creature</param>
     /// <param name="nHand">0 for all attacks, 1 for Mainhand, 2 for Offhand</param>
-    /// <returns>the current critical hit range override for the creature. No override == -1.</returns>
-    public static int GetCriticalRangeOverride(uint oCreature, int nHand = 0)
+    /// <param name="nBaseItem">The baseitem Override to retrieve. BASE_ITEM_GLOVES for Unarmed, '-1' for all</param>
+    /// <returns>the current critical hit range override for the creature. No override == -1</returns>
+    public static int GetCriticalRangeOverride(uint oCreature, int nHand = 0, int nBaseItem = -1)
     {
       VM.NWNX.SetFunction(NWNX_Creature, "GetCriticalRangeOverride");
+      VM.NWNX.StackPush(nBaseItem);
       VM.NWNX.StackPush(nHand);
       VM.NWNX.StackPush(oCreature);
       VM.NWNX.Call();
