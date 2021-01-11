@@ -181,6 +181,34 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
+    /// Get the geometry of an encounter
+    /// <param name="oEncounter:">The encounter object.</param>
+    /// <returns>A string of vertex positions.</returns>
+    public static string GetGeometry(uint oEncounter)
+    {
+      VM.NWNX.SetFunction(NWNX_Encounter, "GetGeometry");
+      VM.NWNX.StackPush(oEncounter);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopString();
+    }
+
+    /// Set the geometry of an encounter with a list of vertex positions
+    /// <param name="oTrigger">The encounter object.</param>
+    /// <param name="sGeometry">Needs to be in the following format -> {x.x, y.y, z.z} or {x.x, y.y}</param>
+    /// Example Geometry: "{1.0, 1.0, 0.0}{4.0, 1.0, 0.0}{4.0, 4.0, 0.0}{1.0, 4.0, 0.0}"
+    ///
+    /// @remark The Z position is optional and will be calculated dynamically based
+    /// on terrain height if it's not provided.
+    ///
+    /// @remark The minimum number of vertices is 3.
+    public static void SetGeometry(uint oEncounter, string sGeometry)
+    {
+      VM.NWNX.SetFunction(NWNX_Encounter, "SetGeometry");
+      VM.NWNX.StackPush(sGeometry);
+      VM.NWNX.StackPush(oEncounter);
+      VM.NWNX.Call();
+    }
+
     /// @}
   }
 
