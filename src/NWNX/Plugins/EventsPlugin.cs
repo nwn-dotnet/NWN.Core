@@ -66,7 +66,7 @@ namespace NWN.Core.NWNX
         ----------------------|--------|-------
         FACTION_ID            | int    | Not the STANDARD_FACTION_* constants. See nwnx_creature->GetFaction().
         SUBJECT_FACTION_ID    | int    | Not the STANDARD_FACTION_* constants. See nwnx_creature->GetFaction().
-        PREVIOUS_REPUTATION   | int    | 
+        PREVIOUS_REPUTATION   | int    |
         NEW_REPUTATION        | int    | Not yet clamped between 0-100. In the AFTER event, this will equal the EventResult set in the BEFORE event.
     
     _______________________________________
@@ -1303,6 +1303,19 @@ namespace NWN.Core.NWNX
         ----------------------|--------|-------
     
     _______________________________________
+        ## Input Emote Event
+        - NWNX_ON_INPUT_EMOTE_BEFORE
+        - NWNX_ON_INPUT_EMOTE_AFTER
+    
+        `OBJECT_SELF` = The creature using a radial menu emote
+    
+        Event Data Tag        | Type   | Notes
+        ----------------------|--------|-------
+        ANIMATION             | int    | An engine animation constant, convent to NWScript animation constant with NWNX_Consts_TranslateEngineAnimation() |
+    
+        @note Some emotes have a voiceline that will still play when the event is skipped. These voicelines can be skipped in the NWNX_ON_QUICKCHAT_* event.
+    
+    _______________________________________
     
     */
     /*
@@ -1420,6 +1433,7 @@ namespace NWN.Core.NWNX
     /// - Object {Lock|Unlock} events
     /// - Quickbar Events
     /// - Input Pause Event
+    /// - Input Emote Event
     /// - Debug events
     /// - Store events
     /// - Disarm event
