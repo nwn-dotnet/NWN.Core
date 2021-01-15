@@ -26,7 +26,6 @@ jobs:
           echo ::set-output name=nwnx_sha_short::$( echo $NWNX_SHA | cut -c1-8 )
           NWN_SHA=$(curl -u "u:${{github.token}}" https://api.github.com/repos/urothis/nwn-assets/git/ref/heads/main | jq .object.sha | tr -d '"')
           echo ::set-output name=nwn_sha::$( echo $NWN_SHA )
-          echo ::set-output name=nwn_sha_short::$( echo $NWN_SHA | cut -c1-8 )
 
       - name: Checkout NWNX
         uses: actions/checkout@v2
@@ -56,6 +55,12 @@ jobs:
         run: |
           cd ${GITHUB_WORKSPACE}/repo
           dotnet build --configuration Release
+      
+      - name: Load Game Version
+        id: "version"
+        run: |
+          echo "::set-output name=nwn_build::$(grep 'set(TARGET_NWN_BUILD ' ./nwnx/CMakeLists.txt | cut -d' ' -f2 | sed 's/)//')"
+          echo "::set-output name=nwn_build_revision::$(grep 'set(TARGET_NWN_BUILD_REVISION ' ./nwnx/CMakeLists.txt | cut -d' ' -f2 | sed 's/)//')"
 
       - name: Commit Changes
         run: |
@@ -63,4 +68,4 @@ jobs:
           git config user.name Jorteck
           git config user.email jorteckdev@gmail.com
           git add -A src/NWN/NWScript.cs src/NWNX/Plugins/*
-          git diff-index --quiet HEAD src/NWN/NWScript.cs src/NWNX/Plugins/* || git commit -m "Update APIs (NWNX: ${{ steps.revision.outputs.nwnx_sha_short }}, NWN: ${{ steps.revision.outputs.nwn_sha_short }})." && git push
+          git diff-index --quiet HEAD src/NWN/NWScript.cs src/NWNX/Plugins/* || git commit -m "Update APIs (NWNX: ${{ steps.revision.outputs.nwnx_sha_short }}, NWN: ${{ steps.version.outputs.nwn_build }}.${{ steps.version.outputs.nwn_build_revision }})." && git push
