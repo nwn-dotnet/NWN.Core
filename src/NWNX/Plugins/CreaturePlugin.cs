@@ -1680,6 +1680,17 @@ namespace NWN.Core.NWNX
       return v;
     }
 
+    /// Update oCreature's perception of oTargetCreature.
+    /// <param name="oCreature">The creature.</param>
+    /// <param name="oTargetCreature">The target creature.</param>
+    public static void DoPerceptionUpdateOnCreature(uint oCreature, uint oTargetCreature)
+    {
+      VM.NWNX.SetFunction(NWNX_Creature, "DoPerceptionUpdateOnCreature");
+      VM.NWNX.StackPush(oTargetCreature);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+    }
+
     /// @}
   }
 
