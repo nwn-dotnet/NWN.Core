@@ -517,6 +517,50 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
+    /// Get the ambient sound playing in an area during the day.
+    /// <param name="oArea">The area to get the sound of.</param>
+    /// <returns>The ambient soundtrack. See ambientsound.2da.</returns>
+    public static int GetAmbientSoundDay(uint oArea)
+    {
+      VM.NWNX.SetFunction(NWNX_Area, "GetAmbientSoundDay");
+      VM.NWNX.StackPush(oArea);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
+    /// Get the ambient sound playing in an area during the night.
+    /// <param name="oArea">The area to get the sound of.</param>
+    /// <returns>The ambient soundtrack. See ambientsound.2da.</returns>
+    public static int GetAmbientSoundNight(uint oArea)
+    {
+      VM.NWNX.SetFunction(NWNX_Area, "GetAmbientSoundNight");
+      VM.NWNX.StackPush(oArea);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
+    /// Get the volume of the ambient sound playing in an area during the day.
+    /// <param name="oArea">The area to get the sound volume of.</param>
+    /// <returns>The volume.</returns>
+    public static int GetAmbientSoundDayVolume(uint oArea)
+    {
+      VM.NWNX.SetFunction(NWNX_Area, "GetAmbientSoundDayVolume");
+      VM.NWNX.StackPush(oArea);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
+    /// Get the volume of the ambient sound playing in an area during the night.
+    /// <param name="oArea">The area to get the sound volume of.</param>
+    /// <returns>The volume.</returns>
+    public static int GetAmbientSoundNightVolume(uint oArea)
+    {
+      VM.NWNX.SetFunction(NWNX_Area, "GetAmbientSoundNightVolume");
+      VM.NWNX.StackPush(oArea);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
     /// @}
   }
 
