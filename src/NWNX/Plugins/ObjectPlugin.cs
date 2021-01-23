@@ -649,6 +649,28 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
+    /// Gets the AI level of an object.
+    /// <param name="oObject">The object.</param>
+    /// <returns>The AI level (AI_LEVEL_* -1 to 4).</returns>
+    public static int GetAILevel(uint oObject)
+    {
+      VM.NWNX.SetFunction(NWNX_Object, "GetAILevel");
+      VM.NWNX.StackPush(oObject);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
+    /// Sets the AI level of an object.
+    /// <param name="oObject">The object.</param>
+    /// <param name="nLevel">The level to set (AI_LEVEL_* -1 to 4).</param>
+    public static void SetAILevel(uint oObject, int nLevel)
+    {
+      VM.NWNX.SetFunction(NWNX_Object, "SetAILevel");
+      VM.NWNX.StackPush(nLevel);
+      VM.NWNX.StackPush(oObject);
+      VM.NWNX.Call();
+    }
+
     /// @}
   }
 

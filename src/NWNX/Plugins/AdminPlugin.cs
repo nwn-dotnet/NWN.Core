@@ -332,6 +332,43 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Get the servers minimum level.
+    /// <returns>The minimum level for the server.</returns>
+    public static int GetMinLevel()
+    {
+      VM.NWNX.SetFunction(NWNX_Administration, "GetMinLevel");
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
+    /// Set the servers minimum level.
+    /// <param name="nLevel">The minimum level for the server.</param>
+    public static void SetMinLevel(int nLevel)
+    {
+      VM.NWNX.SetFunction(NWNX_Administration, "SetMinLevel");
+      VM.NWNX.StackPush(nLevel);
+      VM.NWNX.Call();
+    }
+
+    /// Get the servers maximum level.
+    /// <returns>The maximum level for the server.</returns>
+    public static int GetMaxLevel()
+    {
+      VM.NWNX.SetFunction(NWNX_Administration, "GetMaxLevel");
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
+    /// Set the servers maximum level.
+    /// @note Attention when using this and the MaxLevel plugin. They both change the same value.
+    /// <param name="nLevel">The maximum level for the server.</param>
+    public static void SetMaxLevel(int nLevel)
+    {
+      VM.NWNX.SetFunction(NWNX_Administration, "SetMaxLevel");
+      VM.NWNX.StackPush(nLevel);
+      VM.NWNX.Call();
+    }
+
     /// @}
   }
 }
