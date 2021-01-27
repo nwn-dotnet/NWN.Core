@@ -175,6 +175,13 @@ namespace NWN.Core
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void nwnxCallFunctionDelegate();
 
+    [SuppressUnmanagedCodeSecurity]
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate IntPtr RequestHookDelegate(IntPtr address, IntPtr managedFuncPtr, int priority);
+
+    [SuppressUnmanagedCodeSecurity]
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void ReturnHookDelegate(IntPtr hook);
 
     [StructLayout(LayoutKind.Sequential)]
     public readonly struct NativeHandles
@@ -217,6 +224,8 @@ namespace NWN.Core
       public readonly nwnxPopItemPropertyDelegate nwnxPopItemProperty;
       public readonly nwnxCallFunctionDelegate nwnxCallFunction;
       public readonly GetNWNXExportedGlobalsDelegate GetNWNXExportedGlobals;
+      public readonly RequestHookDelegate RequestHook;
+      public readonly ReturnHookDelegate ReturnHook;
     }
   }
 }

@@ -62,5 +62,11 @@ namespace NWN.Core
 
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
     public static int ClosureActionDoCommand(uint oid, ulong eventId) => NWNCore.NativeFunctions.ClosureActionDoCommand(oid, eventId);
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
+    public static IntPtr RequestHook(IntPtr address, IntPtr managedFuncPtr, int priority) => NWNCore.NativeFunctions.RequestHook(address, managedFuncPtr, priority);
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
+    public static void ReturnHook(IntPtr funcPtr) => NWNCore.NativeFunctions.ReturnHook(funcPtr);
   }
 }
