@@ -9,40 +9,41 @@ namespace NWN.Core.NWNX
 
     ///< @private
     /// Returns the current date.
+    /// @deprecated Use SQLite functions (see inc_sqlite_time). This will be removed in future NWNX releases.
     /// <returns>The date in the format (mm/dd/yyyy).</returns>
     public static string GetSystemDate()
     {
-      VM.NWNX.SetFunction(NWNX_Time, "GetSystemDate");
-      VM.NWNX.Call();
+      WriteTimestampedLogEntry("WARNING:  NWNX_Time is deprecated.  You should migrate to SQLite based functions (see inc_sqlite_time).");
       return VM.NWNX.StackPopString();
     }
 
     /// Returns current time.
+    /// @deprecated Use SQLite functions (see inc_sqlite_time). This will be removed in future NWNX releases.
     /// <returns>The current time in the format (24:mm:ss).</returns>
     public static string GetSystemTime()
     {
-      VM.NWNX.SetFunction(NWNX_Time, "GetSystemTime");
-      VM.NWNX.Call();
+      WriteTimestampedLogEntry("WARNING:  NWNX_Time is deprecated.  You should migrate to SQLite based functions (see inc_sqlite_time).");
       return VM.NWNX.StackPopString();
     }
 
+    /// @deprecated Use SQLite functions (see inc_sqlite_time). This will be removed in future NWNX releases.
     /// <returns>Returns the number of seconds since midnight on January 1, 1970.</returns>
     public static int GetTimeStamp()
     {
-      VM.NWNX.SetFunction(NWNX_Time, "GetTimeStamp");
-      VM.NWNX.Call();
+      WriteTimestampedLogEntry("WARNING:  NWNX_Time is deprecated.  You should migrate to SQLite based functions (see inc_sqlite_time).");
       return VM.NWNX.StackPopInt();
     }
 
     /// A high resolution timestamp
+    /// @deprecated Use NWNX_Util_GetHighResTimeStamp(). This will be removed in future NWNX releases.
     /// <returns>Returns the number of microseconds since midnight on January 1, 1970.</returns>
     public static HighResTimestamp GetHighResTimeStamp()
     {
+      WriteTimestampedLogEntry("WARNING:  NWNX_Time is deprecated.  GetHighResTimeStamp is moving to NWNX_Util.");
+      NWNX_Util_HighResTimestamp u = NWNX_Util_GetHighResTimeStamp();
       HighResTimestamp t = default;
-      VM.NWNX.SetFunction(NWNX_Time, "GetHighResTimeStamp");
-      VM.NWNX.Call();
-      t.microseconds = VM.NWNX.StackPopInt();
-      t.seconds = VM.NWNX.StackPopInt();
+      t.seconds = u.seconds;
+      t.microseconds = u.microseconds;
       return t;
     }
 

@@ -1691,6 +1691,116 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Get a creatures personal space (meters from center to non-creature objects).
+    /// <param name="oCreature">The creature.</param>
+    /// <returns>The creatures personal space.</returns>
+    public static float GetPersonalSpace(uint oCreature)
+    {
+      VM.NWNX.SetFunction(NWNX_Creature, "GetPersonalSpace");
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopFloat();
+    }
+
+    /// Set a creatures personal space (meters from center to non-creature objects).
+    /// <param name="oCreature">The creature.</param>
+    /// <param name="fPerspace">The creatures personal space.</param>
+    public static void SetPersonalSpace(uint oCreature, float fPerspace)
+    {
+      VM.NWNX.SetFunction(NWNX_Creature, "SetPersonalSpace");
+      VM.NWNX.StackPush(fPerspace);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+    }
+
+    /// Get a creatures creature personal space (meters from center to other creatures).
+    /// <param name="oCreature">The creature.</param>
+    /// <returns>The creatures creature personal space.</returns>
+    public static float GetCreaturePersonalSpace(uint oCreature)
+    {
+      VM.NWNX.SetFunction(NWNX_Creature, "GetCreaturePersonalSpace");
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopFloat();
+    }
+
+    /// Set a creatures creature personal space (meters from center to other creatures).
+    /// <param name="oCreature">The creature.</param>
+    /// <param name="fCrePerspace">The creatures creature personal space.</param>
+    public static void SetCreaturePersonalSpace(uint oCreature, float fCrePerspace)
+    {
+      VM.NWNX.SetFunction(NWNX_Creature, "SetCreaturePersonalSpace");
+      VM.NWNX.StackPush(fCrePerspace);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+    }
+
+    /// Get a creatures height.
+    /// <param name="oCreature">The creature.</param>
+    /// <returns>The creatures height.</returns>
+    public static float GetHeight(uint oCreature)
+    {
+      VM.NWNX.SetFunction(NWNX_Creature, "GetHeight");
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopFloat();
+    }
+
+    /// Set a creatures height.
+    /// <param name="oCreature">The creature.</param>
+    /// <param name="fHeight">The creatures height.</param>
+    public static void SetHeight(uint oCreature, float fHeight)
+    {
+      VM.NWNX.SetFunction(NWNX_Creature, "SetHeight");
+      VM.NWNX.StackPush(fHeight);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+    }
+
+    /// Get a creatures hit distance.
+    /// <param name="oCreature">The creature.</param>
+    /// <returns>The creatures hit distance.</returns>
+    public static float GetHitDistance(uint oCreature)
+    {
+      VM.NWNX.SetFunction(NWNX_Creature, "GetHitDistance");
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopFloat();
+    }
+
+    /// Set a creatures hit distance.
+    /// <param name="oCreature">The creature.</param>
+    /// <param name="fHitDist">The creatures hit distance.</param>
+    public static void SetHitDistance(uint oCreature, float fHitDist)
+    {
+      VM.NWNX.SetFunction(NWNX_Creature, "SetHitDistance");
+      VM.NWNX.StackPush(fHitDist);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+    }
+
+    /// Get a creatures preferred attack distance.
+    /// <param name="oCreature">The creature.</param>
+    /// <returns>The creatures preferred attack distance.</returns>
+    public static float GetPreferredAttackDistance(uint oCreature)
+    {
+      VM.NWNX.SetFunction(NWNX_Creature, "GetPreferredAttackDistance");
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopFloat();
+    }
+
+    /// Set a creatures preferred attack distance.
+    /// <param name="oCreature">The creature.</param>
+    /// <param name="fPrefAtckDist">The creatures preferred attack distance.</param>
+    public static void SetPreferredAttackDistance(uint oCreature, float fPrefAtckDist)
+    {
+      VM.NWNX.SetFunction(NWNX_Creature, "SetPreferredAttackDistance");
+      VM.NWNX.StackPush(fPrefAtckDist);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+    }
+
     /// @}
   }
 

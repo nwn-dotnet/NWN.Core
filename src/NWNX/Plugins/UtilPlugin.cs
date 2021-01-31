@@ -31,6 +31,7 @@ namespace NWN.Core.NWNX
 
     ///@}
     /// A world time struct
+    /// A high resolution timestamp
     /// Gets the name of the currently executing script.
     /// @note If depth is > 0, it will return the name of the script that called this one via ExecuteScript().
     /// <param name="depth">to seek the executing script.</param>
@@ -476,6 +477,17 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// <returns>Returns the number of microseconds since midnight on January 1, 1970.</returns>
+    public static HighResTimestamp GetHighResTimeStamp()
+    {
+      HighResTimestamp t = default;
+      VM.NWNX.SetFunction(NWNX_Util, "GetHighResTimeStamp");
+      VM.NWNX.Call();
+      t.microseconds = VM.NWNX.StackPopInt();
+      t.seconds = VM.NWNX.StackPopInt();
+      return t;
+    }
+
     /// @}
   }
 
@@ -483,5 +495,11 @@ namespace NWN.Core.NWNX
   {
     public int nCalendarDay;
     public int nTimeOfDay;
+  }
+
+  public struct HighResTimestamp
+  {
+    public int seconds;
+    public int microseconds;
   }
 }

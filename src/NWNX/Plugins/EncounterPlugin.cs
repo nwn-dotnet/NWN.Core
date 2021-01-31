@@ -98,6 +98,28 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Get if the encounter respawns or not.
+    /// <param name="encounter">The encounter object.</param>
+    /// <returns>TRUE if the encounter does respawn, FALSE otherwise.</returns>
+    public static int GetCanReset(uint encounter)
+    {
+      VM.NWNX.SetFunction(NWNX_Encounter, "GetCanReset");
+      VM.NWNX.StackPush(encounter);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
+    /// Set if the encounter respawns or not.
+    /// <param name="encounter">The encounter object.</param>
+    /// <param name="reset">Does the encounter respawn TRUE or FALSE.</param>
+    public static void SetCanReset(uint encounter, int reset)
+    {
+      VM.NWNX.SetFunction(NWNX_Encounter, "SetCanReset");
+      VM.NWNX.StackPush(reset);
+      VM.NWNX.StackPush(encounter);
+      VM.NWNX.Call();
+    }
+
     /// Get the reset time of encounter.
     /// <param name="encounter">The encounter object.</param>
     /// <returns>The seconds the encounter is defined to reset.</returns>
