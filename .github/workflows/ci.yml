@@ -1,0 +1,91 @@
+﻿name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - '**.md'
+  workflow_dispatch:
+
+jobs:
+  compile:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.100
+
+      - name: Build
+        run: dotnet build --configuration Release
+
+  build:
+    runs-on: ubuntu-20.04
+    if: github.event_name == 'push'
+    needs: compile
+    outputs:
+      version: ${{ steps.vars.outputs.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+    
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.100
+
+      - name: Version and Tag
+        id: bump_version
+        uses: anothrNick/github-tag-action@1.22.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+          RELEASE_BRANCHES: master
+          WITH_V: true
+
+      - name: Prepare Outputs
+        id: vars
+        run: |
+          echo "::set-output name=version::$(echo ${{ steps.bump_version.outputs.tag }} | sed 's/[v]//g')"
+
+      - name: Build Release Binaries
+        id: build
+        run: dotnet build --configuration Release -p:Version=${{ steps.vars.outputs.version }} -o output
+       
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: Binaries
+          path: output/
+          if-no-files-found: error
+
+  nuget:
+    runs-on: ubuntu-20.04
+    if: github.event_name == 'push'
+    needs: build
+    steps:
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.100
+
+      - name: Download Release Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: Binaries
+          path: output
+
+      - name: NuGet Publish
+        run: dotnet nuget push output/*.nupkg --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json
+        
+      - name: GitHub Publish
+        run: dotnet nuget push output/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/nwn-dotnet/index.json
