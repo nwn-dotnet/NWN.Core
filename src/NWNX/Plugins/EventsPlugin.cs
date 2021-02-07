@@ -1316,6 +1316,19 @@ namespace NWN.Core.NWNX
         @note Some emotes have a voiceline that will still play when the event is skipped. These voicelines can be skipped in the NWNX_ON_QUICKCHAT_* event.
     
     _______________________________________
+        ## Combat Damage Resistance/Reduction Broken Event
+        - NWNX_ON_COMBAT_DR_BROKEN_BEFORE
+        - NWNX_ON_COMBAT_DR_BROKEN_AFTER
+    
+        `OBJECT_SELF` = The creature whose DR gets broken
+    
+        Event Data Tag        | Type   | Notes
+        ----------------------|--------|-------
+        TYPE                  | int    | 1 for DamageResistance, 0 for DamageReduction |
+    
+        @note This event only fires when DR gets broken in combat.
+    
+    _______________________________________
     
     */
     /*
