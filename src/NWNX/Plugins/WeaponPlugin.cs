@@ -248,6 +248,22 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
+    /// Override the max attack distance of ranged weapons.
+    /// <param name="nBaseItem">The baseitem id.</param>
+    /// <param name="fMax">The maximum attack distance. Default is 40.0f.</param>
+    /// <param name="fMaxPassive">The maximum passive attack distance. Default is 20.0f. Seems to be used by the engine to determine a new nearby target when needed.</param>
+    /// <param name="fPreferred">The preferred attack distance. See the PrefAttackDist column in baseitems.2da, default seems to be 30.0f for ranged weapons.</param>
+    /// @note fMaxPassive should probably be lower than fMax, half of fMax seems to be a good start. fPreferred should be at least ~0.5f lower than fMax.
+    public static void SetMaxRangedAttackDistanceOverride(int nBaseItem, float fMax, float fMaxPassive, float fPreferred)
+    {
+      VM.NWNX.SetFunction(NWNX_Weapon, "SetMaxRangedAttackDistanceOverride");
+      VM.NWNX.StackPush(fPreferred);
+      VM.NWNX.StackPush(fMaxPassive);
+      VM.NWNX.StackPush(fMax);
+      VM.NWNX.StackPush(nBaseItem);
+      VM.NWNX.Call();
+    }
+
     /// @}
   }
 
