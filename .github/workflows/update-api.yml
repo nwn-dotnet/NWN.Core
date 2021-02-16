@@ -40,7 +40,7 @@ jobs:
 
       - name: Convert
         run: |
-          rm -rfv "${GITHUB_WORKSPACE}/repo/src/NWNX/Plugins/*"
+          su -c "rm -fv ${GITHUB_WORKSPACE}/repo/src/NWNX/Plugins/*"
           dotnet /app/Nss2CSharp.dll "${GITHUB_WORKSPACE}/nwn" "${GITHUB_WORKSPACE}/repo/src/NWN" "${GITHUB_WORKSPACE}/nwnx/Plugins" "${GITHUB_WORKSPACE}/repo/src/NWNX/Plugins"
           if [ -z "$(ls -A ${GITHUB_WORKSPACE}/repo/src/NWNX/Plugins)" ]; then
             exit 1
@@ -67,5 +67,5 @@ jobs:
           cd ${GITHUB_WORKSPACE}/repo
           git config user.name Jorteck
           git config user.email jorteckdev@gmail.com
-          git add -A src/NWN/NWScript.cs src/NWNX/Plugins/*
-          git diff-index --quiet HEAD src/NWN/NWScript.cs src/NWNX/Plugins/* || git commit -m "Update APIs (NWNX: ${{ steps.revision.outputs.nwnx_sha_short }}, NWN: ${{ steps.version.outputs.nwn_build }}.${{ steps.version.outputs.nwn_build_revision }})." && git push
+          git add -A src/NWN/NWScript.cs src/NWNX/Plugins/
+          git diff-index --quiet HEAD src/NWN/NWScript.cs src/NWNX/Plugins/ || git commit -m "Update APIs (NWNX: ${{ steps.revision.outputs.nwnx_sha_short }}, NWN: ${{ steps.version.outputs.nwn_build }}.${{ steps.version.outputs.nwn_build_revision }})." && git push
