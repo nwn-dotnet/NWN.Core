@@ -93,6 +93,8 @@ namespace NWN.Core.NWNX
       VM.NWNX.SetFunction(NWNX_Damage, "GetAttackEventData");
       AttackEventData data = default;
       VM.NWNX.Call();
+      data.bKillingBlow = VM.NWNX.StackPopInt();
+      data.iAttackType_REAL = VM.NWNX.StackPopInt();
       data.oTarget = VM.NWNX.StackPopObject();
       data.iBludgeoning = VM.NWNX.StackPopInt();
       data.iPierce = VM.NWNX.StackPopInt();
@@ -206,6 +208,8 @@ namespace NWN.Core.NWNX
     public int iAttackResult;
     public int iAttackType;
     public int iSneakAttack;
+    public int iAttackType_REAL;
+    public int bKillingBlow;
   }
 
   public struct DamageData
