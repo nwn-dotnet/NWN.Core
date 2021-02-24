@@ -1329,6 +1329,17 @@ namespace NWN.Core.NWNX
         @note This event only fires when DR gets broken in combat.
     
     _______________________________________
+        ## Creature Unpossess Familiar Event
+        - NWNX_ON_UNPOSSESS_FAMILIAR_BEFORE
+        - NWNX_ON_UNPOSSESS_FAMILIAR_AFTER
+    
+        `OBJECT_SELF` = The creature unpossessing a familiar
+    
+        Event Data Tag        | Type   | Notes
+        ----------------------|--------|-------
+        FAMILIAR              | object | The familiar. Convert to object with StringToObject()  |
+    
+    _______________________________________
     
     */
     /*
