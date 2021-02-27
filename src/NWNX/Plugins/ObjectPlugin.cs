@@ -671,6 +671,35 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Retrieves the Map Note (AKA Map Pin) from a waypoint - Returns even if currently disabled.
+    /// <param name="oObject">The Waypoint object</param>
+    /// <param name="nID">The Language ID (default English)</param>
+    /// <param name="nGender">0 = Male, 1 = Female</param>
+    public static string GetMapNote(uint oObject, int nID = 0, int nGender = 0)
+    {
+      VM.NWNX.SetFunction(NWNX_Object, "GetMapNote");
+      VM.NWNX.StackPush(nGender);
+      VM.NWNX.StackPush(nID);
+      VM.NWNX.StackPush(oObject);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopString();
+    }
+
+    /// Sets a Map Note (AKA Map Pin) to any waypoint, even if no previous map note. Only updates for clients on area-load. Use SetMapPinEnabled() as required.
+    /// <param name="oObject">The Waypoint object</param>
+    /// <param name="sMapNote">The contents to set as the Map Note.</param>
+    /// <param name="nID">The Language ID (default English)</param>
+    /// <param name="nGender">0 = Male, 1 = Female</param>
+    public static void SetMapNote(uint oObject, string sMapNote, int nID = 0, int nGender = 0)
+    {
+      VM.NWNX.SetFunction(NWNX_Object, "SetMapNote");
+      VM.NWNX.StackPush(nGender);
+      VM.NWNX.StackPush(nID);
+      VM.NWNX.StackPush(sMapNote);
+      VM.NWNX.StackPush(oObject);
+      VM.NWNX.Call();
+    }
+
     /// @}
   }
 
