@@ -561,6 +561,23 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
+    /// Create a sound object.
+    /// <param name="oArea">The area where to create the sound object.</param>
+    /// <param name="vPosition">The area position where to create the sound object.</param>
+    /// <param name="sResRef">The ResRef of the sound object.</param>
+    /// <returns>The sound object.</returns>
+    public static uint CreateSoundObject(uint oArea, System.Numerics.Vector3 vPosition, string sResRef)
+    {
+      VM.NWNX.SetFunction(NWNX_Area, "CreateSoundObject");
+      VM.NWNX.StackPush(sResRef);
+      VM.NWNX.StackPush(vPosition.Z);
+      VM.NWNX.StackPush(vPosition.Y);
+      VM.NWNX.StackPush(vPosition.X);
+      VM.NWNX.StackPush(oArea);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopObject();
+    }
+
     /// @}
   }
 
