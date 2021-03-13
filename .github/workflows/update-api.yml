@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: "0 0 * * *"
   workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Commit Tag'
 
 jobs:
   build:
@@ -68,4 +71,6 @@ jobs:
           git config user.name Jorteck
           git config user.email jorteckdev@gmail.com
           git add -A src/NWN/NWScript.cs src/NWNX/Plugins/
-          git diff-index --quiet HEAD src/NWN/NWScript.cs src/NWNX/Plugins/ || git commit -m "Update APIs (NWNX: ${{ steps.revision.outputs.nwnx_sha_short }}, NWN: ${{ steps.version.outputs.nwn_build }}.${{ steps.version.outputs.nwn_build_revision }})." && git push
+          git diff-index --quiet HEAD src/NWN/NWScript.cs src/NWNX/Plugins/ ||
+          git commit -m "Update APIs (NWNX: ${{ steps.revision.outputs.nwnx_sha_short }}, NWN: ${{ steps.version.outputs.nwn_build }}.${{ steps.version.outputs.nwn_build_revision }})." &&
+          if [ ${{ github.event.inputs.tag }} != '' ]; then git tag ${{ github.event.inputs.tag }} && git push --atomic origin master ${{ github.event.inputs.tag }}; else git push; fi;
