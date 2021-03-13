@@ -7,13 +7,14 @@ namespace NWN.Core
   {
     public const uint OBJECT_INVALID = 0x7F000000;
     public static uint OBJECT_SELF => NWNCore.GameManager.ObjectSelf;
-    public const int ENGINE_NUM_STRUCTURES = 6;
+    public const int ENGINE_NUM_STRUCTURES = 7;
     public const int ENGINE_STRUCTURE_EFFECT = 0;
     public const int ENGINE_STRUCTURE_EVENT = 1;
     public const int ENGINE_STRUCTURE_LOCATION = 2;
     public const int ENGINE_STRUCTURE_TALENT = 3;
     public const int ENGINE_STRUCTURE_ITEMPROPERTY = 4;
     public const int ENGINE_STRUCTURE_SQLQUERY = 5;
+    public const int ENGINE_STRUCTURE_CASSOWARY = 6;
     ///  Constants
     public const int NUM_INVENTORY_SLOTS = 18;
     public const int TRUE = 1;
@@ -5812,6 +5813,30 @@ namespace NWN.Core
     public const int OBJECT_VISUAL_TRANSFORM_TRANSLATE_Y = 32;
     public const int OBJECT_VISUAL_TRANSFORM_TRANSLATE_Z = 33;
     public const int OBJECT_VISUAL_TRANSFORM_ANIMATION_SPEED = 40;
+    public const int OBJECT_VISUAL_TRANSFORM_LERP_NONE = 0;
+
+    ///  1
+    public const int OBJECT_VISUAL_TRANSFORM_LERP_LINEAR = 1;
+
+    ///  x
+    public const int OBJECT_VISUAL_TRANSFORM_LERP_SMOOTHSTEP = 2;
+
+    ///  x * x * (3 - 2 * x)
+    public const int OBJECT_VISUAL_TRANSFORM_LERP_INVERSE_SMOOTHSTEP = 3;
+
+    ///  0.5 - sin(asin(1.0 - 2.0 * x) / 3.0)
+    public const int OBJECT_VISUAL_TRANSFORM_LERP_EASE_IN = 4;
+
+    ///  (1 - cosf(x * M_PI * 0.5))
+    public const int OBJECT_VISUAL_TRANSFORM_LERP_EASE_OUT = 5;
+
+    ///  sinf(x * M_PI * 0.5)
+    public const int OBJECT_VISUAL_TRANSFORM_LERP_QUADRATIC = 6;
+
+    ///  x * x
+    public const int OBJECT_VISUAL_TRANSFORM_LERP_SMOOTHERSTEP = 7;
+
+    ///  (x * x * x * (x * (6.0 * x - 15.0) + 10.0))
     public const int VIBRATOR_MOTOR_ANY = 0;
     public const int VIBRATOR_MOTOR_LEFT = 1;
     public const int VIBRATOR_MOTOR_RIGHT = 2;
@@ -5913,6 +5938,10 @@ namespace NWN.Core
     public const int MOUSECURSOR_CUSTOM_99_DOWN = 292;
 
     ///  gui_mp_custom99d
+    public const float CASSOWARY_STRENGTH_WEAK = 1.0f;
+    public const float CASSOWARY_STRENGTH_MEDIUM = 1000.0f;
+    public const float CASSOWARY_STRENGTH_STRONG = 1000000.0f;
+    public const float CASSOWARY_STRENGTH_REQUIRED = 1001001000.0f;
     public const string sLanguage = "nwscript";
 
     ///  Get an integer between 0 and nMaxInteger-1.<br/>
@@ -15807,8 +15836,9 @@ namespace NWN.Core
     ///  - oObject can be any valid Creature, Placeable, Item or Door.<br/>
     ///  - nTransform is one of OBJECT_VISUAL_TRANSFORM_*<br/>
     ///  Returns the current (or default) value.
-    public static float GetObjectVisualTransform(uint oObject, int nTransform)
+    public static float GetObjectVisualTransform(uint oObject, int nTransform, int bCurrentLerp = FALSE)
     {
+      VM.StackPush(bCurrentLerp);
       VM.StackPush(nTransform);
       VM.StackPush(oObject);
       VM.Call(887);
@@ -15820,8 +15850,11 @@ namespace NWN.Core
     ///  - nTransform is one of OBJECT_VISUAL_TRANSFORM_*<br/>
     ///  - fValue depends on the transformation to apply.<br/>
     ///  Returns the old/previous value.
-    public static float SetObjectVisualTransform(uint oObject, int nTransform, float fValue)
+    public static float SetObjectVisualTransform(uint oObject, int nTransform, float fValue, int nLerpType = OBJECT_VISUAL_TRANSFORM_LERP_NONE, float fLerpDuration = 0.0f, int bPauseWithGame = TRUE)
     {
+      VM.StackPush(bPauseWithGame);
+      VM.StackPush(fLerpDuration);
+      VM.StackPush(nLerpType);
       VM.StackPush(fValue);
       VM.StackPush(nTransform);
       VM.StackPush(oObject);
@@ -16246,7 +16279,8 @@ namespace NWN.Core
     ///             to the builtin tables needed for CampaignDB functionality.<br/>
     ///  N.B.: You can pass sqlqueries into DelayCommand; HOWEVER<br/>
     ///        *** they will NOT survive a game save/load ***<br/>
-    ///        Any commands on a restored sqlquery will fail.
+    ///        Any commands on a restored sqlquery will fail.<br/>
+    ///  Please check the SQLite_README.txt file in lang/en/docs/ for the list of builtin functions.
     public static System.IntPtr SqlPrepareQueryCampaign(string sDatabase, string sQuery)
     {
       VM.StackPush(sQuery);
@@ -16270,7 +16304,8 @@ namespace NWN.Core
     ///       player creature, you may have a bad time.<br/>
     ///  N.B.: You can pass sqlqueries into DelayCommand; HOWEVER<br/>
     ///        *** they will NOT survive a game save/load ***<br/>
-    ///        Any commands on a restored sqlquery will fail.
+    ///        Any commands on a restored sqlquery will fail.<br/>
+    ///  Please check the SQLite_README.txt file in lang/en/docs/ for the list of builtin functions.
     public static System.IntPtr SqlPrepareQueryObject(uint oObject, string sQuery)
     {
       VM.StackPush(sQuery);
@@ -16431,6 +16466,205 @@ namespace NWN.Core
       VM.StackPush(nHitPoints);
       VM.StackPush(oObject);
       VM.Call(937);
+    }
+
+    ///  Returns the currently executing event (EVENT_SCRIPT_*) or 0 if not determinable.<br/>
+    ///  Note: Will return 0 in DelayCommand/AssignCommand. ExecuteScript(Chunk) will inherit their event ID from their parent event.
+    public static int GetCurrentlyRunningEvent()
+    {
+      VM.Call(938);
+      return VM.StackPopInt();
+    }
+
+    ///  Get the integer parameter of eEffect at nIndex.<br/>
+    ///  * nIndex bounds: 0 >= nIndex < 8.<br/>
+    ///  * Some experimentation will be needed to find the right index for the value you wish to determine.<br/>
+    ///  Returns: the value or 0 on error/when not set.
+    public static int GetEffectInteger(System.IntPtr eEffect, int nIndex)
+    {
+      VM.StackPush(nIndex);
+      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.Call(939);
+      return VM.StackPopInt();
+    }
+
+    ///  Get the float parameter of eEffect at nIndex.<br/>
+    ///  * nIndex bounds: 0 >= nIndex < 4.<br/>
+    ///  * Some experimentation will be needed to find the right index for the value you wish to determine.<br/>
+    ///  Returns: the value or 0.0f on error/when not set.
+    public static float GetEffectFloat(System.IntPtr eEffect, int nIndex)
+    {
+      VM.StackPush(nIndex);
+      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.Call(940);
+      return VM.StackPopFloat();
+    }
+
+    ///  Get the string parameter of eEffect at nIndex.<br/>
+    ///  * nIndex bounds: 0 >= nIndex < 6.<br/>
+    ///  * Some experimentation will be needed to find the right index for the value you wish to determine.<br/>
+    ///  Returns: the value or "" on error/when not set.
+    public static string GetEffectString(System.IntPtr eEffect, int nIndex)
+    {
+      VM.StackPush(nIndex);
+      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.Call(941);
+      return VM.StackPopString();
+    }
+
+    ///  Get the object parameter of eEffect at nIndex.<br/>
+    ///  * nIndex bounds: 0 >= nIndex < 4.<br/>
+    ///  * Some experimentation will be needed to find the right index for the value you wish to determine.<br/>
+    ///  Returns: the value or OBJECT_INVALID on error/when not set.
+    public static uint GetEffectObject(System.IntPtr eEffect, int nIndex)
+    {
+      VM.StackPush(nIndex);
+      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.Call(942);
+      return VM.StackPopObject();
+    }
+
+    ///  Get the vector parameter of eEffect at nIndex.<br/>
+    ///  * nIndex bounds: 0 >= nIndex < 2.<br/>
+    ///  * Some experimentation will be needed to find the right index for the value you wish to determine.<br/>
+    ///  Returns: the value or {0.0f, 0.0f, 0.0f} on error/when not set.
+    public static System.Numerics.Vector3 GetEffectVector(System.IntPtr eEffect, int nIndex)
+    {
+      VM.StackPush(nIndex);
+      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.Call(943);
+      return VM.StackPopVector();
+    }
+
+    ///  Check if nBaseItemType fits in oTarget's inventory.<br/>
+    ///  Note: Does not check inside any container items possessed by oTarget.<br/>
+    ///  * nBaseItemType: a BASE_ITEM_* constant.<br/>
+    ///  * oTarget: a valid creature, placeable or item.<br/>
+    ///  Returns: TRUE if the baseitem type fits, FALSE if not or on error.
+    public static int GetBaseItemFitsInInventory(int nBaseItemType, uint oTarget)
+    {
+      VM.StackPush(oTarget);
+      VM.StackPush(nBaseItemType);
+      VM.Call(944);
+      return VM.StackPopInt();
+    }
+
+    ///  Get oObject's local cassowary variable reference sVarName<br/>
+    ///  * Return value on error: empty solver<br/>
+    ///  * NB: cassowary types are references, same as objects.<br/>
+    ///    Unlike scalars such as int and string, solver references share the same data.<br/>
+    ///    Modifications made to one reference are reflected on others.
+    public static System.IntPtr GetLocalCassowary(uint oObject, string sVarName)
+    {
+      VM.StackPush(sVarName);
+      VM.StackPush(oObject);
+      VM.Call(945);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_CASSOWARY);
+    }
+
+    ///  Set a reference to the given solver on oObject.<br/>
+    ///  * NB: cassowary types are references, same as objects.<br/>
+    ///    Unlike scalars such as int and string, solver references share the same data.<br/>
+    ///    Modifications made to one reference are reflected on others.
+    public static void SetLocalCassowary(uint oObject, string sVarName, System.IntPtr cSolver)
+    {
+      VM.StackPush(cSolver, ENGINE_STRUCTURE_CASSOWARY);
+      VM.StackPush(sVarName);
+      VM.StackPush(oObject);
+      VM.Call(946);
+    }
+
+    ///  Delete local solver reference.<br/>
+    ///  * NB: cassowary types are references, same as objects.<br/>
+    ///    Unlike scalars such as int and string, solver references share the same data.<br/>
+    ///    Modifications made to one reference are reflected on others.
+    public static void DeleteLocalCassowary(uint oObject, string sVarName)
+    {
+      VM.StackPush(sVarName);
+      VM.StackPush(oObject);
+      VM.Call(947);
+    }
+
+    ///  Clear out this solver, removing all state, constraints and suggestions.<br/>
+    ///  This is provided as a convenience if you wish to reuse a cassowary variable.<br/>
+    ///  It is not necessary to call this for solvers you simply want to let go out of scope.
+    public static void CassowaryReset(System.IntPtr cSolver)
+    {
+      VM.StackPush(cSolver, ENGINE_STRUCTURE_CASSOWARY);
+      VM.Call(948);
+    }
+
+    ///  Add a constraint to the system.<br/>
+    ///  * The constraint needs to be a valid comparison equation, one of: >=, ==, <=.<br/>
+    ///  * This implementation is a linear constraint solver.<br/>
+    ///  * You cannot multiply or divide variables and expressions with each other.<br/>
+    ///    Doing so will result in a error when attempting to add the constraint.<br/>
+    ///    (You can, of course, multiply or divide by constants).<br/>
+    ///  * fStrength must be >= CASSOWARY_STRENGTH_WEAK && <= CASSOWARY_STRENGTH_REQUIRED.<br/>
+    ///  * Any referenced variables can be retrieved with CassowaryGetValue().<br/>
+    ///  * Returns "" on success, or the parser/constraint system error message.
+    public static string CassowaryConstrain(System.IntPtr cSolver, string sConstraint, float fStrength = CASSOWARY_STRENGTH_REQUIRED)
+    {
+      VM.StackPush(fStrength);
+      VM.StackPush(sConstraint);
+      VM.StackPush(cSolver, ENGINE_STRUCTURE_CASSOWARY);
+      VM.Call(949);
+      return VM.StackPopString();
+    }
+
+    ///  Suggest a value to the solver.<br/>
+    ///  * Edit variables are soft constraints and exist as an optimisation for complex systems.<br/>
+    ///    You can do the same with Constrain("v == 5", CASSOWARY_STRENGTH_xxx); but edit variables<br/>
+    ///    allow you to suggest values without having to rebuild the solver.<br/>
+    ///  * fStrength must be >= CASSOWARY_STRENGTH_WEAK && < CASSOWARY_STRENGTH_REQUIRED<br/>
+    ///    Suggested values cannot be required, as suggesting a value must not invalidate the solver.
+    public static void CassowarySuggestValue(System.IntPtr cSolver, string sVarName, float fValue, float fStrength = CASSOWARY_STRENGTH_STRONG)
+    {
+      VM.StackPush(fStrength);
+      VM.StackPush(fValue);
+      VM.StackPush(sVarName);
+      VM.StackPush(cSolver, ENGINE_STRUCTURE_CASSOWARY);
+      VM.Call(950);
+    }
+
+    ///  Get the value for the given variable, or 0.0 on error.
+    public static float CassowaryGetValue(System.IntPtr cSolver, string sVarName)
+    {
+      VM.StackPush(sVarName);
+      VM.StackPush(cSolver, ENGINE_STRUCTURE_CASSOWARY);
+      VM.Call(951);
+      return VM.StackPopFloat();
+    }
+
+    ///  Gets a printable debug state of the given solver, which may help you debug<br/>
+    ///  complex systems.
+    public static string CassowaryDebug(System.IntPtr cSolver)
+    {
+      VM.StackPush(cSolver, ENGINE_STRUCTURE_CASSOWARY);
+      VM.Call(952);
+      return VM.StackPopString();
+    }
+
+    ///  Overrides a given strref to always return sValue instead of what is in the TLK file.<br/>
+    ///  Setting sValue to "" will delete the override
+    public static void SetTlkOverride(int nStrRef, string sValue = "")
+    {
+      VM.StackPush(sValue);
+      VM.StackPush(nStrRef);
+      VM.Call(953);
+    }
+
+    ///  Constructs a custom itemproperty given all the parameters explicitly.<br/>
+    ///  This function can be used in place of all the other ItemPropertyXxx constructors<br/>
+    ///  Use GetItemProperty{Type,SubType,CostTableValue,Param1Value} to see the values for a given itemproperty.
+    public static System.IntPtr ItemPropertyCustom(int nType, int nSubType = -1, int nCostTableValue = -1, int nParam1Value = -1)
+    {
+      VM.StackPush(nParam1Value);
+      VM.StackPush(nCostTableValue);
+      VM.StackPush(nSubType);
+      VM.StackPush(nType);
+      VM.Call(954);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
   }
