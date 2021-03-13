@@ -1801,6 +1801,26 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Get the skill penalty from wearing armor.
+    /// <param name="oCreature">The creature.</param>
+    public static int GetArmorCheckPenalty(uint oCreature)
+    {
+      VM.NWNX.SetFunction(NWNX_Creature, "GetArmorCheckPenalty");
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
+    /// Get the skill penalty from wearing a shield.
+    /// <param name="oCreature">The creature.</param>
+    public static int GetShieldCheckPenalty(uint oCreature)
+    {
+      VM.NWNX.SetFunction(NWNX_Creature, "GetShieldCheckPenalty");
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
     /// @}
   }
 
