@@ -373,7 +373,8 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if the message is hidden.</returns>
     public static int GetFeedbackMessageHidden(int nMessage, uint oPC = OBJECT_INVALID)
     {
-      VM.NWNX.SetFunction(NWNX_Feedback, "GetMessageHidden");
+      const string sFunc = "GetMessageHidden";
+      VM.NWNX.SetFunction(NWNX_Feedback, sFunc);
       int nMessageType = 0;
       VM.NWNX.StackPush(nMessage);
       VM.NWNX.StackPush(nMessageType);
@@ -390,7 +391,8 @@ namespace NWN.Core.NWNX
     /// to TRUE but the personal state is set to FALSE, the message will be shown to the PC.
     public static void SetFeedbackMessageHidden(int nMessage, int isHidden, uint oPC = OBJECT_INVALID)
     {
-      VM.NWNX.SetFunction(NWNX_Feedback, "SetMessageHidden");
+      const string sFunc = "SetMessageHidden";
+      VM.NWNX.SetFunction(NWNX_Feedback, sFunc);
       int nMessageType = 0;
       VM.NWNX.StackPush(isHidden);
       VM.NWNX.StackPush(nMessage);
@@ -405,7 +407,8 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if the message is hidden.</returns>
     public static int GetCombatLogMessageHidden(int nMessage, uint oPC = OBJECT_INVALID)
     {
-      VM.NWNX.SetFunction(NWNX_Feedback, "GetMessageHidden");
+      const string sFunc = "GetMessageHidden";
+      VM.NWNX.SetFunction(NWNX_Feedback, sFunc);
       int nMessageType = 1;
       VM.NWNX.StackPush(nMessage);
       VM.NWNX.StackPush(nMessageType);
@@ -422,7 +425,8 @@ namespace NWN.Core.NWNX
     /// to TRUE but the personal state is set to FALSE, the message will be shown to the PC.
     public static void SetCombatLogMessageHidden(int nMessage, int isHidden, uint oPC = OBJECT_INVALID)
     {
-      VM.NWNX.SetFunction(NWNX_Feedback, "SetMessageHidden");
+      const string sFunc = "SetMessageHidden";
+      VM.NWNX.SetFunction(NWNX_Feedback, sFunc);
       int nMessageType = 1;
       VM.NWNX.StackPush(isHidden);
       VM.NWNX.StackPush(nMessage);
@@ -436,7 +440,8 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if the message is hidden.</returns>
     public static int GetJournalUpdatedMessageHidden(uint oPC = OBJECT_INVALID)
     {
-      VM.NWNX.SetFunction(NWNX_Feedback, "GetMessageHidden");
+      const string sFunc = "GetMessageHidden";
+      VM.NWNX.SetFunction(NWNX_Feedback, sFunc);
       int nMessageType = 2;
       VM.NWNX.StackPush(0);
       VM.NWNX.StackPush(nMessageType);
@@ -452,7 +457,8 @@ namespace NWN.Core.NWNX
     /// to TRUE but the personal state is set to FALSE, the message will be shown to the PC.
     public static void SetJournalUpdatedMessageHidden(int isHidden, uint oPC = OBJECT_INVALID)
     {
-      VM.NWNX.SetFunction(NWNX_Feedback, "SetMessageHidden");
+      const string sFunc = "SetMessageHidden";
+      VM.NWNX.SetFunction(NWNX_Feedback, sFunc);
       int nMessageType = 2;
       VM.NWNX.StackPush(isHidden);
       VM.NWNX.StackPush(0);
@@ -465,7 +471,8 @@ namespace NWN.Core.NWNX
     /// <param name="bWhitelist">TRUE for all messages to be hidden by default, default FALSE.</param>
     public static void SetFeedbackMessageMode(int bWhitelist)
     {
-      VM.NWNX.SetFunction(NWNX_Feedback, "SetFeedbackMode");
+      const string sFunc = "SetFeedbackMode";
+      VM.NWNX.SetFunction(NWNX_Feedback, sFunc);
       int nMessageType = 0;
       VM.NWNX.StackPush(bWhitelist);
       VM.NWNX.StackPush(nMessageType);
@@ -477,7 +484,8 @@ namespace NWN.Core.NWNX
     /// @note If using Whitelist, be sure to whitelist NWNX_FEEDBACK_COMBATLOG_FEEDBACK for feedback messages to work.
     public static void SetCombatLogMessageMode(int bWhitelist)
     {
-      VM.NWNX.SetFunction(NWNX_Feedback, "SetFeedbackMode");
+      const string sFunc = "SetFeedbackMode";
+      VM.NWNX.SetFunction(NWNX_Feedback, sFunc);
       int nMessageType = 1;
       VM.NWNX.StackPush(bWhitelist);
       VM.NWNX.StackPush(nMessageType);

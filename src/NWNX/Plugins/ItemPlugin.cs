@@ -14,7 +14,8 @@ namespace NWN.Core.NWNX
     /// <param name="weight">The weight, note this is in tenths of pounds.</param>
     public static void SetWeight(uint oItem, int w)
     {
-      VM.NWNX.SetFunction(NWNX_Item, "SetWeight");
+      const string sFunc = "SetWeight";
+      VM.NWNX.SetFunction(NWNX_Item, sFunc);
       VM.NWNX.StackPush(w);
       VM.NWNX.StackPush(oItem);
       VM.NWNX.Call();
@@ -28,7 +29,8 @@ namespace NWN.Core.NWNX
     /// <param name="gold">The base gold value.</param>
     public static void SetBaseGoldPieceValue(uint oItem, int g)
     {
-      VM.NWNX.SetFunction(NWNX_Item, "SetBaseGoldPieceValue");
+      const string sFunc = "SetBaseGoldPieceValue";
+      VM.NWNX.SetFunction(NWNX_Item, sFunc);
       VM.NWNX.StackPush(g);
       VM.NWNX.StackPush(oItem);
       VM.NWNX.Call();
@@ -41,7 +43,8 @@ namespace NWN.Core.NWNX
     /// <param name="gold">The additional gold value.</param>
     public static void SetAddGoldPieceValue(uint oItem, int g)
     {
-      VM.NWNX.SetFunction(NWNX_Item, "SetAddGoldPieceValue");
+      const string sFunc = "SetAddGoldPieceValue";
+      VM.NWNX.SetFunction(NWNX_Item, sFunc);
       VM.NWNX.StackPush(g);
       VM.NWNX.StackPush(oItem);
       VM.NWNX.Call();
@@ -52,7 +55,8 @@ namespace NWN.Core.NWNX
     /// <returns>The base gold piece value for the item.</returns>
     public static int GetBaseGoldPieceValue(uint oItem)
     {
-      VM.NWNX.SetFunction(NWNX_Item, "GetBaseGoldPieceValue");
+      const string sFunc = "GetBaseGoldPieceValue";
+      VM.NWNX.SetFunction(NWNX_Item, sFunc);
       VM.NWNX.StackPush(oItem);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -63,7 +67,8 @@ namespace NWN.Core.NWNX
     /// <returns>The additional gold piece value for the item.</returns>
     public static int GetAddGoldPieceValue(uint oItem)
     {
-      VM.NWNX.SetFunction(NWNX_Item, "GetAddGoldPieceValue");
+      const string sFunc = "GetAddGoldPieceValue";
+      VM.NWNX.SetFunction(NWNX_Item, sFunc);
       VM.NWNX.StackPush(oItem);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -76,7 +81,8 @@ namespace NWN.Core.NWNX
     /// <param name="nBaseItem">The new base item.</param>
     public static void SetBaseItemType(uint oItem, int nBaseItem)
     {
-      VM.NWNX.SetFunction(NWNX_Item, "SetBaseItemType");
+      const string sFunc = "SetBaseItemType";
+      VM.NWNX.SetFunction(NWNX_Item, sFunc);
       VM.NWNX.StackPush(nBaseItem);
       VM.NWNX.StackPush(oItem);
       VM.NWNX.Call();
@@ -108,7 +114,8 @@ namespace NWN.Core.NWNX
     /// function 'clear colour override', which clears the per-part override for that part.
     public static void SetItemAppearance(uint oItem, int nType, int nIndex, int nValue)
     {
-      VM.NWNX.SetFunction(NWNX_Item, "SetItemAppearance");
+      const string sFunc = "SetItemAppearance";
+      VM.NWNX.SetFunction(NWNX_Item, sFunc);
       VM.NWNX.StackPush(nValue);
       VM.NWNX.StackPush(nIndex);
       VM.NWNX.StackPush(nType);
@@ -122,7 +129,8 @@ namespace NWN.Core.NWNX
     /// <returns>A string representing the item's appearance.</returns>
     public static string GetEntireItemAppearance(uint oItem)
     {
-      VM.NWNX.SetFunction(NWNX_Item, "GetEntireItemAppearance");
+      const string sFunc = "GetEntireItemAppearance";
+      VM.NWNX.SetFunction(NWNX_Item, sFunc);
       VM.NWNX.StackPush(oItem);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
@@ -133,7 +141,8 @@ namespace NWN.Core.NWNX
     /// <param name="sApp">A string representing the item's appearance.</param>
     public static void RestoreItemAppearance(uint oItem, string sApp)
     {
-      VM.NWNX.SetFunction(NWNX_Item, "RestoreItemAppearance");
+      const string sFunc = "RestoreItemAppearance";
+      VM.NWNX.SetFunction(NWNX_Item, sFunc);
       VM.NWNX.StackPush(sApp);
       VM.NWNX.StackPush(oItem);
       VM.NWNX.Call();
@@ -144,7 +153,8 @@ namespace NWN.Core.NWNX
     /// <returns>The base armor class.</returns>
     public static int GetBaseArmorClass(uint oItem)
     {
-      VM.NWNX.SetFunction(NWNX_Item, "GetBaseArmorClass");
+      const string sFunc = "GetBaseArmorClass";
+      VM.NWNX.SetFunction(NWNX_Item, sFunc);
       VM.NWNX.StackPush(oItem);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -155,7 +165,8 @@ namespace NWN.Core.NWNX
     /// <returns>The minimum level required to equip the item.</returns>
     public static int GetMinEquipLevel(uint oItem)
     {
-      VM.NWNX.SetFunction(NWNX_Item, "GetMinEquipLevel");
+      const string sFunc = "GetMinEquipLevel";
+      VM.NWNX.SetFunction(NWNX_Item, sFunc);
       VM.NWNX.StackPush(oItem);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();

@@ -10,7 +10,8 @@ namespace NWN.Core.NWNX
     ///< @private
     public static string Evaluate(string sCode)
     {
-      VM.NWNX.SetFunction(NWNX_Ruby, "Evaluate");
+      const string sFunc = "Evaluate";
+      VM.NWNX.SetFunction(NWNX_Ruby, sFunc);
       VM.NWNX.StackPush(sCode);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();

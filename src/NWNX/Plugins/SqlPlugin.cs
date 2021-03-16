@@ -14,7 +14,8 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if the query was successfully prepared.</returns>
     public static int PrepareQuery(string query)
     {
-      VM.NWNX.SetFunction(NWNX_SQL, "PrepareQuery");
+      const string sFunc = "PrepareQuery";
+      VM.NWNX.SetFunction(NWNX_SQL, sFunc);
       VM.NWNX.StackPush(query);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -24,7 +25,8 @@ namespace NWN.Core.NWNX
     /// <returns>The ID of this query if successful, else FALSE.</returns>
     public static int ExecutePreparedQuery()
     {
-      VM.NWNX.SetFunction(NWNX_SQL, "ExecutePreparedQuery");
+      const string sFunc = "ExecutePreparedQuery";
+      VM.NWNX.SetFunction(NWNX_SQL, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
@@ -47,7 +49,8 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if one or more rows are ready, FALSE otherwise.</returns>
     public static int ReadyToReadNextRow()
     {
-      VM.NWNX.SetFunction(NWNX_SQL, "ReadyToReadNextRow");
+      const string sFunc = "ReadyToReadNextRow";
+      VM.NWNX.SetFunction(NWNX_SQL, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
@@ -57,7 +60,8 @@ namespace NWN.Core.NWNX
     /// @remark Should only be called after a successful call to @ref sql_rtrnr "NWNX_SQL_ReadyToReadNextRow()".
     public static void ReadNextRow()
     {
-      VM.NWNX.SetFunction(NWNX_SQL, "ReadNextRow");
+      const string sFunc = "ReadNextRow";
+      VM.NWNX.SetFunction(NWNX_SQL, sFunc);
       VM.NWNX.Call();
     }
 
@@ -66,7 +70,8 @@ namespace NWN.Core.NWNX
     /// @remark Should only be called after a successful call to @ref sql_rnr "NWNX_SQL_ReadNextRow()".
     public static string ReadDataInActiveRow(int column = 0)
     {
-      VM.NWNX.SetFunction(NWNX_SQL, "ReadDataInActiveRow");
+      const string sFunc = "ReadDataInActiveRow";
+      VM.NWNX.SetFunction(NWNX_SQL, sFunc);
       VM.NWNX.StackPush(column);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
@@ -77,7 +82,8 @@ namespace NWN.Core.NWNX
     /// <param name="value">The value to set.</param>
     public static void PreparedInt(int position, int value)
     {
-      VM.NWNX.SetFunction(NWNX_SQL, "PreparedInt");
+      const string sFunc = "PreparedInt";
+      VM.NWNX.SetFunction(NWNX_SQL, sFunc);
       VM.NWNX.StackPush(value);
       VM.NWNX.StackPush(position);
       VM.NWNX.Call();
@@ -88,7 +94,8 @@ namespace NWN.Core.NWNX
     /// <param name="value">The value to set.</param>
     public static void PreparedString(int position, string value)
     {
-      VM.NWNX.SetFunction(NWNX_SQL, "PreparedString");
+      const string sFunc = "PreparedString";
+      VM.NWNX.SetFunction(NWNX_SQL, sFunc);
       VM.NWNX.StackPush(value);
       VM.NWNX.StackPush(position);
       VM.NWNX.Call();
@@ -99,7 +106,8 @@ namespace NWN.Core.NWNX
     /// <param name="value">The value to set.</param>
     public static void PreparedFloat(int position, float value)
     {
-      VM.NWNX.SetFunction(NWNX_SQL, "PreparedFloat");
+      const string sFunc = "PreparedFloat";
+      VM.NWNX.SetFunction(NWNX_SQL, sFunc);
       VM.NWNX.StackPush(value);
       VM.NWNX.StackPush(position);
       VM.NWNX.Call();
@@ -110,7 +118,8 @@ namespace NWN.Core.NWNX
     /// <param name="value">The value to set.</param>
     public static void PreparedObjectId(int position, uint value)
     {
-      VM.NWNX.SetFunction(NWNX_SQL, "PreparedObjectId");
+      const string sFunc = "PreparedObjectId";
+      VM.NWNX.SetFunction(NWNX_SQL, sFunc);
       VM.NWNX.StackPush(value);
       VM.NWNX.StackPush(position);
       VM.NWNX.Call();
@@ -122,7 +131,8 @@ namespace NWN.Core.NWNX
     /// <param name="base64">Use base64-encoded string format if TRUE (default), otherwise use binary format.</param>
     public static void PreparedObjectFull(int position, uint value, int base64 = TRUE)
     {
-      VM.NWNX.SetFunction(NWNX_SQL, "PreparedObjectFull");
+      const string sFunc = "PreparedObjectFull";
+      VM.NWNX.SetFunction(NWNX_SQL, sFunc);
       VM.NWNX.StackPush(base64);
       VM.NWNX.StackPush(value);
       VM.NWNX.StackPush(position);
@@ -145,7 +155,8 @@ namespace NWN.Core.NWNX
     /// <returns>The deserialized object.</returns>
     public static uint ReadFullObjectInActiveRow(int column = 0, uint owner = OBJECT_INVALID, float x = 0.0f, float y = 0.0f, float z = 0.0f, int base64 = TRUE)
     {
-      VM.NWNX.SetFunction(NWNX_SQL, "ReadFullObjectInActiveRow");
+      const string sFunc = "ReadFullObjectInActiveRow";
+      VM.NWNX.SetFunction(NWNX_SQL, sFunc);
       VM.NWNX.StackPush(base64);
       VM.NWNX.StackPush(z);
       VM.NWNX.StackPush(y);
@@ -161,7 +172,8 @@ namespace NWN.Core.NWNX
     /// <returns>Number of rows affected by SQL statement or -1 if the query was not non-row-based.</returns>
     public static int GetAffectedRows()
     {
-      VM.NWNX.SetFunction(NWNX_SQL, "GetAffectedRows");
+      const string sFunc = "GetAffectedRows";
+      VM.NWNX.SetFunction(NWNX_SQL, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
@@ -171,7 +183,8 @@ namespace NWN.Core.NWNX
     /// @remark This is the same value as the value of NWNX_SQL_TYPE environment variable.
     public static string GetDatabaseType()
     {
-      VM.NWNX.SetFunction(NWNX_SQL, "GetDatabaseType");
+      const string sFunc = "GetDatabaseType";
+      VM.NWNX.SetFunction(NWNX_SQL, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
     }
@@ -180,14 +193,16 @@ namespace NWN.Core.NWNX
     /// @remark Resources are automatically freed when a new query is prepared, so calling this isn't necessary.
     public static void DestroyPreparedQuery()
     {
-      VM.NWNX.SetFunction(NWNX_SQL, "DestroyPreparedQuery");
+      const string sFunc = "DestroyPreparedQuery";
+      VM.NWNX.SetFunction(NWNX_SQL, sFunc);
       VM.NWNX.Call();
     }
 
     /// <returns>The last error message generated by the database.</returns>
     public static string GetLastError()
     {
-      VM.NWNX.SetFunction(NWNX_SQL, "GetLastError");
+      const string sFunc = "GetLastError";
+      VM.NWNX.SetFunction(NWNX_SQL, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
     }
@@ -196,7 +211,8 @@ namespace NWN.Core.NWNX
     /// <returns>Returns the number of parameters expected by the prepared query or -1 if no query is prepared.</returns>
     public static int GetPreparedQueryParamCount()
     {
-      VM.NWNX.SetFunction(NWNX_SQL, "GetPreparedQueryParamCount");
+      const string sFunc = "GetPreparedQueryParamCount";
+      VM.NWNX.SetFunction(NWNX_SQL, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }

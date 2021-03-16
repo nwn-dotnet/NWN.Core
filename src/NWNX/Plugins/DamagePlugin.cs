@@ -19,7 +19,8 @@ namespace NWN.Core.NWNX
     /// <param name="oOwner">An object if only executing for a specific object or OBJECT_INVALID for global.</param>
     public static void SetDamageEventScript(string sScript, uint oOwner = OBJECT_INVALID)
     {
-      VM.NWNX.SetFunction(NWNX_Damage, "SetEventScript");
+      const string sFunc = "SetEventScript";
+      VM.NWNX.SetFunction(NWNX_Damage, sFunc);
       VM.NWNX.StackPush(oOwner);
       VM.NWNX.StackPush(sScript);
       VM.NWNX.StackPush( "DAMAGE");
@@ -31,7 +32,8 @@ namespace NWN.Core.NWNX
     /// @note To use only in the Damage Event Script.
     public static DamageEventData GetDamageEventData()
     {
-      VM.NWNX.SetFunction(NWNX_Damage, "GetDamageEventData");
+      const string sFunc = "GetDamageEventData";
+      VM.NWNX.SetFunction(NWNX_Damage, sFunc);
       DamageEventData data = default;
       VM.NWNX.Call();
       data.oDamager = VM.NWNX.StackPopObject();
@@ -56,7 +58,8 @@ namespace NWN.Core.NWNX
     /// @note To use only in the Damage Event Script.
     public static void SetDamageEventData(DamageEventData data)
     {
-      VM.NWNX.SetFunction(NWNX_Damage, "SetDamageEventData");
+      const string sFunc = "SetDamageEventData";
+      VM.NWNX.SetFunction(NWNX_Damage, sFunc);
       VM.NWNX.StackPush(data.iBase);
       VM.NWNX.StackPush(data.iSonic);
       VM.NWNX.StackPush(data.iPositive);
@@ -78,7 +81,8 @@ namespace NWN.Core.NWNX
     /// <param name="oOwner">An object if only executing for a specific object or OBJECT_INVALID for global.</param>
     public static void SetAttackEventScript(string sScript, uint oOwner = OBJECT_INVALID)
     {
-      VM.NWNX.SetFunction(NWNX_Damage, "SetEventScript");
+      const string sFunc = "SetEventScript";
+      VM.NWNX.SetFunction(NWNX_Damage, sFunc);
       VM.NWNX.StackPush(oOwner);
       VM.NWNX.StackPush(sScript);
       VM.NWNX.StackPush( "ATTACK");
@@ -90,7 +94,8 @@ namespace NWN.Core.NWNX
     /// @note To use only in the Attack Event Script.
     public static AttackEventData GetAttackEventData()
     {
-      VM.NWNX.SetFunction(NWNX_Damage, "GetAttackEventData");
+      const string sFunc = "GetAttackEventData";
+      VM.NWNX.SetFunction(NWNX_Damage, sFunc);
       AttackEventData data = default;
       VM.NWNX.Call();
       data.oTarget = VM.NWNX.StackPopObject();
@@ -109,10 +114,10 @@ namespace NWN.Core.NWNX
       data.iBase = VM.NWNX.StackPopInt();
       data.iAttackNumber = VM.NWNX.StackPopInt();
       data.iAttackResult = VM.NWNX.StackPopInt();
-      data.iAttackType = VM.NWNX.StackPopInt();
+      data.iWeaponAttackType = VM.NWNX.StackPopInt();
       data.iSneakAttack = VM.NWNX.StackPopInt();
       data.bKillingBlow = VM.NWNX.StackPopInt();
-      data.iAttackType_REAL = VM.NWNX.StackPopInt();
+      data.iAttackType = VM.NWNX.StackPopInt();
       return data;
     }
 
@@ -121,7 +126,8 @@ namespace NWN.Core.NWNX
     /// @note To use only in the Attack Event Script.
     public static void SetAttackEventData(AttackEventData data)
     {
-      VM.NWNX.SetFunction(NWNX_Damage, "SetAttackEventData");
+      const string sFunc = "SetAttackEventData";
+      VM.NWNX.SetFunction(NWNX_Damage, sFunc);
       VM.NWNX.StackPush(data.iAttackResult);
       VM.NWNX.StackPush(data.iBase);
       VM.NWNX.StackPush(data.iSonic);
@@ -147,7 +153,8 @@ namespace NWN.Core.NWNX
     /// <param name="iRanged">Whether the attack should be treated as ranged by the engine (for example when considering damage inflicted by Acid Sheath and other such effects)</param>
     public static void DealDamage(DamageData data, uint oTarget, uint oSource, int iRanged = FALSE)
     {
-      VM.NWNX.SetFunction(NWNX_Damage, "DealDamage");
+      const string sFunc = "DealDamage";
+      VM.NWNX.SetFunction(NWNX_Damage, sFunc);
       VM.NWNX.StackPush(iRanged);
       VM.NWNX.StackPush(data.iPower);
       VM.NWNX.StackPush(data.iSonic);
@@ -206,9 +213,9 @@ namespace NWN.Core.NWNX
     public int iBase;
     public int iAttackNumber;
     public int iAttackResult;
-    public int iAttackType;
+    public int iWeaponAttackType;
     public int iSneakAttack;
-    public int iAttackType_REAL;
+    public int iAttackType;
     public int bKillingBlow;
   }
 

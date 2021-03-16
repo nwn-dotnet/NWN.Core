@@ -48,7 +48,8 @@ namespace NWN.Core.NWNX
     /// <param name="iParam1,">iParam2, iParam3, iParam4 The parameters for this feat modifier.</param>
     public static void SetFeatModifier(int iFeat, int iMod, int iParam1 = -559038737, int iParam2 = -559038737, int iParam3 = -559038737, int iParam4 = -559038737)
     {
-      VM.NWNX.SetFunction(NWNX_Feat, "SetFeatModifier");
+      const string sFunc = "SetFeatModifier";
+      VM.NWNX.SetFunction(NWNX_Feat, sFunc);
       VM.NWNX.StackPush(iParam4);
       VM.NWNX.StackPush(iParam3);
       VM.NWNX.StackPush(iParam2);

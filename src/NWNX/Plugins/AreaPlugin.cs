@@ -48,7 +48,8 @@ namespace NWN.Core.NWNX
     /// <returns>The player count for the area.</returns>
     public static int GetNumberOfPlayersInArea(uint area)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "GetNumberOfPlayersInArea");
+      const string sFunc = "GetNumberOfPlayersInArea";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(area);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -59,7 +60,8 @@ namespace NWN.Core.NWNX
     /// <returns>The most recent creature to enter the area.</returns>
     public static uint GetLastEntered(uint area)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "GetLastEntered");
+      const string sFunc = "GetLastEntered";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(area);
       VM.NWNX.Call();
       return VM.NWNX.StackPopObject();
@@ -69,7 +71,8 @@ namespace NWN.Core.NWNX
     /// <param name="area">The area object.</param>
     public static uint GetLastLeft(uint area)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "GetLastLeft");
+      const string sFunc = "GetLastLeft";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(area);
       VM.NWNX.Call();
       return VM.NWNX.StackPopObject();
@@ -80,7 +83,8 @@ namespace NWN.Core.NWNX
     /// <returns>Returns the @ref area_pvp "PVP Setting" for the area.</returns>
     public static int GetPVPSetting(uint area)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "GetPVPSetting");
+      const string sFunc = "GetPVPSetting";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(area);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -91,7 +95,8 @@ namespace NWN.Core.NWNX
     /// <param name="pvpSetting">One of @ref area_pvp the "PVP Settings".</param>
     public static void SetPVPSetting(uint area, int pvpSetting)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "SetPVPSetting");
+      const string sFunc = "SetPVPSetting";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(pvpSetting);
       VM.NWNX.StackPush(area);
       VM.NWNX.Call();
@@ -102,7 +107,8 @@ namespace NWN.Core.NWNX
     /// <returns>The value of the Spot skill modifier for this area.</returns>
     public static int GetAreaSpotModifier(uint area)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "GetAreaSpotModifier");
+      const string sFunc = "GetAreaSpotModifier";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(area);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -114,7 +120,8 @@ namespace NWN.Core.NWNX
     /// @sa NWNX_SkillRanks_SetAreaModifier() to change any skill modifier.
     public static void SetAreaSpotModifier(uint area, int spotModifier)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "SetAreaSpotModifier");
+      const string sFunc = "SetAreaSpotModifier";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(spotModifier);
       VM.NWNX.StackPush(area);
       VM.NWNX.Call();
@@ -125,7 +132,8 @@ namespace NWN.Core.NWNX
     /// <returns>The value of the Listen skill modifier for this area.</returns>
     public static int GetAreaListenModifier(uint area)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "GetAreaListenModifier");
+      const string sFunc = "GetAreaListenModifier";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(area);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -137,7 +145,8 @@ namespace NWN.Core.NWNX
     /// @sa NWNX_SkillRanks_SetAreaModifier() to change any skill modifier.
     public static void SetAreaListenModifier(uint area, int listenModifier)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "SetAreaListenModifier");
+      const string sFunc = "SetAreaListenModifier";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(listenModifier);
       VM.NWNX.StackPush(area);
       VM.NWNX.Call();
@@ -148,7 +157,8 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if resting is not allowed in area.</returns>
     public static int GetNoRestingAllowed(uint area)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "GetNoRestingAllowed");
+      const string sFunc = "GetNoRestingAllowed";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(area);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -159,7 +169,8 @@ namespace NWN.Core.NWNX
     /// <param name="bNoRestingAllowed">TRUE to disable resting in the area.</param>
     public static void SetNoRestingAllowed(uint area, int bNoRestingAllowed)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "SetNoRestingAllowed");
+      const string sFunc = "SetNoRestingAllowed";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(bNoRestingAllowed);
       VM.NWNX.StackPush(area);
       VM.NWNX.Call();
@@ -170,7 +181,8 @@ namespace NWN.Core.NWNX
     /// <returns>The wind power for the area. (0-2)</returns>
     public static int GetWindPower(uint area)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "GetWindPower");
+      const string sFunc = "GetWindPower";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(area);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -181,7 +193,8 @@ namespace NWN.Core.NWNX
     /// <param name="windPower">Set to 0, 1 or 2.</param>
     public static void SetWindPower(uint area, int windPower)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "SetWindPower");
+      const string sFunc = "SetWindPower";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(windPower);
       VM.NWNX.StackPush(area);
       VM.NWNX.Call();
@@ -193,7 +206,8 @@ namespace NWN.Core.NWNX
     /// <returns>The percentage chance for the weather type. (0-100)</returns>
     public static int GetWeatherChance(uint area, int type)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "GetWeatherChance");
+      const string sFunc = "GetWeatherChance";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(type);
       VM.NWNX.StackPush(area);
       VM.NWNX.Call();
@@ -206,7 +220,8 @@ namespace NWN.Core.NWNX
     /// <param name="chance">The chance this weather event occurs.</param>
     public static void SetWeatherChance(uint area, int type, int chance)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "SetWeatherChance");
+      const string sFunc = "SetWeatherChance";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(chance);
       VM.NWNX.StackPush(type);
       VM.NWNX.StackPush(area);
@@ -218,7 +233,8 @@ namespace NWN.Core.NWNX
     /// <returns>The fog clip distance.</returns>
     public static float GetFogClipDistance(uint area)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "GetFogClipDistance");
+      const string sFunc = "GetFogClipDistance";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(area);
       VM.NWNX.Call();
       return VM.NWNX.StackPopFloat();
@@ -229,7 +245,8 @@ namespace NWN.Core.NWNX
     /// <param name="distance">The new fog clip distance.</param>
     public static void SetFogClipDistance(uint area, float distance)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "SetFogClipDistance");
+      const string sFunc = "SetFogClipDistance";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(distance);
       VM.NWNX.StackPush(area);
       VM.NWNX.Call();
@@ -240,7 +257,8 @@ namespace NWN.Core.NWNX
     /// <returns>The shadow opacity for the area. (0-100)</returns>
     public static int GetShadowOpacity(uint area)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "GetShadowOpacity");
+      const string sFunc = "GetShadowOpacity";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(area);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -251,7 +269,8 @@ namespace NWN.Core.NWNX
     /// <param name="shadowOpacity">The shadow opacity to set for the area (0-100).</param>
     public static void SetShadowOpacity(uint area, int shadowOpacity)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "SetShadowOpacity");
+      const string sFunc = "SetShadowOpacity";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(shadowOpacity);
       VM.NWNX.StackPush(area);
       VM.NWNX.Call();
@@ -262,7 +281,8 @@ namespace NWN.Core.NWNX
     /// <returns>The @ref area_daynight "Day Night Cycle Setting".</returns>
     public static int GetDayNightCycle(uint area)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "GetDayNightCycle");
+      const string sFunc = "GetDayNightCycle";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(area);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -273,7 +293,8 @@ namespace NWN.Core.NWNX
     /// <param name="type">= A @ref area_daynight "Day Night Cycle Setting".</param>
     public static void SetDayNightCycle(uint area, int type)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "SetDayNightCycle");
+      const string sFunc = "SetDayNightCycle";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(type);
       VM.NWNX.StackPush(area);
       VM.NWNX.Call();
@@ -285,7 +306,8 @@ namespace NWN.Core.NWNX
     /// <returns>A FOG_COLOR_* or a custom value, -1 on error.</returns>
     public static int GetSunMoonColors(uint area, int type)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "GetSunMoonColors");
+      const string sFunc = "GetSunMoonColors";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(type);
       VM.NWNX.StackPush(area);
       VM.NWNX.Call();
@@ -304,7 +326,8 @@ namespace NWN.Core.NWNX
     ///  * DD would represent the amount of blue in the color.
     public static void SetSunMoonColors(uint area, int type, int color)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "SetSunMoonColors");
+      const string sFunc = "SetSunMoonColors";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(color);
       VM.NWNX.StackPush(type);
       VM.NWNX.StackPush(area);
@@ -320,7 +343,8 @@ namespace NWN.Core.NWNX
     /// @sa NWNX_Object_SetTriggerGeometry() if you wish to draw the transition as something other than a square.
     public static uint CreateTransition(uint area, uint target, float x, float y, float z, float size = 2.0f, string tag = "")
     {
-      VM.NWNX.SetFunction(NWNX_Area, "CreateTransition");
+      const string sFunc = "CreateTransition";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(tag);
       VM.NWNX.StackPush(size);
       VM.NWNX.StackPush(z);
@@ -339,7 +363,8 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if the loop is enabled.</returns>
     public static int GetTileAnimationLoop(uint oArea, float fTileX, float fTileY, int nAnimLoop)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "GetTileAnimationLoop");
+      const string sFunc = "GetTileAnimationLoop";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(nAnimLoop);
       VM.NWNX.StackPush(fTileY);
       VM.NWNX.StackPush(fTileX);
@@ -356,7 +381,8 @@ namespace NWN.Core.NWNX
     /// @note Requires clients to re-enter the area for it to take effect
     public static void SetTileAnimationLoop(uint oArea, float fTileX, float fTileY, int nAnimLoop, int bEnabled)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "SetTileAnimationLoop");
+      const string sFunc = "SetTileAnimationLoop";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(bEnabled);
       VM.NWNX.StackPush(nAnimLoop);
       VM.NWNX.StackPush(fTileY);
@@ -370,7 +396,8 @@ namespace NWN.Core.NWNX
     /// <param name="fTileX,">fTileY The coordinates of the tile.</param>
     public static string GetTileModelResRef(uint oArea, float fTileX, float fTileY)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "GetTileModelResRef");
+      const string sFunc = "GetTileModelResRef";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(fTileY);
       VM.NWNX.StackPush(fTileX);
       VM.NWNX.StackPush(oArea);
@@ -392,7 +419,8 @@ namespace NWN.Core.NWNX
     ///  * -3 if the line is blocked by a creature.
     public static int TestDirectLine(uint oArea, float fStartX, float fStartY, float fEndX, float fEndY, float fPerSpace, float fHeight, int bIgnoreDoors = FALSE)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "TestDirectLine");
+      const string sFunc = "TestDirectLine";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(bIgnoreDoors);
       VM.NWNX.StackPush(fHeight);
       VM.NWNX.StackPush(fPerSpace);
@@ -411,7 +439,8 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if music is playing</returns>
     public static int GetMusicIsPlaying(uint oArea, int bBattleMusic = FALSE)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "GetMusicIsPlaying");
+      const string sFunc = "GetMusicIsPlaying";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(bBattleMusic);
       VM.NWNX.StackPush(oArea);
       VM.NWNX.Call();
@@ -426,7 +455,8 @@ namespace NWN.Core.NWNX
     /// @sa NWNX_Object_SetTriggerGeometry() if you wish to draw the trigger as something other than a square.
     public static uint CreateGenericTrigger(uint oArea, float fX, float fY, float fZ, string sTag = "", float fSize = 1.0f)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "CreateGenericTrigger");
+      const string sFunc = "CreateGenericTrigger";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(fSize);
       VM.NWNX.StackPush(sTag);
       VM.NWNX.StackPush(fZ);
@@ -441,7 +471,8 @@ namespace NWN.Core.NWNX
     /// <param name="oObject">The object to add</param>
     public static void AddObjectToExclusionList(uint oObject)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "AddObjectToExclusionList");
+      const string sFunc = "AddObjectToExclusionList";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(oObject);
       VM.NWNX.Call();
     }
@@ -450,7 +481,8 @@ namespace NWN.Core.NWNX
     /// <param name="oObject">The object to add</param>
     public static void RemoveObjectFromExclusionList(uint oObject)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "RemoveObjectFromExclusionList");
+      const string sFunc = "RemoveObjectFromExclusionList";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(oObject);
       VM.NWNX.Call();
     }
@@ -467,7 +499,8 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if exported successfully, FALSE if not.</returns>
     public static int ExportGIT(uint oArea, string sFileName = "", int bExportVarTable = TRUE, int bExportUUID = TRUE, int nObjectFilter = 0, string sAlias = "NWNX")
     {
-      VM.NWNX.SetFunction(NWNX_Area, "ExportGIT");
+      const string sFunc = "ExportGIT";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(sAlias);
       VM.NWNX.StackPush(nObjectFilter);
       VM.NWNX.StackPush(bExportUUID);
@@ -484,7 +517,8 @@ namespace NWN.Core.NWNX
     /// <returns>A NWNX_Area_TileInfo struct with tile info.</returns>
     public static TileInfo GetTileInfo(uint oArea, float fTileX, float fTileY)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "GetTileInfo");
+      const string sFunc = "GetTileInfo";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(fTileY);
       VM.NWNX.StackPush(fTileX);
       VM.NWNX.StackPush(oArea);
@@ -507,7 +541,8 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if exported successfully, FALSE if not.</returns>
     public static int ExportARE(uint oArea, string sFileName, string sNewName = "", string sNewTag = "", string sAlias = "NWNX")
     {
-      VM.NWNX.SetFunction(NWNX_Area, "ExportARE");
+      const string sFunc = "ExportARE";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(sAlias);
       VM.NWNX.StackPush(sNewTag);
       VM.NWNX.StackPush(sNewName);
@@ -522,7 +557,8 @@ namespace NWN.Core.NWNX
     /// <returns>The ambient soundtrack. See ambientsound.2da.</returns>
     public static int GetAmbientSoundDay(uint oArea)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "GetAmbientSoundDay");
+      const string sFunc = "GetAmbientSoundDay";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(oArea);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -533,7 +569,8 @@ namespace NWN.Core.NWNX
     /// <returns>The ambient soundtrack. See ambientsound.2da.</returns>
     public static int GetAmbientSoundNight(uint oArea)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "GetAmbientSoundNight");
+      const string sFunc = "GetAmbientSoundNight";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(oArea);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -544,7 +581,8 @@ namespace NWN.Core.NWNX
     /// <returns>The volume.</returns>
     public static int GetAmbientSoundDayVolume(uint oArea)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "GetAmbientSoundDayVolume");
+      const string sFunc = "GetAmbientSoundDayVolume";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(oArea);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -555,7 +593,8 @@ namespace NWN.Core.NWNX
     /// <returns>The volume.</returns>
     public static int GetAmbientSoundNightVolume(uint oArea)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "GetAmbientSoundNightVolume");
+      const string sFunc = "GetAmbientSoundNightVolume";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(oArea);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -568,7 +607,8 @@ namespace NWN.Core.NWNX
     /// <returns>The sound object.</returns>
     public static uint CreateSoundObject(uint oArea, System.Numerics.Vector3 vPosition, string sResRef)
     {
-      VM.NWNX.SetFunction(NWNX_Area, "CreateSoundObject");
+      const string sFunc = "CreateSoundObject";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(sResRef);
       VM.NWNX.StackPush(vPosition.Z);
       VM.NWNX.StackPush(vPosition.Y);

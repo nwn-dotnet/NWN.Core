@@ -12,12 +12,14 @@ namespace NWN.Core.NWNX
     /// Convert native itemproperty type to unpacked structure.
     /// <param name="ip">The itemproperty to convert.</param>
     /// <returns>A constructed NWNX_IPUnpacked.</returns>
-    public static IPUnpacked UnpackIP(System.IntPtr ip)
+    public static NWNX_IPUnpacked UnpackIP(System.IntPtr ip)
     {
-      VM.NWNX.SetFunction(NWNX_ItemProperty, "UnpackIP");
+      const string sFunc = "UnpackIP";
+      VM.NWNX.SetFunction(NWNX_ItemProperty, sFunc);
       VM.NWNX.StackPush(ip, ENGINE_STRUCTURE_ITEMPROPERTY);
       VM.NWNX.Call();
-      IPUnpacked n = default;
+      NWNX_IPUnpacked n = default;
+      n.sID = VM.NWNX.StackPopString();
       n.nProperty = VM.NWNX.StackPopInt();
       n.nSubType = VM.NWNX.StackPopInt();
       n.nCostTable = VM.NWNX.StackPopInt();
@@ -36,9 +38,10 @@ namespace NWN.Core.NWNX
     /// Convert unpacked itemproperty structure to native type.
     /// <param name="ip">The NWNX_IPUnpacked structure to convert.</param>
     /// <returns>The itemproperty.</returns>
-    public static System.IntPtr PackIP(IPUnpacked n)
+    public static System.IntPtr PackIP(NWNX_IPUnpacked n)
     {
-      VM.NWNX.SetFunction(NWNX_ItemProperty, "PackIP");
+      const string sFunc = "PackIP";
+      VM.NWNX.SetFunction(NWNX_ItemProperty, sFunc);
       VM.NWNX.StackPush(n.sTag);
       VM.NWNX.StackPush(n.oCreator);
       VM.NWNX.StackPush(n.nSpellId);
@@ -59,13 +62,14 @@ namespace NWN.Core.NWNX
     /// <param name="oItem">- the item with the property</param>
     /// <param name="nIndex">- the index such as returned by some Item Events</param>
     /// <returns>A constructed NWNX_IPUnpacked, except for creator, and spell id.</returns>
-    public static IPUnpacked GetActiveProperty(uint oItem, int nIndex)
+    public static NWNX_IPUnpacked GetActiveProperty(uint oItem, int nIndex)
     {
-      VM.NWNX.SetFunction(NWNX_ItemProperty, "GetActiveProperty");
+      const string sFunc = "GetActiveProperty";
+      VM.NWNX.SetFunction(NWNX_ItemProperty, sFunc);
       VM.NWNX.StackPush(nIndex);
       VM.NWNX.StackPush(oItem);
       VM.NWNX.Call();
-      IPUnpacked n = default;
+      NWNX_IPUnpacked n = default;
       n.nProperty = VM.NWNX.StackPopInt();
       n.nSubType = VM.NWNX.StackPopInt();
       n.nCostTable = VM.NWNX.StackPopInt();
@@ -82,8 +86,9 @@ namespace NWN.Core.NWNX
     /// @}
   }
 
-  public struct IPUnpacked
+  public struct NWNX_IPUnpacked
   {
+    public string sID;
     public int nProperty;
     public int nSubType;
     public int nCostTable;

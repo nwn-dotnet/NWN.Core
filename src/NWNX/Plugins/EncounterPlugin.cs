@@ -14,7 +14,8 @@ namespace NWN.Core.NWNX
     /// <returns>The number of creatures in the encounter list.</returns>
     public static int GetNumberOfCreaturesInEncounterList(uint encounter)
     {
-      VM.NWNX.SetFunction(NWNX_Encounter, "GetNumberOfCreaturesInEncounterList");
+      const string sFunc = "GetNumberOfCreaturesInEncounterList";
+      VM.NWNX.SetFunction(NWNX_Encounter, sFunc);
       VM.NWNX.StackPush(encounter);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -26,7 +27,8 @@ namespace NWN.Core.NWNX
     /// <returns>An NWNX_Encounter_CreatureListEntry.</returns>
     public static CreatureListEntry GetEncounterCreatureByIndex(uint encounter, int index)
     {
-      VM.NWNX.SetFunction(NWNX_Encounter, "GetEncounterCreatureByIndex");
+      const string sFunc = "GetEncounterCreatureByIndex";
+      VM.NWNX.SetFunction(NWNX_Encounter, sFunc);
       CreatureListEntry creatureEntry = default;
       VM.NWNX.StackPush(index);
       VM.NWNX.StackPush(encounter);
@@ -44,7 +46,8 @@ namespace NWN.Core.NWNX
     /// <param name="creatureEntry">The NWNX_Encounter_CreatureListEntry.</param>
     public static void SetEncounterCreatureByIndex(uint encounter, int index, CreatureListEntry creatureEntry)
     {
-      VM.NWNX.SetFunction(NWNX_Encounter, "SetEncounterCreatureByIndex");
+      const string sFunc = "SetEncounterCreatureByIndex";
+      VM.NWNX.SetFunction(NWNX_Encounter, sFunc);
       VM.NWNX.StackPush(creatureEntry.alreadyUsed);
       VM.NWNX.StackPush(creatureEntry.unique);
       VM.NWNX.StackPush(creatureEntry.challengeRating);
@@ -59,7 +62,8 @@ namespace NWN.Core.NWNX
     /// <returns>The faction id.</returns>
     public static int GetFactionId(uint encounter)
     {
-      VM.NWNX.SetFunction(NWNX_Encounter, "GetFactionId");
+      const string sFunc = "GetFactionId";
+      VM.NWNX.SetFunction(NWNX_Encounter, sFunc);
       VM.NWNX.StackPush(encounter);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -70,7 +74,8 @@ namespace NWN.Core.NWNX
     /// <param name="factionId">The faction id.</param>
     public static void SetFactionId(uint encounter, int factionId)
     {
-      VM.NWNX.SetFunction(NWNX_Encounter, "SetFactionId");
+      const string sFunc = "SetFactionId";
+      VM.NWNX.SetFunction(NWNX_Encounter, sFunc);
       VM.NWNX.StackPush(factionId);
       VM.NWNX.StackPush(encounter);
       VM.NWNX.Call();
@@ -81,7 +86,8 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if encounter is player triggered only.</returns>
     public static int GetPlayerTriggeredOnly(uint encounter)
     {
-      VM.NWNX.SetFunction(NWNX_Encounter, "GetPlayerTriggeredOnly");
+      const string sFunc = "GetPlayerTriggeredOnly";
+      VM.NWNX.SetFunction(NWNX_Encounter, sFunc);
       VM.NWNX.StackPush(encounter);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -92,7 +98,8 @@ namespace NWN.Core.NWNX
     /// <param name="playerTriggeredOnly">TRUE/FALSE</param>
     public static void SetPlayerTriggeredOnly(uint encounter, int playerTriggeredOnly)
     {
-      VM.NWNX.SetFunction(NWNX_Encounter, "SetPlayerTriggeredOnly");
+      const string sFunc = "SetPlayerTriggeredOnly";
+      VM.NWNX.SetFunction(NWNX_Encounter, sFunc);
       VM.NWNX.StackPush(playerTriggeredOnly);
       VM.NWNX.StackPush(encounter);
       VM.NWNX.Call();
@@ -103,7 +110,8 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if the encounter does respawn, FALSE otherwise.</returns>
     public static int GetCanReset(uint encounter)
     {
-      VM.NWNX.SetFunction(NWNX_Encounter, "GetCanReset");
+      const string sFunc = "GetCanReset";
+      VM.NWNX.SetFunction(NWNX_Encounter, sFunc);
       VM.NWNX.StackPush(encounter);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -114,7 +122,8 @@ namespace NWN.Core.NWNX
     /// <param name="reset">Does the encounter respawn TRUE or FALSE.</param>
     public static void SetCanReset(uint encounter, int reset)
     {
-      VM.NWNX.SetFunction(NWNX_Encounter, "SetCanReset");
+      const string sFunc = "SetCanReset";
+      VM.NWNX.SetFunction(NWNX_Encounter, sFunc);
       VM.NWNX.StackPush(reset);
       VM.NWNX.StackPush(encounter);
       VM.NWNX.Call();
@@ -125,7 +134,8 @@ namespace NWN.Core.NWNX
     /// <returns>The seconds the encounter is defined to reset.</returns>
     public static int GetResetTime(uint encounter)
     {
-      VM.NWNX.SetFunction(NWNX_Encounter, "GetResetTime");
+      const string sFunc = "GetResetTime";
+      VM.NWNX.SetFunction(NWNX_Encounter, sFunc);
       VM.NWNX.StackPush(encounter);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -136,7 +146,8 @@ namespace NWN.Core.NWNX
     /// <param name="resetTime">The seconds the encounter will reset.</param>
     public static void SetResetTime(uint encounter, int resetTime)
     {
-      VM.NWNX.SetFunction(NWNX_Encounter, "SetResetTime");
+      const string sFunc = "SetResetTime";
+      VM.NWNX.SetFunction(NWNX_Encounter, sFunc);
       VM.NWNX.StackPush(resetTime);
       VM.NWNX.StackPush(encounter);
       VM.NWNX.Call();
@@ -147,7 +158,8 @@ namespace NWN.Core.NWNX
     /// <returns>The count of the spawn points for the encounter.</returns>
     public static int GetNumberOfSpawnPoints(uint encounter)
     {
-      VM.NWNX.SetFunction(NWNX_Encounter, "GetNumberOfSpawnPoints");
+      const string sFunc = "GetNumberOfSpawnPoints";
+      VM.NWNX.SetFunction(NWNX_Encounter, sFunc);
       VM.NWNX.StackPush(encounter);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -159,7 +171,8 @@ namespace NWN.Core.NWNX
     /// <returns>Location of spawn point.</returns>
     public static System.IntPtr GetSpawnPointByIndex(uint encounter, int index)
     {
-      VM.NWNX.SetFunction(NWNX_Encounter, "GetSpawnPointByIndex");
+      const string sFunc = "GetSpawnPointByIndex";
+      VM.NWNX.SetFunction(NWNX_Encounter, sFunc);
       VM.NWNX.StackPush(index);
       VM.NWNX.StackPush(encounter);
       VM.NWNX.Call();
@@ -175,7 +188,8 @@ namespace NWN.Core.NWNX
     /// <returns>the minimal amount.</returns>
     public static int GetMinNumSpawned(uint encounter)
     {
-      VM.NWNX.SetFunction(NWNX_Encounter, "GetMinNumSpawned");
+      const string sFunc = "GetMinNumSpawned";
+      VM.NWNX.SetFunction(NWNX_Encounter, sFunc);
       VM.NWNX.StackPush(encounter);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -186,7 +200,8 @@ namespace NWN.Core.NWNX
     /// <returns>the maximal amount.</returns>
     public static int GetMaxNumSpawned(uint encounter)
     {
-      VM.NWNX.SetFunction(NWNX_Encounter, "GetMaxNumSpawned");
+      const string sFunc = "GetMaxNumSpawned";
+      VM.NWNX.SetFunction(NWNX_Encounter, sFunc);
       VM.NWNX.StackPush(encounter);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -197,7 +212,8 @@ namespace NWN.Core.NWNX
     /// <returns>amount of creatures</returns>
     public static int GetCurrentNumSpawned(uint encounter)
     {
-      VM.NWNX.SetFunction(NWNX_Encounter, "GetCurrentNumSpawned");
+      const string sFunc = "GetCurrentNumSpawned";
+      VM.NWNX.SetFunction(NWNX_Encounter, sFunc);
       VM.NWNX.StackPush(encounter);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -208,7 +224,8 @@ namespace NWN.Core.NWNX
     /// <returns>A string of vertex positions.</returns>
     public static string GetGeometry(uint oEncounter)
     {
-      VM.NWNX.SetFunction(NWNX_Encounter, "GetGeometry");
+      const string sFunc = "GetGeometry";
+      VM.NWNX.SetFunction(NWNX_Encounter, sFunc);
       VM.NWNX.StackPush(oEncounter);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
@@ -225,7 +242,8 @@ namespace NWN.Core.NWNX
     /// @remark The minimum number of vertices is 3.
     public static void SetGeometry(uint oEncounter, string sGeometry)
     {
-      VM.NWNX.SetFunction(NWNX_Encounter, "SetGeometry");
+      const string sFunc = "SetGeometry";
+      VM.NWNX.SetFunction(NWNX_Encounter, sFunc);
       VM.NWNX.StackPush(sGeometry);
       VM.NWNX.StackPush(oEncounter);
       VM.NWNX.Call();

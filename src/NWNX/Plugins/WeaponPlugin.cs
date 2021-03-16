@@ -34,7 +34,8 @@ namespace NWN.Core.NWNX
     /// <param name="nFeat">The feat to set.</param>
     public static void SetWeaponFocusFeat(int nBaseItem, int nFeat)
     {
-      VM.NWNX.SetFunction(NWNX_Weapon, "SetWeaponFocusFeat");
+      const string sFunc = "SetWeaponFocusFeat";
+      VM.NWNX.SetFunction(NWNX_Weapon, sFunc);
       VM.NWNX.StackPush(nFeat);
       VM.NWNX.StackPush(nBaseItem);
       VM.NWNX.Call();
@@ -45,7 +46,8 @@ namespace NWN.Core.NWNX
     /// <param name="nSize">The creature size minimum to consider this weapon finessable.</param>
     public static void SetWeaponFinesseSize(int nBaseItem, int nSize)
     {
-      VM.NWNX.SetFunction(NWNX_Weapon, "SetWeaponFinesseSize");
+      const string sFunc = "SetWeaponFinesseSize";
+      VM.NWNX.SetFunction(NWNX_Weapon, sFunc);
       VM.NWNX.StackPush(nSize);
       VM.NWNX.StackPush(nBaseItem);
       VM.NWNX.Call();
@@ -55,7 +57,8 @@ namespace NWN.Core.NWNX
     /// <param name="nBaseItem">The base item id.</param>
     public static int GetWeaponFinesseSize(int nBaseItem)
     {
-      VM.NWNX.SetFunction(NWNX_Weapon, "GetWeaponFinesseSize");
+      const string sFunc = "GetWeaponFinesseSize";
+      VM.NWNX.SetFunction(NWNX_Weapon, sFunc);
       VM.NWNX.StackPush(nBaseItem);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -65,7 +68,8 @@ namespace NWN.Core.NWNX
     /// <param name="nBaseItem">The base item id.</param>
     public static void SetWeaponUnarmed(int nBaseItem)
     {
-      VM.NWNX.SetFunction(NWNX_Weapon, "SetWeaponUnarmed");
+      const string sFunc = "SetWeaponUnarmed";
+      VM.NWNX.SetFunction(NWNX_Weapon, sFunc);
       VM.NWNX.StackPush(nBaseItem);
       VM.NWNX.Call();
     }
@@ -75,7 +79,8 @@ namespace NWN.Core.NWNX
     /// <param name="nFeat">The feat to set.</param>
     public static void SetWeaponImprovedCriticalFeat(int nBaseItem, int nFeat)
     {
-      VM.NWNX.SetFunction(NWNX_Weapon, "SetWeaponImprovedCriticalFeat");
+      const string sFunc = "SetWeaponImprovedCriticalFeat";
+      VM.NWNX.SetFunction(NWNX_Weapon, sFunc);
       VM.NWNX.StackPush(nFeat);
       VM.NWNX.StackPush(nBaseItem);
       VM.NWNX.Call();
@@ -86,7 +91,8 @@ namespace NWN.Core.NWNX
     /// <param name="nFeat">The feat to set.</param>
     public static void SetWeaponSpecializationFeat(int nBaseItem, int nFeat)
     {
-      VM.NWNX.SetFunction(NWNX_Weapon, "SetWeaponSpecializationFeat");
+      const string sFunc = "SetWeaponSpecializationFeat";
+      VM.NWNX.SetFunction(NWNX_Weapon, sFunc);
       VM.NWNX.StackPush(nFeat);
       VM.NWNX.StackPush(nBaseItem);
       VM.NWNX.Call();
@@ -97,7 +103,8 @@ namespace NWN.Core.NWNX
     /// <param name="nFeat">The feat to set.</param>
     public static void SetEpicWeaponFocusFeat(int nBaseItem, int nFeat)
     {
-      VM.NWNX.SetFunction(NWNX_Weapon, "SetEpicWeaponFocusFeat");
+      const string sFunc = "SetEpicWeaponFocusFeat";
+      VM.NWNX.SetFunction(NWNX_Weapon, sFunc);
       VM.NWNX.StackPush(nFeat);
       VM.NWNX.StackPush(nBaseItem);
       VM.NWNX.Call();
@@ -108,7 +115,8 @@ namespace NWN.Core.NWNX
     /// <param name="nFeat">The feat to set.</param>
     public static void SetEpicWeaponSpecializationFeat(int nBaseItem, int nFeat)
     {
-      VM.NWNX.SetFunction(NWNX_Weapon, "SetEpicWeaponSpecializationFeat");
+      const string sFunc = "SetEpicWeaponSpecializationFeat";
+      VM.NWNX.SetFunction(NWNX_Weapon, sFunc);
       VM.NWNX.StackPush(nFeat);
       VM.NWNX.StackPush(nBaseItem);
       VM.NWNX.Call();
@@ -119,7 +127,8 @@ namespace NWN.Core.NWNX
     /// <param name="nFeat">The feat to set.</param>
     public static void SetEpicWeaponOverwhelmingCriticalFeat(int nBaseItem, int nFeat)
     {
-      VM.NWNX.SetFunction(NWNX_Weapon, "SetEpicWeaponOverwhelmingCriticalFeat");
+      const string sFunc = "SetEpicWeaponOverwhelmingCriticalFeat";
+      VM.NWNX.SetFunction(NWNX_Weapon, sFunc);
       VM.NWNX.StackPush(nFeat);
       VM.NWNX.StackPush(nBaseItem);
       VM.NWNX.Call();
@@ -130,7 +139,8 @@ namespace NWN.Core.NWNX
     /// <param name="nFeat">The feat to set.</param>
     public static void SetEpicWeaponDevastatingCriticalFeat(int nBaseItem, int nFeat)
     {
-      VM.NWNX.SetFunction(NWNX_Weapon, "SetEpicWeaponDevastatingCriticalFeat");
+      const string sFunc = "SetEpicWeaponDevastatingCriticalFeat";
+      VM.NWNX.SetFunction(NWNX_Weapon, sFunc);
       VM.NWNX.StackPush(nFeat);
       VM.NWNX.StackPush(nBaseItem);
       VM.NWNX.Call();
@@ -141,7 +151,8 @@ namespace NWN.Core.NWNX
     /// <param name="nFeat">The feat to set.</param>
     public static void SetWeaponOfChoiceFeat(int nBaseItem, int nFeat)
     {
-      VM.NWNX.SetFunction(NWNX_Weapon, "SetWeaponOfChoiceFeat");
+      const string sFunc = "SetWeaponOfChoiceFeat";
+      VM.NWNX.SetFunction(NWNX_Weapon, sFunc);
       VM.NWNX.StackPush(nFeat);
       VM.NWNX.StackPush(nBaseItem);
       VM.NWNX.Call();
@@ -152,7 +163,8 @@ namespace NWN.Core.NWNX
     /// <param name="nFeat">The feat to set.</param>
     public static void SetGreaterWeaponSpecializationFeat(int nBaseItem, int nFeat)
     {
-      VM.NWNX.SetFunction(NWNX_Weapon, "SetGreaterWeaponSpecializationFeat");
+      const string sFunc = "SetGreaterWeaponSpecializationFeat";
+      VM.NWNX.SetFunction(NWNX_Weapon, sFunc);
       VM.NWNX.StackPush(nFeat);
       VM.NWNX.StackPush(nBaseItem);
       VM.NWNX.Call();
@@ -163,7 +175,8 @@ namespace NWN.Core.NWNX
     /// <param name="nFeat">The feat to set.</param>
     public static void SetGreaterWeaponFocusFeat(int nBaseItem, int nFeat)
     {
-      VM.NWNX.SetFunction(NWNX_Weapon, "SetGreaterWeaponFocusFeat");
+      const string sFunc = "SetGreaterWeaponFocusFeat";
+      VM.NWNX.SetFunction(NWNX_Weapon, sFunc);
       VM.NWNX.StackPush(nFeat);
       VM.NWNX.StackPush(nBaseItem);
       VM.NWNX.Call();
@@ -174,7 +187,8 @@ namespace NWN.Core.NWNX
     /// <param name="nBaseItem">The base item id.</param>
     public static void SetWeaponIsMonkWeapon(int nBaseItem)
     {
-      VM.NWNX.SetFunction(NWNX_Weapon, "SetWeaponIsMonkWeapon");
+      const string sFunc = "SetWeaponIsMonkWeapon";
+      VM.NWNX.SetFunction(NWNX_Weapon, sFunc);
       VM.NWNX.StackPush(nBaseItem);
       VM.NWNX.Call();
     }
@@ -184,7 +198,8 @@ namespace NWN.Core.NWNX
     /// <param name="nVal">The new value of the option.</param>
     public static void SetOption(int nOption, int nVal)
     {
-      VM.NWNX.SetFunction(NWNX_Weapon, "SetOption");
+      const string sFunc = "SetOption";
+      VM.NWNX.SetFunction(NWNX_Weapon, sFunc);
       VM.NWNX.StackPush(nVal);
       VM.NWNX.StackPush(nOption);
       VM.NWNX.Call();
@@ -194,7 +209,8 @@ namespace NWN.Core.NWNX
     /// <param name="sScript">The script to call when a Devastating Critical occurs.</param>
     public static void SetDevastatingCriticalEventScript(string sScript)
     {
-      VM.NWNX.SetFunction(NWNX_Weapon, "SetDevastatingCriticalEventScript");
+      const string sFunc = "SetDevastatingCriticalEventScript";
+      VM.NWNX.SetFunction(NWNX_Weapon, sFunc);
       VM.NWNX.StackPush(sScript);
       VM.NWNX.Call();
     }
@@ -204,7 +220,8 @@ namespace NWN.Core.NWNX
     /// <returns>An NWNX_Weapon_DevastatingCriticalEvent_Data struct.</returns>
     public static DevastatingCriticalEvent_Data GetDevastatingCriticalEventData()
     {
-      VM.NWNX.SetFunction(NWNX_Weapon, "GetEventData");
+      const string sFunc = "GetEventData";
+      VM.NWNX.SetFunction(NWNX_Weapon, sFunc);
       DevastatingCriticalEvent_Data data = default;
       VM.NWNX.StackPush(NWNX_WEAPON_GETDATA_DC);
       VM.NWNX.Call();
@@ -218,7 +235,8 @@ namespace NWN.Core.NWNX
     /// @note This is only for use with the Devastating Critical Event Script.
     public static void BypassDevastatingCritical()
     {
-      VM.NWNX.SetFunction(NWNX_Weapon, "SetEventData");
+      const string sFunc = "SetEventData";
+      VM.NWNX.SetFunction(NWNX_Weapon, sFunc);
       VM.NWNX.StackPush(1);
       VM.NWNX.StackPush(NWNX_WEAPON_SETDATA_DC_BYPASS);
       VM.NWNX.Call();
@@ -230,7 +248,8 @@ namespace NWN.Core.NWNX
     /// <param name="bPersist">whether the two hand state should persist to the gff file.</param>
     public static void SetOneHalfStrength(uint oWeapon, int nEnable, int bPersist = FALSE)
     {
-      VM.NWNX.SetFunction(NWNX_Weapon, "SetOneHalfStrength");
+      const string sFunc = "SetOneHalfStrength";
+      VM.NWNX.SetFunction(NWNX_Weapon, sFunc);
       VM.NWNX.StackPush(bPersist);
       VM.NWNX.StackPush(nEnable);
       VM.NWNX.StackPush(oWeapon);
@@ -242,7 +261,8 @@ namespace NWN.Core.NWNX
     /// <returns>FALSE/0 if weapon is not receiving the bonus. TRUE/1 if it does.</returns>
     public static int GetOneHalfStrength(uint oWeapon)
     {
-      VM.NWNX.SetFunction(NWNX_Weapon, "GetOneHalfStrength");
+      const string sFunc = "GetOneHalfStrength";
+      VM.NWNX.SetFunction(NWNX_Weapon, sFunc);
       VM.NWNX.StackPush(oWeapon);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -256,7 +276,8 @@ namespace NWN.Core.NWNX
     /// @note fMaxPassive should probably be lower than fMax, half of fMax seems to be a good start. fPreferred should be at least ~0.5f lower than fMax.
     public static void SetMaxRangedAttackDistanceOverride(int nBaseItem, float fMax, float fMaxPassive, float fPreferred)
     {
-      VM.NWNX.SetFunction(NWNX_Weapon, "SetMaxRangedAttackDistanceOverride");
+      const string sFunc = "SetMaxRangedAttackDistanceOverride";
+      VM.NWNX.SetFunction(NWNX_Weapon, sFunc);
       VM.NWNX.StackPush(fPreferred);
       VM.NWNX.StackPush(fMaxPassive);
       VM.NWNX.StackPush(fMax);

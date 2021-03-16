@@ -34,7 +34,8 @@ namespace NWN.Core.NWNX
     /// <returns>The @ref vis_types "Visibility Type".</returns>
     public static int GetVisibilityOverride(uint oPlayer, uint oTarget)
     {
-      VM.NWNX.SetFunction(NWNX_Visibility, "GetVisibilityOverride");
+      const string sFunc = "GetVisibilityOverride";
+      VM.NWNX.SetFunction(NWNX_Visibility, sFunc);
       VM.NWNX.StackPush(oTarget);
       VM.NWNX.StackPush(oPlayer);
       VM.NWNX.Call();
@@ -62,7 +63,8 @@ namespace NWN.Core.NWNX
     /// <param name="nOverride">The visibility type from @ref vis_types "Visibility Types".</param>
     public static void SetVisibilityOverride(uint oPlayer, uint oTarget, int nOverride)
     {
-      VM.NWNX.SetFunction(NWNX_Visibility, "SetVisibilityOverride");
+      const string sFunc = "SetVisibilityOverride";
+      VM.NWNX.SetFunction(NWNX_Visibility, sFunc);
       VM.NWNX.StackPush(nOverride);
       VM.NWNX.StackPush(oTarget);
       VM.NWNX.StackPush(oPlayer);

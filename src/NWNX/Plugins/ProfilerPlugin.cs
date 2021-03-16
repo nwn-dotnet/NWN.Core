@@ -32,7 +32,8 @@ namespace NWN.Core.NWNX
     /// <param name="tag0_value">The tag's value for which to filter.</param>
     public static void PushPerfScope(string name, string tag0_tag = "", string tag0_value = "")
     {
-      VM.NWNX.SetFunction(NWNX_Profiler, "PushPerfScope");
+      const string sFunc = "PushPerfScope";
+      VM.NWNX.SetFunction(NWNX_Profiler, sFunc);
       VM.NWNX.StackPush(name);
       if (tag0_value!=""&&tag0_tag!="")
       {
@@ -46,7 +47,8 @@ namespace NWN.Core.NWNX
     /// @remark A metric must already be pushed.
     public static void PopPerfScope()
     {
-      VM.NWNX.SetFunction(NWNX_Profiler, "PopPerfScope");
+      const string sFunc = "PopPerfScope";
+      VM.NWNX.SetFunction(NWNX_Profiler, sFunc);
       VM.NWNX.Call();
     }
 

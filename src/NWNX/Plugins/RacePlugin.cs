@@ -43,7 +43,8 @@ namespace NWN.Core.NWNX
     /// <param name="iParam1,">iParam2, iParam3 The parameters for this racial modifier.</param>
     public static void SetRacialModifier(int iRace, int iMod, int iParam1, int iParam2 = -559038737, int iParam3 = -559038737)
     {
-      VM.NWNX.SetFunction(NWNX_Race, "SetRacialModifier");
+      const string sFunc = "SetRacialModifier";
+      VM.NWNX.SetFunction(NWNX_Race, sFunc);
       VM.NWNX.StackPush(iParam3);
       VM.NWNX.StackPush(iParam2);
       VM.NWNX.StackPush(iParam1);
@@ -57,7 +58,8 @@ namespace NWN.Core.NWNX
     /// <returns>The parent race if applicable, if not it just returns the race passed in.</returns>
     public static int GetParentRace(int iRace)
     {
-      VM.NWNX.SetFunction(NWNX_Race, "GetParentRace");
+      const string sFunc = "GetParentRace";
+      VM.NWNX.SetFunction(NWNX_Race, sFunc);
       VM.NWNX.StackPush(iRace);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -71,7 +73,8 @@ namespace NWN.Core.NWNX
     /// or Favored Enemy: Wild Elf
     public static void SetFavoredEnemyFeat(int iRace, int iFeat)
     {
-      VM.NWNX.SetFunction(NWNX_Race, "SetFavoredEnemyFeat");
+      const string sFunc = "SetFavoredEnemyFeat";
+      VM.NWNX.SetFunction(NWNX_Race, sFunc);
       VM.NWNX.StackPush(iFeat);
       VM.NWNX.StackPush(iRace);
       VM.NWNX.Call();

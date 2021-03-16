@@ -13,7 +13,8 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if string matches the regular expression.</returns>
     public static int Search(string str, string regex)
     {
-      VM.NWNX.SetFunction(NWNX_Regex, "Search");
+      const string sFunc = "Search";
+      VM.NWNX.SetFunction(NWNX_Regex, sFunc);
       VM.NWNX.StackPush(regex);
       VM.NWNX.StackPush(str);
       VM.NWNX.Call();
@@ -28,7 +29,8 @@ namespace NWN.Core.NWNX
     /// <returns>A new string with any replacements made.</returns>
     public static string Replace(string str, string regex, string replace = "", int firstOnly = 0)
     {
-      VM.NWNX.SetFunction(NWNX_Regex, "Replace");
+      const string sFunc = "Replace";
+      VM.NWNX.SetFunction(NWNX_Regex, sFunc);
       VM.NWNX.StackPush(firstOnly);
       VM.NWNX.StackPush(replace);
       VM.NWNX.StackPush(regex);

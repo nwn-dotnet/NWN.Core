@@ -1374,7 +1374,8 @@ namespace NWN.Core.NWNX
     /// <param name="script">The script to call when the event fires.</param>
     public static void SubscribeEvent(string evt, string script)
     {
-      VM.NWNX.SetFunction(NWNX_Events, "SubscribeEvent");
+      const string sFunc = "SubscribeEvent";
+      VM.NWNX.SetFunction(NWNX_Events, sFunc);
       VM.NWNX.StackPush(script);
       VM.NWNX.StackPush(evt);
       VM.NWNX.Call();
@@ -1385,7 +1386,8 @@ namespace NWN.Core.NWNX
     /// <param name="script">The script.</param>
     public static void UnsubscribeEvent(string evt, string script)
     {
-      VM.NWNX.SetFunction(NWNX_Events, "UnsubscribeEvent");
+      const string sFunc = "UnsubscribeEvent";
+      VM.NWNX.SetFunction(NWNX_Events, sFunc);
       VM.NWNX.StackPush(script);
       VM.NWNX.StackPush(evt);
       VM.NWNX.Call();
@@ -1395,7 +1397,8 @@ namespace NWN.Core.NWNX
     /// This should be called BEFORE SignalEvent.
     public static void PushEventData(string tag, string data)
     {
-      VM.NWNX.SetFunction(NWNX_Events, "PushEventData");
+      const string sFunc = "PushEventData";
+      VM.NWNX.SetFunction(NWNX_Events, sFunc);
       VM.NWNX.StackPush(data);
       VM.NWNX.StackPush(tag);
       VM.NWNX.Call();
@@ -1406,7 +1409,8 @@ namespace NWN.Core.NWNX
     /// @remark target will be available as OBJECT_SELF in subscribed event scripts.
     public static int SignalEvent(string evt, uint target)
     {
-      VM.NWNX.SetFunction(NWNX_Events, "SignalEvent");
+      const string sFunc = "SignalEvent";
+      VM.NWNX.SetFunction(NWNX_Events, sFunc);
       VM.NWNX.StackPush(target);
       VM.NWNX.StackPush(evt);
       VM.NWNX.Call();
@@ -1417,7 +1421,8 @@ namespace NWN.Core.NWNX
     /// THIS SHOULD ONLY BE CALLED FROM WITHIN AN EVENT HANDLER.
     public static string GetEventData(string tag)
     {
-      VM.NWNX.SetFunction(NWNX_Events, "GetEventData");
+      const string sFunc = "GetEventData";
+      VM.NWNX.SetFunction(NWNX_Events, sFunc);
       VM.NWNX.StackPush(tag);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
@@ -1463,9 +1468,11 @@ namespace NWN.Core.NWNX
     /// - Disarm event
     /// - {Enter|Exit}Detect events
     /// - Faction events
+    /// - UnpossessFamiliar event
     public static void SkipEvent()
     {
-      VM.NWNX.SetFunction(NWNX_Events, "SkipEvent");
+      const string sFunc = "SkipEvent";
+      VM.NWNX.SetFunction(NWNX_Events, sFunc);
       VM.NWNX.Call();
     }
 
@@ -1487,7 +1494,8 @@ namespace NWN.Core.NWNX
     /// - Faction set reputation event -> The new reputation to apply instead. ("0" - "100")
     public static void SetEventResult(string data)
     {
-      VM.NWNX.SetFunction(NWNX_Events, "SetEventResult");
+      const string sFunc = "SetEventResult";
+      VM.NWNX.SetFunction(NWNX_Events, sFunc);
       VM.NWNX.StackPush(data);
       VM.NWNX.Call();
     }
@@ -1497,7 +1505,8 @@ namespace NWN.Core.NWNX
     /// Returns "" on error
     public static string GetCurrentEvent()
     {
-      VM.NWNX.SetFunction(NWNX_Events, "GetCurrentEvent");
+      const string sFunc = "GetCurrentEvent";
+      VM.NWNX.SetFunction(NWNX_Events, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
     }
@@ -1506,7 +1515,8 @@ namespace NWN.Core.NWNX
     /// If enabled, sEvent for sScript will only be signalled if the target object is on its dispatch list.
     public static void ToggleDispatchListMode(string sEvent, string sScript, int bEnable)
     {
-      VM.NWNX.SetFunction(NWNX_Events, "ToggleDispatchListMode");
+      const string sFunc = "ToggleDispatchListMode";
+      VM.NWNX.SetFunction(NWNX_Events, sFunc);
       VM.NWNX.StackPush(bEnable);
       VM.NWNX.StackPush(sScript);
       VM.NWNX.StackPush(sEvent);
@@ -1516,7 +1526,8 @@ namespace NWN.Core.NWNX
     /// Add oObject to the dispatch list for sEvent+sScript.
     public static void AddObjectToDispatchList(string sEvent, string sScript, uint oObject)
     {
-      VM.NWNX.SetFunction(NWNX_Events, "AddObjectToDispatchList");
+      const string sFunc = "AddObjectToDispatchList";
+      VM.NWNX.SetFunction(NWNX_Events, sFunc);
       VM.NWNX.StackPush(oObject);
       VM.NWNX.StackPush(sScript);
       VM.NWNX.StackPush(sEvent);
@@ -1526,7 +1537,8 @@ namespace NWN.Core.NWNX
     /// Remove oObject from the dispatch list for sEvent+sScript.
     public static void RemoveObjectFromDispatchList(string sEvent, string sScript, uint oObject)
     {
-      VM.NWNX.SetFunction(NWNX_Events, "RemoveObjectFromDispatchList");
+      const string sFunc = "RemoveObjectFromDispatchList";
+      VM.NWNX.SetFunction(NWNX_Events, sFunc);
       VM.NWNX.StackPush(oObject);
       VM.NWNX.StackPush(sScript);
       VM.NWNX.StackPush(sEvent);
@@ -1545,7 +1557,8 @@ namespace NWN.Core.NWNX
     /// <param name="bEnable">TRUE to enable the whitelist, FALSE to disable</param>
     public static void ToggleIDWhitelist(string sEvent, int bEnable)
     {
-      VM.NWNX.SetFunction(NWNX_Events, "ToggleIDWhitelist");
+      const string sFunc = "ToggleIDWhitelist";
+      VM.NWNX.SetFunction(NWNX_Events, sFunc);
       VM.NWNX.StackPush(bEnable);
       VM.NWNX.StackPush(sEvent);
       VM.NWNX.Call();
@@ -1557,7 +1570,8 @@ namespace NWN.Core.NWNX
     /// <param name="nID">The ID.</param>
     public static void AddIDToWhitelist(string sEvent, int nID)
     {
-      VM.NWNX.SetFunction(NWNX_Events, "AddIDToWhitelist");
+      const string sFunc = "AddIDToWhitelist";
+      VM.NWNX.SetFunction(NWNX_Events, sFunc);
       VM.NWNX.StackPush(nID);
       VM.NWNX.StackPush(sEvent);
       VM.NWNX.Call();
@@ -1569,7 +1583,8 @@ namespace NWN.Core.NWNX
     /// <param name="nID">The ID.</param>
     public static void RemoveIDFromWhitelist(string sEvent, int nID)
     {
-      VM.NWNX.SetFunction(NWNX_Events, "RemoveIDFromWhitelist");
+      const string sFunc = "RemoveIDFromWhitelist";
+      VM.NWNX.SetFunction(NWNX_Events, sFunc);
       VM.NWNX.StackPush(nID);
       VM.NWNX.StackPush(sEvent);
       VM.NWNX.Call();

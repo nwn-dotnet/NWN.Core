@@ -85,7 +85,8 @@ namespace NWN.Core.NWNX
     /// <param name="sScript">The script name.</param>
     public static void SetELCScript(string sScript)
     {
-      VM.NWNX.SetFunction(NWNX_ELC, "SetELCScript");
+      const string sFunc = "SetELCScript";
+      VM.NWNX.SetFunction(NWNX_ELC, sFunc);
       VM.NWNX.StackPush(sScript);
       VM.NWNX.Call();
     }
@@ -97,7 +98,8 @@ namespace NWN.Core.NWNX
     /// if a player doesn't fail your custom check otherwise they won't be able to log in
     public static void EnableCustomELCCheck(int bEnabled)
     {
-      VM.NWNX.SetFunction(NWNX_ELC, "EnableCustomELCCheck");
+      const string sFunc = "EnableCustomELCCheck";
+      VM.NWNX.SetFunction(NWNX_ELC, sFunc);
       VM.NWNX.StackPush(bEnabled);
       VM.NWNX.Call();
     }
@@ -106,7 +108,8 @@ namespace NWN.Core.NWNX
     /// @note Only to be called in the ELC Script
     public static void SkipValidationFailure()
     {
-      VM.NWNX.SetFunction(NWNX_ELC, "SkipValidationFailure");
+      const string sFunc = "SkipValidationFailure";
+      VM.NWNX.SetFunction(NWNX_ELC, sFunc);
       VM.NWNX.Call();
     }
 
@@ -115,7 +118,8 @@ namespace NWN.Core.NWNX
     /// @note Only to be called in the ELC Script
     public static int GetValidationFailureType()
     {
-      VM.NWNX.SetFunction(NWNX_ELC, "GetValidationFailureType");
+      const string sFunc = "GetValidationFailureType";
+      VM.NWNX.SetFunction(NWNX_ELC, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
@@ -125,7 +129,8 @@ namespace NWN.Core.NWNX
     /// @note Only to be called in the ELC Script
     public static int GetValidationFailureSubType()
     {
-      VM.NWNX.SetFunction(NWNX_ELC, "GetValidationFailureSubType");
+      const string sFunc = "GetValidationFailureSubType";
+      VM.NWNX.SetFunction(NWNX_ELC, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
@@ -135,7 +140,8 @@ namespace NWN.Core.NWNX
     /// @note Only to be called in the ELC Script
     public static int GetValidationFailureMessageStrRef()
     {
-      VM.NWNX.SetFunction(NWNX_ELC, "GetValidationFailureMessageStrRef");
+      const string sFunc = "GetValidationFailureMessageStrRef";
+      VM.NWNX.SetFunction(NWNX_ELC, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
@@ -145,7 +151,8 @@ namespace NWN.Core.NWNX
     /// @note Only to be called in the ELC Script
     public static void SetValidationFailureMessageStrRef(int nStrRef)
     {
-      VM.NWNX.SetFunction(NWNX_ELC, "SetValidationFailureMessageStrRef");
+      const string sFunc = "SetValidationFailureMessageStrRef";
+      VM.NWNX.SetFunction(NWNX_ELC, sFunc);
       VM.NWNX.StackPush(nStrRef);
       VM.NWNX.Call();
     }
@@ -156,7 +163,8 @@ namespace NWN.Core.NWNX
     /// NWNX_ELC_VALIDATION_FAILURE_TYPE_ITEM validation failure.
     public static uint GetValidationFailureItem()
     {
-      VM.NWNX.SetFunction(NWNX_ELC, "GetValidationFailureItem");
+      const string sFunc = "GetValidationFailureItem";
+      VM.NWNX.SetFunction(NWNX_ELC, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopObject();
     }
@@ -167,7 +175,8 @@ namespace NWN.Core.NWNX
     /// @note Only to be called in the ELC Script
     public static int GetValidationFailureLevel()
     {
-      VM.NWNX.SetFunction(NWNX_ELC, "GetValidationFailureLevel");
+      const string sFunc = "GetValidationFailureLevel";
+      VM.NWNX.SetFunction(NWNX_ELC, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
@@ -179,7 +188,8 @@ namespace NWN.Core.NWNX
     /// NWNX_ELC_VALIDATION_FAILURE_TYPE_SKILL validation failure.
     public static int GetValidationFailureSkillID()
     {
-      VM.NWNX.SetFunction(NWNX_ELC, "GetValidationFailureSkillID");
+      const string sFunc = "GetValidationFailureSkillID";
+      VM.NWNX.SetFunction(NWNX_ELC, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
@@ -191,7 +201,8 @@ namespace NWN.Core.NWNX
     /// NWNX_ELC_VALIDATION_FAILURE_TYPE_FEAT validation failure.
     public static int GetValidationFailureFeatID()
     {
-      VM.NWNX.SetFunction(NWNX_ELC, "GetValidationFailureFeatID");
+      const string sFunc = "GetValidationFailureFeatID";
+      VM.NWNX.SetFunction(NWNX_ELC, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
@@ -203,7 +214,8 @@ namespace NWN.Core.NWNX
     /// NWNX_ELC_VALIDATION_FAILURE_TYPE_SPELL validation failure.
     public static int GetValidationFailureSpellID()
     {
-      VM.NWNX.SetFunction(NWNX_ELC, "GetValidationFailureSpellID");
+      const string sFunc = "GetValidationFailureSpellID";
+      VM.NWNX.SetFunction(NWNX_ELC, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }

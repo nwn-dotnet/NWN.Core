@@ -16,7 +16,8 @@ namespace NWN.Core.NWNX
     /// <param name="mrkdwn">Set to false if you do not wish your message's markdown be parsed.</param>
     public static void SendWebHookHTTPS(string host, string path, string message, string username = "", int mrkdwn = 1)
     {
-      VM.NWNX.SetFunction(NWNX_WebHook, "SendWebHookHTTPS");
+      const string sFunc = "SendWebHookHTTPS";
+      VM.NWNX.SetFunction(NWNX_WebHook, sFunc);
       VM.NWNX.StackPush(mrkdwn);
       VM.NWNX.StackPush(username);
       VM.NWNX.StackPush(message);

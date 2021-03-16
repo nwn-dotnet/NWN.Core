@@ -12,7 +12,8 @@ namespace NWN.Core.NWNX
     /// <param name="sCode">The code to evaluate.</param>
     public static void EvalVoid(string sCode)
     {
-      VM.NWNX.SetFunction(NWNX_Lua, "EvalVoid");
+      const string sFunc = "EvalVoid";
+      VM.NWNX.SetFunction(NWNX_Lua, sFunc);
       VM.NWNX.StackPush(sCode);
       VM.NWNX.Call();
     }
@@ -22,7 +23,8 @@ namespace NWN.Core.NWNX
     /// <returns>The result of the Lua code execution.</returns>
     public static string Eval(string sCode)
     {
-      VM.NWNX.SetFunction(NWNX_Lua, "Eval");
+      const string sFunc = "Eval";
+      VM.NWNX.SetFunction(NWNX_Lua, sFunc);
       VM.NWNX.StackPush(sCode);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
@@ -34,7 +36,8 @@ namespace NWN.Core.NWNX
     /// For details on events just look at the three *Event() functions in preload.lua.
     public static void RunEvent(string sEvent, uint oObject, string sExtra = "")
     {
-      VM.NWNX.SetFunction(NWNX_Lua, "RunEvent");
+      const string sFunc = "RunEvent";
+      VM.NWNX.SetFunction(NWNX_Lua, sFunc);
       VM.NWNX.StackPush(sExtra);
       VM.NWNX.StackPush(oObject);
       VM.NWNX.StackPush(sEvent);

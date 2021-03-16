@@ -23,7 +23,8 @@ namespace NWN.Core.NWNX
     /// <param name="iDetectionMethod">Can be specified to determine whether the hidden creature is seen or heard.</param>
     public static void RevealTo(uint oHiding, uint oObserver, int iDetectionMethod = NWNX_REVEAL_HEARD)
     {
-      VM.NWNX.SetFunction(NWNX_Reveal, "RevealTo");
+      const string sFunc = "RevealTo";
+      VM.NWNX.SetFunction(NWNX_Reveal, sFunc);
       VM.NWNX.StackPush(iDetectionMethod);
       VM.NWNX.StackPush(oObserver);
       VM.NWNX.StackPush(oHiding);
@@ -36,7 +37,8 @@ namespace NWN.Core.NWNX
     /// <param name="iDetectionMethod">Can be specified to determine whether the hidden creature is seen or heard.</param>
     public static void SetRevealToParty(uint oHiding, int bReveal, int iDetectionMethod = NWNX_REVEAL_HEARD)
     {
-      VM.NWNX.SetFunction(NWNX_Reveal, "SetRevealToParty");
+      const string sFunc = "SetRevealToParty";
+      VM.NWNX.SetFunction(NWNX_Reveal, sFunc);
       VM.NWNX.StackPush(iDetectionMethod);
       VM.NWNX.StackPush(bReveal);
       VM.NWNX.StackPush(oHiding);

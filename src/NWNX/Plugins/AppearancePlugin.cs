@@ -58,7 +58,8 @@ namespace NWN.Core.NWNX
     /// <param name="nValue">The new value for the appearance type.</param>
     public static void SetOverride(uint oPlayer, uint oCreature, int nType, int nValue)
     {
-      VM.NWNX.SetFunction(NWNX_Appearance, "SetOverride");
+      const string sFunc = "SetOverride";
+      VM.NWNX.SetFunction(NWNX_Appearance, sFunc);
       VM.NWNX.StackPush(nValue);
       VM.NWNX.StackPush(nType);
       VM.NWNX.StackPush(oCreature);
@@ -73,7 +74,8 @@ namespace NWN.Core.NWNX
     /// <returns>The value for the appearance type or -1 when not set.</returns>
     public static int GetOverride(uint oPlayer, uint oCreature, int nType)
     {
-      VM.NWNX.SetFunction(NWNX_Appearance, "GetOverride");
+      const string sFunc = "GetOverride";
+      VM.NWNX.SetFunction(NWNX_Appearance, sFunc);
       VM.NWNX.StackPush(nType);
       VM.NWNX.StackPush(oCreature);
       VM.NWNX.StackPush(oPlayer);

@@ -56,7 +56,8 @@ namespace NWN.Core.NWNX
     /// <returns>The count of feats for a specific skill.</returns>
     public static int GetSkillFeatCountForSkill(int iSkill)
     {
-      VM.NWNX.SetFunction(NWNX_SkillRanks, "GetSkillFeatCountForSkill");
+      const string sFunc = "GetSkillFeatCountForSkill";
+      VM.NWNX.SetFunction(NWNX_SkillRanks, sFunc);
       VM.NWNX.StackPush(iSkill);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -68,7 +69,8 @@ namespace NWN.Core.NWNX
     /// <returns>A constructed NWNX_SkillRanks_SkillFeat.</returns>
     public static SkillFeat GetSkillFeat(int iSkill, int iFeat)
     {
-      VM.NWNX.SetFunction(NWNX_SkillRanks, "GetSkillFeat");
+      const string sFunc = "GetSkillFeat";
+      VM.NWNX.SetFunction(NWNX_SkillRanks, sFunc);
       VM.NWNX.StackPush(iFeat);
       VM.NWNX.StackPush(iSkill);
       VM.NWNX.Call();
@@ -94,7 +96,8 @@ namespace NWN.Core.NWNX
     /// <returns>A constructed NWNX_SkillRanks_SkillFeat.</returns>
     public static SkillFeat GetSkillFeatForSkillByIndex(int iSkill, int iIndex)
     {
-      VM.NWNX.SetFunction(NWNX_SkillRanks, "GetSkillFeatForSkillByIndex");
+      const string sFunc = "GetSkillFeatForSkillByIndex";
+      VM.NWNX.SetFunction(NWNX_SkillRanks, sFunc);
       VM.NWNX.StackPush(iIndex);
       VM.NWNX.StackPush(iSkill);
       VM.NWNX.Call();
@@ -118,7 +121,8 @@ namespace NWN.Core.NWNX
     /// <param name="createIfNonExistent">TRUE to create if the feat does not exist.</param>
     public static void SetSkillFeat(SkillFeat skillFeat, int createIfNonExistent = FALSE)
     {
-      VM.NWNX.SetFunction(NWNX_SkillRanks, "SetSkillFeat");
+      const string sFunc = "SetSkillFeat";
+      VM.NWNX.SetFunction(NWNX_SkillRanks, sFunc);
       VM.NWNX.StackPush(createIfNonExistent);
       VM.NWNX.StackPush(skillFeat.iKeyAbilityMask);
       VM.NWNX.StackPush(skillFeat.bBypassArmorCheckPenalty);
@@ -165,7 +169,8 @@ namespace NWN.Core.NWNX
     /// <param name="iEpic">Set to TRUE to change the value for Epic Skill Focus.</param>
     public static void SetSkillFeatFocusModifier(int iModifier, int epicFocus = FALSE)
     {
-      VM.NWNX.SetFunction(NWNX_SkillRanks, "SetSkillFeatFocusModifier");
+      const string sFunc = "SetSkillFeatFocusModifier";
+      VM.NWNX.SetFunction(NWNX_SkillRanks, sFunc);
       VM.NWNX.StackPush(epicFocus);
       VM.NWNX.StackPush(iModifier);
       VM.NWNX.Call();
@@ -175,7 +180,8 @@ namespace NWN.Core.NWNX
     /// <returns>The penalty to Dexterity when blind.</returns>
     public static int GetBlindnessPenalty()
     {
-      VM.NWNX.SetFunction(NWNX_SkillRanks, "GetBlindnessPenalty");
+      const string sFunc = "GetBlindnessPenalty";
+      VM.NWNX.SetFunction(NWNX_SkillRanks, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
@@ -185,7 +191,8 @@ namespace NWN.Core.NWNX
     /// <param name="iModifier">The penalty to Dexterity when blind.</param>
     public static void SetBlindnessPenalty(int iModifier)
     {
-      VM.NWNX.SetFunction(NWNX_SkillRanks, "SetBlindnessPenalty");
+      const string sFunc = "SetBlindnessPenalty";
+      VM.NWNX.SetFunction(NWNX_SkillRanks, sFunc);
       VM.NWNX.StackPush(iModifier);
       VM.NWNX.Call();
     }
@@ -196,7 +203,8 @@ namespace NWN.Core.NWNX
     /// <returns>The modifier to that skill in the area.</returns>
     public static int GetAreaModifier(uint oArea, int iSkill)
     {
-      VM.NWNX.SetFunction(NWNX_SkillRanks, "GetAreaModifier");
+      const string sFunc = "GetAreaModifier";
+      VM.NWNX.SetFunction(NWNX_SkillRanks, sFunc);
       VM.NWNX.StackPush(iSkill);
       VM.NWNX.StackPush(oArea);
       VM.NWNX.Call();
@@ -209,7 +217,8 @@ namespace NWN.Core.NWNX
     /// <param name="iModifier">The modifier to the skill in the area.</param>
     public static void SetAreaModifier(uint oArea, int iSkill, int iModifier)
     {
-      VM.NWNX.SetFunction(NWNX_SkillRanks, "SetAreaModifier");
+      const string sFunc = "SetAreaModifier";
+      VM.NWNX.SetFunction(NWNX_SkillRanks, sFunc);
       VM.NWNX.StackPush(iModifier);
       VM.NWNX.StackPush(iSkill);
       VM.NWNX.StackPush(oArea);

@@ -47,7 +47,8 @@ namespace NWN.Core.NWNX
     /// <returns>The count.</returns>
     public static int GetLocalVariableCount(uint obj)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "GetLocalVariableCount");
+      const string sFunc = "GetLocalVariableCount";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(obj);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -68,7 +69,8 @@ namespace NWN.Core.NWNX
     /// <returns>An NWNX_Object_LocalVariable struct.</returns>
     public static LocalVariable GetLocalVariable(uint obj, int index)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "GetLocalVariable");
+      const string sFunc = "GetLocalVariable";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(index);
       VM.NWNX.StackPush(obj);
       VM.NWNX.Call();
@@ -85,7 +87,7 @@ namespace NWN.Core.NWNX
     /// @deprecated Use the basegame StringToObject() function. This will be removed in a future NWNX release.
     public static uint StringToObject(string id)
     {
-      WriteTimestampedLogEntry("WARNING: StringToObject() is deprecated, please use the basegame's StringToObject()");
+      WriteTimestampedLogEntry("WARNING: NWNX_Object_StringToObject() is deprecated, please use the basegame's StringToObject()");
       return VM.NWNX.StackPopObject();
     }
 
@@ -95,7 +97,8 @@ namespace NWN.Core.NWNX
     /// <param name="bUpdateSubareas">If TRUE and oObject is a creature, any triggers/traps at vPosition will fire their events.</param>
     public static void SetPosition(uint oObject, System.Numerics.Vector3 vPosition, int bUpdateSubareas = TRUE)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "SetPosition");
+      const string sFunc = "SetPosition";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(bUpdateSubareas);
       VM.NWNX.StackPush(vPosition.X);
       VM.NWNX.StackPush(vPosition.Y);
@@ -110,7 +113,8 @@ namespace NWN.Core.NWNX
     /// <returns>The hit points.</returns>
     public static int GetCurrentHitPoints(uint creature)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "GetCurrentHitPoints");
+      const string sFunc = "GetCurrentHitPoints";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(creature);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -121,7 +125,8 @@ namespace NWN.Core.NWNX
     /// <param name="hp">The hit points.</param>
     public static void SetCurrentHitPoints(uint creature, int hp)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "SetCurrentHitPoints");
+      const string sFunc = "SetCurrentHitPoints";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(hp);
       VM.NWNX.StackPush(creature);
       VM.NWNX.Call();
@@ -133,7 +138,8 @@ namespace NWN.Core.NWNX
     /// <param name="hp">The maximum hit points.</param>
     public static void SetMaxHitPoints(uint creature, int hp)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "SetMaxHitPoints");
+      const string sFunc = "SetMaxHitPoints";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(hp);
       VM.NWNX.StackPush(creature);
       VM.NWNX.Call();
@@ -145,7 +151,8 @@ namespace NWN.Core.NWNX
     /// @note includes locals, inventory, etc
     public static string Serialize(uint obj)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "Serialize");
+      const string sFunc = "Serialize";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(obj);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
@@ -157,7 +164,8 @@ namespace NWN.Core.NWNX
     /// <returns>The object.</returns>
     public static uint Deserialize(string serialized)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "Deserialize");
+      const string sFunc = "Deserialize";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(serialized);
       VM.NWNX.Call();
       return VM.NWNX.StackPopObject();
@@ -168,7 +176,8 @@ namespace NWN.Core.NWNX
     /// <returns>The name of the dialog resref.</returns>
     public static string GetDialogResref(uint obj)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "GetDialogResref");
+      const string sFunc = "GetDialogResref";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(obj);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
@@ -179,7 +188,8 @@ namespace NWN.Core.NWNX
     /// <param name="dialog">The name of the dialog resref.</param>
     public static void SetDialogResref(uint obj, string dialog)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "SetDialogResref");
+      const string sFunc = "SetDialogResref";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(dialog);
       VM.NWNX.StackPush(obj);
       VM.NWNX.Call();
@@ -191,7 +201,8 @@ namespace NWN.Core.NWNX
     /// <param name="nAppearance">The appearance id.</param>
     public static void SetAppearance(uint oPlaceable, int nAppearance)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "SetAppearance");
+      const string sFunc = "SetAppearance";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(nAppearance);
       VM.NWNX.StackPush(oPlaceable);
       VM.NWNX.Call();
@@ -202,7 +213,8 @@ namespace NWN.Core.NWNX
     /// <returns>The appearance id.</returns>
     public static int GetAppearance(uint oPlaceable)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "GetAppearance");
+      const string sFunc = "GetAppearance";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(oPlaceable);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -214,7 +226,8 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if the object has the visual effect applied to it</returns>
     public static int GetHasVisualEffect(uint obj, int nVFX)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "GetHasVisualEffect");
+      const string sFunc = "GetHasVisualEffect";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(nVFX);
       VM.NWNX.StackPush(obj);
       VM.NWNX.Call();
@@ -227,7 +240,8 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if an item of base item type can fit in object's inventory</returns>
     public static int CheckFit(uint obj, int baseitem)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "CheckFit");
+      const string sFunc = "CheckFit";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(baseitem);
       VM.NWNX.StackPush(obj);
       VM.NWNX.Call();
@@ -240,7 +254,8 @@ namespace NWN.Core.NWNX
     /// <returns>Damage immunity as a percentage.</returns>
     public static int GetDamageImmunity(uint obj, int damageType)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "GetDamageImmunity");
+      const string sFunc = "GetDamageImmunity";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(damageType);
       VM.NWNX.StackPush(obj);
       VM.NWNX.Call();
@@ -253,7 +268,8 @@ namespace NWN.Core.NWNX
     /// <param name="pos">The position.</param>
     public static void AddToArea(uint obj, uint area, System.Numerics.Vector3 pos)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "AddToArea");
+      const string sFunc = "AddToArea";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(pos.Z);
       VM.NWNX.StackPush(pos.Y);
       VM.NWNX.StackPush(pos.X);
@@ -267,7 +283,8 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if placeable is static.</returns>
     public static int GetPlaceableIsStatic(uint obj)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "GetPlaceableIsStatic");
+      const string sFunc = "GetPlaceableIsStatic";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(obj);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -279,7 +296,8 @@ namespace NWN.Core.NWNX
     /// <param name="isStatic">TRUE/FALSE</param>
     public static void SetPlaceableIsStatic(uint obj, int isStatic)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "SetPlaceableIsStatic");
+      const string sFunc = "SetPlaceableIsStatic";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(isStatic);
       VM.NWNX.StackPush(obj);
       VM.NWNX.Call();
@@ -290,7 +308,8 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE/FALSE or -1 on error.</returns>
     public static int GetAutoRemoveKey(uint obj)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "GetAutoRemoveKey");
+      const string sFunc = "GetAutoRemoveKey";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(obj);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -301,7 +320,8 @@ namespace NWN.Core.NWNX
     /// <param name="bRemoveKey">TRUE/FALSE</param>
     public static void SetAutoRemoveKey(uint obj, int bRemoveKey)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "SetAutoRemoveKey");
+      const string sFunc = "SetAutoRemoveKey";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(bRemoveKey);
       VM.NWNX.StackPush(obj);
       VM.NWNX.Call();
@@ -312,7 +332,8 @@ namespace NWN.Core.NWNX
     /// <returns>A string of vertex positions.</returns>
     public static string GetTriggerGeometry(uint oTrigger)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "GetTriggerGeometry");
+      const string sFunc = "GetTriggerGeometry";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(oTrigger);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
@@ -329,7 +350,8 @@ namespace NWN.Core.NWNX
     /// @remark The minimum number of vertices is 3.
     public static void SetTriggerGeometry(uint oTrigger, string sGeometry)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "SetTriggerGeometry");
+      const string sFunc = "SetTriggerGeometry";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(sGeometry);
       VM.NWNX.StackPush(oTrigger);
       VM.NWNX.Call();
@@ -343,7 +365,8 @@ namespace NWN.Core.NWNX
     /// will be permanent.
     public static void AddIconEffect(uint obj, int nIcon, float fDuration = 0.0f)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "AddIconEffect");
+      const string sFunc = "AddIconEffect";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(fDuration);
       VM.NWNX.StackPush(nIcon);
       VM.NWNX.StackPush(obj);
@@ -355,7 +378,8 @@ namespace NWN.Core.NWNX
     /// <param name="nIcon">The icon id.</param>
     public static void RemoveIconEffect(uint obj, int nIcon)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "RemoveIconEffect");
+      const string sFunc = "RemoveIconEffect";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(nIcon);
       VM.NWNX.StackPush(obj);
       VM.NWNX.Call();
@@ -364,11 +388,12 @@ namespace NWN.Core.NWNX
     /// Export an object to the UserDirectory/nwnx folder.
     /// <param name="sFileName">The filename without extension, 16 or less characters.</param>
     /// <param name="oObject">The object to export. Valid object types: Creature, Item, Placeable, Waypoint, Door, Store, Trigger</param>
-    public static void Export(string sFileName, uint oObject)
+    public static void Export(uint oObject, string sFileName)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "Export");
-      VM.NWNX.StackPush(oObject);
+      const string sFunc = "Export";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(sFileName);
+      VM.NWNX.StackPush(oObject);
       VM.NWNX.Call();
     }
 
@@ -378,7 +403,8 @@ namespace NWN.Core.NWNX
     /// <returns>The value or 0 on error.</returns>
     public static int GetInt(uint oObject, string sVarName)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "GetInt");
+      const string sFunc = "GetInt";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(sVarName);
       VM.NWNX.StackPush(oObject);
       VM.NWNX.Call();
@@ -392,7 +418,8 @@ namespace NWN.Core.NWNX
     /// <param name="bPersist">When TRUE, the value is persisted to GFF, this means that it'll be saved in the .bic file of a player's character or when an object is serialized.</param>
     public static void SetInt(uint oObject, string sVarName, int nValue, int bPersist)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "SetInt");
+      const string sFunc = "SetInt";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(bPersist);
       VM.NWNX.StackPush(nValue);
       VM.NWNX.StackPush(sVarName);
@@ -405,7 +432,8 @@ namespace NWN.Core.NWNX
     /// <param name="sVarName">The variable name.</param>
     public static void DeleteInt(uint oObject, string sVarName)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "DeleteInt");
+      const string sFunc = "DeleteInt";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(sVarName);
       VM.NWNX.StackPush(oObject);
       VM.NWNX.Call();
@@ -417,7 +445,8 @@ namespace NWN.Core.NWNX
     /// <returns>The value or "" on error.</returns>
     public static string GetString(uint oObject, string sVarName)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "GetString");
+      const string sFunc = "GetString";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(sVarName);
       VM.NWNX.StackPush(oObject);
       VM.NWNX.Call();
@@ -431,7 +460,8 @@ namespace NWN.Core.NWNX
     /// <param name="bPersist">When TRUE, the value is persisted to GFF, this means that it'll be saved in the .bic file of a player's character or when an object is serialized.</param>
     public static void SetString(uint oObject, string sVarName, string sValue, int bPersist)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "SetString");
+      const string sFunc = "SetString";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(bPersist);
       VM.NWNX.StackPush(sValue);
       VM.NWNX.StackPush(sVarName);
@@ -444,7 +474,8 @@ namespace NWN.Core.NWNX
     /// <param name="sVarName">The variable name.</param>
     public static void DeleteString(uint oObject, string sVarName)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "DeleteString");
+      const string sFunc = "DeleteString";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(sVarName);
       VM.NWNX.StackPush(oObject);
       VM.NWNX.Call();
@@ -456,7 +487,8 @@ namespace NWN.Core.NWNX
     /// <returns>The value or 0.0f on error.</returns>
     public static float GetFloat(uint oObject, string sVarName)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "GetFloat");
+      const string sFunc = "GetFloat";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(sVarName);
       VM.NWNX.StackPush(oObject);
       VM.NWNX.Call();
@@ -470,7 +502,8 @@ namespace NWN.Core.NWNX
     /// <param name="bPersist">When TRUE, the value is persisted to GFF, this means that it'll be saved in the .bic file of a player's character or when an object is serialized.</param>
     public static void SetFloat(uint oObject, string sVarName, float fValue, int bPersist)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "SetFloat");
+      const string sFunc = "SetFloat";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(bPersist);
       VM.NWNX.StackPush(fValue);
       VM.NWNX.StackPush(sVarName);
@@ -483,7 +516,8 @@ namespace NWN.Core.NWNX
     /// <param name="sVarName">The variable name.</param>
     public static void DeleteFloat(uint oObject, string sVarName)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "DeleteFloat");
+      const string sFunc = "DeleteFloat";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(sVarName);
       VM.NWNX.StackPush(oObject);
       VM.NWNX.Call();
@@ -495,7 +529,8 @@ namespace NWN.Core.NWNX
     /// <param name="sRegex">The regular expression, for example .*Test.* removes every variable that has Test in it.</param>
     public static void DeleteVarRegex(uint oObject, string sRegex)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "DeleteVarRegex");
+      const string sFunc = "DeleteVarRegex";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(sRegex);
       VM.NWNX.StackPush(oObject);
       VM.NWNX.Call();
@@ -508,7 +543,8 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if vPosition is inside oTrigger's geometry.</returns>
     public static int GetPositionIsInTrigger(uint oTrigger, System.Numerics.Vector3 vPosition)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "GetPositionIsInTrigger");
+      const string sFunc = "GetPositionIsInTrigger";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(vPosition.Z);
       VM.NWNX.StackPush(vPosition.Y);
       VM.NWNX.StackPush(vPosition.X);
@@ -522,7 +558,8 @@ namespace NWN.Core.NWNX
     /// <returns>The object's type (NWNX_OBJECT_TYPE_INTERNAL_*)</returns>
     public static int GetInternalObjectType(uint oObject)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "GetInternalObjectType");
+      const string sFunc = "GetInternalObjectType";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(oObject);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -535,7 +572,8 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE on success.</returns>
     public static int AcquireItem(uint oObject, uint oItem)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "AcquireItem");
+      const string sFunc = "AcquireItem";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(oItem);
       VM.NWNX.StackPush(oObject);
       VM.NWNX.Call();
@@ -550,7 +588,8 @@ namespace NWN.Core.NWNX
     /// <param name="fDirection">The direction the object should face</param>
     public static void SetFacing(uint oObject, float fDirection)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "SetFacing");
+      const string sFunc = "SetFacing";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(fDirection);
       VM.NWNX.StackPush(oObject);
       VM.NWNX.Call();
@@ -560,7 +599,8 @@ namespace NWN.Core.NWNX
     /// <param name="oObject">The object that applied the spell effects.</param>
     public static void ClearSpellEffectsOnOthers(uint oObject)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "ClearSpellEffectsOnOthers");
+      const string sFunc = "ClearSpellEffectsOnOthers";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(oObject);
       VM.NWNX.Call();
     }
@@ -570,7 +610,8 @@ namespace NWN.Core.NWNX
     /// <returns>The UUID or "" when the object does not have or cannot have an UUID</returns>
     public static string PeekUUID(uint oObject)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "PeekUUID");
+      const string sFunc = "PeekUUID";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(oObject);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
@@ -581,7 +622,8 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if oDoor has a visible model</returns>
     public static int GetDoorHasVisibleModel(uint oDoor)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "GetDoorHasVisibleModel");
+      const string sFunc = "GetDoorHasVisibleModel";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(oDoor);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -592,7 +634,8 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if oObject is destroyable.</returns>
     public static int GetIsDestroyable(uint oObject)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "GetIsDestroyable");
+      const string sFunc = "GetIsDestroyable";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(oObject);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -604,7 +647,8 @@ namespace NWN.Core.NWNX
     /// <returns>-1 if defender has no immunity, 2 if the defender is immune</returns>
     public static int DoSpellImmunity(uint oDefender, uint oCaster)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "DoSpellImmunity");
+      const string sFunc = "DoSpellImmunity";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(oCaster);
       VM.NWNX.StackPush(oDefender);
       VM.NWNX.Call();
@@ -617,7 +661,8 @@ namespace NWN.Core.NWNX
     /// <returns>-1 defender no immunity. 2 if immune. 3 if immune, but the immunity has a limit (example: mantles)</returns>
     public static int DoSpellLevelAbsorption(uint oDefender, uint oCaster)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "DoSpellLevelAbsorption");
+      const string sFunc = "DoSpellLevelAbsorption";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(oCaster);
       VM.NWNX.StackPush(oDefender);
       VM.NWNX.Call();
@@ -630,7 +675,8 @@ namespace NWN.Core.NWNX
     /// @note Only works on placeables.
     public static void SetHasInventory(uint obj, int bHasInventory)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "SetHasInventory");
+      const string sFunc = "SetHasInventory";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(bHasInventory);
       VM.NWNX.StackPush(obj);
       VM.NWNX.Call();
@@ -643,7 +689,8 @@ namespace NWN.Core.NWNX
     /// <returns>-1 on error or the engine animation constant</returns>
     public static int GetCurrentAnimation(uint oObject)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "GetCurrentAnimation");
+      const string sFunc = "GetCurrentAnimation";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(oObject);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -654,7 +701,8 @@ namespace NWN.Core.NWNX
     /// <returns>The AI level (AI_LEVEL_* -1 to 4).</returns>
     public static int GetAILevel(uint oObject)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "GetAILevel");
+      const string sFunc = "GetAILevel";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(oObject);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -665,7 +713,8 @@ namespace NWN.Core.NWNX
     /// <param name="nLevel">The level to set (AI_LEVEL_* -1 to 4).</param>
     public static void SetAILevel(uint oObject, int nLevel)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "SetAILevel");
+      const string sFunc = "SetAILevel";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(nLevel);
       VM.NWNX.StackPush(oObject);
       VM.NWNX.Call();
@@ -677,7 +726,8 @@ namespace NWN.Core.NWNX
     /// <param name="nGender">0 = Male, 1 = Female</param>
     public static string GetMapNote(uint oObject, int nID = 0, int nGender = 0)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "GetMapNote");
+      const string sFunc = "GetMapNote";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(nGender);
       VM.NWNX.StackPush(nID);
       VM.NWNX.StackPush(oObject);
@@ -692,7 +742,8 @@ namespace NWN.Core.NWNX
     /// <param name="nGender">0 = Male, 1 = Female</param>
     public static void SetMapNote(uint oObject, string sMapNote, int nID = 0, int nGender = 0)
     {
-      VM.NWNX.SetFunction(NWNX_Object, "SetMapNote");
+      const string sFunc = "SetMapNote";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(nGender);
       VM.NWNX.StackPush(nID);
       VM.NWNX.StackPush(sMapNote);

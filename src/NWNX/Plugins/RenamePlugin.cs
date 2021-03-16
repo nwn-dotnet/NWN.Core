@@ -34,7 +34,8 @@ namespace NWN.Core.NWNX
     /// @note Will not persist through saving, resets or logout.
     public static void SetPCNameOverride(uint oTarget, string sNewName, string sPrefix = "", string sSuffix = "", int iPlayerNameState = NWNX_RENAME_PLAYERNAME_DEFAULT, uint oObserver = OBJECT_INVALID)
     {
-      VM.NWNX.SetFunction(NWNX_Rename, "SetPCNameOverride");
+      const string sFunc = "SetPCNameOverride";
+      VM.NWNX.SetFunction(NWNX_Rename, sFunc);
       VM.NWNX.StackPush(oObserver);
       VM.NWNX.StackPush(iPlayerNameState);
       VM.NWNX.StackPush(sSuffix);
@@ -51,7 +52,8 @@ namespace NWN.Core.NWNX
     /// @note If you wish to get a PC's true name use `GetName(oPC, TRUE)`.
     public static string GetPCNameOverride(uint oTarget, uint oObserver = OBJECT_INVALID)
     {
-      VM.NWNX.SetFunction(NWNX_Rename, "GetPCNameOverride");
+      const string sFunc = "GetPCNameOverride";
+      VM.NWNX.SetFunction(NWNX_Rename, sFunc);
       VM.NWNX.StackPush(oObserver);
       VM.NWNX.StackPush(oTarget);
       VM.NWNX.Call();
@@ -66,7 +68,8 @@ namespace NWN.Core.NWNX
     /// Requires oObserver be OBJECT_INVALID.
     public static void ClearPCNameOverride(uint oTarget, uint oObserver = OBJECT_INVALID, int clearAll = FALSE)
     {
-      VM.NWNX.SetFunction(NWNX_Rename, "ClearPCNameOverride");
+      const string sFunc = "ClearPCNameOverride";
+      VM.NWNX.SetFunction(NWNX_Rename, sFunc);
       VM.NWNX.StackPush(clearAll);
       VM.NWNX.StackPush(oObserver);
       VM.NWNX.StackPush(oTarget);

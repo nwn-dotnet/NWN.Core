@@ -37,7 +37,8 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if successful, FALSE otherwise.</returns>
     public static int SendMessage(int channel, string message, uint sender = OBJECT_INVALID, uint target = OBJECT_INVALID)
     {
-      VM.NWNX.SetFunction(NWNX_Chat, "SendMessage");
+      const string sFunc = "SendMessage";
+      VM.NWNX.SetFunction(NWNX_Chat, sFunc);
       VM.NWNX.StackPush(target);
       VM.NWNX.StackPush(sender);
       VM.NWNX.StackPush(message);
@@ -51,7 +52,8 @@ namespace NWN.Core.NWNX
     /// <param name="script">The script name to handle the chat events.</param>
     public static void RegisterChatScript(string script)
     {
-      VM.NWNX.SetFunction(NWNX_Chat, "RegisterChatScript");
+      const string sFunc = "RegisterChatScript";
+      VM.NWNX.SetFunction(NWNX_Chat, sFunc);
       VM.NWNX.StackPush(script);
       VM.NWNX.Call();
     }
@@ -60,7 +62,8 @@ namespace NWN.Core.NWNX
     /// @note Must be called from a chat or system script handler.
     public static void SkipMessage()
     {
-      VM.NWNX.SetFunction(NWNX_Chat, "SkipMessage");
+      const string sFunc = "SkipMessage";
+      VM.NWNX.SetFunction(NWNX_Chat, sFunc);
       VM.NWNX.Call();
     }
 
@@ -69,7 +72,8 @@ namespace NWN.Core.NWNX
     /// <returns>The @ref chat_channels "channel" the message is sent.</returns>
     public static int GetChannel()
     {
-      VM.NWNX.SetFunction(NWNX_Chat, "GetChannel");
+      const string sFunc = "GetChannel";
+      VM.NWNX.SetFunction(NWNX_Chat, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
@@ -79,7 +83,8 @@ namespace NWN.Core.NWNX
     /// <returns>The message sent.</returns>
     public static string GetMessage()
     {
-      VM.NWNX.SetFunction(NWNX_Chat, "GetMessage");
+      const string sFunc = "GetMessage";
+      VM.NWNX.SetFunction(NWNX_Chat, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
     }
@@ -89,7 +94,8 @@ namespace NWN.Core.NWNX
     /// <returns>The object sending the message.</returns>
     public static uint GetSender()
     {
-      VM.NWNX.SetFunction(NWNX_Chat, "GetSender");
+      const string sFunc = "GetSender";
+      VM.NWNX.SetFunction(NWNX_Chat, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopObject();
     }
@@ -99,7 +105,8 @@ namespace NWN.Core.NWNX
     /// <returns>The target of the message or OBJECT_INVALID if no target.</returns>
     public static uint GetTarget()
     {
-      VM.NWNX.SetFunction(NWNX_Chat, "GetTarget");
+      const string sFunc = "GetTarget";
+      VM.NWNX.SetFunction(NWNX_Chat, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopObject();
     }
@@ -111,7 +118,8 @@ namespace NWN.Core.NWNX
     /// <param name="channel">The @ref chat_channels "channel" to modify the distance heard. Only applicable for talk and whisper.</param>
     public static void SetChatHearingDistance(float distance, uint listener = OBJECT_INVALID, int channel = NWNX_CHAT_CHANNEL_PLAYER_TALK)
     {
-      VM.NWNX.SetFunction(NWNX_Chat, "SetChatHearingDistance");
+      const string sFunc = "SetChatHearingDistance";
+      VM.NWNX.SetFunction(NWNX_Chat, sFunc);
       VM.NWNX.StackPush(channel);
       VM.NWNX.StackPush(listener);
       VM.NWNX.StackPush(distance);
@@ -123,7 +131,8 @@ namespace NWN.Core.NWNX
     /// <param name="channel">The @ref chat_channels "channel". Only applicable for talk and whisper.</param>
     public static float GetChatHearingDistance(uint listener = OBJECT_INVALID, int channel = NWNX_CHAT_CHANNEL_PLAYER_TALK)
     {
-      VM.NWNX.SetFunction(NWNX_Chat, "GetChatHearingDistance");
+      const string sFunc = "GetChatHearingDistance";
+      VM.NWNX.SetFunction(NWNX_Chat, sFunc);
       VM.NWNX.StackPush(channel);
       VM.NWNX.StackPush(listener);
       VM.NWNX.Call();

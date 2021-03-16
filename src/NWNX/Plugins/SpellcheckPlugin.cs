@@ -17,7 +17,8 @@ namespace NWN.Core.NWNX
     /// Make use of **DelayCommands** and **AssignCommands**
     public static string FindMisspell(string sentence)
     {
-      VM.NWNX.SetFunction(NWNX_SpellChecker, "FindMisspell");
+      const string sFunc = "FindMisspell";
+      VM.NWNX.SetFunction(NWNX_SpellChecker, sFunc);
       VM.NWNX.StackPush(sentence);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
@@ -31,7 +32,8 @@ namespace NWN.Core.NWNX
     /// Make use of **DelayCommands** and **AssignCommands**
     public static string GetSuggestSpell(string word)
     {
-      VM.NWNX.SetFunction(NWNX_SpellChecker, "GetSuggestSpell");
+      const string sFunc = "GetSuggestSpell";
+      VM.NWNX.SetFunction(NWNX_SpellChecker, sFunc);
       VM.NWNX.StackPush(word);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();

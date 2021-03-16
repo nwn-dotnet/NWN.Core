@@ -44,7 +44,8 @@ namespace NWN.Core.NWNX
     /// <returns>A @ref dialog_node_types "Node Type".  If called out of dialog, returns NWNX_DIALOG_NODE_TYPE_INVALID</returns>
     public static int GetCurrentNodeType()
     {
-      VM.NWNX.SetFunction(NWNX_Dialog, "GetCurrentNodeType");
+      const string sFunc = "GetCurrentNodeType";
+      VM.NWNX.SetFunction(NWNX_Dialog, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
@@ -53,7 +54,8 @@ namespace NWN.Core.NWNX
     /// <returns>A @ref dialog_script_types "Node Type". If called out of dialog, returns NWNX_DIALOG_SCRIPT_TYPE_OTHER</returns>
     public static int GetCurrentScriptType()
     {
-      VM.NWNX.SetFunction(NWNX_Dialog, "GetCurrentScriptType");
+      const string sFunc = "GetCurrentScriptType";
+      VM.NWNX.SetFunction(NWNX_Dialog, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
@@ -64,7 +66,8 @@ namespace NWN.Core.NWNX
     /// <returns>The absolute ID in the dialog. If called out of dialog, returns -1</returns>
     public static int GetCurrentNodeID()
     {
-      VM.NWNX.SetFunction(NWNX_Dialog, "GetCurrentNodeID");
+      const string sFunc = "GetCurrentNodeID";
+      VM.NWNX.SetFunction(NWNX_Dialog, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
@@ -74,7 +77,8 @@ namespace NWN.Core.NWNX
     /// <returns>The index of the current node.</returns>
     public static int GetCurrentNodeIndex()
     {
-      VM.NWNX.SetFunction(NWNX_Dialog, "GetCurrentNodeIndex");
+      const string sFunc = "GetCurrentNodeIndex";
+      VM.NWNX.SetFunction(NWNX_Dialog, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
@@ -84,7 +88,8 @@ namespace NWN.Core.NWNX
     /// <param name="gender">The gender for the text.</param>
     public static string GetCurrentNodeText(int language = NWNX_DIALOG_LANGUAGE_ENGLISH, int gender = GENDER_MALE)
     {
-      VM.NWNX.SetFunction(NWNX_Dialog, "GetCurrentNodeText");
+      const string sFunc = "GetCurrentNodeText";
+      VM.NWNX.SetFunction(NWNX_Dialog, sFunc);
       VM.NWNX.StackPush(gender);
       VM.NWNX.StackPush(language);
       VM.NWNX.Call();
@@ -98,7 +103,8 @@ namespace NWN.Core.NWNX
     /// <param name="gender">The gender for the text.</param>
     public static void SetCurrentNodeText(string text, int language = NWNX_DIALOG_LANGUAGE_ENGLISH, int gender = GENDER_MALE)
     {
-      VM.NWNX.SetFunction(NWNX_Dialog, "SetCurrentNodeText");
+      const string sFunc = "SetCurrentNodeText";
+      VM.NWNX.SetFunction(NWNX_Dialog, sFunc);
       VM.NWNX.StackPush(gender);
       VM.NWNX.StackPush(language);
       VM.NWNX.StackPush(text);
@@ -110,7 +116,8 @@ namespace NWN.Core.NWNX
     /// <param name="oObject">The object in a conversation</param>
     public static void End(uint oObject)
     {
-      VM.NWNX.SetFunction(NWNX_Dialog, "End");
+      const string sFunc = "End";
+      VM.NWNX.SetFunction(NWNX_Dialog, sFunc);
       VM.NWNX.StackPush(oObject);
       VM.NWNX.Call();
     }

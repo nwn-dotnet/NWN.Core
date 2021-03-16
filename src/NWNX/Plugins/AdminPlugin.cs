@@ -109,7 +109,8 @@ namespace NWN.Core.NWNX
     /// <returns>The current player password.</returns>
     public static string GetPlayerPassword()
     {
-      VM.NWNX.SetFunction(NWNX_Administration, "GetPlayerPassword");
+      const string sFunc = "GetPlayerPassword";
+      VM.NWNX.SetFunction(NWNX_Administration, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
     }
@@ -118,7 +119,8 @@ namespace NWN.Core.NWNX
     /// <param name="password">The password to use.</param>
     public static void SetPlayerPassword(string password)
     {
-      VM.NWNX.SetFunction(NWNX_Administration, "SetPlayerPassword");
+      const string sFunc = "SetPlayerPassword";
+      VM.NWNX.SetFunction(NWNX_Administration, sFunc);
       VM.NWNX.StackPush(password);
       VM.NWNX.Call();
     }
@@ -126,7 +128,8 @@ namespace NWN.Core.NWNX
     /// Clears the player password required to login.
     public static void ClearPlayerPassword()
     {
-      VM.NWNX.SetFunction(NWNX_Administration, "ClearPlayerPassword");
+      const string sFunc = "ClearPlayerPassword";
+      VM.NWNX.SetFunction(NWNX_Administration, sFunc);
       VM.NWNX.Call();
     }
 
@@ -134,7 +137,8 @@ namespace NWN.Core.NWNX
     /// <returns>The current DM password.</returns>
     public static string GetDMPassword()
     {
-      VM.NWNX.SetFunction(NWNX_Administration, "GetDMPassword");
+      const string sFunc = "GetDMPassword";
+      VM.NWNX.SetFunction(NWNX_Administration, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
     }
@@ -143,7 +147,8 @@ namespace NWN.Core.NWNX
     /// <param name="password">The password to use.</param>
     public static void SetDMPassword(string password)
     {
-      VM.NWNX.SetFunction(NWNX_Administration, "SetDMPassword");
+      const string sFunc = "SetDMPassword";
+      VM.NWNX.SetFunction(NWNX_Administration, sFunc);
       VM.NWNX.StackPush(password);
       VM.NWNX.Call();
     }
@@ -151,7 +156,8 @@ namespace NWN.Core.NWNX
     /// Signals the server to immediately shut down.
     public static void ShutdownServer()
     {
-      VM.NWNX.SetFunction(NWNX_Administration, "ShutdownServer");
+      const string sFunc = "ShutdownServer";
+      VM.NWNX.SetFunction(NWNX_Administration, sFunc);
       VM.NWNX.Call();
     }
 
@@ -164,7 +170,8 @@ namespace NWN.Core.NWNX
     /// <param name="sKickMessage">An optional kick message, if left blank it will default to "Delete Character" as reason.</param>
     public static void DeletePlayerCharacter(uint oPC, int bPreserveBackup = TRUE, string sKickMessage = "")
     {
-      VM.NWNX.SetFunction(NWNX_Administration, "DeletePlayerCharacter");
+      const string sFunc = "DeletePlayerCharacter";
+      VM.NWNX.SetFunction(NWNX_Administration, sFunc);
       VM.NWNX.StackPush(sKickMessage);
       VM.NWNX.StackPush(bPreserveBackup);
       VM.NWNX.StackPush(oPC);
@@ -175,7 +182,8 @@ namespace NWN.Core.NWNX
     /// <param name="ip">The IP Address to ban.</param>
     public static void AddBannedIP(string ip)
     {
-      VM.NWNX.SetFunction(NWNX_Administration, "AddBannedIP");
+      const string sFunc = "AddBannedIP";
+      VM.NWNX.SetFunction(NWNX_Administration, sFunc);
       VM.NWNX.StackPush(ip);
       VM.NWNX.Call();
     }
@@ -184,7 +192,8 @@ namespace NWN.Core.NWNX
     /// <param name="ip">The IP Address to unban.</param>
     public static void RemoveBannedIP(string ip)
     {
-      VM.NWNX.SetFunction(NWNX_Administration, "RemoveBannedIP");
+      const string sFunc = "RemoveBannedIP";
+      VM.NWNX.SetFunction(NWNX_Administration, sFunc);
       VM.NWNX.StackPush(ip);
       VM.NWNX.Call();
     }
@@ -193,7 +202,8 @@ namespace NWN.Core.NWNX
     /// <param name="key">The Public CD Key to ban.</param>
     public static void AddBannedCDKey(string key)
     {
-      VM.NWNX.SetFunction(NWNX_Administration, "AddBannedCDKey");
+      const string sFunc = "AddBannedCDKey";
+      VM.NWNX.SetFunction(NWNX_Administration, sFunc);
       VM.NWNX.StackPush(key);
       VM.NWNX.Call();
     }
@@ -202,7 +212,8 @@ namespace NWN.Core.NWNX
     /// <param name="key">The Public CD Key to unban.</param>
     public static void RemoveBannedCDKey(string key)
     {
-      VM.NWNX.SetFunction(NWNX_Administration, "RemoveBannedCDKey");
+      const string sFunc = "RemoveBannedCDKey";
+      VM.NWNX.SetFunction(NWNX_Administration, sFunc);
       VM.NWNX.StackPush(key);
       VM.NWNX.Call();
     }
@@ -212,7 +223,8 @@ namespace NWN.Core.NWNX
     /// @warning A user can change their playername at will.
     public static void AddBannedPlayerName(string playerName)
     {
-      VM.NWNX.SetFunction(NWNX_Administration, "AddBannedPlayerName");
+      const string sFunc = "AddBannedPlayerName";
+      VM.NWNX.SetFunction(NWNX_Administration, sFunc);
       VM.NWNX.StackPush(playerName);
       VM.NWNX.Call();
     }
@@ -221,7 +233,8 @@ namespace NWN.Core.NWNX
     /// <param name="playerName">The player name (community name) to unban.</param>
     public static void RemoveBannedPlayerName(string playerName)
     {
-      VM.NWNX.SetFunction(NWNX_Administration, "RemoveBannedPlayerName");
+      const string sFunc = "RemoveBannedPlayerName";
+      VM.NWNX.SetFunction(NWNX_Administration, sFunc);
       VM.NWNX.StackPush(playerName);
       VM.NWNX.Call();
     }
@@ -230,7 +243,8 @@ namespace NWN.Core.NWNX
     /// <returns>A string with a listing of the banned IPs/Keys/names.</returns>
     public static string GetBannedList()
     {
-      VM.NWNX.SetFunction(NWNX_Administration, "GetBannedList");
+      const string sFunc = "GetBannedList";
+      VM.NWNX.SetFunction(NWNX_Administration, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
     }
@@ -239,7 +253,8 @@ namespace NWN.Core.NWNX
     /// <param name="name">The name to give the module.</param>
     public static void SetModuleName(string name)
     {
-      VM.NWNX.SetFunction(NWNX_Administration, "SetModuleName");
+      const string sFunc = "SetModuleName";
+      VM.NWNX.SetFunction(NWNX_Administration, sFunc);
       VM.NWNX.StackPush(name);
       VM.NWNX.Call();
     }
@@ -248,7 +263,8 @@ namespace NWN.Core.NWNX
     /// <param name="name">The name to give the server.</param>
     public static void SetServerName(string name)
     {
-      VM.NWNX.SetFunction(NWNX_Administration, "SetServerName");
+      const string sFunc = "SetServerName";
+      VM.NWNX.SetFunction(NWNX_Administration, sFunc);
       VM.NWNX.StackPush(name);
       VM.NWNX.Call();
     }
@@ -256,7 +272,8 @@ namespace NWN.Core.NWNX
     /// Returns the server's name as shown to the serverlist.
     public static string GetServerName()
     {
-      VM.NWNX.SetFunction(NWNX_Administration, "GetServerName");
+      const string sFunc = "GetServerName";
+      VM.NWNX.SetFunction(NWNX_Administration, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
     }
@@ -266,7 +283,8 @@ namespace NWN.Core.NWNX
     /// <returns>The current setting for the supplied option from @ref admin_opts "Administration Options".</returns>
     public static int GetPlayOption(int option)
     {
-      VM.NWNX.SetFunction(NWNX_Administration, "GetPlayOption");
+      const string sFunc = "GetPlayOption";
+      VM.NWNX.SetFunction(NWNX_Administration, sFunc);
       VM.NWNX.StackPush(option);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -277,7 +295,8 @@ namespace NWN.Core.NWNX
     /// <param name="value">The new value for the option.</param>
     public static void SetPlayOption(int option, int value)
     {
-      VM.NWNX.SetFunction(NWNX_Administration, "SetPlayOption");
+      const string sFunc = "SetPlayOption";
+      VM.NWNX.SetFunction(NWNX_Administration, sFunc);
       VM.NWNX.StackPush(value);
       VM.NWNX.StackPush(option);
       VM.NWNX.Call();
@@ -295,7 +314,8 @@ namespace NWN.Core.NWNX
     /// <returns>Returns TRUE if successful</returns>
     public static int DeleteTURD(string playerName, string characterName)
     {
-      VM.NWNX.SetFunction(NWNX_Administration, "DeleteTURD");
+      const string sFunc = "DeleteTURD";
+      VM.NWNX.SetFunction(NWNX_Administration, sFunc);
       VM.NWNX.StackPush(characterName);
       VM.NWNX.StackPush(playerName);
       VM.NWNX.Call();
@@ -307,7 +327,8 @@ namespace NWN.Core.NWNX
     /// <returns>The current value for the supplied debug type from @ref admin_debug "Administration Debug Types".</returns>
     public static int GetDebugValue(int type)
     {
-      VM.NWNX.SetFunction(NWNX_Administration, "GetDebugValue");
+      const string sFunc = "GetDebugValue";
+      VM.NWNX.SetFunction(NWNX_Administration, sFunc);
       VM.NWNX.StackPush(type);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -318,7 +339,8 @@ namespace NWN.Core.NWNX
     /// <param name="state">The new state for the debug type, TRUE or FALSE</param>
     public static void SetDebugValue(int type, int state)
     {
-      VM.NWNX.SetFunction(NWNX_Administration, "SetDebugValue");
+      const string sFunc = "SetDebugValue";
+      VM.NWNX.SetFunction(NWNX_Administration, sFunc);
       VM.NWNX.StackPush(state);
       VM.NWNX.StackPush(type);
       VM.NWNX.Call();
@@ -328,7 +350,8 @@ namespace NWN.Core.NWNX
     /// @warning DANGER, DRAGONS. Bad things may or may not happen.
     public static void ReloadRules()
     {
-      VM.NWNX.SetFunction(NWNX_Administration, "ReloadRules");
+      const string sFunc = "ReloadRules";
+      VM.NWNX.SetFunction(NWNX_Administration, sFunc);
       VM.NWNX.Call();
     }
 
@@ -336,7 +359,8 @@ namespace NWN.Core.NWNX
     /// <returns>The minimum level for the server.</returns>
     public static int GetMinLevel()
     {
-      VM.NWNX.SetFunction(NWNX_Administration, "GetMinLevel");
+      const string sFunc = "GetMinLevel";
+      VM.NWNX.SetFunction(NWNX_Administration, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
@@ -345,7 +369,8 @@ namespace NWN.Core.NWNX
     /// <param name="nLevel">The minimum level for the server.</param>
     public static void SetMinLevel(int nLevel)
     {
-      VM.NWNX.SetFunction(NWNX_Administration, "SetMinLevel");
+      const string sFunc = "SetMinLevel";
+      VM.NWNX.SetFunction(NWNX_Administration, sFunc);
       VM.NWNX.StackPush(nLevel);
       VM.NWNX.Call();
     }
@@ -354,7 +379,8 @@ namespace NWN.Core.NWNX
     /// <returns>The maximum level for the server.</returns>
     public static int GetMaxLevel()
     {
-      VM.NWNX.SetFunction(NWNX_Administration, "GetMaxLevel");
+      const string sFunc = "GetMaxLevel";
+      VM.NWNX.SetFunction(NWNX_Administration, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
@@ -364,7 +390,8 @@ namespace NWN.Core.NWNX
     /// <param name="nLevel">The maximum level for the server.</param>
     public static void SetMaxLevel(int nLevel)
     {
-      VM.NWNX.SetFunction(NWNX_Administration, "SetMaxLevel");
+      const string sFunc = "SetMaxLevel";
+      VM.NWNX.SetFunction(NWNX_Administration, sFunc);
       VM.NWNX.StackPush(nLevel);
       VM.NWNX.Call();
     }

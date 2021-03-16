@@ -38,7 +38,8 @@ namespace NWN.Core.NWNX
     /// <returns>The name of the currently executing script.</returns>
     public static string GetCurrentScriptName(int depth = 0)
     {
-      VM.NWNX.SetFunction(NWNX_Util, "GetCurrentScriptName");
+      const string sFunc = "GetCurrentScriptName";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(depth);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
@@ -49,7 +50,8 @@ namespace NWN.Core.NWNX
     /// <returns>A string that contains all characters at their position (e.g. 'A' at 65).</returns>
     public static string GetAsciiTableString()
     {
-      VM.NWNX.SetFunction(NWNX_Util, "GetAsciiTableString");
+      const string sFunc = "GetAsciiTableString";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
     }
@@ -59,7 +61,8 @@ namespace NWN.Core.NWNX
     /// <returns>The hashed string as an integer.</returns>
     public static int Hash(string str)
     {
-      VM.NWNX.SetFunction(NWNX_Util, "Hash");
+      const string sFunc = "Hash";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(str);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -70,7 +73,8 @@ namespace NWN.Core.NWNX
     /// <returns>The string representation of the token value.</returns>
     public static string GetCustomToken(int customTokenNumber)
     {
-      VM.NWNX.SetFunction(NWNX_Util, "GetCustomToken");
+      const string sFunc = "GetCustomToken";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(customTokenNumber);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
@@ -81,7 +85,8 @@ namespace NWN.Core.NWNX
     /// <returns>The converted itemproperty.</returns>
     public static System.IntPtr EffectToItemProperty(System.IntPtr e)
     {
-      VM.NWNX.SetFunction(NWNX_Util, "EffectTypeCast");
+      const string sFunc = "EffectTypeCast";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(e, ENGINE_STRUCTURE_EFFECT);
       VM.NWNX.Call();
       return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
@@ -93,7 +98,8 @@ namespace NWN.Core.NWNX
     /// <returns>The converted effect.</returns>
     public static System.IntPtr ItemPropertyToEffect(System.IntPtr ip)
     {
-      VM.NWNX.SetFunction(NWNX_Util, "EffectTypeCast");
+      const string sFunc = "EffectTypeCast";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(ip, ENGINE_STRUCTURE_ITEMPROPERTY);
       VM.NWNX.Call();
       return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
@@ -104,7 +110,8 @@ namespace NWN.Core.NWNX
     /// <returns>The new string without any color codes.</returns>
     public static string StripColors(string str)
     {
-      VM.NWNX.SetFunction(NWNX_Util, "StripColors");
+      const string sFunc = "StripColors";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(str);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
@@ -116,7 +123,8 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE/FALSE</returns>
     public static int IsValidResRef(string resref, int type = NWNX_UTIL_RESREF_TYPE_CREATURE)
     {
-      VM.NWNX.SetFunction(NWNX_Util, "IsValidResRef");
+      const string sFunc = "IsValidResRef";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(type);
       VM.NWNX.StackPush(resref);
       VM.NWNX.Call();
@@ -128,7 +136,8 @@ namespace NWN.Core.NWNX
     /// <returns>The value of the environment variable.</returns>
     public static string GetEnvironmentVariable(string sVarname)
     {
-      VM.NWNX.SetFunction(NWNX_Util, "GetEnvironmentVariable");
+      const string sFunc = "GetEnvironmentVariable";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(sVarname);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
@@ -138,7 +147,8 @@ namespace NWN.Core.NWNX
     /// <returns>The minutes per hour.</returns>
     public static int GetMinutesPerHour()
     {
-      VM.NWNX.SetFunction(NWNX_Util, "GetMinutesPerHour");
+      const string sFunc = "GetMinutesPerHour";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
@@ -147,7 +157,8 @@ namespace NWN.Core.NWNX
     /// <param name="minutes">The minutes per hour.</param>
     public static void SetMinutesPerHour(int minutes)
     {
-      VM.NWNX.SetFunction(NWNX_Util, "SetMinutesPerHour");
+      const string sFunc = "SetMinutesPerHour";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(minutes);
       VM.NWNX.Call();
     }
@@ -158,7 +169,8 @@ namespace NWN.Core.NWNX
     /// <returns>The url encoded string.</returns>
     public static string EncodeStringForURL(string sURL)
     {
-      VM.NWNX.SetFunction(NWNX_Util, "EncodeStringForURL");
+      const string sFunc = "EncodeStringForURL";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(sURL);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
@@ -170,7 +182,8 @@ namespace NWN.Core.NWNX
     /// <returns>The amount of rows in the 2da.</returns>
     public static int Get2DARowCount(string str)
     {
-      VM.NWNX.SetFunction(NWNX_Util, "Get2DARowCount");
+      const string sFunc = "Get2DARowCount";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(str);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -185,7 +198,8 @@ namespace NWN.Core.NWNX
     /// <returns>The first resref found or "" if none is found.</returns>
     public static string GetFirstResRef(int nType, string sRegexFilter = "", int bModuleResourcesOnly = TRUE)
     {
-      VM.NWNX.SetFunction(NWNX_Util, "GetFirstResRef");
+      const string sFunc = "GetFirstResRef";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(bModuleResourcesOnly);
       VM.NWNX.StackPush(sRegexFilter);
       VM.NWNX.StackPush(nType);
@@ -197,7 +211,8 @@ namespace NWN.Core.NWNX
     /// <returns>The next resref found or "" if none is found.</returns>
     public static string GetNextResRef()
     {
-      VM.NWNX.SetFunction(NWNX_Util, "GetNextResRef");
+      const string sFunc = "GetNextResRef";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
     }
@@ -207,7 +222,8 @@ namespace NWN.Core.NWNX
     /// <returns>The ticks per second.</returns>
     public static int GetServerTicksPerSecond()
     {
-      VM.NWNX.SetFunction(NWNX_Util, "GetServerTicksPerSecond");
+      const string sFunc = "GetServerTicksPerSecond";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
@@ -219,7 +235,8 @@ namespace NWN.Core.NWNX
     /// <returns>The last created object. On error, this returns OBJECT_INVALID.</returns>
     public static uint GetLastCreatedObject(int nObjectType, int nNthLast = 1)
     {
-      VM.NWNX.SetFunction(NWNX_Util, "GetLastCreatedObject");
+      const string sFunc = "GetLastCreatedObject";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(nNthLast);
       VM.NWNX.StackPush(nObjectType);
       VM.NWNX.Call();
@@ -235,7 +252,8 @@ namespace NWN.Core.NWNX
     /// <returns>"" on success, or the compilation error.</returns>
     public static string AddScript(string sFileName, string sScriptData, int bWrapIntoMain = FALSE, string sAlias = "NWNX")
     {
-      VM.NWNX.SetFunction(NWNX_Util, "AddScript");
+      const string sFunc = "AddScript";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(sAlias);
       VM.NWNX.StackPush(bWrapIntoMain);
       VM.NWNX.StackPush(sScriptData);
@@ -250,7 +268,8 @@ namespace NWN.Core.NWNX
     /// <returns>The script file contents or "" on error.</returns>
     public static string GetNSSContents(string sScriptName, int nMaxLength = -1)
     {
-      VM.NWNX.SetFunction(NWNX_Util, "GetNSSContents");
+      const string sFunc = "GetNSSContents";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(nMaxLength);
       VM.NWNX.StackPush(sScriptName);
       VM.NWNX.Call();
@@ -265,7 +284,8 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE on success.</returns>
     public static int AddNSSFile(string sFileName, string sContents, string sAlias = "NWNX")
     {
-      VM.NWNX.SetFunction(NWNX_Util, "AddNSSFile");
+      const string sFunc = "AddNSSFile";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(sAlias);
       VM.NWNX.StackPush(sContents);
       VM.NWNX.StackPush(sFileName);
@@ -280,7 +300,8 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE on success.</returns>
     public static int RemoveNWNXResourceFile(string sFileName, int nType, string sAlias = "NWNX")
     {
-      VM.NWNX.SetFunction(NWNX_Util, "RemoveNWNXResourceFile");
+      const string sFunc = "RemoveNWNXResourceFile";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(sAlias);
       VM.NWNX.StackPush(nType);
       VM.NWNX.StackPush(sFileName);
@@ -292,7 +313,8 @@ namespace NWN.Core.NWNX
     /// <param name="nInstructionLimit">The new limit or -1 to reset to default.</param>
     public static void SetInstructionLimit(int nInstructionLimit)
     {
-      VM.NWNX.SetFunction(NWNX_Util, "SetInstructionLimit");
+      const string sFunc = "SetInstructionLimit";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(nInstructionLimit);
       VM.NWNX.Call();
     }
@@ -300,7 +322,8 @@ namespace NWN.Core.NWNX
     /// Get the NWScript instruction limit.
     public static int GetInstructionLimit()
     {
-      VM.NWNX.SetFunction(NWNX_Util, "GetInstructionLimit");
+      const string sFunc = "GetInstructionLimit";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
@@ -309,7 +332,8 @@ namespace NWN.Core.NWNX
     /// <param name="nInstructions">The number of instructions, must be >= 0.</param>
     public static void SetInstructionsExecuted(int nInstructions)
     {
-      VM.NWNX.SetFunction(NWNX_Util, "SetInstructionsExecuted");
+      const string sFunc = "SetInstructionsExecuted";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(nInstructions);
       VM.NWNX.Call();
     }
@@ -317,7 +341,8 @@ namespace NWN.Core.NWNX
     /// Get the number of NWScript instructions currently executed.
     public static int GetInstructionsExecuted()
     {
-      VM.NWNX.SetFunction(NWNX_Util, "GetInstructionsExecuted");
+      const string sFunc = "GetInstructionsExecuted";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
@@ -329,7 +354,8 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE on success.</returns>
     public static int RegisterServerConsoleCommand(string sCommand, string sScriptChunk)
     {
-      VM.NWNX.SetFunction(NWNX_Util, "RegisterServerConsoleCommand");
+      const string sFunc = "RegisterServerConsoleCommand";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(sScriptChunk);
       VM.NWNX.StackPush(sCommand);
       VM.NWNX.Call();
@@ -340,7 +366,8 @@ namespace NWN.Core.NWNX
     /// <param name="sCommand">The name of the command.</param>
     public static void UnregisterServerConsoleCommand(string sCommand)
     {
-      VM.NWNX.SetFunction(NWNX_Util, "UnregisterServerConsoleCommand");
+      const string sFunc = "UnregisterServerConsoleCommand";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(sCommand);
       VM.NWNX.Call();
     }
@@ -351,7 +378,8 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if the plugin exists and is enabled, otherwise FALSE.</returns>
     public static int PluginExists(string sPlugin)
     {
-      VM.NWNX.SetFunction(NWNX_Util, "PluginExists");
+      const string sFunc = "PluginExists";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(sPlugin);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -361,7 +389,8 @@ namespace NWN.Core.NWNX
     /// <returns>The absolute path of the server's home directory (-userDirectory)</returns>
     public static string GetUserDirectory()
     {
-      VM.NWNX.SetFunction(NWNX_Util, "GetUserDirectory");
+      const string sFunc = "GetUserDirectory";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
     }
@@ -370,7 +399,8 @@ namespace NWN.Core.NWNX
     /// <returns>Return value of the last run script.</returns>
     public static int GetScriptReturnValue()
     {
-      VM.NWNX.SetFunction(NWNX_Util, "GetScriptReturnValue");
+      const string sFunc = "GetScriptReturnValue";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
@@ -383,7 +413,8 @@ namespace NWN.Core.NWNX
     /// <returns>The door, or OBJECT_INVALID on failure.</returns>
     public static uint CreateDoor(string sResRef, System.IntPtr locLocation, string sNewTag = "", int nAppearanceType = -1)
     {
-      VM.NWNX.SetFunction(NWNX_Util, "CreateDoor");
+      const string sFunc = "CreateDoor";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       System.Numerics.Vector3 vPosition = GetPositionFromLocation(locLocation);
       VM.NWNX.StackPush(nAppearanceType);
       VM.NWNX.StackPush(sNewTag);
@@ -401,7 +432,8 @@ namespace NWN.Core.NWNX
     /// <param name="oObject">An object.</param>
     public static void SetItemActivator(uint oObject)
     {
-      VM.NWNX.SetFunction(NWNX_Util, "SetItemActivator");
+      const string sFunc = "SetItemActivator";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(oObject);
       VM.NWNX.Call();
     }
@@ -413,7 +445,8 @@ namespace NWN.Core.NWNX
     /// <returns>A NWNX_Util_WorldTime struct with the calendar day and time of day.</returns>
     public static WorldTime GetWorldTime(float fAdjustment = 0.0f)
     {
-      VM.NWNX.SetFunction(NWNX_Util, "GetWorldTime");
+      const string sFunc = "GetWorldTime";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(fAdjustment);
       VM.NWNX.Call();
       WorldTime strWorldTime = default;
@@ -428,7 +461,8 @@ namespace NWN.Core.NWNX
     /// <param name="sNewName">The new resource name or "" to clear a previous override, 16 characters or less.</param>
     public static void SetResourceOverride(int nResType, string sOldName, string sNewName)
     {
-      VM.NWNX.SetFunction(NWNX_Util, "SetResourceOverride");
+      const string sFunc = "SetResourceOverride";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(sNewName);
       VM.NWNX.StackPush(sOldName);
       VM.NWNX.StackPush(nResType);
@@ -441,7 +475,8 @@ namespace NWN.Core.NWNX
     /// <returns>The resource override, or "" if one is not set.</returns>
     public static string GetResourceOverride(int nResType, string sName)
     {
-      VM.NWNX.SetFunction(NWNX_Util, "GetResourceOverride");
+      const string sFunc = "GetResourceOverride";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(sName);
       VM.NWNX.StackPush(nResType);
       VM.NWNX.Call();
@@ -453,7 +488,8 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if the script param is set, FALSE if not or on error.</returns>
     public static int GetScriptParamIsSet(string sParamName)
     {
-      VM.NWNX.SetFunction(NWNX_Util, "GetScriptParamIsSet");
+      const string sFunc = "GetScriptParamIsSet";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(sParamName);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -463,7 +499,8 @@ namespace NWN.Core.NWNX
     /// <param name="nDawnHour">The new dawn hour</param>
     public static void SetDawnHour(int nDawnHour)
     {
-      VM.NWNX.SetFunction(NWNX_Util, "SetDawnHour");
+      const string sFunc = "SetDawnHour";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(nDawnHour);
       VM.NWNX.Call();
     }
@@ -472,7 +509,8 @@ namespace NWN.Core.NWNX
     /// <param name="nDuskHour">The new dusk hour</param>
     public static void SetDuskHour(int nDuskHour)
     {
-      VM.NWNX.SetFunction(NWNX_Util, "SetDuskHour");
+      const string sFunc = "SetDuskHour";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(nDuskHour);
       VM.NWNX.Call();
     }
@@ -481,7 +519,8 @@ namespace NWN.Core.NWNX
     public static HighResTimestamp GetHighResTimeStamp()
     {
       HighResTimestamp t = default;
-      VM.NWNX.SetFunction(NWNX_Util, "GetHighResTimeStamp");
+      const string sFunc = "GetHighResTimeStamp";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.Call();
       t.microseconds = VM.NWNX.StackPopInt();
       t.seconds = VM.NWNX.StackPopInt();
