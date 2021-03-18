@@ -1340,6 +1340,16 @@ namespace NWN.Core.NWNX
         FAMILIAR              | object | The familiar. Convert to object with StringToObject()  |
     
     _______________________________________
+        ## Client Levelup Begin Event
+        - NWNX_ON_CLIENT_LEVEL_UP_BEGIN_BEFORE
+        - NWNX_ON_CLIENT_LEVEL_UP_BEGIN_AFTER
+    
+        `OBJECT_SELF` = The player clicking the levelup button
+    
+        Event Data Tag        | Type   | Notes
+        ----------------------|--------|-------
+    
+    _______________________________________
     
     */
     /*
@@ -1469,6 +1479,7 @@ namespace NWN.Core.NWNX
     /// - {Enter|Exit}Detect events
     /// - Faction events
     /// - UnpossessFamiliar event
+    /// - ClientLevelUpBegin event
     public static void SkipEvent()
     {
       const string sFunc = "SkipEvent";
