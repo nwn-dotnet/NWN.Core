@@ -527,6 +527,15 @@ namespace NWN.Core.NWNX
       return t;
     }
 
+    /// <returns>Return name of a terminal, "" if not a TTY</returns>
+    public static string GetTTY()
+    {
+      const string sFunc = "GetTTY";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopString();
+    }
+
     /// @}
   }
 
