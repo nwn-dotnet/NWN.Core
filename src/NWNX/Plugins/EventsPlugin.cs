@@ -1350,6 +1350,16 @@ namespace NWN.Core.NWNX
         ----------------------|--------|-------
     
     _______________________________________
+        ## Creature Possess Familiar Event
+        - NWNX_ON_POSSESS_FAMILIAR_BEFORE
+        - NWNX_ON_POSSESS_FAMILIAR_AFTER
+    
+        `OBJECT_SELF` = The creature possessing a familiar
+    
+        Event Data Tag        | Type   | Notes
+        ----------------------|--------|-------
+        FAMILIAR              | object | The familiar. Convert to object with StringToObject()  |
+    _______________________________________
     
     */
     /*
