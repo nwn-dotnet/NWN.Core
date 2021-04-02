@@ -130,7 +130,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.StackPush(skillFeat.iAreaFlagsForbidden);
       VM.NWNX.StackPush(skillFeat.iAreaFlagsRequired);
       VM.NWNX.StackPush(skillFeat.fClassLevelMod);
-      VM.NWNX.StackPush( GetStringRight( skillFeat.sClasses, GetStringLength( skillFeat.sClasses) -FindSubString( skillFeat.sClasses, "1") ));
+      VM.NWNX.StackPush(GetStringRight(skillFeat.sClasses,  GetStringLength( skillFeat.sClasses) -FindSubString( skillFeat.sClasses, "1") ));
       VM.NWNX.StackPush(skillFeat.iFocusFeat);
       VM.NWNX.StackPush(skillFeat.iModifier);
       VM.NWNX.StackPush(skillFeat.iFeat);

@@ -23,7 +23,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.SetFunction(NWNX_Damage, sFunc);
       VM.NWNX.StackPush(oOwner);
       VM.NWNX.StackPush(sScript);
-      VM.NWNX.StackPush( "DAMAGE");
+      VM.NWNX.StackPush("DAMAGE");
       VM.NWNX.Call();
     }
 
@@ -85,7 +85,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.SetFunction(NWNX_Damage, sFunc);
       VM.NWNX.StackPush(oOwner);
       VM.NWNX.StackPush(sScript);
-      VM.NWNX.StackPush( "ATTACK");
+      VM.NWNX.StackPush("ATTACK");
       VM.NWNX.Call();
     }
 
