@@ -7,7 +7,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Events = "NWNX_Events";
 
-    ///< @private
+    ///&lt; @private
     /*
     *
      # Events
@@ -1473,8 +1473,8 @@ namespace NWN.Core.NWNX
     }
 
     /// Skips execution of the currently executing event.
-    /// If this is a NWNX event, that means that the base function call won't be called.
-    /// This won't impact any other subscribers, nor dispatch for before / after functions.
+    /// If this is a NWNX event, that means that the base function call won&apos;t be called.
+    /// This won&apos;t impact any other subscribers, nor dispatch for before / after functions.
     /// For example, if you are subscribing to NWNX_ON_EXAMINE_OBJECT_BEFORE, and you skip ...
     /// - The other subscribers will still be called.
     /// - The original function in the base game will be skipped.
@@ -1526,19 +1526,19 @@ namespace NWN.Core.NWNX
     ///
     /// THIS SHOULD ONLY BE CALLED FROM WITHIN AN EVENT HANDLER.
     /// ONLY WORKS WITH THE FOLLOWING EVENTS:
-    /// - Use Item event - "1" or "0" to send feedback whether item use is allowed
-    /// - Validate Use Item Event - "1" or "0" to show the item is unusable (red) in the player inventory.
-    /// - Healer's Kit event
-    /// - Listen/Spot Detection events -> "1" or "0"
-    /// - OnClientConnectBefore -> Reason for disconnect if skipped
-    /// - Ammo Reload event -> Forced ammunition returned
-    /// - Trap events -> "1" or "0"
-    /// - Sticky Player Name event -> "1" or "0"
-    /// - Heal event -> Amount of HP to heal
-    /// - Has Feat event -> "1" or "0"
-    /// - Stealth event -> "1" to perform HiPS (without the feat), "0" to bypass HiPS
-    /// - Faction set reputation event -> The new reputation to apply instead. ("0" - "100")
-    /// - CharacterSheetPermitted event -> "1" allow the player to view the character sheet or "0" to disallow
+    /// - Use Item event - &quot;1&quot; or &quot;0&quot; to send feedback whether item use is allowed
+    /// - Validate Use Item Event - &quot;1&quot; or &quot;0&quot; to show the item is unusable (red) in the player inventory.
+    /// - Healer&apos;s Kit event
+    /// - Listen/Spot Detection events -&gt; &quot;1&quot; or &quot;0&quot;
+    /// - OnClientConnectBefore -&gt; Reason for disconnect if skipped
+    /// - Ammo Reload event -&gt; Forced ammunition returned
+    /// - Trap events -&gt; &quot;1&quot; or &quot;0&quot;
+    /// - Sticky Player Name event -&gt; &quot;1&quot; or &quot;0&quot;
+    /// - Heal event -&gt; Amount of HP to heal
+    /// - Has Feat event -&gt; &quot;1&quot; or &quot;0&quot;
+    /// - Stealth event -&gt; &quot;1&quot; to perform HiPS (without the feat), &quot;0&quot; to bypass HiPS
+    /// - Faction set reputation event -&gt; The new reputation to apply instead. (&quot;0&quot; - &quot;100&quot;)
+    /// - CharacterSheetPermitted event -&gt; &quot;1&quot; allow the player to view the character sheet or &quot;0&quot; to disallow
     public static void SetEventResult(string data)
     {
       const string sFunc = "SetEventResult";
@@ -1549,7 +1549,7 @@ namespace NWN.Core.NWNX
 
     /// Returns the current event name
     ///
-    /// Returns "" on error
+    /// Returns &quot;&quot; on error
     public static string GetCurrentEvent()
     {
       const string sFunc = "GetCurrentEvent";
@@ -1595,9 +1595,9 @@ namespace NWN.Core.NWNX
     /// Toggle the whitelisting of IDs for sEvent. If whitelisting is enabled, the event will only fire for IDs that are
     /// on its whitelist.
     ///
-    /// ONLY WORKS WITH THE FOLLOWING EVENTS -> ID TYPES:
-    /// - NWNX_ON_CAST_SPELL -> SpellID
-    /// - NWNX_ON_HAS_FEAT -> FeatID (default enabled)
+    /// ONLY WORKS WITH THE FOLLOWING EVENTS -&gt; ID TYPES:
+    /// - NWNX_ON_CAST_SPELL -&gt; SpellID
+    /// - NWNX_ON_HAS_FEAT -&gt; FeatID (default enabled)
     ///
     /// @note This enables the whitelist for ALL scripts subscribed to sEvent.
     /// <param name="sEvent">The event name without _BEFORE / _AFTER.</param>
@@ -1637,6 +1637,6 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// @}
+    // @}
   }
 }

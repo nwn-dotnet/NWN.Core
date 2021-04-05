@@ -7,7 +7,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_SQL = "NWNX_SQL";
 
-    ///< @private
+    ///&lt; @private
     /// Prepares the provided query for execution.
     /// @note This does not execute the query. Will also clear any previous state.
     /// <param name="query">The query to prepare.</param>
@@ -57,7 +57,7 @@ namespace NWN.Core.NWNX
 
     /// @anchor sql_rnr
     /// Reads the next row of returned data.
-    /// @remark Should only be called after a successful call to @ref sql_rtrnr "NWNX_SQL_ReadyToReadNextRow()".
+    /// @remark Should only be called after a successful call to @ref sql_rtrnr &quot;NWNX_SQL_ReadyToReadNextRow()&quot;.
     public static void ReadNextRow()
     {
       const string sFunc = "ReadNextRow";
@@ -67,7 +67,7 @@ namespace NWN.Core.NWNX
 
     /// <param name="column">The column to read in the active row.</param>
     /// <returns>Data at the nth (0-based) column of the active row.</returns>
-    /// @remark Should only be called after a successful call to @ref sql_rnr "NWNX_SQL_ReadNextRow()".
+    /// @remark Should only be called after a successful call to @ref sql_rnr &quot;NWNX_SQL_ReadNextRow()&quot;.
     public static string ReadDataInActiveRow(int column = 0)
     {
       const string sFunc = "ReadDataInActiveRow";
@@ -179,7 +179,7 @@ namespace NWN.Core.NWNX
     }
 
     /// Gets the database type.
-    /// <returns>The database type we're interacting with.</returns>
+    /// <returns>The database type we&apos;re interacting with.</returns>
     /// @remark This is the same value as the value of NWNX_SQL_TYPE environment variable.
     public static string GetDatabaseType()
     {
@@ -190,7 +190,7 @@ namespace NWN.Core.NWNX
     }
 
     /// Free any resources attached to an existing prepared query.
-    /// @remark Resources are automatically freed when a new query is prepared, so calling this isn't necessary.
+    /// @remark Resources are automatically freed when a new query is prepared, so calling this isn&apos;t necessary.
     public static void DestroyPreparedQuery()
     {
       const string sFunc = "DestroyPreparedQuery";
@@ -217,6 +217,6 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// @}
+    // @}
   }
 }

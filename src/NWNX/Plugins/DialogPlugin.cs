@@ -7,7 +7,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Dialog = "NWNX_Dialog";
 
-    ///< @private
+    ///&lt; @private
     /// @name Dialog Node Types
     /// @anchor dialog_node_types
     /// @{
@@ -16,7 +16,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_DIALOG_NODE_TYPE_ENTRY_NODE = 1;
     public const int NWNX_DIALOG_NODE_TYPE_REPLY_NODE = 2;
 
-    /// @}
+    // @}
     /// @name Dialog Script Types
     /// @anchor dialog_script_types
     /// @{
@@ -24,7 +24,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_DIALOG_SCRIPT_TYPE_STARTING_CONDITIONAL = 1;
     public const int NWNX_DIALOG_SCRIPT_TYPE_ACTION_TAKEN = 2;
 
-    /// @}
+    // @}
     /// @name Dialog Languages
     /// @anchor dialog_languages
     /// @{
@@ -39,9 +39,9 @@ namespace NWN.Core.NWNX
     public const int NWNX_DIALOG_LANGUAGE_CHINESE_SIMPLIFIED = 130;
     public const int NWNX_DIALOG_LANGUAGE_JAPANESE = 131;
 
-    /// @}
-    /// Get the @ref dialog_node_types "Node Type" of the current text node
-    /// <returns>A @ref dialog_node_types "Node Type".  If called out of dialog, returns NWNX_DIALOG_NODE_TYPE_INVALID</returns>
+    // @}
+    /// Get the @ref dialog_node_types &quot;Node Type&quot; of the current text node
+    /// <returns>A @ref dialog_node_types &quot;Node Type&quot;.  If called out of dialog, returns NWNX_DIALOG_NODE_TYPE_INVALID</returns>
     public static int GetCurrentNodeType()
     {
       const string sFunc = "GetCurrentNodeType";
@@ -50,8 +50,8 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// Get the @ref dialog_script_types "Script Type" of the current text node
-    /// <returns>A @ref dialog_script_types "Node Type". If called out of dialog, returns NWNX_DIALOG_SCRIPT_TYPE_OTHER</returns>
+    /// Get the @ref dialog_script_types &quot;Script Type&quot; of the current text node
+    /// <returns>A @ref dialog_script_types &quot;Node Type&quot;. If called out of dialog, returns NWNX_DIALOG_SCRIPT_TYPE_OTHER</returns>
     public static int GetCurrentScriptType()
     {
       const string sFunc = "GetCurrentScriptType";
@@ -84,7 +84,7 @@ namespace NWN.Core.NWNX
     }
 
     /// Get the text of the current node
-    /// <param name="language">The @ref dialog_languages "language" of the text.</param>
+    /// <param name="language">The @ref dialog_languages &quot;language&quot; of the text.</param>
     /// <param name="gender">The gender for the text.</param>
     public static string GetCurrentNodeText(int language = NWNX_DIALOG_LANGUAGE_ENGLISH, int gender = GENDER_MALE)
     {
@@ -99,7 +99,7 @@ namespace NWN.Core.NWNX
     /// Set the text of the current node for given language/gender
     /// @note This will only work in a starting conditional script (action take comes after the text is displayed)
     /// <param name="text">The text for the node.</param>
-    /// <param name="language">The @ref dialog_languages "language" of the text.</param>
+    /// <param name="language">The @ref dialog_languages &quot;language&quot; of the text.</param>
     /// <param name="gender">The gender for the text.</param>
     public static void SetCurrentNodeText(string text, int language = NWNX_DIALOG_LANGUAGE_ENGLISH, int gender = GENDER_MALE)
     {
@@ -122,6 +122,6 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// @}
+    // @}
   }
 }

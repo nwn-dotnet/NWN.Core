@@ -7,13 +7,13 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_WebHook = "NWNX_WebHook";
 
-    ///< @private
+    ///&lt; @private
     /// Send a slack compatible webhook.
     /// <param name="host">The web server to send the hook.</param>
     /// <param name="path">The path to the hook.</param>
     /// <param name="message">The message to dispatch.</param>
     /// <param name="username">The username to display as the originator of the hook.</param>
-    /// <param name="mrkdwn">Set to false if you do not wish your message's markdown be parsed.</param>
+    /// <param name="mrkdwn">Set to false if you do not wish your message&apos;s markdown be parsed.</param>
     public static void SendWebHookHTTPS(string host, string path, string message, string username = "", int mrkdwn = 1)
     {
       const string sFunc = "SendWebHookHTTPS";
@@ -39,6 +39,6 @@ namespace NWN.Core.NWNX
       DelayCommand(delay, () => SendWebHookHTTPS(host, path, sMessage));
     }
 
-    /// @}
+    // @}
   }
 }

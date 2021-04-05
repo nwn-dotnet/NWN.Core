@@ -7,7 +7,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_NoStack = "NWNX_NoStack";
 
-    ///< @private
+    ///&lt; @private
     /// @name Spell Effect Bonus Types
     /// @anchor spell_bonus_types
     ///
@@ -23,7 +23,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_NOSTACK_EFFECT_TYPE_RESISTANCE = 7;
     public const int NWNX_NOSTACK_EFFECT_TYPE_SACRED = 8;
 
-    /// @}
+    // @}
     /// Sets a spell bonus type to be used by the NoStack feature.
     /// <param name="spell">The spell ID from spells.2da.</param>
     /// <param name="type">The new type.</param>
@@ -36,6 +36,6 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// @}
+    // @}
   }
 }

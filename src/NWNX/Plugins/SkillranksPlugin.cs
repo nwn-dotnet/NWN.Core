@@ -7,7 +7,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_SkillRanks = "NWNX_SkillRanks";
 
-    ///< @private
+    ///&lt; @private
     /// @name SkillRanks Key Abilities
     /// @anchor skr_key_abilities
     ///
@@ -15,22 +15,22 @@ namespace NWN.Core.NWNX
     /// @{
     public const int NWNX_SKILLRANKS_KEY_ABILITY_STRENGTH = 1;
 
-    ///< Strength
+    ///&lt; Strength
     public const int NWNX_SKILLRANKS_KEY_ABILITY_DEXTERITY = 2;
 
-    ///< Dexterity
+    ///&lt; Dexterity
     public const int NWNX_SKILLRANKS_KEY_ABILITY_CONSTITUTION = 4;
 
-    ///< Constitution
+    ///&lt; Constitution
     public const int NWNX_SKILLRANKS_KEY_ABILITY_INTELLIGENCE = 8;
 
-    ///< Intelligence
+    ///&lt; Intelligence
     public const int NWNX_SKILLRANKS_KEY_ABILITY_WISDOM = 16;
 
-    ///< Wisdom
+    ///&lt; Wisdom
     public const int NWNX_SKILLRANKS_KEY_ABILITY_CHARISMA = 32;
 
-    ///< Charisma
+    ///&lt; Charisma
     ///@}
     /// @name SkillRanks Key Ability Calculation Method
     /// @anchor skr_key_ability_calc_bits
@@ -40,16 +40,16 @@ namespace NWN.Core.NWNX
     /// @warning Use only one of these calculations in your mask! If you use more than one the first will be used.
     public const int NWNX_SKILLRANKS_KEY_ABILITY_CALC_MIN = 64;
 
-    ///< Use the minimum value of the provided ability scores.
+    ///&lt; Use the minimum value of the provided ability scores.
     public const int NWNX_SKILLRANKS_KEY_ABILITY_CALC_MAX = 128;
 
-    ///< Use the maximum value of the provided ability scores.
+    ///&lt; Use the maximum value of the provided ability scores.
     public const int NWNX_SKILLRANKS_KEY_ABILITY_CALC_AVERAGE = 256;
 
-    ///< Use the average value of the provided ability scores.
+    ///&lt; Use the average value of the provided ability scores.
     public const int NWNX_SKILLRANKS_KEY_ABILITY_CALC_SUM = 512;
 
-    ///< Use the sum of the provided ability scores.
+    ///&lt; Use the sum of the provided ability scores.
     ///@}
     /// A feat that manipulates skill ranks.
     /// <param name="iSkill">The skill to check the feat count.</param>
@@ -225,7 +225,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// @}
+    // @}
   }
 
   public struct SkillFeat

@@ -7,7 +7,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Weapon = "NWNX_Weapon";
 
-    ///< @private
+    ///&lt; @private
     /// @name Weapons Options
     /// @anchor wpn_opts
     ///
@@ -15,19 +15,19 @@ namespace NWN.Core.NWNX
     /// @{
     public const int NWNX_WEAPON_OPT_GRTFOCUS_AB_BONUS = 0;
 
-    ///< Greater Focus Attack Bonus
+    ///&lt; Greater Focus Attack Bonus
     public const int NWNX_WEAPON_OPT_GRTSPEC_DAM_BONUS = 1;
 
-    ///< Greater Specialization Damage Bonus
+    ///&lt; Greater Specialization Damage Bonus
     ///@}
     // Get Event Data Constants
     public const int NWNX_WEAPON_GETDATA_DC = 0;
 
-    ///< Get Devastating Critical Data
+    ///&lt; Get Devastating Critical Data
     // Set Event Data Constants
     public const int NWNX_WEAPON_SETDATA_DC_BYPASS = 0;
 
-    ///< Set Devastating Critical Bypass
+    ///&lt; Set Devastating Critical Bypass
     /// Devastating critical event data
     /// Set nFeat as weapon focus feat for a base item.
     /// <param name="nBaseItem">The base item id.</param>
@@ -194,7 +194,7 @@ namespace NWN.Core.NWNX
     }
 
     /// Set plugin options.
-    /// <param name="nOption">The option to change from @ref wpn_opts "Weapon Options".</param>
+    /// <param name="nOption">The option to change from @ref wpn_opts &quot;Weapon Options&quot;.</param>
     /// <param name="nVal">The new value of the option.</param>
     public static void SetOption(int nOption, int nVal)
     {
@@ -285,7 +285,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// @}
+    // @}
   }
 
   public struct DevastatingCriticalEvent_Data

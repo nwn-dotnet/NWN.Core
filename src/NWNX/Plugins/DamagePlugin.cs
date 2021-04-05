@@ -7,7 +7,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Damage = "NWNX_Damage";
 
-    ///< @private
+    ///&lt; @private
     /// @struct NWNX_Damage_DamageEventData
     /// Damage Event Data
     /// @struct NWNX_Damage_AttackEventData
@@ -174,7 +174,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// @}
+    // @}
   }
 
   public struct DamageEventData

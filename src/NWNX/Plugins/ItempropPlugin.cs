@@ -7,7 +7,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_ItemProperty = "NWNX_ItemProperty";
 
-    ///< @private
+    ///&lt; @private
     /// An unpacked itemproperty.
     /// Convert native itemproperty type to unpacked structure.
     /// <param name="ip">The itemproperty to convert.</param>
@@ -83,7 +83,7 @@ namespace NWN.Core.NWNX
       return n;
     }
 
-    /// @}
+    // @}
   }
 
   public struct NWNX_IPUnpacked

@@ -7,7 +7,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Creature = "NWNX_Creature";
 
-    ///< @private
+    ///&lt; @private
     /// @name Creature Movement Rates
     /// @anchor creature_movement_rates
     ///
@@ -23,7 +23,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_CREATURE_MOVEMENT_RATE_DEFAULT = 7;
     public const int NWNX_CREATURE_MOVEMENT_RATE_DM_FAST = 8;
 
-    /// @}
+    // @}
     /// @name Creature Movement Types
     /// @anchor creature_movement_types
     ///
@@ -35,7 +35,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_CREATURE_MOVEMENT_TYPE_SIDESTEP = 3;
     public const int NWNX_CREATURE_MOVEMENT_TYPE_WALK_BACKWARDS = 4;
 
-    /// @}
+    // @}
     /// @name Cleric Domains
     /// @anchor cleric_domains
     ///
@@ -61,7 +61,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_CREATURE_CLERIC_DOMAIN_WAR = 20;
     public const int NWNX_CREATURE_CLERIC_DOMAIN_WATER = 21;
 
-    /// @}
+    // @}
     /// @name Bonus Types
     /// @anchor bonus_types
     ///
@@ -74,7 +74,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_CREATURE_BONUS_TYPE_SKILL = 5;
     public const int NWNX_CREATURE_BONUS_TYPE_TOUCH_ATTACK = 6;
 
-    /// @}
+    // @}
     /// @struct NWNX_Creature_SpecialAbility
     /// A creature special ability.
     /// @struct NWNX_Creature_MemorisedSpell
@@ -151,7 +151,7 @@ namespace NWN.Core.NWNX
     /// Returns the feat learned at the level and index.
     /// <param name="creature">The creature object.</param>
     /// <param name="level">The level.</param>
-    /// <param name="index">The index. Index bounds: 0 <= index < NWNX_Creature_GetFeatCountByLevel().</param>
+    /// <param name="index">The index. Index bounds: 0 &lt;= index &lt; NWNX_Creature_GetFeatCountByLevel().</param>
     /// <returns>The feat id at the index.</returns>
     public static int GetFeatByLevel(uint creature, int level, int index)
     {
@@ -190,9 +190,9 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// Returns the creature's feat at a given index
+    /// Returns the creature&apos;s feat at a given index
     /// <param name="creature">The creature object.</param>
-    /// <param name="index">The index. Index bounds: 0 <= index < NWNX_Creature_GetFeatCount();</param>
+    /// <param name="index">The index. Index bounds: 0 &lt;= index &lt; NWNX_Creature_GetFeatCount();</param>
     /// <returns>The feat id at the index.</returns>
     public static int GetFeatByIndex(uint creature, int index)
     {
@@ -230,9 +230,9 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// Returns the creature's special ability at a given index.
+    /// Returns the creature&apos;s special ability at a given index.
     /// <param name="creature">The creature object.</param>
-    /// <param name="index">The index. Index bounds: 0 <= index < NWNX_Creature_GetSpecialAbilityCount().</param>
+    /// <param name="index">The index. Index bounds: 0 &lt;= index &lt; NWNX_Creature_GetSpecialAbilityCount().</param>
     /// <returns>An NWNX_Creature_SpecialAbility struct.</returns>
     public static SpecialAbility GetSpecialAbility(uint creature, int index)
     {
@@ -264,7 +264,7 @@ namespace NWN.Core.NWNX
 
     /// Removes a special ability from a creature.
     /// <param name="creature">The creature object.</param>
-    /// <param name="index">The index. Index bounds: 0 <= index < NWNX_Creature_GetSpecialAbilityCount().</param>
+    /// <param name="index">The index. Index bounds: 0 &lt;= index &lt; NWNX_Creature_GetSpecialAbilityCount().</param>
     public static void RemoveSpecialAbility(uint creature, int index)
     {
       const string sFunc = "RemoveSpecialAbility";
@@ -276,7 +276,7 @@ namespace NWN.Core.NWNX
 
     /// Sets a special ability at the index for the creature.
     /// <param name="creature">The creature object.</param>
-    /// <param name="index">The index. Index bounds: 0 <= index < NWNX_Creature_GetSpecialAbilityCount().</param>
+    /// <param name="index">The index. Index bounds: 0 &lt;= index &lt; NWNX_Creature_GetSpecialAbilityCount().</param>
     /// <param name="ability">An NWNX_Creature_SpecialAbility struct.</param>
     public static void SetSpecialAbility(uint creature, int index, SpecialAbility ability)
     {
@@ -388,7 +388,7 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// Gets the count of memorised spells for a creature's class at a level.
+    /// Gets the count of memorised spells for a creature&apos;s class at a level.
     /// <param name="creature">The creature object.</param>
     /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
     /// <param name="level">The spell level.</param>
@@ -404,11 +404,11 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// Gets the memorised spell at a class level's index.
+    /// Gets the memorised spell at a class level&apos;s index.
     /// <param name="creature">The creature object.</param>
     /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
     /// <param name="level">The spell level.</param>
-    /// <param name="index">The index. Index bounds: 0 <= index < NWNX_Creature_GetMemorisedSpellCountByLevel().</param>
+    /// <param name="index">The index. Index bounds: 0 &lt;= index &lt; NWNX_Creature_GetMemorisedSpellCountByLevel().</param>
     /// <returns>An NWNX_Creature_MemorisedSpell() struct.</returns>
     public static MemorisedSpell GetMemorisedSpell(uint creature, int @class, int level, int index)
     {
@@ -427,11 +427,11 @@ namespace NWN.Core.NWNX
       return spell;
     }
 
-    /// Sets the memorised spell at a class level's index.
+    /// Sets the memorised spell at a class level&apos;s index.
     /// <param name="creature">The creature object.</param>
     /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
     /// <param name="level">The spell level.</param>
-    /// <param name="index">The index. Index bounds: 0 <= index < NWNX_Creature_GetMemorisedSpellCountByLevel().</param>
+    /// <param name="index">The index. Index bounds: 0 &lt;= index &lt; NWNX_Creature_GetMemorisedSpellCountByLevel().</param>
     /// <param name="spell">An NWNX_Creature_MemorisedSpell() struct.</param>
     public static void SetMemorisedSpell(uint creature, int @class, int level, int index, MemorisedSpell spell)
     {
@@ -448,7 +448,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Gets the remaining spell slots (innate casting) at a class level's index.
+    /// Gets the remaining spell slots (innate casting) at a class level&apos;s index.
     /// <param name="creature">The creature object.</param>
     /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
     /// <param name="level">The spell level.</param>
@@ -512,11 +512,11 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// Gets the known spell at a class level's index.
+    /// Gets the known spell at a class level&apos;s index.
     /// <param name="creature">The creature object.</param>
     /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
     /// <param name="level">The spell level.</param>
-    /// <param name="index">The index. Index bounds: 0 <= index < NWNX_Creature_GetKnownSpellCount().</param>
+    /// <param name="index">The index. Index bounds: 0 &lt;= index &lt; NWNX_Creature_GetKnownSpellCount().</param>
     /// <returns>The spell id.</returns>
     public static int GetKnownSpell(uint creature, int @class, int level, int index)
     {
@@ -530,7 +530,7 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// Add a spell to a creature's spellbook for class.
+    /// Add a spell to a creature&apos;s spellbook for class.
     /// <param name="creature">The creature object.</param>
     /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
     /// <param name="level">The spell level.</param>
@@ -546,7 +546,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Remove a spell from creature's spellbook for class.
+    /// Remove a spell from creature&apos;s spellbook for class.
     /// <param name="creature">The creature object.</param>
     /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
     /// <param name="level">The spell level.</param>
@@ -562,7 +562,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Clear a specific spell from the creature's spellbook for class
+    /// Clear a specific spell from the creature&apos;s spellbook for class
     /// <param name="creature">The creature object.</param>
     /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
     /// <param name="spellId">The spell to clear.</param>
@@ -580,7 +580,7 @@ namespace NWN.Core.NWNX
     /// <param name="creature">The creature object.</param>
     /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
     /// <param name="level">The spell level.</param>
-    /// <param name="index">The index. Index bounds: 0 <= index < NWNX_Creature_GetMemorisedSpellCountByLevel().</param>
+    /// <param name="index">The index. Index bounds: 0 &lt;= index &lt; NWNX_Creature_GetMemorisedSpellCountByLevel().</param>
     public static void ClearMemorisedSpell(uint creature, int @class, int level, int index)
     {
       const string sFunc = "ClearMemorisedSpell";
@@ -620,7 +620,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Set creature's movement rate.
+    /// Set creature&apos;s movement rate.
     /// <param name="creature">The creature object.</param>
     /// <param name="rate">The movement rate.</param>
     public static void SetMovementRate(uint creature, int rate)
@@ -632,7 +632,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Returns the creature's current movement rate factor.
+    /// Returns the creature&apos;s current movement rate factor.
     /// @remark Base movement rate factor is 1.0.
     /// <param name="creature">The creature object.</param>
     /// <returns>The current movement rate factor.</returns>
@@ -645,7 +645,7 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopFloat();
     }
 
-    /// Sets the creature's current movement rate factor.
+    /// Sets the creature&apos;s current movement rate factor.
     /// @note Base movement rate factor is 1.0.
     /// <param name="creature">The creature object.</param>
     /// <param name="rate">The rate to set.</param>
@@ -658,7 +658,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Sets the creature's maximum movement rate cap.
+    /// Sets the creature&apos;s maximum movement rate cap.
     /// @note Default movement rate cap is 1.5.
     /// <param name="creature">The creature object.</param>
     /// <param name="cap">The cap to set.</param>
@@ -671,7 +671,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Returns the creature's current movement type
+    /// Returns the creature&apos;s current movement type
     /// <param name="creature">The creature object.</param>
     /// <returns>An NWNX_CREATURE_MOVEMENT_TYPE_* constant.</returns>
     public static int GetMovementType(uint creature)
@@ -697,7 +697,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Set creature's raw good/evil alignment value.
+    /// Set creature&apos;s raw good/evil alignment value.
     /// <param name="creature">The creature object.</param>
     /// <param name="value">The value to set.</param>
     public static void SetAlignmentGoodEvil(uint creature, int value)
@@ -709,7 +709,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Set creature's raw law/chaos alignment value.
+    /// Set creature&apos;s raw law/chaos alignment value.
     /// <param name="creature">The creature object.</param>
     /// <param name="value">The value to set.</param>
     public static void SetAlignmentLawChaos(uint creature, int value)
@@ -790,8 +790,8 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Set creature's base attack bonus (BAB).
-    /// @note Modifying the BAB will also affect the creature's attacks per round and its
+    /// Set creature&apos;s base attack bonus (BAB).
+    /// @note Modifying the BAB will also affect the creature&apos;s attacks per round and its
     /// eligibility for feats, prestige classes, etc.
     /// <param name="creature">The creature object.</param>
     /// <param name="bab">The BAB value. Should be between 0 and 254. Setting BAB to 0 will cause the</param>
@@ -889,7 +889,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Gets the creature's remaining unspent skill points.
+    /// Gets the creature&apos;s remaining unspent skill points.
     /// <param name="creature">The creature object.</param>
     /// <returns>The remaining unspent skill points.</returns>
     public static int GetSkillPointsRemaining(uint creature)
@@ -901,7 +901,7 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// Sets the creature's remaining unspent skill points.
+    /// Sets the creature&apos;s remaining unspent skill points.
     /// <param name="creature">The creature object.</param>
     /// <param name="skillpoints">The value to set.</param>
     public static void SetSkillPointsRemaining(uint creature, int skillpoints)
@@ -913,7 +913,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Sets the creature's racial type
+    /// Sets the creature&apos;s racial type
     /// <param name="creature">The creature object.</param>
     /// <param name="racialtype">The racial type to set.</param>
     public static void SetRacialType(uint creature, int racialtype)
@@ -925,7 +925,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Sets the creature's gold without sending a feedback message
+    /// Sets the creature&apos;s gold without sending a feedback message
     /// <param name="creature">The creature object.</param>
     /// <param name="gold">The amount of gold to set for their creature.</param>
     public static void SetGold(uint creature, int gold)
@@ -949,7 +949,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Gets the creature's base save.
+    /// Gets the creature&apos;s base save.
     /// <param name="creature">The creature object.</param>
     /// <param name="which">One of SAVING_THROW_FORT, SAVING_THROW_REFLEX or SAVING_THROW_WILL</param>
     /// <returns>The base save value.</returns>
@@ -964,7 +964,7 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// Sets the creature's base save.
+    /// Sets the creature&apos;s base save.
     /// <param name="creature">The creature object.</param>
     /// <param name="which">One of SAVING_THROW_FORT, SAVING_THROW_REFLEX or SAVING_THROW_WILL</param>
     /// <param name="value">The base save value.</param>
@@ -1006,7 +1006,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Sets the creature's challenge rating
+    /// Sets the creature&apos;s challenge rating
     /// <param name="creature">The creature object.</param>
     /// <param name="fCR">The challenge rating.</param>
     public static void SetChallengeRating(uint creature, float fCR)
@@ -1018,10 +1018,10 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Returns the creature's highest attack bonus based on its own stats.
+    /// Returns the creature&apos;s highest attack bonus based on its own stats.
     /// @note AB vs. Type and +AB on Gauntlets are excluded
     /// <param name="creature">The creature object.</param>
-    /// @param isMelee</param>
+    /// <param name="isMelee"></param>
     ///   * TRUE: Get Melee/Unarmed Attack Bonus
     ///   * FALSE: Get Ranged Attack Bonus
     ///   * -1: Get Attack Bonus depending on the weapon creature has equipped in its right hand
@@ -1113,10 +1113,10 @@ namespace NWN.Core.NWNX
     }
 
     /// Get total effect bonus
-    /// @remark This exposes the actual bonus value beyond a player's base scores to attack, damage bonus, saves,
+    /// @remark This exposes the actual bonus value beyond a player&apos;s base scores to attack, damage bonus, saves,
     /// skills, ability scores, and touch attack provided by spells, equipment, potions etc.
     /// <param name="creature">The creature object.</param>
-    /// <param name="bonusType">A @ref bonus_types "Bonus Type"</param>
+    /// <param name="bonusType">A @ref bonus_types &quot;Bonus Type&quot;</param>
     /// <param name="target">A target object. Used to calculate bonuses versus specific races, alignments, etc.</param>
     /// <param name="isElemental">If a damage bonus includes elemental damage.</param>
     /// <param name="isForceMax">If the bonus should return the maximum possible.</param>
@@ -1173,7 +1173,7 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopString();
     }
 
-    /// Set creature's spell resistance
+    /// Set creature&apos;s spell resistance
     /// <param name="creature">The creature object.</param>
     /// <param name="sr">The spell resistance.</param>
     /// @warning This setting will be overwritten by effects and once those effects fade the old setting (typically 0) will be set.
@@ -1186,7 +1186,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Set creature's animal companion creature type
+    /// Set creature&apos;s animal companion creature type
     /// <param name="creature">The master creature object.</param>
     /// <param name="type">The type from ANIMAL_COMPANION_CREATURE_TYPE_*.</param>
     public static void SetAnimalCompanionCreatureType(uint creature, int type)
@@ -1198,7 +1198,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Set creature's familiar creature type
+    /// Set creature&apos;s familiar creature type
     /// <param name="creature">The master creature object.</param>
     /// <param name="type">The type from FAMILIAR_CREATURE_TYPE_*.</param>
     public static void SetFamiliarCreatureType(uint creature, int type)
@@ -1210,7 +1210,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Set creature's animal companion's name
+    /// Set creature&apos;s animal companion&apos;s name
     /// <param name="creature">The master creature object.</param>
     /// <param name="name">The name to give their animal companion.</param>
     public static void SetAnimalCompanionName(uint creature, string name)
@@ -1222,7 +1222,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Set creature's familiar's name
+    /// Set creature&apos;s familiar&apos;s name
     /// <param name="creature">The master creature object.</param>
     /// <param name="name">The name to give their familiar.</param>
     public static void SetFamiliarName(uint creature, string name)
@@ -1258,7 +1258,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Gets one of creature's domains.
+    /// Gets one of creature&apos;s domains.
     /// <param name="creature">The creature object.</param>
     /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
     /// <param name="index">The first or second domain.</param>
@@ -1269,7 +1269,7 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// Sets one of creature's domains.
+    /// Sets one of creature&apos;s domains.
     /// <param name="creature">The creature object.</param>
     /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
     /// <param name="index">The first or second domain.</param>
@@ -1285,7 +1285,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Gets the creature's specialist school.
+    /// Gets the creature&apos;s specialist school.
     /// <param name="creature">The creature object.</param>
     /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
     /// @deprecated Use GetSpecialization(). This will be removed in future NWNX releases.
@@ -1295,7 +1295,7 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// Sets creature's specialist school.
+    /// Sets creature&apos;s specialist school.
     /// <param name="creature">The creature object.</param>
     /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
     /// <param name="school">The school constant.</param>
@@ -1345,9 +1345,9 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// Serialize oCreature's quickbar to a base64 string
+    /// Serialize oCreature&apos;s quickbar to a base64 string
     /// <param name="oCreature">The creature.</param>
-    /// <returns>A base64 string representation of oCreature's quickbar.</returns>
+    /// <returns>A base64 string representation of oCreature&apos;s quickbar.</returns>
     public static string SerializeQuickbar(uint oCreature)
     {
       const string sFunc = "SerializeQuickbar";
@@ -1446,8 +1446,8 @@ namespace NWN.Core.NWNX
     /// <param name="nModifier">The modifier to apply</param>
     /// <param name="nHand">0 for all attacks, 1 for Mainhand, 2 for Offhand</param>
     /// <param name="bPersist">Whether the modifier should persist to .bic file if applicable</param>
-    /// <param name="nBaseItem">Applies the.modifier only when the attack used this baseitem. BASE_ITEM_GLOVES for Unarmed, '-1' for all</param>
-    /// @note Persistence is activated each server reset by the first use of either 'SetCriticalMultiplier*' functions. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
+    /// <param name="nBaseItem">Applies the.modifier only when the attack used this baseitem. BASE_ITEM_GLOVES for Unarmed, &apos;-1&apos; for all</param>
+    /// @note Persistence is activated each server reset by the first use of either &apos;SetCriticalMultiplier*&apos; functions. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
     public static void SetCriticalMultiplierModifier(uint oCreature, int nModifier, int nHand = 0, int bPersist = FALSE, int nBaseItem = -1)
     {
       const string sFunc = "SetCriticalMultiplierModifier";
@@ -1463,7 +1463,7 @@ namespace NWN.Core.NWNX
     /// Gets the critical hit multiplier modifier for the Creature
     /// <param name="oCreature">The target creature</param>
     /// <param name="nHand">0 for all attacks, 1 for Mainhand, 2 for Offhand</param>
-    /// <param name="nBaseItem">The baseitem modifer to retrieve. BASE_ITEM_GLOVES for Unarmed, '-1' for all</param>
+    /// <param name="nBaseItem">The baseitem modifer to retrieve. BASE_ITEM_GLOVES for Unarmed, &apos;-1&apos; for all</param>
     /// <returns>the current critical hit multiplier modifier for the creature</returns>
     public static int GetCriticalMultiplierModifier(uint oCreature, int nHand = 0, int nBaseItem = -1)
     {
@@ -1481,8 +1481,8 @@ namespace NWN.Core.NWNX
     /// <param name="nOverride">The override value to apply. -1 to clear override.</param>
     /// <param name="nHand">0 for all attacks, 1 for Mainhand, 2 for Offhand</param>
     /// <param name="bPersist">Whether the modifier should persist to .bic file if applicable</param>
-    /// <param name="nBaseItem">Applies the.Override only when the attack used this baseitem. BASE_ITEM_GLOVES for Unarmed, '-1' for all</param>
-    /// @note Persistence is activated each server reset by the first use of either 'SetCriticalMultiplier*' functions. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
+    /// <param name="nBaseItem">Applies the.Override only when the attack used this baseitem. BASE_ITEM_GLOVES for Unarmed, &apos;-1&apos; for all</param>
+    /// @note Persistence is activated each server reset by the first use of either &apos;SetCriticalMultiplier*&apos; functions. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
     public static void SetCriticalMultiplierOverride(uint oCreature, int nOverride, int nHand = 0, int bPersist = FALSE, int nBaseItem = -1)
     {
       const string sFunc = "SetCriticalMultiplierOverride";
@@ -1498,7 +1498,7 @@ namespace NWN.Core.NWNX
     /// Gets the critical hit multiplier override for the Creature
     /// <param name="oCreature">The target creature</param>
     /// <param name="nHand">0 for all attacks, 1 for Mainhand, 2 for Offhand</param>
-    /// <param name="nBaseItem">The baseitem Override to retrieve. BASE_ITEM_GLOVES for Unarmed, '-1' for all</param>
+    /// <param name="nBaseItem">The baseitem Override to retrieve. BASE_ITEM_GLOVES for Unarmed, &apos;-1&apos; for all</param>
     /// <returns>the current critical hit multiplier override for the creature. No override == -1</returns>
     public static int GetCriticalMultiplierOverride(uint oCreature, int nHand = 0, int nBaseItem = -1)
     {
@@ -1516,8 +1516,8 @@ namespace NWN.Core.NWNX
     /// <param name="nModifier">The modifier to apply. Positive modifiers reduce critical chance. (I.e. From 18-20, a +1 results in crit range of 19-20)</param>
     /// <param name="nHand">0 for all attacks, 1 for Mainhand, 2 for Offhand</param>
     /// <param name="bPersist">Whether the modifier should persist to .bic file if applicable</param>
-    /// <param name="nBaseItem">Applies the.modifier only when the attack used this baseitem. BASE_ITEM_GLOVES for Unarmed, '-1' for all</param>
-    /// @note Persistence is activated each server reset by the first use of either 'SetCriticalRange*' functions. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
+    /// <param name="nBaseItem">Applies the.modifier only when the attack used this baseitem. BASE_ITEM_GLOVES for Unarmed, &apos;-1&apos; for all</param>
+    /// @note Persistence is activated each server reset by the first use of either &apos;SetCriticalRange*&apos; functions. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
     public static void SetCriticalRangeModifier(uint oCreature, int nModifier, int nHand = 0, int bPersist = FALSE, int nBaseItem = -1)
     {
       const string sFunc = "SetCriticalRangeModifier";
@@ -1533,7 +1533,7 @@ namespace NWN.Core.NWNX
     /// Gets the critical hit range modifier for the creature.
     /// <param name="oCreature">The target creature</param>
     /// <param name="nHand">0 for all attacks, 1 for Mainhand, 2 for Offhand</param>
-    /// <param name="nBaseItem">The baseitem modifer to retrieve. BASE_ITEM_GLOVES for Unarmed, '-1' for all</param>
+    /// <param name="nBaseItem">The baseitem modifer to retrieve. BASE_ITEM_GLOVES for Unarmed, &apos;-1&apos; for all</param>
     /// <returns>the current critical hit range modifier for the creature</returns>
     public static int GetCriticalRangeModifier(uint oCreature, int nHand = 0, int nBaseItem = -1)
     {
@@ -1551,8 +1551,8 @@ namespace NWN.Core.NWNX
     /// <param name="nOverride">The new minimum roll to crit. i.e nOverride of 15 results in crit range of 15-20. -1 to clear override.</param>
     /// <param name="nHand">0 for all attacks, 1 for Mainhand, 2 for Offhand</param>
     /// <param name="bPersist">Whether the modifier should persist to .bic file if applicable</param>
-    /// <param name="nBaseItem">Applies the.Override only when the attack used this baseitem. BASE_ITEM_GLOVES for Unarmed, '-1' for all</param>
-    /// @note Persistence is activated each server reset by the first use of either 'SetCriticalRange*' functions. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
+    /// <param name="nBaseItem">Applies the.Override only when the attack used this baseitem. BASE_ITEM_GLOVES for Unarmed, &apos;-1&apos; for all</param>
+    /// @note Persistence is activated each server reset by the first use of either &apos;SetCriticalRange*&apos; functions. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
     public static void SetCriticalRangeOverride(uint oCreature, int nOverride, int nHand = 0, int bPersist = FALSE, int nBaseItem = -1)
     {
       const string sFunc = "SetCriticalRangeOverride";
@@ -1568,7 +1568,7 @@ namespace NWN.Core.NWNX
     /// Sets the critical hit range Override for the creature.
     /// <param name="oCreature">The target creature</param>
     /// <param name="nHand">0 for all attacks, 1 for Mainhand, 2 for Offhand</param>
-    /// <param name="nBaseItem">The baseitem Override to retrieve. BASE_ITEM_GLOVES for Unarmed, '-1' for all</param>
+    /// <param name="nBaseItem">The baseitem Override to retrieve. BASE_ITEM_GLOVES for Unarmed, &apos;-1&apos; for all</param>
     /// <returns>the current critical hit range override for the creature. No override == -1</returns>
     public static int GetCriticalRangeOverride(uint oCreature, int nHand = 0, int nBaseItem = -1)
     {
@@ -1611,7 +1611,7 @@ namespace NWN.Core.NWNX
     }
 
     /// Override the damage level of oCreature.
-    /// @note Damage levels are the damage state under a creature's name, for example: 'Near Death'
+    /// @note Damage levels are the damage state under a creature&apos;s name, for example: &apos;Near Death&apos;
     /// <param name="oCreature">The target creature.</param>
     /// <param name="nDamageLevel">A damage level, see damagelevels.2da. Allowed values: 0-255 or -1 to remove the override.</param>
     public static void OverrideDamageLevel(uint oCreature, int nDamageLevel)
@@ -1673,7 +1673,7 @@ namespace NWN.Core.NWNX
 
     /// Gets the caster level of the last item used.
     /// <param name="oCreature">the creature who used the item.</param>
-    /// <returns>returns the creatures last used item's level.</returns>
+    /// <returns>returns the creatures last used item&apos;s level.</returns>
     public static int GetLastItemCasterLevel(uint oCreature)
     {
       const string sFunc = "GetLastItemCasterLevel";
@@ -1779,7 +1779,7 @@ namespace NWN.Core.NWNX
     /// <param name="vPosition">The starting position.</param>
     /// <param name="fRadius">The search radius around vPosition.</param>
     /// <param name="bWalkStraightLineRequired">Whether the creature must be able to walk in a straight line to the position.</param>
-    /// <returns>A safe location as vector, will return vPosition if one wasn't found. Returns {0.0, 0.0, 0.0} on error.</returns>
+    /// <returns>A safe location as vector, will return vPosition if one wasn&apos;t found. Returns {0.0, 0.0, 0.0} on error.</returns>
     public static System.Numerics.Vector3 ComputeSafeLocation(uint oCreature, System.Numerics.Vector3 vPosition, float fRadius = 20.0f, int bWalkStraightLineRequired = TRUE)
     {
       const string sFunc = "ComputeSafeLocation";
@@ -1798,7 +1798,7 @@ namespace NWN.Core.NWNX
       return v;
     }
 
-    /// Update oCreature's perception of oTargetCreature.
+    /// Update oCreature&apos;s perception of oTargetCreature.
     /// <param name="oCreature">The creature.</param>
     /// <param name="oTargetCreature">The target creature.</param>
     public static void DoPerceptionUpdateOnCreature(uint oCreature, uint oTargetCreature)
@@ -1954,7 +1954,7 @@ namespace NWN.Core.NWNX
 
     /// Sets a chance for normal Effect Immunities to be bypassed
     /// <param name="oCreature">The affected creature</param>
-    /// <param name="nImmunityType">'IMMUNITY_TYPE_*' to bypass. By default affects outgoing effects (oCreature -> another creature). Use a negative (-IMMUNITY_TYPE_*) to affect incoming effects instead (another creature -> oCreature) use 255/-255 to bypass ALL Immunities.</param>
+    /// <param name="nImmunityType">&apos;IMMUNITY_TYPE_*&apos; to bypass. By default affects outgoing effects (oCreature -&gt; another creature). Use a negative (-IMMUNITY_TYPE_*) to affect incoming effects instead (another creature -&gt; oCreature) use 255/-255 to bypass ALL Immunities.</param>
     /// <param name="nChance">The chance (of 100%) to bypass the immunity check. A Positive chance results in NOT IMMUNE. A Negative chance results in IMMUNE.</param>
     /// <param name="bPersist">Whether the modifier should persist to .bic file (for PCs)</param>
     /// @note Persistence is enabled after a server reset by the first use of this function. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
@@ -1972,7 +1972,7 @@ namespace NWN.Core.NWNX
 
     /// Gets a chance for normal Effect Immunities to be bypassed
     /// <param name="oCreature">The target creature</param>
-    /// <param name="nImmunityType">'IMMUNITY_TYPE_*' to retrive the current chance for bypass: Positive gets outgoing effects (oCreature -> another creature). Negative (-IMMUNITY_TYPE_*) gets incoming effects (another creature -> oCreature).</param>
+    /// <param name="nImmunityType">&apos;IMMUNITY_TYPE_*&apos; to retrive the current chance for bypass: Positive gets outgoing effects (oCreature -&gt; another creature). Negative (-IMMUNITY_TYPE_*) gets incoming effects (another creature -&gt; oCreature).</param>
     /// <returns>the current critical hit multiplier modifier for the creature</returns>
     public static int GetBypassEffectImmunity(uint oCreature, int nImmunityType)
     {
@@ -1984,7 +1984,16 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// @}
+    // @}
+    public static void SetLastKiller(uint oCreature, uint oKiller)
+    {
+      const string sFunc = "SetLastKiller";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(oKiller);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+    }
+
   }
 
   public struct SpecialAbility

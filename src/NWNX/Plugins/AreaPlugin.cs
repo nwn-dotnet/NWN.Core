@@ -7,7 +7,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Area = "NWNX_Area";
 
-    ///< @private
+    ///&lt; @private
     /// @name Area PVP Settings
     /// @anchor area_pvp
     /// @{
@@ -16,7 +16,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_AREA_PVP_SETTING_FULL_PVP = 2;
     public const int NWNX_AREA_PVP_SETTING_SERVER_DEFAULT = 3;
 
-    /// @}
+    // @}
     /// @name Area Weather Settings
     /// @anchor area_weather
     /// @{
@@ -24,7 +24,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_AREA_WEATHER_CHANCE_SNOW = 1;
     public const int NWNX_AREA_WEATHER_CHANCE_LIGHTNING = 2;
 
-    /// @}
+    // @}
     /// @name Area Day Night Cycle Settings
     /// @anchor area_daynight
     /// @{
@@ -32,7 +32,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_AREA_DAYNIGHTCYCLE_ALWAYS_BRIGHT = 1;
     public const int NWNX_AREA_DAYNIGHTCYCLE_ALWAYS_DARK = 2;
 
-    /// @}
+    // @}
     /// @name Area Sun/Moon Color Settings
     /// @anchor area_color
     /// @{
@@ -41,7 +41,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_AREA_COLOR_TYPE_SUN_AMBIENT = 2;
     public const int NWNX_AREA_COLOR_TYPE_SUN_DIFFUSE = 3;
 
-    /// @}
+    // @}
     /// A tile info struct
     /// Gets the number of players in area.
     /// <param name="area">The area object.</param>
@@ -80,7 +80,7 @@ namespace NWN.Core.NWNX
 
     /// Get the PVP setting of area
     /// <param name="area">The area object.</param>
-    /// <returns>Returns the @ref area_pvp "PVP Setting" for the area.</returns>
+    /// <returns>Returns the @ref area_pvp &quot;PVP Setting&quot; for the area.</returns>
     public static int GetPVPSetting(uint area)
     {
       const string sFunc = "GetPVPSetting";
@@ -92,7 +92,7 @@ namespace NWN.Core.NWNX
 
     /// Set the PVP setting of area
     /// <param name="area">The area object.</param>
-    /// <param name="pvpSetting">One of @ref area_pvp the "PVP Settings".</param>
+    /// <param name="pvpSetting">One of @ref area_pvp the &quot;PVP Settings&quot;.</param>
     public static void SetPVPSetting(uint area, int pvpSetting)
     {
       const string sFunc = "SetPVPSetting";
@@ -201,7 +201,7 @@ namespace NWN.Core.NWNX
     }
 
     /// Get the weather chance of type in area
-    /// <param name="type">A @ref area_weather "Weather Setting".</param>
+    /// <param name="type">A @ref area_weather &quot;Weather Setting&quot;.</param>
     /// <param name="area">The area object.</param>
     /// <returns>The percentage chance for the weather type. (0-100)</returns>
     public static int GetWeatherChance(uint area, int type)
@@ -216,7 +216,7 @@ namespace NWN.Core.NWNX
 
     /// Set the weather chance of type in area
     /// <param name="area">The area object.</param>
-    /// <param name="type">A @ref area_weather "Weather Setting".</param>
+    /// <param name="type">A @ref area_weather &quot;Weather Setting&quot;.</param>
     /// <param name="chance">The chance this weather event occurs.</param>
     public static void SetWeatherChance(uint area, int type, int chance)
     {
@@ -278,7 +278,7 @@ namespace NWN.Core.NWNX
 
     /// Get the day/night cycle of area
     /// <param name="area">The area object.</param>
-    /// <returns>The @ref area_daynight "Day Night Cycle Setting".</returns>
+    /// <returns>The @ref area_daynight &quot;Day Night Cycle Setting&quot;.</returns>
     public static int GetDayNightCycle(uint area)
     {
       const string sFunc = "GetDayNightCycle";
@@ -290,7 +290,7 @@ namespace NWN.Core.NWNX
 
     /// Set the day/night cycle of area
     /// <param name="area">The area object.</param>
-    /// <param name="type">= A @ref area_daynight "Day Night Cycle Setting".</param>
+    /// <param name="type">= A @ref area_daynight &quot;Day Night Cycle Setting&quot;.</param>
     public static void SetDayNightCycle(uint area, int type)
     {
       const string sFunc = "SetDayNightCycle";
@@ -302,7 +302,7 @@ namespace NWN.Core.NWNX
 
     /// Get the Sun/Moon Ambient/Diffuse colors of area
     /// <param name="area">The area object.</param>
-    /// <param name="type">= A @ref area_color "Sun/Moon Color Setting".</param>
+    /// <param name="type">= A @ref area_color &quot;Sun/Moon Color Setting&quot;.</param>
     /// <returns>A FOG_COLOR_* or a custom value, -1 on error.</returns>
     public static int GetSunMoonColors(uint area, int type)
     {
@@ -317,7 +317,7 @@ namespace NWN.Core.NWNX
     /// Set the Sun/Moon Ambient/Diffuse colors of area
     // type = NWNX_AREA_COLOR_TYPE_*
     /// <param name="area">The area object.</param>
-    /// <param name="type">= A @ref area_color "Sun/Moon Color Setting".</param>
+    /// <param name="type">= A @ref area_color &quot;Sun/Moon Color Setting&quot;.</param>
     /// <param name="color">= A FOG_COLOR_*.</param>
     /// @note The color can also be represented as a hex RGB number if specific color shades are desired.
     /// The format of a hex specified color would be 0xFFEEDD where
@@ -405,14 +405,14 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopString();
     }
 
-    /// Test to see if there's a direct, walkable line between two points in the area.
+    /// Test to see if there&apos;s a direct, walkable line between two points in the area.
     /// <param name="oArea">The area object.</param>
     /// <param name="fStartX,">fStartY The starting points.</param>
     /// <param name="fEndX,">fEndY The ending points.</param>
     /// <param name="fPerSpace">The personal space of a creature. Found in appearance.2da.</param>
     /// <param name="fHeight">The height of a creature. Found in appearance.2da.</param>
     /// <param name="bIgnoreDoors">Whether to ignore doors in the check.</param>
-    /// @return</returns>
+    /// <returns></returns>
     ///  * 1 if there is a direct walkable line.
     ///  * -1 if the line is blocked by terrain.
     ///  * -2 if the line is blocked by a placeable.
@@ -467,7 +467,7 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopObject();
     }
 
-    /// Add oObject to the ExportGIT exclusion list, objects on this list won't be exported when NWNX_Area_ExportGIT() is called.
+    /// Add oObject to the ExportGIT exclusion list, objects on this list won&apos;t be exported when NWNX_Area_ExportGIT() is called.
     /// <param name="oObject">The object to add</param>
     public static void AddObjectToExclusionList(uint oObject)
     {
@@ -618,7 +618,7 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopObject();
     }
 
-    /// @}
+    // @}
   }
 
   public struct TileInfo

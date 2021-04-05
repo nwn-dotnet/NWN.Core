@@ -7,7 +7,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Feedback = "NWNX_Feedback";
 
-    ///< @private
+    ///&lt; @private
     /// @name Combat Log Message Types
     /// @anchor combat_log_msgs
     /// @{
@@ -55,7 +55,7 @@ namespace NWN.Core.NWNX
     // 20 -> Unused
     
     */
-    /// @}
+    // @}
     /// @name Feedback Message Types
     /// @anchor feedback_msgs
     /// @{
@@ -366,9 +366,9 @@ namespace NWN.Core.NWNX
     const int NWNX_FEEDBACK_SAVE_COMPLETE                      = 226;
     
     */
-    /// @}
+    // @}
     /// Gets if feedback message is hidden.
-    /// <param name="nMessage">The message identifier from @ref feedback_msgs "Feedback Messages".</param>
+    /// <param name="nMessage">The message identifier from @ref feedback_msgs &quot;Feedback Messages&quot;.</param>
     /// <param name="oPC">The PC or OBJECT_INVALID for a global setting.</param>
     /// <returns>TRUE if the message is hidden.</returns>
     public static int GetFeedbackMessageHidden(int nMessage, uint oPC = OBJECT_INVALID)
@@ -402,7 +402,7 @@ namespace NWN.Core.NWNX
     }
 
     /// Gets if combat log message is hidden.
-    /// <param name="nMessage">The message identifier from @ref combat_log_msgs "Combat Log Messages".</param>
+    /// <param name="nMessage">The message identifier from @ref combat_log_msgs &quot;Combat Log Messages&quot;.</param>
     /// <param name="oPC">The PC or OBJECT_INVALID for a global setting.</param>
     /// <returns>TRUE if the message is hidden.</returns>
     public static int GetCombatLogMessageHidden(int nMessage, uint oPC = OBJECT_INVALID)
@@ -492,6 +492,6 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// @}
+    // @}
   }
 }

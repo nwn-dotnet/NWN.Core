@@ -7,7 +7,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Object = "NWNX_Object";
 
-    ///< @private
+    ///&lt; @private
     /// @anchor object_localvar_types
     /// @name Local Variable Types
     /// @{
@@ -18,7 +18,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_OBJECT_LOCALVAR_TYPE_OBJECT = 4;
     public const int NWNX_OBJECT_LOCALVAR_TYPE_LOCATION = 5;
 
-    /// @}
+    // @}
     /// @anchor object_internal_types
     /// @name Internal Object Types
     /// @{
@@ -40,7 +40,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_OBJECT_TYPE_INTERNAL_PORTAL = 15;
     public const int NWNX_OBJECT_TYPE_INTERNAL_SOUND = 16;
 
-    /// @}
+    // @}
     /// A local variable structure.
     /// Gets the count of all local variables.
     /// <param name="obj">The object.</param>
@@ -57,7 +57,7 @@ namespace NWN.Core.NWNX
     /// Gets the local variable at the provided index of the provided object.
     /// <param name="obj">The object.</param>
     /// <param name="index">The index.</param>
-    /// @note Index bounds: 0 >= index < NWNX_Object_GetLocalVariableCount().
+    /// @note Index bounds: 0 &gt;= index &lt; NWNX_Object_GetLocalVariableCount().
     /// @note As of build 8193.14 local variables no longer have strict ordering.
     ///       this means that any change to the variables can result in drastically
     ///       different order when iterating.
@@ -65,7 +65,7 @@ namespace NWN.Core.NWNX
     ///       of locals on the object. Individual variable access with GetLocalXxx()
     ///       is now O(1) though.
     /// @note As of build 8193.14, this function may return variable type UNKNOWN
-    ///       if the value is the default (0/0.0/""/OBJECT_INVALID) for the type.
+    ///       if the value is the default (0/0.0/&quot;&quot;/OBJECT_INVALID) for the type.
     /// <returns>An NWNX_Object_LocalVariable struct.</returns>
     public static LocalVariable GetLocalVariable(uint obj, int index)
     {
@@ -91,7 +91,7 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopObject();
     }
 
-    /// Set oObject's position.
+    /// Set oObject&apos;s position.
     /// <param name="oObject">The object.</param>
     /// <param name="vPosition">A vector position.</param>
     /// <param name="bUpdateSubareas">If TRUE and oObject is a creature, any triggers/traps at vPosition will fire their events.</param>
@@ -107,7 +107,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Get an object's hit points.
+    /// Get an object&apos;s hit points.
     /// @note Unlike the native GetCurrentHitpoints function, this excludes temporary hitpoints.
     /// <param name="obj">The object.</param>
     /// <returns>The hit points.</returns>
@@ -120,7 +120,7 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// Set an object's hit points.
+    /// Set an object&apos;s hit points.
     /// <param name="obj">The object.</param>
     /// <param name="hp">The hit points.</param>
     public static void SetCurrentHitPoints(uint creature, int hp)
@@ -132,7 +132,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Adjust an object's maximum hit points
+    /// Adjust an object&apos;s maximum hit points
     /// @note Will not work on PCs.
     /// <param name="obj">The object.</param>
     /// <param name="hp">The maximum hit points.</param>
@@ -195,7 +195,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Set oPlaceable's appearance.
+    /// Set oPlaceable&apos;s appearance.
     /// @note Will not update for PCs until they re-enter the area.
     /// <param name="oPlaceable">The placeable.</param>
     /// <param name="nAppearance">The appearance id.</param>
@@ -208,7 +208,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Get oPlaceable's appearance.
+    /// Get oPlaceable&apos;s appearance.
     /// <param name="oPlaceable">The placeable.</param>
     /// <returns>The appearance id.</returns>
     public static int GetAppearance(uint oPlaceable)
@@ -234,10 +234,10 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// Check if an item can fit in an object's inventory.
+    /// Check if an item can fit in an object&apos;s inventory.
     /// <param name="obj">The object with an inventory.</param>
     /// <param name="baseitem">The base item id to check for a fit.</param>
-    /// <returns>TRUE if an item of base item type can fit in object's inventory</returns>
+    /// <returns>TRUE if an item of base item type can fit in object&apos;s inventory</returns>
     public static int CheckFit(uint obj, int baseitem)
     {
       const string sFunc = "CheckFit";
@@ -248,7 +248,7 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// Get an object's damage immunity.
+    /// Get an object&apos;s damage immunity.
     /// <param name="obj">The object.</param>
     /// <param name="damageType">The damage type to check for immunity. Use DAMAGE_TYPE_* constants.</param>
     /// <returns>Damage immunity as a percentage.</returns>
@@ -278,7 +278,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Get placeable's static setting
+    /// Get placeable&apos;s static setting
     /// <param name="obj">The object.</param>
     /// <returns>TRUE if placeable is static.</returns>
     public static int GetPlaceableIsStatic(uint obj)
@@ -341,11 +341,11 @@ namespace NWN.Core.NWNX
 
     /// Set the geometry of a trigger with a list of vertex positions
     /// <param name="oTrigger">The trigger object.</param>
-    /// <param name="sGeometry">Needs to be in the following format -> {x.x, y.y, z.z} or {x.x, y.y}</param>
-    /// Example Geometry: "{1.0, 1.0, 0.0}{4.0, 1.0, 0.0}{4.0, 4.0, 0.0}{1.0, 4.0, 0.0}"
+    /// <param name="sGeometry">Needs to be in the following format -&gt; {x.x, y.y, z.z} or {x.x, y.y}</param>
+    /// Example Geometry: &quot;{1.0, 1.0, 0.0}{4.0, 1.0, 0.0}{4.0, 4.0, 0.0}{1.0, 4.0, 0.0}&quot;
     ///
     /// @remark The Z position is optional and will be calculated dynamically based
-    /// on terrain height if it's not provided.
+    /// on terrain height if it&apos;s not provided.
     ///
     /// @remark The minimum number of vertices is 3.
     public static void SetTriggerGeometry(uint oTrigger, string sGeometry)
@@ -397,7 +397,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Get oObject's integer variable sVarName.
+    /// Get oObject&apos;s integer variable sVarName.
     /// <param name="oObject">The object to get the variable from.</param>
     /// <param name="sVarName">The variable name.</param>
     /// <returns>The value or 0 on error.</returns>
@@ -411,11 +411,11 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// Set oObject's integer variable sVarName to nValue.
+    /// Set oObject&apos;s integer variable sVarName to nValue.
     /// <param name="oObject">The object to set the variable on.</param>
     /// <param name="sVarName">The variable name.</param>
     /// <param name="nValue">The integer value to to set</param>
-    /// <param name="bPersist">When TRUE, the value is persisted to GFF, this means that it'll be saved in the .bic file of a player's character or when an object is serialized.</param>
+    /// <param name="bPersist">When TRUE, the value is persisted to GFF, this means that it&apos;ll be saved in the .bic file of a player&apos;s character or when an object is serialized.</param>
     public static void SetInt(uint oObject, string sVarName, int nValue, int bPersist)
     {
       const string sFunc = "SetInt";
@@ -427,7 +427,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Delete oObject's integer variable sVarName.
+    /// Delete oObject&apos;s integer variable sVarName.
     /// <param name="oObject">The object to delete the variable from.</param>
     /// <param name="sVarName">The variable name.</param>
     public static void DeleteInt(uint oObject, string sVarName)
@@ -439,10 +439,10 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Get oObject's string variable sVarName.
+    /// Get oObject&apos;s string variable sVarName.
     /// <param name="oObject">The object to get the variable from.</param>
     /// <param name="sVarName">The variable name.</param>
-    /// <returns>The value or "" on error.</returns>
+    /// <returns>The value or &quot;&quot; on error.</returns>
     public static string GetString(uint oObject, string sVarName)
     {
       const string sFunc = "GetString";
@@ -453,11 +453,11 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopString();
     }
 
-    /// Set oObject's string variable sVarName to sValue.
+    /// Set oObject&apos;s string variable sVarName to sValue.
     /// <param name="oObject">The object to set the variable on.</param>
     /// <param name="sVarName">The variable name.</param>
     /// <param name="sValue">The string value to to set</param>
-    /// <param name="bPersist">When TRUE, the value is persisted to GFF, this means that it'll be saved in the .bic file of a player's character or when an object is serialized.</param>
+    /// <param name="bPersist">When TRUE, the value is persisted to GFF, this means that it&apos;ll be saved in the .bic file of a player&apos;s character or when an object is serialized.</param>
     public static void SetString(uint oObject, string sVarName, string sValue, int bPersist)
     {
       const string sFunc = "SetString";
@@ -469,7 +469,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Delete oObject's string variable sVarName.
+    /// Delete oObject&apos;s string variable sVarName.
     /// <param name="oObject">The object to delete the variable from.</param>
     /// <param name="sVarName">The variable name.</param>
     public static void DeleteString(uint oObject, string sVarName)
@@ -481,7 +481,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Get oObject's float variable sVarName.
+    /// Get oObject&apos;s float variable sVarName.
     /// <param name="oObject">The object to get the variable from.</param>
     /// <param name="sVarName">The variable name.</param>
     /// <returns>The value or 0.0f on error.</returns>
@@ -495,11 +495,11 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopFloat();
     }
 
-    /// Set oObject's float variable sVarName to fValue.
+    /// Set oObject&apos;s float variable sVarName to fValue.
     /// <param name="oObject">The object to set the variable on.</param>
     /// <param name="sVarName">The variable name.</param>
     /// <param name="fValue">The float value to to set</param>
-    /// <param name="bPersist">When TRUE, the value is persisted to GFF, this means that it'll be saved in the .bic file of a player's character or when an object is serialized.</param>
+    /// <param name="bPersist">When TRUE, the value is persisted to GFF, this means that it&apos;ll be saved in the .bic file of a player&apos;s character or when an object is serialized.</param>
     public static void SetFloat(uint oObject, string sVarName, float fValue, int bPersist)
     {
       const string sFunc = "SetFloat";
@@ -511,7 +511,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Delete oObject's persistent float variable sVarName.
+    /// Delete oObject&apos;s persistent float variable sVarName.
     /// <param name="oObject">The object to delete the variable from.</param>
     /// <param name="sVarName">The variable name.</param>
     public static void DeleteFloat(uint oObject, string sVarName)
@@ -536,11 +536,11 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Get if vPosition is inside oTrigger's geometry.
+    /// Get if vPosition is inside oTrigger&apos;s geometry.
     /// @note The Z value of vPosition is ignored.
     /// <param name="oTrigger">The trigger.</param>
     /// <param name="vPosition">The position.</param>
-    /// <returns>TRUE if vPosition is inside oTrigger's geometry.</returns>
+    /// <returns>TRUE if vPosition is inside oTrigger&apos;s geometry.</returns>
     public static int GetPositionIsInTrigger(uint oTrigger, System.Numerics.Vector3 vPosition)
     {
       const string sFunc = "GetPositionIsInTrigger";
@@ -553,9 +553,9 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// Gets the given object's internal type (NWNX_OBJECT_TYPE_INTERNAL_*)
+    /// Gets the given object&apos;s internal type (NWNX_OBJECT_TYPE_INTERNAL_*)
     /// <param name="oObject">The object.</param>
-    /// <returns>The object's type (NWNX_OBJECT_TYPE_INTERNAL_*)</returns>
+    /// <returns>The object&apos;s type (NWNX_OBJECT_TYPE_INTERNAL_*)</returns>
     public static int GetInternalObjectType(uint oObject)
     {
       const string sFunc = "GetInternalObjectType";
@@ -607,7 +607,7 @@ namespace NWN.Core.NWNX
 
     /// Peek at the UUID of oObject without assigning one if it does not have one
     /// <param name="oObject">The object</param>
-    /// <returns>The UUID or "" when the object does not have or cannot have an UUID</returns>
+    /// <returns>The UUID or &quot;&quot; when the object does not have or cannot have an UUID</returns>
     public static string PeekUUID(uint oObject)
     {
       const string sFunc = "PeekUUID";
@@ -751,7 +751,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// @}
+    // @}
   }
 
   public struct LocalVariable

@@ -7,7 +7,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Util = "NWNX_Util";
 
-    ///< @private
+    ///&lt; @private
     /// @name Resref Types
     /// @anchor resref_types
     /// Constants for the various types of resrefs.
@@ -33,7 +33,7 @@ namespace NWN.Core.NWNX
     /// A world time struct
     /// A high resolution timestamp
     /// Gets the name of the currently executing script.
-    /// @note If depth is > 0, it will return the name of the script that called this one via ExecuteScript().
+    /// @note If depth is &gt; 0, it will return the name of the script that called this one via ExecuteScript().
     /// <param name="depth">to seek the executing script.</param>
     /// <returns>The name of the currently executing script.</returns>
     public static string GetCurrentScriptName(int depth = 0)
@@ -47,7 +47,7 @@ namespace NWN.Core.NWNX
 
     /// Gets a string that contains the ascii table.
     /// @note The character at index 0 is a space.
-    /// <returns>A string that contains all characters at their position (e.g. 'A' at 65).</returns>
+    /// <returns>A string that contains all characters at their position (e.g. &apos;A&apos; at 65).</returns>
     public static string GetAsciiTableString()
     {
       const string sFunc = "GetAsciiTableString";
@@ -119,7 +119,7 @@ namespace NWN.Core.NWNX
 
     /// Determines if the supplied resref exists.
     /// <param name="resref">The resref to check.</param>
-    /// <param name="type">The @ref resref_types "Resref Type".</param>
+    /// <param name="type">The @ref resref_types &quot;Resref Type&quot;.</param>
     /// <returns>TRUE/FALSE</returns>
     public static int IsValidResRef(string resref, int type = NWNX_UTIL_RESREF_TYPE_CREATURE)
     {
@@ -190,12 +190,12 @@ namespace NWN.Core.NWNX
     }
 
     /// Get the first resref of nType.
-    /// <param name="nType">A @ref resref_types "Resref Type".</param>
+    /// <param name="nType">A @ref resref_types &quot;Resref Type&quot;.</param>
     /// <param name="sRegexFilter">Lets you filter out resrefs using a regexfilter.</param>
     /// For example: **nwnx_.\*** gets you all scripts prefixed with nwnx_
     /// when using the NSS resref type.
     /// <param name="bModuleResourcesOnly">If TRUE only custom resources will be returned.</param>
-    /// <returns>The first resref found or "" if none is found.</returns>
+    /// <returns>The first resref found or &quot;&quot; if none is found.</returns>
     public static string GetFirstResRef(int nType, string sRegexFilter = "", int bModuleResourcesOnly = TRUE)
     {
       const string sFunc = "GetFirstResRef";
@@ -208,7 +208,7 @@ namespace NWN.Core.NWNX
     }
 
     /// Get the next resref.
-    /// <returns>The next resref found or "" if none is found.</returns>
+    /// <returns>The next resref found or &quot;&quot; if none is found.</returns>
     public static string GetNextResRef()
     {
       const string sFunc = "GetNextResRef";
@@ -249,7 +249,7 @@ namespace NWN.Core.NWNX
     /// <param name="sScriptData">The script data to compile</param>
     /// <param name="bWrapIntoMain">Set to TRUE to wrap sScriptData into void main(){}.</param>
     /// <param name="sAlias">The alias of the resource directory to add the ncs file to. Default: UserDirectory/nwnx</param>
-    /// <returns>"" on success, or the compilation error.</returns>
+    /// <returns>&quot;&quot; on success, or the compilation error.</returns>
     public static string AddScript(string sFileName, string sScriptData, int bWrapIntoMain = FALSE, string sAlias = "NWNX")
     {
       const string sFunc = "AddScript";
@@ -265,7 +265,7 @@ namespace NWN.Core.NWNX
     /// Gets the contents of a .nss script file as a string.
     /// <param name="sScriptName">The name of the script to get the contents of.</param>
     /// <param name="nMaxLength">The max length of the return string, -1 to get everything</param>
-    /// <returns>The script file contents or "" on error.</returns>
+    /// <returns>The script file contents or &quot;&quot; on error.</returns>
     public static string GetNSSContents(string sScriptName, int nMaxLength = -1)
     {
       const string sFunc = "GetNSSContents";
@@ -295,7 +295,7 @@ namespace NWN.Core.NWNX
 
     /// Remove sFileName of nType from the UserDirectory/nwnx folder, or from the location of sAlias.
     /// <param name="sFileName">The filename without extension, 16 or less characters.</param>
-    /// <param name="nType">The @ref resref_types "Resref Type".</param>
+    /// <param name="nType">The @ref resref_types &quot;Resref Type&quot;.</param>
     /// <param name="sAlias">The alias of the resource directory to remove the file from. Default: UserDirectory/nwnx</param>
     /// <returns>TRUE on success.</returns>
     public static int RemoveNWNXResourceFile(string sFileName, int nType, string sAlias = "NWNX")
@@ -329,7 +329,7 @@ namespace NWN.Core.NWNX
     }
 
     /// Set the number of NWScript instructions currently executed.
-    /// <param name="nInstructions">The number of instructions, must be >= 0.</param>
+    /// <param name="nInstructions">The number of instructions, must be &gt;= 0.</param>
     public static void SetInstructionsExecuted(int nInstructions)
     {
       const string sFunc = "SetInstructionsExecuted";
@@ -348,7 +348,7 @@ namespace NWN.Core.NWNX
     }
 
     /// Register a server console command that will execute a script chunk.
-    /// @note Example usage: NWNX_Util_RegisterServerConsoleCommand("test", "PrintString(\"Test Command -> Args: $args\");");
+    /// @note Example usage: NWNX_Util_RegisterServerConsoleCommand(&quot;test&quot;, &quot;PrintString(\&quot;Test Command -&gt; Args: $args\&quot;);&quot;);
     /// <param name="sCommand">The name of the command.</param>
     /// <param name="sScriptChunk">The script chunk to run. You can use $args to get the console command arguments.</param>
     /// <returns>TRUE on success.</returns>
@@ -374,7 +374,7 @@ namespace NWN.Core.NWNX
 
     /// Determines if the given plugin exists and is enabled.
     /// <param name="sPlugin">The name of the plugin to check. This is the case sensitive plugin name as used by NWNX_CallFunction, NWNX_PushArgumentX</param>
-    /// @note Example usage: NWNX_Util_PluginExists("NWNX_Creature");
+    /// @note Example usage: NWNX_Util_PluginExists(&quot;NWNX_Creature&quot;);
     /// <returns>TRUE if the plugin exists and is enabled, otherwise FALSE.</returns>
     public static int PluginExists(string sPlugin)
     {
@@ -385,8 +385,8 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// Gets the server's current working user folder.
-    /// <returns>The absolute path of the server's home directory (-userDirectory)</returns>
+    /// Gets the server&apos;s current working user folder.
+    /// <returns>The absolute path of the server&apos;s home directory (-userDirectory)</returns>
     public static string GetUserDirectory()
     {
       const string sFunc = "GetUserDirectory";
@@ -456,9 +456,9 @@ namespace NWN.Core.NWNX
     }
 
     /// Set a server-side resource override.
-    /// <param name="nResType">A @ref resref_types "Resref Type".</param>
+    /// <param name="nResType">A @ref resref_types &quot;Resref Type&quot;.</param>
     /// <param name="sOldName">The old resource name, 16 characters or less.</param>
-    /// <param name="sNewName">The new resource name or "" to clear a previous override, 16 characters or less.</param>
+    /// <param name="sNewName">The new resource name or &quot;&quot; to clear a previous override, 16 characters or less.</param>
     public static void SetResourceOverride(int nResType, string sOldName, string sNewName)
     {
       const string sFunc = "SetResourceOverride";
@@ -470,9 +470,9 @@ namespace NWN.Core.NWNX
     }
 
     /// Get a server-side resource override.
-    /// <param name="nResType">A @ref resref_types "Resref Type".</param>
+    /// <param name="nResType">A @ref resref_types &quot;Resref Type&quot;.</param>
     /// <param name="sName">The name of the resource, 16 characters or less.</param>
-    /// <returns>The resource override, or "" if one is not set.</returns>
+    /// <returns>The resource override, or &quot;&quot; if one is not set.</returns>
     public static string GetResourceOverride(int nResType, string sName)
     {
       const string sFunc = "GetResourceOverride";
@@ -527,7 +527,7 @@ namespace NWN.Core.NWNX
       return t;
     }
 
-    /// <returns>Return name of a terminal, "" if not a TTY</returns>
+    /// <returns>Return name of a terminal, &quot;&quot; if not a TTY</returns>
     public static string GetTTY()
     {
       const string sFunc = "GetTTY";
@@ -536,7 +536,7 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopString();
     }
 
-    /// @}
+    // @}
   }
 
   public struct WorldTime

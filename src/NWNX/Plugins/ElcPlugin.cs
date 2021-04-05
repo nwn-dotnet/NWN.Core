@@ -7,7 +7,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_ELC = "NWNX_ELC";
 
-    ///< @private
+    ///&lt; @private
     /// @anchor elc_fail_type
     /// @name ELC Failure Types
     /// @{
@@ -19,7 +19,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_ELC_VALIDATION_FAILURE_TYPE_SPELL = 5;
     public const int NWNX_ELC_VALIDATION_FAILURE_TYPE_CUSTOM = 6;
 
-    /// @}
+    // @}
     /// @anchor elc_fail_subtype
     /// @name ELC Failure Subtypes
     /// @note By default these constants are commented out to avoid a
@@ -80,7 +80,7 @@ namespace NWN.Core.NWNX
     const int NWNX_ELC_SUBTYPE_NUM_FEAT_COMPARISON                      = 51;
      
     */
-    /// @}
+    // @}
     /// Sets the script that runs whenever an ELC validation failure happens
     /// <param name="sScript">The script name.</param>
     public static void SetELCScript(string sScript)
@@ -95,7 +95,7 @@ namespace NWN.Core.NWNX
     /// NWNX_ELC_VALIDATION_FAILURE_TYPE_CUSTOM type.
     /// <param name="bEnabled">TRUE to use this check.</param>
     /// @note Only runs if you have an ELC script set, be sure to skip this check
-    /// if a player doesn't fail your custom check otherwise they won't be able to log in
+    /// if a player doesn&apos;t fail your custom check otherwise they won&apos;t be able to log in
     public static void EnableCustomELCCheck(int bEnabled)
     {
       const string sFunc = "EnableCustomELCCheck";
@@ -114,7 +114,7 @@ namespace NWN.Core.NWNX
     }
 
     /// Get the validation failure type
-    /// <returns>A @ref elc_fail_type "Validation Failure Type"</returns>
+    /// <returns>A @ref elc_fail_type &quot;Validation Failure Type&quot;</returns>
     /// @note Only to be called in the ELC Script
     public static int GetValidationFailureType()
     {
@@ -125,7 +125,7 @@ namespace NWN.Core.NWNX
     }
 
     /// Get the validation failure subtype
-    /// <returns>A @ref elc_fail_subtype "Validation Failure Subtype"</returns>
+    /// <returns>A @ref elc_fail_subtype &quot;Validation Failure Subtype&quot;</returns>
     /// @note Only to be called in the ELC Script
     public static int GetValidationFailureSubType()
     {
@@ -147,7 +147,7 @@ namespace NWN.Core.NWNX
     }
 
     /// Set the failure message
-    /// <param name="nStrRef">The talk table strref the player receives, must be > 0.</param>
+    /// <param name="nStrRef">The talk table strref the player receives, must be &gt; 0.</param>
     /// @note Only to be called in the ELC Script
     public static void SetValidationFailureMessageStrRef(int nStrRef)
     {
@@ -220,6 +220,6 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// @}
+    // @}
   }
 }

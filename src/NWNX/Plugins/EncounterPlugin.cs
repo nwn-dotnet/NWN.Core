@@ -7,7 +7,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Encounter = "NWNX_Encounter";
 
-    ///< @private
+    ///&lt; @private
     /// A creature list entry for an encounter.
     /// Get the number of creatures in the encounter list
     /// <param name="encounter">The encounter object.</param>
@@ -233,11 +233,11 @@ namespace NWN.Core.NWNX
 
     /// Set the geometry of an encounter with a list of vertex positions
     /// <param name="oTrigger">The encounter object.</param>
-    /// <param name="sGeometry">Needs to be in the following format -> {x.x, y.y, z.z} or {x.x, y.y}</param>
-    /// Example Geometry: "{1.0, 1.0, 0.0}{4.0, 1.0, 0.0}{4.0, 4.0, 0.0}{1.0, 4.0, 0.0}"
+    /// <param name="sGeometry">Needs to be in the following format -&gt; {x.x, y.y, z.z} or {x.x, y.y}</param>
+    /// Example Geometry: &quot;{1.0, 1.0, 0.0}{4.0, 1.0, 0.0}{4.0, 4.0, 0.0}{1.0, 4.0, 0.0}&quot;
     ///
     /// @remark The Z position is optional and will be calculated dynamically based
-    /// on terrain height if it's not provided.
+    /// on terrain height if it&apos;s not provided.
     ///
     /// @remark The minimum number of vertices is 3.
     public static void SetGeometry(uint oEncounter, string sGeometry)
@@ -249,7 +249,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// @}
+    // @}
   }
 
   public struct CreatureListEntry

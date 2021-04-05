@@ -7,7 +7,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Tileset = "NWNX_Tileset";
 
-    ///< @private
+    ///&lt; @private
     /// A structure containing general tileset data.
     /// A structure containing the group data for a tileset.
     /// A structure containing the edge and corner types of a tile.
@@ -38,10 +38,10 @@ namespace NWN.Core.NWNX
       return str;
     }
 
-    /// Get the name of sTileset's terrain at nIndex.
+    /// Get the name of sTileset&apos;s terrain at nIndex.
     /// <param name="sTileset">The tileset.</param>
-    /// <param name="nIndex">The index of the terrain. Range: NWNX_Tileset_TilesetData.nNumTerrain > nIndex >= 0</param>
-    /// <returns>The terrain name or "" on error.</returns>
+    /// <param name="nIndex">The index of the terrain. Range: NWNX_Tileset_TilesetData.nNumTerrain &gt; nIndex &gt;= 0</param>
+    /// <returns>The terrain name or &quot;&quot; on error.</returns>
     public static string GetTilesetTerrain(string sTileset, int nIndex)
     {
       const string sFunc = "GetTilesetTerrain";
@@ -52,10 +52,10 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopString();
     }
 
-    /// Get the name of sTileset's crosser at nIndex.
+    /// Get the name of sTileset&apos;s crosser at nIndex.
     /// <param name="sTileset">The tileset.</param>
-    /// <param name="nIndex">The index of the crosser. Range: NWNX_Tileset_TilesetData.nNumCrossers > nIndex >= 0</param>
-    /// <returns>The crosser name or "" on error.</returns>
+    /// <param name="nIndex">The index of the crosser. Range: NWNX_Tileset_TilesetData.nNumCrossers &gt; nIndex &gt;= 0</param>
+    /// <returns>The crosser name or &quot;&quot; on error.</returns>
     public static string GetTilesetCrosser(string sTileset, int nIndex)
     {
       const string sFunc = "GetTilesetCrosser";
@@ -68,7 +68,7 @@ namespace NWN.Core.NWNX
 
     /// Get general data of the group at nIndex in sTileset.
     /// <param name="sTileset">The tileset.</param>
-    /// <param name="nIndex">The index of the group. Range: NWNX_Tileset_TilesetData.nNumGroups > nIndex >= 0</param>
+    /// <param name="nIndex">The index of the group. Range: NWNX_Tileset_TilesetData.nNumGroups &gt; nIndex &gt;= 0</param>
     /// <returns>A NWNX_Tileset_TilesetGroupData struct.</returns>
     public static TilesetGroupData GetTilesetGroupData(string sTileset, int nIndex)
     {
@@ -87,7 +87,7 @@ namespace NWN.Core.NWNX
 
     /// Get tile ID of the tile at nIndex.
     /// @note NWNX_Tileset_GetTilesetGroupData() needs to be called first.
-    /// <param name="nIndex">The index of the tile. Range: (NWNX_Tileset_TilesetGroupData.nRows * NWNX_Tileset_TilesetGroupData.nColumns) > nIndex >= 0</param>
+    /// <param name="nIndex">The index of the tile. Range: (NWNX_Tileset_TilesetGroupData.nRows * NWNX_Tileset_TilesetGroupData.nColumns) &gt; nIndex &gt;= 0</param>
     /// <returns>The tile ID or 0 on error.</returns>
     public static int GetTilesetGroupTile(int nIndex)
     {
@@ -101,7 +101,7 @@ namespace NWN.Core.NWNX
     /// Get the model name of a tile in sTileset.
     /// <param name="sTileset">The tileset.</param>
     /// <param name="nTileID">The tile ID.</param>
-    /// <returns>The model name or "" on error.</returns>
+    /// <returns>The model name or &quot;&quot; on error.</returns>
     public static string GetTileModel(string sTileset, int nTileID)
     {
       const string sFunc = "GetTileModel";
@@ -115,7 +115,7 @@ namespace NWN.Core.NWNX
     /// Get the minimap texture name of a tile in sTileset.
     /// <param name="sTileset">The tileset.</param>
     /// <param name="nTileID">The tile ID.</param>
-    /// <returns>The minimap texture name or "" on error.</returns>
+    /// <returns>The minimap texture name or &quot;&quot; on error.</returns>
     public static string GetTileMinimapTexture(string sTileset, int nTileID)
     {
       const string sFunc = "GetTileMinimapTexture";
@@ -166,7 +166,7 @@ namespace NWN.Core.NWNX
     /// Get the door data of a tile in sTileset.
     /// <param name="sTileset">The tileset.</param>
     /// <param name="nTileID">The tile ID.</param>
-    /// <param name="nIndex">The index of the door. Range: NWNX_Tileset_GetTileNumDoors() > nIndex >= 0</param>
+    /// <param name="nIndex">The index of the door. Range: NWNX_Tileset_GetTileNumDoors() &gt; nIndex &gt;= 0</param>
     /// <returns>A NWNX_Tileset_TileDoorData struct.</returns>
     public static TileDoorData GetTileDoorData(string sTileset, int nTileID, int nIndex = 0)
     {
@@ -187,7 +187,7 @@ namespace NWN.Core.NWNX
 
     /// Override the tiles of sAreaResRef with data in sOverrideName.
     /// <param name="sAreaResRef">The resref of the area to override.</param>
-    /// <param name="sOverrideName">The name of the override containing the custom tile data or "" to remove the override.</param>
+    /// <param name="sOverrideName">The name of the override containing the custom tile data or &quot;&quot; to remove the override.</param>
     public static void SetAreaTileOverride(string sAreaResRef, string sOverrideName)
     {
       const string sFunc = "SetAreaTileOverride";
@@ -250,7 +250,7 @@ namespace NWN.Core.NWNX
 
     /// Delete custom tile data of the tile at nIndex in sOverrideName.
     /// <param name="sOverrideName">The name of the override.</param>
-    /// <param name="nIndex">The tile's index or -1 to remove all custom tile data.</param>
+    /// <param name="nIndex">The tile&apos;s index or -1 to remove all custom tile data.</param>
     public static void DeleteOverrideTileData(string sOverrideName, int nIndex)
     {
       const string sFunc = "DeleteOverrideTileData";
@@ -260,7 +260,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// @}
+    // @}
   }
 
   public struct TilesetData

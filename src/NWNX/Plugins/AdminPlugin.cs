@@ -7,7 +7,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Administration = "NWNX_Administration";
 
-    ///< @private
+    ///&lt; @private
     /// @name Administration Options
     /// @anchor admin_opts
     ///
@@ -87,7 +87,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_ADMINISTRATION_OPTION_HIDE_HITPOINTS_GAINED = 26;
 
     // TRUE/FALSE
-    /// @}
+    // @}
     /// @name Administration Debug Types
     /// @anchor admin_debug
     ///
@@ -104,7 +104,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_ADMINISTRATION_DEBUG_HIT_DIE = 3;
 
     // TRUE/FALSE
-    /// @}
+    // @}
     /// Gets the current player password.
     /// <returns>The current player password.</returns>
     public static string GetPlayerPassword()
@@ -163,11 +163,11 @@ namespace NWN.Core.NWNX
 
     /// Deletes the player character from the servervault
     ///
-    /// The PC will be immediately booted from the game with a "Delete Character" message
+    /// The PC will be immediately booted from the game with a &quot;Delete Character&quot; message
     ///
     /// <param name="oPC">The player to delete.</param>
-    /// <param name="bPreserveBackup">If true, it will leave the file on server, only appending ".deleted0" to the bic filename.</param>
-    /// <param name="sKickMessage">An optional kick message, if left blank it will default to "Delete Character" as reason.</param>
+    /// <param name="bPreserveBackup">If true, it will leave the file on server, only appending &quot;.deleted0&quot; to the bic filename.</param>
+    /// <param name="sKickMessage">An optional kick message, if left blank it will default to &quot;Delete Character&quot; as reason.</param>
     public static void DeletePlayerCharacter(uint oPC, int bPreserveBackup = TRUE, string sKickMessage = "")
     {
       const string sFunc = "DeletePlayerCharacter";
@@ -249,7 +249,7 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopString();
     }
 
-    /// Set the module's name as shown to the serverlist.
+    /// Set the module&apos;s name as shown to the serverlist.
     /// <param name="name">The name to give the module.</param>
     public static void SetModuleName(string name)
     {
@@ -259,7 +259,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Set the server's name as shown to the serverlist.
+    /// Set the server&apos;s name as shown to the serverlist.
     /// <param name="name">The name to give the server.</param>
     public static void SetServerName(string name)
     {
@@ -269,7 +269,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Returns the server's name as shown to the serverlist.
+    /// Returns the server&apos;s name as shown to the serverlist.
     public static string GetServerName()
     {
       const string sFunc = "GetServerName";
@@ -278,9 +278,9 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopString();
     }
 
-    /// Get an @ref admin_opts "Administration Option" value.
-    /// <param name="option">An @ref admin_opts "Administration Option".</param>
-    /// <returns>The current setting for the supplied option from @ref admin_opts "Administration Options".</returns>
+    /// Get an @ref admin_opts &quot;Administration Option&quot; value.
+    /// <param name="option">An @ref admin_opts &quot;Administration Option&quot;.</param>
+    /// <returns>The current setting for the supplied option from @ref admin_opts &quot;Administration Options&quot;.</returns>
     public static int GetPlayOption(int option)
     {
       const string sFunc = "GetPlayOption";
@@ -290,8 +290,8 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// Set an @ref admin_opts "Administration Options" to a value.
-    /// <param name="option">The option to adjust from @ref admin_opts "Administration Options".</param>
+    /// Set an @ref admin_opts &quot;Administration Options&quot; to a value.
+    /// <param name="option">The option to adjust from @ref admin_opts &quot;Administration Options&quot;.</param>
     /// <param name="value">The new value for the option.</param>
     public static void SetPlayOption(int option, int value)
     {
@@ -306,7 +306,7 @@ namespace NWN.Core.NWNX
     ///
     /// At times a PC may get stuck in a permanent crash loop when attempting to log
     /// in. This function allows administrators to delete their Temporary User
-    /// Resource Data where the PC's current location is stored allowing them to log
+    /// Resource Data where the PC&apos;s current location is stored allowing them to log
     /// into the starting area.
     ///
     /// <param name="playerName">The community (login name).</param>
@@ -322,9 +322,9 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// Get an @ref admin_debug "Administration Debug Type" value.
-    /// <param name="type">An @ref admin_debug "Administration Debug Type".</param>
-    /// <returns>The current value for the supplied debug type from @ref admin_debug "Administration Debug Types".</returns>
+    /// Get an @ref admin_debug &quot;Administration Debug Type&quot; value.
+    /// <param name="type">An @ref admin_debug &quot;Administration Debug Type&quot;.</param>
+    /// <returns>The current value for the supplied debug type from @ref admin_debug &quot;Administration Debug Types&quot;.</returns>
     public static int GetDebugValue(int type)
     {
       const string sFunc = "GetDebugValue";
@@ -334,8 +334,8 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// Set an @ref admin_debug "Administration Debug Type" to a value.
-    /// <param name="type">The debug type to adjust from @ref admin_debug "Administration Debug Types".</param>
+    /// Set an @ref admin_debug &quot;Administration Debug Type&quot; to a value.
+    /// <param name="type">The debug type to adjust from @ref admin_debug &quot;Administration Debug Types&quot;.</param>
     /// <param name="state">The new state for the debug type, TRUE or FALSE</param>
     public static void SetDebugValue(int type, int state)
     {
@@ -396,6 +396,6 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// @}
+    // @}
   }
 }

@@ -7,7 +7,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Chat = "NWNX_Chat";
 
-    ///< @private
+    ///&lt; @private
     /// @name Chat Channels
     /// @anchor chat_channels
     ///
@@ -27,10 +27,10 @@ namespace NWN.Core.NWNX
     public const int NWNX_CHAT_CHANNEL_DM_PARTY = 22;
     public const int NWNX_CHAT_CHANNEL_DM_DM = 30;
 
-    /// @}
+    // @}
     /// Sends a chat message.
     /// @remark If no target is provided, then it broadcasts to all eligible targets.
-    /// <param name="channel">The @ref chat_channels "channel" to send the message.</param>
+    /// <param name="channel">The @ref chat_channels &quot;channel&quot; to send the message.</param>
     /// <param name="message">The message to send.</param>
     /// <param name="sender">The sender of the message.</param>
     /// <param name="target">The receiver of the message.</param>
@@ -67,9 +67,9 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Gets the chat @ref chat_channels "channel".
+    /// Gets the chat @ref chat_channels &quot;channel&quot;.
     /// @note Must be called from a chat or system script handler.
-    /// <returns>The @ref chat_channels "channel" the message is sent.</returns>
+    /// <returns>The @ref chat_channels &quot;channel&quot; the message is sent.</returns>
     public static int GetChannel()
     {
       const string sFunc = "GetChannel";
@@ -115,7 +115,7 @@ namespace NWN.Core.NWNX
     /// @remark Per player settings override server wide.
     /// <param name="distance">The distance in meters.</param>
     /// <param name="listener">The listener, if OBJECT_INVALID then it will be set server wide.</param>
-    /// <param name="channel">The @ref chat_channels "channel" to modify the distance heard. Only applicable for talk and whisper.</param>
+    /// <param name="channel">The @ref chat_channels &quot;channel&quot; to modify the distance heard. Only applicable for talk and whisper.</param>
     public static void SetChatHearingDistance(float distance, uint listener = OBJECT_INVALID, int channel = NWNX_CHAT_CHANNEL_PLAYER_TALK)
     {
       const string sFunc = "SetChatHearingDistance";
@@ -128,7 +128,7 @@ namespace NWN.Core.NWNX
 
     /// Gets the distance with which the player hears talks or whisper
     /// <param name="listener">The listener, if OBJECT_INVALID then will return server wide setting.</param>
-    /// <param name="channel">The @ref chat_channels "channel". Only applicable for talk and whisper.</param>
+    /// <param name="channel">The @ref chat_channels &quot;channel&quot;. Only applicable for talk and whisper.</param>
     public static float GetChatHearingDistance(uint listener = OBJECT_INVALID, int channel = NWNX_CHAT_CHANNEL_PLAYER_TALK)
     {
       const string sFunc = "GetChatHearingDistance";
@@ -139,6 +139,6 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopFloat();
     }
 
-    /// @}
+    // @}
   }
 }

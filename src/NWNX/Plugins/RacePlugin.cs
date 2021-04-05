@@ -7,7 +7,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Race = "NWNX_Race";
 
-    ///< @private
+    ///&lt; @private
     /// @name Racial Modifiers
     /// @anchor racial_modifiers
     ///
@@ -39,7 +39,7 @@ namespace NWN.Core.NWNX
     ///@}
     /// Sets a racial modifier.
     /// <param name="iRace">The RACIALTYPE_ constant or value in racialtypes.2da.</param>
-    /// <param name="iMod">The @ref racial_modifiers "racial modifier" to set.</param>
+    /// <param name="iMod">The @ref racial_modifiers &quot;racial modifier&quot; to set.</param>
     /// <param name="iParam1,">iParam2, iParam3 The parameters for this racial modifier.</param>
     public static void SetRacialModifier(int iRace, int iMod, int iParam1, int iParam2 = -559038737, int iParam3 = -559038737)
     {
@@ -80,6 +80,6 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// @}
+    // @}
   }
 }

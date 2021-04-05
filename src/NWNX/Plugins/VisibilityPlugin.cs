@@ -7,7 +7,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Visibility = "NWNX_Visibility";
 
-    ///< @private
+    ///&lt; @private
     /// @name Visibility Types
     /// @anchor vis_types
     /// @{
@@ -30,8 +30,8 @@ namespace NWN.Core.NWNX
     ///  * NWNX_VISIBILITY_ALWAYS_VISIBLE_DM_ONLY = Target is always visible only to DMs in all circumstances.
     ///
     /// <param name="oPlayer">The PC Object or OBJECT_INVALID.</param>
-    /// <param name="oTarget">The object for which we're querying the visibility override.</param>
-    /// <returns>The @ref vis_types "Visibility Type".</returns>
+    /// <param name="oTarget">The object for which we&apos;re querying the visibility override.</param>
+    /// <returns>The @ref vis_types &quot;Visibility Type&quot;.</returns>
     public static int GetVisibilityOverride(uint oPlayer, uint oTarget)
     {
       const string sFunc = "GetVisibilityOverride";
@@ -55,12 +55,12 @@ namespace NWN.Core.NWNX
     /// @warning Setting too many objects to ALWAYS_VISIBLE in an area will impact the performance of your players. Use sparingly.
     ///
     /// @note Player state overrides the global state which means if a global state is set
-    /// to NWNX_VISIBILITY_HIDDEN or NWNX_VISIBILITY_DM_ONLY but the player's state is
+    /// to NWNX_VISIBILITY_HIDDEN or NWNX_VISIBILITY_DM_ONLY but the player&apos;s state is
     /// set to NWNX_VISIBILITY_VISIBLE for the target, the object will be visible to the player.
     ///
     /// <param name="oPlayer">The PC Object or OBJECT_INVALID.</param>
-    /// <param name="oTarget">The object for which we're altering the visibility.</param>
-    /// <param name="nOverride">The visibility type from @ref vis_types "Visibility Types".</param>
+    /// <param name="oTarget">The object for which we&apos;re altering the visibility.</param>
+    /// <param name="nOverride">The visibility type from @ref vis_types &quot;Visibility Types&quot;.</param>
     public static void SetVisibilityOverride(uint oPlayer, uint oTarget, int nOverride)
     {
       const string sFunc = "SetVisibilityOverride";
@@ -71,6 +71,6 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// @}
+    // @}
   }
 }

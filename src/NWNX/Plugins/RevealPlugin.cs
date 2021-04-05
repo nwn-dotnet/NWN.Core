@@ -7,15 +7,15 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Reveal = "NWNX_Reveal";
 
-    ///< @private
+    ///&lt; @private
     /// @name Reveal Detection Methods
     /// @{
     public const int NWNX_REVEAL_SEEN = 1;
 
-    ///< Seen
+    ///&lt; Seen
     public const int NWNX_REVEAL_HEARD = 0;
 
-    ///< Heard
+    ///&lt; Heard
     ///@}
     /// Selectively reveals the character to an observer until the next time they stealth out of sight.
     /// <param name="oHiding">The creature who is stealthed.</param>
@@ -45,6 +45,6 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// @}
+    // @}
   }
 }

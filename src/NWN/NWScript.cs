@@ -1974,7 +1974,7 @@ namespace NWN.Core
     public const int DISEASE_VERMIN_MADNESS = 16;
 
     ///  the thing after CREATURE_TYPE_ should refer to the<br/>
-    ///  actual "subtype" in the lists given above.
+    ///  actual &amp;quot;subtype&amp;quot; in the lists given above.
     public const int CREATURE_TYPE_RACIAL_TYPE = 0;
     public const int CREATURE_TYPE_PLAYER_CHAR = 1;
     public const int CREATURE_TYPE_CLASS = 2;
@@ -5660,7 +5660,7 @@ namespace NWN.Core
     public const int COLOR_CHANNEL_TATTOO_1 = 2;
     public const int COLOR_CHANNEL_TATTOO_2 = 3;
 
-    ///  The following resrefs must match those in the tileset's set file.
+    ///  The following resrefs must match those in the tileset&amp;apos;s set file.
     public const string TILESET_RESREF_BEHOLDER_CAVES = "tib01";
     public const string TILESET_RESREF_CASTLE_INTERIOR = "tic01";
     public const string TILESET_RESREF_CITY_EXTERIOR = "tcn01";
@@ -5990,7 +5990,7 @@ namespace NWN.Core
       VM.Call(4);
     }
 
-    ///  Output oObject's ID to the log file.
+    ///  Output oObject&amp;apos;s ID to the log file.
     public static void PrintObject(uint oObject)
     {
       VM.StackPush(oObject);
@@ -5999,8 +5999,8 @@ namespace NWN.Core
 
     ///  Assign aActionToAssign to oActionSubject.<br/>
     ///  * No return value, but if an error occurs, the log file will contain<br/>
-    ///    "AssignCommand failed."<br/>
-    ///    (If the object doesn't exist, nothing happens.)
+    ///    &amp;quot;AssignCommand failed.&amp;quot;<br/>
+    ///    (If the object doesn&amp;apos;t exist, nothing happens.)
     public static void AssignCommand(uint oActionSubject, ActionDelegate aActionToAssign)
     {
       NWNCore.GameManager.ClosureAssignCommand(oActionSubject, aActionToAssign);
@@ -6009,7 +6009,7 @@ namespace NWN.Core
 
     ///  Delay aActionToDelay by fSeconds.<br/>
     ///  * No return value, but if an error occurs, the log file will contain<br/>
-    ///    "DelayCommand failed.".<br/>
+    ///    &amp;quot;DelayCommand failed.&amp;quot;.<br/>
     ///  It is suggested that functions which create effects should not be used<br/>
     ///  as parameters to delayed actions.  Instead, the effect should be created in the<br/>
     ///  script and then passed into the action.  For example:<br/>
@@ -6032,7 +6032,7 @@ namespace NWN.Core
 
     ///  Clear all the actions of the caller.<br/>
     ///  * No return value, but if an error occurs, the log file will contain<br/>
-    ///    "ClearAllActions failed.".<br/>
+    ///    &amp;quot;ClearAllActions failed.&amp;quot;.<br/>
     ///  - nClearCombatState: if true, this will immediately clear the combat state<br/>
     ///    on a creature, which will stop the combat music and allow them to rest,<br/>
     ///    engage in dialog, or other actions that they would normally have to wait for.
@@ -6147,7 +6147,7 @@ namespace NWN.Core
     ///  to call ClearAllActions in order to allow a creature to perform any other action<br/>
     ///  once ActionRandomWalk has been called.<br/>
     ///  * No return value, but if an error occurs the log file will contain<br/>
-    ///    "ActionRandomWalk failed."
+    ///    &amp;quot;ActionRandomWalk failed.&amp;quot;
     public static void ActionRandomWalk()
     {
       VM.Call(20);
@@ -6158,7 +6158,7 @@ namespace NWN.Core
     ///    invalid or a path cannot be found to it, the command does nothing.<br/>
     ///  - bRun: If this is TRUE, the action subject will run rather than walk<br/>
     ///  * No return value, but if an error occurs the log file will contain<br/>
-    ///    "MoveToPoint failed."
+    ///    &amp;quot;MoveToPoint failed.&amp;quot;
     public static void ActionMoveToLocation(System.IntPtr lDestination, int bRun = FALSE)
     {
       VM.StackPush(bRun);
@@ -6172,7 +6172,7 @@ namespace NWN.Core
     ///  - bRun: If this is TRUE, the action subject will run rather than walk<br/>
     ///  - fRange: This is the desired distance between the action subject and oMoveTo<br/>
     ///  * No return value, but if an error occurs the log file will contain<br/>
-    ///    "ActionMoveToObject failed."
+    ///    &amp;quot;ActionMoveToObject failed.&amp;quot;
     public static void ActionMoveToObject(uint oMoveTo, int bRun = FALSE, float fRange = 1.0f)
     {
       VM.StackPush(fRange);
@@ -6189,7 +6189,7 @@ namespace NWN.Core
     ///  - fMoveAwayRange: This is the distance we wish the action subject to put<br/>
     ///    between themselves and oFleeFrom<br/>
     ///  * No return value, but if an error occurs the log file will contain<br/>
-    ///    "ActionMoveAwayFromObject failed."
+    ///    &amp;quot;ActionMoveAwayFromObject failed.&amp;quot;
     public static void ActionMoveAwayFromObject(uint oFleeFrom, int bRun = FALSE, float fMoveAwayRange = 40.0f)
     {
       VM.StackPush(fMoveAwayRange);
@@ -6269,7 +6269,7 @@ namespace NWN.Core
       return VM.StackPopObject();
     }
 
-    ///  Create an item with the template sItemTemplate in oTarget's inventory.<br/>
+    ///  Create an item with the template sItemTemplate in oTarget&amp;apos;s inventory.<br/>
     ///  - nStackSize: This is the stack size of the item to be created<br/>
     ///  - sNewTag: If this string is not empty, it will replace the default tag from the template<br/>
     ///  * Return value: The object that has been created.  On error, this returns<br/>
@@ -6290,7 +6290,7 @@ namespace NWN.Core
     ///  Equip oItem into nInventorySlot.<br/>
     ///  - nInventorySlot: INVENTORY_SLOT_*<br/>
     ///  * No return value, but if an error occurs the log file will contain<br/>
-    ///    "ActionEquipItem failed."<br/>
+    ///    &amp;quot;ActionEquipItem failed.&amp;quot;<br/>
     /// <br/>
     ///  Note:<br/>
     ///        If the creature already has an item equipped in the slot specified, it will be<br/>
@@ -6298,7 +6298,7 @@ namespace NWN.Core
     /// <br/>
     ///        In order for ActionEquipItem to succeed the creature must be able to equip the<br/>
     ///        item oItem normally. This means that:<br/>
-    ///        1) The item is in the creature's inventory.<br/>
+    ///        1) The item is in the creature&amp;apos;s inventory.<br/>
     ///        2) The item must already be identified (if magical).<br/>
     ///        3) The creature has the level required to equip the item (if magical and ILR is on).<br/>
     ///        4) The creature possesses the required feats to equip the item (such as weapon proficiencies).
@@ -6318,7 +6318,7 @@ namespace NWN.Core
 
     ///  Pick up oItem from the ground.<br/>
     ///  * No return value, but if an error occurs the log file will contain<br/>
-    ///    "ActionPickUpItem failed."
+    ///    &amp;quot;ActionPickUpItem failed.&amp;quot;
     public static void ActionPickUpItem(uint oItem)
     {
       VM.StackPush(oItem);
@@ -6327,7 +6327,7 @@ namespace NWN.Core
 
     ///  Put down oItem on the ground.<br/>
     ///  * No return value, but if an error occurs the log file will contain<br/>
-    ///    "ActionPutDownItem failed."
+    ///    &amp;quot;ActionPutDownItem failed.&amp;quot;
     public static void ActionPutDownItem(uint oItem)
     {
       VM.StackPush(oItem);
@@ -6356,20 +6356,20 @@ namespace NWN.Core
     ///  Get the creature nearest to oTarget, subject to all the criteria specified.<br/>
     ///  - nFirstCriteriaType: CREATURE_TYPE_*<br/>
     ///  - nFirstCriteriaValue:<br/>
-    ///    -> CLASS_TYPE_* if nFirstCriteriaType was CREATURE_TYPE_CLASS<br/>
-    ///    -> SPELL_* if nFirstCriteriaType was CREATURE_TYPE_DOES_NOT_HAVE_SPELL_EFFECT<br/>
+    ///    -&amp;gt; CLASS_TYPE_* if nFirstCriteriaType was CREATURE_TYPE_CLASS<br/>
+    ///    -&amp;gt; SPELL_* if nFirstCriteriaType was CREATURE_TYPE_DOES_NOT_HAVE_SPELL_EFFECT<br/>
     ///       or CREATURE_TYPE_HAS_SPELL_EFFECT<br/>
-    ///    -> TRUE or FALSE if nFirstCriteriaType was CREATURE_TYPE_IS_ALIVE<br/>
-    ///    -> PERCEPTION_* if nFirstCriteriaType was CREATURE_TYPE_PERCEPTION<br/>
-    ///    -> PLAYER_CHAR_IS_PC or PLAYER_CHAR_NOT_PC if nFirstCriteriaType was<br/>
+    ///    -&amp;gt; TRUE or FALSE if nFirstCriteriaType was CREATURE_TYPE_IS_ALIVE<br/>
+    ///    -&amp;gt; PERCEPTION_* if nFirstCriteriaType was CREATURE_TYPE_PERCEPTION<br/>
+    ///    -&amp;gt; PLAYER_CHAR_IS_PC or PLAYER_CHAR_NOT_PC if nFirstCriteriaType was<br/>
     ///       CREATURE_TYPE_PLAYER_CHAR<br/>
-    ///    -> RACIAL_TYPE_* if nFirstCriteriaType was CREATURE_TYPE_RACIAL_TYPE<br/>
-    ///    -> REPUTATION_TYPE_* if nFirstCriteriaType was CREATURE_TYPE_REPUTATION<br/>
+    ///    -&amp;gt; RACIAL_TYPE_* if nFirstCriteriaType was CREATURE_TYPE_RACIAL_TYPE<br/>
+    ///    -&amp;gt; REPUTATION_TYPE_* if nFirstCriteriaType was CREATURE_TYPE_REPUTATION<br/>
     ///    For example, to get the nearest PC, use:<br/>
     ///    (CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC)<br/>
-    ///  - oTarget: We're trying to find the creature of the specified type that is<br/>
+    ///  - oTarget: We&amp;apos;re trying to find the creature of the specified type that is<br/>
     ///    nearest to oTarget<br/>
-    ///  - nNth: We don't have to find the first nearest: we can find the Nth nearest...<br/>
+    ///  - nNth: We don&amp;apos;t have to find the first nearest: we can find the Nth nearest...<br/>
     ///  - nSecondCriteriaType: This is used in the same way as nFirstCriteriaType to<br/>
     ///    further specify the type of creature that we are looking for.<br/>
     ///  - nSecondCriteriaValue: This is used in the same way as nFirstCriteriaValue<br/>
@@ -6458,7 +6458,7 @@ namespace NWN.Core
     ///    camera to the new position, while the other types will result in the camera moving gradually into position<br/>
     ///  Pitch and distance are limited to valid values for the current camera mode:<br/>
     ///  Top Down: Distance = 5-20, Pitch = 1-50<br/>
-    ///  Driving camera: Distance = 6 (can't be changed), Pitch = 1-62<br/>
+    ///  Driving camera: Distance = 6 (can&amp;apos;t be changed), Pitch = 1-62<br/>
     ///  Chase: Distance = 5-20, Pitch = 1-50<br/>
     ///  *** NOTE *** In NWN:Hordes of the Underdark the camera limits have been relaxed to the following:<br/>
     ///  Distance 1-25<br/>
@@ -6493,7 +6493,7 @@ namespace NWN.Core
     ///  - nSpell: SPELL_*<br/>
     ///  - oTarget: Target for the spell<br/>
     ///  - nMetamagic: METAMAGIC_*<br/>
-    ///  - bCheat: If this is TRUE, then the executor of the action doesn't have to be<br/>
+    ///  - bCheat: If this is TRUE, then the executor of the action doesn&amp;apos;t have to be<br/>
     ///    able to cast the spell.<br/>
     ///  - nDomainLevel: TBD - SS<br/>
     ///  - nProjectilePathType: PROJECTILE_PATH_TYPE_*<br/>
@@ -6530,7 +6530,7 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  Get oObject's local integer variable sVarName<br/>
+    ///  Get oObject&amp;apos;s local integer variable sVarName<br/>
     ///  * Return value on error: 0
     public static int GetLocalInt(uint oObject, string sVarName)
     {
@@ -6540,7 +6540,7 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  Get oObject's local float variable sVarName<br/>
+    ///  Get oObject&amp;apos;s local float variable sVarName<br/>
     ///  * Return value on error: 0.0f
     public static float GetLocalFloat(uint oObject, string sVarName)
     {
@@ -6550,8 +6550,8 @@ namespace NWN.Core
       return VM.StackPopFloat();
     }
 
-    ///  Get oObject's local string variable sVarName<br/>
-    ///  * Return value on error: ""
+    ///  Get oObject&amp;apos;s local string variable sVarName<br/>
+    ///  * Return value on error: &amp;quot;&amp;quot;
     public static string GetLocalString(uint oObject, string sVarName)
     {
       VM.StackPush(sVarName);
@@ -6560,7 +6560,7 @@ namespace NWN.Core
       return VM.StackPopString();
     }
 
-    ///  Get oObject's local object variable sVarName<br/>
+    ///  Get oObject&amp;apos;s local object variable sVarName<br/>
     ///  * Return value on error: OBJECT_INVALID
     public static uint GetLocalObject(uint oObject, string sVarName)
     {
@@ -6570,7 +6570,7 @@ namespace NWN.Core
       return VM.StackPopObject();
     }
 
-    ///  Set oObject's local integer variable sVarName to nValue
+    ///  Set oObject&amp;apos;s local integer variable sVarName to nValue
     public static void SetLocalInt(uint oObject, string sVarName, int nValue)
     {
       VM.StackPush(nValue);
@@ -6579,7 +6579,7 @@ namespace NWN.Core
       VM.Call(55);
     }
 
-    ///  Set oObject's local float variable sVarName to nValue
+    ///  Set oObject&amp;apos;s local float variable sVarName to nValue
     public static void SetLocalFloat(uint oObject, string sVarName, float fValue)
     {
       VM.StackPush(fValue);
@@ -6588,7 +6588,7 @@ namespace NWN.Core
       VM.Call(56);
     }
 
-    ///  Set oObject's local string variable sVarName to nValue
+    ///  Set oObject&amp;apos;s local string variable sVarName to nValue
     public static void SetLocalString(uint oObject, string sVarName, string sValue)
     {
       VM.StackPush(sValue);
@@ -6597,7 +6597,7 @@ namespace NWN.Core
       VM.Call(57);
     }
 
-    ///  Set oObject's local object variable sVarName to nValue
+    ///  Set oObject&amp;apos;s local object variable sVarName to nValue
     public static void SetLocalObject(uint oObject, string sVarName, uint oValue)
     {
       VM.StackPush(oValue);
@@ -6616,7 +6616,7 @@ namespace NWN.Core
     }
 
     ///  Convert sString into upper case<br/>
-    ///  * Return value on error: ""
+    ///  * Return value on error: &amp;quot;&amp;quot;
     public static string GetStringUpperCase(string sString)
     {
       VM.StackPush(sString);
@@ -6625,7 +6625,7 @@ namespace NWN.Core
     }
 
     ///  Convert sString into lower case<br/>
-    ///  * Return value on error: ""
+    ///  * Return value on error: &amp;quot;&amp;quot;
     public static string GetStringLowerCase(string sString)
     {
       VM.StackPush(sString);
@@ -6634,7 +6634,7 @@ namespace NWN.Core
     }
 
     ///  Get nCount characters from the right end of sString<br/>
-    ///  * Return value on error: ""
+    ///  * Return value on error: &amp;quot;&amp;quot;
     public static string GetStringRight(string sString, int nCount)
     {
       VM.StackPush(nCount);
@@ -6644,7 +6644,7 @@ namespace NWN.Core
     }
 
     ///  Get nCounter characters from the left end of sString<br/>
-    ///  * Return value on error: ""
+    ///  * Return value on error: &amp;quot;&amp;quot;
     public static string GetStringLeft(string sString, int nCount)
     {
       VM.StackPush(nCount);
@@ -6654,7 +6654,7 @@ namespace NWN.Core
     }
 
     ///  Insert sString into sDestination at nPosition<br/>
-    ///  * Return value on error: ""
+    ///  * Return value on error: &amp;quot;&amp;quot;
     public static string InsertString(string sDestination, string sString, int nPosition)
     {
       VM.StackPush(nPosition);
@@ -6665,7 +6665,7 @@ namespace NWN.Core
     }
 
     ///  Get nCount characters from sString, starting at nStart<br/>
-    ///  * Return value on error: ""
+    ///  * Return value on error: &amp;quot;&amp;quot;
     public static string GetSubString(string sString, int nStart, int nCount)
     {
       VM.StackPush(nCount);
@@ -6721,7 +6721,7 @@ namespace NWN.Core
     }
 
     ///  Maths operation: arccosine of fValue<br/>
-    ///  * Returns zero if fValue > 1 or fValue < -1
+    ///  * Returns zero if fValue &amp;gt; 1 or fValue &amp;lt; -1
     public static float acos(float fValue)
     {
       VM.StackPush(fValue);
@@ -6730,7 +6730,7 @@ namespace NWN.Core
     }
 
     ///  Maths operation: arcsine of fValue<br/>
-    ///  * Returns zero if fValue >1 or fValue < -1
+    ///  * Returns zero if fValue &amp;gt;1 or fValue &amp;lt; -1
     public static float asin(float fValue)
     {
       VM.StackPush(fValue);
@@ -6747,7 +6747,7 @@ namespace NWN.Core
     }
 
     ///  Maths operation: log of fValue<br/>
-    ///  * Returns zero if fValue <= zero
+    ///  * Returns zero if fValue &amp;lt;= zero
     public static float log(float fValue)
     {
       VM.StackPush(fValue);
@@ -6756,7 +6756,7 @@ namespace NWN.Core
     }
 
     ///  Maths operation: fValue is raised to the power of fExponent<br/>
-    ///  * Returns zero if fValue ==0 and fExponent <0
+    ///  * Returns zero if fValue ==0 and fExponent &amp;lt;0
     public static float pow(float fValue, float fExponent)
     {
       VM.StackPush(fExponent);
@@ -6766,7 +6766,7 @@ namespace NWN.Core
     }
 
     ///  Maths operation: square root of fValue<br/>
-    ///  * Returns zero if fValue <0
+    ///  * Returns zero if fValue &amp;lt;0
     public static float sqrt(float fValue)
     {
       VM.StackPush(fValue);
@@ -6784,7 +6784,7 @@ namespace NWN.Core
     }
 
     ///  Create a Heal effect. This should be applied as an instantaneous effect.<br/>
-    ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nDamageToHeal < 0.
+    ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nDamageToHeal &amp;lt; 0.
     public static System.IntPtr EffectHeal(int nDamageToHeal)
     {
       VM.StackPush(nDamageToHeal);
@@ -6838,14 +6838,14 @@ namespace NWN.Core
     }
 
     ///  Create a Summon Creature effect.  The creature is created and placed into the<br/>
-    ///  caller's party/faction.<br/>
+    ///  caller&amp;apos;s party/faction.<br/>
     ///  - sCreatureResref: Identifies the creature to be summoned<br/>
     ///  - nVisualEffectId: VFX_*<br/>
     ///  - fDelaySeconds: There can be delay between the visual effect being played, and the<br/>
     ///    creature being added to the area<br/>
-    ///  - nUseAppearAnimation: should this creature play it's "appear" animation when it is<br/>
+    ///  - nUseAppearAnimation: should this creature play it&amp;apos;s &amp;quot;appear&amp;quot; animation when it is<br/>
     ///    summoned. If zero, it will just fade in somewhere near the target.  If the value is 1<br/>
-    ///    it will use the appear animation, and if it's 2 it will use appear2 (which doesn't exist for most creatures)
+    ///    it will use the appear animation, and if it&amp;apos;s 2 it will use appear2 (which doesn&amp;apos;t exist for most creatures)
     public static System.IntPtr EffectSummonCreature(string sCreatureResref, int nVisualEffectId = VFX_NONE, float fDelaySeconds = 0.0f, int nUseAppearAnimation = 0)
     {
       VM.StackPush(nUseAppearAnimation);
@@ -6856,7 +6856,7 @@ namespace NWN.Core
       return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
 
-    ///  Get the level at which this creature cast it's last spell (or spell-like ability)<br/>
+    ///  Get the level at which this creature cast it&amp;apos;s last spell (or spell-like ability)<br/>
     ///  * Return value on error, or if oCreature has not yet cast a spell: 0;
     public static int GetCasterLevel(uint oCreature)
     {
@@ -6927,7 +6927,7 @@ namespace NWN.Core
     }
 
     ///  Convert nInteger into a string.<br/>
-    ///  * Return value on error: ""
+    ///  * Return value on error: &amp;quot;&amp;quot;
     public static string IntToString(int nInteger)
     {
       VM.StackPush(nInteger);
@@ -6936,7 +6936,7 @@ namespace NWN.Core
     }
 
     ///  Get the first object in oArea.<br/>
-    ///  If no valid area is specified, it will use the caller's area.<br/>
+    ///  If no valid area is specified, it will use the caller&amp;apos;s area.<br/>
     ///  * Return value on error: OBJECT_INVALID
     public static uint GetFirstObjectInArea(uint oArea = OBJECT_INVALID)
     {
@@ -6946,7 +6946,7 @@ namespace NWN.Core
     }
 
     ///  Get the next object in oArea.<br/>
-    ///  If no valid area is specified, it will use the caller's area.<br/>
+    ///  If no valid area is specified, it will use the caller&amp;apos;s area.<br/>
     ///  * Return value on error: OBJECT_INVALID
     public static uint GetNextObjectInArea(uint oArea = OBJECT_INVALID)
     {
@@ -7184,7 +7184,7 @@ namespace NWN.Core
       return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
 
-    ///  If oObject is a creature, this will return that creature's armour class<br/>
+    ///  If oObject is a creature, this will return that creature&amp;apos;s armour class<br/>
     ///  If oObject is an item, door or placeable, this will return zero.<br/>
     ///  - nForFutureUse: this parameter is not currently used<br/>
     ///  * Return value if oObject is not a creature, item, door or placeable: -1
@@ -7278,7 +7278,7 @@ namespace NWN.Core
       return VM.StackPopFloat();
     }
 
-    ///  Get an integer between 0 and 100 (inclusive) to represent oCreature's<br/>
+    ///  Get an integer between 0 and 100 (inclusive) to represent oCreature&amp;apos;s<br/>
     ///  Law/Chaos alignment<br/>
     ///  (100=law, 0=chaos)<br/>
     ///  * Return value if oCreature is not a valid creature: -1
@@ -7289,7 +7289,7 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  Get an integer between 0 and 100 (inclusive) to represent oCreature's<br/>
+    ///  Get an integer between 0 and 100 (inclusive) to represent oCreature&amp;apos;s<br/>
     ///  Good/Evil alignment<br/>
     ///  (100=good, 0=evil)<br/>
     ///  * Return value if oCreature is not a valid creature: -1
@@ -7300,7 +7300,7 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  Return an ALIGNMENT_* constant to represent oCreature's law/chaos alignment<br/>
+    ///  Return an ALIGNMENT_* constant to represent oCreature&amp;apos;s law/chaos alignment<br/>
     ///  * Return value if oCreature is not a valid creature: -1
     public static int GetAlignmentLawChaos(uint oCreature)
     {
@@ -7309,7 +7309,7 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  Return an ALIGNMENT_* constant to represent oCreature's good/evil alignment<br/>
+    ///  Return an ALIGNMENT_* constant to represent oCreature&amp;apos;s good/evil alignment<br/>
     ///  * Return value if oCreature is not a valid creature: -1
     public static int GetAlignmentGoodEvil(uint oCreature)
     {
@@ -7321,14 +7321,14 @@ namespace NWN.Core
     ///  Get the first object in nShape<br/>
     ///  - nShape: SHAPE_*<br/>
     ///  - fSize:<br/>
-    ///    -> If nShape == SHAPE_SPHERE, this is the radius of the sphere<br/>
-    ///    -> If nShape == SHAPE_SPELLCYLINDER, this is the length of the cylinder<br/>
-    ///       Spell Cylinder's always have a radius of 1.5m.<br/>
-    ///    -> If nShape == SHAPE_CONE, this is the widest radius of the cone<br/>
-    ///    -> If nShape == SHAPE_SPELLCONE, this is the length of the cone in the<br/>
+    ///    -&amp;gt; If nShape == SHAPE_SPHERE, this is the radius of the sphere<br/>
+    ///    -&amp;gt; If nShape == SHAPE_SPELLCYLINDER, this is the length of the cylinder<br/>
+    ///       Spell Cylinder&amp;apos;s always have a radius of 1.5m.<br/>
+    ///    -&amp;gt; If nShape == SHAPE_CONE, this is the widest radius of the cone<br/>
+    ///    -&amp;gt; If nShape == SHAPE_SPELLCONE, this is the length of the cone in the<br/>
     ///       direction of lTarget. Spell cones are always 60 degrees with the origin<br/>
     ///       at OBJECT_SELF.<br/>
-    ///    -> If nShape == SHAPE_CUBE, this is half the length of one of the sides of<br/>
+    ///    -&amp;gt; If nShape == SHAPE_CUBE, this is half the length of one of the sides of<br/>
     ///       the cube<br/>
     ///  - lTarget: This is the centre of the effect, usually GetSpellTargetLocation(),<br/>
     ///    or the end of a cylinder or cone.<br/>
@@ -7337,11 +7337,11 @@ namespace NWN.Core
     ///    at a height 1m above the ground<br/>
     ///    (This can be used to ensure that spell effects do not go through walls.)<br/>
     ///  - nObjectFilter: This allows you to filter out undesired object types, using<br/>
-    ///    bitwise "or".<br/>
+    ///    bitwise &amp;quot;or&amp;quot;.<br/>
     ///    For example, to return only creatures and doors, the value for this<br/>
     ///    parameter would be OBJECT_TYPE_CREATURE | OBJECT_TYPE_DOOR<br/>
     ///  - vOrigin: This is only used for cylinders and cones, and specifies the<br/>
-    ///    origin of the effect(normally the spell-caster's position).<br/>
+    ///    origin of the effect(normally the spell-caster&amp;apos;s position).<br/>
     ///  Return value on error: OBJECT_INVALID
     public static uint GetFirstObjectInShape(int nShape, float fSize, System.IntPtr lTarget, int bLineOfSight = FALSE, int nObjectFilter = OBJECT_TYPE_CREATURE, System.Numerics.Vector3 vOrigin = default)
     {
@@ -7358,14 +7358,14 @@ namespace NWN.Core
     ///  Get the next object in nShape<br/>
     ///  - nShape: SHAPE_*<br/>
     ///  - fSize:<br/>
-    ///    -> If nShape == SHAPE_SPHERE, this is the radius of the sphere<br/>
-    ///    -> If nShape == SHAPE_SPELLCYLINDER, this is the length of the cylinder.<br/>
-    ///       Spell Cylinder's always have a radius of 1.5m.<br/>
-    ///    -> If nShape == SHAPE_CONE, this is the widest radius of the cone<br/>
-    ///    -> If nShape == SHAPE_SPELLCONE, this is the length of the cone in the<br/>
+    ///    -&amp;gt; If nShape == SHAPE_SPHERE, this is the radius of the sphere<br/>
+    ///    -&amp;gt; If nShape == SHAPE_SPELLCYLINDER, this is the length of the cylinder.<br/>
+    ///       Spell Cylinder&amp;apos;s always have a radius of 1.5m.<br/>
+    ///    -&amp;gt; If nShape == SHAPE_CONE, this is the widest radius of the cone<br/>
+    ///    -&amp;gt; If nShape == SHAPE_SPELLCONE, this is the length of the cone in the<br/>
     ///       direction of lTarget. Spell cones are always 60 degrees with the origin<br/>
     ///       at OBJECT_SELF.<br/>
-    ///    -> If nShape == SHAPE_CUBE, this is half the length of one of the sides of<br/>
+    ///    -&amp;gt; If nShape == SHAPE_CUBE, this is half the length of one of the sides of<br/>
     ///       the cube<br/>
     ///  - lTarget: This is the centre of the effect, usually GetSpellTargetLocation(),<br/>
     ///    or the end of a cylinder or cone.<br/>
@@ -7374,10 +7374,10 @@ namespace NWN.Core
     ///    through walls.) Line of sight check is done from origin to target object<br/>
     ///    at a height 1m above the ground<br/>
     ///  - nObjectFilter: This allows you to filter out undesired object types, using<br/>
-    ///    bitwise "or". For example, to return only creatures and doors, the value for<br/>
+    ///    bitwise &amp;quot;or&amp;quot;. For example, to return only creatures and doors, the value for<br/>
     ///    this parameter would be OBJECT_TYPE_CREATURE | OBJECT_TYPE_DOOR<br/>
     ///  - vOrigin: This is only used for cylinders and cones, and specifies the origin<br/>
-    ///    of the effect (normally the spell-caster's position).<br/>
+    ///    of the effect (normally the spell-caster&amp;apos;s position).<br/>
     ///  Return value on error: OBJECT_INVALID
     public static uint GetNextObjectInShape(int nShape, float fSize, System.IntPtr lTarget, int bLineOfSight = FALSE, int nObjectFilter = OBJECT_TYPE_CREATURE, System.Numerics.Vector3 vOrigin = default)
     {
@@ -7392,7 +7392,7 @@ namespace NWN.Core
     }
 
     ///  Create an Entangle effect<br/>
-    ///  When applied, this effect will restrict the creature's movement and apply a<br/>
+    ///  When applied, this effect will restrict the creature&amp;apos;s movement and apply a<br/>
     ///  (-2) to all attacks and a -4 to AC.
     public static System.IntPtr EffectEntangle()
     {
@@ -7428,7 +7428,7 @@ namespace NWN.Core
     ///  Once the event has been signaled. The script associated with the OnUserDefined event will<br/>
     ///  run on the object oObject.<br/>
     /// <br/>
-    ///  To specify the OnUserDefined script that should run, view the object's Properties<br/>
+    ///  To specify the OnUserDefined script that should run, view the object&amp;apos;s Properties<br/>
     ///  and click on the Scripts Tab. Then specify a script for the OnUserDefined event.<br/>
     ///  From inside the OnUserDefined script call:<br/>
     ///     GetUserDefinedEventNumber() to retrieve the value of nUserDefinedEventNumber<br/>
@@ -7534,7 +7534,7 @@ namespace NWN.Core
 
     ///  Output vVector to the logfile.<br/>
     ///  - vVector<br/>
-    ///  - bPrepend: if this is TRUE, the message will be prefixed with "PRINTVECTOR:"
+    ///  - bPrepend: if this is TRUE, the message will be prefixed with &amp;quot;PRINTVECTOR:&amp;quot;
     public static void PrintVector(System.Numerics.Vector3 vVector, int bPrepend)
     {
       VM.StackPush(bPrepend);
@@ -7635,7 +7635,7 @@ namespace NWN.Core
       return VM.StackPopFloat();
     }
 
-    ///  Set oObject's local location variable sVarname to lValue
+    ///  Set oObject&amp;apos;s local location variable sVarname to lValue
     public static void SetLocalLocation(uint oObject, string sVarName, System.IntPtr lValue)
     {
       VM.StackPush(lValue, ENGINE_STRUCTURE_LOCATION);
@@ -7644,7 +7644,7 @@ namespace NWN.Core
       VM.Call(152);
     }
 
-    ///  Get oObject's local location variable sVarname
+    ///  Get oObject&amp;apos;s local location variable sVarname
     public static System.IntPtr GetLocalLocation(uint oObject, string sVarName)
     {
       VM.StackPush(sVarName);
@@ -7660,7 +7660,7 @@ namespace NWN.Core
       return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
 
-    ///  Get the object which is in oCreature's specified inventory slot<br/>
+    ///  Get the object which is in oCreature&amp;apos;s specified inventory slot<br/>
     ///  - nInventorySlot: INVENTORY_SLOT_*<br/>
     ///  - oCreature<br/>
     ///  * Returns OBJECT_INVALID if oCreature is not a valid creature or there is no<br/>
@@ -7715,7 +7715,7 @@ namespace NWN.Core
       return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
 
-    ///  Set whether oTarget's action stack can be modified
+    ///  Set whether oTarget&amp;apos;s action stack can be modified
     public static void SetCommandable(int bCommandable, uint oTarget = OBJECT_INVALID)
     {
       VM.StackPush(oTarget);
@@ -7723,7 +7723,7 @@ namespace NWN.Core
       VM.Call(162);
     }
 
-    ///  Determine whether oTarget's action stack can be modified.
+    ///  Determine whether oTarget&amp;apos;s action stack can be modified.
     public static int GetCommandable(uint oTarget = OBJECT_INVALID)
     {
       VM.StackPush(oTarget);
@@ -7776,7 +7776,7 @@ namespace NWN.Core
     }
 
     ///  Get the Tag of oObject<br/>
-    ///  * Return value if oObject is not a valid object: ""
+    ///  * Return value if oObject is not a valid object: &amp;quot;&amp;quot;
     public static string GetTag(uint oObject)
     {
       VM.StackPush(oObject);
@@ -7875,7 +7875,7 @@ namespace NWN.Core
 
     ///  Get the appropriate matched string (this should only be used in<br/>
     ///  OnConversation scripts).<br/>
-    ///  * Returns the appropriate matched string, otherwise returns ""
+    ///  * Returns the appropriate matched string, otherwise returns &amp;quot;&amp;quot;
     public static string GetMatchedSubstring(int nString)
     {
       VM.StackPush(nString);
@@ -7906,8 +7906,8 @@ namespace NWN.Core
       return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
 
-    ///  Get the weakest member of oFactionMember's faction.<br/>
-    ///  * Returns OBJECT_INVALID if oFactionMember's faction is invalid.
+    ///  Get the weakest member of oFactionMember&amp;apos;s faction.<br/>
+    ///  * Returns OBJECT_INVALID if oFactionMember&amp;apos;s faction is invalid.
     public static uint GetFactionWeakestMember(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
     {
       VM.StackPush(bMustBeVisible);
@@ -7916,8 +7916,8 @@ namespace NWN.Core
       return VM.StackPopObject();
     }
 
-    ///  Get the strongest member of oFactionMember's faction.<br/>
-    ///  * Returns OBJECT_INVALID if oFactionMember's faction is invalid.
+    ///  Get the strongest member of oFactionMember&amp;apos;s faction.<br/>
+    ///  * Returns OBJECT_INVALID if oFactionMember&amp;apos;s faction is invalid.
     public static uint GetFactionStrongestMember(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
     {
       VM.StackPush(bMustBeVisible);
@@ -7926,9 +7926,9 @@ namespace NWN.Core
       return VM.StackPopObject();
     }
 
-    ///  Get the member of oFactionMember's faction that has taken the most hit points<br/>
+    ///  Get the member of oFactionMember&amp;apos;s faction that has taken the most hit points<br/>
     ///  of damage.<br/>
-    ///  * Returns OBJECT_INVALID if oFactionMember's faction is invalid.
+    ///  * Returns OBJECT_INVALID if oFactionMember&amp;apos;s faction is invalid.
     public static uint GetFactionMostDamagedMember(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
     {
       VM.StackPush(bMustBeVisible);
@@ -7937,9 +7937,9 @@ namespace NWN.Core
       return VM.StackPopObject();
     }
 
-    ///  Get the member of oFactionMember's faction that has taken the fewest hit<br/>
+    ///  Get the member of oFactionMember&amp;apos;s faction that has taken the fewest hit<br/>
     ///  points of damage.<br/>
-    ///  * Returns OBJECT_INVALID if oFactionMember's faction is invalid.
+    ///  * Returns OBJECT_INVALID if oFactionMember&amp;apos;s faction is invalid.
     public static uint GetFactionLeastDamagedMember(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
     {
       VM.StackPush(bMustBeVisible);
@@ -7948,8 +7948,8 @@ namespace NWN.Core
       return VM.StackPopObject();
     }
 
-    ///  Get the amount of gold held by oFactionMember's faction.<br/>
-    ///  * Returns -1 if oFactionMember's faction is invalid.
+    ///  Get the amount of gold held by oFactionMember&amp;apos;s faction.<br/>
+    ///  * Returns -1 if oFactionMember&amp;apos;s faction is invalid.
     public static int GetFactionGold(uint oFactionMember)
     {
       VM.StackPush(oFactionMember);
@@ -7958,7 +7958,7 @@ namespace NWN.Core
     }
 
     ///  Get an integer between 0 and 100 (inclusive) that represents how<br/>
-    ///  oSourceFactionMember's faction feels about oTarget.<br/>
+    ///  oSourceFactionMember&amp;apos;s faction feels about oTarget.<br/>
     ///  * Return value on error: -1
     public static int GetFactionAverageReputation(uint oSourceFactionMember, uint oTarget)
     {
@@ -7969,7 +7969,7 @@ namespace NWN.Core
     }
 
     ///  Get an integer between 0 and 100 (inclusive) that represents the average<br/>
-    ///  good/evil alignment of oFactionMember's faction.<br/>
+    ///  good/evil alignment of oFactionMember&amp;apos;s faction.<br/>
     ///  * Return value on error: -1
     public static int GetFactionAverageGoodEvilAlignment(uint oFactionMember)
     {
@@ -7979,7 +7979,7 @@ namespace NWN.Core
     }
 
     ///  Get an integer between 0 and 100 (inclusive) that represents the average<br/>
-    ///  law/chaos alignment of oFactionMember's faction.<br/>
+    ///  law/chaos alignment of oFactionMember&amp;apos;s faction.<br/>
     ///  * Return value on error: -1
     public static int GetFactionAverageLawChaosAlignment(uint oFactionMember)
     {
@@ -8017,7 +8017,7 @@ namespace NWN.Core
     }
 
     ///  Get the object faction member with the lowest armour class.<br/>
-    ///  * Returns OBJECT_INVALID if oFactionMember's faction is invalid.
+    ///  * Returns OBJECT_INVALID if oFactionMember&amp;apos;s faction is invalid.
     public static uint GetFactionWorstAC(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
     {
       VM.StackPush(bMustBeVisible);
@@ -8027,7 +8027,7 @@ namespace NWN.Core
     }
 
     ///  Get the object faction member with the highest armour class.<br/>
-    ///  * Returns OBJECT_INVALID if oFactionMember's faction is invalid.
+    ///  * Returns OBJECT_INVALID if oFactionMember&amp;apos;s faction is invalid.
     public static uint GetFactionBestAC(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
     {
       VM.StackPush(bMustBeVisible);
@@ -8101,7 +8101,7 @@ namespace NWN.Core
     ///  effects all other effects will be removed as well. This means that if you<br/>
     ///  apply a visual effect and a silence effect (in a link) and the target is<br/>
     ///  immune to the silence effect that the visual effect will get removed as well.<br/>
-    ///  Visual Effects are not considered "valid" effects for the purposes of<br/>
+    ///  Visual Effects are not considered &amp;quot;valid&amp;quot; effects for the purposes of<br/>
     ///  determining if an effect will be removed or not and as such should never be<br/>
     ///  packaged *only* with other visual effects in a link.
     public static System.IntPtr EffectLinkEffects(System.IntPtr eChildEffect, System.IntPtr eParentEffect)
@@ -8128,11 +8128,11 @@ namespace NWN.Core
     ///  Adjust the alignment of oSubject.<br/>
     ///  - oSubject<br/>
     ///  - nAlignment:<br/>
-    ///    -> ALIGNMENT_LAWFUL/ALIGNMENT_CHAOTIC/ALIGNMENT_GOOD/ALIGNMENT_EVIL: oSubject's<br/>
+    ///    -&amp;gt; ALIGNMENT_LAWFUL/ALIGNMENT_CHAOTIC/ALIGNMENT_GOOD/ALIGNMENT_EVIL: oSubject&amp;apos;s<br/>
     ///       alignment will be shifted in the direction specified<br/>
-    ///    -> ALIGNMENT_ALL: nShift will be added to oSubject's law/chaos and<br/>
+    ///    -&amp;gt; ALIGNMENT_ALL: nShift will be added to oSubject&amp;apos;s law/chaos and<br/>
     ///       good/evil alignment values<br/>
-    ///    -> ALIGNMENT_NEUTRAL: nShift is applied to oSubject's law/chaos and<br/>
+    ///    -&amp;gt; ALIGNMENT_NEUTRAL: nShift is applied to oSubject&amp;apos;s law/chaos and<br/>
     ///       good/evil alignment values in the direction which is towards neutrality.<br/>
     ///      e.g. If oSubject has a law/chaos value of 10 (i.e. chaotic) and a<br/>
     ///           good/evil value of 80 (i.e. good) then if nShift is 15, the<br/>
@@ -8145,7 +8145,7 @@ namespace NWN.Core
     ///           good/evil value will become 55<br/>
     ///  - nShift: this is the desired shift in alignment<br/>
     ///  - bAllPartyMembers: when TRUE the alignment shift of oSubject also has a<br/>
-    ///                      diminished affect all members of oSubject's party (if oSubject is a Player).<br/>
+    ///                      diminished affect all members of oSubject&amp;apos;s party (if oSubject is a Player).<br/>
     ///                      When FALSE the shift only affects oSubject.<br/>
     ///  * No return value
     public static void AdjustAlignment(uint oSubject, int nAlignment, int nShift, int bAllPartyMembers = TRUE)
@@ -8165,11 +8165,11 @@ namespace NWN.Core
     }
 
     ///  Set the transition bitmap of a player; this should only be called in area<br/>
-    ///  transition scripts. This action should be run by the person "clicking" the<br/>
+    ///  transition scripts. This action should be run by the person &amp;quot;clicking&amp;quot; the<br/>
     ///  area transition via AssignCommand.<br/>
     ///  - nPredefinedAreaTransition:<br/>
-    ///    -> To use a predefined area transition bitmap, use one of AREA_TRANSITION_*<br/>
-    ///    -> To use a custom, user-defined area transition bitmap, use<br/>
+    ///    -&amp;gt; To use a predefined area transition bitmap, use one of AREA_TRANSITION_*<br/>
+    ///    -&amp;gt; To use a custom, user-defined area transition bitmap, use<br/>
     ///       AREA_TRANSITION_USER_DEFINED and specify the filename in the second<br/>
     ///       parameter<br/>
     ///  - sCustomAreaTransitionBMP: this is the filename of a custom, user-defined<br/>
@@ -8184,9 +8184,9 @@ namespace NWN.Core
     ///  Starts a conversation with oObjectToConverseWith - this will cause their<br/>
     ///  OnDialog event to fire.<br/>
     ///  - oObjectToConverseWith<br/>
-    ///  - sDialogResRef: If this is blank, the creature's own dialogue file will be used<br/>
+    ///  - sDialogResRef: If this is blank, the creature&amp;apos;s own dialogue file will be used<br/>
     ///  - bPrivateConversation<br/>
-    ///  Turn off bPlayHello if you don't want the initial greeting to play
+    ///  Turn off bPlayHello if you don&amp;apos;t want the initial greeting to play
     public static void ActionStartConversation(uint oObjectToConverseWith, string sDialogResRef = "", int bPrivateConversation = FALSE, int bPlayHello = TRUE)
     {
       VM.StackPush(bPlayHello);
@@ -8231,9 +8231,9 @@ namespace NWN.Core
 
     ///  Get an integer between 0 and 100 (inclusive) that represents how oSource<br/>
     ///  feels about oTarget.<br/>
-    ///  -> 0-10 means oSource is hostile to oTarget<br/>
-    ///  -> 11-89 means oSource is neutral to oTarget<br/>
-    ///  -> 90-100 means oSource is friendly to oTarget<br/>
+    ///  -&amp;gt; 0-10 means oSource is hostile to oTarget<br/>
+    ///  -&amp;gt; 11-89 means oSource is neutral to oTarget<br/>
+    ///  -&amp;gt; 90-100 means oSource is friendly to oTarget<br/>
     ///  * Returns -1 if oSource or oTarget does not identify a valid object
     public static int GetReputation(uint oSource, uint oTarget)
     {
@@ -8243,12 +8243,12 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  Adjust how oSourceFactionMember's faction feels about oTarget by the<br/>
+    ///  Adjust how oSourceFactionMember&amp;apos;s faction feels about oTarget by the<br/>
     ///  specified amount.<br/>
     ///  Note: This adjusts Faction Reputation, how the entire faction that<br/>
     ///  oSourceFactionMember is in, feels about oTarget.<br/>
     ///  * No return value<br/>
-    ///  Note: You can't adjust a player character's (PC) faction towards<br/>
+    ///  Note: You can&amp;apos;t adjust a player character&amp;apos;s (PC) faction towards<br/>
     ///        NPCs, so attempting to make an NPC hostile by passing in a PC object<br/>
     ///        as oSourceFactionMember in the following call will fail:<br/>
     ///        AdjustReputation(oNPC,oPC,-100);<br/>
@@ -8276,7 +8276,7 @@ namespace NWN.Core
 
     ///  Get the creature that is going to attack oTarget.<br/>
     ///  Note: This value is cleared out at the end of every combat round and should<br/>
-    ///  not be used in any case except when getting a "going to be attacked" shout<br/>
+    ///  not be used in any case except when getting a &amp;quot;going to be attacked&amp;quot; shout<br/>
     ///  from the master creature (and this creature is a henchman)<br/>
     ///  * Returns OBJECT_INVALID if oTarget is not a valid creature.
     public static uint GetGoingToBeAttackedBy(uint oTarget)
@@ -8376,7 +8376,7 @@ namespace NWN.Core
       VM.Call(221);
     }
 
-    ///  Get the location of the caller's last spell target.
+    ///  Get the location of the caller&amp;apos;s last spell target.
     public static System.IntPtr GetSpellTargetLocation()
     {
       VM.Call(222);
@@ -8391,7 +8391,7 @@ namespace NWN.Core
       return VM.StackPopVector();
     }
 
-    ///  Get the area's object ID from lLocation.
+    ///  Get the area&amp;apos;s object ID from lLocation.
     public static uint GetAreaFromLocation(System.IntPtr lLocation)
     {
       VM.StackPush(lLocation, ENGINE_STRUCTURE_LOCATION);
@@ -8410,20 +8410,20 @@ namespace NWN.Core
     ///  Get the creature nearest to lLocation, subject to all the criteria specified.<br/>
     ///  - nFirstCriteriaType: CREATURE_TYPE_*<br/>
     ///  - nFirstCriteriaValue:<br/>
-    ///    -> CLASS_TYPE_* if nFirstCriteriaType was CREATURE_TYPE_CLASS<br/>
-    ///    -> SPELL_* if nFirstCriteriaType was CREATURE_TYPE_DOES_NOT_HAVE_SPELL_EFFECT<br/>
+    ///    -&amp;gt; CLASS_TYPE_* if nFirstCriteriaType was CREATURE_TYPE_CLASS<br/>
+    ///    -&amp;gt; SPELL_* if nFirstCriteriaType was CREATURE_TYPE_DOES_NOT_HAVE_SPELL_EFFECT<br/>
     ///       or CREATURE_TYPE_HAS_SPELL_EFFECT<br/>
-    ///    -> TRUE or FALSE if nFirstCriteriaType was CREATURE_TYPE_IS_ALIVE<br/>
-    ///    -> PERCEPTION_* if nFirstCriteriaType was CREATURE_TYPE_PERCEPTION<br/>
-    ///    -> PLAYER_CHAR_IS_PC or PLAYER_CHAR_NOT_PC if nFirstCriteriaType was<br/>
+    ///    -&amp;gt; TRUE or FALSE if nFirstCriteriaType was CREATURE_TYPE_IS_ALIVE<br/>
+    ///    -&amp;gt; PERCEPTION_* if nFirstCriteriaType was CREATURE_TYPE_PERCEPTION<br/>
+    ///    -&amp;gt; PLAYER_CHAR_IS_PC or PLAYER_CHAR_NOT_PC if nFirstCriteriaType was<br/>
     ///       CREATURE_TYPE_PLAYER_CHAR<br/>
-    ///    -> RACIAL_TYPE_* if nFirstCriteriaType was CREATURE_TYPE_RACIAL_TYPE<br/>
-    ///    -> REPUTATION_TYPE_* if nFirstCriteriaType was CREATURE_TYPE_REPUTATION<br/>
+    ///    -&amp;gt; RACIAL_TYPE_* if nFirstCriteriaType was CREATURE_TYPE_RACIAL_TYPE<br/>
+    ///    -&amp;gt; REPUTATION_TYPE_* if nFirstCriteriaType was CREATURE_TYPE_REPUTATION<br/>
     ///    For example, to get the nearest PC, use<br/>
     ///    (CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC)<br/>
-    ///  - lLocation: We're trying to find the creature of the specified type that is<br/>
+    ///  - lLocation: We&amp;apos;re trying to find the creature of the specified type that is<br/>
     ///    nearest to lLocation<br/>
-    ///  - nNth: We don't have to find the first nearest: we can find the Nth nearest....<br/>
+    ///  - nNth: We don&amp;apos;t have to find the first nearest: we can find the Nth nearest....<br/>
     ///  - nSecondCriteriaType: This is used in the same way as nFirstCriteriaType to<br/>
     ///    further specify the type of creature that we are looking for.<br/>
     ///  - nSecondCriteriaValue: This is used in the same way as nFirstCriteriaValue<br/>
@@ -8522,7 +8522,7 @@ namespace NWN.Core
     ///  - nSpell: SPELL_*<br/>
     ///  - lTargetLocation<br/>
     ///  - nMetaMagic: METAMAGIC_*<br/>
-    ///  - bCheat: If this is TRUE, then the executor of the action doesn't have to be<br/>
+    ///  - bCheat: If this is TRUE, then the executor of the action doesn&amp;apos;t have to be<br/>
     ///    able to cast the spell.<br/>
     ///  - nProjectilePathType: PROJECTILE_PATH_TYPE_*<br/>
     ///  - bInstantSpell: If this is TRUE, the spell is cast immediately; this allows<br/>
@@ -8628,16 +8628,16 @@ namespace NWN.Core
       return VM.StackPopObject();
     }
 
-    ///  Create an event which triggers the "SpellCastAt" script<br/>
+    ///  Create an event which triggers the &amp;quot;SpellCastAt&amp;quot; script<br/>
     ///  Note: This only creates the event. The event wont actually trigger until SignalEvent()<br/>
     ///  is called using this created SpellCastAt event as an argument.<br/>
     ///  For example:<br/>
     ///      SignalEvent(oCreature, EventSpellCastAt(oCaster, SPELL_MAGIC_MISSILE, TRUE));<br/>
-    ///  This function doesn't cast the spell specified, it only creates an event so that<br/>
+    ///  This function doesn&amp;apos;t cast the spell specified, it only creates an event so that<br/>
     ///  when the event is signaled on an object, the object will use its OnSpellCastAt script<br/>
     ///  to react to the spell being cast.<br/>
     /// <br/>
-    ///  To specify the OnSpellCastAt script that should run, view the Object's Properties<br/>
+    ///  To specify the OnSpellCastAt script that should run, view the Object&amp;apos;s Properties<br/>
     ///  and click on the Scripts Tab. Then specify a script for the OnSpellCastAt event.<br/>
     ///  From inside the OnSpellCastAt script call:<br/>
     ///      GetLastSpellCaster() to get the object that cast the spell (oCaster).<br/>
@@ -8652,7 +8652,7 @@ namespace NWN.Core
       return VM.StackPopStruct(ENGINE_STRUCTURE_EVENT);
     }
 
-    ///  This is for use in a "Spell Cast" script, it gets who cast the spell.<br/>
+    ///  This is for use in a &amp;quot;Spell Cast&amp;quot; script, it gets who cast the spell.<br/>
     ///  The spell could have been cast by a creature, placeable or door.<br/>
     ///  * Returns OBJECT_INVALID if the caller is not a creature, placeable or door.
     public static uint GetLastSpellCaster()
@@ -8661,7 +8661,7 @@ namespace NWN.Core
       return VM.StackPopObject();
     }
 
-    ///  This is for use in a "Spell Cast" script, it gets the ID of the spell that<br/>
+    ///  This is for use in a &amp;quot;Spell Cast&amp;quot; script, it gets the ID of the spell that<br/>
     ///  was cast.
     public static int GetLastSpell()
     {
@@ -8723,7 +8723,7 @@ namespace NWN.Core
     ///  - oObject: the object for which you are changing the name (area, creature, placeable, item, or door).<br/>
     ///  - sNewName: the new name that the object will use.<br/>
     ///  Note: SetName() does not work on player objects.<br/>
-    ///        Setting an object's name to "" will make the object<br/>
+    ///        Setting an object&amp;apos;s name to &amp;quot;&amp;quot; will make the object<br/>
     ///        revert to using the name it had originally before any<br/>
     ///        SetName() calls were made on the object.
     public static string GetName(uint oObject, int bOriginalName = FALSE)
@@ -8841,7 +8841,7 @@ namespace NWN.Core
       return VM.StackPopObject();
     }
 
-    ///  Delete oObject's local integer variable sVarName
+    ///  Delete oObject&amp;apos;s local integer variable sVarName
     public static void DeleteLocalInt(uint oObject, string sVarName)
     {
       VM.StackPush(sVarName);
@@ -8849,7 +8849,7 @@ namespace NWN.Core
       VM.Call(265);
     }
 
-    ///  Delete oObject's local float variable sVarName
+    ///  Delete oObject&amp;apos;s local float variable sVarName
     public static void DeleteLocalFloat(uint oObject, string sVarName)
     {
       VM.StackPush(sVarName);
@@ -8857,7 +8857,7 @@ namespace NWN.Core
       VM.Call(266);
     }
 
-    ///  Delete oObject's local string variable sVarName
+    ///  Delete oObject&amp;apos;s local string variable sVarName
     public static void DeleteLocalString(uint oObject, string sVarName)
     {
       VM.StackPush(sVarName);
@@ -8865,7 +8865,7 @@ namespace NWN.Core
       VM.Call(267);
     }
 
-    ///  Delete oObject's local object variable sVarName
+    ///  Delete oObject&amp;apos;s local object variable sVarName
     public static void DeleteLocalObject(uint oObject, string sVarName)
     {
       VM.StackPush(sVarName);
@@ -8873,7 +8873,7 @@ namespace NWN.Core
       VM.Call(268);
     }
 
-    ///  Delete oObject's local location variable sVarName
+    ///  Delete oObject&amp;apos;s local location variable sVarName
     public static void DeleteLocalLocation(uint oObject, string sVarName)
     {
       VM.StackPush(sVarName);
@@ -8945,7 +8945,7 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  Set oEncounter's active state to nNewValue.<br/>
+    ///  Set oEncounter&amp;apos;s active state to nNewValue.<br/>
     ///  - nNewValue: TRUE/FALSE<br/>
     ///  - oEncounter
     public static void SetEncounterActive(int nNewValue, uint oEncounter = OBJECT_INVALID)
@@ -9044,7 +9044,7 @@ namespace NWN.Core
       VM.Call(287);
     }
 
-    ///  Runs the action "UseSkill" on the current creature<br/>
+    ///  Runs the action &amp;quot;UseSkill&amp;quot; on the current creature<br/>
     ///  Use nSkill on oTarget.<br/>
     ///  - nSkill: SKILL_*<br/>
     ///  - oTarget<br/>
@@ -9154,7 +9154,7 @@ namespace NWN.Core
       return VM.StackPopFloat();
     }
 
-    ///  Use this in spell scripts to get nDamage adjusted by oTarget's reflex and<br/>
+    ///  Use this in spell scripts to get nDamage adjusted by oTarget&amp;apos;s reflex and<br/>
     ///  evasion saves.<br/>
     ///  - nDamage<br/>
     ///  - oTarget<br/>
@@ -9310,7 +9310,7 @@ namespace NWN.Core
 
     ///  Create a Temporary Hitpoints effect.<br/>
     ///  - nHitPoints: a positive integer<br/>
-    ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nHitPoints < 0.
+    ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nHitPoints &amp;lt; 0.
     public static System.IntPtr EffectTemporaryHitpoints(int nHitPoints)
     {
       VM.StackPush(nHitPoints);
@@ -9323,7 +9323,7 @@ namespace NWN.Core
     ///  - oTarget<br/>
     ///  - nBaseSkillRank: if set to true returns the number of base skill ranks the target<br/>
     ///                    has (i.e. not including any bonuses from ability scores, feats, etc).<br/>
-    ///  * Returns -1 if oTarget doesn't have nSkill.<br/>
+    ///  * Returns -1 if oTarget doesn&amp;apos;t have nSkill.<br/>
     ///  * Returns 0 if nSkill is untrained.
     public static int GetSkillRank(int nSkill, uint oTarget = OBJECT_INVALID, int nBaseSkillRank = FALSE)
     {
@@ -9343,7 +9343,7 @@ namespace NWN.Core
       return VM.StackPopObject();
     }
 
-    ///  Get the attack type (SPECIAL_ATTACK_*) of oCreature's last attack.<br/>
+    ///  Get the attack type (SPECIAL_ATTACK_*) of oCreature&amp;apos;s last attack.<br/>
     ///  This only works when oCreature is in combat.
     public static int GetLastAttackType(uint oCreature = OBJECT_INVALID)
     {
@@ -9352,7 +9352,7 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  Get the attack mode (COMBAT_MODE_*) of oCreature's last attack.<br/>
+    ///  Get the attack mode (COMBAT_MODE_*) of oCreature&amp;apos;s last attack.<br/>
     ///  This only works when oCreature is in combat.
     public static int GetLastAttackMode(uint oCreature = OBJECT_INVALID)
     {
@@ -9422,10 +9422,10 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  Use this in a trigger's OnClick event script to get the object that last<br/>
+    ///  Use this in a trigger&amp;apos;s OnClick event script to get the object that last<br/>
     ///  clicked on it.<br/>
     ///  This is identical to GetEnteringObject.<br/>
-    ///  GetClickingObject() should not be called from a placeable's OnClick event,<br/>
+    ///  GetClickingObject() should not be called from a placeable&amp;apos;s OnClick event,<br/>
     ///  instead use GetPlaceableLastClickedBy();
     public static uint GetClickingObject()
     {
@@ -9466,7 +9466,7 @@ namespace NWN.Core
     }
 
     ///  Returns the ability modifier for the specified ability<br/>
-    ///  Get oCreature's ability modifier for nAbility.<br/>
+    ///  Get oCreature&amp;apos;s ability modifier for nAbility.<br/>
     ///  - nAbility: ABILITY_*<br/>
     ///  - oCreature
     public static int GetAbilityModifier(int nAbility, uint oCreature = OBJECT_INVALID)
@@ -9534,7 +9534,7 @@ namespace NWN.Core
       VM.Call(338);
     }
 
-    ///  Get the first item in oTarget's inventory (start to cycle through oTarget's<br/>
+    ///  Get the first item in oTarget&amp;apos;s inventory (start to cycle through oTarget&amp;apos;s<br/>
     ///  inventory).<br/>
     ///  * Returns OBJECT_INVALID if the caller is not a creature, item, placeable or store,<br/>
     ///    or if no item is found.
@@ -9545,7 +9545,7 @@ namespace NWN.Core
       return VM.StackPopObject();
     }
 
-    ///  Get the next item in oTarget's inventory (continue to cycle through oTarget's<br/>
+    ///  Get the next item in oTarget&amp;apos;s inventory (continue to cycle through oTarget&amp;apos;s<br/>
     ///  inventory).<br/>
     ///  * Returns OBJECT_INVALID if the caller is not a creature, item, placeable or store,<br/>
     ///    or if no item is found.
@@ -9557,7 +9557,7 @@ namespace NWN.Core
     }
 
     ///  A creature can have up to three classes.  This function determines the<br/>
-    ///  creature's class (CLASS_TYPE_*) based on nClassPosition.<br/>
+    ///  creature&amp;apos;s class (CLASS_TYPE_*) based on nClassPosition.<br/>
     ///  - nClassPosition: 1, 2 or 3<br/>
     ///  - oCreature<br/>
     ///  * Returns CLASS_TYPE_INVALID if the oCreature does not have a class in<br/>
@@ -9572,7 +9572,7 @@ namespace NWN.Core
     }
 
     ///  A creature can have up to three classes.  This function determines the<br/>
-    ///  creature's class level based on nClass Position.<br/>
+    ///  creature&amp;apos;s class level based on nClass Position.<br/>
     ///  - nClassPosition: 1, 2 or 3<br/>
     ///  - oCreature<br/>
     ///  * Returns 0 if oCreature does not have a class in nClassPosition<br/>
@@ -9667,7 +9667,7 @@ namespace NWN.Core
       return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
 
-    ///  Get the type of disturbance (INVENTORY_DISTURB_*) that caused the caller's<br/>
+    ///  Get the type of disturbance (INVENTORY_DISTURB_*) that caused the caller&amp;apos;s<br/>
     ///  OnInventoryDisturbed script to fire.  This will only work for creatures and<br/>
     ///  placeables.
     public static int GetInventoryDisturbType()
@@ -9676,7 +9676,7 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  get the item that caused the caller's OnInventoryDisturbed script to fire.<br/>
+    ///  get the item that caused the caller&amp;apos;s OnInventoryDisturbed script to fire.<br/>
     ///  * Returns OBJECT_INVALID if the caller is not a valid object.
     public static uint GetInventoryDisturbItem()
     {
@@ -9810,8 +9810,8 @@ namespace NWN.Core
     }
 
     ///  Add a journal quest entry to oCreature.<br/>
-    ///  - szPlotID: the plot identifier used in the toolset's Journal Editor<br/>
-    ///  - nState: the state of the plot as seen in the toolset's Journal Editor<br/>
+    ///  - szPlotID: the plot identifier used in the toolset&amp;apos;s Journal Editor<br/>
+    ///  - nState: the state of the plot as seen in the toolset&amp;apos;s Journal Editor<br/>
     ///  - oCreature<br/>
     ///  - bAllPartyMembers: If this is TRUE, the entry will show up in the journal of<br/>
     ///    everyone in the party<br/>
@@ -9831,7 +9831,7 @@ namespace NWN.Core
     }
 
     ///  Remove a journal quest entry from oCreature.<br/>
-    ///  - szPlotID: the plot identifier used in the toolset's Journal Editor<br/>
+    ///  - szPlotID: the plot identifier used in the toolset&amp;apos;s Journal Editor<br/>
     ///  - oCreature<br/>
     ///  - bAllPartyMembers: If this is TRUE, the entry will be removed from the<br/>
     ///    journal of everyone in the party<br/>
@@ -9847,7 +9847,7 @@ namespace NWN.Core
     }
 
     ///  Get the public part of the CD Key that oPlayer used when logging in.<br/>
-    ///  - nSinglePlayerCDKey: If set to TRUE, the player's public CD Key will<br/>
+    ///  - nSinglePlayerCDKey: If set to TRUE, the player&amp;apos;s public CD Key will<br/>
     ///    be returned when the player is playing in single player mode<br/>
     ///    (otherwise returns an empty string in single player mode).
     public static string GetPCPublicCDKey(uint oPlayer, int nSinglePlayerCDKey = FALSE)
@@ -9947,9 +9947,9 @@ namespace NWN.Core
       return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
 
-    ///  Get the first member of oMemberOfFaction's faction (start to cycle through<br/>
-    ///  oMemberOfFaction's faction).<br/>
-    ///  * Returns OBJECT_INVALID if oMemberOfFaction's faction is invalid.
+    ///  Get the first member of oMemberOfFaction&amp;apos;s faction (start to cycle through<br/>
+    ///  oMemberOfFaction&amp;apos;s faction).<br/>
+    ///  * Returns OBJECT_INVALID if oMemberOfFaction&amp;apos;s faction is invalid.
     public static uint GetFirstFactionMember(uint oMemberOfFaction, int bPCOnly = TRUE)
     {
       VM.StackPush(bPCOnly);
@@ -9958,9 +9958,9 @@ namespace NWN.Core
       return VM.StackPopObject();
     }
 
-    ///  Get the next member of oMemberOfFaction's faction (continue to cycle through<br/>
-    ///  oMemberOfFaction's faction).<br/>
-    ///  * Returns OBJECT_INVALID if oMemberOfFaction's faction is invalid.
+    ///  Get the next member of oMemberOfFaction&amp;apos;s faction (continue to cycle through<br/>
+    ///  oMemberOfFaction&amp;apos;s faction).<br/>
+    ///  * Returns OBJECT_INVALID if oMemberOfFaction&amp;apos;s faction is invalid.
     public static uint GetNextFactionMember(uint oMemberOfFaction, int bPCOnly = TRUE)
     {
       VM.StackPush(bPCOnly);
@@ -10056,7 +10056,7 @@ namespace NWN.Core
     ///    the friendship lasts.<br/>
     ///  Note: If bDecays is TRUE, the personal reputation amount decreases in size<br/>
     ///  over fDurationInSeconds. Friendship will only be in effect as long as<br/>
-    ///  (faction reputation + total personal reputation) >= REPUTATION_TYPE_FRIEND.
+    ///  (faction reputation + total personal reputation) &amp;gt;= REPUTATION_TYPE_FRIEND.
     public static void SetIsTemporaryFriend(uint oTarget, uint oSource = OBJECT_INVALID, int bDecays = FALSE, float fDurationInSeconds = 180.0f)
     {
       VM.StackPush(fDurationInSeconds);
@@ -10075,7 +10075,7 @@ namespace NWN.Core
     ///    the enmity lasts.<br/>
     ///  Note: If bDecays is TRUE, the personal reputation amount decreases in size<br/>
     ///  over fDurationInSeconds. Enmity will only be in effect as long as<br/>
-    ///  (faction reputation + total personal reputation) <= REPUTATION_TYPE_ENEMY.
+    ///  (faction reputation + total personal reputation) &amp;lt;= REPUTATION_TYPE_ENEMY.
     public static void SetIsTemporaryEnemy(uint oTarget, uint oSource = OBJECT_INVALID, int bDecays = FALSE, float fDurationInSeconds = 180.0f)
     {
       VM.StackPush(fDurationInSeconds);
@@ -10094,8 +10094,8 @@ namespace NWN.Core
     ///    the neutrality lasts.<br/>
     ///  Note: If bDecays is TRUE, the personal reputation amount decreases in size<br/>
     ///  over fDurationInSeconds. Neutrality will only be in effect as long as<br/>
-    ///  (faction reputation + total personal reputation) > REPUTATION_TYPE_ENEMY and<br/>
-    ///  (faction reputation + total personal reputation) < REPUTATION_TYPE_FRIEND.
+    ///  (faction reputation + total personal reputation) &amp;gt; REPUTATION_TYPE_ENEMY and<br/>
+    ///  (faction reputation + total personal reputation) &amp;lt; REPUTATION_TYPE_FRIEND.
     public static void SetIsTemporaryNeutral(uint oTarget, uint oSource = OBJECT_INVALID, int bDecays = FALSE, float fDurationInSeconds = 180.0f)
     {
       VM.StackPush(fDurationInSeconds);
@@ -10113,7 +10113,7 @@ namespace NWN.Core
       VM.Call(393);
     }
 
-    ///  Sets oCreature's experience to nXpAmount.
+    ///  Sets oCreature&amp;apos;s experience to nXpAmount.
     public static void SetXP(uint oCreature, int nXpAmount)
     {
       VM.StackPush(nXpAmount);
@@ -10121,7 +10121,7 @@ namespace NWN.Core
       VM.Call(394);
     }
 
-    ///  Get oCreature's experience.
+    ///  Get oCreature&amp;apos;s experience.
     public static int GetXP(uint oCreature)
     {
       VM.StackPush(oCreature);
@@ -10130,7 +10130,7 @@ namespace NWN.Core
     }
 
     ///  Convert nInteger to hex, returning the hex value as a string.<br/>
-    ///  * Return value has the format "0x????????" where each ? will be a hex digit<br/>
+    ///  * Return value has the format &amp;quot;0x????????&amp;quot; where each ? will be a hex digit<br/>
     ///    (8 digits in total).
     public static string IntToHexString(int nInteger)
     {
@@ -10197,7 +10197,7 @@ namespace NWN.Core
 
     ///  The creature will rest if not in combat and no enemies are nearby.<br/>
     ///  - bCreatureToEnemyLineOfSightCheck: TRUE to allow the creature to rest if enemies<br/>
-    ///                                      are nearby, but the creature can't see the enemy.<br/>
+    ///                                      are nearby, but the creature can&amp;apos;t see the enemy.<br/>
     ///                                      FALSE the creature will not rest if enemies are<br/>
     ///                                      nearby regardless of whether or not the creature<br/>
     ///                                      can see them, such as if an enemy is close by,<br/>
@@ -10525,7 +10525,7 @@ namespace NWN.Core
       return VM.StackPopObject();
     }
 
-    ///  Use this in an OnItemActivated module script to get the location of the item's<br/>
+    ///  Use this in an OnItemActivated module script to get the location of the item&amp;apos;s<br/>
     ///  target.
     public static System.IntPtr GetItemActivatedTargetLocation()
     {
@@ -10533,7 +10533,7 @@ namespace NWN.Core
       return VM.StackPopStruct(ENGINE_STRUCTURE_LOCATION);
     }
 
-    ///  Use this in an OnItemActivated module script to get the item's target.
+    ///  Use this in an OnItemActivated module script to get the item&amp;apos;s target.
     public static uint GetItemActivatedTarget()
     {
       VM.Call(442);
@@ -10683,7 +10683,7 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  Set oTarget's plot object status.
+    ///  Set oTarget&amp;apos;s plot object status.
     public static void SetPlotFlag(uint oTarget, int nPlotFlag)
     {
       VM.StackPush(nPlotFlag);
@@ -10705,8 +10705,8 @@ namespace NWN.Core
     ///  Create a Concealment effect.<br/>
     ///  - nPercentage: 1-100 inclusive<br/>
     ///  - nMissChanceType: MISS_CHANCE_TYPE_*<br/>
-    ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nPercentage < 1 or<br/>
-    ///    nPercentage > 100.
+    ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nPercentage &amp;lt; 1 or<br/>
+    ///    nPercentage &amp;gt; 100.
     public static System.IntPtr EffectConcealment(int nPercentage, int nMissType = MISS_CHANCE_TYPE_NORMAL)
     {
       VM.StackPush(nMissType);
@@ -10742,7 +10742,7 @@ namespace NWN.Core
 
     ///  Create a Negative Level effect.<br/>
     ///  - nNumLevels: the number of negative levels to apply.<br/>
-    ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nNumLevels > 100.
+    ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nNumLevels &amp;gt; 100.
     public static System.IntPtr EffectNegativeLevel(int nNumLevels, int bHPBonus = FALSE)
     {
       VM.StackPush(bHPBonus);
@@ -10762,7 +10762,7 @@ namespace NWN.Core
 
     ///  Create a Sanctuary effect.<br/>
     ///  - nDifficultyClass: must be a non-zero, positive number<br/>
-    ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nDifficultyClass <= 0.
+    ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nDifficultyClass &amp;lt;= 0.
     public static System.IntPtr EffectSanctuary(int nDifficultyClass)
     {
       VM.StackPush(nDifficultyClass);
@@ -10800,7 +10800,7 @@ namespace NWN.Core
 
     ///  Determine whether oSource has a friendly reaction towards oTarget, depending<br/>
     ///  on the reputation, PVP setting and (if both oSource and oTarget are PCs),<br/>
-    ///  oSource's Like/Dislike setting for oTarget.<br/>
+    ///  oSource&amp;apos;s Like/Dislike setting for oTarget.<br/>
     ///  Note: If you just want to know how two objects feel about each other in terms<br/>
     ///  of faction and personal reputation, use GetIsFriend() instead.<br/>
     ///  * Returns TRUE if oSource has a friendly reaction towards oTarget
@@ -10814,7 +10814,7 @@ namespace NWN.Core
 
     ///  Determine whether oSource has a neutral reaction towards oTarget, depending<br/>
     ///  on the reputation, PVP setting and (if both oSource and oTarget are PCs),<br/>
-    ///  oSource's Like/Dislike setting for oTarget.<br/>
+    ///  oSource&amp;apos;s Like/Dislike setting for oTarget.<br/>
     ///  Note: If you just want to know how two objects feel about each other in terms<br/>
     ///  of faction and personal reputation, use GetIsNeutral() instead.<br/>
     ///  * Returns TRUE if oSource has a neutral reaction towards oTarget
@@ -10828,7 +10828,7 @@ namespace NWN.Core
 
     ///  Determine whether oSource has a Hostile reaction towards oTarget, depending<br/>
     ///  on the reputation, PVP setting and (if both oSource and oTarget are PCs),<br/>
-    ///  oSource's Like/Dislike setting for oTarget.<br/>
+    ///  oSource&amp;apos;s Like/Dislike setting for oTarget.<br/>
     ///  Note: If you just want to know how two objects feel about each other in terms<br/>
     ///  of faction and personal reputation, use GetIsEnemy() instead.<br/>
     ///  * Returns TRUE if oSource has a hostile reaction towards oTarget
@@ -10871,9 +10871,9 @@ namespace NWN.Core
 
     ///  Try to send oTarget to a new server defined by sIPaddress.<br/>
     ///  - oTarget<br/>
-    ///  - sIPaddress: this can be numerical "192.168.0.84" or alphanumeric<br/>
-    ///    "www.bioware.com". It can also contain a port "192.168.0.84:5121" or<br/>
-    ///    "www.bioware.com:5121"; if the port is not specified, it will default to<br/>
+    ///  - sIPaddress: this can be numerical &amp;quot;192.168.0.84&amp;quot; or alphanumeric<br/>
+    ///    &amp;quot;www.bioware.com&amp;quot;. It can also contain a port &amp;quot;192.168.0.84:5121&amp;quot; or<br/>
+    ///    &amp;quot;www.bioware.com:5121&amp;quot;; if the port is not specified, it will default to<br/>
     ///    5121.<br/>
     ///  - sPassword: login password for the destination server<br/>
     ///  - sWaypointTag: if this is set, after portalling the character will be moved<br/>
@@ -10901,7 +10901,7 @@ namespace NWN.Core
     }
 
     ///  Use this on an NPC to cause all creatures within a 10-metre radius to stop<br/>
-    ///  what they are doing and sets the NPC's enemies within this range to be<br/>
+    ///  what they are doing and sets the NPC&amp;apos;s enemies within this range to be<br/>
     ///  neutral towards the NPC for roughly 3 minutes. If this command is run on a PC<br/>
     ///  or an object that is not a creature, nothing will happen.
     public static void SurrenderToEnemies()
@@ -10912,8 +10912,8 @@ namespace NWN.Core
     ///  Create a Miss Chance effect.<br/>
     ///  - nPercentage: 1-100 inclusive<br/>
     ///  - nMissChanceType: MISS_CHANCE_TYPE_*<br/>
-    ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nPercentage < 1 or<br/>
-    ///    nPercentage > 100.
+    ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nPercentage &amp;lt; 1 or<br/>
+    ///    nPercentage &amp;gt; 100.
     public static System.IntPtr EffectMissChance(int nPercentage, int nMissChanceType = MISS_CHANCE_TYPE_NORMAL)
     {
       VM.StackPush(nMissChanceType);
@@ -10940,7 +10940,7 @@ namespace NWN.Core
     }
 
     ///  Create a Disappear/Appear effect.<br/>
-    ///  The object will "fly away" for the duration of the effect and will reappear<br/>
+    ///  The object will &amp;quot;fly away&amp;quot; for the duration of the effect and will reappear<br/>
     ///  at lLocation.<br/>
     ///  - nAnimation determines which appear and disappear animations to use. Most creatures<br/>
     ///  only have animation 1, although a few have 2 (like beholders)
@@ -10952,7 +10952,7 @@ namespace NWN.Core
       return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
 
-    ///  Create a Disappear effect to make the object "fly away" and then destroy<br/>
+    ///  Create a Disappear effect to make the object &amp;quot;fly away&amp;quot; and then destroy<br/>
     ///  itself.<br/>
     ///  - nAnimation determines which appear and disappear animations to use. Most creatures<br/>
     ///  only have animation 1, although a few have 2 (like beholders)
@@ -10963,7 +10963,7 @@ namespace NWN.Core
       return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
 
-    ///  Create an Appear effect to make the object "fly in".<br/>
+    ///  Create an Appear effect to make the object &amp;quot;fly in&amp;quot;.<br/>
     ///  - nAnimation determines which appear and disappear animations to use. Most creatures<br/>
     ///  only have animation 1, although a few have 2 (like beholders)
     public static System.IntPtr EffectAppear(int nAnimation = 1)
@@ -10991,7 +10991,7 @@ namespace NWN.Core
 
     ///  Create a Modify Attacks effect to add attacks.<br/>
     ///  - nAttacks: maximum is 5, even with the effect stacked<br/>
-    ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nAttacks > 5.
+    ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nAttacks &amp;gt; 5.
     public static System.IntPtr EffectModifyAttacks(int nAttacks)
     {
       VM.StackPush(nAttacks);
@@ -11025,8 +11025,8 @@ namespace NWN.Core
     }
 
     ///  Get the trap nearest to oTarget.<br/>
-    ///  Note : "trap objects" are actually any trigger, placeable or door that is<br/>
-    ///  trapped in oTarget's area.<br/>
+    ///  Note : &amp;quot;trap objects&amp;quot; are actually any trigger, placeable or door that is<br/>
+    ///  trapped in oTarget&amp;apos;s area.<br/>
     ///  - oTarget<br/>
     ///  - nTrapDetected: if this is TRUE, the trap returned has to have been detected<br/>
     ///    by oTarget.
@@ -11038,8 +11038,8 @@ namespace NWN.Core
       return VM.StackPopObject();
     }
 
-    ///  Get the name of oCreature's deity.<br/>
-    ///  * Returns "" if oCreature is invalid (or if the deity name is blank for<br/>
+    ///  Get the name of oCreature&amp;apos;s deity.<br/>
+    ///  * Returns &amp;quot;&amp;quot; if oCreature is invalid (or if the deity name is blank for<br/>
     ///    oCreature).
     public static string GetDeity(uint oCreature)
     {
@@ -11048,8 +11048,8 @@ namespace NWN.Core
       return VM.StackPopString();
     }
 
-    ///  Get the name of oCreature's sub race.<br/>
-    ///  * Returns "" if oCreature is invalid (or if sub race is blank for oCreature).
+    ///  Get the name of oCreature&amp;apos;s sub race.<br/>
+    ///  * Returns &amp;quot;&amp;quot; if oCreature is invalid (or if sub race is blank for oCreature).
     public static string GetSubRace(uint oTarget)
     {
       VM.StackPush(oTarget);
@@ -11057,7 +11057,7 @@ namespace NWN.Core
       return VM.StackPopString();
     }
 
-    ///  Get oTarget's base fortitude saving throw value (this will only work for<br/>
+    ///  Get oTarget&amp;apos;s base fortitude saving throw value (this will only work for<br/>
     ///  creatures, doors, and placeables).<br/>
     ///  * Returns 0 if oTarget is invalid.
     public static int GetFortitudeSavingThrow(uint oTarget)
@@ -11067,7 +11067,7 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  Get oTarget's base will saving throw value (this will only work for creatures,<br/>
+    ///  Get oTarget&amp;apos;s base will saving throw value (this will only work for creatures,<br/>
     ///  doors, and placeables).<br/>
     ///  * Returns 0 if oTarget is invalid.
     public static int GetWillSavingThrow(uint oTarget)
@@ -11077,7 +11077,7 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  Get oTarget's base reflex saving throw value (this will only work for<br/>
+    ///  Get oTarget&amp;apos;s base reflex saving throw value (this will only work for<br/>
     ///  creatures, doors, and placeables).<br/>
     ///  * Returns 0 if oTarget is invalid.
     public static int GetReflexSavingThrow(uint oTarget)
@@ -11087,7 +11087,7 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  Get oCreature's challenge rating.<br/>
+    ///  Get oCreature&amp;apos;s challenge rating.<br/>
     ///  * Returns 0.0 if oCreature is invalid.
     public static float GetChallengeRating(uint oCreature)
     {
@@ -11096,7 +11096,7 @@ namespace NWN.Core
       return VM.StackPopFloat();
     }
 
-    ///  Get oCreature's age.<br/>
+    ///  Get oCreature&amp;apos;s age.<br/>
     ///  * Returns 0 if oCreature is invalid.
     public static int GetAge(uint oCreature)
     {
@@ -11105,7 +11105,7 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  Get oCreature's movement rate.<br/>
+    ///  Get oCreature&amp;apos;s movement rate.<br/>
     ///  * Returns 0 if oCreature is invalid.
     public static int GetMovementRate(uint oCreature)
     {
@@ -11114,7 +11114,7 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  Get oCreature's familiar creature type (FAMILIAR_CREATURE_TYPE_*).<br/>
+    ///  Get oCreature&amp;apos;s familiar creature type (FAMILIAR_CREATURE_TYPE_*).<br/>
     ///  * Returns FAMILIAR_CREATURE_TYPE_NONE if oCreature is invalid or does not<br/>
     ///    currently have a familiar.
     public static int GetFamiliarCreatureType(uint oCreature)
@@ -11124,7 +11124,7 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  Get oCreature's animal companion creature type<br/>
+    ///  Get oCreature&amp;apos;s animal companion creature type<br/>
     ///  (ANIMAL_COMPANION_CREATURE_TYPE_*).<br/>
     ///  * Returns ANIMAL_COMPANION_CREATURE_TYPE_NONE if oCreature is invalid or does<br/>
     ///    not currently have an animal companion.
@@ -11135,9 +11135,9 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  Get oCreature's familiar's name.<br/>
-    ///  * Returns "" if oCreature is invalid, does not currently<br/>
-    ///  have a familiar or if the familiar's name is blank.
+    ///  Get oCreature&amp;apos;s familiar&amp;apos;s name.<br/>
+    ///  * Returns &amp;quot;&amp;quot; if oCreature is invalid, does not currently<br/>
+    ///  have a familiar or if the familiar&amp;apos;s name is blank.
     public static string GetFamiliarName(uint oCreature)
     {
       VM.StackPush(oCreature);
@@ -11145,9 +11145,9 @@ namespace NWN.Core
       return VM.StackPopString();
     }
 
-    ///  Get oCreature's animal companion's name.<br/>
-    ///  * Returns "" if oCreature is invalid, does not currently<br/>
-    ///  have an animal companion or if the animal companion's name is blank.
+    ///  Get oCreature&amp;apos;s animal companion&amp;apos;s name.<br/>
+    ///  * Returns &amp;quot;&amp;quot; if oCreature is invalid, does not currently<br/>
+    ///  have an animal companion or if the animal companion&amp;apos;s name is blank.
     public static string GetAnimalCompanionName(uint oTarget)
     {
       VM.StackPush(oTarget);
@@ -11222,8 +11222,8 @@ namespace NWN.Core
     ///    weather constant. If it is an area, oTarget will play the weather only if<br/>
     ///    it is an outdoor area.<br/>
     ///  - nWeather: WEATHER_*<br/>
-    ///    -> WEATHER_USER_AREA_SETTINGS will set the area back to random weather.<br/>
-    ///    -> WEATHER_CLEAR, WEATHER_RAIN, WEATHER_SNOW will make the weather go to<br/>
+    ///    -&amp;gt; WEATHER_USER_AREA_SETTINGS will set the area back to random weather.<br/>
+    ///    -&amp;gt; WEATHER_CLEAR, WEATHER_RAIN, WEATHER_SNOW will make the weather go to<br/>
     ///       the appropriate precipitation *without stopping*.
     public static void SetWeather(uint oTarget, int nWeather)
     {
@@ -11367,7 +11367,7 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  Make the corresponding panel button on the player's client start or stop<br/>
+    ///  Make the corresponding panel button on the player&amp;apos;s client start or stop<br/>
     ///  flashing.<br/>
     ///  - oPlayer<br/>
     ///  - nButton: PANEL_BUTTON_*<br/>
@@ -11603,8 +11603,8 @@ namespace NWN.Core
 
     ///  Set the status of the illumination for oPlaceable.<br/>
     ///  - oPlaceable<br/>
-    ///  - bIlluminate: if this is TRUE, oPlaceable's illumination will be turned on.<br/>
-    ///    If this is FALSE, oPlaceable's illumination will be turned off.<br/>
+    ///  - bIlluminate: if this is TRUE, oPlaceable&amp;apos;s illumination will be turned on.<br/>
+    ///    If this is FALSE, oPlaceable&amp;apos;s illumination will be turned off.<br/>
     ///  Note: You must call RecomputeStaticLighting() after calling this function in<br/>
     ///  order for the changes to occur visually for the players.<br/>
     ///  SetPlaceableIllumination() buffers the illumination changes, which are then<br/>
@@ -11613,7 +11613,7 @@ namespace NWN.Core
     ///  to set the illumination on, and then call RecomputeStaticLighting() once after<br/>
     ///  all the placeable illumination has been set.<br/>
     ///  * If oPlaceable is not a placeable object, or oPlaceable is a placeable that<br/>
-    ///    doesn't have a light, nothing will happen.
+    ///    doesn&amp;apos;t have a light, nothing will happen.
     public static void SetPlaceableIllumination(uint oPlaceable = OBJECT_INVALID, int bIlluminate = TRUE)
     {
       VM.StackPush(bIlluminate);
@@ -11710,12 +11710,12 @@ namespace NWN.Core
 
     ///  Spawn in the Death GUI.<br/>
     ///  The default (as defined by BioWare) can be spawned in by PopUpGUIPanel, but<br/>
-    ///  if you want to turn off the "Respawn" or "Wait for Help" buttons, this is the<br/>
+    ///  if you want to turn off the &amp;quot;Respawn&amp;quot; or &amp;quot;Wait for Help&amp;quot; buttons, this is the<br/>
     ///  function to use.<br/>
     ///  - oPC<br/>
-    ///  - bRespawnButtonEnabled: if this is TRUE, the "Respawn" button will be enabled<br/>
+    ///  - bRespawnButtonEnabled: if this is TRUE, the &amp;quot;Respawn&amp;quot; button will be enabled<br/>
     ///    on the Death GUI.<br/>
-    ///  - bWaitForHelpButtonEnabled: if this is TRUE, the "Wait For Help" button will<br/>
+    ///  - bWaitForHelpButtonEnabled: if this is TRUE, the &amp;quot;Wait For Help&amp;quot; button will<br/>
     ///    be enabled on the Death GUI (Note: This button will not appear in single player games).<br/>
     ///  - nHelpStringReference<br/>
     ///  - sHelpString
@@ -11785,7 +11785,7 @@ namespace NWN.Core
       VM.Call(560);
     }
 
-    ///  Get the module's name in the language of the server that's running it.<br/>
+    ///  Get the module&amp;apos;s name in the language of the server that&amp;apos;s running it.<br/>
     ///  * If there is no entry for the language of the server, it will return an<br/>
     ///    empty string
     public static string GetModuleName()
@@ -11812,7 +11812,7 @@ namespace NWN.Core
     }
 
     ///  End the currently running game, play sEndMovie then return all players to the<br/>
-    ///  game's main menu.
+    ///  game&amp;apos;s main menu.
     public static void EndGame(string sEndMovie)
     {
       VM.StackPush(sEndMovie);
@@ -11882,7 +11882,7 @@ namespace NWN.Core
       return VM.StackPopFloat();
     }
 
-    ///  Add oPC to oPartyLeader's party.  This will only work on two PCs.<br/>
+    ///  Add oPC to oPartyLeader&amp;apos;s party.  This will only work on two PCs.<br/>
     ///  - oPC: player to add to a party<br/>
     ///  - oPartyLeader: player already in the party
     public static void AddToParty(uint oPC, uint oPartyLeader)
@@ -11893,7 +11893,7 @@ namespace NWN.Core
     }
 
     ///  Remove oPC from their current party. This will only work on a PC.<br/>
-    ///  - oPC: removes this player from whatever party they're currently in.
+    ///  - oPC: removes this player from whatever party they&amp;apos;re currently in.
     public static void RemoveFromParty(uint oPC)
     {
       VM.StackPush(oPC);
@@ -11942,10 +11942,10 @@ namespace NWN.Core
 
     ///  SpawnScriptDebugger() will cause the script debugger to be executed<br/>
     ///  after this command is executed!<br/>
-    ///  In order to compile the script for debugging go to Tools->Options->Script Editor<br/>
-    ///  and check the box labeled "Generate Debug Information When Compiling Scripts"<br/>
+    ///  In order to compile the script for debugging go to Tools-&amp;gt;Options-&amp;gt;Script Editor<br/>
+    ///  and check the box labeled &amp;quot;Generate Debug Information When Compiling Scripts&amp;quot;<br/>
     ///  After you have checked the above box, recompile the script that you want to debug.<br/>
-    ///  If the script file isn't compiled for debugging, this command will do nothing.<br/>
+    ///  If the script file isn&amp;apos;t compiled for debugging, this command will do nothing.<br/>
     ///  Remove any SpawnScriptDebugger() calls once you have finished<br/>
     ///  debugging the script.
     public static void SpawnScriptDebugger()
@@ -12001,8 +12001,8 @@ namespace NWN.Core
 
     ///  duplicates the item and returns a new object<br/>
     ///  oItem - item to copy<br/>
-    ///  oTargetInventory - create item in this object's inventory. If this parameter<br/>
-    ///                     is not valid, the item will be created in oItem's location<br/>
+    ///  oTargetInventory - create item in this object&amp;apos;s inventory. If this parameter<br/>
+    ///                     is not valid, the item will be created in oItem&amp;apos;s location<br/>
     ///  bCopyVars - copy the local variables from the old item to the new one<br/>
     ///  * returns the new item<br/>
     ///  * returns OBJECT_INVALID for non-items.<br/>
@@ -12028,7 +12028,7 @@ namespace NWN.Core
     }
 
     ///  returns TRUE if the item CAN be dropped<br/>
-    ///  Droppable items will appear on a creature's remains when the creature is killed.
+    ///  Droppable items will appear on a creature&amp;apos;s remains when the creature is killed.
     public static int GetDroppableFlag(uint oItem)
     {
       VM.StackPush(oItem);
@@ -12248,7 +12248,7 @@ namespace NWN.Core
 
     ///  Use RetrieveCampaign with the given id to restore it.<br/>
     ///  If you specify an owner, the object will try to be created in their repository<br/>
-    ///  If the owner can't handle the item (or if it's a non-item) it will be created at the given location.
+    ///  If the owner can&amp;apos;t handle the item (or if it&amp;apos;s a non-item) it will be created at the given location.
     public static uint RetrieveCampaignObject(string sCampaignName, string sVarName, System.IntPtr locLocation, uint oOwner = OBJECT_INVALID, uint oPlayer = OBJECT_INVALID)
     {
       VM.StackPush(oPlayer);
@@ -13088,7 +13088,7 @@ namespace NWN.Core
 
     ///  Returns Item property extra melee damage type.  You must specify the extra<br/>
     ///  melee base damage type that you want applied.  It is a constant(IP_CONST_DAMAGETYPE_*).<br/>
-    ///  NOTE: only the first 3 base types (piercing, slashing, & bludgeoning are applicable<br/>
+    ///  NOTE: only the first 3 base types (piercing, slashing, &amp; bludgeoning are applicable<br/>
     ///        here.<br/>
     ///  NOTE: It is also only applicable to melee weapons.
     public static System.IntPtr ItemPropertyExtraMeleeDamageType(int nDamageType)
@@ -13100,7 +13100,7 @@ namespace NWN.Core
 
     ///  Returns Item property extra ranged damage type.  You must specify the extra<br/>
     ///  melee base damage type that you want applied.  It is a constant(IP_CONST_DAMAGETYPE_*).<br/>
-    ///  NOTE: only the first 3 base types (piercing, slashing, & bludgeoning are applicable<br/>
+    ///  NOTE: only the first 3 base types (piercing, slashing, &amp; bludgeoning are applicable<br/>
     ///        here.<br/>
     ///  NOTE: It is also only applicable to ranged weapons.
     public static System.IntPtr ItemPropertyExtraRangeDamageType(int nDamageType)
@@ -13210,7 +13210,7 @@ namespace NWN.Core
       return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
-    ///  Returns Item property on hit -> do effect property.  You must specify the on<br/>
+    ///  Returns Item property on hit -&amp;gt; do effect property.  You must specify the on<br/>
     ///  hit property constant(IP_CONST_ONHIT_*) and the save DC constant(IP_CONST_ONHIT_SAVEDC_*).<br/>
     ///  Some of the item properties require a special parameter as well.  If the<br/>
     ///  property does not require one you may leave out the last one.  The list of<br/>
@@ -13464,7 +13464,7 @@ namespace NWN.Core
     ///  Returns Item property Monster on hit apply effect property.  You must specify<br/>
     ///  the property that you want applied on hit.  There are some properties that<br/>
     ///  require an additional special parameter to be specified.  The others that<br/>
-    ///  don't require any additional parameter you may just put in the one.  The<br/>
+    ///  don&amp;apos;t require any additional parameter you may just put in the one.  The<br/>
     ///  special cases are as follows:<br/>
     ///       ABILITYDRAIN:nSpecial is the ability to drain.<br/>
     ///                    constant(IP_CONST_ABILITY_*)<br/>
@@ -13514,7 +13514,7 @@ namespace NWN.Core
     }
 
     ///  Returns Item property monster damage.  You must specify the amount of damage<br/>
-    ///  the monster's attack will do(IP_CONST_MONSTERDAMAGE_*).<br/>
+    ///  the monster&amp;apos;s attack will do(IP_CONST_MONSTERDAMAGE_*).<br/>
     ///  NOTE: These can only be applied to monster NATURAL weapons (ie. bite, claw,<br/>
     ///        gore, and slam).  IT WILL NOT WORK ON NORMAL WEAPONS.
     public static System.IntPtr ItemPropertyMonsterDamage(int nDamage)
@@ -13605,8 +13605,8 @@ namespace NWN.Core
     ///  - nInCutscene: TRUE to move them into cutscene, FALSE to remove cutscene mode<br/>
     ///  - nLeftClickingEnabled: TRUE to allow the user to interact with the game world using the left mouse button only.<br/>
     ///                          FALSE to stop the user from interacting with the game world.<br/>
-    ///  Note: SetCutsceneMode(oPlayer, TRUE) will also make the player 'plot' (unkillable).<br/>
-    ///  SetCutsceneMode(oPlayer, FALSE) will restore the player's plot flag to what it<br/>
+    ///  Note: SetCutsceneMode(oPlayer, TRUE) will also make the player &amp;apos;plot&amp;apos; (unkillable).<br/>
+    ///  SetCutsceneMode(oPlayer, FALSE) will restore the player&amp;apos;s plot flag to what it<br/>
     ///  was when SetCutsceneMode(oPlayer, TRUE) was called.
     public static void SetCutsceneMode(uint oCreature, int nInCutscene = TRUE, int nLeftClickingEnabled = FALSE)
     {
@@ -13675,7 +13675,7 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  Set a creature's immortality flag.<br/>
+    ///  Set a creature&amp;apos;s immortality flag.<br/>
     ///  -oCreature: creature affected<br/>
     ///  -bImmortal: TRUE = creature is immortal and cannot be killed (but still takes damage)<br/>
     ///              FALSE = creature is not immortal and is damaged normally.<br/>
@@ -13687,10 +13687,10 @@ namespace NWN.Core
       VM.Call(700);
     }
 
-    ///  Open's this creature's inventory panel for this player<br/>
+    ///  Open&amp;apos;s this creature&amp;apos;s inventory panel for this player<br/>
     ///  - oCreature: creature to view<br/>
     ///  - oPlayer: the owner of this creature will see the panel pop up<br/>
-    ///  * DM's can view any creature's inventory<br/>
+    ///  * DM&amp;apos;s can view any creature&amp;apos;s inventory<br/>
     ///  * Players can view their own inventory, or that of their henchman, familiar or animal companion
     public static void OpenInventory(uint oCreature, uint oPlayer)
     {
@@ -13736,7 +13736,7 @@ namespace NWN.Core
     ///  Sets the droppable flag on an item<br/>
     ///  - oItem: the item to change<br/>
     ///  - bDroppable: TRUE or FALSE, whether the item should be droppable<br/>
-    ///  Droppable items will appear on a creature's remains when the creature is killed.
+    ///  Droppable items will appear on a creature&amp;apos;s remains when the creature is killed.
     public static void SetDroppableFlag(uint oItem, int bDroppable)
     {
       VM.StackPush(bDroppable);
@@ -13898,7 +13898,7 @@ namespace NWN.Core
       VM.Call(720);
     }
 
-    ///  Set the name of oCreature's sub race to sSubRace.
+    ///  Set the name of oCreature&amp;apos;s sub race to sSubRace.
     public static void SetSubRace(uint oCreature, string sSubRace)
     {
       VM.StackPush(sSubRace);
@@ -13906,7 +13906,7 @@ namespace NWN.Core
       VM.Call(721);
     }
 
-    ///  Set the name of oCreature's Deity to sDeity.
+    ///  Set the name of oCreature&amp;apos;s Deity to sDeity.
     public static void SetDeity(uint oCreature, string sDeity)
     {
       VM.StackPush(sDeity);
@@ -14000,7 +14000,7 @@ namespace NWN.Core
     ///    6 + (7 * 6) + 2 = 50<br/>
     /// <br/>
     ///  [1] When specifying per-part coloring, the value 255 is allowed and corresponds with the logical<br/>
-    ///  function 'clear colour override', which clears the per-part override for that part.
+    ///  function &amp;apos;clear colour override&amp;apos;, which clears the per-part override for that part.
     public static uint CopyItemAndModify(uint oItem, int nType, int nIndex, int nNewValue, int bCopyVars = FALSE)
     {
       VM.StackPush(bCopyVars);
@@ -14103,7 +14103,7 @@ namespace NWN.Core
     }
 
     ///  Returns the current movement rate factor<br/>
-    ///  of the cutscene 'camera man'.<br/>
+    ///  of the cutscene &amp;apos;camera man&amp;apos;.<br/>
     ///  NOTE: This will be a value between 0.1, 2.0 (10%-200%)
     public static float GetCutsceneCameraMoveRate(uint oCreature)
     {
@@ -14241,7 +14241,7 @@ namespace NWN.Core
       VM.Call(755);
     }
 
-    ///  Restores the number of base attacks back to it's<br/>
+    ///  Restores the number of base attacks back to it&amp;apos;s<br/>
     ///  original state.
     public static void RestoreBaseAttackBonus(uint oCreature = OBJECT_INVALID)
     {
@@ -14320,7 +14320,7 @@ namespace NWN.Core
       VM.Call(764);
     }
 
-    ///  Sets the creature's appearance type to the value specified (uses the APPEARANCE_TYPE_XXX constants)
+    ///  Sets the creature&amp;apos;s appearance type to the value specified (uses the APPEARANCE_TYPE_XXX constants)
     public static void SetCreatureAppearanceType(uint oCreature, int nAppearanceType)
     {
       VM.StackPush(nAppearanceType);
@@ -14337,7 +14337,7 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  Returns an effect that when applied will paralyze the target's legs, rendering<br/>
+    ///  Returns an effect that when applied will paralyze the target&amp;apos;s legs, rendering<br/>
     ///  them unable to walk but otherwise unpenalized. This effect cannot be resisted.
     public static System.IntPtr EffectCutsceneImmobilize()
     {
@@ -14398,7 +14398,7 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  Sets whether this item is 'stolen' or not
+    ///  Sets whether this item is &amp;apos;stolen&amp;apos; or not
     public static void SetStolenFlag(uint oItem, int nStolenFlag)
     {
       VM.StackPush(nStolenFlag);
@@ -14413,7 +14413,7 @@ namespace NWN.Core
       VM.Call(775);
     }
 
-    ///  Forces this player's camera to be set to this height. Setting this value to zero will<br/>
+    ///  Forces this player&amp;apos;s camera to be set to this height. Setting this value to zero will<br/>
     ///  restore the camera to the racial default height.
     public static void SetCameraHeight(uint oPlayer, float fHeight = 0.0f)
     {
@@ -14433,7 +14433,7 @@ namespace NWN.Core
       VM.Call(777);
     }
 
-    ///  Returns the creature's currently set PhenoType (body type).
+    ///  Returns the creature&amp;apos;s currently set PhenoType (body type).
     public static int GetPhenoType(uint oCreature)
     {
       VM.StackPush(oCreature);
@@ -14441,7 +14441,7 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  Sets the creature's PhenoType (body type) to the type specified.<br/>
+    ///  Sets the creature&amp;apos;s PhenoType (body type) to the type specified.<br/>
     ///  nPhenoType = PHENOTYPE_NORMAL<br/>
     ///  nPhenoType = PHENOTYPE_BIG<br/>
     ///  nPhenoType = PHENOTYPE_CUSTOM* - The custom PhenoTypes should only ever<br/>
@@ -14557,10 +14557,10 @@ namespace NWN.Core
     }
 
     ///  returns the footstep type of the creature specified.<br/>
-    ///  The footstep type determines what the creature's footsteps sound<br/>
+    ///  The footstep type determines what the creature&amp;apos;s footsteps sound<br/>
     ///  like when ever they take a step.<br/>
     ///  returns FOOTSTEP_TYPE_INVALID if used on a non-creature object, or if<br/>
-    ///  used on creature that has no footstep sounds by default (e.g. Will-O'-Wisp).
+    ///  used on creature that has no footstep sounds by default (e.g. Will-O&amp;apos;-Wisp).
     public static int GetFootstepType(uint oCreature = OBJECT_INVALID)
     {
       VM.StackPush(oCreature);
@@ -14569,9 +14569,9 @@ namespace NWN.Core
     }
 
     ///  Sets the footstep type of the creature specified.<br/>
-    ///  Changing a creature's footstep type will change the sound that<br/>
+    ///  Changing a creature&amp;apos;s footstep type will change the sound that<br/>
     ///  its feet make when ever the creature makes takes a step.<br/>
-    ///  By default a creature's footsteps are detemined by the appearance<br/>
+    ///  By default a creature&amp;apos;s footsteps are detemined by the appearance<br/>
     ///  type of the creature. SetFootstepType() allows you to make a<br/>
     ///  creature use a difference footstep type than it would use by default<br/>
     ///  for its given appearance.<br/>
@@ -14626,8 +14626,8 @@ namespace NWN.Core
     ///       CREATURE_WING_TYPE_BIRD<br/>
     ///  - oCreature: the creature to change the wing type for.<br/>
     ///  Note: Only two creature model types will support wings.<br/>
-    ///  The MODELTYPE for the part based (playable races) 'P'<br/>
-    ///  and MODELTYPE 'W'in the appearance.2da
+    ///  The MODELTYPE for the part based (playable races) &amp;apos;P&amp;apos;<br/>
+    ///  and MODELTYPE &amp;apos;W&amp;apos;in the appearance.2da
     public static void SetCreatureWingType(int nWingType, uint oCreature = OBJECT_INVALID)
     {
       VM.StackPush(oCreature);
@@ -14676,7 +14676,7 @@ namespace NWN.Core
 
     ///  Sets the body part model to be used on the creature specified.<br/>
     ///  The model names for parts need to be in the following format:<br/>
-    ///    p<m/f><race letter><phenotype>_<body part><model number>.mdl<br/>
+    ///    p&amp;lt;m/f&amp;gt;&amp;lt;race letter&amp;gt;&amp;lt;phenotype&amp;gt;_&amp;lt;body part&amp;gt;&amp;lt;model number&amp;gt;.mdl<br/>
     /// <br/>
     ///  - nPart (CREATURE_PART_*)<br/>
     ///       CREATURE_PART_RIGHT_FOOT<br/>
@@ -14705,7 +14705,7 @@ namespace NWN.Core
     ///       CREATURE_MODEL_TYPE_UNDEAD (undead model only exists for the right arm parts).<br/>
     ///  - oCreature: the creature to change the body part for.<br/>
     ///  Note: Only part based creature appearance types are supported.<br/>
-    ///  i.e. The model types for the playable races ('P') in the appearance.2da
+    ///  i.e. The model types for the playable races (&amp;apos;P&amp;apos;) in the appearance.2da
     public static void SetCreatureBodyPart(int nPart, int nModelNumber, uint oCreature = OBJECT_INVALID)
     {
       VM.StackPush(oCreature);
@@ -14737,8 +14737,8 @@ namespace NWN.Core
     ///       CREATURE_TAIL_TYPE_DEVIL<br/>
     ///  - oCreature: the creature to change the Tail type for.<br/>
     ///  Note: Only two creature model types will support Tails.<br/>
-    ///  The MODELTYPE for the part based (playable) races 'P'<br/>
-    ///  and MODELTYPE 'T'in the appearance.2da
+    ///  The MODELTYPE for the part based (playable) races &amp;apos;P&amp;apos;<br/>
+    ///  and MODELTYPE &amp;apos;T&amp;apos;in the appearance.2da
     public static void SetCreatureTailType(int nTailType, uint oCreature = OBJECT_INVALID)
     {
       VM.StackPush(oCreature);
@@ -14784,7 +14784,7 @@ namespace NWN.Core
 
     ///  Set the key tag required to open object oObject.<br/>
     ///  This will only have an effect if the object is set to<br/>
-    ///  "Key required to unlock or lock" either in the toolset<br/>
+    ///  &amp;quot;Key required to unlock or lock&amp;quot; either in the toolset<br/>
     ///  or by using the scripting command SetLockKeyRequired().<br/>
     ///  - oObject: a door, placeable or trigger.<br/>
     ///  - sNewKeyTag: the key tag required to open the locked object.
@@ -14894,10 +14894,10 @@ namespace NWN.Core
     ///  - sTag: The tag of the trap being created.<br/>
     ///  - nFaction: The faction of the trap (STANDARD_FACTION_*).<br/>
     ///  - sOnDisarmScript: The OnDisarm script that will fire when the trap is disarmed.<br/>
-    ///                     If "" no script will fire.<br/>
+    ///                     If &amp;quot;&amp;quot; no script will fire.<br/>
     ///  - sOnTrapTriggeredScript: The OnTrapTriggered script that will fire when the<br/>
     ///                            trap is triggered.<br/>
-    ///                            If "" the default OnTrapTriggered script for the trap<br/>
+    ///                            If &amp;quot;&amp;quot; the default OnTrapTriggered script for the trap<br/>
     ///                            type specified will fire instead (as specified in the<br/>
     ///                            traps.2da).
     public static uint CreateTrapAtLocation(int nTrapType, System.IntPtr lLocation, float fSize = 2.0f, string sTag = "", int nFaction = STANDARD_FACTION_HOSTILE, string sOnDisarmScript = "", string sOnTrapTriggeredScript = "")
@@ -14918,13 +14918,13 @@ namespace NWN.Core
     ///  - oObject: The object that the trap will be created on. Works only on Doors and Placeables.<br/>
     ///  - nFaction: The faction of the trap (STANDARD_FACTION_*).<br/>
     ///  - sOnDisarmScript: The OnDisarm script that will fire when the trap is disarmed.<br/>
-    ///                     If "" no script will fire.<br/>
+    ///                     If &amp;quot;&amp;quot; no script will fire.<br/>
     ///  - sOnTrapTriggeredScript: The OnTrapTriggered script that will fire when the<br/>
     ///                            trap is triggered.<br/>
-    ///                            If "" the default OnTrapTriggered script for the trap<br/>
+    ///                            If &amp;quot;&amp;quot; the default OnTrapTriggered script for the trap<br/>
     ///                            type specified will fire instead (as specified in the<br/>
     ///                            traps.2da).<br/>
-    ///  Note: After creating a trap on an object, you can change the trap's properties<br/>
+    ///  Note: After creating a trap on an object, you can change the trap&amp;apos;s properties<br/>
     ///        using the various SetTrap* scripting commands by passing in the object<br/>
     ///        that the trap was created on (i.e. oObject) to any subsequent SetTrap* commands.
     public static void CreateTrapOnObject(int nTrapType, uint oObject, int nFaction = STANDARD_FACTION_HOSTILE, string sOnDisarmScript = "", string sOnTrapTriggeredScript = "")
@@ -15029,7 +15029,7 @@ namespace NWN.Core
 
     ///  Get the feedback message that will be displayed when trying to unlock the object oObject.<br/>
     ///  - oObject: a door or placeable.<br/>
-    ///  Returns an empty string "" on an error or if the game's default feedback message is being used
+    ///  Returns an empty string &amp;quot;&amp;quot; on an error or if the game&amp;apos;s default feedback message is being used
     public static string GetKeyRequiredFeedback(uint oObject)
     {
       VM.StackPush(oObject);
@@ -15039,11 +15039,11 @@ namespace NWN.Core
 
     ///  Set the feedback message that is displayed when trying to unlock the object oObject.<br/>
     ///  This will only have an effect if the object is set to<br/>
-    ///  "Key required to unlock or lock" either in the toolset<br/>
+    ///  &amp;quot;Key required to unlock or lock&amp;quot; either in the toolset<br/>
     ///  or by using the scripting command SetLockKeyRequired().<br/>
     ///  - oObject: a door or placeable.<br/>
-    ///  - sFeedbackMessage: the string to be displayed in the player's text window.<br/>
-    ///                      to use the game's default message, set sFeedbackMessage to ""
+    ///  - sFeedbackMessage: the string to be displayed in the player&amp;apos;s text window.<br/>
+    ///                      to use the game&amp;apos;s default message, set sFeedbackMessage to &amp;quot;&amp;quot;
     public static void SetKeyRequiredFeedback(uint oObject, string sFeedbackMessage)
     {
       VM.StackPush(sFeedbackMessage);
@@ -15075,8 +15075,8 @@ namespace NWN.Core
       VM.Call(822);
     }
 
-    ///  Locks the player's camera pitch to its current pitch setting,<br/>
-    ///  or unlocks the player's camera pitch.<br/>
+    ///  Locks the player&amp;apos;s camera pitch to its current pitch setting,<br/>
+    ///  or unlocks the player&amp;apos;s camera pitch.<br/>
     ///  Stops the player from tilting their camera angle.<br/>
     ///  - oPlayer: A player object.<br/>
     ///  - bLocked: TRUE/FALSE.
@@ -15087,8 +15087,8 @@ namespace NWN.Core
       VM.Call(823);
     }
 
-    ///  Locks the player's camera distance to its current distance setting,<br/>
-    ///  or unlocks the player's camera distance.<br/>
+    ///  Locks the player&amp;apos;s camera distance to its current distance setting,<br/>
+    ///  or unlocks the player&amp;apos;s camera distance.<br/>
     ///  Stops the player from being able to zoom in/out the camera.<br/>
     ///  - oPlayer: A player object.<br/>
     ///  - bLocked: TRUE/FALSE.
@@ -15099,8 +15099,8 @@ namespace NWN.Core
       VM.Call(824);
     }
 
-    ///  Locks the player's camera direction to its current direction,<br/>
-    ///  or unlocks the player's camera direction to enable it to move<br/>
+    ///  Locks the player&amp;apos;s camera direction to its current direction,<br/>
+    ///  or unlocks the player&amp;apos;s camera direction to enable it to move<br/>
     ///  freely again.<br/>
     ///  Stops the player from being able to rotate the camera direction.<br/>
     ///  - oPlayer: A player object.<br/>
@@ -15167,7 +15167,7 @@ namespace NWN.Core
     ///  - oObject: the object for which you are changing the name (a creature, placeable, item, or door).<br/>
     ///  - sNewName: the new name that the object will use.<br/>
     ///  Note: SetName() does not work on player objects.<br/>
-    ///        Setting an object's name to "" will make the object<br/>
+    ///        Setting an object&amp;apos;s name to &amp;quot;&amp;quot; will make the object<br/>
     ///        revert to using the name it had originally before any<br/>
     ///        SetName() calls were made on the object.
     public static void SetName(uint oObject, string sNewName = "")
@@ -15231,7 +15231,7 @@ namespace NWN.Core
       VM.Call(834);
     }
 
-    ///  Set oPlaceable's useable object status.<br/>
+    ///  Set oPlaceable&amp;apos;s useable object status.<br/>
     ///  Note: Only works on non-static placeables.
     public static void SetUseableFlag(uint oPlaceable, int nUseableFlag)
     {
@@ -15244,7 +15244,7 @@ namespace NWN.Core
     ///  - oObject: the object from which you are obtaining the description.<br/>
     ///             Can be a creature, item, placeable, door, trigger or module object.<br/>
     ///  - bOriginalDescription:  if set to true any new description specified via a SetDescription scripting command<br/>
-    ///                    is ignored and the original object's description is returned instead.<br/>
+    ///                    is ignored and the original object&amp;apos;s description is returned instead.<br/>
     ///  - bIdentified: If oObject is an item, setting this to TRUE will return the identified description,<br/>
     ///                 setting this to FALSE will return the unidentified description. This flag has no<br/>
     ///                 effect on objects other than items.
@@ -15264,7 +15264,7 @@ namespace NWN.Core
     ///  - bIdentified: If oObject is an item, setting this to TRUE will set the identified description,<br/>
     ///                 setting this to FALSE will set the unidentified description. This flag has no<br/>
     ///                 effect on objects other than items.<br/>
-    ///  Note: Setting an object's description to "" will make the object<br/>
+    ///  Note: Setting an object&amp;apos;s description to &amp;quot;&amp;quot; will make the object<br/>
     ///        revert to using the description it originally had before any<br/>
     ///        SetDescription() calls were made on the object.
     public static void SetDescription(uint oObject, string sNewDescription = "", int bIdentifiedDescription = TRUE)
@@ -15276,7 +15276,7 @@ namespace NWN.Core
     }
 
     ///  Get the PC that sent the last player chat(text) message.<br/>
-    ///  Should only be called from a module's OnPlayerChat event script.<br/>
+    ///  Should only be called from a module&amp;apos;s OnPlayerChat event script.<br/>
     ///  * Returns OBJECT_INVALID on error.<br/>
     ///  Note: Private tells do not trigger a OnPlayerChat event.
     public static uint GetPCChatSpeaker()
@@ -15286,8 +15286,8 @@ namespace NWN.Core
     }
 
     ///  Get the last player chat(text) message that was sent.<br/>
-    ///  Should only be called from a module's OnPlayerChat event script.<br/>
-    ///  * Returns empty string "" on error.<br/>
+    ///  Should only be called from a module&amp;apos;s OnPlayerChat event script.<br/>
+    ///  * Returns empty string &amp;quot;&amp;quot; on error.<br/>
     ///  Note: Private tells do not trigger a OnPlayerChat event.
     public static string GetPCChatMessage()
     {
@@ -15303,7 +15303,7 @@ namespace NWN.Core
     ///                 TALKVOLUME_SHOUT<br/>
     ///                 TALKVOLUME_SILENT_SHOUT (used for DM chat channel)<br/>
     ///                 TALKVOLUME_PARTY<br/>
-    ///  Should only be called from a module's OnPlayerChat event script.<br/>
+    ///  Should only be called from a module&amp;apos;s OnPlayerChat event script.<br/>
     ///  * Returns -1 on error.<br/>
     ///  Note: Private tells do not trigger a OnPlayerChat event.
     public static int GetPCChatVolume()
@@ -15314,7 +15314,7 @@ namespace NWN.Core
 
     ///  Set the last player chat(text) message before it gets sent to other players.<br/>
     ///  - sNewChatMessage: The new chat text to be sent onto other players.<br/>
-    ///                     Setting the player chat message to an empty string "",<br/>
+    ///                     Setting the player chat message to an empty string &amp;quot;&amp;quot;,<br/>
     ///                     will cause the chat message to be discarded<br/>
     ///                     (i.e. it will not be sent to other players).<br/>
     ///  Note: The new chat message gets sent after the OnPlayerChat script exits.
@@ -15810,7 +15810,7 @@ namespace NWN.Core
     }
 
     ///  Returns the event script for the given object and handler.<br/>
-    ///  Will return "" if unset, the object is invalid, or the object cannot<br/>
+    ///  Will return &amp;quot;&amp;quot; if unset, the object is invalid, or the object cannot<br/>
     ///  have the requested handler.
     public static string GetEventScript(uint oObject, int nHandler)
     {
@@ -15902,7 +15902,7 @@ namespace NWN.Core
       VM.Call(891);
     }
 
-    ///  Vibrate the player's device or controller. Does nothing if vibration is not supported.<br/>
+    ///  Vibrate the player&amp;apos;s device or controller. Does nothing if vibration is not supported.<br/>
     ///  - nMotor is one of VIBRATOR_MOTOR_*<br/>
     ///  - fStrength is between 0.0 and 1.0<br/>
     ///  - fSeconds is the number of seconds to vibrate
@@ -15935,7 +15935,7 @@ namespace NWN.Core
     ///  The script is jitted in place and currently not cached: Each invocation will recompile the script chunk.<br/>
     ///  Note that the script chunk will run as if a separate script. This is not eval().<br/>
     ///  By default, the script chunk is wrapped into void main() {}. Pass in bWrapIntoMain = FALSE to override.<br/>
-    ///  Returns "" on success, or the compilation error.
+    ///  Returns &amp;quot;&amp;quot; on success, or the compilation error.
     public static string ExecuteScriptChunk(string sScriptChunk, uint oObject = OBJECT_INVALID, int bWrapIntoMain = TRUE)
     {
       VM.StackPush(bWrapIntoMain);
@@ -15953,7 +15953,7 @@ namespace NWN.Core
       return VM.StackPopString();
     }
 
-    ///  Returns the given objects' UUID. This UUID is persisted across save boundaries,<br/>
+    ///  Returns the given objects&amp;apos; UUID. This UUID is persisted across save boundaries,<br/>
     ///  like Save/RestoreCampaignObject and save games.<br/>
     /// <br/>
     ///  Thus, reidentification is only guaranteed in scenarios where players cannot introduce<br/>
@@ -15975,7 +15975,7 @@ namespace NWN.Core
     ///    Items, Creatures, Placeables, Triggers, Doors, Waypoints, Stores,<br/>
     ///    Encounters, Areas.<br/>
     /// <br/>
-    ///  Will return "" (empty string) when the given object cannot carry a UUID.
+    ///  Will return &amp;quot;&amp;quot; (empty string) when the given object cannot carry a UUID.
     public static string GetObjectUUID(uint oObject)
     {
       VM.StackPush(oObject);
@@ -15990,7 +15990,7 @@ namespace NWN.Core
       VM.Call(897);
     }
 
-    ///  Looks up a object on the server by it's UUID.<br/>
+    ///  Looks up a object on the server by it&amp;apos;s UUID.<br/>
     ///  Returns OBJECT_INVALID if the UUID is not on the server.
     public static uint GetObjectByUUID(string sUUID)
     {
@@ -16007,7 +16007,7 @@ namespace NWN.Core
 
     ///  Makes oPC load texture sNewName instead of sOldName.<br/>
     ///  If oPC is OBJECT_INVALID, it will apply the override to all active players<br/>
-    ///  Setting sNewName to "" will clear the override and revert to original.
+    ///  Setting sNewName to &amp;quot;&amp;quot; will clear the override and revert to original.
     public static void SetTextureOverride(string sOldName, string sNewName = "", uint oPC = OBJECT_INVALID)
     {
       VM.StackPush(oPC);
@@ -16016,17 +16016,17 @@ namespace NWN.Core
       VM.Call(900);
     }
 
-    ///  Displays sMsg on oPC's screen.<br/>
+    ///  Displays sMsg on oPC&amp;apos;s screen.<br/>
     ///  The message is displayed on top of whatever is on the screen, including UI elements<br/>
     ///   nX, nY - coordinates of the first character to be displayed. The value is in terms<br/>
-    ///            of character 'slot' relative to the nAnchor anchor point.<br/>
+    ///            of character &amp;apos;slot&amp;apos; relative to the nAnchor anchor point.<br/>
     ///            If the number is negative, it is applied from the bottom/right.<br/>
     ///   nAnchor - SCREEN_ANCHOR_* constant<br/>
     ///   fLife - Duration in seconds until the string disappears.<br/>
     ///   nRGBA, nRGBA2 - Colors of the string in 0xRRGGBBAA format. String starts at nRGBA,<br/>
     ///                   but as it nears end of life, it will slowly blend into nRGBA2.<br/>
     ///   nID - Optional ID of a string. If not 0, subsequent calls to PostString will<br/>
-    ///         remove the old string with the same ID, even if it's lifetime has not elapsed.<br/>
+    ///         remove the old string with the same ID, even if it&amp;apos;s lifetime has not elapsed.<br/>
     ///         Only positive values are allowed.<br/>
     ///   sFont - If specified, use this custom font instead of default console font.
     public static void PostString(uint oPC, string sMsg, int nX = 0, int nY = 0, int nAnchor = SCREEN_ANCHOR_TOP_LEFT, float fLife = 10.0f, int nRGBA = 2147418367, int nRGBA2 = 2147418367, int nID = 0, string sFont = "")
@@ -16044,7 +16044,7 @@ namespace NWN.Core
       VM.Call(901);
     }
 
-    ///  Returns oCreature's spell school specialization in nClass (SPELL_SCHOOL_* constants)<br/>
+    ///  Returns oCreature&amp;apos;s spell school specialization in nClass (SPELL_SCHOOL_* constants)<br/>
     ///  Unless custom content is used, only Wizards have spell schools<br/>
     ///  Returns -1 on error
     public static int GetSpecialization(uint oCreature, int nClass = CLASS_TYPE_WIZARD)
@@ -16055,7 +16055,7 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  Returns oCreature's domain in nClass (DOMAIN_* constants)<br/>
+    ///  Returns oCreature&amp;apos;s domain in nClass (DOMAIN_* constants)<br/>
     ///  nDomainIndex - 1 or 2<br/>
     ///  Unless custom content is used, only Clerics have domains<br/>
     ///  Returns -1 on error
@@ -16069,7 +16069,7 @@ namespace NWN.Core
     }
 
     ///  Returns the build number of oPlayer (i.e. 8193).<br/>
-    ///  Returns 0 if the given object isn't a player or did not advertise their build info.
+    ///  Returns 0 if the given object isn&amp;apos;t a player or did not advertise their build info.
     public static int GetPlayerBuildVersionMajor(uint oPlayer)
     {
       VM.StackPush(oPlayer);
@@ -16078,7 +16078,7 @@ namespace NWN.Core
     }
 
     ///  Returns the patch revision of oPlayer (i.e. 8).<br/>
-    ///  Returns 0 if the given object isn't a player or did not advertise their build info.
+    ///  Returns 0 if the given object isn&amp;apos;t a player or did not advertise their build info.
     public static int GetPlayerBuildVersionMinor(uint oPlayer)
     {
       VM.StackPush(oPlayer);
@@ -16087,9 +16087,9 @@ namespace NWN.Core
     }
 
     ///  Returns the script parameter value for a given parameter name.<br/>
-    ///  Script parameters can be set for conversation scripts in the toolset's<br/>
+    ///  Script parameters can be set for conversation scripts in the toolset&amp;apos;s<br/>
     ///  Conversation Editor, or for any script with SetScriptParam().<br/>
-    ///  * Will return "" if a parameter with the given name does not exist.
+    ///  * Will return &amp;quot;&amp;quot; if a parameter with the given name does not exist.
     public static string GetScriptParam(string sParamName)
     {
       VM.StackPush(sParamName);
@@ -16194,7 +16194,7 @@ namespace NWN.Core
       return VM.StackPopObject();
     }
 
-    ///  Sets oObject's hilite color to nColor<br/>
+    ///  Sets oObject&amp;apos;s hilite color to nColor<br/>
     ///  The nColor format is 0xRRGGBB; -1 clears the color override.
     public static void SetObjectHiliteColor(uint oObject, int nColor = -1)
     {
@@ -16236,8 +16236,8 @@ namespace NWN.Core
       VM.Call(919);
     }
 
-    ///  Replace's oObject's texture sOld with sNew.<br/>
-    ///  Specifying sNew = "" will restore the original texture.<br/>
+    ///  Replace&amp;apos;s oObject&amp;apos;s texture sOld with sNew.<br/>
+    ///  Specifying sNew = &amp;quot;&amp;quot; will restore the original texture.<br/>
     ///  If sNew cannot be found, the original texture will be restored.<br/>
     ///  sNew must refer to a simple texture, not PLT
     public static void ReplaceObjectTexture(uint oObject, string sOld, string sNew = "")
@@ -16261,7 +16261,7 @@ namespace NWN.Core
       VM.Call(921);
     }
 
-    ///  Returns "" if the last Sql command succeeded; or a human-readable error otherwise.<br/>
+    ///  Returns &amp;quot;&amp;quot; if the last Sql command succeeded; or a human-readable error otherwise.<br/>
     ///  Additionally, all SQL errors are logged to the server log.
     public static string SqlGetError(System.IntPtr sqlQuery)
     {
@@ -16316,8 +16316,8 @@ namespace NWN.Core
 
     ///  Bind an integer to a named parameter of the given prepared query.<br/>
     ///  Example:<br/>
-    ///    sqlquery v = SqlPrepareQueryObject(GetModule(), "insert into test (col) values (@myint);");<br/>
-    ///    SqlBindInt(v, "@myint", 5);<br/>
+    ///    sqlquery v = SqlPrepareQueryObject(GetModule(), &amp;quot;insert into test (col) values (@myint);&amp;quot;);<br/>
+    ///    SqlBindInt(v, &amp;quot;@myint&amp;quot;, 5);<br/>
     ///    SqlStep(v);
     public static void SqlBindInt(System.IntPtr sqlQuery, string sParam, int nValue)
     {
@@ -16370,9 +16370,9 @@ namespace NWN.Core
     ///  the query ran successfully but did not return data.<br/>
     ///  You need to call SqlPrepareQuery() and potentially SqlBind* before calling this.<br/>
     ///  Example:<br/>
-    ///    sqlquery n = SqlPrepareQueryObject(GetFirstPC(), "select widget from widgets;");<br/>
+    ///    sqlquery n = SqlPrepareQueryObject(GetFirstPC(), &amp;quot;select widget from widgets;&amp;quot;);<br/>
     ///    while (SqlStep(n))<br/>
-    ///      SendMessageToPC(GetFirstPC(), "Found widget: " + SqlGetString(n, 0));
+    ///      SendMessageToPC(GetFirstPC(), &amp;quot;Found widget: &amp;quot; + SqlGetString(n, 0));
     public static int SqlStep(System.IntPtr sqlQuery)
     {
       VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
@@ -16477,7 +16477,7 @@ namespace NWN.Core
     }
 
     ///  Get the integer parameter of eEffect at nIndex.<br/>
-    ///  * nIndex bounds: 0 >= nIndex < 8.<br/>
+    ///  * nIndex bounds: 0 &amp;gt;= nIndex &amp;lt; 8.<br/>
     ///  * Some experimentation will be needed to find the right index for the value you wish to determine.<br/>
     ///  Returns: the value or 0 on error/when not set.
     public static int GetEffectInteger(System.IntPtr eEffect, int nIndex)
@@ -16489,7 +16489,7 @@ namespace NWN.Core
     }
 
     ///  Get the float parameter of eEffect at nIndex.<br/>
-    ///  * nIndex bounds: 0 >= nIndex < 4.<br/>
+    ///  * nIndex bounds: 0 &amp;gt;= nIndex &amp;lt; 4.<br/>
     ///  * Some experimentation will be needed to find the right index for the value you wish to determine.<br/>
     ///  Returns: the value or 0.0f on error/when not set.
     public static float GetEffectFloat(System.IntPtr eEffect, int nIndex)
@@ -16501,9 +16501,9 @@ namespace NWN.Core
     }
 
     ///  Get the string parameter of eEffect at nIndex.<br/>
-    ///  * nIndex bounds: 0 >= nIndex < 6.<br/>
+    ///  * nIndex bounds: 0 &amp;gt;= nIndex &amp;lt; 6.<br/>
     ///  * Some experimentation will be needed to find the right index for the value you wish to determine.<br/>
-    ///  Returns: the value or "" on error/when not set.
+    ///  Returns: the value or &amp;quot;&amp;quot; on error/when not set.
     public static string GetEffectString(System.IntPtr eEffect, int nIndex)
     {
       VM.StackPush(nIndex);
@@ -16513,7 +16513,7 @@ namespace NWN.Core
     }
 
     ///  Get the object parameter of eEffect at nIndex.<br/>
-    ///  * nIndex bounds: 0 >= nIndex < 4.<br/>
+    ///  * nIndex bounds: 0 &amp;gt;= nIndex &amp;lt; 4.<br/>
     ///  * Some experimentation will be needed to find the right index for the value you wish to determine.<br/>
     ///  Returns: the value or OBJECT_INVALID on error/when not set.
     public static uint GetEffectObject(System.IntPtr eEffect, int nIndex)
@@ -16525,7 +16525,7 @@ namespace NWN.Core
     }
 
     ///  Get the vector parameter of eEffect at nIndex.<br/>
-    ///  * nIndex bounds: 0 >= nIndex < 2.<br/>
+    ///  * nIndex bounds: 0 &amp;gt;= nIndex &amp;lt; 2.<br/>
     ///  * Some experimentation will be needed to find the right index for the value you wish to determine.<br/>
     ///  Returns: the value or {0.0f, 0.0f, 0.0f} on error/when not set.
     public static System.Numerics.Vector3 GetEffectVector(System.IntPtr eEffect, int nIndex)
@@ -16536,7 +16536,7 @@ namespace NWN.Core
       return VM.StackPopVector();
     }
 
-    ///  Check if nBaseItemType fits in oTarget's inventory.<br/>
+    ///  Check if nBaseItemType fits in oTarget&amp;apos;s inventory.<br/>
     ///  Note: Does not check inside any container items possessed by oTarget.<br/>
     ///  * nBaseItemType: a BASE_ITEM_* constant.<br/>
     ///  * oTarget: a valid creature, placeable or item.<br/>
@@ -16549,7 +16549,7 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  Get oObject's local cassowary variable reference sVarName<br/>
+    ///  Get oObject&amp;apos;s local cassowary variable reference sVarName<br/>
     ///  * Return value on error: empty solver<br/>
     ///  * NB: cassowary types are references, same as objects.<br/>
     ///    Unlike scalars such as int and string, solver references share the same data.<br/>
@@ -16595,14 +16595,14 @@ namespace NWN.Core
     }
 
     ///  Add a constraint to the system.<br/>
-    ///  * The constraint needs to be a valid comparison equation, one of: >=, ==, <=.<br/>
+    ///  * The constraint needs to be a valid comparison equation, one of: &amp;gt;=, ==, &amp;lt;=.<br/>
     ///  * This implementation is a linear constraint solver.<br/>
     ///  * You cannot multiply or divide variables and expressions with each other.<br/>
     ///    Doing so will result in a error when attempting to add the constraint.<br/>
     ///    (You can, of course, multiply or divide by constants).<br/>
-    ///  * fStrength must be >= CASSOWARY_STRENGTH_WEAK && <= CASSOWARY_STRENGTH_REQUIRED.<br/>
+    ///  * fStrength must be &amp;gt;= CASSOWARY_STRENGTH_WEAK &amp;&amp; &amp;lt;= CASSOWARY_STRENGTH_REQUIRED.<br/>
     ///  * Any referenced variables can be retrieved with CassowaryGetValue().<br/>
-    ///  * Returns "" on success, or the parser/constraint system error message.
+    ///  * Returns &amp;quot;&amp;quot; on success, or the parser/constraint system error message.
     public static string CassowaryConstrain(System.IntPtr cSolver, string sConstraint, float fStrength = CASSOWARY_STRENGTH_REQUIRED)
     {
       VM.StackPush(fStrength);
@@ -16614,9 +16614,9 @@ namespace NWN.Core
 
     ///  Suggest a value to the solver.<br/>
     ///  * Edit variables are soft constraints and exist as an optimisation for complex systems.<br/>
-    ///    You can do the same with Constrain("v == 5", CASSOWARY_STRENGTH_xxx); but edit variables<br/>
+    ///    You can do the same with Constrain(&amp;quot;v == 5&amp;quot;, CASSOWARY_STRENGTH_xxx); but edit variables<br/>
     ///    allow you to suggest values without having to rebuild the solver.<br/>
-    ///  * fStrength must be >= CASSOWARY_STRENGTH_WEAK && < CASSOWARY_STRENGTH_REQUIRED<br/>
+    ///  * fStrength must be &amp;gt;= CASSOWARY_STRENGTH_WEAK &amp;&amp; &amp;lt; CASSOWARY_STRENGTH_REQUIRED<br/>
     ///    Suggested values cannot be required, as suggesting a value must not invalidate the solver.
     public static void CassowarySuggestValue(System.IntPtr cSolver, string sVarName, float fValue, float fStrength = CASSOWARY_STRENGTH_STRONG)
     {
@@ -16646,7 +16646,7 @@ namespace NWN.Core
     }
 
     ///  Overrides a given strref to always return sValue instead of what is in the TLK file.<br/>
-    ///  Setting sValue to "" will delete the override
+    ///  Setting sValue to &amp;quot;&amp;quot; will delete the override
     public static void SetTlkOverride(int nStrRef, string sValue = "")
     {
       VM.StackPush(sValue);

@@ -7,7 +7,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Player = "NWNX_Player";
 
-    ///< @private
+    ///&lt; @private
     /// A quickbar slot.
     /// A journal entry.
     /// @name Timing Bar Types
@@ -25,7 +25,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_PLAYER_TIMING_BAR_LOCK = 8;
     public const int NWNX_PLAYER_TIMING_BAR_CUSTOM = 10;
 
-    /// @}
+    // @}
     /// @name Platform IDs
     /// @anchor platform_ids
     /// @{
@@ -46,7 +46,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_PLAYER_PLATFORM_MICROSOFT_XBOXONE = 60;
     public const int NWNX_PLAYER_PLATFORM_SONY_PS4 = 70;
 
-    /// @}
+    // @}
     /// Force display placeable examine window for player
     /// @note If used on a placeable in a different area than the player, the portait will not be shown.
     /// <param name="player">The player object.</param>
@@ -60,11 +60,11 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Force opens the target object's inventory for the player.
+    /// Force opens the target object&apos;s inventory for the player.
     /// @note
     /// * If the placeable is in a different area than the player, the portrait will not be shown
-    /// * The placeable's open/close animations will be played
-    /// * Clicking the 'close' button will cause the player to walk to the placeable If the placeable is in a
+    /// * The placeable&apos;s open/close animations will be played
+    /// * Clicking the &apos;close&apos; button will cause the player to walk to the placeable If the placeable is in a
     /// different area, the player will just walk to the edge of the current area and stop.
     /// This action can be cancelled manually.
     /// * Walking will close the placeable automatically.
@@ -82,8 +82,8 @@ namespace NWN.Core.NWNX
     /// Starts displaying a timing bar.
     /// <param name="player">The player object.</param>
     /// <param name="seconds">The length of time the timing bar will complete.</param>
-    /// <param name="script">The script to run at the bar's completion.</param>
-    /// <param name="type">The @ref timing_bar_types "Timing Bar Type"</param>
+    /// <param name="script">The script to run at the bar&apos;s completion.</param>
+    /// <param name="type">The @ref timing_bar_types &quot;Timing Bar Type&quot;</param>
     /// @remark Only one timing bar can be ran at the same time.
     public static void StartGuiTimingBar(uint player, float seconds, string script = "", int type = NWNX_PLAYER_TIMING_BAR_CUSTOM)
     {
@@ -122,7 +122,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Gets the player's quickbar slot info
+    /// Gets the player&apos;s quickbar slot info
     /// <param name="player">The player object.</param>
     /// <param name="slot">Slot ID 0-35</param>
     /// <returns>An NWNX_Player_QuickBarSlot struct.</returns>
@@ -150,7 +150,7 @@ namespace NWN.Core.NWNX
       return qbs;
     }
 
-    /// Sets the player's quickbar slot info
+    /// Sets the player&apos;s quickbar slot info
     /// <param name="player">The player object.</param>
     /// <param name="slot">Slot ID 0-35</param>
     /// <param name="qbs">An NWNX_Player_QuickBarSlot struct.</param>
@@ -176,9 +176,9 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Get the name of the .bic file associated with the player's character.
+    /// Get the name of the .bic file associated with the player&apos;s character.
     /// <param name="player">The player object.</param>
-    /// <returns>The filename for this player's bic. (Not including the ".bic")</returns>
+    /// <returns>The filename for this player&apos;s bic. (Not including the &quot;.bic&quot;)</returns>
     public static string GetBicFileName(uint player)
     {
       const string sFunc = "GetBicFileName";
@@ -301,7 +301,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Toggle a placeable's usable flag for the given player only
+    /// Toggle a placeable&apos;s usable flag for the given player only
     /// <param name="player">The player object.</param>
     /// <param name="placeable">The placeable object.</param>
     /// <param name="usable">TRUE for usable.</param>
@@ -315,7 +315,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Override player's rest duration
+    /// Override player&apos;s rest duration
     /// <param name="player">The player object.</param>
     /// <param name="duration">The duration of rest in milliseconds, 1000 = 1 second. Minimum duration of 10ms. -1 clears the override.</param>
     public static void SetRestDuration(uint player, int duration)
@@ -344,7 +344,7 @@ namespace NWN.Core.NWNX
 
     /// Refreshes the players character sheet
     /// <param name="player">The player object.</param>
-    /// @note You may need to use DelayCommand if you're manipulating values
+    /// @note You may need to use DelayCommand if you&apos;re manipulating values
     /// through nwnx and forcing a UI refresh, 0.5s seemed to be fine
     public static void UpdateCharacterSheet(uint player)
     {
@@ -354,7 +354,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Allows player to open target's inventory
+    /// Allows player to open target&apos;s inventory
     /// <param name="player">The player object.</param>
     /// <param name="target">The target object, must be a creature or another player.</param>
     /// <param name="open">TRUE to open.</param>
@@ -369,7 +369,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Get player's area exploration state
+    /// Get player&apos;s area exploration state
     /// <param name="player">The player object.</param>
     /// <param name="area">The area object.</param>
     /// <returns>A string representation of the tiles explored for that area.</returns>
@@ -383,7 +383,7 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopString();
     }
 
-    /// Set player's area exploration state.
+    /// Set player&apos;s area exploration state.
     /// <param name="player">The player object.</param>
     /// <param name="area">The area object.</param>
     /// <param name="str">An encoded string obtained with NWNX_Player_GetAreaExplorationState()</param>
@@ -397,7 +397,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Override player's rest animation.
+    /// Override player&apos;s rest animation.
     /// <param name="oPlayer">The player object.</param>
     /// <param name="nAnimation">The NWNX animation id. This does not take ANIMATION_LOOPING_* or</param>
     /// ANIMATION_FIREFORGET_* constants. Instead use NWNX_Consts_TranslateNWScriptAnimation() to get
@@ -431,7 +431,7 @@ namespace NWN.Core.NWNX
     /// <param name="player">The player object.</param>
     /// <param name="target">The target object.</param>
     /// <param name="visualeffect">A VFX_DUR_*. Calling again will remove an applied effect. -1 to remove all effects</param>
-    /// @note Only really works with looping effects: VFX_DUR_*. Other types *kind* of work, they'll play when
+    /// @note Only really works with looping effects: VFX_DUR_*. Other types *kind* of work, they&apos;ll play when
     /// reentering the area and the object is in view or when they come back in view range.
     public static void ApplyLoopingVisualEffectToObject(uint player, uint target, int visualeffect)
     {
@@ -446,7 +446,7 @@ namespace NWN.Core.NWNX
     /// Override the name of placeable for player only
     /// <param name="player">The player object.</param>
     /// <param name="placeable">The placeable object.</param>
-    /// <param name="name">The name for the placeable for this player, "" to clear the override.</param>
+    /// <param name="name">The name for the placeable for this player, &quot;&quot; to clear the override.</param>
     public static void SetPlaceableNameOverride(uint player, uint placeable, string name)
     {
       const string sFunc = "SetPlaceableNameOverride";
@@ -473,7 +473,7 @@ namespace NWN.Core.NWNX
 
     /// Place waypoints on module load representing where a PC should start
     ///
-    /// This will require storing the PC's cd key or community name (depending on how you store in your vault)
+    /// This will require storing the PC&apos;s cd key or community name (depending on how you store in your vault)
     /// and bic_filename along with routinely updating their location in some persistent method like OnRest,
     /// OnAreaEnter and OnClentExit.
     ///
@@ -557,11 +557,11 @@ namespace NWN.Core.NWNX
     }
 
     /// Override sOldResName with sNewResName of nResType for oPlayer.
-    /// @warning If sNewResName does not exist on oPlayer's client it will crash their game.
+    /// @warning If sNewResName does not exist on oPlayer&apos;s client it will crash their game.
     /// <param name="oPlayer">The player object.</param>
     /// <param name="nResType">The res type, see nwnx_util.nss for constants.</param>
     /// <param name="sOldResName">The old res name, 16 characters or less.</param>
-    /// <param name="sNewResName">The new res name or "" to clear a previous override, 16 characters or less.</param>
+    /// <param name="sNewResName">The new res name or &quot;&quot; to clear a previous override, 16 characters or less.</param>
     public static void SetResManOverride(uint oPlayer, int nResType, string sOldResName, string sNewResName)
     {
       const string sFunc = "SetResManOverride";
@@ -591,7 +591,7 @@ namespace NWN.Core.NWNX
     /// Override the name of creature for player only
     /// <param name="oPlayer">The player object.</param>
     /// <param name="oCreature">The creature object.</param>
-    /// <param name="sName">The name for the creature for this player, "" to clear the override.</param>
+    /// <param name="sName">The name for the creature for this player, &quot;&quot; to clear the override.</param>
     public static void SetCreatureNameOverride(uint oPlayer, uint oCreature, string sName)
     {
       const string sFunc = "SetCreatureNameOverride";
@@ -603,7 +603,7 @@ namespace NWN.Core.NWNX
     }
 
     /// Display floaty text above oCreature for oPlayer only.
-    /// @note This will also display the floaty text above creatures that are not part of oPlayer's faction.
+    /// @note This will also display the floaty text above creatures that are not part of oPlayer&apos;s faction.
     /// <param name="oPlayer">The player to display the text to.</param>
     /// <param name="oCreature">The creature to display the text above.</param>
     /// <param name="sText">The text to display.</param>
@@ -617,8 +617,8 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Toggle oPlayer's PlayerDM status.
-    /// @note This function does nothing for actual DMClient DMs or players with a client version < 8193.14
+    /// Toggle oPlayer&apos;s PlayerDM status.
+    /// @note This function does nothing for actual DMClient DMs or players with a client version &lt; 8193.14
     /// <param name="oPlayer">The player.</param>
     /// <param name="bIsDM">TRUE to toggle dm mode on, FALSE for off.</param>
     public static void ToggleDM(uint oPlayer, int bIsDM)
@@ -658,7 +658,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Remove effects with sEffectTag from oPlayer's TURD
+    /// Remove effects with sEffectTag from oPlayer&apos;s TURD
     /// @note This function should be called in the NWNX_ON_CLIENT_DISCONNECT_AFTER event, OnClientLeave is too early for the TURD to exist.
     /// <param name="oPlayer">The player object.</param>
     /// <param name="sEffectTag">The effect tag.</param>
@@ -772,7 +772,7 @@ namespace NWN.Core.NWNX
     /// Override nStrRef from the TlkTable with sOverride for oPlayer only.
     /// <param name="oPlayer">The player.</param>
     /// <param name="nStrRef">The StrRef.</param>
-    /// <param name="sOverride">The new value for nStrRef or "" to remove the override.</param>
+    /// <param name="sOverride">The new value for nStrRef or &quot;&quot; to remove the override.</param>
     /// <param name="bRestoreGlobal">If TRUE, when removing a personal override it will attempt to restore the global override if it exists.</param>
     /// @note Overrides will not persist through relogging.
     public static void SetTlkOverride(uint oPlayer, int nStrRef, string sOverride, int bRestoreGlobal = TRUE)
@@ -786,7 +786,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// @}
+    // @}
     public static void INTERNAL_StopGuiTimingBar(uint player, string script = "", int id = -1)
     {
       int activeId = GetLocalInt(player,  "NWNX_PLAYER_GUI_TIMING_ACTIVE");

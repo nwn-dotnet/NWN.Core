@@ -7,7 +7,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Lua = "NWNX_Lua";
 
-    ///< @private
+    ///&lt; @private
     /// Evaluate LUA code.
     /// <param name="sCode">The code to evaluate.</param>
     public static void EvalVoid(string sCode)
@@ -44,6 +44,6 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// @}
+    // @}
   }
 }

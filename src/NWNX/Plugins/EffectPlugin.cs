@@ -7,7 +7,7 @@ namespace NWN.Core.NWNX
   {
     public const string NWNX_Effect = "NWNX_Effect";
 
-    ///< @private
+    ///&lt; @private
     /// An unpacked effect
     /// Convert native effect type to unpacked structure.
     /// <param name="e">The effect to convert.</param>
@@ -142,7 +142,7 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// @}
+    // @}
     public static NWNX_EffectUnpacked __NWNX_Effect_ResolveUnpack(string sFunc, int bLink = TRUE)
     {
       NWNX_EffectUnpacked n = default;
