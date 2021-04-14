@@ -142,6 +142,18 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
+    /// Applys an effect, bypassing any processing done by ApplyEffectToObject
+    /// <param name="eEffect">The effect to be applied.</param>
+    /// <param name="oObject">The object to apply it to.</param>
+    public static void Apply(System.IntPtr eEffect, uint oObject)
+    {
+      const string sFunc = "ApplyEffect";
+      VM.NWNX.SetFunction(NWNX_Effect, sFunc);
+      VM.NWNX.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.NWNX.StackPush(oObject);
+      VM.NWNX.Call();
+    }
+
     // @}
     public static NWNX_EffectUnpacked __NWNX_Effect_ResolveUnpack(string sFunc, int bLink = TRUE)
     {
