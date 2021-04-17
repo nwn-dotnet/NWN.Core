@@ -11940,8 +11940,10 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  SpawnScriptDebugger() will cause the script debugger to be executed<br/>
-    ///  after this command is executed!<br/>
+    ///  SpawnScriptDebugger() will attempt to communicate with the a running script debugger<br/>
+    ///  instance. You need to run it yourself, and enable it in Options/Config beforehand.<br/>
+    ///  A sample debug server is included with the game installation in utils/.<br/>
+    ///  Will only work in singleplayer, NOT on dedicated servers.<br/>
     ///  In order to compile the script for debugging go to Tools-&amp;gt;Options-&amp;gt;Script Editor<br/>
     ///  and check the box labeled &amp;quot;Generate Debug Information When Compiling Scripts&amp;quot;<br/>
     ///  After you have checked the above box, recompile the script that you want to debug.<br/>
