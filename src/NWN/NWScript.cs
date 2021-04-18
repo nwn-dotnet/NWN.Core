@@ -6,7 +6,7 @@ namespace NWN.Core
   public static class NWScript
   {
     public const uint OBJECT_INVALID = 0x7F000000;
-    public static uint OBJECT_SELF => NWNCore.GameManager.ObjectSelf;
+    public static uint OBJECT_SELF => NWNCore.FunctionHandler.ObjectSelf;
     public const int ENGINE_NUM_STRUCTURES = 7;
     public const int ENGINE_STRUCTURE_EFFECT = 0;
     public const int ENGINE_STRUCTURE_EVENT = 1;
@@ -6003,7 +6003,7 @@ namespace NWN.Core
     ///    (If the object doesn&amp;apos;t exist, nothing happens.)
     public static void AssignCommand(uint oActionSubject, ActionDelegate aActionToAssign)
     {
-      NWNCore.GameManager.ClosureAssignCommand(oActionSubject, aActionToAssign);
+      NWNCore.FunctionHandler.ClosureAssignCommand(oActionSubject, aActionToAssign);
       // Function ID 6
     }
 
@@ -6017,7 +6017,7 @@ namespace NWN.Core
     ///  DelayCommand(fDelay, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDamage, oTarget);
     public static void DelayCommand(float fSeconds, ActionDelegate aActionToDelay)
     {
-      NWNCore.GameManager.ClosureDelayCommand(OBJECT_SELF, fSeconds, aActionToDelay);
+      NWNCore.FunctionHandler.ClosureDelayCommand(OBJECT_SELF, fSeconds, aActionToDelay);
       // Function ID 7
     }
 
@@ -9107,7 +9107,7 @@ namespace NWN.Core
     ///  Do aActionToDo.
     public static void ActionDoCommand(ActionDelegate aActionToDo)
     {
-      NWNCore.GameManager.ClosureActionDoCommand(OBJECT_SELF, aActionToDo);
+      NWNCore.FunctionHandler.ClosureActionDoCommand(OBJECT_SELF, aActionToDo);
       // Function ID 294
     }
 

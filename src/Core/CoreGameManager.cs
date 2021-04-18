@@ -6,7 +6,7 @@ namespace NWN.Core
   /// <summary>
   /// Simple GameManager implementation. Used by default if no manager is specified during bootstrap.
   /// </summary>
-  public class CoreGameManager : IGameManager
+  public class CoreGameManager : ICoreFunctionHandler, ICoreEventHandler
   {
     // Hook-able Events
     public delegate void ServerLoopEvent(ulong frame);
@@ -27,15 +27,15 @@ namespace NWN.Core
     private uint objectSelf = ObjectInvalid;
 
     // Interface Implementations
-    uint IGameManager.ObjectSelf => objectSelf;
+    uint ICoreFunctionHandler.ObjectSelf => objectSelf;
 
-    void IGameManager.OnMainLoop(ulong frame)
+    void ICoreEventHandler.OnMainLoop(ulong frame)
         => OnServerLoop?.Invoke(frame);
 
-    void IGameManager.OnSignal(string signal)
+    void ICoreEventHandler.OnSignal(string signal)
         => OnSignal?.Invoke(signal);
 
-    int IGameManager.OnRunScript(string script, uint oidSelf)
+    int ICoreEventHandler.OnRunScript(string script, uint oidSelf)
     {
       int retVal = -1;
       objectSelf = oidSelf;
@@ -55,7 +55,7 @@ namespace NWN.Core
       return retVal;
     }
 
-    void IGameManager.OnClosure(ulong eid, uint oidSelf)
+    void ICoreEventHandler.OnClosure(ulong eid, uint oidSelf)
     {
       uint old = objectSelf;
       objectSelf = oidSelf;
@@ -73,7 +73,7 @@ namespace NWN.Core
       objectSelf = old;
     }
 
-    void IGameManager.ClosureAssignCommand(uint obj, ActionDelegate func)
+    void ICoreFunctionHandler.ClosureAssignCommand(uint obj, ActionDelegate func)
     {
       if (VM.ClosureAssignCommand(obj, nextEventId) != 0)
       {
@@ -81,7 +81,7 @@ namespace NWN.Core
       }
     }
 
-    void IGameManager.ClosureDelayCommand(uint obj, float duration, ActionDelegate func)
+    void ICoreFunctionHandler.ClosureDelayCommand(uint obj, float duration, ActionDelegate func)
     {
       if (VM.ClosureDelayCommand(obj, duration, nextEventId) != 0)
       {
@@ -89,7 +89,7 @@ namespace NWN.Core
       }
     }
 
-    void IGameManager.ClosureActionDoCommand(uint obj, ActionDelegate func)
+    void ICoreFunctionHandler.ClosureActionDoCommand(uint obj, ActionDelegate func)
     {
       if (VM.ClosureActionDoCommand(obj, nextEventId) != 0)
       {

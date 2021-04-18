@@ -5,16 +5,31 @@ namespace NWN.Core
 {
   public static partial class NWNCore
   {
-#pragma warning disable CS8618
-    internal static IGameManager GameManager;
-#pragma warning restore CS8618
+    internal static ICoreFunctionHandler? FunctionHandler;
 
     internal static NativeHandles NativeFunctions;
     private static NativeEventHandles eventHandles;
 
+    [Obsolete("IGameManager will be removed in a future release. Use the ICoreFunctionHandler/ICoreEventHandler init methods instead.")]
     public static int Init(IntPtr nativeHandlesPtr, int nativeHandlesLength, IGameManager gameManager)
     {
-      GameManager = gameManager;
+      return Init(nativeHandlesPtr, nativeHandlesLength, gameManager, gameManager);
+    }
+
+    public static int Init(IntPtr nativeHandlesPtr, int nativeHandlesLength, ICoreFunctionHandler functionHandler, ICoreEventHandler eventHandler)
+    {
+      int result = Init(nativeHandlesPtr, nativeHandlesLength, functionHandler);
+      if (result == 0)
+      {
+        RegisterEventHandles(eventHandler);
+      }
+
+      return result;
+    }
+
+    public static int Init(IntPtr nativeHandlesPtr, int nativeHandlesLength, ICoreFunctionHandler functionHandler)
+    {
+      FunctionHandler = functionHandler;
 
       if (nativeHandlesPtr == IntPtr.Zero)
       {
@@ -36,21 +51,16 @@ namespace NWN.Core
       }
 
       NativeFunctions = Marshal.PtrToStructure<NativeHandles>(nativeHandlesPtr);
-      RegisterHandles();
-      RegisterNativeEventHandles();
       return 0;
     }
 
-    private static void RegisterHandles()
+    private static void RegisterEventHandles(ICoreEventHandler eventHandler)
     {
-      eventHandles.MainLoop = GameManager.OnMainLoop;
-      eventHandles.RunScript = GameManager.OnRunScript;
-      eventHandles.Closure = GameManager.OnClosure;
-      eventHandles.Signal = GameManager.OnSignal;
-    }
+      eventHandles.MainLoop = eventHandler.OnMainLoop;
+      eventHandles.RunScript = eventHandler.OnRunScript;
+      eventHandles.Closure = eventHandler.OnClosure;
+      eventHandles.Signal = eventHandler.OnSignal;
 
-    private static void RegisterNativeEventHandles()
-    {
       int size = Marshal.SizeOf(typeof(NativeEventHandles));
       IntPtr ptr = Marshal.AllocHGlobal(size);
       Marshal.StructureToPtr(eventHandles, ptr, false);
