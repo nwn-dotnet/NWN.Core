@@ -1,12 +1,10 @@
-using System;
-using System.Numerics;
-
 namespace NWN.Core
 {
-  public static class NWScript
+  public static partial class NWScript
   {
     public const uint OBJECT_INVALID = 0x7F000000;
-    public static uint OBJECT_SELF => NWNCore.FunctionHandler.ObjectSelf;
+    public static uint OBJECT_SELF => NWNCore.FunctionHandler!.ObjectSelf;
+
     public const int ENGINE_NUM_STRUCTURES = 7;
     public const int ENGINE_STRUCTURE_EFFECT = 0;
     public const int ENGINE_STRUCTURE_EVENT = 1;
@@ -6001,9 +5999,9 @@ namespace NWN.Core
     ///  * No return value, but if an error occurs, the log file will contain<br/>
     ///    &amp;quot;AssignCommand failed.&amp;quot;<br/>
     ///    (If the object doesn&amp;apos;t exist, nothing happens.)
-    public static void AssignCommand(uint oActionSubject, ActionDelegate aActionToAssign)
+    public static void AssignCommand(uint oActionSubject, System.Action aActionToAssign)
     {
-      NWNCore.FunctionHandler.ClosureAssignCommand(oActionSubject, aActionToAssign);
+      NWNCore.FunctionHandler!.ClosureAssignCommand(oActionSubject, aActionToAssign);
       // Function ID 6
     }
 
@@ -6015,9 +6013,9 @@ namespace NWN.Core
     ///  script and then passed into the action.  For example:<br/>
     ///  effect eDamage = EffectDamage(nDamage, DAMAGE_TYPE_MAGICAL);<br/>
     ///  DelayCommand(fDelay, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDamage, oTarget);
-    public static void DelayCommand(float fSeconds, ActionDelegate aActionToDelay)
+    public static void DelayCommand(float fSeconds, System.Action aActionToDelay)
     {
-      NWNCore.FunctionHandler.ClosureDelayCommand(OBJECT_SELF, fSeconds, aActionToDelay);
+      NWNCore.FunctionHandler!.ClosureDelayCommand(OBJECT_SELF, fSeconds, aActionToDelay);
       // Function ID 7
     }
 
@@ -9105,9 +9103,9 @@ namespace NWN.Core
     }
 
     ///  Do aActionToDo.
-    public static void ActionDoCommand(ActionDelegate aActionToDo)
+    public static void ActionDoCommand(System.Action aActionToDo)
     {
-      NWNCore.FunctionHandler.ClosureActionDoCommand(OBJECT_SELF, aActionToDo);
+      NWNCore.FunctionHandler!.ClosureActionDoCommand(OBJECT_SELF, aActionToDo);
       // Function ID 294
     }
 

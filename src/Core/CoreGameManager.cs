@@ -10,17 +10,23 @@ namespace NWN.Core
   {
     // Hook-able Events
     public delegate void ServerLoopEvent(ulong frame);
+
+    /// <inheritdoc cref="ICoreEventHandler.OnMainLoop"/>
     public event ServerLoopEvent? OnServerLoop;
 
     public delegate void SignalEvent(string signal);
+
+    /// <inheritdoc cref="ICoreEventHandler.OnSignal"/>
     public event SignalEvent? OnSignal;
 
     public delegate void RunScriptEvent(string scriptName, uint objectSelf, out int scriptHandleResult);
+
+    /// <inheritdoc cref="ICoreEventHandler.OnRunScript"/>
     public event RunScriptEvent? OnRunScript;
 
     // Native Management
     private readonly Stack<uint> scriptContexts = new Stack<uint>();
-    private readonly Dictionary<ulong, ActionDelegate> closures = new Dictionary<ulong, ActionDelegate>();
+    private readonly Dictionary<ulong, Action> closures = new Dictionary<ulong, Action>();
     private ulong nextEventId;
 
     private const uint ObjectInvalid = 0x7F000000;
@@ -73,7 +79,7 @@ namespace NWN.Core
       objectSelf = old;
     }
 
-    void ICoreFunctionHandler.ClosureAssignCommand(uint obj, ActionDelegate func)
+    void ICoreFunctionHandler.ClosureAssignCommand(uint obj, Action func)
     {
       if (VM.ClosureAssignCommand(obj, nextEventId) != 0)
       {
@@ -81,7 +87,7 @@ namespace NWN.Core
       }
     }
 
-    void ICoreFunctionHandler.ClosureDelayCommand(uint obj, float duration, ActionDelegate func)
+    void ICoreFunctionHandler.ClosureDelayCommand(uint obj, float duration, Action func)
     {
       if (VM.ClosureDelayCommand(obj, duration, nextEventId) != 0)
       {
@@ -89,7 +95,7 @@ namespace NWN.Core
       }
     }
 
-    void ICoreFunctionHandler.ClosureActionDoCommand(uint obj, ActionDelegate func)
+    void ICoreFunctionHandler.ClosureActionDoCommand(uint obj, Action func)
     {
       if (VM.ClosureActionDoCommand(obj, nextEventId) != 0)
       {
