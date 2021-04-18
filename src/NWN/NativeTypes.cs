@@ -2,6 +2,7 @@ using System;
 
 namespace NWN.Core
 {
+  [Obsolete("The bundled native types in NWN.Core will be removed in a future release. Consider migrating to your own wrapper class instead.")]
   public class Effect
   {
     public IntPtr Handle;
@@ -16,6 +17,7 @@ namespace NWN.Core
     public static implicit operator Effect(IntPtr intPtr) => new Effect(intPtr);
   }
 
+  [Obsolete("The bundled native types in NWN.Core will be removed in a future release. Consider migrating to your own wrapper class instead.")]
   public class Event
   {
     public IntPtr Handle;
@@ -30,6 +32,7 @@ namespace NWN.Core
     public static implicit operator Event(IntPtr intPtr) => new Event(intPtr);
   }
 
+  [Obsolete("The bundled native types in NWN.Core will be removed in a future release. Consider migrating to your own wrapper class instead.")]
   public class Location
   {
     public IntPtr Handle;
@@ -44,6 +47,7 @@ namespace NWN.Core
     public static implicit operator Location(IntPtr intPtr) => new Location(intPtr);
   }
 
+  [Obsolete("The bundled native types in NWN.Core will be removed in a future release. Consider migrating to your own wrapper class instead.")]
   public class Talent
   {
     public IntPtr Handle;
@@ -58,6 +62,7 @@ namespace NWN.Core
     public static implicit operator Talent(IntPtr intPtr) => new Talent(intPtr);
   }
 
+  [Obsolete("The bundled native types in NWN.Core will be removed in a future release. Consider migrating to your own wrapper class instead.")]
   public class ItemProperty
   {
     public IntPtr Handle;
@@ -72,6 +77,7 @@ namespace NWN.Core
     public static implicit operator ItemProperty(IntPtr intPtr) => new ItemProperty(intPtr);
   }
 
+  [Obsolete("The bundled native types in NWN.Core will be removed in a future release. Consider migrating to your own wrapper class instead.")]
   public class SQLQuery
   {
     public IntPtr Handle;
@@ -86,5 +92,6 @@ namespace NWN.Core
     public static implicit operator SQLQuery(IntPtr intPtr) => new SQLQuery(intPtr);
   }
 
+  [Obsolete("The bundled native types in NWN.Core will be removed in a future release. Consider migrating to your own wrapper class instead.")]
   public delegate void ActionDelegate();
 }

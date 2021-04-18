@@ -8,6 +8,14 @@ namespace NWN.Core
   {
     public static class NWNX
     {
+      static NWNX()
+      {
+        if (NWNCore.FunctionHandler == null)
+        {
+          throw new InvalidOperationException("Attempted to call a VM function before NWN.Core was initialised. Initialise NWN.Core first using NWNCore.Init()");
+        }
+      }
+
       [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
       public static void SetFunction(string plugin, string method) => NWNCore.NativeFunctions.nwnxSetFunction(plugin, method);
 

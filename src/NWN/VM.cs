@@ -6,6 +6,14 @@ namespace NWN.Core
 {
   public static partial class VM
   {
+    static VM()
+    {
+      if (NWNCore.FunctionHandler == null)
+      {
+        throw new InvalidOperationException("Attempted to call a VM function before NWN.Core was initialised. Initialise NWN.Core first using NWNCore.Init()");
+      }
+    }
+
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
     public static void StackPush(int value) => NWNCore.NativeFunctions.StackPushInteger(value);
 
