@@ -751,6 +751,19 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Gets the last spell cast feat of oObject.
+    /// @note Should be called in a spell script.
+    /// <param name="oObject">The object.</param>
+    /// <returns>The feat ID, or 65535 when not cast by a feat, or -1 on error.</returns>
+    public static int GetLastSpellCastFeat(uint oObject)
+    {
+      const string sFunc = "GetLastSpellCastFeat";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
+      VM.NWNX.StackPush(oObject);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
     // @}
   }
 
