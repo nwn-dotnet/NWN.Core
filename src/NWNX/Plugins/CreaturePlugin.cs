@@ -1984,7 +1984,9 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    // @}
+    /// Sets the killer of oCreature to oKiller.
+    /// <param name="oCreature">The target creature.</param>
+    /// <param name="oKiller">The killer.</param>
     public static void SetLastKiller(uint oCreature, uint oKiller)
     {
       const string sFunc = "SetLastKiller";
@@ -1994,6 +1996,7 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    // @}
   }
 
   public struct SpecialAbility

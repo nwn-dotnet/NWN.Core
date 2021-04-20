@@ -147,10 +147,10 @@ namespace NWN.Core.NWNX
     /// <param name="oObject">The object to apply it to.</param>
     public static void Apply(System.IntPtr eEffect, uint oObject)
     {
-      const string sFunc = "ApplyEffect";
+      const string sFunc = "Apply";
       VM.NWNX.SetFunction(NWNX_Effect, sFunc);
-      VM.NWNX.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
       VM.NWNX.StackPush(oObject);
+      VM.NWNX.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
       VM.NWNX.Call();
     }
 
