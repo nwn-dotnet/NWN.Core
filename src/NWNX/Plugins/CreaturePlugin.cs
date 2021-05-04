@@ -1972,7 +1972,7 @@ namespace NWN.Core.NWNX
 
     /// Gets a chance for normal Effect Immunities to be bypassed
     /// <param name="oCreature">The target creature</param>
-    /// <param name="nImmunityType">&apos;IMMUNITY_TYPE_*&apos; to retrive the current chance for bypass: Positive gets outgoing effects (oCreature -&gt; another creature). Negative (-IMMUNITY_TYPE_*) gets incoming effects (another creature -&gt; oCreature).</param>
+    /// <param name="nImmunityType">&apos;IMMUNITY_TYPE_*&apos; to retrieve the current chance for bypass: Positive gets outgoing effects (oCreature -&gt; another creature). Negative (-IMMUNITY_TYPE_*) gets incoming effects (another creature -&gt; oCreature).</param>
     /// <returns>the current critical hit multiplier modifier for the creature</returns>
     public static int GetBypassEffectImmunity(uint oCreature, int nImmunityType)
     {
@@ -1992,6 +1992,37 @@ namespace NWN.Core.NWNX
       const string sFunc = "SetLastKiller";
       VM.NWNX.SetFunction(NWNX_Creature, sFunc);
       VM.NWNX.StackPush(oKiller);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+    }
+
+    /// Instantly cast a spell at a target or location.
+    /// @note oCreature must be in the same area as oTarget or locTarget.
+    /// @note Does not care if oCreature can&apos;t cast spells or doesn&apos;t know the spell. Does not consume spell slots.
+    /// <param name="oCreature">The caster.</param>
+    /// <param name="oTarget">The target, use OBJECT_INVALID to cast at a location.</param>
+    /// <param name="locTarget">The location, only used when oTarget is OBJECT_INVALID.</param>
+    /// <param name="nSpellID">The spell ID.</param>
+    /// <param name="nCasterLevel">The caster level of the spell.</param>
+    /// <param name="fProjectileTime">The time in seconds for the projectile to reach the target. 0.0f for no projectile.</param>
+    /// <param name="nProjectilePathType">A PROJECTILE_PATH_TYPE_* constant.</param>
+    /// <param name="nProjectileSpellID">An optional spell ID which to use the projectile vfx of. -1 to use nSpellID&apos;s projectile vfx.</param>
+    public static void DoItemCastSpell(uint oCreature, uint oTarget, System.IntPtr locTarget, int nSpellID, int nCasterLevel, float fProjectileTime, int nProjectilePathType = PROJECTILE_PATH_TYPE_DEFAULT, int nProjectileSpellID = -1)
+    {
+      const string sFunc = "DoItemCastSpell";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      uint oArea = GetAreaFromLocation(locTarget);
+      System.Numerics.Vector3 vPosition = GetPositionFromLocation(locTarget);
+      VM.NWNX.StackPush(nProjectileSpellID);
+      VM.NWNX.StackPush(nProjectilePathType);
+      VM.NWNX.StackPush(fProjectileTime);
+      VM.NWNX.StackPush(nCasterLevel);
+      VM.NWNX.StackPush(nSpellID);
+      VM.NWNX.StackPush(vPosition.Z);
+      VM.NWNX.StackPush(vPosition.Y);
+      VM.NWNX.StackPush(vPosition.X);
+      VM.NWNX.StackPush(oArea);
+      VM.NWNX.StackPush(oTarget);
       VM.NWNX.StackPush(oCreature);
       VM.NWNX.Call();
     }
