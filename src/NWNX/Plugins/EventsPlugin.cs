@@ -270,7 +270,7 @@ namespace NWN.Core.NWNX
     
     _______________________________________
         ## Has Feat Events
-        - NWNX_ON_HASFEAT_BEFORE
+        - NWNX_ON_HAS_FEAT_BEFORE
         - NWNX_ON_HAS_FEAT_AFTER
     
         `OBJECT_SELF` = The player being checked for the feat
