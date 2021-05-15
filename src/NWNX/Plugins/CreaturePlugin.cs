@@ -2027,6 +2027,36 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Have oCreature instantly equip oItem to nInventorySlot.
+    /// <param name="oCreature">The creature.</param>
+    /// <param name="oItem">The item, must be possessed by oCreature.</param>
+    /// <param name="nInventorySlot">An INVENTORY_SLOT_* constant.</param>
+    /// <returns>TRUE on success, FALSE on failure.</returns>
+    public static int RunEquip(uint oCreature, uint oItem, int nInventorySlot)
+    {
+      const string sFunc = "RunEquip";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(nInventorySlot);
+      VM.NWNX.StackPush(oItem);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
+    /// Have oCreature instantly unequip oItem.
+    /// <param name="oCreature">The creature.</param>
+    /// <param name="oItem">The item, must be possessed by oCreature.</param>
+    /// <returns>TRUE on success, FALSE on failure.</returns>
+    public static int RunUnequip(uint oCreature, uint oItem)
+    {
+      const string sFunc = "RunUnequip";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(oItem);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
     // @}
   }
 
