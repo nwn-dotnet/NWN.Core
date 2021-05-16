@@ -10,12 +10,6 @@ namespace NWN.Core
     internal static NativeHandles NativeFunctions;
     private static NativeEventHandles eventHandles;
 
-    [Obsolete("IGameManager will be removed in a future release. Use the ICoreFunctionHandler/ICoreEventHandler init methods instead.")]
-    public static int Init(IntPtr nativeHandlesPtr, int nativeHandlesLength, IGameManager gameManager)
-    {
-      return Init(nativeHandlesPtr, nativeHandlesLength, gameManager, gameManager);
-    }
-
     public static int Init(IntPtr nativeHandlesPtr, int nativeHandlesLength, ICoreFunctionHandler functionHandler, ICoreEventHandler eventHandler)
     {
       int result = Init(nativeHandlesPtr, nativeHandlesLength, functionHandler);
