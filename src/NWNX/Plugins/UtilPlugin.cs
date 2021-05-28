@@ -536,6 +536,16 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopString();
     }
 
+    /// Set the currently running script event.
+    /// <param name="nEventID">The ID of the event.</param>
+    public static void SetCurrentlyRunningEvent(int nEventID)
+    {
+      const string sFunc = "SetCurrentlyRunningEvent";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
+      VM.NWNX.StackPush(nEventID);
+      VM.NWNX.Call();
+    }
+
     // @}
   }
 
