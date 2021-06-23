@@ -118,6 +118,8 @@ namespace NWN.Core.NWNX
       data.iSneakAttack = VM.NWNX.StackPopInt();
       data.bKillingBlow = VM.NWNX.StackPopInt();
       data.iAttackType = VM.NWNX.StackPopInt();
+      data.iToHitRoll = VM.NWNX.StackPopInt();
+      data.iToHitModifier = VM.NWNX.StackPopInt();
       return data;
     }
 
@@ -217,6 +219,8 @@ namespace NWN.Core.NWNX
     public int iSneakAttack;
     public int iAttackType;
     public int bKillingBlow;
+    public int iToHitRoll;
+    public int iToHitModifier;
   }
 
   public struct DamageData

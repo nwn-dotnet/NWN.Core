@@ -31,7 +31,7 @@ jobs:
 
   build:
     runs-on: ubuntu-20.04
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     needs: compile
     outputs:
       version: ${{ steps.vars.outputs.version }}
@@ -71,7 +71,7 @@ jobs:
 
   nuget:
     runs-on: ubuntu-20.04
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     needs: build
     steps:
       - name: Setup .NET Core
