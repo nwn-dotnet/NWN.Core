@@ -48,6 +48,12 @@ namespace NWN.Core
       return 0;
     }
 
+    public static int Init(IntPtr nativeHandlesPtr, int nativeHandlesLength, out CoreGameManager coreGameManager)
+    {
+      coreGameManager = new CoreGameManager();
+      return Init(nativeHandlesPtr, nativeHandlesLength, coreGameManager, coreGameManager);
+    }
+
     private static void RegisterEventHandles(ICoreEventHandler eventHandler)
     {
       eventHandles.MainLoop = eventHandler.OnMainLoop;
