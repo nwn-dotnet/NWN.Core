@@ -141,6 +141,84 @@ This function is called during significant server events. The string parameter i
 "ON_DESTROY_SERVER" - Called just before the server will be shutdown. Perform any cleanup/flushing here.
 ```
 
+## Memory & Engine Structures
+When you use an engine structure (E.g. effects, item properties), you must manually "free" the structure after you have finished using it with `VM.FreeGameDefinedStructure`. Failure to do so will cause a memory leak.
+
+A good pattern is to implement "wrapper" classes that handles this cleanup logic for you:
+
+```csharp
+  public abstract class EngineStructure
+  {
+    public abstract int StructureId { get; }
+
+    public IntPtr Handle;
+
+    protected EngineStructure(IntPtr handle)
+    {
+      Handle = handle;
+    }
+
+    ~EngineStructure()
+    {
+      VM.FreeGameDefinedStructure(StructureId, Handle);
+    }
+
+    public static implicit operator IntPtr(EngineStructure engineStructure) => engineStructure.Handle;
+  }
+
+  public class Effect : EngineStructure
+  {
+    public Effect(IntPtr handle) : base(handle) {}
+    public override int StructureId => NWScript.ENGINE_STRUCTURE_EFFECT;
+    public static implicit operator Effect(IntPtr intPtr) => new Effect(intPtr);
+  }
+
+  public class Event : EngineStructure
+  {
+    public Event(IntPtr handle) : base(handle) {}
+    public override int StructureId => NWScript.ENGINE_STRUCTURE_EVENT;
+    public static implicit operator Event(IntPtr intPtr) => new Event(intPtr);
+  }
+
+  public class Location : EngineStructure
+  {
+    public Location(IntPtr handle) : base(handle) {}
+    public override int StructureId => NWScript.ENGINE_STRUCTURE_LOCATION;
+    public static implicit operator Location(IntPtr intPtr) => new Location(intPtr);
+  }
+
+  public class Talent : EngineStructure
+  {
+    public Talent(IntPtr handle) : base(handle) {}
+    public override int StructureId => NWScript.ENGINE_STRUCTURE_TALENT;
+    public static implicit operator Talent(IntPtr intPtr) => new Talent(intPtr);
+  }
+
+  public class ItemProperty : EngineStructure
+  {
+    public ItemProperty(IntPtr handle) : base(handle) {}
+    public override int StructureId => NWScript.ENGINE_STRUCTURE_ITEMPROPERTY;
+    public static implicit operator ItemProperty(IntPtr intPtr) => new ItemProperty(intPtr);
+  }
+
+  public class SQLQuery : EngineStructure
+  {
+    public SQLQuery(IntPtr handle) : base(handle) {}
+    public override int StructureId => NWScript.ENGINE_STRUCTURE_SQLQUERY;
+    public static implicit operator SQLQuery(IntPtr intPtr) => new SQLQuery(intPtr);
+  }
+```
+
+You can then use the NWScript API like this, and the cleanup will be done automatically:
+
+```csharp
+    public static void KillCreature(uint creature)
+    {
+      Effect effect = NWScript.EffectDeath();
+      NWScript.ApplyEffectToObject(NWScript.DURATION_TYPE_INSTANT, effect, creature);
+    }
+```
+
 ## Contribute ##
 If you would like to contribute, you are more than welcome to join the NWNXEE DotNET Discord [here](https://discord.gg/BY9cq3Q "NWNXEE DotNET Discord"). We welcome contributions and suggestions of all kinds.
 
