@@ -83,7 +83,7 @@ NWN.Core sends 3 different events that can be hooked once you have bootstrapped 
 
 The right assignment of `+=` is the name of your function to handle the event.
 
-As an example, if I wanted to write the module name to the console once the server starts:
+As an example, to write the module name to the console once the server starts:
 
 ```csharp
 using System;
