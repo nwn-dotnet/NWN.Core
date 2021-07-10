@@ -183,10 +183,11 @@ namespace NWN.Core.NWNX
     }
 
     /// Set base item as monk weapon.
-    /// @note Requires activation of CombatModes plugin for Flurry of Blows.
     /// <param name="nBaseItem">The base item id.</param>
+    /// @deprecated Use baseitems.2da. This will be removed in future NWNX releases.
     public static void SetWeaponIsMonkWeapon(int nBaseItem)
     {
+      WriteTimestampedLogEntry("NWNX_Weapon_SetWeaponIsMonkWeapon() is deprecated. Please use baseitems.2da instead.");
       const string sFunc = "SetWeaponIsMonkWeapon";
       VM.NWNX.SetFunction(NWNX_Weapon, sFunc);
       VM.NWNX.StackPush(nBaseItem);
