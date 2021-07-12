@@ -503,6 +503,8 @@ namespace NWN.Core
     public const int EFFECT_TYPE_SPELL_FAILURE = 82;
     public const int EFFECT_TYPE_CUTSCENEGHOST = 83;
     public const int EFFECT_TYPE_CUTSCENEIMMOBILIZE = 84;
+    public const int EFFECT_TYPE_RUNSCRIPT = 85;
+    public const int EFFECT_TYPE_ICON = 86;
     public const int ITEM_APPR_TYPE_SIMPLE_MODEL = 0;
     public const int ITEM_APPR_TYPE_WEAPON_COLOR = 1;
     public const int ITEM_APPR_TYPE_WEAPON_MODEL = 2;
@@ -5940,6 +5942,139 @@ namespace NWN.Core
     public const float CASSOWARY_STRENGTH_MEDIUM = 1000.0f;
     public const float CASSOWARY_STRENGTH_STRONG = 1000000.0f;
     public const float CASSOWARY_STRENGTH_REQUIRED = 1001001000.0f;
+    public const int RUNSCRIPT_EFFECT_SCRIPT_TYPE_ON_APPLIED = 1;
+    public const int RUNSCRIPT_EFFECT_SCRIPT_TYPE_ON_REMOVED = 2;
+    public const int RUNSCRIPT_EFFECT_SCRIPT_TYPE_ON_INTERVAL = 3;
+    public const int EFFECT_ICON_INVALID = 0;
+    public const int EFFECT_ICON_DAMAGE_RESISTANCE = 1;
+    public const int EFFECT_ICON_REGENERATE = 2;
+    public const int EFFECT_ICON_DAMAGE_REDUCTION = 3;
+    public const int EFFECT_ICON_TEMPORARY_HITPOINTS = 4;
+    public const int EFFECT_ICON_ENTANGLE = 5;
+    public const int EFFECT_ICON_INVULNERABLE = 6;
+    public const int EFFECT_ICON_DEAF = 7;
+    public const int EFFECT_ICON_FATIGUE = 8;
+    public const int EFFECT_ICON_IMMUNITY = 9;
+    public const int EFFECT_ICON_BLIND = 10;
+    public const int EFFECT_ICON_ENEMY_ATTACK_BONUS = 11;
+    public const int EFFECT_ICON_CHARMED = 12;
+    public const int EFFECT_ICON_CONFUSED = 13;
+    public const int EFFECT_ICON_FRIGHTENED = 14;
+    public const int EFFECT_ICON_DOMINATED = 15;
+    public const int EFFECT_ICON_PARALYZE = 16;
+    public const int EFFECT_ICON_DAZED = 17;
+    public const int EFFECT_ICON_STUNNED = 18;
+    public const int EFFECT_ICON_SLEEP = 19;
+    public const int EFFECT_ICON_POISON = 20;
+    public const int EFFECT_ICON_DISEASE = 21;
+    public const int EFFECT_ICON_CURSE = 22;
+    public const int EFFECT_ICON_SILENCE = 23;
+    public const int EFFECT_ICON_TURNED = 24;
+    public const int EFFECT_ICON_HASTE = 25;
+    public const int EFFECT_ICON_SLOW = 26;
+    public const int EFFECT_ICON_ABILITY_INCREASE_STR = 27;
+    public const int EFFECT_ICON_ABILITY_DECREASE_STR = 28;
+    public const int EFFECT_ICON_ATTACK_INCREASE = 29;
+    public const int EFFECT_ICON_ATTACK_DECREASE = 30;
+    public const int EFFECT_ICON_DAMAGE_INCREASE = 31;
+    public const int EFFECT_ICON_DAMAGE_DECREASE = 32;
+    public const int EFFECT_ICON_DAMAGE_IMMUNITY_INCREASE = 33;
+    public const int EFFECT_ICON_DAMAGE_IMMUNITY_DECREASE = 34;
+    public const int EFFECT_ICON_AC_INCREASE = 35;
+    public const int EFFECT_ICON_AC_DECREASE = 36;
+    public const int EFFECT_ICON_MOVEMENT_SPEED_INCREASE = 37;
+    public const int EFFECT_ICON_MOVEMENT_SPEED_DECREASE = 38;
+    public const int EFFECT_ICON_SAVING_THROW_INCREASE = 39;
+    public const int EFFECT_ICON_SAVING_THROW_DECREASE = 40;
+    public const int EFFECT_ICON_SPELL_RESISTANCE_INCREASE = 41;
+    public const int EFFECT_ICON_SPELL_RESISTANCE_DECREASE = 42;
+    public const int EFFECT_ICON_SKILL_INCREASE = 43;
+    public const int EFFECT_ICON_SKILL_DECREASE = 44;
+    public const int EFFECT_ICON_INVISIBILITY = 45;
+    public const int EFFECT_ICON_IMPROVEDINVISIBILITY = 46;
+    public const int EFFECT_ICON_DARKNESS = 47;
+    public const int EFFECT_ICON_DISPELMAGICALL = 48;
+    public const int EFFECT_ICON_ELEMENTALSHIELD = 49;
+    public const int EFFECT_ICON_LEVELDRAIN = 50;
+    public const int EFFECT_ICON_POLYMORPH = 51;
+    public const int EFFECT_ICON_SANCTUARY = 52;
+    public const int EFFECT_ICON_TRUESEEING = 53;
+    public const int EFFECT_ICON_SEEINVISIBILITY = 54;
+    public const int EFFECT_ICON_TIMESTOP = 55;
+    public const int EFFECT_ICON_BLINDNESS = 56;
+    public const int EFFECT_ICON_SPELLLEVELABSORPTION = 57;
+    public const int EFFECT_ICON_DISPELMAGICBEST = 58;
+    public const int EFFECT_ICON_ABILITY_INCREASE_DEX = 59;
+    public const int EFFECT_ICON_ABILITY_DECREASE_DEX = 60;
+    public const int EFFECT_ICON_ABILITY_INCREASE_CON = 61;
+    public const int EFFECT_ICON_ABILITY_DECREASE_CON = 62;
+    public const int EFFECT_ICON_ABILITY_INCREASE_INT = 63;
+    public const int EFFECT_ICON_ABILITY_DECREASE_INT = 64;
+    public const int EFFECT_ICON_ABILITY_INCREASE_WIS = 65;
+    public const int EFFECT_ICON_ABILITY_DECREASE_WIS = 66;
+    public const int EFFECT_ICON_ABILITY_INCREASE_CHA = 67;
+    public const int EFFECT_ICON_ABILITY_DECREASE_CHA = 68;
+    public const int EFFECT_ICON_IMMUNITY_ALL = 69;
+    public const int EFFECT_ICON_IMMUNITY_MIND = 70;
+    public const int EFFECT_ICON_IMMUNITY_POISON = 71;
+    public const int EFFECT_ICON_IMMUNITY_DISEASE = 72;
+    public const int EFFECT_ICON_IMMUNITY_FEAR = 73;
+    public const int EFFECT_ICON_IMMUNITY_TRAP = 74;
+    public const int EFFECT_ICON_IMMUNITY_PARALYSIS = 75;
+    public const int EFFECT_ICON_IMMUNITY_BLINDNESS = 76;
+    public const int EFFECT_ICON_IMMUNITY_DEAFNESS = 77;
+    public const int EFFECT_ICON_IMMUNITY_SLOW = 78;
+    public const int EFFECT_ICON_IMMUNITY_ENTANGLE = 79;
+    public const int EFFECT_ICON_IMMUNITY_SILENCE = 80;
+    public const int EFFECT_ICON_IMMUNITY_STUN = 81;
+    public const int EFFECT_ICON_IMMUNITY_SLEEP = 82;
+    public const int EFFECT_ICON_IMMUNITY_CHARM = 83;
+    public const int EFFECT_ICON_IMMUNITY_DOMINATE = 84;
+    public const int EFFECT_ICON_IMMUNITY_CONFUSE = 85;
+    public const int EFFECT_ICON_IMMUNITY_CURSE = 86;
+    public const int EFFECT_ICON_IMMUNITY_DAZED = 87;
+    public const int EFFECT_ICON_IMMUNITY_ABILITY_DECREASE = 88;
+    public const int EFFECT_ICON_IMMUNITY_ATTACK_DECREASE = 89;
+    public const int EFFECT_ICON_IMMUNITY_DAMAGE_DECREASE = 90;
+    public const int EFFECT_ICON_IMMUNITY_DAMAGE_IMMUNITY_DECREASE = 91;
+    public const int EFFECT_ICON_IMMUNITY_AC_DECREASE = 92;
+    public const int EFFECT_ICON_IMMUNITY_MOVEMENT_SPEED_DECREASE = 93;
+    public const int EFFECT_ICON_IMMUNITY_SAVING_THROW_DECREASE = 94;
+    public const int EFFECT_ICON_IMMUNITY_SPELL_RESISTANCE_DECREASE = 95;
+    public const int EFFECT_ICON_IMMUNITY_SKILL_DECREASE = 96;
+    public const int EFFECT_ICON_IMMUNITY_KNOCKDOWN = 97;
+    public const int EFFECT_ICON_IMMUNITY_NEGATIVE_LEVEL = 98;
+    public const int EFFECT_ICON_IMMUNITY_SNEAK_ATTACK = 99;
+    public const int EFFECT_ICON_IMMUNITY_CRITICAL_HIT = 100;
+    public const int EFFECT_ICON_IMMUNITY_DEATH_MAGIC = 101;
+    public const int EFFECT_ICON_REFLEX_SAVE_INCREASED = 102;
+    public const int EFFECT_ICON_FORT_SAVE_INCREASED = 103;
+    public const int EFFECT_ICON_WILL_SAVE_INCREASED = 104;
+    public const int EFFECT_ICON_TAUNTED = 105;
+    public const int EFFECT_ICON_SPELLIMMUNITY = 106;
+    public const int EFFECT_ICON_ETHEREALNESS = 107;
+    public const int EFFECT_ICON_CONCEALMENT = 108;
+    public const int EFFECT_ICON_PETRIFIED = 109;
+    public const int EFFECT_ICON_EFFECT_SPELL_FAILURE = 110;
+    public const int EFFECT_ICON_DAMAGE_IMMUNITY_MAGIC = 111;
+    public const int EFFECT_ICON_DAMAGE_IMMUNITY_ACID = 112;
+    public const int EFFECT_ICON_DAMAGE_IMMUNITY_COLD = 113;
+    public const int EFFECT_ICON_DAMAGE_IMMUNITY_DIVINE = 114;
+    public const int EFFECT_ICON_DAMAGE_IMMUNITY_ELECTRICAL = 115;
+    public const int EFFECT_ICON_DAMAGE_IMMUNITY_FIRE = 116;
+    public const int EFFECT_ICON_DAMAGE_IMMUNITY_NEGATIVE = 117;
+    public const int EFFECT_ICON_DAMAGE_IMMUNITY_POSITIVE = 118;
+    public const int EFFECT_ICON_DAMAGE_IMMUNITY_SONIC = 119;
+    public const int EFFECT_ICON_DAMAGE_IMMUNITY_MAGIC_DECREASE = 120;
+    public const int EFFECT_ICON_DAMAGE_IMMUNITY_ACID_DECREASE = 121;
+    public const int EFFECT_ICON_DAMAGE_IMMUNITY_COLD_DECREASE = 122;
+    public const int EFFECT_ICON_DAMAGE_IMMUNITY_DIVINE_DECREASE = 123;
+    public const int EFFECT_ICON_DAMAGE_IMMUNITY_ELECTRICAL_DECREASE = 124;
+    public const int EFFECT_ICON_DAMAGE_IMMUNITY_FIRE_DECREASE = 125;
+    public const int EFFECT_ICON_DAMAGE_IMMUNITY_NEGATIVE_DECREASE = 126;
+    public const int EFFECT_ICON_DAMAGE_IMMUNITY_POSITIVE_DECREASE = 127;
+    public const int EFFECT_ICON_DAMAGE_IMMUNITY_SONIC_DECREASE = 128;
+    public const int EFFECT_ICON_WOUNDING = 129;
     public const string sLanguage = "nwscript";
 
     ///  Get an integer between 0 and nMaxInteger-1.<br/>
@@ -15502,7 +15637,7 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  Instances a new area from the given resref, which needs to be a existing module area.<br/>
+    ///  Instances a new area from the given sSourceResRef, which needs to be a existing module area.<br/>
     ///  Will optionally set a new area tag and displayed name. The new area is accessible<br/>
     ///  immediately, but initialisation scripts for the area and all contained creatures will only<br/>
     ///  run after the current script finishes (so you can clean up objects before returning).<br/>
@@ -15511,17 +15646,28 @@ namespace NWN.Core
     /// <br/>
     ///  Note: When spawning a second instance of a existing area, you will have to manually<br/>
     ///        adjust all transitions (doors, triggers) with the relevant script commands,<br/>
-    ///        or players might end up in the wrong area.
-    public static uint CreateArea(string sResRef, string sNewTag = "", string sNewName = "")
+    ///        or players might end up in the wrong area.<br/>
+    ///  Note: Areas cannot have duplicate ResRefs, so your new area will have a autogenerated,<br/>
+    ///        sequential resref starting with &amp;quot;nw_&amp;quot;; for example: nw_5. You cannot influence this resref.<br/>
+    ///        If you destroy an area, that resref will be come free for reuse for the next area created.<br/>
+    ///        If you need to know the resref of your new area, you can call GetResRef on it.<br/>
+    ///  Note: When instancing an area from a loaded savegame, it will spawn the area as it was at time of save, NOT<br/>
+    ///        at module creation. This is because the savegame replaces the module data. Due to technical limitations,<br/>
+    ///        polymorphed creatures, personal reputation, and associates will currently fail to restore correctly.
+    public static uint CreateArea(string sSourceResRef, string sNewTag = "", string sNewName = "")
     {
       VM.StackPush(sNewName);
       VM.StackPush(sNewTag);
-      VM.StackPush(sResRef);
+      VM.StackPush(sSourceResRef);
       VM.Call(858);
       return VM.StackPopObject();
     }
 
     ///  Destroys the given area object and everything in it.<br/>
+    /// <br/>
+    ///  If the area is in a module, the .are and .git data is left behind and you can spawn from<br/>
+    ///  it again. If the area is a temporary copy, the data will be deleted and you cannot spawn it again<br/>
+    ///  via the resref.<br/>
     /// <br/>
     ///  Return values:<br/>
     ///     0: Object not an area or invalid.<br/>
@@ -15536,13 +15682,26 @@ namespace NWN.Core
     }
 
     ///  Creates a copy of a existing area, including everything inside of it (except players).<br/>
+    ///  Will optionally set a new area tag and displayed name. The new area is accessible<br/>
+    ///  immediately, but initialisation scripts for the area and all contained creatures will only<br/>
+    ///  run after the current script finishes (so you can clean up objects before returning).<br/>
+    /// <br/>
+    ///  This is similar to CreateArea, except this variant will copy all changes made to the source<br/>
+    ///  area since it has spawned. CreateArea() will instance the area from the .are and .git data<br/>
+    ///  as it was at creation.<br/>
     /// <br/>
     ///  Returns the new area, or OBJECT_INVALID on error.<br/>
     /// <br/>
     ///  Note: You will have to manually adjust all transitions (doors, triggers) with the<br/>
-    ///        relevant script commands, or players might end up in the wrong area.
-    public static uint CopyArea(uint oArea)
+    ///        relevant script commands, or players might end up in the wrong area.<br/>
+    ///  Note: Areas cannot have duplicate ResRefs, so your new area will have a autogenerated,<br/>
+    ///        sequential resref starting with &amp;quot;nw_&amp;quot;; for example: nw_5. You cannot influence this resref.<br/>
+    ///        If you destroy an area, that resref will be come free for reuse for the next area created.<br/>
+    ///        If you need to know the resref of your new area, you can call GetResRef on it.
+    public static uint CopyArea(uint oArea, string sNewTag = "", string sNewName = "")
     {
+      VM.StackPush(sNewName);
+      VM.StackPush(sNewTag);
       VM.StackPush(oArea);
       VM.Call(860);
       return VM.StackPopObject();
@@ -16469,9 +16628,15 @@ namespace NWN.Core
     }
 
     ///  Returns the currently executing event (EVENT_SCRIPT_*) or 0 if not determinable.<br/>
-    ///  Note: Will return 0 in DelayCommand/AssignCommand. ExecuteScript(Chunk) will inherit their event ID from their parent event.
-    public static int GetCurrentlyRunningEvent()
+    ///  Note: Will return 0 in DelayCommand/AssignCommand.<br/>
+    ///  * bInheritParent: If TRUE, ExecuteScript(Chunk) will inherit their event ID from their parent event.<br/>
+    ///                    If FALSE, it will return the event ID of the current script, which may be 0.<br/>
+    /// <br/>
+    ///  Some events can run in the same script context as a previous event (for example: CreatureOnDeath, CreatureOnDamaged)<br/>
+    ///  In cases like these calling the function with bInheritParent = TRUE will return the wrong event ID.
+    public static int GetCurrentlyRunningEvent(int bInheritParent = TRUE)
     {
+      VM.StackPush(bInheritParent);
       VM.Call(938);
       return VM.StackPopInt();
     }
@@ -16665,6 +16830,62 @@ namespace NWN.Core
       VM.StackPush(nType);
       VM.Call(954);
       return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+    }
+
+    ///  Create a RunScript effect.<br/>
+    ///  Notes: When applied as instant effect, only sOnAppliedScript will fire.<br/>
+    ///         In the scripts, OBJECT_SELF will be the object the effect is applied to.<br/>
+    ///  * sOnAppliedScript: An optional script to execute when the effect is applied.<br/>
+    ///  * sOnRemovedScript: An optional script to execute when the effect is removed.<br/>
+    ///  * sOnIntervalScript: An optional script to execute every fInterval seconds.<br/>
+    ///  * fInterval: The interval in seconds, must be &amp;gt;0.0f if an interval script is set.<br/>
+    ///               Very low values may have an adverse effect on performance.<br/>
+    ///  * sData: An optional string of data saved in the effect, retrievable with GetEffectString() at index 0.
+    public static System.IntPtr EffectRunScript(string sOnAppliedScript = "", string sOnRemovedScript = "", string sOnIntervalScript = "", float fInterval = 0.0f, string sData = "")
+    {
+      VM.StackPush(sData);
+      VM.StackPush(fInterval);
+      VM.StackPush(sOnIntervalScript);
+      VM.StackPush(sOnRemovedScript);
+      VM.StackPush(sOnAppliedScript);
+      VM.Call(955);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+    }
+
+    ///  Get the effect that last triggered an EffectRunScript() script.<br/>
+    ///  Note: This can be used to get the creator or tag, among others, of the EffectRunScript() in one of its scripts.<br/>
+    ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT when called outside of an EffectRunScript() script.
+    public static System.IntPtr GetLastRunScriptEffect()
+    {
+      VM.Call(956);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+    }
+
+    ///  Get the script type (RUNSCRIPT_EFFECT_SCRIPT_TYPE_*) of the last triggered EffectRunScript() script.<br/>
+    ///  * Returns 0 when called outside of an EffectRunScript() script.
+    public static int GetLastRunScriptEffectScriptType()
+    {
+      VM.Call(957);
+      return VM.StackPopInt();
+    }
+
+    ///  Hides the effect icon of eEffect and of all effects currently linked to it.
+    public static System.IntPtr HideEffectIcon(System.IntPtr eEffect)
+    {
+      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.Call(958);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+    }
+
+    ///  Create an Icon effect.<br/>
+    ///  * nIconID: The effect icon (EFFECT_ICON_*) to display.<br/>
+    ///             Using the icon for Poison/Disease will also color the health bar green/brown, useful to simulate custom poisons/diseases.<br/>
+    ///  Returns an effect of type EFFECT_TYPE_INVALIDEFFECT when nIconID is &amp;lt; 1 or &amp;gt; 255.
+    public static System.IntPtr EffectIcon(int nIconID)
+    {
+      VM.StackPush(nIconID);
+      VM.Call(959);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
 
   }
