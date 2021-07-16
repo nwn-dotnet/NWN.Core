@@ -764,6 +764,19 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
+    /// Sets the last object that triggered door or placeable trap.
+    /// @note Should be retrieved with GetEnteringObject.
+    /// <param name="oObject">Door or placeable object</param>
+    /// <param name="oLast">Object that last triggered trap.</param>
+    public static void SetLastTriggered(uint oObject, uint oLast)
+    {
+      const string sFunc = "SetLastTriggered";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
+      VM.NWNX.StackPush(oLast);
+      VM.NWNX.StackPush(oObject);
+      VM.NWNX.Call();
+    }
+
     // @}
   }
 
