@@ -764,10 +764,13 @@ namespace NWN.Core.NWNX
     /// <param name="position">Should be 0, 1, or 2 depending on how many classes the creature</param>
     /// has and which is to be modified.
     /// <param name="classID">A valid ID number in classes.2da and between 0 and 255.</param>
-    public static void SetClassByPosition(uint creature, int position, int classID)
+    /// <param name="bUpdateLevels">determines whether the method will replace all occurrences</param>
+    /// of the old class in CNWLevelStats with the new classID.
+    public static void SetClassByPosition(uint creature, int position, int classID, int bUpdateLevels = TRUE)
     {
       const string sFunc = "SetClassByPosition";
       VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(bUpdateLevels);
       VM.NWNX.StackPush(classID);
       VM.NWNX.StackPush(position);
       VM.NWNX.StackPush(creature);
