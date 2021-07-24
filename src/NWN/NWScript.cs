@@ -3474,6 +3474,13 @@ namespace NWN.Core
     public const int INVENTORY_DISTURB_TYPE_REMOVED = 1;
     public const int INVENTORY_DISTURB_TYPE_STOLEN = 2;
     public const int GUI_PANEL_PLAYER_DEATH = 0;
+    public const int GUI_PANEL_MINIMAP = 2;
+    public const int GUI_PANEL_COMPASS = 3;
+    public const int GUI_PANEL_INVENTORY = 4;
+    public const int GUI_PANEL_PLAYERLIST = 5;
+    public const int GUI_PANEL_JOURNAL = 6;
+    public const int GUI_PANEL_SPELLBOOK = 7;
+    public const int GUI_PANEL_CHARACTERSHEET = 8;
     public const int VOICE_CHAT_ATTACK = 0;
     public const int VOICE_CHAT_BATTLECRY1 = 1;
     public const int VOICE_CHAT_BATTLECRY2 = 2;
@@ -5739,6 +5746,8 @@ namespace NWN.Core
     public const int EVENT_SCRIPT_MODULE_ON_UNEQUIP_ITEM = 3016;
     public const int EVENT_SCRIPT_MODULE_ON_PLAYER_CHAT = 3017;
     public const int EVENT_SCRIPT_MODULE_ON_PLAYER_TARGET = 3018;
+    public const int EVENT_SCRIPT_MODULE_ON_PLAYER_GUIEVENT = 3019;
+    public const int EVENT_SCRIPT_MODULE_ON_PLAYER_TILE_ACTION = 3020;
     public const int EVENT_SCRIPT_AREA_ON_HEARTBEAT = 4000;
     public const int EVENT_SCRIPT_AREA_ON_USER_DEFINED_EVENT = 4001;
     public const int EVENT_SCRIPT_AREA_ON_ENTER = 4002;
@@ -6075,6 +6084,20 @@ namespace NWN.Core
     public const int EFFECT_ICON_DAMAGE_IMMUNITY_POSITIVE_DECREASE = 127;
     public const int EFFECT_ICON_DAMAGE_IMMUNITY_SONIC_DECREASE = 128;
     public const int EFFECT_ICON_WOUNDING = 129;
+    public const int GUIEVENT_CHATBAR_FOCUS = 1;
+    public const int GUIEVENT_CHATBAR_UNFOCUS = 2;
+    public const int GUIEVENT_CHARACTERSHEET_SKILL_CLICK = 3;
+    public const int GUIEVENT_CHARACTERSHEET_FEAT_CLICK = 4;
+    public const int GUIEVENT_EFFECTICON_CLICK = 5;
+    public const int GUIEVENT_DEATHPANEL_WAITFORHELP_CLICK = 6;
+    public const int GUIEVENT_MINIMAP_MAPPIN_CLICK = 7;
+    public const int GUIEVENT_MINIMAP_OPEN = 8;
+    public const int GUIEVENT_MINIMAP_CLOSE = 9;
+    public const int GUIEVENT_JOURNAL_OPEN = 10;
+    public const int GUIEVENT_JOURNAL_CLOSE = 11;
+    public const int GUIEVENT_PLAYERLIST_PLAYER_CLICK = 12;
+    public const int GUIEVENT_PARTYBAR_PORTRAIT_CLICK = 13;
+    public const int GUIEVENT_DISABLED_PANEL_ATTEMPT_OPEN = 14;
     public const string sLanguage = "nwscript";
 
     ///  Get an integer between 0 and nMaxInteger-1.<br/>
@@ -10158,10 +10181,10 @@ namespace NWN.Core
     }
 
     ///  Spawn a GUI panel for the client that controls oPC.<br/>
+    ///  Will force show panels disabled with SetGuiPanelDisabled()<br/>
     ///  - oPC<br/>
-    ///  - nGUIPanel: GUI_PANEL_*<br/>
-    ///  * Nothing happens if oPC is not a player character or if an invalid value is<br/>
-    ///    used for nGUIPanel.
+    ///  - nGUIPanel: GUI_PANEL_*, except GUI_PANEL_COMPASS<br/>
+    ///  * Nothing happens if oPC is not a player character or if an invalid value is used for nGUIPanel.
     public static void PopUpGUIPanel(uint oPC, int nGUIPanel)
     {
       VM.StackPush(nGUIPanel);
@@ -16886,6 +16909,80 @@ namespace NWN.Core
       VM.StackPush(nIconID);
       VM.Call(959);
       return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+    }
+
+    ///  Gets the player that last triggered the module OnPlayerGuiEvent event.
+    public static uint GetLastGuiEventPlayer()
+    {
+      VM.Call(960);
+      return VM.StackPopObject();
+    }
+
+    ///  Gets the last triggered GUIEVENT_* in the module OnPlayerGuiEvent event.
+    public static int GetLastGuiEventType()
+    {
+      VM.Call(961);
+      return VM.StackPopInt();
+    }
+
+    ///  Gets an optional integer of specific gui events in the module OnPlayerGuiEvent event.<br/>
+    ///  * GUIEVENT_CHATBAR_*: The selected chat channel. Does not indicate the actual used channel.<br/>
+    ///                        0 = Shout, 1 = Whisper, 2 = Talk, 3 = Party, 4 = DM<br/>
+    ///  * GUIEVENT_CHARACTERSHEET_SKILL_SELECT: The skill ID.<br/>
+    ///  * GUIEVENT_CHARACTERSHEET_FEAT_SELECT: The feat ID.<br/>
+    ///  * GUIEVENT_EFFECTICON_CLICK: The effect icon ID (EFFECT_ICON_*)<br/>
+    ///  * GUIEVENT_DISABLED_PANEL_ATTEMPT_OPEN: The GUI_PANEL_* the player attempted to open.
+    public static int GetLastGuiEventInteger()
+    {
+      VM.Call(962);
+      return VM.StackPopInt();
+    }
+
+    ///  Gets an optional object of specific gui events in the module OnPlayerGuiEvent event.<br/>
+    ///  * GUIEVENT_MINIMAP_MAPPIN_CLICK: The waypoint the map note is attached to.<br/>
+    ///  * GUIEVENT_CHARACTERSHEET_*_SELECT: The owner of the character sheet.<br/>
+    ///  * GUIEVENT_PLAYERLIST_PLAYER_CLICK: The player clicked on.<br/>
+    ///  * GUIEVENT_PARTYBAR_PORTRAIT_CLICK: The creature clicked on.<br/>
+    ///  * GUIEVENT_DISABLED_PANEL_ATTEMPT_OPEN: For GUI_PANEL_CHARACTERSHEET, the owner of the character sheet.
+    public static uint GetLastGuiEventObject()
+    {
+      VM.Call(963);
+      return VM.StackPopObject();
+    }
+
+    ///  Disable a gui panel for the client that controls oPlayer.<br/>
+    ///  Notes: Will close the gui panel if currently open.<br/>
+    ///         Does not persist through relogging or in savegames.<br/>
+    ///         Will fire a GUIEVENT_DISABLED_PANEL_ATTEMPT_OPEN OnPlayerGuiEvent for some gui panels if a player attempts to open them.<br/>
+    ///         You can still force show a panel with PopUpGUIPanel().<br/>
+    ///  * nGuiPanel: A GUI_PANEL_* constant, except GUI_PANEL_PLAYER_DEATH.
+    public static void SetGuiPanelDisabled(uint oPlayer, int nGuiPanel, int bDisabled)
+    {
+      VM.StackPush(bDisabled);
+      VM.StackPush(nGuiPanel);
+      VM.StackPush(oPlayer);
+      VM.Call(964);
+    }
+
+    ///  Gets the ID (1..8) of the last tile action performed in OnPlayerTileAction
+    public static int GetLastTileActionId()
+    {
+      VM.Call(965);
+      return VM.StackPopInt();
+    }
+
+    ///  Gets the target position in the module OnPlayerTileAction event.
+    public static System.Numerics.Vector3 GetLastTileActionPosition()
+    {
+      VM.Call(966);
+      return VM.StackPopVector();
+    }
+
+    ///  Gets the player object that triggered the OnPlayerTileAction event.
+    public static uint GetLastPlayerToDoTileAction()
+    {
+      VM.Call(967);
+      return VM.StackPopObject();
     }
 
   }
