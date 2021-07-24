@@ -21,13 +21,17 @@ jobs:
           ssh-key: ${{ secrets.API_PUSH_KEY }}
           persist-credentials: true
 
+      - name: Load Environment Info
+        id: "dotenv"
+        uses: ./.github/actions/dotenv-action
+
       - name: Load Revisions
         id: "revision"
         run: |
-          NWNX_SHA=$(curl -u "u:${{github.token}}" https://api.github.com/repos/nwnxee/unified/git/ref/heads/master | jq .object.sha | tr -d '"')
+          NWNX_SHA=$(curl -u "u:${{github.token}}" https://api.github.com/repos/nwnxee/unified/git/ref/tags/${{ steps.dotenv.outputs.nwnx_tag }} | jq .object.sha | tr -d '"')
           echo ::set-output name=nwnx_sha::$( echo $NWNX_SHA )
           echo ::set-output name=nwnx_sha_short::$( echo $NWNX_SHA | cut -c1-8 )
-          NWN_SHA=$(curl -u "u:${{github.token}}" https://api.github.com/repos/urothis/nwn-assets/git/ref/heads/main | jq .object.sha | tr -d '"')
+          NWN_SHA=$(curl -u "u:${{github.token}}" https://api.github.com/repos/urothis/nwn-assets/git/ref/tags/${{ steps.dotenv.outputs.nwn_tag }} | jq .object.sha | tr -d '"')
           echo ::set-output name=nwn_sha::$( echo $NWN_SHA )
 
       - name: Checkout NWNX
@@ -39,7 +43,7 @@ jobs:
 
       - name: Checkout nwscript.nss
         run: |
-          wget -P "${GITHUB_WORKSPACE}/nwn" https://raw.githubusercontent.com/urothis/nwn-assets/${{ steps.revision.outputs.nwn_sha }}/key-file/pkg5.bif/nwscript.nss
+          wget -P "${GITHUB_WORKSPACE}/nwn" https://raw.githubusercontent.com/urothis/nwn-assets/${{ steps.revision.outputs.nwn_sha }}/nwscript/nwscript.nss
 
       - name: Convert
         run: |
