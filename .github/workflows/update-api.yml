@@ -24,6 +24,8 @@ jobs:
       - name: Load Environment Info
         id: "dotenv"
         uses: falti/dotenv-action@v0.2.6
+        with:
+          path: "./repo/.env"
 
       - name: Load Revisions
         id: "revision"
