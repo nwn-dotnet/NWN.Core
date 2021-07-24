@@ -23,7 +23,7 @@ jobs:
 
       - name: Load Environment Info
         id: "dotenv"
-        uses: ./.github/actions/dotenv-action
+        uses: falti/dotenv-action@v0.2.6
 
       - name: Load Revisions
         id: "revision"
