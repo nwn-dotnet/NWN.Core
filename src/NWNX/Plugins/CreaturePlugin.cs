@@ -119,6 +119,22 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Removes the creature a feat assigned at a level
+    /// <param name="creature">The creature object.</param>
+    /// <param name="feat">The feat id.</param>
+    /// <param name="level">The level they gained the feat.</param>
+    /// @remark Removes the feat from the stat list at the provided level. Does not remove the feat from the creature, use
+    /// NWNX_Creature_RemoveFeat for this.
+    public static void RemoveFeatByLevel(uint creature, int feat, int level)
+    {
+      const string sFunc = "RemoveFeatByLevel";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(level);
+      VM.NWNX.StackPush(feat);
+      VM.NWNX.StackPush(creature);
+      VM.NWNX.Call();
+    }
+
     /// Determines if the creature knows a feat.
     /// @note This differs from native @nwn{GetHasFeat} which returns FALSE if the feat has no more uses per day.
     /// <param name="creature">The creature object.</param>
