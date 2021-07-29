@@ -775,6 +775,22 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Set the ranks in a skill for creature assigned at a level
+    /// <param name="creature">The creature object.</param>
+    /// <param name="skill">The skill id.</param>
+    /// <param name="level">The level they gained skill ranks.</param>
+    /// <param name="rank">The value to set as the skill rank.</param>
+    public static void SetSkillRankByLevel(uint creature, int skill, int rank, int level)
+    {
+      const string sFunc = "SetSkillRankByLevel";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(level);
+      VM.NWNX.StackPush(rank);
+      VM.NWNX.StackPush(skill);
+      VM.NWNX.StackPush(creature);
+      VM.NWNX.Call();
+    }
+
     /// Set the class ID in a particular position for a creature.
     /// <param name="creature">The creature object.</param>
     /// <param name="position">Should be 0, 1, or 2 depending on how many classes the creature</param>
