@@ -775,7 +775,8 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Set the ranks in a skill for creature assigned at a level
+    /// Set the ranks in a skill for creature assigned at a level.
+    /// @note It only affect the leveling array, to know what to do on level-down. To effectivly change the skill rank on the current level, NWNX_Creature_SetSkillRank is also needed.
     /// <param name="creature">The creature object.</param>
     /// <param name="skill">The skill id.</param>
     /// <param name="level">The level they gained skill ranks.</param>
