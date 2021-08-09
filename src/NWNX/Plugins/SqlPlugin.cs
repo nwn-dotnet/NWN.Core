@@ -139,6 +139,16 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Set the NULL value of a prepared statement at given position.
+    /// <param name="position">The nth ? in a prepared statement.</param>
+    public static void PreparedNULL(int position)
+    {
+      const string sFunc = "PreparedNULL";
+      VM.NWNX.SetFunction(NWNX_SQL, sFunc);
+      VM.NWNX.StackPush(position);
+      VM.NWNX.Call();
+    }
+
     /// Like NWNX_SQL_ReadDataInActiveRow, but for full serialized objects.
     ///
     /// The object will be deserialized and created in the game. New object ID is returned.
