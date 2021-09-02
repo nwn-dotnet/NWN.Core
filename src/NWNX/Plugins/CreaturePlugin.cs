@@ -775,6 +775,21 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Get the ranks in a skill for creature assigned at a level.
+    /// <param name="creature">The creature object.</param>
+    /// <param name="skill">The skill id.</param>
+    /// <param name="level">The level they gained skill ranks.</param>
+    /// <returns>The rank in a skill assigned at a level (-1 on error).</returns>
+    public static void GetSkillRankByLevel(uint creature, int skill, int level)
+    {
+      const string sFunc = "GetSkillRankByLevel";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(level);
+      VM.NWNX.StackPush(skill);
+      VM.NWNX.StackPush(creature);
+      VM.NWNX.Call();
+    }
+
     /// Set the ranks in a skill for creature assigned at a level.
     /// @note It only affect the leveling array, to know what to do on level-down. To effectivly change the skill rank on the current level, NWNX_Creature_SetSkillRank is also needed.
     /// <param name="creature">The creature object.</param>
