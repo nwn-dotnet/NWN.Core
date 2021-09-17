@@ -5,7 +5,7 @@ namespace NWN.Core
     public const uint OBJECT_INVALID = 0x7F000000;
     public static uint OBJECT_SELF => NWNCore.FunctionHandler!.ObjectSelf;
 
-    public const int ENGINE_NUM_STRUCTURES = 7;
+    public const int ENGINE_NUM_STRUCTURES = 8;
     public const int ENGINE_STRUCTURE_EFFECT = 0;
     public const int ENGINE_STRUCTURE_EVENT = 1;
     public const int ENGINE_STRUCTURE_LOCATION = 2;
@@ -13,6 +13,7 @@ namespace NWN.Core
     public const int ENGINE_STRUCTURE_ITEMPROPERTY = 4;
     public const int ENGINE_STRUCTURE_SQLQUERY = 5;
     public const int ENGINE_STRUCTURE_CASSOWARY = 6;
+    public const int ENGINE_STRUCTURE_JSON = 7;
     ///  Constants
     public const int NUM_INVENTORY_SLOTS = 18;
     public const int TRUE = 1;
@@ -3481,6 +3482,13 @@ namespace NWN.Core
     public const int GUI_PANEL_JOURNAL = 6;
     public const int GUI_PANEL_SPELLBOOK = 7;
     public const int GUI_PANEL_CHARACTERSHEET = 8;
+    public const int GUI_PANEL_LEVELUP = 9;
+    public const int GUI_PANEL_GOLD_INVENTORY = 10;
+    public const int GUI_PANEL_GOLD_BARTER = 11;
+    public const int GUI_PANEL_EXAMINE_CREATURE = 12;
+    public const int GUI_PANEL_EXAMINE_ITEM = 13;
+    public const int GUI_PANEL_EXAMINE_PLACEABLE = 14;
+    public const int GUI_PANEL_EXAMINE_DOOR = 15;
     public const int VOICE_CHAT_ATTACK = 0;
     public const int VOICE_CHAT_BATTLECRY1 = 1;
     public const int VOICE_CHAT_BATTLECRY2 = 2;
@@ -5748,6 +5756,7 @@ namespace NWN.Core
     public const int EVENT_SCRIPT_MODULE_ON_PLAYER_TARGET = 3018;
     public const int EVENT_SCRIPT_MODULE_ON_PLAYER_GUIEVENT = 3019;
     public const int EVENT_SCRIPT_MODULE_ON_PLAYER_TILE_ACTION = 3020;
+    public const int EVENT_SCRIPT_MODULE_ON_NUI_EVENT = 3021;
     public const int EVENT_SCRIPT_AREA_ON_HEARTBEAT = 4000;
     public const int EVENT_SCRIPT_AREA_ON_USER_DEFINED_EVENT = 4001;
     public const int EVENT_SCRIPT_AREA_ON_ENTER = 4002;
@@ -6098,6 +6107,150 @@ namespace NWN.Core
     public const int GUIEVENT_PLAYERLIST_PLAYER_CLICK = 12;
     public const int GUIEVENT_PARTYBAR_PORTRAIT_CLICK = 13;
     public const int GUIEVENT_DISABLED_PANEL_ATTEMPT_OPEN = 14;
+    public const int GUIEVENT_COMPASS_CLICK = 15;
+    public const int GUIEVENT_LEVELUP_CANCELLED = 16;
+    public const int GUIEVENT_AREA_LOADSCREEN_FINISHED = 17;
+    public const int GUIEVENT_QUICKCHAT_ACTIVATE = 18;
+    public const int GUIEVENT_QUICKCHAT_SELECT = 19;
+    public const int GUIEVENT_QUICKCHAT_CLOSE = 20;
+    public const int GUIEVENT_SELECT_CREATURE = 21;
+    public const int GUIEVENT_UNSELECT_CREATURE = 22;
+    public const int GUIEVENT_EXAMINE_OBJECT = 23;
+    public const int GUIEVENT_OPTIONS_OPEN = 24;
+    public const int GUIEVENT_OPTIONS_CLOSE = 25;
+    public const int JSON_TYPE_NULL = 0;
+
+    ///  Also invalid
+    public const int JSON_TYPE_OBJECT = 1;
+    public const int JSON_TYPE_ARRAY = 2;
+    public const int JSON_TYPE_STRING = 3;
+    public const int JSON_TYPE_INTEGER = 4;
+    public const int JSON_TYPE_FLOAT = 5;
+    public const int JSON_TYPE_BOOL = 6;
+
+    ///  The player&amp;apos;s gui width (inner window bounds).
+    public const string PLAYER_DEVICE_PROPERTY_GUI_WIDTH = "gui_width";
+
+    ///  The player&amp;apos;s gui height (inner window bounds).
+    public const string PLAYER_DEVICE_PROPERTY_GUI_HEIGHT = "gui_height";
+
+    ///  The player&amp;apos;s gui scale, in percent (factor 1.4 = 140)
+    public const string PLAYER_DEVICE_PROPERTY_GUI_SCALE = "gui_scale";
+    public const int PLAYER_LANGUAGE_INVALID = -1;
+    public const int PLAYER_LANGUAGE_ENGLISH = 0;
+    public const int PLAYER_LANGUAGE_FRENCH = 1;
+    public const int PLAYER_LANGUAGE_GERMAN = 2;
+    public const int PLAYER_LANGUAGE_ITALIAN = 3;
+    public const int PLAYER_LANGUAGE_SPANISH = 4;
+    public const int PLAYER_LANGUAGE_POLISH = 5;
+    public const int PLAYER_DEVICE_PLATFORM_INVALID = 0;
+    public const int PLAYER_DEVICE_PLATFORM_WINDOWS_X86 = 1;
+    public const int PLAYER_DEVICE_PLATFORM_WINDOWS_X64 = 2;
+    public const int PLAYER_DEVICE_PLATFORM_LINUX_X86 = 10;
+    public const int PLAYER_DEVICE_PLATFORM_LINUX_X64 = 11;
+    public const int PLAYER_DEVICE_PLATFORM_LINUX_ARM32 = 12;
+    public const int PLAYER_DEVICE_PLATFORM_LINUX_ARM64 = 13;
+    public const int PLAYER_DEVICE_PLATFORM_MAC_X86 = 20;
+    public const int PLAYER_DEVICE_PLATFORM_MAC_X64 = 21;
+    public const int PLAYER_DEVICE_PLATFORM_IOS = 30;
+    public const int PLAYER_DEVICE_PLATFORM_ANDROID_ARM32 = 40;
+    public const int PLAYER_DEVICE_PLATFORM_ANDROID_ARM64 = 41;
+    public const int PLAYER_DEVICE_PLATFORM_ANDROID_X64 = 42;
+    public const int PLAYER_DEVICE_PLATFORM_NINTENDO_SWITCH = 50;
+    public const int PLAYER_DEVICE_PLATFORM_MICROSOFT_XBOXONE = 60;
+    public const int PLAYER_DEVICE_PLATFORM_SONY_PS4 = 70;
+    public const int RESTYPE_RES = 0;
+    public const int RESTYPE_BMP = 1;
+    public const int RESTYPE_MVE = 2;
+    public const int RESTYPE_TGA = 3;
+    public const int RESTYPE_WAV = 4;
+    public const int RESTYPE_WFX = 5;
+    public const int RESTYPE_PLT = 6;
+    public const int RESTYPE_INI = 7;
+    public const int RESTYPE_MP3 = 8;
+    public const int RESTYPE_MPG = 9;
+    public const int RESTYPE_TXT = 10;
+    public const int RESTYPE_KEY = 9999;
+    public const int RESTYPE_BIF = 9998;
+    public const int RESTYPE_ERF = 9997;
+    public const int RESTYPE_IDS = 9996;
+    public const int RESTYPE_PLH = 2000;
+    public const int RESTYPE_TEX = 2001;
+    public const int RESTYPE_MDL = 2002;
+    public const int RESTYPE_THG = 2003;
+    public const int RESTYPE_FNT = 2005;
+    public const int RESTYPE_LUA = 2007;
+    public const int RESTYPE_SLT = 2008;
+    public const int RESTYPE_NSS = 2009;
+    public const int RESTYPE_NCS = 2010;
+    public const int RESTYPE_MOD = 2011;
+    public const int RESTYPE_ARE = 2012;
+    public const int RESTYPE_SET = 2013;
+    public const int RESTYPE_IFO = 2014;
+    public const int RESTYPE_BIC = 2015;
+    public const int RESTYPE_WOK = 2016;
+    public const int RESTYPE_2DA = 2017;
+    public const int RESTYPE_TLK = 2018;
+    public const int RESTYPE_TXI = 2022;
+    public const int RESTYPE_GIT = 2023;
+    public const int RESTYPE_BTI = 2024;
+    public const int RESTYPE_UTI = 2025;
+    public const int RESTYPE_BTC = 2026;
+    public const int RESTYPE_UTC = 2027;
+    public const int RESTYPE_DLG = 2029;
+    public const int RESTYPE_ITP = 2030;
+    public const int RESTYPE_BTT = 2031;
+    public const int RESTYPE_UTT = 2032;
+    public const int RESTYPE_DDS = 2033;
+    public const int RESTYPE_BTS = 2034;
+    public const int RESTYPE_UTS = 2035;
+    public const int RESTYPE_LTR = 2036;
+    public const int RESTYPE_GFF = 2037;
+    public const int RESTYPE_FAC = 2038;
+    public const int RESTYPE_BTE = 2039;
+    public const int RESTYPE_UTE = 2040;
+    public const int RESTYPE_BTD = 2041;
+    public const int RESTYPE_UTD = 2042;
+    public const int RESTYPE_BTP = 2043;
+    public const int RESTYPE_UTP = 2044;
+    public const int RESTYPE_DFT = 2045;
+    public const int RESTYPE_GIC = 2046;
+    public const int RESTYPE_GUI = 2047;
+    public const int RESTYPE_CSS = 2048;
+    public const int RESTYPE_CCS = 2049;
+    public const int RESTYPE_BTM = 2050;
+    public const int RESTYPE_UTM = 2051;
+    public const int RESTYPE_DWK = 2052;
+    public const int RESTYPE_PWK = 2053;
+    public const int RESTYPE_BTG = 2054;
+    public const int RESTYPE_UTG = 2055;
+    public const int RESTYPE_JRL = 2056;
+    public const int RESTYPE_SAV = 2057;
+    public const int RESTYPE_UTW = 2058;
+    public const int RESTYPE_4PC = 2059;
+    public const int RESTYPE_SSF = 2060;
+    public const int RESTYPE_HAK = 2061;
+    public const int RESTYPE_NWM = 2062;
+    public const int RESTYPE_BIK = 2063;
+    public const int RESTYPE_NDB = 2064;
+    public const int RESTYPE_PTM = 2065;
+    public const int RESTYPE_PTT = 2066;
+    public const int RESTYPE_BAK = 2067;
+    public const int RESTYPE_DAT = 2068;
+    public const int RESTYPE_SHD = 2069;
+    public const int RESTYPE_XBC = 2070;
+    public const int RESTYPE_WBM = 2071;
+    public const int RESTYPE_MTR = 2072;
+    public const int RESTYPE_KTX = 2073;
+    public const int RESTYPE_TTF = 2074;
+    public const int RESTYPE_SQL = 2075;
+    public const int RESTYPE_TML = 2076;
+    public const int RESTYPE_SQ3 = 2077;
+    public const int RESTYPE_LOD = 2078;
+    public const int RESTYPE_GIF = 2079;
+    public const int RESTYPE_PNG = 2080;
+    public const int RESTYPE_JPG = 2081;
+    public const int RESTYPE_CAF = 2082;
     public const string sLanguage = "nwscript";
 
     ///  Get an integer between 0 and nMaxInteger-1.<br/>
@@ -10183,7 +10336,7 @@ namespace NWN.Core
     ///  Spawn a GUI panel for the client that controls oPC.<br/>
     ///  Will force show panels disabled with SetGuiPanelDisabled()<br/>
     ///  - oPC<br/>
-    ///  - nGUIPanel: GUI_PANEL_*, except GUI_PANEL_COMPASS<br/>
+    ///  - nGUIPanel: GUI_PANEL_*, except GUI_PANEL_COMPASS / GUI_PANEL_LEVELUP / GUI_PANEL_GOLD_* / GUI_PANEL_EXAMINE_*<br/>
     ///  * Nothing happens if oPC is not a player character or if an invalid value is used for nGUIPanel.
     public static void PopUpGUIPanel(uint oPC, int nGUIPanel)
     {
@@ -12371,9 +12524,11 @@ namespace NWN.Core
     ///  NOTE: this command can be used for copying Creatures, Items, Placeables, Waypoints, Stores, Doors, Triggers.<br/>
     ///  If an owner is specified and the object is an item, it will be put into their inventory<br/>
     ///  Otherwise, it will be created at the location.<br/>
-    ///  If a new tag is specified, it will be assigned to the new object.
-    public static uint CopyObject(uint oSource, System.IntPtr locLocation, uint oOwner = OBJECT_INVALID, string sNewTag = "")
+    ///  If a new tag is specified, it will be assigned to the new object.<br/>
+    ///  If bCopyLocalState is TRUE, local vars, effects, action queue, and transition info (triggers, doors) are copied over.
+    public static uint CopyObject(uint oSource, System.IntPtr locLocation, uint oOwner = OBJECT_INVALID, string sNewTag = "", int bCopyLocalState = FALSE)
     {
+      VM.StackPush(bCopyLocalState);
       VM.StackPush(sNewTag);
       VM.StackPush(oOwner);
       VM.StackPush(locLocation, ENGINE_STRUCTURE_LOCATION);
@@ -12393,9 +12548,12 @@ namespace NWN.Core
 
     ///  Stores an object with the given id.<br/>
     ///  NOTE: this command can be used for storing Creatures, Items, Placeables, Waypoints, Stores, Doors, Triggers.<br/>
-    ///  Returns 0 if it failled, 1 if it worked.
-    public static int StoreCampaignObject(string sCampaignName, string sVarName, uint oObject, uint oPlayer = OBJECT_INVALID)
+    ///  Returns 0 if it failled, 1 if it worked.<br/>
+    ///  If bSaveObjectState is TRUE, local vars, effects, action queue, and transition info (triggers, doors) are saved out<br/>
+    ///  (except for Combined Area Format, which always has object state saved out).
+    public static int StoreCampaignObject(string sCampaignName, string sVarName, uint oObject, uint oPlayer = OBJECT_INVALID, int bSaveObjectState = FALSE)
     {
+      VM.StackPush(bSaveObjectState);
       VM.StackPush(oPlayer);
       VM.StackPush(oObject);
       VM.StackPush(sVarName);
@@ -12406,9 +12564,11 @@ namespace NWN.Core
 
     ///  Use RetrieveCampaign with the given id to restore it.<br/>
     ///  If you specify an owner, the object will try to be created in their repository<br/>
-    ///  If the owner can&amp;apos;t handle the item (or if it&amp;apos;s a non-item) it will be created at the given location.
-    public static uint RetrieveCampaignObject(string sCampaignName, string sVarName, System.IntPtr locLocation, uint oOwner = OBJECT_INVALID, uint oPlayer = OBJECT_INVALID)
+    ///  If the owner can&amp;apos;t handle the item (or if it&amp;apos;s a non-item) it will be created at the given location.<br/>
+    ///  If bLoadObjectState is TRUE, local vars, effects, action queue, and transition info (triggers, doors) are read in.
+    public static uint RetrieveCampaignObject(string sCampaignName, string sVarName, System.IntPtr locLocation, uint oOwner = OBJECT_INVALID, uint oPlayer = OBJECT_INVALID, int bLoadObjectState = FALSE)
     {
+      VM.StackPush(bLoadObjectState);
       VM.StackPush(oPlayer);
       VM.StackPush(oOwner);
       VM.StackPush(locLocation, ENGINE_STRUCTURE_LOCATION);
@@ -16538,9 +16698,12 @@ namespace NWN.Core
 
     ///  Bind a object to a named parameter of the given prepared query.<br/>
     ///  Objects are serialized, NOT stored as a reference!<br/>
-    ///  Currently supported object types: Creatures, Items, Placeables, Waypoints, Stores, Doors, Triggers
-    public static void SqlBindObject(System.IntPtr sqlQuery, string sParam, uint oObject)
+    ///  Currently supported object types: Creatures, Items, Placeables, Waypoints, Stores, Doors, Triggers, Areas (CAF format)<br/>
+    ///  If bSaveObjectState is TRUE, local vars, effects, action queue, and transition info (triggers, doors) are saved out<br/>
+    ///  (except for Combined Area Format, which always has object state saved out).
+    public static void SqlBindObject(System.IntPtr sqlQuery, string sParam, uint oObject, int bSaveObjectState = FALSE)
     {
+      VM.StackPush(bSaveObjectState);
       VM.StackPush(oObject);
       VM.StackPush(sParam);
       VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
@@ -16616,9 +16779,11 @@ namespace NWN.Core
     ///  has the capability to receive it, otherwise at lSpawnAt.<br/>
     ///  Objects are serialized, NOT stored as a reference!<br/>
     ///  In case of error, INVALID_OBJECT will be returned.<br/>
-    ///  In traditional fashion, nIndex starts at 0.
-    public static uint SqlGetObject(System.IntPtr sqlQuery, int nIndex, System.IntPtr lSpawnAt, uint oInventory = OBJECT_INVALID)
+    ///  In traditional fashion, nIndex starts at 0.<br/>
+    ///  If bLoadObjectState is TRUE, local vars, effects, action queue, and transition info (triggers, doors) are read in.
+    public static uint SqlGetObject(System.IntPtr sqlQuery, int nIndex, System.IntPtr lSpawnAt, uint oInventory = OBJECT_INVALID, int bLoadObjectState = FALSE)
     {
+      VM.StackPush(bLoadObjectState);
       VM.StackPush(oInventory);
       VM.StackPush(lSpawnAt, ENGINE_STRUCTURE_LOCATION);
       VM.StackPush(nIndex);
@@ -16931,7 +17096,9 @@ namespace NWN.Core
     ///  * GUIEVENT_CHARACTERSHEET_SKILL_SELECT: The skill ID.<br/>
     ///  * GUIEVENT_CHARACTERSHEET_FEAT_SELECT: The feat ID.<br/>
     ///  * GUIEVENT_EFFECTICON_CLICK: The effect icon ID (EFFECT_ICON_*)<br/>
-    ///  * GUIEVENT_DISABLED_PANEL_ATTEMPT_OPEN: The GUI_PANEL_* the player attempted to open.
+    ///  * GUIEVENT_DISABLED_PANEL_ATTEMPT_OPEN: The GUI_PANEL_* the player attempted to open.<br/>
+    ///  * GUIEVENT_QUICKCHAT_SELECT: The hotkey character representing the option<br/>
+    ///  * GUIEVENT_EXAMINE_OBJECT: A GUI_PANEL_EXAMINE_* constant
     public static int GetLastGuiEventInteger()
     {
       VM.Call(962);
@@ -16943,7 +17110,10 @@ namespace NWN.Core
     ///  * GUIEVENT_CHARACTERSHEET_*_SELECT: The owner of the character sheet.<br/>
     ///  * GUIEVENT_PLAYERLIST_PLAYER_CLICK: The player clicked on.<br/>
     ///  * GUIEVENT_PARTYBAR_PORTRAIT_CLICK: The creature clicked on.<br/>
-    ///  * GUIEVENT_DISABLED_PANEL_ATTEMPT_OPEN: For GUI_PANEL_CHARACTERSHEET, the owner of the character sheet.
+    ///  * GUIEVENT_DISABLED_PANEL_ATTEMPT_OPEN: For GUI_PANEL_CHARACTERSHEET, the owner of the character sheet.<br/>
+    ///                                          For GUI_PANEL_EXAMINE_*, the object being examined.<br/>
+    ///  * GUIEVENT_*SELECT_CREATURE: The creature that was (un)selected<br/>
+    ///  * GUIEVENT_EXAMINE_OBJECT: The object being examined.
     public static uint GetLastGuiEventObject()
     {
       VM.Call(963);
@@ -16951,10 +17121,11 @@ namespace NWN.Core
     }
 
     ///  Disable a gui panel for the client that controls oPlayer.<br/>
-    ///  Notes: Will close the gui panel if currently open.<br/>
+    ///  Notes: Will close the gui panel if currently open, except GUI_PANEL_LEVELUP / GUI_PANEL_GOLD_*<br/>
     ///         Does not persist through relogging or in savegames.<br/>
     ///         Will fire a GUIEVENT_DISABLED_PANEL_ATTEMPT_OPEN OnPlayerGuiEvent for some gui panels if a player attempts to open them.<br/>
     ///         You can still force show a panel with PopUpGUIPanel().<br/>
+    ///         You can still force examine an object with ActionExamine().<br/>
     ///  * nGuiPanel: A GUI_PANEL_* constant, except GUI_PANEL_PLAYER_DEATH.
     public static void SetGuiPanelDisabled(uint oPlayer, int nGuiPanel, int bDisabled)
     {
@@ -16983,6 +17154,693 @@ namespace NWN.Core
     {
       VM.Call(967);
       return VM.StackPopObject();
+    }
+
+    ///  Parse the given string as a valid json value, and returns the corresponding type.<br/>
+    ///  Returns a JSON_TYPE_NULL on error.<br/>
+    ///  Check JsonGetError() to see the parse error, if any.<br/>
+    ///  NB: The parsed string needs to be in game-local encoding, but the generated json structure<br/>
+    ///      will contain UTF-8 data.
+    public static System.IntPtr JsonParse(string sJson)
+    {
+      VM.StackPush(sJson);
+      VM.Call(968);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Dump the given json value into a string that can be read back in via JsonParse.<br/>
+    ///  nIndent describes the indentation level for pretty-printing; a value of -1 means no indentation and no linebreaks.<br/>
+    ///  Returns a string describing JSON_TYPE_NULL on error.<br/>
+    ///  NB: The dumped string is in game-local encoding, with all non-ascii characters escaped.
+    public static string JsonDump(System.IntPtr jValue, int nIndent = -1)
+    {
+      VM.StackPush(nIndent);
+      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.Call(969);
+      return VM.StackPopString();
+    }
+
+    ///  Describes the type of the given json value.<br/>
+    ///  Returns JSON_TYPE_NULL if the value is empty.
+    public static int JsonGetType(System.IntPtr jValue)
+    {
+      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.Call(970);
+      return VM.StackPopInt();
+    }
+
+    ///  Returns the length of the given json type.<br/>
+    ///  For objects, returns the number of top-level keys present.<br/>
+    ///  For arrays, returns the number of elements.<br/>
+    ///  Null types are of size 0.<br/>
+    ///  All other types return 1.
+    public static int JsonGetLength(System.IntPtr jValue)
+    {
+      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.Call(971);
+      return VM.StackPopInt();
+    }
+
+    ///  Returns the error message if the value has errored out.<br/>
+    ///  Currently only describes parse errors.
+    public static string JsonGetError(System.IntPtr jValue)
+    {
+      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.Call(972);
+      return VM.StackPopString();
+    }
+
+    ///  Create a NULL json value, seeded with a optional error message for JsonGetError().
+    public static System.IntPtr JsonNull(string sError = "")
+    {
+      VM.StackPush(sError);
+      VM.Call(973);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Create a empty json object.
+    public static System.IntPtr JsonObject()
+    {
+      VM.Call(974);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Create a empty json array.
+    public static System.IntPtr JsonArray()
+    {
+      VM.Call(975);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Create a json string value.<br/>
+    ///  NB: Strings are encoded to UTF-8 from the game-local charset.
+    public static System.IntPtr JsonString(string sValue)
+    {
+      VM.StackPush(sValue);
+      VM.Call(976);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Create a json integer value.
+    public static System.IntPtr JsonInt(int nValue)
+    {
+      VM.StackPush(nValue);
+      VM.Call(977);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Create a json floating point value.
+    public static System.IntPtr JsonFloat(float fValue)
+    {
+      VM.StackPush(fValue);
+      VM.Call(978);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Create a json bool valye.
+    public static System.IntPtr JsonBool(int bValue)
+    {
+      VM.StackPush(bValue);
+      VM.Call(979);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Returns a string representation of the json value.<br/>
+    ///  Returns &amp;quot;&amp;quot; if the value cannot be represented as a string, or is empty.<br/>
+    ///  NB: Strings are decoded from UTF-8 to the game-local charset.
+    public static string JsonGetString(System.IntPtr jValue)
+    {
+      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.Call(980);
+      return VM.StackPopString();
+    }
+
+    ///  Returns a int representation of the json value, casting where possible.<br/>
+    ///  Returns 0 if the value cannot be represented as a float.<br/>
+    ///  Use this to parse json bool types.<br/>
+    ///  NB: This will narrow down to signed 32 bit, as that is what NWScript int is.<br/>
+    ///      If you are trying to read a 64 bit or unsigned integer, you will lose data.<br/>
+    ///      You will not lose data if you keep the value as a json element (via Object/ArrayGet).
+    public static int JsonGetInt(System.IntPtr jValue)
+    {
+      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.Call(981);
+      return VM.StackPopInt();
+    }
+
+    ///  Returns a float representation of the json value, casting where possible.<br/>
+    ///  Returns 0.0 if the value cannot be represented as a float.<br/>
+    ///  NB: This will narrow doubles down to float.<br/>
+    ///      If you are trying to read a double, you will lose data.<br/>
+    ///      You will not lose data if you keep the value as a json element (via Object/ArrayGet).
+    public static float JsonGetFloat(System.IntPtr jValue)
+    {
+      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.Call(982);
+      return VM.StackPopFloat();
+    }
+
+    ///  Returns a json array containing all keys of jObject.<br/>
+    ///  Returns a empty array if the object is empty or not a json object, with GetJsonError() filled in.
+    public static System.IntPtr JsonObjectKeys(System.IntPtr jObject)
+    {
+      VM.StackPush(jObject, ENGINE_STRUCTURE_JSON);
+      VM.Call(983);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Returns the key value of sKey on the object jObect.<br/>
+    ///  Returns a null json value if jObject is not a object or sKey does not exist on the object, with GetJsonError() filled in.
+    public static System.IntPtr JsonObjectGet(System.IntPtr jObject, string sKey)
+    {
+      VM.StackPush(sKey);
+      VM.StackPush(jObject, ENGINE_STRUCTURE_JSON);
+      VM.Call(984);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Returns a modified copy of jObject with the key at sKey set to jValue.<br/>
+    ///  Returns a json null value if jObject is not a object, with GetJsonError() filled in.
+    public static System.IntPtr JsonObjectSet(System.IntPtr jObject, string sKey, System.IntPtr jValue)
+    {
+      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(sKey);
+      VM.StackPush(jObject, ENGINE_STRUCTURE_JSON);
+      VM.Call(985);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Returns a modified copy of jObject with the key at sKey deleted.<br/>
+    ///  Returns a json null value if jObject is not a object, with GetJsonError() filled in.
+    public static System.IntPtr JsonObjectDel(System.IntPtr jObject, string sKey)
+    {
+      VM.StackPush(sKey);
+      VM.StackPush(jObject, ENGINE_STRUCTURE_JSON);
+      VM.Call(986);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Gets the json object at jArray index position nIndex.<br/>
+    ///  Returns a json null value if the index is out of bounds, with GetJsonError() filled in.
+    public static System.IntPtr JsonArrayGet(System.IntPtr jArray, int nIndex)
+    {
+      VM.StackPush(nIndex);
+      VM.StackPush(jArray, ENGINE_STRUCTURE_JSON);
+      VM.Call(987);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Returns a modified copy of jArray with position nIndex set to jValue.<br/>
+    ///  Returns a json null value if jArray is not actually an array, with GetJsonError() filled in.<br/>
+    ///  Returns a json null value if nIndex is out of bounds, with GetJsonError() filled in.
+    public static System.IntPtr JsonArraySet(System.IntPtr jArray, int nIndex, System.IntPtr jValue)
+    {
+      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(nIndex);
+      VM.StackPush(jArray, ENGINE_STRUCTURE_JSON);
+      VM.Call(988);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Returns a modified copy of jArray with jValue inserted at position nIndex.<br/>
+    ///  All succeeding objects in the array will move by one.<br/>
+    ///  By default (-1), inserts objects at the end of the array (&amp;quot;push&amp;quot;).<br/>
+    ///  nIndex = 0 inserts at the beginning of the array.<br/>
+    ///  Returns a json null value if jArray is not actually an array, with GetJsonError() filled in.<br/>
+    ///  Returns a json null value if nIndex is not 0 or -1 and out of bounds, with GetJsonError() filled in.
+    public static System.IntPtr JsonArrayInsert(System.IntPtr jArray, System.IntPtr jValue, int nIndex = -1)
+    {
+      VM.StackPush(nIndex);
+      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(jArray, ENGINE_STRUCTURE_JSON);
+      VM.Call(989);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Returns a modified copy of jArray with the element at position nIndex removed,<br/>
+    ///  and the array resized by one.<br/>
+    ///  Returns a json null value if jArray is not actually an array, with GetJsonError() filled in.<br/>
+    ///  Returns a json null value if nIndex is out of bounds, with GetJsonError() filled in.
+    public static System.IntPtr JsonArrayDel(System.IntPtr jArray, int nIndex)
+    {
+      VM.StackPush(nIndex);
+      VM.StackPush(jArray, ENGINE_STRUCTURE_JSON);
+      VM.Call(990);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Transforms the given object into a json structure.<br/>
+    ///  The json format is compatible with what https://github.com/niv/neverwinter.nim@1.4.3+ emits.<br/>
+    ///  Returns the null json type on errors, or if oObject is not serializable, with GetJsonError() filled in.<br/>
+    ///  Supported object types: creature, item, trigger, placeable, door, waypoint, encounter, store, area (combined format)<br/>
+    ///  If bSaveObjectState is TRUE, local vars, effects, action queue, and transition info (triggers, doors) are saved out<br/>
+    ///  (except for Combined Area Format, which always has object state saved out).
+    public static System.IntPtr ObjectToJson(uint oObject, int bSaveObjectState = FALSE)
+    {
+      VM.StackPush(bSaveObjectState);
+      VM.StackPush(oObject);
+      VM.Call(991);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Deserializes the game object described in jObject.<br/>
+    ///  Returns OBJECT_INVALID on errors.<br/>
+    ///  Supported object types: creature, item, trigger, placeable, door, waypoint, encounter, store, area (combined format)<br/>
+    ///  For areas, locLocation is ignored.<br/>
+    ///  If bLoadObjectState is TRUE, local vars, effects, action queue, and transition info (triggers, doors) are read in.
+    public static uint JsonToObject(System.IntPtr jObject, System.IntPtr locLocation, uint oOwner = OBJECT_INVALID, int bLoadObjectState = FALSE)
+    {
+      VM.StackPush(bLoadObjectState);
+      VM.StackPush(oOwner);
+      VM.StackPush(locLocation, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(jObject, ENGINE_STRUCTURE_JSON);
+      VM.Call(992);
+      return VM.StackPopObject();
+    }
+
+    ///  Returns the element at the given JSON pointer value.<br/>
+    ///  See https://datatracker.ietf.org/doc/html/rfc6901 for details.<br/>
+    ///  Returns a json null value on error, with GetJsonError() filled in.
+    public static System.IntPtr JsonPointer(System.IntPtr jData, string sPointer)
+    {
+      VM.StackPush(sPointer);
+      VM.StackPush(jData, ENGINE_STRUCTURE_JSON);
+      VM.Call(993);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Return a modified copy of jData with jValue inserted at the path described by sPointer.<br/>
+    ///  See https://datatracker.ietf.org/doc/html/rfc6901 for details.<br/>
+    ///  Returns a json null value on error, with GetJsonError() filled in.<br/>
+    ///  jPatch is an array of patch elements, each containing a op, a path, and a value field. Example:<br/>
+    ///  [<br/>
+    ///    { &amp;quot;op&amp;quot;: &amp;quot;replace&amp;quot;, &amp;quot;path&amp;quot;: &amp;quot;/baz&amp;quot;, &amp;quot;value&amp;quot;: &amp;quot;boo&amp;quot; },<br/>
+    ///    { &amp;quot;op&amp;quot;: &amp;quot;add&amp;quot;, &amp;quot;path&amp;quot;: &amp;quot;/hello&amp;quot;, &amp;quot;value&amp;quot;: [&amp;quot;world&amp;quot;] },<br/>
+    ///    { &amp;quot;op&amp;quot;: &amp;quot;remove&amp;quot;, &amp;quot;path&amp;quot;: &amp;quot;/foo&amp;quot;}<br/>
+    ///  ]<br/>
+    ///  Valid operations are: add, remove, replace, move, copy, test
+    public static System.IntPtr JsonPatch(System.IntPtr jData, System.IntPtr jPatch)
+    {
+      VM.StackPush(jPatch, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(jData, ENGINE_STRUCTURE_JSON);
+      VM.Call(994);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Returns the diff (described as a json structure you can pass into JsonPatch) between the two objects.<br/>
+    ///  Returns a json null value on error, with GetJsonError() filled in.
+    public static System.IntPtr JsonDiff(System.IntPtr jLHS, System.IntPtr jRHS)
+    {
+      VM.StackPush(jRHS, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(jLHS, ENGINE_STRUCTURE_JSON);
+      VM.Call(995);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Returns a modified copy of jData with jMerge merged into it. This is an alternative to<br/>
+    ///  JsonPatch/JsonDiff, with a syntax more closely resembling the final object.<br/>
+    ///  See https://datatracker.ietf.org/doc/html/rfc7386 for details.<br/>
+    ///  Returns a json null value on error, with GetJsonError() filled in.
+    public static System.IntPtr JsonMerge(System.IntPtr jData, System.IntPtr jMerge)
+    {
+      VM.StackPush(jMerge, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(jData, ENGINE_STRUCTURE_JSON);
+      VM.Call(996);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Get oObject&amp;apos;s local json variable sVarName<br/>
+    ///  * Return value on error: json null type
+    public static System.IntPtr GetLocalJson(uint oObject, string sVarName)
+    {
+      VM.StackPush(sVarName);
+      VM.StackPush(oObject);
+      VM.Call(997);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Set oObject&amp;apos;s local json variable sVarName to jValue
+    public static void SetLocalJson(uint oObject, string sVarName, System.IntPtr jValue)
+    {
+      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(sVarName);
+      VM.StackPush(oObject);
+      VM.Call(998);
+    }
+
+    ///  Delete oObject&amp;apos;s local json variable sVarName
+    public static void DeleteLocalJson(uint oObject, string sVarName)
+    {
+      VM.StackPush(sVarName);
+      VM.StackPush(oObject);
+      VM.Call(999);
+    }
+
+    ///  Bind an json to a named parameter of the given prepared query.<br/>
+    ///  Json values are serialised into a string.<br/>
+    ///  Example:<br/>
+    ///    sqlquery v = SqlPrepareQueryObject(GetModule(), &amp;quot;insert into test (col) values (@myjson);&amp;quot;);<br/>
+    ///    SqlBindJson(v, &amp;quot;@myjson&amp;quot;, myJsonObject);<br/>
+    ///    SqlStep(v);
+    public static void SqlBindJson(System.IntPtr sqlQuery, string sParam, System.IntPtr jValue)
+    {
+      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(sParam);
+      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
+      VM.Call(1000);
+    }
+
+    ///  Retrieve a column cast as a json value of the currently stepped row.<br/>
+    ///  You can call this after SqlStep() returned TRUE.<br/>
+    ///  In case of error, a json null value will be returned.<br/>
+    ///  In traditional fashion, nIndex starts at 0.
+    public static System.IntPtr SqlGetJson(System.IntPtr sqlQuery, int nIndex)
+    {
+      VM.StackPush(nIndex);
+      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
+      VM.Call(1001);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  This stores a json out to the specified campaign database<br/>
+    ///  The database name:<br/>
+    ///   - is case insensitive and it must be the same for both set and get functions.<br/>
+    ///   - can only contain alphanumeric characters, no spaces.<br/>
+    ///  The var name must be unique across the entire database, regardless of the variable type.<br/>
+    ///  If you want a variable to pertain to a specific player in the game, provide a player object.
+    public static void SetCampaignJson(string sCampaignName, string sVarName, System.IntPtr jValue, uint oPlayer = OBJECT_INVALID)
+    {
+      VM.StackPush(oPlayer);
+      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(sVarName);
+      VM.StackPush(sCampaignName);
+      VM.Call(1002);
+    }
+
+    ///  This will read a json from the  specified campaign database<br/>
+    ///  The database name:<br/>
+    ///   - is case insensitive and it must be the same for both set and get functions.<br/>
+    ///   - can only contain alphanumeric characters, no spaces.<br/>
+    ///  The var name must be unique across the entire database, regardless of the variable type.<br/>
+    ///  If you want a variable to pertain to a specific player in the game, provide a player object.
+    public static System.IntPtr GetCampaignJson(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
+    {
+      VM.StackPush(oPlayer);
+      VM.StackPush(sVarName);
+      VM.StackPush(sCampaignName);
+      VM.Call(1003);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Gets a device property/capability as advertised by the client.<br/>
+    ///  sProperty is one of PLAYER_DEVICE_PROPERTY_xxx.<br/>
+    ///  Returns -1 if<br/>
+    ///  - the property was never set by the client,<br/>
+    ///  - the the actual value is -1,<br/>
+    ///  - the player is running a older build that does not advertise device properties,<br/>
+    ///  - the player has disabled sending device properties (Options-&amp;gt;Game-&amp;gt;Privacy).
+    public static int GetPlayerDeviceProperty(uint oPlayer, string sProperty)
+    {
+      VM.StackPush(sProperty);
+      VM.StackPush(oPlayer);
+      VM.Call(1004);
+      return VM.StackPopInt();
+    }
+
+    ///  Returns the LANGUAGE_xx code of the given player, or -1 if unavailable.
+    public static int GetPlayerLanguage(uint oPlayer)
+    {
+      VM.StackPush(oPlayer);
+      VM.Call(1005);
+      return VM.StackPopInt();
+    }
+
+    ///  Returns one of PLAYER_DEVICE_PLATFORM_xxx, or 0 if unavailable.
+    public static int GetPlayerDevicePlatform(uint oPlayer)
+    {
+      VM.StackPush(oPlayer);
+      VM.Call(1006);
+      return VM.StackPopInt();
+    }
+
+    ///  Deserializes the given resref/template into a JSON structure.<br/>
+    ///  Supported GFF resource types:<br/>
+    ///  * RESTYPE_CAF (and RESTYPE_ARE, RESTYPE_GIT, RESTYPE_GIC)<br/>
+    ///  * RESTYPE_UTC<br/>
+    ///  * RESTYPE_UTI<br/>
+    ///  * RESTYPE_UTT<br/>
+    ///  * RESTYPE_UTP<br/>
+    ///  * RESTYPE_UTD<br/>
+    ///  * RESTYPE_UTW<br/>
+    ///  * RESTYPE_UTE<br/>
+    ///  * RESTYPE_UTM<br/>
+    ///  Returns a valid gff-type json structure, or a null value with GetJsonError() set.
+    public static System.IntPtr TemplateToJson(string sResRef, int nResType)
+    {
+      VM.StackPush(nResType);
+      VM.StackPush(sResRef);
+      VM.Call(1007);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Returns the resource location of sResRef.nResType, as seen by the running module.<br/>
+    ///  Note for dedicated servers: Checks on the module/server side, not the client.<br/>
+    ///  Returns &amp;quot;&amp;quot; if the resource does not exist in the search space.
+    public static string ResManGetAliasFor(string sResRef, int nResType)
+    {
+      VM.StackPush(nResType);
+      VM.StackPush(sResRef);
+      VM.Call(1008);
+      return VM.StackPopString();
+    }
+
+    ///  Finds the nNth available resref starting with sPrefix.<br/>
+    ///  * Set bSearchBaseData to TRUE to also search base game content stored in your game installation directory.<br/>
+    ///    WARNING: This can be very slow.<br/>
+    ///  * Set sOnlyKeyTable to a specific keytable to only search the given named keytable (e.g. &amp;quot;OVERRIDE:&amp;quot;).<br/>
+    ///  Returns &amp;quot;&amp;quot; if no such resref exists.
+    public static string ResManFindPrefix(string sPrefix, int nResType, int nNth = 1, int bSearchBaseData = FALSE, string sOnlyKeyTable = "")
+    {
+      VM.StackPush(sOnlyKeyTable);
+      VM.StackPush(bSearchBaseData);
+      VM.StackPush(nNth);
+      VM.StackPush(nResType);
+      VM.StackPush(sPrefix);
+      VM.Call(1009);
+      return VM.StackPopString();
+    }
+
+    ///  Create a NUI window from the given resref(.jui) for the given player.<br/>
+    ///  * The resref needs to be available on the client, not the server.<br/>
+    ///  * The token is a integer for ease of handling only. You are not supposed to do anything with it, except store/pass it.<br/>
+    ///  * The window ID needs to be alphanumeric and short. Only one window (per client) with the same ID can exist at a time.<br/>
+    ///    Re-creating a window with the same id of one already open will immediately close the old one.<br/>
+    ///  * See nw_inc_nui.nss for full documentation.<br/>
+    ///  Returns the window token on success (&amp;gt;0), or 0 on error.
+    public static int NuiCreateFromResRef(uint oPlayer, string sResRef, string sWindowId = "")
+    {
+      VM.StackPush(sWindowId);
+      VM.StackPush(sResRef);
+      VM.StackPush(oPlayer);
+      VM.Call(1010);
+      return VM.StackPopInt();
+    }
+
+    ///  Create a NUI window inline for the given player.<br/>
+    ///  * The token is a integer for ease of handling only. You are not supposed to do anything with it, except store/pass it.<br/>
+    ///  * The window ID needs to be alphanumeric and short. Only one window (per client) with the same ID can exist at a time.<br/>
+    ///    Re-creating a window with the same id of one already open will immediately close the old one.<br/>
+    ///  * See nw_inc_nui.nss for full documentation.<br/>
+    ///  Returns the window token on success (&amp;gt;0), or 0 on error.
+    public static int NuiCreate(uint oPlayer, System.IntPtr jNui, string sWindowId = "")
+    {
+      VM.StackPush(sWindowId);
+      VM.StackPush(jNui, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(oPlayer);
+      VM.Call(1011);
+      return VM.StackPopInt();
+    }
+
+    ///  You can look up windows by ID, if you gave them one.<br/>
+    ///  * Windows with a ID present are singletons - attempting to open a second one with the same ID<br/>
+    ///    will fail, even if the json definition is different.<br/>
+    ///  Returns the token if found, or 0.
+    public static int NuiFindWindow(uint oPlayer, string sId)
+    {
+      VM.StackPush(sId);
+      VM.StackPush(oPlayer);
+      VM.Call(1012);
+      return VM.StackPopInt();
+    }
+
+    ///  Destroys the given window, by token, immediately closing it on the client.<br/>
+    ///  Does nothing if nUiToken does not exist on the client.<br/>
+    ///  Does not send a close event - this immediately destroys all serverside state.<br/>
+    ///  The client will close the window asynchronously.
+    public static void NuiDestroy(uint oPlayer, int nUiToken)
+    {
+      VM.StackPush(nUiToken);
+      VM.StackPush(oPlayer);
+      VM.Call(1013);
+    }
+
+    ///  Returns the originating player of the current event.
+    public static uint NuiGetEventPlayer()
+    {
+      VM.Call(1014);
+      return VM.StackPopObject();
+    }
+
+    ///  Gets the window token of the current event (or 0 if not in a event).
+    public static int NuiGetEventWindow()
+    {
+      VM.Call(1015);
+      return VM.StackPopInt();
+    }
+
+    ///  Returns the event type of the current event.<br/>
+    ///  * See nw_inc_nui.nss for full documentation of all events.
+    public static string NuiGetEventType()
+    {
+      VM.Call(1016);
+      return VM.StackPopString();
+    }
+
+    ///  Returns the ID of the widget that triggered the event.
+    public static string NuiGetEventElement()
+    {
+      VM.Call(1017);
+      return VM.StackPopString();
+    }
+
+    ///  Get the array index of the current event.<br/>
+    ///  This can be used to get the index into an array, for example when rendering lists of buttons.<br/>
+    ///  Returns -1 if the event is not originating from within an array.
+    public static int NuiGetEventArrayIndex()
+    {
+      VM.Call(1018);
+      return VM.StackPopInt();
+    }
+
+    ///  Returns the window ID of the window described by nUiToken.<br/>
+    ///  Returns &amp;quot;&amp;quot; on error, or if the window has no ID.
+    public static string NuiGetWindowId(uint oPlayer, int nUiToken)
+    {
+      VM.StackPush(nUiToken);
+      VM.StackPush(oPlayer);
+      VM.Call(1019);
+      return VM.StackPopString();
+    }
+
+    ///  Gets the json value for the given player, token and bind.<br/>
+    ///  * json values can hold all kinds of values; but NUI widgets require specific bind types.<br/>
+    ///    It is up to you to either handle this in NWScript, or just set compatible bind types.<br/>
+    ///    No auto-conversion happens.<br/>
+    ///  Returns a json null value if the bind does not exist.
+    public static System.IntPtr NuiGetBind(uint oPlayer, int nUiToken, string sBindName)
+    {
+      VM.StackPush(sBindName);
+      VM.StackPush(nUiToken);
+      VM.StackPush(oPlayer);
+      VM.Call(1020);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Sets a json value for the given player, token and bind.<br/>
+    ///  The value is synced down to the client and can be used in UI binding.<br/>
+    ///  When the UI changes the value, it is returned to the server and can be retrieved via NuiGetBind().<br/>
+    ///  * json values can hold all kinds of values; but NUI widgets require specific bind types.<br/>
+    ///    It is up to you to either handle this in NWScript, or just set compatible bind types.<br/>
+    ///    No auto-conversion happens.<br/>
+    ///  * If the bind is on the watch list, this will immediately invoke the event handler with the &amp;quot;watch&amp;quot;<br/>
+    ///    even type; even before this function returns. Do not update watched binds from within the watch handler<br/>
+    ///    unless you enjoy stack overflows.<br/>
+    ///  Does nothing if the given player+token is invalid.
+    public static void NuiSetBind(uint oPlayer, int nUiToken, string sBindName, System.IntPtr jValue)
+    {
+      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(sBindName);
+      VM.StackPush(nUiToken);
+      VM.StackPush(oPlayer);
+      VM.Call(1021);
+    }
+
+    ///  Swaps out the given element (by id) with the given nui layout (partial).<br/>
+    ///  * This currently only works with the &amp;quot;group&amp;quot; element type, and the special &amp;quot;_window_&amp;quot; root group.
+    public static void NuiSetGroupLayout(uint oPlayer, int nUiToken, string sElement, System.IntPtr jNui)
+    {
+      VM.StackPush(jNui, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(sElement);
+      VM.StackPush(nUiToken);
+      VM.StackPush(oPlayer);
+      VM.Call(1022);
+    }
+
+    ///  Mark the given bind name as watched.<br/>
+    ///  A watched bind will invoke the NUI script event every time it&amp;apos;s value changes.<br/>
+    ///  Be careful with binding nui data inside a watch event handler: It&amp;apos;s easy to accidentally recurse yourself into a stack overflow.
+    public static int NuiSetBindWatch(uint oPlayer, int nUiToken, string sBind, int bWatch)
+    {
+      VM.StackPush(bWatch);
+      VM.StackPush(sBind);
+      VM.StackPush(nUiToken);
+      VM.StackPush(oPlayer);
+      VM.Call(1023);
+      return VM.StackPopInt();
+    }
+
+    ///  Returns the nNth window token of the player, or 0.<br/>
+    ///  nNth starts at 0.<br/>
+    ///  Iterator is not write-safe: Calling DestroyWindow() will invalidate move following offsets by one.
+    public static int NuiGetNthWindow(uint oPlayer, int nNth = 0)
+    {
+      VM.StackPush(nNth);
+      VM.StackPush(oPlayer);
+      VM.Call(1024);
+      return VM.StackPopInt();
+    }
+
+    ///  Return the nNth bind name of the given window, or &amp;quot;&amp;quot;.<br/>
+    ///  If bWatched is TRUE, iterates only watched binds.<br/>
+    ///  If FALSE, iterates all known binds on the window (either set locally or in UI).
+    public static string NuiGetNthBind(uint oPlayer, int nToken, int bWatched, int nNth = 0)
+    {
+      VM.StackPush(nNth);
+      VM.StackPush(bWatched);
+      VM.StackPush(nToken);
+      VM.StackPush(oPlayer);
+      VM.Call(1025);
+      return VM.StackPopString();
+    }
+
+    ///  Returns the event payload, specific to the event.<br/>
+    ///  Returns JsonNull if event has no payload.
+    public static System.IntPtr NuiGetEventPayload()
+    {
+      VM.Call(1026);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Get the userdata of the given window token.<br/>
+    ///  Returns JsonNull if the window does not exist on the given player, or has no userdata set.
+    public static System.IntPtr NuiGetUserData(uint oPlayer, int nToken)
+    {
+      VM.StackPush(nToken);
+      VM.StackPush(oPlayer);
+      VM.Call(1027);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Sets an arbitrary json value as userdata on the given window token.<br/>
+    ///  This userdata is not read or handled by the game engine and not sent to clients.<br/>
+    ///  This mechanism only exists as a convenience for the programmer to store data bound to a windows&amp;apos; lifecycle.<br/>
+    ///  Will do nothing if the window does not exist.
+    public static void NuiSetUserData(uint oPlayer, int nToken, System.IntPtr jUserData)
+    {
+      VM.StackPush(jUserData, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(nToken);
+      VM.StackPush(oPlayer);
+      VM.Call(1028);
     }
 
   }
