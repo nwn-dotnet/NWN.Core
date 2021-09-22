@@ -6251,6 +6251,7 @@ namespace NWN.Core
     public const int RESTYPE_PNG = 2080;
     public const int RESTYPE_JPG = 2081;
     public const int RESTYPE_CAF = 2082;
+    public const int RESTYPE_JUI = 2083;
     public const string sLanguage = "nwscript";
 
     ///  Get an integer between 0 and nMaxInteger-1.<br/>
@@ -17276,10 +17277,10 @@ namespace NWN.Core
     }
 
     ///  Returns a int representation of the json value, casting where possible.<br/>
-    ///  Returns 0 if the value cannot be represented as a float.<br/>
+    ///  Returns 0 if the value cannot be represented as a int.<br/>
     ///  Use this to parse json bool types.<br/>
     ///  NB: This will narrow down to signed 32 bit, as that is what NWScript int is.<br/>
-    ///      If you are trying to read a 64 bit or unsigned integer, you will lose data.<br/>
+    ///      If you are trying to read a 64 bit or unsigned integer that doesn&amp;apos;t fit into int32, you will lose data.<br/>
     ///      You will not lose data if you keep the value as a json element (via Object/ArrayGet).
     public static int JsonGetInt(System.IntPtr jValue)
     {
@@ -17291,7 +17292,7 @@ namespace NWN.Core
     ///  Returns a float representation of the json value, casting where possible.<br/>
     ///  Returns 0.0 if the value cannot be represented as a float.<br/>
     ///  NB: This will narrow doubles down to float.<br/>
-    ///      If you are trying to read a double, you will lose data.<br/>
+    ///      If you are trying to read a double, you will potentially lose precision.<br/>
     ///      You will not lose data if you keep the value as a json element (via Object/ArrayGet).
     public static float JsonGetFloat(System.IntPtr jValue)
     {
@@ -17301,7 +17302,7 @@ namespace NWN.Core
     }
 
     ///  Returns a json array containing all keys of jObject.<br/>
-    ///  Returns a empty array if the object is empty or not a json object, with GetJsonError() filled in.
+    ///  Returns a empty array if the object is empty or not a json object, with JsonGetError() filled in.
     public static System.IntPtr JsonObjectKeys(System.IntPtr jObject)
     {
       VM.StackPush(jObject, ENGINE_STRUCTURE_JSON);
@@ -17310,7 +17311,7 @@ namespace NWN.Core
     }
 
     ///  Returns the key value of sKey on the object jObect.<br/>
-    ///  Returns a null json value if jObject is not a object or sKey does not exist on the object, with GetJsonError() filled in.
+    ///  Returns a null json value if jObject is not a object or sKey does not exist on the object, with JsonGetError() filled in.
     public static System.IntPtr JsonObjectGet(System.IntPtr jObject, string sKey)
     {
       VM.StackPush(sKey);
@@ -17320,7 +17321,7 @@ namespace NWN.Core
     }
 
     ///  Returns a modified copy of jObject with the key at sKey set to jValue.<br/>
-    ///  Returns a json null value if jObject is not a object, with GetJsonError() filled in.
+    ///  Returns a json null value if jObject is not a object, with JsonGetError() filled in.
     public static System.IntPtr JsonObjectSet(System.IntPtr jObject, string sKey, System.IntPtr jValue)
     {
       VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
@@ -17331,7 +17332,7 @@ namespace NWN.Core
     }
 
     ///  Returns a modified copy of jObject with the key at sKey deleted.<br/>
-    ///  Returns a json null value if jObject is not a object, with GetJsonError() filled in.
+    ///  Returns a json null value if jObject is not a object, with JsonGetError() filled in.
     public static System.IntPtr JsonObjectDel(System.IntPtr jObject, string sKey)
     {
       VM.StackPush(sKey);
@@ -17341,7 +17342,7 @@ namespace NWN.Core
     }
 
     ///  Gets the json object at jArray index position nIndex.<br/>
-    ///  Returns a json null value if the index is out of bounds, with GetJsonError() filled in.
+    ///  Returns a json null value if the index is out of bounds, with JsonGetError() filled in.
     public static System.IntPtr JsonArrayGet(System.IntPtr jArray, int nIndex)
     {
       VM.StackPush(nIndex);
@@ -17351,8 +17352,8 @@ namespace NWN.Core
     }
 
     ///  Returns a modified copy of jArray with position nIndex set to jValue.<br/>
-    ///  Returns a json null value if jArray is not actually an array, with GetJsonError() filled in.<br/>
-    ///  Returns a json null value if nIndex is out of bounds, with GetJsonError() filled in.
+    ///  Returns a json null value if jArray is not actually an array, with JsonGetError() filled in.<br/>
+    ///  Returns a json null value if nIndex is out of bounds, with JsonGetError() filled in.
     public static System.IntPtr JsonArraySet(System.IntPtr jArray, int nIndex, System.IntPtr jValue)
     {
       VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
@@ -17366,8 +17367,8 @@ namespace NWN.Core
     ///  All succeeding objects in the array will move by one.<br/>
     ///  By default (-1), inserts objects at the end of the array (&amp;quot;push&amp;quot;).<br/>
     ///  nIndex = 0 inserts at the beginning of the array.<br/>
-    ///  Returns a json null value if jArray is not actually an array, with GetJsonError() filled in.<br/>
-    ///  Returns a json null value if nIndex is not 0 or -1 and out of bounds, with GetJsonError() filled in.
+    ///  Returns a json null value if jArray is not actually an array, with JsonGetError() filled in.<br/>
+    ///  Returns a json null value if nIndex is not 0 or -1 and out of bounds, with JsonGetError() filled in.
     public static System.IntPtr JsonArrayInsert(System.IntPtr jArray, System.IntPtr jValue, int nIndex = -1)
     {
       VM.StackPush(nIndex);
@@ -17379,8 +17380,8 @@ namespace NWN.Core
 
     ///  Returns a modified copy of jArray with the element at position nIndex removed,<br/>
     ///  and the array resized by one.<br/>
-    ///  Returns a json null value if jArray is not actually an array, with GetJsonError() filled in.<br/>
-    ///  Returns a json null value if nIndex is out of bounds, with GetJsonError() filled in.
+    ///  Returns a json null value if jArray is not actually an array, with JsonGetError() filled in.<br/>
+    ///  Returns a json null value if nIndex is out of bounds, with JsonGetError() filled in.
     public static System.IntPtr JsonArrayDel(System.IntPtr jArray, int nIndex)
     {
       VM.StackPush(nIndex);
@@ -17391,7 +17392,7 @@ namespace NWN.Core
 
     ///  Transforms the given object into a json structure.<br/>
     ///  The json format is compatible with what https://github.com/niv/neverwinter.nim@1.4.3+ emits.<br/>
-    ///  Returns the null json type on errors, or if oObject is not serializable, with GetJsonError() filled in.<br/>
+    ///  Returns the null json type on errors, or if oObject is not serializable, with JsonGetError() filled in.<br/>
     ///  Supported object types: creature, item, trigger, placeable, door, waypoint, encounter, store, area (combined format)<br/>
     ///  If bSaveObjectState is TRUE, local vars, effects, action queue, and transition info (triggers, doors) are saved out<br/>
     ///  (except for Combined Area Format, which always has object state saved out).
@@ -17419,8 +17420,34 @@ namespace NWN.Core
     }
 
     ///  Returns the element at the given JSON pointer value.<br/>
-    ///  See https://datatracker.ietf.org/doc/html/rfc6901 for details.<br/>
-    ///  Returns a json null value on error, with GetJsonError() filled in.
+    ///  For example, given the JSON document:<br/>
+    ///    {<br/>
+    ///      &amp;quot;foo&amp;quot;: [&amp;quot;bar&amp;quot;, &amp;quot;baz&amp;quot;],<br/>
+    ///      &amp;quot;&amp;quot;: 0,<br/>
+    ///      &amp;quot;a/b&amp;quot;: 1,<br/>
+    ///      &amp;quot;c%d&amp;quot;: 2,<br/>
+    ///      &amp;quot;e^f&amp;quot;: 3,<br/>
+    ///      &amp;quot;g|h&amp;quot;: 4,<br/>
+    ///      &amp;quot;i\\j&amp;quot;: 5,<br/>
+    ///      &amp;quot;k\&amp;quot;l&amp;quot;: 6,<br/>
+    ///      &amp;quot; &amp;quot;: 7,<br/>
+    ///      &amp;quot;m~n&amp;quot;: 8<br/>
+    ///    }<br/>
+    ///  The following JSON strings evaluate to the accompanying values:<br/>
+    ///    &amp;quot;&amp;quot;           // the whole document<br/>
+    ///    &amp;quot;/foo&amp;quot;       [&amp;quot;bar&amp;quot;, &amp;quot;baz&amp;quot;]<br/>
+    ///    &amp;quot;/foo/0&amp;quot;     &amp;quot;bar&amp;quot;<br/>
+    ///    &amp;quot;/&amp;quot;          0<br/>
+    ///    &amp;quot;/a~1b&amp;quot;      1<br/>
+    ///    &amp;quot;/c%d&amp;quot;       2<br/>
+    ///    &amp;quot;/e^f&amp;quot;       3<br/>
+    ///    &amp;quot;/g|h&amp;quot;       4<br/>
+    ///    &amp;quot;/i\\j&amp;quot;      5<br/>
+    ///    &amp;quot;/k\&amp;quot;l&amp;quot;      6<br/>
+    ///    &amp;quot;/ &amp;quot;         7<br/>
+    ///    &amp;quot;/m~0n&amp;quot;      8<br/>
+    ///  See https://datatracker.ietf.org/doc/html/rfc6901 for more details.<br/>
+    ///  Returns a json null value on error, with JsonGetError() filled in.
     public static System.IntPtr JsonPointer(System.IntPtr jData, string sPointer)
     {
       VM.StackPush(sPointer);
@@ -17429,16 +17456,17 @@ namespace NWN.Core
       return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
     }
 
-    ///  Return a modified copy of jData with jValue inserted at the path described by sPointer.<br/>
-    ///  See https://datatracker.ietf.org/doc/html/rfc6901 for details.<br/>
-    ///  Returns a json null value on error, with GetJsonError() filled in.<br/>
+    ///  Return a modified copy of jData with jPatch applied, according to the rules described below.<br/>
+    ///  See JsonPointer() for documentation on the pointer syntax.<br/>
+    ///  Returns a json null value on error, with JsonGetError() filled in.<br/>
     ///  jPatch is an array of patch elements, each containing a op, a path, and a value field. Example:<br/>
     ///  [<br/>
     ///    { &amp;quot;op&amp;quot;: &amp;quot;replace&amp;quot;, &amp;quot;path&amp;quot;: &amp;quot;/baz&amp;quot;, &amp;quot;value&amp;quot;: &amp;quot;boo&amp;quot; },<br/>
     ///    { &amp;quot;op&amp;quot;: &amp;quot;add&amp;quot;, &amp;quot;path&amp;quot;: &amp;quot;/hello&amp;quot;, &amp;quot;value&amp;quot;: [&amp;quot;world&amp;quot;] },<br/>
     ///    { &amp;quot;op&amp;quot;: &amp;quot;remove&amp;quot;, &amp;quot;path&amp;quot;: &amp;quot;/foo&amp;quot;}<br/>
     ///  ]<br/>
-    ///  Valid operations are: add, remove, replace, move, copy, test
+    ///  Valid operations are: add, remove, replace, move, copy, test<br/>
+    ///  See https://datatracker.ietf.org/doc/html/rfc7386 for more details on the patch rules.
     public static System.IntPtr JsonPatch(System.IntPtr jData, System.IntPtr jPatch)
     {
       VM.StackPush(jPatch, ENGINE_STRUCTURE_JSON);
@@ -17448,7 +17476,7 @@ namespace NWN.Core
     }
 
     ///  Returns the diff (described as a json structure you can pass into JsonPatch) between the two objects.<br/>
-    ///  Returns a json null value on error, with GetJsonError() filled in.
+    ///  Returns a json null value on error, with JsonGetError() filled in.
     public static System.IntPtr JsonDiff(System.IntPtr jLHS, System.IntPtr jRHS)
     {
       VM.StackPush(jRHS, ENGINE_STRUCTURE_JSON);
@@ -17460,7 +17488,7 @@ namespace NWN.Core
     ///  Returns a modified copy of jData with jMerge merged into it. This is an alternative to<br/>
     ///  JsonPatch/JsonDiff, with a syntax more closely resembling the final object.<br/>
     ///  See https://datatracker.ietf.org/doc/html/rfc7386 for details.<br/>
-    ///  Returns a json null value on error, with GetJsonError() filled in.
+    ///  Returns a json null value on error, with JsonGetError() filled in.
     public static System.IntPtr JsonMerge(System.IntPtr jData, System.IntPtr jMerge)
     {
       VM.StackPush(jMerge, ENGINE_STRUCTURE_JSON);
@@ -17594,7 +17622,7 @@ namespace NWN.Core
     ///  * RESTYPE_UTW<br/>
     ///  * RESTYPE_UTE<br/>
     ///  * RESTYPE_UTM<br/>
-    ///  Returns a valid gff-type json structure, or a null value with GetJsonError() set.
+    ///  Returns a valid gff-type json structure, or a null value with JsonGetError() set.
     public static System.IntPtr TemplateToJson(string sResRef, int nResType)
     {
       VM.StackPush(nResType);
