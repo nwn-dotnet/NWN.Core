@@ -1397,6 +1397,18 @@ namespace NWN.Core.NWNX
         ----------------------|--------|-------
         TARGET                | object | Convert to object with StringToObject() |
     _______________________________________
+        ## Player Device Property Events
+        - NWNX_ON_CLIENT_SET_DEVICE_PROPERTY_BEFORE
+        - NWNX_ON_CLIENT_SET_DEVICE_PROPERTY_AFTER
+    
+        `OBJECT_SELF` = The player changing a device property (window size/gui scale)
+    
+        Event Data Tag        | Type   | Notes
+        ----------------------|--------|-------
+        PROPERTY              | string | A PLAYER_DEVICE_PROPERTY_GUI_* constant |
+        OLD_VALUE             | int    | |
+        NEW_VALUE             | int    | |
+    _______________________________________
     
     */
     /*

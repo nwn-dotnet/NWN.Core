@@ -68,6 +68,14 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
+    /// Gets the last modified timestamp (mtime) of the module file in seconds.
+    /// <returns>The mtime of the module file.</returns>
+    public static int GetModuleMtime()
+    {
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
     /// Gets the value of customTokenNumber.
     /// <param name="customTokenNumber">The token number to query.</param>
     /// <returns>The string representation of the token value.</returns>
