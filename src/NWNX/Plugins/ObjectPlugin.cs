@@ -777,6 +777,18 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Gets the remaining duration of the AoE object.
+    /// <param name="oAoE">The AreaOfEffect object.</param>
+    /// <returns>The remaining duration, in seconds, or the zero on failure.</returns>
+    public static float GetAoEObjectDurationRemaining(uint oAoE)
+    {
+      const string sFunc = "GetAoEObjectDurationRemaining";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
+      VM.NWNX.StackPush(oAoE);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopFloat();
+    }
+
     // @}
   }
 
