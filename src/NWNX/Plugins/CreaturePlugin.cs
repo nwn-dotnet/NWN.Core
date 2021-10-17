@@ -75,6 +75,23 @@ namespace NWN.Core.NWNX
     public const int NWNX_CREATURE_BONUS_TYPE_TOUCH_ATTACK = 6;
 
     // @}
+    /// @name Ranged Projectile VFX
+    /// @anchor ranged_projectile_vfx
+    ///
+    /// Used with NWNX_Creature_OverrideRangedProjectileVFX() these are the projectile vfx types.
+    /// @{
+    public const int NWNX_CREATURE_PROJECTILE_VFX_NONE = 0;
+
+    ///&lt; No VFX
+    public const int NWNX_CREATURE_PROJECTILE_VFX_ACID = 1;
+    public const int NWNX_CREATURE_PROJECTILE_VFX_COLD = 2;
+    public const int NWNX_CREATURE_PROJECTILE_VFX_ELECTRICAL = 3;
+    public const int NWNX_CREATURE_PROJECTILE_VFX_FIRE = 4;
+    public const int NWNX_CREATURE_PROJECTILE_VFX_SONIC = 5;
+    public const int NWNX_CREATURE_PROJECTILE_VFX_RANDOM = 6;
+
+    ///&lt; Random Elemental VFX
+    // @}
     /// @struct NWNX_Creature_SpecialAbility
     /// A creature special ability.
     /// @struct NWNX_Creature_MemorisedSpell
@@ -2107,6 +2124,21 @@ namespace NWN.Core.NWNX
       VM.NWNX.StackPush(oCreature);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
+    }
+
+    /// Override the elemental projectile visual effect of ranged/throwing weapons.
+    /// <param name="oCreature">The creature.</param>
+    /// <param name="nProjectileVFX">A @ref ranged_projectile_vfx &quot;NWNX_CREATURE_PROJECTILE_VFX_*&quot; constant or -1 to remove the override.</param>
+    /// <param name="bPersist">Whether the vfx should persist to the .bic file (for PCs).</param>
+    /// @note Persistence is enabled after a server reset by the first use of this function. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
+    public static void OverrideRangedProjectileVFX(uint oCreature, int nProjectileVFX, int bPersist = FALSE)
+    {
+      const string sFunc = "OverrideRangedProjectileVFX";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(bPersist);
+      VM.NWNX.StackPush(nProjectileVFX);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
     }
 
     // @}
