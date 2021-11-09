@@ -60,13 +60,13 @@ jobs:
 
       - name: Build Release Binaries
         id: build
-        run: dotnet build --configuration Release -p:Version=${{ steps.vars.outputs.version }} -o output
+        run: dotnet build --configuration Release -p:Version=${{ steps.vars.outputs.version }}
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v2
         with:
           name: Binaries
-          path: output/
+          path: bin/Release
           if-no-files-found: error
 
   nuget:
@@ -83,10 +83,10 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: Binaries
-          path: output
+          path: bin/Release
 
       - name: NuGet Publish
-        run: dotnet nuget push output/*.nupkg --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json
+        run: dotnet nuget push bin/Release/*.nupkg --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json
 
       - name: GitHub Publish
-        run: dotnet nuget push output/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/nwn-dotnet/index.json
+        run: dotnet nuget push bin/Release/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/nwn-dotnet/index.json
