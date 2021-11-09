@@ -7,7 +7,7 @@ NWN.Core is a low-level function wrapper that exposes all engine events, NWScrip
 It is designed to follow as close as possible to the native NwScript and NWNX APIs to maintain maximum coverage of the base game functions.
 The library is automatically updated to match latest NWNEE and NWNXEE versions.
 
-NWN.Core exposes the base game functions by sorting them into static classes, and does not include object wrappers/enums or utilize other C# features. 
+NWN.Core exposes the base game functions by sorting them into static classes, and does not include object wrappers/enums or utilize other C# features.
 
 It can serve both as a primary tool in its own right for simpler setups and as a base for more elegant or abstract solutions.
 
@@ -97,7 +97,7 @@ namespace NWN
     {
       // Bootstrap NWN.Core
       int retVal = NWNCore.Init(nativeHandlesPtr, nativeHandlesLength, out CoreGameManager coreGameManager);
-      
+
       // Register "private static void OnSignal" as the "OnSignal" handler.
       coreGameManager.OnSignal += OnSignal;
 
@@ -113,7 +113,7 @@ namespace NWN
       {
         // Get the module name.
         string moduleName = NWScript.GetModuleName();
-        
+
         // Write the module name to the server console.
         Console.WriteLine(moduleName);
       }
