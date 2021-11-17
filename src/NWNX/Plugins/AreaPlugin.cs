@@ -618,6 +618,19 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopObject();
     }
 
+    /// Rotates an existing area, including all objects within (excluding PCs).
+    /// @note Functions while clients are in the area, but not recommended as tiles/walkmesh only updates on area load, and this may reuslt in unexpected clientside results.
+    /// <param name="oArea">The area to be rotated</param>
+    /// <param name="nRotation">How many 90 degrees clockwise to rotate (1-3).</param>
+    public static void RotateArea(uint oArea, int nRotation)
+    {
+      const string sFunc = "RotateArea";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
+      VM.NWNX.StackPush(nRotation);
+      VM.NWNX.StackPush(oArea);
+      VM.NWNX.Call();
+    }
+
     // @}
   }
 
