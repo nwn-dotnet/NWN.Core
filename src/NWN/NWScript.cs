@@ -6252,6 +6252,24 @@ namespace NWN.Core
     public const int RESTYPE_JPG = 2081;
     public const int RESTYPE_CAF = 2082;
     public const int RESTYPE_JUI = 2083;
+
+    ///  For JsonArrayTransform():
+    public const int JSON_ARRAY_SORT_ASCENDING = 1;
+    public const int JSON_ARRAY_SORT_DESCENDING = 2;
+    public const int JSON_ARRAY_SHUFFLE = 3;
+    public const int JSON_ARRAY_REVERSE = 4;
+    public const int JSON_ARRAY_UNIQUE = 5;
+    public const int JSON_ARRAY_COALESCE = 6;
+    public const int JSON_FIND_EQUAL = 0;
+    public const int JSON_FIND_LT = 1;
+    public const int JSON_FIND_LTE = 2;
+    public const int JSON_FIND_GT = 3;
+    public const int JSON_FIND_GTE = 4;
+    public const int JSON_SET_SUBSET = 1;
+    public const int JSON_SET_UNION = 2;
+    public const int JSON_SET_INTERSECT = 3;
+    public const int JSON_SET_DIFFERENCE = 4;
+    public const int JSON_SET_SYMMETRIC_DIFFERENCE = 5;
     public const string sLanguage = "nwscript";
 
     ///  Get an integer between 0 and nMaxInteger-1.<br/>
@@ -17869,6 +17887,112 @@ namespace NWN.Core
       VM.StackPush(nToken);
       VM.StackPush(oPlayer);
       VM.Call(1028);
+    }
+
+    ///  Returns the number of script instructions remaining for the currently-running script.<br/>
+    ///  Once this value hits zero, the script will abort with TOO MANY INSTRUCTIONS.<br/>
+    ///  The instruction limit is configurable by the user, so if you have a really long-running<br/>
+    ///  process, this value can guide you with splitting it up into smaller, discretely schedulable parts.<br/>
+    ///  Note: Running this command and checking/handling the value also takes up some instructions.
+    public static int GetScriptInstructionsRemaining()
+    {
+      VM.Call(1029);
+      return VM.StackPopInt();
+    }
+
+    ///  Returns a modified copy of jArray with the value order changed according to nTransform:<br/>
+    ///  * JSON_ARRAY_SORT_ASCENDING, JSON_ARRAY_SORT_DESCENDING<br/>
+    ///     Sorting is dependent on the type and follows json standards (.e.g. 99 &amp;lt; &amp;quot;100&amp;quot;).<br/>
+    ///  * JSON_ARRAY_SHUFFLE<br/>
+    ///    Randomises the order of elements.<br/>
+    ///  * JSON_ARRAY_REVERSE<br/>
+    ///    Reverses the array.<br/>
+    ///  * JSON_ARRAY_UNIQUE<br/>
+    ///    Returns a modified copy of jArray with duplicate values removed.<br/>
+    ///    Coercable but different types are not considered equal (e.g. 99 != &amp;quot;99&amp;quot;); int/float equivalence however applies: 4.0 == 4.<br/>
+    ///    Order is preserved.<br/>
+    ///  * JSON_ARRAY_COALESCE<br/>
+    ///    Returns the first non-null entry. Empty-ish values (e.g. &amp;quot;&amp;quot;, 0) are not considered null, only the json scalar type.
+    public static System.IntPtr JsonArrayTransform(System.IntPtr jArray, int nTransform)
+    {
+      VM.StackPush(nTransform);
+      VM.StackPush(jArray, ENGINE_STRUCTURE_JSON);
+      VM.Call(1030);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Returns the nth-matching index or key of jNeedle in jHaystack.<br/>
+    ///  Supported haystacks: object, array<br/>
+    ///  Ordering behaviour for objects is unspecified.<br/>
+    ///  Return null when not found or on any error.
+    public static System.IntPtr JsonFind(System.IntPtr jHaystack, System.IntPtr jNeedle, int nNth = 0, int nConditional = JSON_FIND_EQUAL)
+    {
+      VM.StackPush(nConditional);
+      VM.StackPush(nNth);
+      VM.StackPush(jNeedle, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(jHaystack, ENGINE_STRUCTURE_JSON);
+      VM.Call(1031);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Returns a copy of the range (nBeginIndex, nEndIndex) inclusive of jArray.<br/>
+    ///  Negative nEndIndex values count from the other end.<br/>
+    ///  Out-of-bound values are clamped to the array range.<br/>
+    ///  Examples:<br/>
+    ///   json a = JsonParse(&amp;quot;[0, 1, 2, 3, 4]&amp;quot;);<br/>
+    ///   JsonArrayGetRange(a, 0, 1)    // =&amp;gt; [0, 1]<br/>
+    ///   JsonArrayGetRange(a, 1, -1)   // =&amp;gt; [1, 2, 3, 4]<br/>
+    ///   JsonArrayGetRange(a, 0, 4)    // =&amp;gt; [0, 1, 2, 3, 4]<br/>
+    ///   JsonArrayGetRange(a, 0, 999)  // =&amp;gt; [0, 1, 2, 3, 4]<br/>
+    ///   JsonArrayGetRange(a, 1, 0)    // =&amp;gt; []<br/>
+    ///   JsonArrayGetRange(a, 1, 1)    // =&amp;gt; [1]<br/>
+    ///  Returns a null type on error, including type mismatches.
+    public static System.IntPtr JsonArrayGetRange(System.IntPtr jArray, int nBeginIndex, int nEndIndex)
+    {
+      VM.StackPush(nEndIndex);
+      VM.StackPush(nBeginIndex);
+      VM.StackPush(jArray, ENGINE_STRUCTURE_JSON);
+      VM.Call(1032);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Returns the result of a set operation on two arrays.<br/>
+    ///  Operations:<br/>
+    ///  * JSON_SET_SUBSET (v &amp;lt;= o):<br/>
+    ///    Returns true if every element in jValue is also in jOther.<br/>
+    ///  * JSON_SET_UNION (v | o):<br/>
+    ///    Returns a new array containing values from both sides.<br/>
+    ///  * JSON_SET_INTERSECT (v &amp; o):<br/>
+    ///    Returns a new array containing only values common to both sides.<br/>
+    ///  * JSON_SET_DIFFERENCE (v - o):<br/>
+    ///    Returns a new array containing only values not in jOther.<br/>
+    ///  * JSON_SET_SYMMETRIC_DIFFERENCE (v ^ o):<br/>
+    ///    Returns a new array containing all elements present in either array, but not both.
+    public static System.IntPtr JsonSetOp(System.IntPtr jValue, int nOp, System.IntPtr jOther)
+    {
+      VM.StackPush(jOther, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(nOp);
+      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.Call(1033);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Returns the column name of s2DA at nColumn index (starting at 0).<br/>
+    ///  Returns &amp;quot;&amp;quot; if column nColumn doesn&amp;apos;t exist (at end).
+    public static string Get2DAColumn(string s2DA, int nColumnIdx)
+    {
+      VM.StackPush(nColumnIdx);
+      VM.StackPush(s2DA);
+      VM.Call(1034);
+      return VM.StackPopString();
+    }
+
+    ///  Returns the number of defined rows in the 2da s2DA.
+    public static int Get2DARowCount(string s2DA)
+    {
+      VM.StackPush(s2DA);
+      VM.Call(1035);
+      return VM.StackPopInt();
     }
 
   }
