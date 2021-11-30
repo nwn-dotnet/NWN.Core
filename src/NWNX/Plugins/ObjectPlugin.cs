@@ -388,10 +388,12 @@ namespace NWN.Core.NWNX
     /// Export an object to the UserDirectory/nwnx folder.
     /// <param name="sFileName">The filename without extension, 16 or less characters.</param>
     /// <param name="oObject">The object to export. Valid object types: Creature, Item, Placeable, Waypoint, Door, Store, Trigger</param>
-    public static void Export(uint oObject, string sFileName)
+    /// <param name="sAlias">The alias of the resource directory to add the .git file to. Default: UserDirectory/nwnx</param>
+    public static void Export(uint oObject, string sFileName, string sAlias = "NWNX")
     {
       const string sFunc = "Export";
       VM.NWNX.SetFunction(NWNX_Object, sFunc);
+      VM.NWNX.StackPush(sAlias);
       VM.NWNX.StackPush(sFileName);
       VM.NWNX.StackPush(oObject);
       VM.NWNX.Call();
