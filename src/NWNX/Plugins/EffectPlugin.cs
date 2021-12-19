@@ -154,6 +154,19 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Accessorize an EffectVisualEffect(), making it undispellable and unable to be removed by resting or death.
+    /// @note If linked with a non-visualeffect or a non-accessorized visualeffect it *will* get removed.
+    /// <param name="eEffect">An EffectVisualEffect(), does not work for other effect types.</param>
+    /// <returns>The accessorized effect or an unchanged effect if not an EffectVisualEffect().</returns>
+    public static System.IntPtr AccessorizeVisualEffect(System.IntPtr eEffect)
+    {
+      const string sFunc = "AccessorizeVisualEffect";
+      VM.NWNX.SetFunction(NWNX_Effect, sFunc);
+      VM.NWNX.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+    }
+
     // @}
     public static NWNX_EffectUnpacked __NWNX_Effect_ResolveUnpack(string sFunc, int bLink = TRUE)
     {
