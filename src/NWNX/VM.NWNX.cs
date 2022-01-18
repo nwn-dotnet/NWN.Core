@@ -1,6 +1,7 @@
 using System;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace NWN.Core
 {
@@ -17,26 +18,31 @@ namespace NWN.Core
       }
 
       [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-      public static void SetFunction(string plugin, string method) => NWNCore.NativeFunctions.nwnxSetFunction(plugin, method);
+      public static void SetFunction(string plugin, string method) => NWNCore.NativeFunctions.NWNXSetFunction(plugin, method);
 
       [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-      public static void StackPush(int value) => NWNCore.NativeFunctions.nwnxPushInt(value);
+      public static void StackPush(int value) => NWNCore.NativeFunctions.NWNXPushInt(value);
 
       [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-      public static void StackPush(float value) => NWNCore.NativeFunctions.nwnxPushFloat(value);
+      public static void StackPush(float value) => NWNCore.NativeFunctions.NWNXPushFloat(value);
 
       [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-      public static void StackPush(string value) => NWNCore.NativeFunctions.nwnxPushString(value);
+      public static void StackPush(string value)
+      {
+        IntPtr charPtr = GetNullTerminatedString(value);
+        NWNCore.NativeFunctions.NWNXPushRawString(charPtr);
+        Marshal.FreeHGlobal(charPtr);
+      }
 
       [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-      public static void StackPush(uint value) => NWNCore.NativeFunctions.nwnxPushObject(value);
+      public static void StackPush(uint value) => NWNCore.NativeFunctions.NWNXPushObject(value);
 
       [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
       public static void StackPush(Vector3 vector)
       {
-        NWNCore.NativeFunctions.nwnxPushFloat(vector.X);
-        NWNCore.NativeFunctions.nwnxPushFloat(vector.Y);
-        NWNCore.NativeFunctions.nwnxPushFloat(vector.Z);
+        NWNCore.NativeFunctions.NWNXPushFloat(vector.X);
+        NWNCore.NativeFunctions.NWNXPushFloat(vector.Y);
+        NWNCore.NativeFunctions.NWNXPushFloat(vector.Z);
       }
 
       [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
@@ -45,18 +51,18 @@ namespace NWN.Core
         switch (engineType)
         {
           case NWScript.ENGINE_STRUCTURE_EFFECT:
-            NWNCore.NativeFunctions.nwnxPushEffect(refValue);
+            NWNCore.NativeFunctions.NWNXPushEffect(refValue);
             break;
           case NWScript.ENGINE_STRUCTURE_ITEMPROPERTY:
-            NWNCore.NativeFunctions.nwnxPushItemProperty(refValue);
+            NWNCore.NativeFunctions.NWNXPushItemProperty(refValue);
             break;
           case NWScript.ENGINE_STRUCTURE_LOCATION:
             Vector3 pos = NWScript.GetPositionFromLocation(refValue);
-            NWNCore.NativeFunctions.nwnxPushFloat(NWScript.GetFacingFromLocation(refValue));
-            NWNCore.NativeFunctions.nwnxPushFloat(pos.Z);
-            NWNCore.NativeFunctions.nwnxPushFloat(pos.Y);
-            NWNCore.NativeFunctions.nwnxPushFloat(pos.X);
-            NWNCore.NativeFunctions.nwnxPushObject(NWScript.GetAreaFromLocation(refValue));
+            NWNCore.NativeFunctions.NWNXPushFloat(NWScript.GetFacingFromLocation(refValue));
+            NWNCore.NativeFunctions.NWNXPushFloat(pos.Z);
+            NWNCore.NativeFunctions.NWNXPushFloat(pos.Y);
+            NWNCore.NativeFunctions.NWNXPushFloat(pos.X);
+            NWNCore.NativeFunctions.NWNXPushObject(NWScript.GetAreaFromLocation(refValue));
             break;
           default:
             throw new NotSupportedException($"Native engine type not supported: {engineType}");
@@ -64,26 +70,26 @@ namespace NWN.Core
       }
 
       [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-      public static void Call() => NWNCore.NativeFunctions.nwnxCallFunction();
+      public static void Call() => NWNCore.NativeFunctions.NWNXCallFunction();
 
       [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-      public static int StackPopInt() => NWNCore.NativeFunctions.nwnxPopInt();
+      public static int StackPopInt() => NWNCore.NativeFunctions.NWNXPopInt();
 
       [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-      public static float StackPopFloat() => NWNCore.NativeFunctions.nwnxPopFloat();
+      public static float StackPopFloat() => NWNCore.NativeFunctions.NWNXPopFloat();
 
       [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-      public static string StackPopString() => NWNCore.NativeFunctions.nwnxPopString();
+      public static string? StackPopString() => ReadNullTerminatedString(NWNCore.NativeFunctions.NWNXPopRawString());
 
       [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-      public static uint StackPopObject() => NWNCore.NativeFunctions.nwnxPopObject();
+      public static uint StackPopObject() => NWNCore.NativeFunctions.NWNXPopObject();
 
       [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
       public static Vector3 StackPopVector()
       {
-        float z = NWNCore.NativeFunctions.nwnxPopFloat();
-        float y = NWNCore.NativeFunctions.nwnxPopFloat();
-        float x = NWNCore.NativeFunctions.nwnxPopFloat();
+        float z = NWNCore.NativeFunctions.NWNXPopFloat();
+        float y = NWNCore.NativeFunctions.NWNXPopFloat();
+        float x = NWNCore.NativeFunctions.NWNXPopFloat();
 
         return new Vector3(x, y, z);
       }
@@ -93,8 +99,8 @@ namespace NWN.Core
       {
         return engineType switch
         {
-          NWScript.ENGINE_STRUCTURE_EFFECT => NWNCore.NativeFunctions.nwnxPopEffect(),
-          NWScript.ENGINE_STRUCTURE_ITEMPROPERTY => NWNCore.NativeFunctions.nwnxPopItemProperty(),
+          NWScript.ENGINE_STRUCTURE_EFFECT => NWNCore.NativeFunctions.NWNXPopEffect(),
+          NWScript.ENGINE_STRUCTURE_ITEMPROPERTY => NWNCore.NativeFunctions.NWNXPopItemProperty(),
           _ => throw new NotSupportedException($"Native engine type not supported: {engineType}")
         };
       }
