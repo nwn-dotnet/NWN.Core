@@ -89,8 +89,13 @@ namespace NWN.Core
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
     public static void ReturnHook(IntPtr funcPtr) => NWNCore.NativeFunctions.ReturnHook(funcPtr);
 
-    public static IntPtr GetNullTerminatedString(string value)
+    public static IntPtr GetNullTerminatedString(string? value)
     {
+      if (value == null)
+      {
+        return IntPtr.Zero;
+      }
+
       byte[] bytes = Cp1252Encoding.GetBytes(value);
       IntPtr buffer = Marshal.AllocHGlobal(bytes.Length + 1);
       Marshal.Copy(bytes, 0, buffer, bytes.Length);
