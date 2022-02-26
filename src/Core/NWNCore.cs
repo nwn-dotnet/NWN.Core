@@ -8,6 +8,8 @@ namespace NWN.Core
     internal static ICoreFunctionHandler? FunctionHandler;
 
     internal static NativeHandles NativeFunctions;
+
+    // We hold a reference to prevent GC of the delegates.
     private static NativeEventHandles eventHandles;
 
     public static int Init(IntPtr nativeHandlesPtr, int nativeHandlesLength, ICoreFunctionHandler functionHandler, ICoreEventHandler eventHandler)
@@ -16,6 +18,17 @@ namespace NWN.Core
       if (result == 0)
       {
         RegisterEventHandles(eventHandler);
+      }
+
+      return result;
+    }
+
+    public static int Init(IntPtr nativeHandlesPtr, int nativeHandlesLength, ICoreFunctionHandler functionHandler, NativeEventHandles eventCallbackHandles)
+    {
+      int result = Init(nativeHandlesPtr, nativeHandlesLength, functionHandler);
+      if (result == 0)
+      {
+        RegisterEventHandles(eventCallbackHandles);
       }
 
       return result;
@@ -54,13 +67,25 @@ namespace NWN.Core
       return Init(nativeHandlesPtr, nativeHandlesLength, coreGameManager, coreGameManager);
     }
 
-    private static void RegisterEventHandles(ICoreEventHandler eventHandler)
+    public static void RegisterEventHandles(ICoreEventHandler eventHandler)
     {
+      NativeEventHandles eventHandles;
       eventHandles.MainLoop = eventHandler.OnMainLoop;
       eventHandles.RunScript = eventHandler.OnRunScript;
       eventHandles.Closure = eventHandler.OnClosure;
       eventHandles.Signal = eventHandler.OnSignal;
 
+      RegisterEventHandles(eventHandles);
+    }
+
+    public static void RegisterEventHandles(NativeEventHandles eventCallbackHandles)
+    {
+      if (FunctionHandler == null)
+      {
+        throw new InvalidOperationException("Init must be called first with a valid function handler.");
+      }
+
+      eventHandles = eventCallbackHandles;
       int size = Marshal.SizeOf(typeof(NativeEventHandles));
       IntPtr ptr = Marshal.AllocHGlobal(size);
       Marshal.StructureToPtr(eventHandles, ptr, false);
