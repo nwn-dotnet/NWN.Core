@@ -619,7 +619,7 @@ namespace NWN.Core.NWNX
     }
 
     /// Rotates an existing area, including all objects within (excluding PCs).
-    /// @note Functions while clients are in the area, but not recommended as tiles/walkmesh only updates on area load, and this may reuslt in unexpected clientside results.
+    /// @note Functions while clients are in the area, but not recommended as tiles/walkmesh only updates on area load, and this may result in unexpected clientside results.
     /// <param name="oArea">The area to be rotated</param>
     /// <param name="nRotation">How many 90 degrees clockwise to rotate (1-3).</param>
     public static void RotateArea(uint oArea, int nRotation)
@@ -627,6 +627,73 @@ namespace NWN.Core.NWNX
       const string sFunc = "RotateArea";
       VM.NWNX.SetFunction(NWNX_Area, sFunc);
       VM.NWNX.StackPush(nRotation);
+      VM.NWNX.StackPush(oArea);
+      VM.NWNX.Call();
+    }
+
+    /// Get the tile info of the tile at nIndex in the tile array.
+    /// <param name="oArea">The area.</param>
+    /// <param name="nIndex">The index of the tile.</param>
+    /// <returns>A NWNX_Area_TileInfo struct with tile info.</returns>
+    public static TileInfo GetTileInfoByTileIndex(uint oArea, int nIndex)
+    {
+      const string sFunc = "GetTileInfoByTileIndex";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
+      VM.NWNX.StackPush(nIndex);
+      VM.NWNX.StackPush(oArea);
+      VM.NWNX.Call();
+      TileInfo str = default;
+      str.nGridY = VM.NWNX.StackPopInt();
+      str.nGridX = VM.NWNX.StackPopInt();
+      str.nOrientation = VM.NWNX.StackPopInt();
+      str.nHeight = VM.NWNX.StackPopInt();
+      str.nID = VM.NWNX.StackPopInt();
+      return str;
+    }
+
+    /// Check if there is a path between two positions in an area.
+    /// @note Does not care about doors or placeables, only checks tile path nodes.
+    /// <param name="oArea">The area.</param>
+    /// <param name="vStartPosition">The start position.</param>
+    /// <param name="vEndPosition">The end position.</param>
+    /// <param name="nMaxDepth">The max depth of the DFS tree. A good value is AreaWidth * AreaHeight.</param>
+    /// <returns>TRUE if there is a path between vStartPosition and vEndPosition, FALSE if not or on error.</returns>
+    public static int GetPathExists(uint oArea, System.Numerics.Vector3 vStartPosition, System.Numerics.Vector3 vEndPosition, int nMaxDepth)
+    {
+      const string sFunc = "GetPathExists";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
+      VM.NWNX.StackPush(nMaxDepth);
+      VM.NWNX.StackPush(vEndPosition.Y);
+      VM.NWNX.StackPush(vEndPosition.X);
+      VM.NWNX.StackPush(vStartPosition.Y);
+      VM.NWNX.StackPush(vStartPosition.X);
+      VM.NWNX.StackPush(oArea);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
+    /// Get oArea&apos;s flags, interior/underground etc.
+    /// <param name="oArea">The area.</param>
+    /// <returns>The raw flags bitmask or -1 on error.</returns>
+    public static int GetAreaFlags(uint oArea)
+    {
+      const string sFunc = "GetAreaFlags";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
+      VM.NWNX.StackPush(oArea);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
+    /// Set oArea&apos;s raw flags bitmask.
+    /// @note You&apos;ll have to do any bitwise operations yourself.
+    /// @note Requires clients to reload the area to get any updated flags.
+    /// <param name="oArea">The area.</param>
+    /// <param name="nFlags">The flags.</param>
+    public static void SetAreaFlags(uint oArea, int nFlags)
+    {
+      const string sFunc = "SetAreaFlags";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
+      VM.NWNX.StackPush(nFlags);
       VM.NWNX.StackPush(oArea);
       VM.NWNX.Call();
     }

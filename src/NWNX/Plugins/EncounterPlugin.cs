@@ -9,6 +9,16 @@ namespace NWN.Core.NWNX
 
     ///&lt; @private
     /// A creature list entry for an encounter.
+    /// Immediately destroys the specified encounter object.
+    /// <param name="encounter">The encounter object.</param>
+    public static void Destroy(uint encounter)
+    {
+      const string sFunc = "Destroy";
+      VM.NWNX.SetFunction(NWNX_Encounter, sFunc);
+      VM.NWNX.StackPush(encounter);
+      VM.NWNX.Call();
+    }
+
     /// Get the number of creatures in the encounter list
     /// <param name="encounter">The encounter object.</param>
     /// <returns>The number of creatures in the encounter list.</returns>

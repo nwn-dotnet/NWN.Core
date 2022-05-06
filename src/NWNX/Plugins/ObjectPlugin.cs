@@ -17,6 +17,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_OBJECT_LOCALVAR_TYPE_STRING = 3;
     public const int NWNX_OBJECT_LOCALVAR_TYPE_OBJECT = 4;
     public const int NWNX_OBJECT_LOCALVAR_TYPE_LOCATION = 5;
+    public const int NWNX_OBJECT_LOCALVAR_TYPE_JSON = 6;
 
     // @}
     /// @anchor object_internal_types
@@ -64,8 +65,9 @@ namespace NWN.Core.NWNX
     /// @note As of build 8193.14, this function takes O(n) time, where n is the number
     ///       of locals on the object. Individual variable access with GetLocalXxx()
     ///       is now O(1) though.
-    /// @note As of build 8193.14, this function may return variable type UNKNOWN
-    ///       if the value is the default (0/0.0/&quot;&quot;/OBJECT_INVALID) for the type.
+    /// @note As of build 8193.14, this function will not return a variable if the value is
+    ///       the default (0/0.0/&quot;&quot;/OBJECT_INVALID/JsonNull()) for the type. They are considered not set.
+    /// @note Will return type UNKNOWN for cassowary variables.
     /// <returns>An NWNX_Object_LocalVariable struct.</returns>
     public static LocalVariable GetLocalVariable(uint obj, int index)
     {
@@ -646,11 +648,13 @@ namespace NWN.Core.NWNX
     /// Checks for specific spell immunity. Should only be called in spellscripts
     /// <param name="oDefender">The object defending against the spell.</param>
     /// <param name="oCaster">The object casting the spell.</param>
+    /// <param name="nSpellId">The casted spell id. Default value is -1, which corrresponds to the normal game behaviour.</param>
     /// <returns>-1 if defender has no immunity, 2 if the defender is immune</returns>
-    public static int DoSpellImmunity(uint oDefender, uint oCaster)
+    public static int DoSpellImmunity(uint oDefender, uint oCaster, int nSpellId = -1)
     {
       const string sFunc = "DoSpellImmunity";
       VM.NWNX.SetFunction(NWNX_Object, sFunc);
+      VM.NWNX.StackPush(nSpellId);
       VM.NWNX.StackPush(oCaster);
       VM.NWNX.StackPush(oDefender);
       VM.NWNX.Call();
@@ -660,11 +664,17 @@ namespace NWN.Core.NWNX
     /// Checks for spell school/level immunities and mantles. Should only be called in spellscripts
     /// <param name="oDefender">The object defending against the spell.</param>
     /// <param name="oCaster">The object casting the spell.</param>
+    /// <param name="nSpellId">The casted spell id. Default value is -1, which corrresponds to the normal game behaviour.</param>
+    /// <param name="nSpellLevel">The level of the casted spell. Default value is -1, which corrresponds to the normal game behaviour.</param>
+    /// <param name="nSpellSchool">The school of the casted spell (SPELL_SCHOOL_* constant). Default value is -1, which corrresponds to the normal game behaviour.</param>
     /// <returns>-1 defender no immunity. 2 if immune. 3 if immune, but the immunity has a limit (example: mantles)</returns>
-    public static int DoSpellLevelAbsorption(uint oDefender, uint oCaster)
+    public static int DoSpellLevelAbsorption(uint oDefender, uint oCaster, int nSpellId = -1, int nSpellLevel = -1, int nSpellSchool = -1)
     {
       const string sFunc = "DoSpellLevelAbsorption";
       VM.NWNX.SetFunction(NWNX_Object, sFunc);
+      VM.NWNX.StackPush(nSpellSchool);
+      VM.NWNX.StackPush(nSpellLevel);
+      VM.NWNX.StackPush(nSpellId);
       VM.NWNX.StackPush(oCaster);
       VM.NWNX.StackPush(oDefender);
       VM.NWNX.Call();

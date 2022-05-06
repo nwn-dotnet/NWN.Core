@@ -39,6 +39,20 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopString();
     }
 
+    /// Returns all matches in a string that match the regular expression.
+    /// <param name="str">The string to search.</param>
+    /// <param name="regex">The regular expression to use.</param>
+    /// <returns>A json array with json arrays of all (sub)matches. Returns JsonNull() on error.</returns>
+    public static System.IntPtr Match(string str, string regex)
+    {
+      const string sFunc = "Match";
+      VM.NWNX.SetFunction(NWNX_Regex, sFunc);
+      VM.NWNX.StackPush(regex);
+      VM.NWNX.StackPush(str);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
     // @}
   }
 }

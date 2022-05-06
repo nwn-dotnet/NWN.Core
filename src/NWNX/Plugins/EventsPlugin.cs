@@ -482,21 +482,71 @@ namespace NWN.Core.NWNX
         PASSWORD              | string | The password the DM provided, only valid for NWNX_ON_DM_PLAYERDM_LOGIN_*
     
     _______________________________________
+        ## DM Set Stat Events
+        - NWNX_ON_DM_SET_STAT_BEFORE
+        - NWNX_ON_DM_SET_STAT_AFTER
+    
+        `OBJECT_SELF` = The DM
+    
+        Event Data Tag        | Type   | Notes
+        ----------------------|--------|-------
+        STAT                  | int    | Returns ABILITY_* constant
+        VALUE                 | int    | 
+        TARGET                | object | Convert to object with StringToObject()
+        SET                   | int    | TRUE if setting stat, FALSE if modifying
+    
+    _______________________________________
+        ## DM Get Variable Events
+        - NWNX_ON_DM_GET_VARIABLE_BEFORE
+        - NWNX_ON_DM_GET_VARIABLE_AFTER
+    
+        `OBJECT_SELF` = The DM
+    
+        Event Data Tag        | Type   | Notes
+        ----------------------|--------|-------
+        TYPE                  | int    | Returns NWNX_EVENTS_DM_SET_VARIABLE_TYPE_*
+        TARGET                | object | Convert to object with StringToObject()
+        KEY                   | string | Variable name
+    
+        @note Vector variable types aren't supported.
+    
+    _______________________________________
+        ## DM Set Variable Events
+        - NWNX_ON_DM_SET_VARIABLE_BEFORE
+        - NWNX_ON_DM_SET_VARIABLE_AFTER
+    
+        `OBJECT_SELF` = The DM
+    
+        Event Data Tag        | Type   | Notes
+        ----------------------|--------|-------
+        TYPE                  | int    | Returns NWNX_EVENTS_DM_SET_VARIABLE_TYPE_*
+        TARGET                | object | Convert to object with StringToObject()
+        KEY                   | string | Variable name
+        VALUE                 | string | Variable value
+    
+        @note Vector variable types aren't supported.
+    
+    _______________________________________
+        ## DM Set Faction Events
+        - NWNX_ON_DM_SET_FACTION_BEFORE
+        - NWNX_ON_DM_SET_FACTION_AFTER
+    
+        `OBJECT_SELF` = The DM
+    
+        Event Data Tag        | Type   | Notes
+        ----------------------|--------|-------
+        TARGET                | object | Convert to object with StringToObject()
+        FACTION_ID            | int    | Not the STANDARD_FACTION_* constants. See nwnx_creature->GetFaction(). 
+        FACTION_NAME          | string | 
+    
+    _______________________________________
         ## DM Other Events
         - NWNX_ON_DM_APPEAR_BEFORE
         - NWNX_ON_DM_APPEAR_AFTER
         - NWNX_ON_DM_DISAPPEAR_BEFORE
         - NWNX_ON_DM_DISAPPEAR_AFTER
-        - NWNX_ON_DM_SET_FACTION_BEFORE
-        - NWNX_ON_DM_SET_FACTION_AFTER
         - NWNX_ON_DM_TAKE_ITEM_BEFORE
         - NWNX_ON_DM_TAKE_ITEM_AFTER
-        - NWNX_ON_DM_SET_STAT_BEFORE
-        - NWNX_ON_DM_SET_STAT_AFTER
-        - NWNX_ON_DM_GET_VARIABLE_BEFORE
-        - NWNX_ON_DM_GET_VARIABLE_AFTER
-        - NWNX_ON_DM_SET_VARIABLE_BEFORE
-        - NWNX_ON_DM_SET_VARIABLE_AFTER
         - NWNX_ON_DM_SET_TIME_BEFORE
         - NWNX_ON_DM_SET_TIME_AFTER
         - NWNX_ON_DM_SET_DATE_BEFORE
@@ -531,6 +581,9 @@ namespace NWN.Core.NWNX
         CDKEY                 | string | Public cdkey of the connecting client
         IS_DM                 | int    | Whether the client is connect as DM (1/0)
         IP_ADDRESS            | string | The IP address of the connecting client
+        VERSION_MAJOR         | int    | The client's major version, eg 8193, or 0 if unavailable.
+        VERSION_MINOR         | int    | The client's minor version, eg 34, or 0 if unavailable.
+        PLATFORM_ID           | int    | The client's platform id, PLAYER_DEVICE_PLATFORM_*, or 0 if unavailable.
     
         @note Skipping the _BEFORE event will cause the client's connection to be denied.
         You can optionally pass a reason for this in the event result.
@@ -1276,6 +1329,25 @@ namespace NWN.Core.NWNX
         @note This event also runs for players that do not have permission to execute the command.
     
     _______________________________________
+        ## Play Visual Effect Event
+        - NWNX_ON_DEBUG_PLAY_VISUAL_EFFECT_BEFORE
+        - NWNX_ON_DEBUG_PLAY_VISUAL_EFFECT_AFTER
+    
+        `OBJECT_SELF` = The DM
+    
+        Event Data Tag        | Type   | Notes
+        ----------------------|--------|-------
+        TARGET_OBJECT_ID      | object | Convert to object with StringToObject() 
+        VISUAL_EFFECT         | int    | Index into visualeffects.2da 
+        DURATION              | float  | 
+        TARGET_POSITION_X     | float  | Will be 0.0 when playing visual effects on an object 
+        TARGET_POSITION_Y     | float  | Will be 0.0 when playing visual effects on an object 
+        TARGET_POSITION_Z     | float  | Will be 0.0 when playing visual effects on an object 
+    
+        @note This is the `dm_visualeffect` console command.
+        `TARGET_OBJECT_ID` will be `OBJECT_INVALID` when playing visual effects at a position in an area.
+    
+    _______________________________________
         ## Buy/Sell Store Events
         - NWNX_ON_STORE_REQUEST_BUY_BEFORE
         - NWNX_ON_STORE_REQUEST_BUY_AFTER
@@ -1409,6 +1481,52 @@ namespace NWN.Core.NWNX
         OLD_VALUE             | int    | |
         NEW_VALUE             | int    | |
     _______________________________________
+        ## Input Drop Item Events
+        - NWNX_ON_INPUT_DROP_ITEM_BEFORE
+        - NWNX_ON_INPUT_DROP_ITEM_AFTER
+    
+        `OBJECT_SELF` = The player dropping an item
+    
+        Event Data Tag        | Type   | Notes
+        ----------------------|--------|-------
+        ITEM                  | object | Convert to object with StringToObject() |
+        POS_X                 | float  | |
+        POS_Y                 | float  | |
+        POS_Z                 | float  | |
+    _______________________________________
+        ## Decrement Spell Count Events
+        - NWNX_ON_DECREMENT_SPELL_COUNT_BEFORE
+        - NWNX_ON_DECREMENT_SPELL_COUNT_AFTER
+    
+        `OBJECT_SELF` = The player losing a spell slot
+    
+        Event Data Tag        | Type   | Notes
+        ----------------------|--------|-------
+        SPELL_ID              | int    | |
+        CLASS                 | int    | Index of the spell casting class (0-2). Returns 254 for spell-like abilities |
+        DOMAIN                | int    | Spell level if non-default due to Domain |
+        METAMAGIC             | int    | |
+        CASTERLEVEL           | int    | Only returns for spell-like abilities |
+    _______________________________________
+        ## EventScript Events
+        - NWNX_ON_RUN_EVENT_SCRIPT_BEFORE
+        - NWNX_ON_RUN_EVENT_SCRIPT_AFTER
+    
+        `OBJECT_SELF` = The object the event script is running on
+    
+        Event Data Tag        | Type   | Notes
+        ----------------------|--------|-------
+        EVENT_TYPE            | int    | EVENT_SCRIPT_* in nwscript.nss |
+        EVENT_SCRIPT          | int    | Script name running (can be empty) |
+        
+        @note This event should definitely be used with the Event ID Whitelist, which is turned on by default
+        for this event. Until you add your EVENT_SCRIPT_ to the whitelist this event will not function:
+        ```c
+        NWNX_Events_SubscribeEvent("NWNX_ON_RUN_EVENT_SCRIPT_BEFORE", "creature_hb_ovr");
+        NWNX_Events_AddIDToWhitelist("NWNX_ON_RUN_EVENT_SCRIPT", EVENT_SCRIPT_MODULE_ON_HEARTBEAT);
+        ```
+        @warning Toggling the Whitelist to be off for this event will degrade performance.
+    _______________________________________
     
     */
     /*
@@ -1435,6 +1553,14 @@ namespace NWN.Core.NWNX
     const int NWNX_EVENTS_TIMING_BAR_CUSTOM        = 10;
     
     */
+    /*
+    
+    const int NWNX_EVENTS_DM_SET_VARIABLE_TYPE_INT          = 0;
+    const int NWNX_EVENTS_DM_SET_VARIABLE_TYPE_FLOAT        = 1;
+    const int NWNX_EVENTS_DM_SET_VARIABLE_TYPE_STRING       = 2;
+    const int NWNX_EVENTS_DM_SET_VARIABLE_TYPE_OBJECT       = 3;
+    
+    */
     /// Scripts can subscribe to events.
     ///
     /// Some events are dispatched via the NWNX plugin (see NWNX_EVENTS_EVENT_* constants).
@@ -1459,6 +1585,37 @@ namespace NWN.Core.NWNX
       VM.NWNX.SetFunction(NWNX_Events, sFunc);
       VM.NWNX.StackPush(script);
       VM.NWNX.StackPush(evt);
+      VM.NWNX.Call();
+    }
+
+    /// Script chunks can subscribe to events.
+    ///
+    /// Some events are dispatched via the NWNX plugin (see NWNX_EVENTS_EVENT_* constants).
+    /// Others can be signalled via script code via NWNX_Events_SignalEvent().
+    /// <param name="sEvent">The event name.</param>
+    /// <param name="sScriptChunk">The script chunk to execute when the event fires.</param>
+    /// <param name="bWrapIntoMain">TRUE if the script chunk needs to be wrapped into a void main(){}.</param>
+    public static void SubscribeEventScriptChunk(string sEvent, string sScriptChunk, int bWrapIntoMain = TRUE)
+    {
+      const string sFunc = "SubscribeEventScriptChunk";
+      VM.NWNX.SetFunction(NWNX_Events, sFunc);
+      VM.NWNX.StackPush(bWrapIntoMain);
+      VM.NWNX.StackPush(sScriptChunk);
+      VM.NWNX.StackPush(sEvent);
+      VM.NWNX.Call();
+    }
+
+    /// Unsubscribe a script chunk from an event
+    /// <param name="sEvent">The event name.</param>
+    /// <param name="sScriptChunk">The script chunk.</param>
+    /// <param name="bWrapIntoMain">TRUE if the script chunk needs to be wrapped into a void main(){}. Must match the value used when subscribing.</param>
+    public static void UnsubscribeEventScriptChunk(string sEvent, string sScriptChunk, int bWrapIntoMain = TRUE)
+    {
+      const string sFunc = "UnsubscribeEventScriptChunk";
+      VM.NWNX.SetFunction(NWNX_Events, sFunc);
+      VM.NWNX.StackPush(bWrapIntoMain);
+      VM.NWNX.StackPush(sScriptChunk);
+      VM.NWNX.StackPush(sEvent);
       VM.NWNX.Call();
     }
 
@@ -1540,6 +1697,10 @@ namespace NWN.Core.NWNX
     /// - UnpossessFamiliar event
     /// - ClientLevelUpBegin event
     /// - CharacterSheetPermitted event
+    /// - Input Drop Item
+    /// - Decrement Spell Count event
+    /// - Play Visual Effect event
+    /// - EventScript event
     public static void SkipEvent()
     {
       const string sFunc = "SkipEvent";
@@ -1583,36 +1744,36 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopString();
     }
 
-    /// Toggles DispatchListMode for sEvent+sScript
-    /// If enabled, sEvent for sScript will only be signalled if the target object is on its dispatch list.
-    public static void ToggleDispatchListMode(string sEvent, string sScript, int bEnable)
+    /// Toggles DispatchListMode for sEvent+sScript(Chunk)
+    /// If enabled, sEvent for sScript(Chunk) will only be signalled if the target object is on its dispatch list.
+    public static void ToggleDispatchListMode(string sEvent, string sScriptOrChunk, int bEnable)
     {
       const string sFunc = "ToggleDispatchListMode";
       VM.NWNX.SetFunction(NWNX_Events, sFunc);
       VM.NWNX.StackPush(bEnable);
-      VM.NWNX.StackPush(sScript);
+      VM.NWNX.StackPush(sScriptOrChunk);
       VM.NWNX.StackPush(sEvent);
       VM.NWNX.Call();
     }
 
-    /// Add oObject to the dispatch list for sEvent+sScript.
-    public static void AddObjectToDispatchList(string sEvent, string sScript, uint oObject)
+    /// Add oObject to the dispatch list for sEvent+sScript(Chunk).
+    public static void AddObjectToDispatchList(string sEvent, string sScriptOrChunk, uint oObject)
     {
       const string sFunc = "AddObjectToDispatchList";
       VM.NWNX.SetFunction(NWNX_Events, sFunc);
       VM.NWNX.StackPush(oObject);
-      VM.NWNX.StackPush(sScript);
+      VM.NWNX.StackPush(sScriptOrChunk);
       VM.NWNX.StackPush(sEvent);
       VM.NWNX.Call();
     }
 
-    /// Remove oObject from the dispatch list for sEvent+sScript.
-    public static void RemoveObjectFromDispatchList(string sEvent, string sScript, uint oObject)
+    /// Remove oObject from the dispatch list for sEvent+sScript(Chunk).
+    public static void RemoveObjectFromDispatchList(string sEvent, string sScriptOrChunk, uint oObject)
     {
       const string sFunc = "RemoveObjectFromDispatchList";
       VM.NWNX.SetFunction(NWNX_Events, sFunc);
       VM.NWNX.StackPush(oObject);
-      VM.NWNX.StackPush(sScript);
+      VM.NWNX.StackPush(sScriptOrChunk);
       VM.NWNX.StackPush(sEvent);
       VM.NWNX.Call();
     }
@@ -1623,6 +1784,7 @@ namespace NWN.Core.NWNX
     /// ONLY WORKS WITH THE FOLLOWING EVENTS -&gt; ID TYPES:
     /// - NWNX_ON_CAST_SPELL -&gt; SpellID
     /// - NWNX_ON_HAS_FEAT -&gt; FeatID (default enabled)
+    /// - NWNX_ON_RUN_EVENT_SCRIPT -&gt; EVENT_SCRIPT_* (default enabled)
     ///
     /// @note This enables the whitelist for ALL scripts subscribed to sEvent.
     /// <param name="sEvent">The event name without _BEFORE / _AFTER.</param>
@@ -1660,6 +1822,18 @@ namespace NWN.Core.NWNX
       VM.NWNX.StackPush(nID);
       VM.NWNX.StackPush(sEvent);
       VM.NWNX.Call();
+    }
+
+    /// Get the number of subscribers to sEvent.
+    /// <param name="sEvent">The event.</param>
+    /// <returns>The number of subscribers sEvent has or 0 on error.</returns>
+    public static int GetNumSubscribers(string sEvent)
+    {
+      const string sFunc = "GetNumSubscribers";
+      VM.NWNX.SetFunction(NWNX_Events, sFunc);
+      VM.NWNX.StackPush(sEvent);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
     }
 
     // @}

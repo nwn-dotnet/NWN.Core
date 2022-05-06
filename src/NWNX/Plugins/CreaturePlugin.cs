@@ -691,6 +691,19 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Returns the creature&apos;s maximum movement rate cap.
+    /// @remark Default movement rate cap is 1.5.
+    /// <param name="creature">The creature object.</param>
+    /// <returns>The maximum movement rate cap.</returns>
+    public static float GetMovementRateFactorCap(uint creature)
+    {
+      const string sFunc = "GetMovementRateFactorCap";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(creature);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopFloat();
+    }
+
     /// Sets the creature&apos;s maximum movement rate cap.
     /// @note Default movement rate cap is 1.5.
     /// <param name="creature">The creature object.</param>
@@ -978,6 +991,34 @@ namespace NWN.Core.NWNX
       const string sFunc = "SetSkillPointsRemaining";
       VM.NWNX.SetFunction(NWNX_Creature, sFunc);
       VM.NWNX.StackPush(skillpoints);
+      VM.NWNX.StackPush(creature);
+      VM.NWNX.Call();
+    }
+
+    /// Gets the creature&apos;s remaining unspent skill points for level.
+    /// <param name="creature">The creature object.</param>
+    /// <param name="level">The level.</param>
+    /// <returns>The remaining unspent skill points for level.</returns>
+    public static int GetSkillPointsRemainingByLevel(uint creature, int level)
+    {
+      const string sFunc = "GetSkillPointsRemainingByLevel";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(level);
+      VM.NWNX.StackPush(creature);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
+    /// Sets the creature&apos;s remaining unspent skill points for level.
+    /// <param name="creature">The creature object.</param>
+    /// <param name="level">The level.</param>
+    /// <param name="value">The value to set for level.</param>
+    public static void SetSkillPointsRemainingByLevel(uint creature, int level, int value)
+    {
+      const string sFunc = "SetSkillPointsRemainingByLevel";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(value);
+      VM.NWNX.StackPush(level);
       VM.NWNX.StackPush(creature);
       VM.NWNX.Call();
     }
@@ -2139,6 +2180,46 @@ namespace NWN.Core.NWNX
       VM.NWNX.StackPush(nProjectileVFX);
       VM.NWNX.StackPush(oCreature);
       VM.NWNX.Call();
+    }
+
+    /// Sets a custom Initiative modifier
+    /// <param name="oCreature">The affected creature</param>
+    /// <param name="nMod">The amount to adjust their initiative (+/-).</param>
+    /// <param name="bPersist">Whether the modifier should persist to .bic file (for PCs)</param>
+    /// @note Persistence is enabled after a server reset by the first use of this function. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
+    /// @warning This modifier takes precedence over an NWNX_Race Initiative modifier; they&apos;re not additive
+    public static void SetInitiativeModifier(uint oCreature, int nMod, int bPersist = FALSE)
+    {
+      const string sFunc = "SetInitiativeModifier";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(bPersist);
+      VM.NWNX.StackPush(nMod);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+    }
+
+    /// Gets the custom Initiative modifier.
+    /// <param name="oCreature">The target creature</param>
+    /// <returns>the current custom initiative modifier for the creature</returns>
+    public static int GetInitiativeModifier(uint oCreature)
+    {
+      const string sFunc = "GetInitiativeModifier";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
+    /// Gets the Body Bag of a creature
+    /// <param name="oCreature">The target creature</param>
+    /// <returns>The creatures assigned Body Bag</returns>
+    public static uint GetBodyBag(uint oCreature)
+    {
+      const string sFunc = "GetBodyBag";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopObject();
     }
 
     // @}
