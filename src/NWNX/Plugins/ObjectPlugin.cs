@@ -801,6 +801,19 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopFloat();
     }
 
+    /// Sets conversations started by oObject to be private or not.
+    /// @note ActionStartConversation()&apos;s bPrivateConversation parameter will overwrite this flag.
+    /// <param name="oObject">The object.</param>
+    /// <param name="bPrivate">TRUE/FALSE.</param>
+    public static void SetConversationPrivate(uint oObject, int bPrivate)
+    {
+      const string sFunc = "SetConversationPrivate";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
+      VM.NWNX.StackPush(bPrivate);
+      VM.NWNX.StackPush(oObject);
+      VM.NWNX.Call();
+    }
+
     // @}
   }
 
