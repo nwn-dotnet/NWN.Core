@@ -21,6 +21,12 @@ jobs:
           ssh-key: ${{ secrets.API_PUSH_KEY }}
           persist-credentials: true
 
+      - name: Download Tools
+        run: |
+          apt-get update && apt-get install -y curl && \
+          wget https://github.com/niv/neverwinter.nim/releases/download/1.5.4/neverwinter.linux.amd64.zip && \
+          unzip neverwinter.linux.amd64.zip
+
       - name: Load Environment Info
         id: "dotenv"
         uses: falti/dotenv-action@v0.2.6
@@ -33,8 +39,6 @@ jobs:
           NWNX_SHA=$(curl -u "u:${{github.token}}" https://api.github.com/repos/nwnxee/unified/git/ref/tags/${{ steps.dotenv.outputs.nwnx_tag }} | jq .object.sha | tr -d '"')
           echo ::set-output name=nwnx_sha::$( echo $NWNX_SHA )
           echo ::set-output name=nwnx_sha_short::$( echo $NWNX_SHA | cut -c1-8 )
-          NWN_SHA=$(curl -u "u:${{github.token}}" https://api.github.com/repos/urothis/nwn-assets/git/ref/tags/${{ steps.dotenv.outputs.nwn_tag }} | jq .object.sha | tr -d '"')
-          echo ::set-output name=nwn_sha::$( echo $NWN_SHA )
 
       - name: Checkout NWNX
         uses: actions/checkout@v2
@@ -42,10 +46,17 @@ jobs:
           repository: "nwnxee/unified"
           path: "./nwnx"
           ref: ${{ steps.revision.outputs.nwnx_sha }}
+      
+      - name: Extract Server Image
+        uses: shrink/actions-docker-extract@v1
+        with:
+          image: beamdog/nwserver:${{ steps.dotenv.outputs.nwn_tag }}
+          path: /nwn
 
-      - name: Checkout nwscript.nss
+      - name: Extract nwscript.nss
         run: |
-          wget -P "${GITHUB_WORKSPACE}/nwn" https://raw.githubusercontent.com/urothis/nwn-assets/${{ steps.revision.outputs.nwn_sha }}/nwscript/nwscript.nss
+          ./nwn_key_unpack ${{ steps.extracted.outputs.destination }}/nwn/data/data/nwn_base.key ${GITHUB_WORKSPACE}/nwserver-extracted
+          cp ${GITHUB_WORKSPACE}/nwserver-extracted/nwscript.nss ${GITHUB_WORKSPACE}/nwn
 
       - name: Convert
         run: |
