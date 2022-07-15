@@ -23,7 +23,7 @@ jobs:
 
       - name: Download Tools
         run: |
-          apt-get update && apt-get install -y curl && \
+          apt-get update && apt-get install -y curl unzip docker && \
           wget https://github.com/niv/neverwinter.nim/releases/download/1.5.4/neverwinter.linux.amd64.zip && \
           unzip neverwinter.linux.amd64.zip
 
