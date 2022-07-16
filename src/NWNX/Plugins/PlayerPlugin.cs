@@ -786,6 +786,66 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Update wind for oPlayer only.
+    /// <param name="oPlayer">The player.</param>
+    /// <param name="vDirection">The Wind&apos;s direction.</param>
+    /// <param name="fMagnitude">The Wind&apos;s magnitude.</param>
+    /// <param name="fYaw">The Wind&apos;s yaw.</param>
+    /// <param name="fPitch">The Wind&apos;s pitch.</param>
+    public static void UpdateWind(uint oPlayer, System.Numerics.Vector3 vDirection, float fMagnitude, float fYaw, float fPitch)
+    {
+      const string sFunc = "UpdateWind";
+      VM.NWNX.SetFunction(NWNX_Player, sFunc);
+      VM.NWNX.StackPush(fPitch);
+      VM.NWNX.StackPush(fYaw);
+      VM.NWNX.StackPush(fMagnitude);
+      VM.NWNX.StackPush(vDirection.X);
+      VM.NWNX.StackPush(vDirection.Y);
+      VM.NWNX.StackPush(vDirection.Z);
+      VM.NWNX.StackPush(oPlayer);
+      VM.NWNX.Call();
+    }
+
+    /// Update the SkyBox for oPlayer only.
+    /// <param name="oPlayer">The player.</param>
+    /// <param name="nSkyBox">The Skybox ID.</param>
+    public static void UpdateSkyBox(uint oPlayer, int nSkyBox)
+    {
+      const string sFunc = "UpdateSkyBox";
+      VM.NWNX.SetFunction(NWNX_Player, sFunc);
+      VM.NWNX.StackPush(nSkyBox);
+      VM.NWNX.StackPush(oPlayer);
+      VM.NWNX.Call();
+    }
+
+    /// Update Sun and Moon Fog Color for oPlayer only.
+    /// <param name="oPlayer">The player.</param>
+    /// <param name="nSunFogColor">The int value of Sun Fog color.</param>
+    /// <param name="nMoonFogColor">The int value of Moon Fog color.</param>
+    public static void UpdateFogColor(uint oPlayer, int nSunFogColor, int nMoonFogColor)
+    {
+      const string sFunc = "UpdateFogColor";
+      VM.NWNX.SetFunction(NWNX_Player, sFunc);
+      VM.NWNX.StackPush(nMoonFogColor);
+      VM.NWNX.StackPush(nSunFogColor);
+      VM.NWNX.StackPush(oPlayer);
+      VM.NWNX.Call();
+    }
+
+    /// Update Sun and Moon Fog Amount for oPlayer only.
+    /// <param name="oPlayer">The player.</param>
+    /// <param name="nSunFogAmount">The int value of Sun Fog amount (range 0-255).</param>
+    /// <param name="nMoonFogAmount">The int value of Moon Fog amount (range 0-255).</param>
+    public static void UpdateFogAmount(uint oPlayer, int nSunFogAmount, int nMoonFogAmount)
+    {
+      const string sFunc = "UpdateFogAmount";
+      VM.NWNX.SetFunction(NWNX_Player, sFunc);
+      VM.NWNX.StackPush(nMoonFogAmount);
+      VM.NWNX.StackPush(nSunFogAmount);
+      VM.NWNX.StackPush(oPlayer);
+      VM.NWNX.Call();
+    }
+
     // @}
     public static void INTERNAL_StopGuiTimingBar(uint player, string script = "", int id = -1)
     {

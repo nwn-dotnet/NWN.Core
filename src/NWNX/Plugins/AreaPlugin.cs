@@ -43,6 +43,7 @@ namespace NWN.Core.NWNX
 
     // @}
     /// A tile info struct
+    /// Area wind info struct
     /// Gets the number of players in area.
     /// <param name="area">The area object.</param>
     /// <returns>The player count for the area.</returns>
@@ -698,6 +699,25 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Get oArea&apos;s detailed win data.
+    /// @note vDirection returns [0.0, 0.0, 0.0] if not set previously with SetAreaWind nwscript function.
+    /// <param name="oArea">The area.</param>
+    public static AreaWind GetAreaWind(uint oArea)
+    {
+      const string sFunc = "GetAreaWind";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
+      AreaWind data = default;
+      VM.NWNX.StackPush(oArea);
+      VM.NWNX.Call();
+      data.fPitch = VM.NWNX.StackPopFloat();
+      data.fYaw = VM.NWNX.StackPopFloat();
+      data.fMagnitude = VM.NWNX.StackPopFloat();
+      data.vDirection.X = VM.NWNX.StackPopFloat();
+      data.vDirection.Y = VM.NWNX.StackPopFloat();
+      data.vDirection.Z = VM.NWNX.StackPopFloat();
+      return data;
+    }
+
     // @}
   }
 
@@ -708,5 +728,13 @@ namespace NWN.Core.NWNX
     public int nOrientation;
     public int nGridX;
     public int nGridY;
+  }
+
+  public struct AreaWind
+  {
+    public System.Numerics.Vector3 vDirection;
+    public float fMagnitude;
+    public float fYaw;
+    public float fPitch;
   }
 }

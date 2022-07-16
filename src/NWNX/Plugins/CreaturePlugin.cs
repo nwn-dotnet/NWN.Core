@@ -2222,6 +2222,80 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopObject();
     }
 
+    /// Add a cast spell action to oCreature&apos;s action queue.
+    /// <param name="oCreature">The creature casting the spell.</param>
+    /// <param name="oTarget">The target, to cast at a location use the area as target.</param>
+    /// <param name="vTargetLocation">The target location.</param>
+    /// <param name="nSpellID">The spell ID.</param>
+    /// <param name="nMultiClass">The character class position to cast the spell as. 0 = First Class, 1 = Second Class, 3 = Third Class. To cast a cheat spell use 255 and to cast a special ability use 254.</param>
+    /// <param name="nMetaMagic">A METAMAGIC_* constant, except METAMAGIC_ANY.</param>
+    /// <param name="nDomainLevel">The domain level if casting a domain spell.</param>
+    /// <param name="nProjectilePathType">A PROJECTILE_PATH_TYPE_* constant.</param>
+    /// <param name="bInstant">TRUE to instantly cast the spell.</param>
+    /// <param name="bClearActions">TRUE to clear all actions.</param>
+    /// <param name="bAddToFront">TRUE to add the cast spell action to the front of the action queue.</param>
+    /// <returns>TRUE if the action was successfully added to oCreature&apos;s action queue.</returns>
+    public static int AddCastSpellActions(uint oCreature, uint oTarget, System.Numerics.Vector3 vTargetLocation, int nSpellID, int nMultiClass, int nMetaMagic = METAMAGIC_NONE, int nDomainLevel = 0, int nProjectilePathType = PROJECTILE_PATH_TYPE_DEFAULT, int bInstant = FALSE, int bClearActions = FALSE, int bAddToFront = FALSE)
+    {
+      const string sFunc = "AddCastSpellActions";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(bAddToFront);
+      VM.NWNX.StackPush(bClearActions);
+      VM.NWNX.StackPush(bInstant);
+      VM.NWNX.StackPush(nProjectilePathType);
+      VM.NWNX.StackPush(nDomainLevel);
+      VM.NWNX.StackPush(nMetaMagic);
+      VM.NWNX.StackPush(nMultiClass);
+      VM.NWNX.StackPush(nSpellID);
+      VM.NWNX.StackPush(vTargetLocation.Z);
+      VM.NWNX.StackPush(vTargetLocation.Y);
+      VM.NWNX.StackPush(vTargetLocation.X);
+      VM.NWNX.StackPush(oTarget);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
+    /// Get the number of uses left of a spell.
+    /// @note This function is for caster classes that don&apos;t need to memorize spells.
+    /// <param name="oCreature">The creature.</param>
+    /// <param name="nSpellID">The spell ID.</param>
+    /// <param name="nMultiClass">The position of the class to check, 0-2</param>
+    /// <param name="nDomainLevel">The domain level if checking a domain spell.</param>
+    /// <param name="nMetaMagic">A METAMAGIC_* constant.</param>
+    /// <returns>The number of spell uses left or 0 on error.</returns>
+    public static int GetSpellUsesLeft(uint oCreature, int nSpellID, int nMultiClass, int nDomainLevel = 0, int nMetaMagic = METAMAGIC_NONE)
+    {
+      const string sFunc = "GetSpellUsesLeft";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(nMetaMagic);
+      VM.NWNX.StackPush(nDomainLevel);
+      VM.NWNX.StackPush(nMultiClass);
+      VM.NWNX.StackPush(nSpellID);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
+    /// Get the number of memorized ready spells by spellid.
+    /// @note This function is for caster classes that need to memorize spells.
+    /// <param name="oCreature">The creature.</param>
+    /// <param name="nSpellID">The spell ID.</param>
+    /// <param name="nMultiClass">The position of the class to check, 0-2</param>
+    /// <param name="nMetaMagic">A METAMAGIC_* constant.</param>
+    /// <returns>The number of spell uses left or 0 on error.</returns>
+    public static int GetMemorizedSpellReadyCount(uint oCreature, int nSpellID, int nMultiClass, int nMetaMagic = METAMAGIC_NONE)
+    {
+      const string sFunc = "GetMemorizedSpellReadyCount";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(nMetaMagic);
+      VM.NWNX.StackPush(nMultiClass);
+      VM.NWNX.StackPush(nSpellID);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
     // @}
   }
 
