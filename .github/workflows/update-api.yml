@@ -9,21 +9,20 @@ on:
         description: 'Commit Tag'
 
 jobs:
-  build:
+  download:
     runs-on: ubuntu-20.04
-    container:
-      image: docker://nwndotnet/nss2csharp:latest
+    outputs:
+      nwnx_sha_short: ${{ steps.revision.outputs.nwnx_sha_short }}
+      nwn_build: ${{ steps.version.outputs.nwn_build }}
+      nwn_build_revision: ${{ steps.version.outputs.nwn_build_revision }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          path: "./repo"
-          ssh-key: ${{ secrets.API_PUSH_KEY }}
-          persist-credentials: true
+          path: ./repo
 
       - name: Download Tools
         run: |
-          apt-get update && apt-get install -y curl unzip docker && \
           wget https://github.com/niv/neverwinter.nim/releases/download/1.5.4/neverwinter.linux.amd64.zip && \
           unzip neverwinter.linux.amd64.zip
 
@@ -46,22 +45,63 @@ jobs:
           repository: "nwnxee/unified"
           path: "./nwnx"
           ref: ${{ steps.revision.outputs.nwnx_sha }}
-      
+
+      - name: Load Game Version
+        id: "version"
+        run: |
+          echo "::set-output name=nwn_build::$(grep 'set(TARGET_NWN_BUILD ' ./nwnx/CMakeLists.txt | cut -d' ' -f2 | sed 's/)//')"
+          echo "::set-output name=nwn_build_revision::$(grep 'set(TARGET_NWN_BUILD_REVISION ' ./nwnx/CMakeLists.txt | cut -d' ' -f2 | sed 's/)//')"
+
       - name: Extract Server Image
+        id: "nwn_extract"
         uses: shrink/actions-docker-extract@v1
         with:
           image: beamdog/nwserver:${{ steps.dotenv.outputs.nwn_tag }}
           path: /nwn
 
-      - name: Extract nwscript.nss
+      - name: Unpack Key File
         run: |
-          ./nwn_key_unpack ${{ steps.extracted.outputs.destination }}/nwn/data/data/nwn_base.key ${GITHUB_WORKSPACE}/nwserver-extracted
-          cp ${GITHUB_WORKSPACE}/nwserver-extracted/nwscript.nss ${GITHUB_WORKSPACE}/nwn
+          ./nwn_key_unpack ${{ steps.nwn_extract.outputs.destination }}/nwn/data/data/nwn_base.key ${GITHUB_WORKSPACE}/nwn
+
+      - name: Copy Scripts
+        run: |
+          mkdir -p ${GITHUB_WORKSPACE}/scripts/nwn
+          mkdir -p ${GITHUB_WORKSPACE}/scripts/nwnx
+
+          find ${GITHUB_WORKSPACE}/nwn -name 'nwscript.nss' -type f -exec cp -v '{}' ${GITHUB_WORKSPACE}/scripts/nwn \;
+          find ${GITHUB_WORKSPACE}/nwnx/Plugins -name '*.nss' -type f -exec cp -v '{}' ${GITHUB_WORKSPACE}/scripts/nwnx \;
+
+          test -e ${GITHUB_WORKSPACE}/scripts/nwn/nwscript.nss
+
+      - name: Upload Scripts
+        uses: actions/upload-artifact@v2
+        with:
+          name: nss_source
+          path: ./scripts
+
+  build:
+    runs-on: ubuntu-20.04
+    container:
+      image: docker://nwndotnet/nss2csharp:latest
+    needs: [download]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          path: ./repo
+          ssh-key: ${{ secrets.API_PUSH_KEY }}
+          persist-credentials: true
+
+      - name: Download Scripts
+        uses: actions/download-artifact@v2
+        with:
+          name: nss_source
+          path: ./scripts
 
       - name: Convert
         run: |
           su -c "rm -fv ${GITHUB_WORKSPACE}/repo/src/NWNX/Plugins/*"
-          dotnet /app/Nss2CSharp.dll "${GITHUB_WORKSPACE}/nwn" "${GITHUB_WORKSPACE}/repo/src/NWN" "${GITHUB_WORKSPACE}/nwnx/Plugins" "${GITHUB_WORKSPACE}/repo/src/NWNX/Plugins"
+          dotnet /app/Nss2CSharp.dll "${GITHUB_WORKSPACE}/scripts/nwn" "${GITHUB_WORKSPACE}/repo/src/NWN" "${GITHUB_WORKSPACE}/scripts/nwnx" "${GITHUB_WORKSPACE}/repo/src/NWNX/Plugins"
           if [ -z "$(ls -A ${GITHUB_WORKSPACE}/repo/src/NWNX/Plugins)" ]; then
             exit 1
           fi
@@ -76,12 +116,6 @@ jobs:
           cd ${GITHUB_WORKSPACE}/repo
           dotnet build --configuration Release
 
-      - name: Load Game Version
-        id: "version"
-        run: |
-          echo "::set-output name=nwn_build::$(grep 'set(TARGET_NWN_BUILD ' ./nwnx/CMakeLists.txt | cut -d' ' -f2 | sed 's/)//')"
-          echo "::set-output name=nwn_build_revision::$(grep 'set(TARGET_NWN_BUILD_REVISION ' ./nwnx/CMakeLists.txt | cut -d' ' -f2 | sed 's/)//')"
-
       - name: Commit Changes
         run: |
           cd ${GITHUB_WORKSPACE}/repo
@@ -89,5 +123,5 @@ jobs:
           git config user.email jorteckdev@gmail.com
           git add -A src/NWN/NWScript.cs src/NWNX/Plugins/
           git diff-index --quiet HEAD src/NWN/NWScript.cs src/NWNX/Plugins/ ||
-          git commit -m "Update APIs (NWNX: ${{ steps.revision.outputs.nwnx_sha_short }}, NWN: ${{ steps.version.outputs.nwn_build }}.${{ steps.version.outputs.nwn_build_revision }})." &&
+          git commit -m "Update APIs (NWNX: ${{ needs.download.outputs.nwnx_sha_short }}, NWN: ${{ needs.download.outputs.nwn_build }}.${{ needs.download.outputs.nwn_build_revision }})." &&
           if [ ${{ github.event.inputs.tag }} != '' ]; then git tag ${{ github.event.inputs.tag }} && git push --atomic origin master ${{ github.event.inputs.tag }}; else git push; fi;
