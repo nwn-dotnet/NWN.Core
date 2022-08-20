@@ -814,6 +814,30 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Sets the radius of a circle AoE object.
+    /// <param name="oAoE">The AreaOfEffect object.</param>
+    /// <param name="fRadius">The radius, must be bigger than 0.0f.</param>
+    public static void SetAoEObjectRadius(uint oAoE, float fRadius)
+    {
+      const string sFunc = "SetAoEObjectRadius";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
+      VM.NWNX.StackPush(fRadius);
+      VM.NWNX.StackPush(oAoE);
+      VM.NWNX.Call();
+    }
+
+    /// Gets the radius of a circle AoE object.
+    /// <param name="oAoE">The AreaOfEffect object.</param>
+    /// <returns>The radius or 0.0f on error</returns>
+    public static float GetAoEObjectRadius(uint oAoE)
+    {
+      const string sFunc = "GetAoEObjectRadius";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
+      VM.NWNX.StackPush(oAoE);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopFloat();
+    }
+
     // @}
   }
 
