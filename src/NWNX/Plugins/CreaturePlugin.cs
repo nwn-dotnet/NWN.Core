@@ -2296,6 +2296,20 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
+    /// Get whether oCreature is flanking oTargetCreature.
+    /// <param name="oCreature">The creature object.</param>
+    /// <param name="oTargetCreature">The target creature object.</param>
+    /// <returns>TRUE if oCreature is flanking oTargetCreature.</returns>
+    public static int GetIsFlanking(uint oCreature, uint oTargetCreature)
+    {
+      const string sFunc = "GetIsFlanking";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(oTargetCreature);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
     // @}
   }
 
