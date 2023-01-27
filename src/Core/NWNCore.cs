@@ -1,10 +1,17 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace NWN.Core
 {
   public static partial class NWNCore
   {
+    /// <summary>
+    /// Gets or sets the encoding to use for native/managed string conversion.<br/>
+    /// Defaults to windows-1252.
+    /// </summary>
+    public static Encoding Encoding { get; set; } = null!;
+
     internal static ICoreFunctionHandler? FunctionHandler;
 
     internal static NativeHandles NativeFunctions;
@@ -36,6 +43,8 @@ namespace NWN.Core
 
     public static int Init(IntPtr nativeHandlesPtr, int nativeHandlesLength, ICoreFunctionHandler functionHandler)
     {
+      Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+      Encoding = Encoding.GetEncoding("windows-1252");
       FunctionHandler = functionHandler;
 
       if (nativeHandlesPtr == IntPtr.Zero)

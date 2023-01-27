@@ -8,17 +8,12 @@ namespace NWN.Core
 {
   public static partial class VM
   {
-    public static readonly Encoding Cp1252Encoding;
-
     static VM()
     {
       if (NWNCore.FunctionHandler == null)
       {
         throw new InvalidOperationException("Attempted to call a VM function before NWN.Core was initialised. Initialise NWN.Core first using NWNCore.Init()");
       }
-
-      Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-      Cp1252Encoding = Encoding.GetEncoding("windows-1252");
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
@@ -96,7 +91,7 @@ namespace NWN.Core
         return IntPtr.Zero;
       }
 
-      byte[] bytes = Cp1252Encoding.GetBytes(value);
+      byte[] bytes = NWNCore.Encoding.GetBytes(value);
       IntPtr buffer = Marshal.AllocHGlobal(bytes.Length + 1);
       Marshal.Copy(bytes, 0, buffer, bytes.Length);
 
@@ -113,7 +108,7 @@ namespace NWN.Core
       }
 
       byte* charPointer = (byte*)cString;
-      return Cp1252Encoding.GetString(charPointer, GetStringLength(charPointer));
+      return NWNCore.Encoding.GetString(charPointer, GetStringLength(charPointer));
     }
 
     private static unsafe int GetStringLength(byte* cString)
