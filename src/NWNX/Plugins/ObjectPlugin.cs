@@ -838,6 +838,32 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopFloat();
     }
 
+    /// Gets whether the last spell cast of oObject was spontaneous.
+    /// @note Should be called in a spell script.
+    /// <param name="oObject">The object.</param>
+    /// <returns>true if the last spell was cast spontaneously</returns>
+    public static int GetLastSpellCastSpontaneous(uint oObject)
+    {
+      const string sFunc = "GetLastSpellCastSpontaneous";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
+      VM.NWNX.StackPush(oObject);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
+    /// Gets the last spell cast domain level.
+    /// @note Should be called in a spell script.
+    /// <param name="oObject">The object.</param>
+    /// <returns>Domain level of the cast spell, 0 if not a domain spell</returns>
+    public static int GetLastSpellCastDomainLevel(uint oObject)
+    {
+      const string sFunc = "GetLastSpellCastDomainLevel";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
+      VM.NWNX.StackPush(oObject);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
     // @}
   }
 
