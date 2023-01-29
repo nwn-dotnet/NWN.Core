@@ -2310,6 +2310,34 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
+    /// Decrements the remaining spell slots (innate casting) at a class level.
+    /// <param name="oCreature">The creature object.</param>
+    /// <param name="nClass">The class id from classes.2da. (Not class index 0-2)</param>
+    /// <param name="nSpellLevel">The spell level.</param>
+    public static void DecrementRemainingSpellSlots(uint oCreature, int nClass, int nSpellLevel)
+    {
+      const string sFunc = "DecrementRemainingSpellSlots";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(nSpellLevel);
+      VM.NWNX.StackPush(nClass);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+    }
+
+    /// Increments the remaining spell slots (innate casting) at a class level.
+    /// <param name="oCreature">The creature object.</param>
+    /// <param name="nClass">The class id from classes.2da. (Not class index 0-2)</param>
+    /// <param name="nSpellLevel">The spell level.</param>
+    public static void IncrementRemainingSpellSlots(uint oCreature, int nClass, int nSpellLevel)
+    {
+      const string sFunc = "IncrementRemainingSpellSlots";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(nSpellLevel);
+      VM.NWNX.StackPush(nClass);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+    }
+
     // @}
   }
 
