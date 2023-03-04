@@ -46,12 +46,14 @@ jobs:
 
       - name: Version and Tag
         id: bump_version
-        uses: anothrNick/github-tag-action@1.39.0
+        uses: anothrNick/github-tag-action@1.61.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
           RELEASE_BRANCHES: main
           WITH_V: true
+          PRERELEASE_SUFFIX: alpha
+          PRERELEASE: ${{ github.ref != 'main' }}
 
       - name: Prepare Outputs
         id: vars
