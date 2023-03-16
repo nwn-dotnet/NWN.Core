@@ -30,5 +30,12 @@ namespace NWN.Core
     /// <param name="signal">"ON_MODULE_LOAD_FINISH" - Called just before the OnModuleLoad event. Perform any init requiring NWScript usage here.<br/>
     /// "ON_DESTROY_SERVER" - Called just before the server will be shutdown. Perform any cleanup/flushing here.</param>
     void OnSignal(string signal);
+
+    /// <summary>
+    /// Called when a assertion failure occurs in native code.
+    /// </summary>
+    /// <param name="message">The failure message.</param>
+    /// <param name="stackTrace">The native stack trace when this assertion failure occurred.</param>
+    void OnAssertFail(string message, string stackTrace);
   }
 }

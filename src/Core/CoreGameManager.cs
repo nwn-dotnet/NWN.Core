@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace NWN.Core
 {
@@ -40,6 +41,12 @@ namespace NWN.Core
 
     void ICoreEventHandler.OnSignal(string signal)
         => OnSignal?.Invoke(signal);
+
+    public void OnAssertFail(string message, string stackTrace)
+    {
+      StackTrace managedStackTrace = new StackTrace(true);
+      Console.Error.WriteLine(managedStackTrace.ToString());
+    }
 
     int ICoreEventHandler.OnRunScript(string script, uint oidSelf)
     {
