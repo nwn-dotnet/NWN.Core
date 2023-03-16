@@ -54,6 +54,7 @@ jobs:
           WITH_V: true
           PRERELEASE_SUFFIX: alpha
           PRERELEASE: ${{ github.ref != 'main' }}
+          TAG_CONTEXT: branch
 
       - name: Prepare Outputs
         id: vars
