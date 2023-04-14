@@ -15,6 +15,7 @@ jobs:
       nwnx_sha_short: ${{ steps.revision.outputs.nwnx_sha_short }}
       nwn_build: ${{ steps.version.outputs.nwn_build }}
       nwn_build_revision: ${{ steps.version.outputs.nwn_build_revision }}
+      nwn_build_postfix: ${{ steps.version.outputs.nwn_build_postfix }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -51,6 +52,7 @@ jobs:
         run: |
           echo "::set-output name=nwn_build::$(grep 'set(TARGET_NWN_BUILD ' ./nwnx/CMakeLists.txt | cut -d' ' -f2 | sed 's/)//')"
           echo "::set-output name=nwn_build_revision::$(grep 'set(TARGET_NWN_BUILD_REVISION ' ./nwnx/CMakeLists.txt | cut -d' ' -f2 | sed 's/)//')"
+          echo "::set-output name=nwn_build_postfix::$(grep 'set(TARGET_NWN_BUILD_POSTFIX ' ./nwnx/CMakeLists.txt | cut -d' ' -f2 | sed 's/)//')"
 
       - name: Extract Server Image
         id: "nwn_extract"
@@ -123,5 +125,5 @@ jobs:
           git config user.email jorteckdev@gmail.com
           git add -A src/NWN/NWScript.cs src/NWNX/Plugins/
           git diff-index --quiet HEAD src/NWN/NWScript.cs src/NWNX/Plugins/ ||
-          git commit -m "Update APIs (NWNX: ${{ needs.download.outputs.nwnx_sha_short }}, NWN: ${{ needs.download.outputs.nwn_build }}.${{ needs.download.outputs.nwn_build_revision }})." &&
+          git commit -m "Update APIs (NWNX: ${{ needs.download.outputs.nwnx_sha_short }}, NWN: ${{ needs.download.outputs.nwn_build }}.${{ needs.download.outputs.nwn_build_revision }}-${{ needs.download.outputs.nwn_build_postfix }})." &&
           if [ ${{ github.event.inputs.tag }} != '' ]; then git tag ${{ github.event.inputs.tag }} && git push --atomic origin master ${{ github.event.inputs.tag }}; else git push; fi;
