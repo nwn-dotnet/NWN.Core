@@ -4,11 +4,13 @@ on:
   push:
     branches:
       - main
+      - preview
     paths-ignore:
       - '**.md'
   pull_request:
     branches:
       - main
+      - preview
     paths-ignore:
       - '**.md'
   workflow_dispatch:
