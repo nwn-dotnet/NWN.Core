@@ -37,7 +37,7 @@ jobs:
         run: |
           NWNX_SHA=$(curl -u "u:${{github.token}}" https://api.github.com/repos/nwnxee/unified/git/ref/tags/${{ steps.dotenv.outputs.nwnx_tag }} | jq .object.sha | tr -d '"')
           echo ::set-output name=nwnx_sha::$( echo $NWNX_SHA )
-          echo ::set-output name=nwnx_sha_short::$( echo $NWNX_SHA | cut -c1-8 )
+          echo ::set-output name=nwnx_sha_short::$( echo $NWNX_SHA | cut -c1-7 )
 
       - name: Checkout NWNX
         uses: actions/checkout@v2
@@ -56,7 +56,7 @@ jobs:
         id: "nwn_extract"
         uses: shrink/actions-docker-extract@v1
         with:
-          image: beamdog/nwserver:${{ steps.dotenv.outputs.nwn_tag }}
+          image: nwnxee/unified:${{ steps.revision.outputs.nwnx_sha_short }}
           path: /nwn
 
       - name: Unpack Key File
