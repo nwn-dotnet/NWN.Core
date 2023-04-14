@@ -24,7 +24,7 @@ jobs:
 
       - name: Download Tools
         run: |
-          wget https://github.com/niv/neverwinter.nim/releases/download/1.5.4/neverwinter.linux.amd64.zip && \
+          wget https://github.com/niv/neverwinter.nim/releases/download/1.5.9/neverwinter.linux.amd64.zip && \
           unzip neverwinter.linux.amd64.zip
 
       - name: Load Environment Info
