@@ -4,6 +4,7 @@ namespace NWN.Core
   {
     public const uint OBJECT_INVALID = 0x7F000000;
     public static uint OBJECT_SELF => NWNCore.FunctionHandler!.ObjectSelf;
+    public static System.IntPtr LOCATION_INVALID => Location(OBJECT_INVALID, new System.Numerics.Vector3(0f, 0f, 0f), 0f);
 
     public const int ENGINE_NUM_STRUCTURES = 8;
     public const int ENGINE_STRUCTURE_EFFECT = 0;
@@ -60,6 +61,7 @@ namespace NWN.Core
     public const int SUBTYPE_MAGICAL = 8;
     public const int SUBTYPE_SUPERNATURAL = 16;
     public const int SUBTYPE_EXTRAORDINARY = 24;
+    public const int SUBTYPE_UNYIELDING = 32;
     public const int ABILITY_STRENGTH = 0;
 
     ///  should be the same as in nwseffectlist.cpp
@@ -114,6 +116,25 @@ namespace NWN.Core
     ///  The base weapon damage is the base damage delivered by the weapon before<br/>
     ///  any additional types of damage (e.g. fire) have been added.
     public const int DAMAGE_TYPE_BASE_WEAPON = 4096;
+    public const int DAMAGE_TYPE_CUSTOM1 = 8192;
+    public const int DAMAGE_TYPE_CUSTOM2 = 16384;
+    public const int DAMAGE_TYPE_CUSTOM3 = 32768;
+    public const int DAMAGE_TYPE_CUSTOM4 = 65536;
+    public const int DAMAGE_TYPE_CUSTOM5 = 131072;
+    public const int DAMAGE_TYPE_CUSTOM6 = 262144;
+    public const int DAMAGE_TYPE_CUSTOM7 = 524288;
+    public const int DAMAGE_TYPE_CUSTOM8 = 1048576;
+    public const int DAMAGE_TYPE_CUSTOM9 = 2097152;
+    public const int DAMAGE_TYPE_CUSTOM10 = 4194304;
+    public const int DAMAGE_TYPE_CUSTOM11 = 8388608;
+    public const int DAMAGE_TYPE_CUSTOM12 = 16777216;
+    public const int DAMAGE_TYPE_CUSTOM13 = 33554432;
+    public const int DAMAGE_TYPE_CUSTOM14 = 67108864;
+    public const int DAMAGE_TYPE_CUSTOM15 = 134217728;
+    public const int DAMAGE_TYPE_CUSTOM16 = 268435456;
+    public const int DAMAGE_TYPE_CUSTOM17 = 536870912;
+    public const int DAMAGE_TYPE_CUSTOM18 = 1073741824;
+    public const int DAMAGE_TYPE_CUSTOM19 = unchecked((int)2147483648);
 
     ///  Special versus flag just for AC effects
     public const int AC_VS_DAMAGE_TYPE_ALL = 4103;
@@ -506,6 +527,10 @@ namespace NWN.Core
     public const int EFFECT_TYPE_CUTSCENEIMMOBILIZE = 84;
     public const int EFFECT_TYPE_RUNSCRIPT = 85;
     public const int EFFECT_TYPE_ICON = 86;
+    public const int EFFECT_TYPE_PACIFY = 87;
+    public const int EFFECT_TYPE_BONUS_FEAT = 88;
+    public const int EFFECT_TYPE_TIMESTOP_IMMUNITY = 89;
+    public const int EFFECT_TYPE_FORCE_WALK = 90;
     public const int ITEM_APPR_TYPE_SIMPLE_MODEL = 0;
     public const int ITEM_APPR_TYPE_WEAPON_COLOR = 1;
     public const int ITEM_APPR_TYPE_WEAPON_MODEL = 2;
@@ -3252,6 +3277,19 @@ namespace NWN.Core
     public const int FEAT_PLAYER_TOOL_09 = 1114;
     public const int FEAT_PLAYER_TOOL_10 = 1115;
 
+    ///  Subfeats for engine hardcoded entries
+    public const int SUBFEAT_CALLED_SHOT_LEG = 65000;
+    public const int SUBFEAT_CALLED_SHOT_ARMS = 65001;
+    public const int SUBFEAT_ELEMENTAL_SHAPE_EARTH = 1004;
+    public const int SUBFEAT_ELEMENTAL_SHAPE_WATER = 1005;
+    public const int SUBFEAT_ELEMENTAL_SHAPE_FIRE = 1006;
+    public const int SUBFEAT_ELEMENTAL_SHAPE_AIR = 1007;
+    public const int SUBFEAT_WILD_SHAPE_BROWN_BEAR = 1008;
+    public const int SUBFEAT_WILD_SHAPE_PANTHER = 1009;
+    public const int SUBFEAT_WILD_SHAPE_WOLF = 1010;
+    public const int SUBFEAT_WILD_SHAPE_BOAR = 1011;
+    public const int SUBFEAT_WILD_SHAPE_BADGER = 1012;
+
     ///  Special Attack Defines
     public const int SPECIAL_ATTACK_INVALID = 0;
     public const int SPECIAL_ATTACK_CALLED_SHOT_LEG = 1;
@@ -3489,6 +3527,13 @@ namespace NWN.Core
     public const int GUI_PANEL_EXAMINE_ITEM = 13;
     public const int GUI_PANEL_EXAMINE_PLACEABLE = 14;
     public const int GUI_PANEL_EXAMINE_DOOR = 15;
+    public const int GUI_PANEL_RADIAL_TILE = 16;
+    public const int GUI_PANEL_RADIAL_TRIGGER = 17;
+    public const int GUI_PANEL_RADIAL_CREATURE = 18;
+    public const int GUI_PANEL_RADIAL_ITEM = 19;
+    public const int GUI_PANEL_RADIAL_PLACEABLE = 20;
+    public const int GUI_PANEL_RADIAL_DOOR = 21;
+    public const int GUI_PANEL_RADIAL_QUICKBAR = 22;
     public const int VOICE_CHAT_ATTACK = 0;
     public const int VOICE_CHAT_BATTLECRY1 = 1;
     public const int VOICE_CHAT_BATTLECRY2 = 2;
@@ -5498,6 +5543,12 @@ namespace NWN.Core
     public const int FOG_COLOR_ORANGE_DARK = 13395456;
     public const int FOG_COLOR_BROWN = 10053120;
     public const int FOG_COLOR_BROWN_DARK = 6697728;
+    public const int AREA_LIGHT_COLOR_MOON_AMBIENT = 0;
+    public const int AREA_LIGHT_COLOR_MOON_DIFFUSE = 1;
+    public const int AREA_LIGHT_COLOR_SUN_AMBIENT = 2;
+    public const int AREA_LIGHT_COLOR_SUN_DIFFUSE = 3;
+    public const int AREA_LIGHT_DIRECTION_MOON = 0;
+    public const int AREA_LIGHT_DIRECTION_SUN = 1;
 
     ///  these constants must match those in the AmbientSound.2da
     public const int AMBIENT_SOUND_NONE = 0;
@@ -5855,6 +5906,22 @@ namespace NWN.Core
     public const int OBJECT_VISUAL_TRANSFORM_LERP_SMOOTHERSTEP = 7;
 
     ///  (x * x * x * (x * (6.0 * x - 15.0) + 10.0))
+    public const int OBJECT_VISUAL_TRANSFORM_DATA_SCOPE_BASE = 0;
+    public const int OBJECT_VISUAL_TRANSFORM_DATA_SCOPE_CREATURE_HEAD = 254;
+    public const int OBJECT_VISUAL_TRANSFORM_DATA_SCOPE_CREATURE_TAIL = 253;
+    public const int OBJECT_VISUAL_TRANSFORM_DATA_SCOPE_CREATURE_WINGS = 252;
+    public const int OBJECT_VISUAL_TRANSFORM_DATA_SCOPE_CREATURE_CLOAK = 243;
+    public const int OBJECT_VISUAL_TRANSFORM_DATA_SCOPE_ITEM_PART1 = 255;
+    public const int OBJECT_VISUAL_TRANSFORM_DATA_SCOPE_ITEM_PART2 = 254;
+    public const int OBJECT_VISUAL_TRANSFORM_DATA_SCOPE_ITEM_PART3 = 253;
+    public const int OBJECT_VISUAL_TRANSFORM_DATA_SCOPE_ITEM_PART4 = 252;
+    public const int OBJECT_VISUAL_TRANSFORM_DATA_SCOPE_ITEM_PART5 = 251;
+    public const int OBJECT_VISUAL_TRANSFORM_BEHAVIOR_DEFAULT = 0;
+
+    ///  no special behavior
+    public const int OBJECT_VISUAL_TRANSFORM_BEHAVIOR_BOUNCE = 1;
+
+    ///  when repeating a lerp, swap to and from states
     public const int VIBRATOR_MOTOR_ANY = 0;
     public const int VIBRATOR_MOTOR_LEFT = 1;
     public const int VIBRATOR_MOTOR_RIGHT = 2;
@@ -6118,6 +6185,7 @@ namespace NWN.Core
     public const int GUIEVENT_EXAMINE_OBJECT = 23;
     public const int GUIEVENT_OPTIONS_OPEN = 24;
     public const int GUIEVENT_OPTIONS_CLOSE = 25;
+    public const int GUIEVENT_RADIAL_OPEN = 26;
     public const int JSON_TYPE_NULL = 0;
 
     ///  Also invalid
@@ -6136,6 +6204,66 @@ namespace NWN.Core
 
     ///  The player&amp;apos;s gui scale, in percent (factor 1.4 = 140)
     public const string PLAYER_DEVICE_PROPERTY_GUI_SCALE = "gui_scale";
+
+    ///  Client config values:
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_ANTIALIASING_MODE = "graphics.video.anti-aliasing-mode";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_ANISOTROPIC_FILTERING = "graphics.video.anisotropic-filtering.enabled";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_GAMMA = "graphics.gamma";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_TEXTURE_ANIMATIONS = "graphics.texture-animations.enabled";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_SKYBOXES = "graphics.skyboxes.enabled";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_CREATURE_WIND = "graphics.creature-wind.mode";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_SECOND_STORY_TILES = "graphics.second-story-tiles.mode";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_TILE_BORDERS = "graphics.tile-borders.enabled";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_SPELL_TARGETING_EFFECT = "graphics.spell-targeting-effect.enabled";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_TEXTURES_PACK = "graphics.textures.pack";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_GRASS = "graphics.grass.mode";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_GRASS_RENDER_DISTANCE = "graphics.grass.render-distance";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_SHINY_WATER = "graphics.water.shiny";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_LIGHTING_MAX_LIGHTS = "graphics.lighting.max-lights";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_LIGHTING_ENHANCED = "graphics.lighting.enhanced";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_SHADOWS_ENVIRONMENT = "graphics.shadows.environment.enabled";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_SHADOWS_CREATURES = "graphics.shadows.creatures.mode";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_SHADOWS_MAX_CASTING_LIGHTS = "graphics.shadows.max-casting-lights";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_EFFECTS_HIGH_QUALITY = "graphics.effects.high-quality";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_EFFECTS_CREATURE_ENVIRONMENT_MAPPING = "graphics.effects.creature-environment-mapping";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_KEYHOLING = "graphics.keyholing.enabled";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_KEYHOLING_WITH_TOOLTIP = "graphics.keyholing.with-tooltip";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_KEYHOLING_DISABLES_CAMERA_COLLISIONS = "graphics.keyholing.disables-camera-collisions";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_FBO_SSAO = "graphics.fbo.ssao.enabled";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_FBO_HIGH_CONTRAST = "graphics.fbo.high-contrast.enabled";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_FBO_VIBRANCE = "graphics.fbo.vibrance.enabled";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_FBO_TOON = "graphics.fbo.toon.enabled";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_FBO_DOF = "graphics.fbo.dof.enabled";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_LOD = "graphics.lod.enabled";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_RENDER_CLOAKS = "graphics.experimental.render-cloaks";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_GENERATE_PLT_WITH_SHADERS = "graphics.experimental.generate-plt-with-shaders";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_HILITE = "graphics.hilite.enabled";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_HILITE_GLOW = "graphics.hilite.glow";
+    public const string PLAYER_DEVICE_PROPERTY_INPUT_KEYBOARD_SHIFT_WALK_INVERTED = "input.keyboard.shift-walk-mode-inverted";
+    public const string PLAYER_DEVICE_PROPERTY_INPUT_MOUSE_HARDWARE_POINTER = "input.mouse.hardware-pointer";
+    public const string PLAYER_DEVICE_PROPERTY_UI_SCALE = "ui.scale";
+    public const string PLAYER_DEVICE_PROPERTY_UI_LARGE_FONT = "ui.large-font";
+    public const string PLAYER_DEVICE_PROPERTY_UI_TOOLTIP_DELAY = "ui.tooltip-delay";
+    public const string PLAYER_DEVICE_PROPERTY_UI_MOUSEOVER_FEEDBACK = "ui.mouseover-feedback";
+    public const string PLAYER_DEVICE_PROPERTY_UI_TEXT_BUBBLE = "ui.text-bubble-mode";
+    public const string PLAYER_DEVICE_PROPERTY_UI_TARGETING_FEEDBACK = "ui.targeting-feedback-mode";
+    public const string PLAYER_DEVICE_PROPERTY_UI_FLOATING_TEXT_FEEDBACK = "ui.floating-text-feedback";
+    public const string PLAYER_DEVICE_PROPERTY_UI_FLOATING_TEXT_FEEDBACK_DAMAGE_TOTALS_ONLY = "ui.floating-text-feedback-damage-totals-only";
+    public const string PLAYER_DEVICE_PROPERTY_UI_HIDE_QUICKCHAT_TEXT_IN_CHAT_WINDOW = "ui.hide-quick-chat-text-in-chat-window";
+    public const string PLAYER_DEVICE_PROPERTY_UI_CONFIRM_SELFCAST_SPELLS = "ui.confirm-self-cast-spells";
+    public const string PLAYER_DEVICE_PROPERTY_UI_CONFIRM_SELFCAST_FEATS = "ui.confirm-self-cast-feats";
+    public const string PLAYER_DEVICE_PROPERTY_UI_CONFIRM_SELFCAST_ITEMS = "ui.confirm-self-cast-items";
+    public const string PLAYER_DEVICE_PROPERTY_UI_CHAT_PANE_PRIMARY_HEIGHT = "ui.chat.pane.primary.height";
+    public const string PLAYER_DEVICE_PROPERTY_UI_CHAT_PANE_SECONDARY_HEIGHT = "ui.chat.pane.secondary.height";
+    public const string PLAYER_DEVICE_PROPERTY_UI_CHAT_SWEAR_FILTER = "ui.chat.swear-filter.enabled";
+    public const string PLAYER_DEVICE_PROPERTY_UI_PARTY_INVITE_POPUP = "ui.party.invite-popup.enabled";
+    public const string PLAYER_DEVICE_PROPERTY_UI_SPELLBOOK_SORT_SPELLS = "ui.spellbook.sort-spells";
+    public const string PLAYER_DEVICE_PROPERTY_UI_RADIAL_SPELLCASTING_ALWAYS_SUBRADIAL = "ui.radial.spellcasting.always-show-as-subradial";
+    public const string PLAYER_DEVICE_PROPERTY_UI_RADIAL_CLASS_ABILITIES_ALWAYS_SUBRADIAL = "ui.radial.class-abilities.always-show-as-subradial";
+    public const string PLAYER_DEVICE_PROPERTY_CAMERA_MODE = "camera.mode";
+    public const string PLAYER_DEVICE_PROPERTY_CAMERA_EDGE_TURNING = "camera.edge-turning";
+    public const string PLAYER_DEVICE_PROPERTY_CAMERA_DIALOG_ZOOM = "camera.dialog-zoom";
+    public const string PLAYER_DEVICE_PROPERTY_GAME_GORE = "game.gore";
     public const int PLAYER_LANGUAGE_INVALID = -1;
     public const int PLAYER_LANGUAGE_ENGLISH = 0;
     public const int PLAYER_LANGUAGE_FRENCH = 1;
@@ -6270,6 +6398,124 @@ namespace NWN.Core
     public const int JSON_SET_INTERSECT = 3;
     public const int JSON_SET_DIFFERENCE = 4;
     public const int JSON_SET_SYMMETRIC_DIFFERENCE = 5;
+
+    ///  For SetShaderUniform*():
+    public const int SHADER_UNIFORM_1 = 0;
+    public const int SHADER_UNIFORM_2 = 1;
+    public const int SHADER_UNIFORM_3 = 2;
+    public const int SHADER_UNIFORM_4 = 3;
+    public const int SHADER_UNIFORM_5 = 4;
+    public const int SHADER_UNIFORM_6 = 5;
+    public const int SHADER_UNIFORM_7 = 6;
+    public const int SHADER_UNIFORM_8 = 7;
+    public const int SHADER_UNIFORM_9 = 8;
+    public const int SHADER_UNIFORM_10 = 9;
+    public const int SHADER_UNIFORM_11 = 10;
+    public const int SHADER_UNIFORM_12 = 11;
+    public const int SHADER_UNIFORM_13 = 12;
+    public const int SHADER_UNIFORM_14 = 13;
+    public const int SHADER_UNIFORM_15 = 14;
+    public const int SHADER_UNIFORM_16 = 15;
+
+    ///  For SetSpellTargetingData():
+    public const int SPELL_TARGETING_SHAPE_NONE = 0;
+    public const int SPELL_TARGETING_SHAPE_SPHERE = 1;
+    public const int SPELL_TARGETING_SHAPE_RECT = 2;
+    public const int SPELL_TARGETING_SHAPE_CONE = 3;
+    public const int SPELL_TARGETING_SHAPE_HSPHERE = 4;
+    public const int SPELL_TARGETING_FLAGS_NONE = 0;
+    public const int SPELL_TARGETING_FLAGS_HARMS_ENEMIES = 1;
+    public const int SPELL_TARGETING_FLAGS_HARMS_ALLIES = 2;
+    public const int SPELL_TARGETING_FLAGS_HELPS_ALLIES = 4;
+    public const int SPELL_TARGETING_FLAGS_IGNORES_SELF = 8;
+    public const int SPELL_TARGETING_FLAGS_ORIGIN_ON_SELF = 16;
+    public const int SPELL_TARGETING_FLAGS_SUPPRESS_WITH_TARGET = 32;
+
+    ///  These constants are for RegExpMatch() and RegExpIterate() only; do not mix with RegExpReplace():<br/>
+    /// <br/>
+    ///  At most one grammar option must be chosen out of ECMAScript, basic, extended, awk, grep, egrep:<br/>
+    /// <br/>
+    ///  Use the Modified ECMAScript regular expression grammar (https://en.cppreference.com/w/cpp/regex/ecmascript)
+    public const int REGEXP_ECMASCRIPT = 0;
+
+    ///  Use the basic POSIX regular expression grammar (http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap09.html#tag_09_03).
+    public const int REGEXP_BASIC = 1;
+
+    ///  Use the extended POSIX regular expression grammar (http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap09.html#tag_09_04).
+    public const int REGEXP_EXTENDED = 2;
+
+    ///  Use the regular expression grammar used by the awk utility in POSIX (http://pubs.opengroup.org/onlinepubs/9699919799/utilities/awk.html#tag_20_06_13_04).
+    public const int REGEXP_AWK = 4;
+
+    ///  Use the regular expression grammar used by the grep utility in POSIX. This is effectively the same as the basic option with the addition of newline &amp;apos;\n&amp;apos; as an alternation separator.
+    public const int REGEXP_GREP = 8;
+
+    ///  Use the regular expression grammar used by the grep utility, with the -E option, in POSIX. This is effectively the same as the extended option with the addition of newline &amp;apos;\n&amp;apos; as an alternation separator in addition to &amp;apos;|&amp;apos;.
+    public const int REGEXP_EGREP = 16;
+
+    ///  Character matching should be performed without regard to case.
+    public const int REGEXP_ICASE = 32;
+
+    ///  When performing matches, all marked sub-expressions (expr) are treated as non-marking sub-expressions (?:expr).
+    public const int REGEXP_NOSUBS = 64;
+
+    ///  These constants are for RegExpReplace() only, do not mix with other RegExp functions:<br/>
+    /// <br/>
+    ///  The first character in [first,last) will be treated as if it is not at the beginning of a line (i.e. ^ will not match [first,first)
+    public const int REGEXP_MATCH_NOT_BOL = 1;
+
+    ///  The last character in [first,last) will be treated as if it is not at the end of a line (i.e. $ will not match [last,last)
+    public const int REGEXP_MATCH_NOT_EOL = 2;
+
+    ///  &amp;quot;\b&amp;quot; will not match [first,first)
+    public const int REGEXP_MATCH_NOT_BOW = 4;
+
+    ///  &amp;quot;\b&amp;quot; will not match [last,last)
+    public const int REGEXP_MATCH_NOT_EOW = 8;
+
+    ///  If more than one match is possible, then any match is an acceptable result
+    public const int REGEXP_MATCH_ANY = 16;
+
+    ///  Do not match empty sequences
+    public const int REGEXP_MATCH_NOT_NULL = 32;
+
+    ///  Only match a sub-sequence that begins at first
+    public const int REGEXP_MATCH_CONTINUOUS = 64;
+
+    ///  --first is a valid iterator position. When set, causes match_not_bol and match_not_bow to be ignored
+    public const int REGEXP_MATCH_PREV_AVAIL = 128;
+
+    ///  Use ECMAScript rules to construct strings (http://ecma-international.org/ecma-262/5.1/#sec-15.5.4.11)
+    public const int REGEXP_FORMAT_DEFAULT = 0;
+
+    ///  Use POSIX sed utility rules (http://pubs.opengroup.org/onlinepubs/9699919799/utilities/sed.html#tag_20_116_13_03)
+    public const int REGEXP_FORMAT_SED = 256;
+
+    ///  Do not copy un-matched strings to the output
+    public const int REGEXP_FORMAT_NO_COPY = 512;
+
+    ///  Only replace the first match
+    public const int REGEXP_FORMAT_FIRST_ONLY = 1024;
+    public const int OBJECT_UI_DISCOVERY_DEFAULT = -1;
+    public const int OBJECT_UI_DISCOVERY_NONE = 0;
+    public const int OBJECT_UI_DISCOVERY_HILITE_MOUSEOVER = 1;
+    public const int OBJECT_UI_DISCOVERY_HILITE_TAB = 2;
+    public const int OBJECT_UI_DISCOVERY_TEXTBUBBLE_MOUSEOVER = 4;
+    public const int OBJECT_UI_DISCOVERY_TEXTBUBBLE_TAB = 8;
+    public const int OBJECT_UI_TEXT_BUBBLE_OVERRIDE_NONE = 0;
+    public const int OBJECT_UI_TEXT_BUBBLE_OVERRIDE_REPLACE = 1;
+    public const int OBJECT_UI_TEXT_BUBBLE_OVERRIDE_PREPEND = 2;
+    public const int OBJECT_UI_TEXT_BUBBLE_OVERRIDE_APPEND = 3;
+    public const int CAMERA_FLAG_ENABLE_COLLISION = 1;
+    public const int CAMERA_FLAG_DISABLE_COLLISION = 2;
+    public const int CAMERA_FLAG_DISABLE_SHAKE = 4;
+    public const int CAMERA_FLAG_DISABLE_SCROLL = 8;
+    public const int CAMERA_FLAG_DISABLE_TURN = 16;
+    public const int CAMERA_FLAG_DISABLE_TILT = 32;
+    public const int CAMERA_FLAG_DISABLE_ZOOM = 64;
+    public const int SETTILE_FLAG_RELOAD_GRASS = 1;
+    public const int SETTILE_FLAG_RELOAD_BORDER = 2;
+    public const int SETTILE_FLAG_RECOMPUTE_LIGHTING = 4;
     public const string sLanguage = "nwscript";
 
     ///  Get an integer between 0 and nMaxInteger-1.<br/>
@@ -7265,9 +7511,12 @@ namespace NWN.Core
 
     ///  Get the first object in oArea.<br/>
     ///  If no valid area is specified, it will use the caller&amp;apos;s area.<br/>
+    ///  - nObjectFilter: This allows you to filter out undesired object types, using bitwise &amp;quot;or&amp;quot;.<br/>
+    ///    For example, to return only creatures and doors, the value for this parameter would be OBJECT_TYPE_CREATURE | OBJECT_TYPE_DOOR<br/>
     ///  * Return value on error: OBJECT_INVALID
-    public static uint GetFirstObjectInArea(uint oArea = OBJECT_INVALID)
+    public static uint GetFirstObjectInArea(uint oArea = OBJECT_INVALID, int nObjectFilter = OBJECT_TYPE_ALL)
     {
+      VM.StackPush(nObjectFilter);
       VM.StackPush(oArea);
       VM.Call(93);
       return VM.StackPopObject();
@@ -7275,9 +7524,12 @@ namespace NWN.Core
 
     ///  Get the next object in oArea.<br/>
     ///  If no valid area is specified, it will use the caller&amp;apos;s area.<br/>
+    ///  - nObjectFilter: This allows you to filter out undesired object types, using bitwise &amp;quot;or&amp;quot;.<br/>
+    ///    For example, to return only creatures and doors, the value for this parameter would be OBJECT_TYPE_CREATURE | OBJECT_TYPE_DOOR<br/>
     ///  * Return value on error: OBJECT_INVALID
-    public static uint GetNextObjectInArea(uint oArea = OBJECT_INVALID)
+    public static uint GetNextObjectInArea(uint oArea = OBJECT_INVALID, int nObjectFilter = OBJECT_TYPE_ALL)
     {
+      VM.StackPush(nObjectFilter);
       VM.StackPush(oArea);
       VM.Call(94);
       return VM.StackPopObject();
@@ -8639,7 +8891,9 @@ namespace NWN.Core
       VM.Call(214);
     }
 
-    ///  Create a location.
+    ///  Create a location.<br/>
+    ///  The special constant LOCATION_INVALID describes a location with area equalling OBJECT_INVALID<br/>
+    ///  and all other values 0.0f. Declared but not initialised location variables default to this value.
     public static System.IntPtr Location(uint oArea, System.Numerics.Vector3 vPosition, float fOrientation)
     {
       VM.StackPush(fOrientation);
@@ -9050,8 +9304,7 @@ namespace NWN.Core
     /// <br/>
     ///  - oObject: the object for which you are changing the name (area, creature, placeable, item, or door).<br/>
     ///  - sNewName: the new name that the object will use.<br/>
-    ///  Note: SetName() does not work on player objects.<br/>
-    ///        Setting an object&amp;apos;s name to &amp;quot;&amp;quot; will make the object<br/>
+    ///  Note: Setting an object&amp;apos;s name to &amp;quot;&amp;quot; will make the object<br/>
     ///        revert to using the name it had originally before any<br/>
     ///        SetName() calls were made on the object.
     public static string GetName(uint oObject, int bOriginalName = FALSE)
@@ -9364,9 +9617,20 @@ namespace NWN.Core
 
     ///  Use nFeat on oTarget.<br/>
     ///  - nFeat: FEAT_*<br/>
-    ///  - oTarget
-    public static void ActionUseFeat(int nFeat, uint oTarget)
+    ///  - oTarget: Target of the feat. Must be OBJECT_INVALID if lTarget is used.<br/>
+    ///  - nSubFeat: - For feats with subdial options, use either:<br/>
+    ///         - SUBFEAT_* for some specific feats like called shot<br/>
+    ///         - spells.2da line of the subdial spell, eg 708 for Dragon Shape: Blue Dragon when using FEAT_EPIC_WILD_SHAPE_DRAGON<br/>
+    ///  - lTarget: The location to use the feat at. oTarget must be OBJECT_INVALID for this to be used.
+    public static void ActionUseFeat(int nFeat, uint oTarget = OBJECT_INVALID, int nSubFeat = 0, System.IntPtr lTarget = default)
     {
+      if (lTarget == default)
+      {
+        lTarget = LOCATION_INVALID;
+      }
+
+      VM.StackPush(lTarget, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(nSubFeat);
       VM.StackPush(oTarget);
       VM.StackPush(nFeat);
       VM.Call(287);
@@ -12366,7 +12630,7 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  returns TRUE if the placeable object is usable
+    ///  returns TRUE if the object is usable
     public static int GetUseableFlag(uint oObject = OBJECT_INVALID)
     {
       VM.StackPush(oObject);
@@ -14804,9 +15068,11 @@ namespace NWN.Core
     ///  EE would represent the amount of green in the color<br/>
     ///  DD would represent the amount of blue in the color.<br/>
     ///  If no valid area (or object) is specified, it uses the area of caller.<br/>
-    ///  If an object other than an area is specified, will use the area that the object is currently in.
-    public static void SetFogColor(int nFogType, int nFogColor, uint oArea = OBJECT_INVALID)
+    ///  If an object other than an area is specified, will use the area that the object is currently in.<br/>
+    ///  If fFadeTime is above 0.0, it will fade to the new color in the amount of seconds specified. 
+    public static void SetFogColor(int nFogType, int nFogColor, uint oArea = OBJECT_INVALID, float fFadeTime = 0.0f)
     {
+      VM.StackPush(fFadeTime);
       VM.StackPush(oArea);
       VM.StackPush(nFogColor);
       VM.StackPush(nFogType);
@@ -15503,8 +15769,7 @@ namespace NWN.Core
     ///  Set the name of oObject.<br/>
     ///  - oObject: the object for which you are changing the name (a creature, placeable, item, or door).<br/>
     ///  - sNewName: the new name that the object will use.<br/>
-    ///  Note: SetName() does not work on player objects.<br/>
-    ///        Setting an object&amp;apos;s name to &amp;quot;&amp;quot; will make the object<br/>
+    ///  Note: Setting an object&amp;apos;s name to &amp;quot;&amp;quot; will make the object<br/>
     ///        revert to using the name it had originally before any<br/>
     ///        SetName() calls were made on the object.
     public static void SetName(uint oObject, string sNewName = "")
@@ -15568,12 +15833,13 @@ namespace NWN.Core
       VM.Call(834);
     }
 
-    ///  Set oPlaceable&amp;apos;s useable object status.<br/>
-    ///  Note: Only works on non-static placeables.
-    public static void SetUseableFlag(uint oPlaceable, int nUseableFlag)
+    ///  Set oTarget&amp;apos;s useable object status.<br/>
+    ///  Note: Only works on non-static placeables, creatures, doors and items.<br/>
+    ///  On items, it affects interactivity when they&amp;apos;re on the ground, and not useability in inventory.
+    public static void SetUseableFlag(uint oTarget, int nUseableFlag)
     {
       VM.StackPush(nUseableFlag);
-      VM.StackPush(oPlaceable);
+      VM.StackPush(oTarget);
       VM.Call(835);
     }
 
@@ -16196,9 +16462,11 @@ namespace NWN.Core
     ///  Gets a visual transform on the given object.<br/>
     ///  - oObject can be any valid Creature, Placeable, Item or Door.<br/>
     ///  - nTransform is one of OBJECT_VISUAL_TRANSFORM_*<br/>
+    ///  - nScope is one of OBJECT_VISUAL_TRANSFORM_DATA_SCOPE_* and specific to the object type being VT&amp;apos;ed.<br/>
     ///  Returns the current (or default) value.
-    public static float GetObjectVisualTransform(uint oObject, int nTransform, int bCurrentLerp = FALSE)
+    public static float GetObjectVisualTransform(uint oObject, int nTransform, int bCurrentLerp = FALSE, int nScope = OBJECT_VISUAL_TRANSFORM_DATA_SCOPE_BASE)
     {
+      VM.StackPush(nScope);
       VM.StackPush(bCurrentLerp);
       VM.StackPush(nTransform);
       VM.StackPush(oObject);
@@ -16210,9 +16478,15 @@ namespace NWN.Core
     ///  - oObject can be any valid Creature, Placeable, Item or Door.<br/>
     ///  - nTransform is one of OBJECT_VISUAL_TRANSFORM_*<br/>
     ///  - fValue depends on the transformation to apply.<br/>
+    ///  - nScope is one of OBJECT_VISUAL_TRANSFORM_DATA_SCOPE_* and specific to the object type being VT&amp;apos;ed.<br/>
+    ///  - nBehaviorFlags: bitmask of OBJECT_VISUAL_TRANSFORM_BEHAVIOR_*.<br/>
+    ///  - nRepeats: If &amp;gt; 0: N times, jump back to initial/from state after completing the transform. If -1: Do forever.<br/>
     ///  Returns the old/previous value.
-    public static float SetObjectVisualTransform(uint oObject, int nTransform, float fValue, int nLerpType = OBJECT_VISUAL_TRANSFORM_LERP_NONE, float fLerpDuration = 0.0f, int bPauseWithGame = TRUE)
+    public static float SetObjectVisualTransform(uint oObject, int nTransform, float fValue, int nLerpType = OBJECT_VISUAL_TRANSFORM_LERP_NONE, float fLerpDuration = 0.0f, int bPauseWithGame = TRUE, int nScope = OBJECT_VISUAL_TRANSFORM_DATA_SCOPE_BASE, int nBehaviorFlags = OBJECT_VISUAL_TRANSFORM_BEHAVIOR_DEFAULT, int nRepeats = 0)
     {
+      VM.StackPush(nRepeats);
+      VM.StackPush(nBehaviorFlags);
+      VM.StackPush(nScope);
       VM.StackPush(bPauseWithGame);
       VM.StackPush(fLerpDuration);
       VM.StackPush(nLerpType);
@@ -16429,8 +16703,9 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  Returns the build number of oPlayer (i.e. 8193).<br/>
-    ///  Returns 0 if the given object isn&amp;apos;t a player or did not advertise their build info.
+    ///  Returns the patch build number of oPlayer (i.e. the 8193 out of &amp;quot;87.8193.35-29 abcdef01&amp;quot;).<br/>
+    ///  Returns 0 if the given object isn&amp;apos;t a player or did not advertise their build info, or the<br/>
+    ///  player version is old enough not to send this bit of build info to the server.
     public static int GetPlayerBuildVersionMajor(uint oPlayer)
     {
       VM.StackPush(oPlayer);
@@ -16438,8 +16713,9 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  Returns the patch revision of oPlayer (i.e. 8).<br/>
-    ///  Returns 0 if the given object isn&amp;apos;t a player or did not advertise their build info.
+    ///  Returns the patch revision number of oPlayer (i.e. the 35 out of &amp;quot;87.8193.35-29 abcdef01&amp;quot;).<br/>
+    ///  Returns 0 if the given object isn&amp;apos;t a player or did not advertise their build info, or the<br/>
+    ///  player version is old enough not to send this bit of build info to the server.
     public static int GetPlayerBuildVersionMinor(uint oPlayer)
     {
       VM.StackPush(oPlayer);
@@ -16623,7 +16899,8 @@ namespace NWN.Core
     }
 
     ///  Returns &amp;quot;&amp;quot; if the last Sql command succeeded; or a human-readable error otherwise.<br/>
-    ///  Additionally, all SQL errors are logged to the server log.
+    ///  Additionally, all SQL errors are logged to the server log.<br/>
+    ///  Additionally, all SQL errors are sent to all connected players.
     public static string SqlGetError(System.IntPtr sqlQuery)
     {
       VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
@@ -16641,6 +16918,8 @@ namespace NWN.Core
     ///  N.B.: You can pass sqlqueries into DelayCommand; HOWEVER<br/>
     ///        *** they will NOT survive a game save/load ***<br/>
     ///        Any commands on a restored sqlquery will fail.<br/>
+    ///  N.B.: All uncommitted transactions left over at script termination are automatically rolled back.<br/>
+    ///        This ensures that no database handle will be left in an unusable state.<br/>
     ///  Please check the SQLite_README.txt file in lang/en/docs/ for the list of builtin functions.
     public static System.IntPtr SqlPrepareQueryCampaign(string sDatabase, string sQuery)
     {
@@ -16666,6 +16945,8 @@ namespace NWN.Core
     ///  N.B.: You can pass sqlqueries into DelayCommand; HOWEVER<br/>
     ///        *** they will NOT survive a game save/load ***<br/>
     ///        Any commands on a restored sqlquery will fail.<br/>
+    ///  N.B.: All uncommitted transactions left over at script termination are automatically rolled back.<br/>
+    ///        This ensures that no database handle will be left in an unusable state.<br/>
     ///  Please check the SQLite_README.txt file in lang/en/docs/ for the list of builtin functions.
     public static System.IntPtr SqlPrepareQueryObject(uint oObject, string sQuery)
     {
@@ -17146,8 +17427,9 @@ namespace NWN.Core
     ///         You can still force show a panel with PopUpGUIPanel().<br/>
     ///         You can still force examine an object with ActionExamine().<br/>
     ///  * nGuiPanel: A GUI_PANEL_* constant, except GUI_PANEL_PLAYER_DEATH.
-    public static void SetGuiPanelDisabled(uint oPlayer, int nGuiPanel, int bDisabled)
+    public static void SetGuiPanelDisabled(uint oPlayer, int nGuiPanel, int bDisabled, uint oTarget = OBJECT_INVALID)
     {
+      VM.StackPush(oTarget);
       VM.StackPush(bDisabled);
       VM.StackPush(nGuiPanel);
       VM.StackPush(oPlayer);
@@ -17229,7 +17511,8 @@ namespace NWN.Core
       return VM.StackPopString();
     }
 
-    ///  Create a NULL json value, seeded with a optional error message for JsonGetError().
+    ///  Create a NULL json value, seeded with a optional error message for JsonGetError().<br/>
+    ///  You can say JSON_NULL for default parameters on functions to initialise with a null value.
     public static System.IntPtr JsonNull(string sError = "")
     {
       VM.StackPush(sError);
@@ -17237,14 +17520,16 @@ namespace NWN.Core
       return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
     }
 
-    ///  Create a empty json object.
+    ///  Create a empty json object.<br/>
+    ///  You can say JSON_OBJECT for default parameters on functions to initialise with an empty object.
     public static System.IntPtr JsonObject()
     {
       VM.Call(974);
       return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
     }
 
-    ///  Create a empty json array.
+    ///  Create a empty json array.<br/>
+    ///  You can say JSON_ARRAY for default parameters on functions to initialise with an empty array.
     public static System.IntPtr JsonArray()
     {
       VM.Call(975);
@@ -17252,6 +17537,7 @@ namespace NWN.Core
     }
 
     ///  Create a json string value.<br/>
+    ///  You can say JSON_STRING for default parameters on functions to initialise with a empty string.<br/>
     ///  NB: Strings are encoded to UTF-8 from the game-local charset.
     public static System.IntPtr JsonString(string sValue)
     {
@@ -17276,7 +17562,8 @@ namespace NWN.Core
       return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
     }
 
-    ///  Create a json bool valye.
+    ///  Create a json bool valye.<br/>
+    ///  You can say JSON_TRUE or JSON_FALSE for default parameters on functions to initialise with a bool.
     public static System.IntPtr JsonBool(int bValue)
     {
       VM.StackPush(bValue);
@@ -17993,6 +18280,1030 @@ namespace NWN.Core
       VM.StackPush(s2DA);
       VM.Call(1035);
       return VM.StackPopInt();
+    }
+
+    ///  Set the subtype of eEffect to Unyielding and return eEffect.<br/>
+    ///  (Effects default to magical if the subtype is not set)<br/>
+    ///  Unyielding effects are not removed by resting, death or dispel magic, only by RemoveEffect().<br/>
+    ///  Note: effects that modify state, Stunned/Knockdown/Deaf etc, WILL be removed on death.
+    public static System.IntPtr UnyieldingEffect(System.IntPtr eEffect)
+    {
+      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.Call(1036);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+    }
+
+    ///  Set eEffect to ignore immunities and return eEffect.
+    public static System.IntPtr IgnoreEffectImmunity(System.IntPtr eEffect)
+    {
+      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.Call(1037);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+    }
+
+    ///  Sets the global shader uniform for the player to the specified float.<br/>
+    ///  These uniforms are not used by the base game and are reserved for module-specific scripting.<br/>
+    ///  You need to add custom shaders that will make use of them.<br/>
+    ///  In multiplayer, these need to be reapplied when a player rejoins.<br/>
+    ///  - nShader: SHADER_UNIFORM_*
+    public static void SetShaderUniformFloat(uint oPlayer, int nShader, float fValue)
+    {
+      VM.StackPush(fValue);
+      VM.StackPush(nShader);
+      VM.StackPush(oPlayer);
+      VM.Call(1038);
+    }
+
+    ///  Sets the global shader uniform for the player to the specified integer.<br/>
+    ///  These uniforms are not used by the base game and are reserved for module-specific scripting.<br/>
+    ///  You need to add custom shaders that will make use of them.<br/>
+    ///  In multiplayer, these need to be reapplied when a player rejoins.<br/>
+    ///  - nShader: SHADER_UNIFORM_*
+    public static void SetShaderUniformInt(uint oPlayer, int nShader, int nValue)
+    {
+      VM.StackPush(nValue);
+      VM.StackPush(nShader);
+      VM.StackPush(oPlayer);
+      VM.Call(1039);
+    }
+
+    ///  Sets the global shader uniform for the player to the specified vec4.<br/>
+    ///  These uniforms are not used by the base game and are reserved for module-specific scripting.<br/>
+    ///  You need to add custom shaders that will make use of them.<br/>
+    ///  In multiplayer, these need to be reapplied when a player rejoins.<br/>
+    ///  - nShader: SHADER_UNIFORM_*
+    public static void SetShaderUniformVec(uint oPlayer, int nShader, float fX, float fY, float fZ, float fW)
+    {
+      VM.StackPush(fW);
+      VM.StackPush(fZ);
+      VM.StackPush(fY);
+      VM.StackPush(fX);
+      VM.StackPush(nShader);
+      VM.StackPush(oPlayer);
+      VM.Call(1040);
+    }
+
+    ///  Sets the spell targeting data manually for the player. This data is usually specified in spells.2da.<br/>
+    ///  This data persists through spell casts; you&amp;apos;re overwriting the entry in spells.2da for this session.<br/>
+    ///  In multiplayer, these need to be reapplied when a player rejoins.<br/>
+    ///  - nSpell: SPELL_*<br/>
+    ///  - nShape: SPELL_TARGETING_SHAPE_*<br/>
+    ///  - nFlags: SPELL_TARGETING_FLAGS_*
+    public static void SetSpellTargetingData(uint oPlayer, int nSpell, int nShape, float fSizeX, float fSizeY, int nFlags)
+    {
+      VM.StackPush(nFlags);
+      VM.StackPush(fSizeY);
+      VM.StackPush(fSizeX);
+      VM.StackPush(nShape);
+      VM.StackPush(nSpell);
+      VM.StackPush(oPlayer);
+      VM.Call(1041);
+    }
+
+    ///  Sets the spell targeting data which is used for the next call to EnterTargetingMode() for this player.<br/>
+    ///  If the shape is set to SPELL_TARGETING_SHAPE_NONE and the range is provided, the dotted line range indicator will still appear.<br/>
+    ///  - nShape: SPELL_TARGETING_SHAPE_*<br/>
+    ///  - nFlags: SPELL_TARGETING_FLAGS_*<br/>
+    ///  - nSpell: SPELL_* (optional, passed to the shader but does nothing by default, you need to edit the shader to use it)<br/>
+    ///  - nFeat: FEAT_* (optional, passed to the shader but does nothing by default, you need to edit the shader to use it)
+    public static void SetEnterTargetingModeData(uint oPlayer, int nShape, float fSizeX, float fSizeY, int nFlags, float fRange = 0.0f, int nSpell = -1, int nFeat = -1)
+    {
+      VM.StackPush(nFeat);
+      VM.StackPush(nSpell);
+      VM.StackPush(fRange);
+      VM.StackPush(nFlags);
+      VM.StackPush(fSizeY);
+      VM.StackPush(fSizeX);
+      VM.StackPush(nShape);
+      VM.StackPush(oPlayer);
+      VM.Call(1042);
+    }
+
+    ///  Gets the number of memorized spell slots for a given spell level.<br/>
+    ///  - nClassType: a CLASS_TYPE_* constant. Must be a MemorizesSpells class.<br/>
+    ///  - nSpellLevel: the spell level, 0-9.<br/>
+    ///  Returns: the number of spell slots.
+    public static int GetMemorizedSpellCountByLevel(uint oCreature, int nClassType, int nSpellLevel)
+    {
+      VM.StackPush(nSpellLevel);
+      VM.StackPush(nClassType);
+      VM.StackPush(oCreature);
+      VM.Call(1043);
+      return VM.StackPopInt();
+    }
+
+    ///  Gets the spell id of a memorized spell slot.<br/>
+    ///  - nClassType: a CLASS_TYPE_* constant. Must be a MemorizesSpells class.<br/>
+    ///  - nSpellLevel: the spell level, 0-9.<br/>
+    ///  - nIndex: the index of the spell slot. Bounds: 0 &amp;lt;= nIndex &amp;lt; GetMemorizedSpellCountByLevel()<br/>
+    ///  Returns: a SPELL_* constant or -1 if the slot is not set.
+    public static int GetMemorizedSpellId(uint oCreature, int nClassType, int nSpellLevel, int nIndex)
+    {
+      VM.StackPush(nIndex);
+      VM.StackPush(nSpellLevel);
+      VM.StackPush(nClassType);
+      VM.StackPush(oCreature);
+      VM.Call(1044);
+      return VM.StackPopInt();
+    }
+
+    ///  Gets the ready state of a memorized spell slot.<br/>
+    ///  - nClassType: a CLASS_TYPE_* constant. Must be a MemorizesSpells class.<br/>
+    ///  - nSpellLevel: the spell level, 0-9.<br/>
+    ///  - nIndex: the index of the spell slot. Bounds: 0 &amp;lt;= nIndex &amp;lt; GetMemorizedSpellCountByLevel()<br/>
+    ///  Returns: TRUE/FALSE or -1 if the slot is not set.
+    public static int GetMemorizedSpellReady(uint oCreature, int nClassType, int nSpellLevel, int nIndex)
+    {
+      VM.StackPush(nIndex);
+      VM.StackPush(nSpellLevel);
+      VM.StackPush(nClassType);
+      VM.StackPush(oCreature);
+      VM.Call(1045);
+      return VM.StackPopInt();
+    }
+
+    ///  Gets the metamagic of a memorized spell slot.<br/>
+    ///  - nClassType: a CLASS_TYPE_* constant. Must be a MemorizesSpells class.<br/>
+    ///  - nSpellLevel: the spell level, 0-9.<br/>
+    ///  - nIndex: the index of the spell slot. Bounds: 0 &amp;lt;= nIndex &amp;lt; GetMemorizedSpellCountByLevel()<br/>
+    ///  Returns: a METAMAGIC_* constant or -1 if the slot is not set.
+    public static int GetMemorizedSpellMetaMagic(uint oCreature, int nClassType, int nSpellLevel, int nIndex)
+    {
+      VM.StackPush(nIndex);
+      VM.StackPush(nSpellLevel);
+      VM.StackPush(nClassType);
+      VM.StackPush(oCreature);
+      VM.Call(1046);
+      return VM.StackPopInt();
+    }
+
+    ///  Gets if the memorized spell slot has a domain spell.<br/>
+    ///  - nClassType: a CLASS_TYPE_* constant. Must be a MemorizesSpells class.<br/>
+    ///  - nSpellLevel: the spell level, 0-9.<br/>
+    ///  - nIndex: the index of the spell slot. Bounds: 0 &amp;lt;= nIndex &amp;lt; GetMemorizedSpellCountByLevel()<br/>
+    ///  Returns: TRUE/FALSE or -1 if the slot is not set.
+    public static int GetMemorizedSpellIsDomainSpell(uint oCreature, int nClassType, int nSpellLevel, int nIndex)
+    {
+      VM.StackPush(nIndex);
+      VM.StackPush(nSpellLevel);
+      VM.StackPush(nClassType);
+      VM.StackPush(oCreature);
+      VM.Call(1047);
+      return VM.StackPopInt();
+    }
+
+    ///  Set a memorized spell slot.<br/>
+    ///  - nClassType: a CLASS_TYPE_* constant. Must be a MemorizesSpells class.<br/>
+    ///  - nSpellLevel: the spell level, 0-9.<br/>
+    ///  - nIndex: the index of the spell slot. Bounds: 0 &amp;lt;= nIndex &amp;lt; GetMemorizedSpellCountByLevel()<br/>
+    ///  - nSpellId: a SPELL_* constant.<br/>
+    ///  - bReady: TRUE to mark the slot ready.<br/>
+    ///  - nMetaMagic: a METAMAGIC_* constant.<br/>
+    ///  - bIsDomainSpell: TRUE for a domain spell.
+    public static void SetMemorizedSpell(uint oCreature, int nClassType, int nSpellLevel, int nIndex, int nSpellId, int bReady = TRUE, int nMetaMagic = METAMAGIC_NONE, int bIsDomainSpell = FALSE)
+    {
+      VM.StackPush(bIsDomainSpell);
+      VM.StackPush(nMetaMagic);
+      VM.StackPush(bReady);
+      VM.StackPush(nSpellId);
+      VM.StackPush(nIndex);
+      VM.StackPush(nSpellLevel);
+      VM.StackPush(nClassType);
+      VM.StackPush(oCreature);
+      VM.Call(1048);
+    }
+
+    ///  Set the ready state of a memorized spell slot.<br/>
+    ///  - nClassType: a CLASS_TYPE_* constant. Must be a MemorizesSpells class.<br/>
+    ///  - nSpellLevel: the spell level, 0-9.<br/>
+    ///  - nIndex: the index of the spell slot. Bounds: 0 &amp;lt;= nIndex &amp;lt; GetMemorizedSpellCountByLevel()<br/>
+    ///  - bReady: TRUE to mark the slot ready.
+    public static void SetMemorizedSpellReady(uint oCreature, int nClassType, int nSpellLevel, int nIndex, int bReady)
+    {
+      VM.StackPush(bReady);
+      VM.StackPush(nIndex);
+      VM.StackPush(nSpellLevel);
+      VM.StackPush(nClassType);
+      VM.StackPush(oCreature);
+      VM.Call(1049);
+    }
+
+    ///  Clear a specific memorized spell slot.<br/>
+    ///  - nClassType: a CLASS_TYPE_* constant. Must be a MemorizesSpells class.<br/>
+    ///  - nSpellLevel: the spell level, 0-9.<br/>
+    ///  - nIndex: the index of the spell slot. Bounds: 0 &amp;lt;= nIndex &amp;lt; GetMemorizedSpellCountByLevel()
+    public static void ClearMemorizedSpell(uint oCreature, int nClassType, int nSpellLevel, int nIndex)
+    {
+      VM.StackPush(nIndex);
+      VM.StackPush(nSpellLevel);
+      VM.StackPush(nClassType);
+      VM.StackPush(oCreature);
+      VM.Call(1050);
+    }
+
+    ///  Clear all memorized spell slots of a specific spell id, including metamagic&amp;apos;d ones.<br/>
+    ///  - nClassType: a CLASS_TYPE_* constant. Must be a MemorizesSpells class.<br/>
+    ///  - nSpellId: a SPELL_* constant.
+    public static void ClearMemorizedSpellBySpellId(uint oCreature, int nClassType, int nSpellId)
+    {
+      VM.StackPush(nSpellId);
+      VM.StackPush(nClassType);
+      VM.StackPush(oCreature);
+      VM.Call(1051);
+    }
+
+    ///  Gets the number of known spells for a given spell level.<br/>
+    ///  - nClassType: a CLASS_TYPE_* constant. Must be a SpellBookRestricted class.<br/>
+    ///  - nSpellLevel: the spell level, 0-9.<br/>
+    ///  Returns: the number of known spells.
+    public static int GetKnownSpellCount(uint oCreature, int nClassType, int nSpellLevel)
+    {
+      VM.StackPush(nSpellLevel);
+      VM.StackPush(nClassType);
+      VM.StackPush(oCreature);
+      VM.Call(1052);
+      return VM.StackPopInt();
+    }
+
+    ///  Gets the spell id of a known spell.<br/>
+    ///  - nClassType: a CLASS_TYPE_* constant. Must be a SpellBookRestricted class.<br/>
+    ///  - nSpellLevel: the spell level, 0-9.<br/>
+    ///  - nIndex: the index of the known spell. Bounds: 0 &amp;lt;= nIndex &amp;lt; GetKnownSpellCount()<br/>
+    ///  Returns: a SPELL_* constant or -1 on error.
+    public static int GetKnownSpellId(uint oCreature, int nClassType, int nSpellLevel, int nIndex)
+    {
+      VM.StackPush(nIndex);
+      VM.StackPush(nSpellLevel);
+      VM.StackPush(nClassType);
+      VM.StackPush(oCreature);
+      VM.Call(1053);
+      return VM.StackPopInt();
+    }
+
+    ///  Gets if a spell is in the known spell list.<br/>
+    ///  - nClassType: a CLASS_TYPE_* constant. Must be a SpellBookRestricted class.<br/>
+    ///  - nSpellId: a SPELL_* constant.<br/>
+    ///  Returns: TRUE if the spell is in the known spell list.
+    public static int GetIsInKnownSpellList(uint oCreature, int nClassType, int nSpellId)
+    {
+      VM.StackPush(nSpellId);
+      VM.StackPush(nClassType);
+      VM.StackPush(oCreature);
+      VM.Call(1054);
+      return VM.StackPopInt();
+    }
+
+    ///  Gets the amount of uses a spell has left.<br/>
+    ///  - nClassType: a CLASS_TYPE_* constant.<br/>
+    ///  - nSpellid: a SPELL_* constant.<br/>
+    ///  - nMetaMagic: a METAMAGIC_* constant.<br/>
+    ///  - nDomainLevel: the domain level, if a domain spell.<br/>
+    ///  Returns: the amount of spell uses left.
+    public static int GetSpellUsesLeft(uint oCreature, int nClassType, int nSpellId, int nMetaMagic = METAMAGIC_NONE, int nDomainLevel = 0)
+    {
+      VM.StackPush(nDomainLevel);
+      VM.StackPush(nMetaMagic);
+      VM.StackPush(nSpellId);
+      VM.StackPush(nClassType);
+      VM.StackPush(oCreature);
+      VM.Call(1055);
+      return VM.StackPopInt();
+    }
+
+    ///  Gets the spell level at which a class gets a spell.<br/>
+    ///  - nClassType: a CLASS_TYPE_* constant.<br/>
+    ///  - nSpellId: a SPELL_* constant.<br/>
+    ///  Returns: the spell level or -1 if the class does not get the spell.
+    public static int GetSpellLevelByClass(int nClassType, int nSpellId)
+    {
+      VM.StackPush(nSpellId);
+      VM.StackPush(nClassType);
+      VM.Call(1056);
+      return VM.StackPopInt();
+    }
+
+    ///  Replaces oObject&amp;apos;s animation sOld with sNew.<br/>
+    ///  Specifying sNew = &amp;quot;&amp;quot; will restore the original animation.
+    public static void ReplaceObjectAnimation(uint oObject, string sOld, string sNew = "")
+    {
+      VM.StackPush(sNew);
+      VM.StackPush(sOld);
+      VM.StackPush(oObject);
+      VM.Call(1057);
+    }
+
+    ///  Sets the distance (in meters) at which oObject info will be sent to clients (default 45.0)<br/>
+    ///  This is still subject to other limitations, such as perception ranges for creatures<br/>
+    ///  Note: Increasing visibility ranges of many objects can have a severe negative effect on<br/>
+    ///        network latency and server performance, and rendering additional objects will<br/>
+    ///        impact graphics performance of clients. Use cautiously.
+    public static void SetObjectVisibleDistance(uint oObject, float fDistance = 45.0f)
+    {
+      VM.StackPush(fDistance);
+      VM.StackPush(oObject);
+      VM.Call(1058);
+    }
+
+    ///  Gets oObject&amp;apos;s visible distance, as set by SetObjectVisibleDistance()<br/>
+    ///  Returns -1.0f on error
+    public static float GetObjectVisibleDistance(uint oObject)
+    {
+      VM.StackPush(oObject);
+      VM.Call(1059);
+      return VM.StackPopFloat();
+    }
+
+    ///  Sets the active game pause state - same as if the player requested pause.
+    public static void SetGameActivePause(int bState)
+    {
+      VM.StackPush(bState);
+      VM.Call(1060);
+    }
+
+    ///  Returns &amp;gt;0 if the game is currently paused:<br/>
+    ///  - 0: Game is not paused.<br/>
+    ///  - 1: Timestop<br/>
+    ///  - 2: Active Player Pause (optionally on top of timestop)
+    public static int GetGamePauseState()
+    {
+      VM.Call(1061);
+      return VM.StackPopInt();
+    }
+
+    ///  Set the gender of oCreature.<br/>
+    ///  - nGender: a GENDER_* constant.
+    public static void SetGender(uint oCreature, int nGender)
+    {
+      VM.StackPush(nGender);
+      VM.StackPush(oCreature);
+      VM.Call(1062);
+    }
+
+    ///  Get the soundset of oCreature.<br/>
+    ///  Returns -1 on error.
+    public static int GetSoundset(uint oCreature)
+    {
+      VM.StackPush(oCreature);
+      VM.Call(1063);
+      return VM.StackPopInt();
+    }
+
+    ///  Set the soundset of oCreature, see soundset.2da for possible values.
+    public static void SetSoundset(uint oCreature, int nSoundset)
+    {
+      VM.StackPush(nSoundset);
+      VM.StackPush(oCreature);
+      VM.Call(1064);
+    }
+
+    ///  Ready a spell level for oCreature.<br/>
+    ///  - nSpellLevel: 0-9<br/>
+    ///  - nClassType: a CLASS_TYPE_* constant or CLASS_TYPE_INVALID to ready the spell level for all classes.
+    public static void ReadySpellLevel(uint oCreature, int nSpellLevel, int nClassType = CLASS_TYPE_INVALID)
+    {
+      VM.StackPush(nClassType);
+      VM.StackPush(nSpellLevel);
+      VM.StackPush(oCreature);
+      VM.Call(1065);
+    }
+
+    ///  Makes oCreature controllable by oPlayer, if player party control is enabled<br/>
+    ///  Setting oPlayer=OBJECT_INVALID removes the override and reverts to regular party control behavior<br/>
+    ///  NB: A creature is only controllable by one player, so if you set oPlayer to a non-Player object<br/>
+    ///     (e.g. the module) it will disable regular party control for this creature
+    public static void SetCommandingPlayer(uint oCreature, uint oPlayer)
+    {
+      VM.StackPush(oPlayer);
+      VM.StackPush(oCreature);
+      VM.Call(1066);
+    }
+
+    ///  Sets oPlayer&amp;apos;s camera limits that override any client configuration limits<br/>
+    ///  Value of -1.0 means use the client config instead<br/>
+    ///  NB: Like all other camera settings, this is not saved when saving the game
+    public static void SetCameraLimits(uint oPlayer, float fMinPitch = -1.0f, float fMaxPitch = -1.0f, float fMinDist = -1.0f, float fMaxDist = -1.0f)
+    {
+      VM.StackPush(fMaxDist);
+      VM.StackPush(fMinDist);
+      VM.StackPush(fMaxPitch);
+      VM.StackPush(fMinPitch);
+      VM.StackPush(oPlayer);
+      VM.Call(1067);
+    }
+
+    ///  Applies sRegExp on sValue, returning an array containing all matching groups.<br/>
+    ///  * The regexp is not bounded by default (so /t/ will match &amp;quot;test&amp;quot;).<br/>
+    ///  * A matching result with always return a JSON_ARRAY with the full match as the first element.<br/>
+    ///  * All matching groups will be returned as additional elements, depth-first.<br/>
+    ///  * A non-matching result will return a empty JSON_ARRAY.<br/>
+    ///  * If there was an error, the function will return JSON_NULL, with a error string filled in.<br/>
+    ///  * nSyntaxFlags is a mask of REGEXP_*<br/>
+    ///  * nMatchFlags is a mask of REGEXP_MATCH_* and REGEXP_FORMAT_*.<br/>
+    ///  Examples:<br/>
+    ///  * RegExpMatch(&amp;quot;[&amp;quot;, &amp;quot;test value&amp;quot;)             -&amp;gt; null (error: &amp;quot;The expression contained mismatched [ and ].&amp;quot;)<br/>
+    ///  * RegExpMatch(&amp;quot;nothing&amp;quot;, &amp;quot;test value&amp;quot;)       -&amp;gt; []<br/>
+    ///  * RegExpMatch(&amp;quot;^test&amp;quot;, &amp;quot;test value&amp;quot;)         -&amp;gt; [&amp;quot;test&amp;quot;]<br/>
+    ///  * RegExpMatch(&amp;quot;^(test) (.+)$&amp;quot;, &amp;quot;test value&amp;quot;) -&amp;gt; [&amp;quot;test value&amp;quot;, &amp;quot;test&amp;quot;, &amp;quot;value&amp;quot;]
+    public static System.IntPtr RegExpMatch(string sRegExp, string sValue, int nSyntaxFlags = REGEXP_ECMASCRIPT, int nMatchFlags = REGEXP_FORMAT_DEFAULT)
+    {
+      VM.StackPush(nMatchFlags);
+      VM.StackPush(nSyntaxFlags);
+      VM.StackPush(sValue);
+      VM.StackPush(sRegExp);
+      VM.Call(1068);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Iterates sValue with sRegExp.<br/>
+    ///  * Returns an array of arrays; where each sub-array contains first the full match and then all matched groups.<br/>
+    ///  * Returns empty JSON_ARRAY if no matches are found.<br/>
+    ///  * If there was an error, the function will return JSON_NULL, with a error string filled in.<br/>
+    ///  * nSyntaxFlags is a mask of REGEXP_*<br/>
+    ///  * nMatchFlags is a mask of REGEXP_MATCH_* and REGEXP_FORMAT_*.<br/>
+    ///  Example: RegExpIterate(&amp;quot;(\\d)(\\S+)&amp;quot;, &amp;quot;1i 2am 3 4asentence&amp;quot;); -&amp;gt; [[&amp;quot;1i&amp;quot;, &amp;quot;1&amp;quot;, &amp;quot;i&amp;quot;], [&amp;quot;2am&amp;quot;, &amp;quot;2&amp;quot;, &amp;quot;am&amp;quot;], [&amp;quot;4sentence&amp;quot;, &amp;quot;4&amp;quot;, &amp;quot;sentence&amp;quot;]]
+    public static System.IntPtr RegExpIterate(string sRegExp, string sValue, int nSyntaxFlags = REGEXP_ECMASCRIPT, int nMatchFlags = REGEXP_FORMAT_DEFAULT)
+    {
+      VM.StackPush(nMatchFlags);
+      VM.StackPush(nSyntaxFlags);
+      VM.StackPush(sValue);
+      VM.StackPush(sRegExp);
+      VM.Call(1069);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Replaces all matching sRegExp in sValue with sReplacement.<br/>
+    ///  * Returns a empty string on error.<br/>
+    ///  * Please see the format documentation for replacement patterns.<br/>
+    ///  * nSyntaxFlags is a mask of REGEXP_*<br/>
+    ///  * nMatchFlags is a mask of REGEXP_MATCH_* and REGEXP_FORMAT_*.<br/>
+    ///  * FORMAT_DEFAULT replacement patterns:<br/>
+    ///     $$    $<br/>
+    ///     $&amp;    The matched substring.<br/>
+    ///     $`    The portion of string that precedes the matched substring.<br/>
+    ///     $&amp;apos;    The portion of string that follows the matched substring.<br/>
+    ///     $n    The nth capture, where n is a single digit in the range 1 to 9 and $n is not followed by a decimal digit.<br/>
+    ///     $nn   The nnth capture, where nn is a two-digit decimal number in the range 01 to 99.<br/>
+    ///  Example: RegExpReplace(&amp;quot;a+&amp;quot;, &amp;quot;vaaalue&amp;quot;, &amp;quot;[$&amp;]&amp;quot;)    =&amp;gt; &amp;quot;v[aaa]lue&amp;quot;
+    public static string RegExpReplace(string sRegExp, string sValue, string sReplacement, int nSyntaxFlags = REGEXP_ECMASCRIPT, int nMatchFlags = REGEXP_FORMAT_DEFAULT)
+    {
+      VM.StackPush(nMatchFlags);
+      VM.StackPush(nSyntaxFlags);
+      VM.StackPush(sReplacement);
+      VM.StackPush(sValue);
+      VM.StackPush(sRegExp);
+      VM.Call(1070);
+      return VM.StackPopString();
+    }
+
+    ///  Get the contents of a file as string, as seen by the server&amp;apos;s resman.<br/>
+    ///  Note: If the file contains binary data it will return data up to the first null byte.<br/>
+    ///  - nResType: a RESTYPE_* constant.<br/>
+    ///  Returns &amp;quot;&amp;quot; if the file does not exist.
+    public static string ResManGetFileContents(string sResRef, int nResType)
+    {
+      VM.StackPush(nResType);
+      VM.StackPush(sResRef);
+      VM.Call(1071);
+      return VM.StackPopString();
+    }
+
+    ///  Compile a script and place it in the server&amp;apos;s CURRENTGAME: folder.<br/>
+    ///  Note: Scripts will persist for as long as the module is running.<br/>
+    ///  SinglePlayer / Saves: Scripts that overwrite existing module scripts will persist to the save file.<br/>
+    ///                        New scripts, unknown to the module, will have to be re-compiled on module load when loading a save.<br/>
+    ///  Returns &amp;quot;&amp;quot; on success or the error on failure.
+    public static string CompileScript(string sScriptName, string sScriptData, int bWrapIntoMain = FALSE, int bGenerateNDB = FALSE)
+    {
+      VM.StackPush(bGenerateNDB);
+      VM.StackPush(bWrapIntoMain);
+      VM.StackPush(sScriptData);
+      VM.StackPush(sScriptName);
+      VM.Call(1072);
+      return VM.StackPopString();
+    }
+
+    ///  Sets the object oPlayer&amp;apos;s camera will be attached to.<br/>
+    ///  - oTarget: A valid creature or placeable. If oTarget is OBJECT_INVALID, it will revert the camera back to oPlayer&amp;apos;s character.<br/>
+    ///             The target must be known to oPlayer&amp;apos;s client, this means it must be in the same area and within visible distance.<br/>
+    ///               - SetObjectVisibleDistance() can be used to increase this range.<br/>
+    ///               - If the target is a creature, it also must be within the perception range of oPlayer and perceived.<br/>
+    ///  - bFindClearView: if TRUE, the client will attempt to find a camera position where oTarget is in view.<br/>
+    ///  Notes:<br/>
+    ///        - If oTarget gets destroyed while oPlayer&amp;apos;s camera is attached to it, the camera will revert back to oPlayer&amp;apos;s character.<br/>
+    ///        - If oPlayer goes through a transition with its camera attached to a different object, it will revert back to oPlayer&amp;apos;s character.<br/>
+    ///        - The object the player&amp;apos;s camera is attached to is not saved when saving the game.
+    public static void AttachCamera(uint oPlayer, uint oTarget, int bFindClearView = FALSE)
+    {
+      VM.StackPush(bFindClearView);
+      VM.StackPush(oTarget);
+      VM.StackPush(oPlayer);
+      VM.Call(1073);
+    }
+
+    ///  Get the current discoverability mask of oObject.<br/>
+    ///  Returns -1 if oObject cannot have a discovery mask.
+    public static int GetObjectUiDiscoveryMask(uint oObject)
+    {
+      VM.StackPush(oObject);
+      VM.Call(1074);
+      return VM.StackPopInt();
+    }
+
+    ///  Sets the discoverability mask on oObject.<br/>
+    ///  This allows toggling areahilite (TAB key by default) and mouseover discovery in the area view.<br/>
+    ///  * nMask is a mask of OBJECT_UI_DISCOVERY_MODE_*<br/>
+    ///  Will currently only work on Creatures, Doors (Hilite only), Items and Useable Placeables.<br/>
+    ///  Does not affect inventory items.
+    public static void SetObjectUiDiscoveryMask(uint oObject, int nMask = OBJECT_UI_DISCOVERY_DEFAULT)
+    {
+      VM.StackPush(nMask);
+      VM.StackPush(oObject);
+      VM.Call(1075);
+    }
+
+    ///  Sets a text override for the mouseover/tab-highlight text bubble of oObject.<br/>
+    ///  Will currently only work on Creatures, Items and Useable Placeables.<br/>
+    ///  * nMode is one of OBJECT_UI_TEXT_BUBBLE_OVERRIDE_*.
+    public static void SetObjectTextBubbleOverride(uint oObject, int nMode, string sText)
+    {
+      VM.StackPush(sText);
+      VM.StackPush(nMode);
+      VM.StackPush(oObject);
+      VM.Call(1076);
+    }
+
+    ///  Immediately unsets a VTs for the given object, with no lerp.<br/>
+    ///  * nScope: one of OBJECT_VISUAL_TRANSFORM_DATA_SCOPE_, or -1 for all scopes<br/>
+    ///  Returns TRUE only if transforms were successfully removed (valid object, transforms existed).
+    public static int ClearObjectVisualTransform(uint oObject, int nScope = -1)
+    {
+      VM.StackPush(nScope);
+      VM.StackPush(oObject);
+      VM.Call(1077);
+      return VM.StackPopInt();
+    }
+
+    ///  Gets an optional vecror of specific gui events in the module OnPlayerGuiEvent event.<br/>
+    ///  GUIEVENT_RADIAL_OPEN - World vector position of radial if on tile.
+    public static System.Numerics.Vector3 GetLastGuiEventVector()
+    {
+      VM.Call(1078);
+      return VM.StackPopVector();
+    }
+
+    ///  Sets oPlayer&amp;apos;s camera settings that override any client configuration settings<br/>
+    ///  nFlags is a bitmask of CAMERA_FLAG_* constants;<br/>
+    ///  NB: Like all other camera settings, this is not saved when saving the game
+    public static void SetCameraFlags(uint oPlayer, int nFlags = 0)
+    {
+      VM.StackPush(nFlags);
+      VM.StackPush(oPlayer);
+      VM.Call(1079);
+    }
+
+    ///  Gets the light color in the area specified.<br/>
+    ///  nColorType specifies the color type returned.<br/>
+    ///     Valid values for nColorType are the AREA_LIGHT_COLOR_* values.<br/>
+    ///  If no valid area (or object) is specified, it uses the area of caller.<br/>
+    ///  If an object other than an area is specified, will use the area that the object is currently in.
+    public static int GetAreaLightColor(int nColorType, uint oArea = OBJECT_INVALID)
+    {
+      VM.StackPush(oArea);
+      VM.StackPush(nColorType);
+      VM.Call(1080);
+      return VM.StackPopInt();
+    }
+
+    ///  Sets the light color in the area specified.<br/>
+    ///  nColorType = AREA_LIGHT_COLOR_* specifies the color type.<br/>
+    ///  nColor = FOG_COLOR_* specifies the color the fog is being set to.<br/>
+    ///  The color can also be represented as a hex RGB number if specific color shades<br/>
+    ///  are desired.<br/>
+    ///  The format of a hex specified color would be 0xFFEEDD where<br/>
+    ///  FF would represent the amount of red in the color<br/>
+    ///  EE would represent the amount of green in the color<br/>
+    ///  DD would represent the amount of blue in the color.<br/>
+    ///  If no valid area (or object) is specified, it uses the area of caller.<br/>
+    ///  If an object other than an area is specified, will use the area that the object is currently in.<br/>
+    ///  If fFadeTime is above 0.0, it will fade to the new color in the amount of seconds specified. 
+    public static void SetAreaLightColor(int nColorType, int nColor, uint oArea = OBJECT_INVALID, float fFadeTime = 0.0f)
+    {
+      VM.StackPush(fFadeTime);
+      VM.StackPush(oArea);
+      VM.StackPush(nColor);
+      VM.StackPush(nColorType);
+      VM.Call(1081);
+    }
+
+    ///  Gets the light direction of origin in the area specified.<br/>
+    ///  nLightType specifies whether the Moon or Sun light direction is returned.<br/>
+    ///     Valid values for nColorType are the AREA_LIGHT_DIRECTION_* values.<br/>
+    ///  If no valid area (or object) is specified, it uses the area of caller.<br/>
+    ///  If an object other than an area is specified, will use the area that the object is currently in.
+    public static System.Numerics.Vector3 GetAreaLightDirection(int nLightType, uint oArea = OBJECT_INVALID)
+    {
+      VM.StackPush(oArea);
+      VM.StackPush(nLightType);
+      VM.Call(1082);
+      return VM.StackPopVector();
+    }
+
+    ///  Sets the light direction of origin in the area specified.<br/>
+    ///  nLightType = AREA_LIGHT_DIRECTION_* specifies the light type.<br/>
+    ///  vDirection = specifies the direction of origin of the light type, i.e. the direction the sun/moon is in from the area.<br/>
+    ///  If no valid area (or object) is specified, it uses the area of caller.<br/>
+    ///  If an object other than an area is specified, will use the area that the object is currently in.<br/>
+    ///  If fFadeTime is above 0.0, it will fade to the new color in the amount of seconds specified. 
+    public static void SetAreaLightDirection(int nLightType, System.Numerics.Vector3 vDirection, uint oArea = OBJECT_INVALID, float fFadeTime = 0.0f)
+    {
+      VM.StackPush(fFadeTime);
+      VM.StackPush(oArea);
+      VM.StackPush(vDirection);
+      VM.StackPush(nLightType);
+      VM.Call(1083);
+    }
+
+    ///  This immediately aborts the running script.<br/>
+    ///  - Will not emit an error to the server log by default.<br/>
+    ///  - You can specify the optional sError to emit as a script error, which will be printed<br/>
+    ///    to the log and sent to all players, just like any other script error.<br/>
+    ///  - Will not terminate other script recursion (e.g. nested ExecuteScript()) will resume as if the<br/>
+    ///    called script exited cleanly.<br/>
+    ///  - This call will never return.
+    public static void AbortRunningScript(string sError = "")
+    {
+      VM.StackPush(sError);
+      VM.Call(1084);
+    }
+
+    ///  Generate a VM debug view into the current execution location.<br/>
+    ///  - Names and symbols can only be resolved if debug information is available (NDB file).<br/>
+    ///  - This call can be a slow call for large scripts.<br/>
+    ///  - Setting bIncludeStack = TRUE will include stack info in the output, which could be a<br/>
+    ///    lot of data for large scripts. You can turn it off if you do not need the info.<br/>
+    ///  Returned data format (JSON object):<br/>
+    ///    &amp;quot;frames&amp;quot;: array of stack frames:<br/>
+    ///      &amp;quot;ip&amp;quot;: instruction pointer into code<br/>
+    ///      &amp;quot;bp&amp;quot;, &amp;quot;sp&amp;quot;: current base/stack pointer<br/>
+    ///      &amp;quot;file&amp;quot;, &amp;quot;line&amp;quot;, &amp;quot;function&amp;quot;: available only if NDB loaded correctly<br/>
+    ///    &amp;quot;stack&amp;quot;: abbreviated stack data (only if bIncludeStack is TRUE)<br/>
+    ///      &amp;quot;type&amp;quot;: one of the nwscript object types, OR:<br/>
+    ///      &amp;quot;type_unknown&amp;quot;: hex code of AUX<br/>
+    ///      &amp;quot;data&amp;quot;: type-specific payload. Not all type info is rendered in the interest of brevity.<br/>
+    ///              Only enough for you to re-identify which variable this might belong to.
+    public static System.IntPtr GetScriptBacktrace(int bIncludeStack = TRUE)
+    {
+      VM.StackPush(bIncludeStack);
+      VM.Call(1085);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  Mark the current location in code as a jump target, identified by sLabel.<br/>
+    ///  - Returns 0 on initial invocation, but will return nRetVal if jumped-to by LongJmp.<br/>
+    ///  - sLabel can be any valid string (including empty); though it is recommended to pick<br/>
+    ///    something distinct. The responsibility of namespacing lies with you.<br/>
+    ///  - Calling repeatedly with the same label will overwrite the previous jump location.<br/>
+    ///    If you want to nest them, you need to manage nesting state externally.
+    public static int SetJmp(string sLabel)
+    {
+      VM.StackPush(sLabel);
+      VM.Call(1086);
+      return VM.StackPopInt();
+    }
+
+    ///  Jump execution back in time to the point where you called SetJmp with the same label.<br/>
+    ///  - This function is a GREAT way to get really hard-to-debug stack under/overflows.<br/>
+    ///  - Will not work across script runs or script recursion; only within the same script.<br/>
+    ///    (However, it WILL work across includes - those go into the same script data in compilation)<br/>
+    ///  - Will throw a script error if sLabel does not exist.<br/>
+    ///  - Will throw a script error if no valid jump destination exists.<br/>
+    ///  - You CAN jump to locations with compatible stack layout, including sibling functions.<br/>
+    ///    For the script to successfully finish, the entire stack needs to be correct (either in code or<br/>
+    ///    by jumping elsewhere again). Making sure this is the case is YOUR responsibility.<br/>
+    ///  - The parameter nRetVal is passed to SetJmp, resuming script execution as if SetJmp returned<br/>
+    ///    that value (instead of 0).<br/>
+    ///    If you accidentally pass 0 as nRetVal, it will be silently rewritten to 1.<br/>
+    ///    Any other integer value is valid, including negative ones.<br/>
+    ///  - This call will never return.
+    public static void LongJmp(string sLabel, int nRetVal = 1)
+    {
+      VM.StackPush(nRetVal);
+      VM.StackPush(sLabel);
+      VM.Call(1087);
+    }
+
+    ///  Returns TRUE if the given sLabel is a valid jump target at the current code location.
+    public static int GetIsValidJmp(string sLabel)
+    {
+      VM.StackPush(sLabel);
+      VM.Call(1088);
+      return VM.StackPopInt();
+    }
+
+    ///  Create a Pacified effect, making the creature unable to attack anyone
+    public static System.IntPtr EffectPacified()
+    {
+      VM.Call(1089);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+    }
+
+    ///  Get the current script recursion level.
+    public static int GetScriptRecursionLevel()
+    {
+      VM.Call(1090);
+      return VM.StackPopInt();
+    }
+
+    ///  Get the name of the script at a script recursion level.<br/>
+    ///  - nRecursionLevel: Between 0 and &amp;lt;= GetScriptRecursionLevel() or -1 for the current recursion level.<br/>
+    ///  Returns the script name or &amp;quot;&amp;quot; on error.
+    public static string GetScriptName(int nRecursionLevel = -1)
+    {
+      VM.StackPush(nRecursionLevel);
+      VM.Call(1091);
+      return VM.StackPopString();
+    }
+
+    ///  Get the script chunk attached to a script recursion level.<br/>
+    ///  - nRecursionLevel: Between 0 and &amp;lt;= GetScriptRecursionLevel() or -1 for the current recursion level.<br/>
+    ///  Returns the script chunk or &amp;quot;&amp;quot; on error / no script chunk attached.
+    public static string GetScriptChunk(int nRecursionLevel = -1)
+    {
+      VM.StackPush(nRecursionLevel);
+      VM.Call(1092);
+      return VM.StackPopString();
+    }
+
+    ///  Returns the patch postfix of oPlayer (i.e. the 29 out of &amp;quot;87.8193.35-29 abcdef01&amp;quot;).<br/>
+    ///  Returns 0 if the given object isn&amp;apos;t a player or did not advertise their build info, or the<br/>
+    ///  player version is old enough not to send this bit of build info to the server.
+    public static int GetPlayerBuildVersionPostfix(uint oPlayer)
+    {
+      VM.StackPush(oPlayer);
+      VM.Call(1093);
+      return VM.StackPopInt();
+    }
+
+    ///  Returns the patch commit sha1 of oPlayer (i.e. the &amp;quot;abcdef01&amp;quot; out of &amp;quot;87.8193.35-29 abcdef01&amp;quot;).<br/>
+    ///  Returns &amp;quot;&amp;quot; if the given object isn&amp;apos;t a player or did not advertise their build info, or the<br/>
+    ///  player version is old enough not to send this bit of build info to the server.
+    public static string GetPlayerBuildVersionCommitSha1(uint oPlayer)
+    {
+      VM.StackPush(oPlayer);
+      VM.Call(1094);
+      return VM.StackPopString();
+    }
+
+    ///  In the spell script returns the feat used, or -1 if no feat was used
+    public static int GetSpellFeatId()
+    {
+      VM.Call(1095);
+      return VM.StackPopInt();
+    }
+
+    ///  Returns the given effects Link ID. There is no guarantees about this identifier other than<br/>
+    ///  it is unique and the same for all effects linked to it.
+    public static string GetEffectLinkId(System.IntPtr eEffect)
+    {
+      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.Call(1096);
+      return VM.StackPopString();
+    }
+
+    ///  If oCreature has nFeat, and nFeat is useable, returns the number of remaining uses left<br/>
+    ///  or the maximum int value if the feat has unlimited uses (eg FEAT_KNOCKDOWN)<br/>
+    ///  - nFeat: FEAT_*<br/>
+    ///  - oCreature: Creature to check the feat of
+    public static int GetFeatRemainingUses(int nFeat, uint oCreature = OBJECT_INVALID)
+    {
+      VM.StackPush(oCreature);
+      VM.StackPush(nFeat);
+      VM.Call(1097);
+      return VM.StackPopInt();
+    }
+
+    ///  Change a tile in an area, it will also update the tile for all players in the area.<br/>
+    ///  * Notes:<br/>
+    ///    - For optimal use you should be familiar with how tilesets / .set files work.<br/>
+    ///    - Will not update the height of non-creature objects.<br/>
+    ///    - Creatures may get stuck on non-walkable terrain.<br/>
+    /// <br/>
+    ///  - locTile: The location of the tile.<br/>
+    ///  - nTileID: the ID of the tile, for values see the .set file of the tileset.<br/>
+    ///  - nOrientation: the orientation of the tile, 0-3.<br/>
+    ///                  0 = Normal orientation<br/>
+    ///                  1 = 90 degrees counterclockwise<br/>
+    ///                  2 = 180 degrees counterclockwise<br/>
+    ///                  3 = 270 degrees counterclockwise<br/>
+    ///  - nHeight: the height of the tile.<br/>
+    ///  - nFlags: a bitmask of SETTILE_FLAG_* constants.<br/>
+    ///            - SETTILE_FLAG_RELOAD_GRASS: reloads the area&amp;apos;s grass, use if your tile used to have grass or should have grass now.<br/>
+    ///            - SETTILE_FLAG_RELOAD_BORDER: reloads the edge tile border, use if you changed a tile on the edge of the area.<br/>
+    ///            - SETTILE_FLAG_RECOMPUTE_LIGHTING: recomputes the area&amp;apos;s lighting and static shadows, use most of time.
+    public static void SetTile(System.IntPtr locTile, int nTileID, int nOrientation, int nHeight = 0, int nFlags = SETTILE_FLAG_RECOMPUTE_LIGHTING)
+    {
+      VM.StackPush(nFlags);
+      VM.StackPush(nHeight);
+      VM.StackPush(nOrientation);
+      VM.StackPush(nTileID);
+      VM.StackPush(locTile, ENGINE_STRUCTURE_LOCATION);
+      VM.Call(1098);
+    }
+
+    ///  Get the ID of the tile at location locTile.<br/>
+    ///  Returns -1 on error.
+    public static int GetTileID(System.IntPtr locTile)
+    {
+      VM.StackPush(locTile, ENGINE_STRUCTURE_LOCATION);
+      VM.Call(1099);
+      return VM.StackPopInt();
+    }
+
+    ///  Get the orientation of the tile at location locTile.<br/>
+    ///  Returns -1 on error.
+    public static int GetTileOrientation(System.IntPtr locTile)
+    {
+      VM.StackPush(locTile, ENGINE_STRUCTURE_LOCATION);
+      VM.Call(1100);
+      return VM.StackPopInt();
+    }
+
+    ///  Get the height of the tile at location locTile.<br/>
+    ///  Returns -1 on error.
+    public static int GetTileHeight(System.IntPtr locTile)
+    {
+      VM.StackPush(locTile, ENGINE_STRUCTURE_LOCATION);
+      VM.Call(1101);
+      return VM.StackPopInt();
+    }
+
+    ///  All clients in oArea will reload the area&amp;apos;s grass.<br/>
+    ///  This can be used to update the grass of an area after changing a tile with SetTile() that will have or used to have grass.
+    public static void ReloadAreaGrass(uint oArea)
+    {
+      VM.StackPush(oArea);
+      VM.Call(1102);
+    }
+
+    ///  Set the state of the tile animation loops of the tile at location locTile.
+    public static void SetTileAnimationLoops(System.IntPtr locTile, int bAnimLoop1, int bAnimLoop2, int bAnimLoop3)
+    {
+      VM.StackPush(bAnimLoop3);
+      VM.StackPush(bAnimLoop2);
+      VM.StackPush(bAnimLoop1);
+      VM.StackPush(locTile, ENGINE_STRUCTURE_LOCATION);
+      VM.Call(1103);
+    }
+
+    ///  Change multiple tiles in an area, it will also update the tiles for all players in the area.<br/>
+    ///  Note: See SetTile() for additional information.<br/>
+    ///  - oArea: the area to change one or more tiles of.<br/>
+    ///  - jTileData: a JsonArray() with one or more JsonObject()s with the following keys:<br/>
+    ///                - index: the index of the tile as a JsonInt()<br/>
+    ///                         For example, a 3x3 area has the following tile indexes:<br/>
+    ///                         6 7 8<br/>
+    ///                         3 4 5<br/>
+    ///                         0 1 2<br/>
+    ///                - tileid: the ID of the tile as a JsonInt(), defaults to 0 if not set<br/>
+    ///                - orientation: the orientation of the tile as JsonInt(), defaults to 0 if not set<br/>
+    ///                - height: the height of the tile as JsonInt(), defaults to 0 if not set<br/>
+    ///                - animloop1: the state of a tile animation, 1/0 as JsonInt(), defaults to the current value if not set<br/>
+    ///                - animloop2: the state of a tile animation, 1/0 as JsonInt(), defaults to the current value if not set<br/>
+    ///                - animloop3: the state of a tile animation, 1/0 as JsonInt(), defaults to the current value if not set<br/>
+    ///  - nFlags: a bitmask of SETTILE_FLAG_* constants.<br/>
+    ///  - sTileset: if not empty, it will also change the area&amp;apos;s tileset<br/>
+    ///              Warning: only use this if you really know what you&amp;apos;re doing, it&amp;apos;s very easy to break things badly.<br/>
+    ///                       Make sure jTileData changes *all* tiles in the area and to a tile id that&amp;apos;s supported by sTileset.
+    public static void SetTileJson(uint oArea, System.IntPtr jTileData, int nFlags = SETTILE_FLAG_RECOMPUTE_LIGHTING, string sTileset = "")
+    {
+      VM.StackPush(sTileset);
+      VM.StackPush(nFlags);
+      VM.StackPush(jTileData, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(oArea);
+      VM.Call(1104);
+    }
+
+    ///  All clients in oArea will reload the inaccesible border tiles.<br/>
+    ///  This can be used to update the edge tiles after changing a tile with SetTile().
+    public static void ReloadAreaBorder(uint oArea)
+    {
+      VM.StackPush(oArea);
+      VM.Call(1105);
+    }
+
+    ///  Sets whether or not oCreatures&amp;apos;s nIconId is flashing in their GUI icon bar.  If oCreature does not<br/>
+    ///  have an icon associated with nIconId, nothing happens. This function does not add icons to <br/>
+    ///  oCreatures&amp;apos;s GUI icon bar. The icon will flash until the underlying effect is removed or this <br/>
+    ///  function is called again with bFlashing = FALSE.<br/>
+    ///  - oCreature: Player object to affect<br/>
+    ///  - nIconId: Referenced to effecticons.2da or EFFECT_ICON_*<br/>
+    ///  - bFlashing: TRUE to force an existing icon to flash, FALSE to to stop.
+    public static void SetEffectIconFlashing(uint oCreature, int nIconId, int bFlashing = TRUE)
+    {
+      VM.StackPush(bFlashing);
+      VM.StackPush(nIconId);
+      VM.StackPush(oCreature);
+      VM.Call(1106);
+    }
+
+    ///  Creates a bonus feat effect. These act like the Bonus Feat item property,<br/>
+    ///  and do not work as feat prerequisites for levelup purposes.<br/>
+    ///  - nFeat: FEAT_*
+    public static System.IntPtr EffectBonusFeat(int nFeat)
+    {
+      VM.StackPush(nFeat);
+      VM.Call(1107);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+    }
+
+    ///  Returns the INVENTORY_SLOT_* constant of the last item equipped.  Can only be used in the<br/>
+    ///  module&amp;apos;s OnPlayerEquip event.  Returns -1 on error.
+    public static int GetPCItemLastEquippedSlot()
+    {
+      VM.Call(1108);
+      return VM.StackPopInt();
+    }
+
+    ///  Returns the INVENTORY_SLOT_* constant of the last item unequipped.  Can only be used in the<br/>
+    ///  module&amp;apos;s OnPlayerUnequip event.  Returns -1 on error.
+    public static int GetPCItemLastUnequippedSlot()
+    {
+      VM.Call(1109);
+      return VM.StackPopInt();
+    }
+
+    ///  Returns TRUE if the last spell was cast spontaneously<br/>
+    ///  eg; a Cleric casting SPELL_CURE_LIGHT_WOUNDS when it is not prepared, using another level 1 slot
+    public static int GetSpellCastSpontaneously()
+    {
+      VM.Call(1110);
+      return VM.StackPopInt();
+    }
+
+    ///  Reset the given sqlquery, readying it for re-execution after it has been stepped.<br/>
+    ///  All existing binds are kept untouched, unless bClearBinds is TRUE.<br/>
+    ///  This command only works on successfully-prepared queries that have not errored out.
+    public static void SqlResetQuery(System.IntPtr sqlQuery, int bClearBinds = FALSE)
+    {
+      VM.StackPush(bClearBinds);
+      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
+      VM.Call(1111);
+    }
+
+    ///  Provides immunity to the effects of EffectTimeStop which allows actions during other creatures time stop effects
+    public static System.IntPtr EffectTimeStopImmunity()
+    {
+      VM.Call(1112);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+    }
+
+    ///  Return the current game tick rate (mainloop iterations per second).<br/>
+    ///  This is equivalent to graphics frames per second when the module is running inside a client.
+    public static int GetTickRate()
+    {
+      VM.Call(1113);
+      return VM.StackPopInt();
+    }
+
+    ///  Returns the level of the last spell cast. This value is only valid in a Spell script.
+    public static int GetLastSpellLevel()
+    {
+      VM.Call(1114);
+      return VM.StackPopInt();
+    }
+
+    ///  Returns the 32bit integer hash of sString<br/>
+    ///  This hash is stable and will always have the same value for same input string, regardless of platform.<br/>
+    ///  The hash algorithm is the same as the one used internally for strings in case statements, so you can do:<br/>
+    ///     switch (HashString(sString))<br/>
+    ///     {<br/>
+    ///          case &amp;quot;AAA&amp;quot;:    HandleAAA(); break;<br/>
+    ///          case &amp;quot;BBB&amp;quot;:    HandleBBB(); break;<br/>
+    ///     }<br/>
+    ///  NOTE: The exact algorithm used is XXH32(sString) ^ XXH32(&amp;quot;&amp;quot;). This means that HashString(&amp;quot;&amp;quot;) is 0.
+    public static int HashString(string sString)
+    {
+      VM.StackPush(sString);
+      VM.Call(1115);
+      return VM.StackPopInt();
+    }
+
+    ///  Returns the current microsecond counter value. This value is meaningless on its own, but can be subtracted<br/>
+    ///  from other values returned by this function in the same script to get high resolution elapsed time:<br/>
+    ///      int nMicrosecondsStart = GetMicrosecondCounter();<br/>
+    ///      DoSomething();<br/>
+    ///      int nElapsedMicroseconds = GetMicrosecondCounter() - nMicrosecondsStart;
+    public static int GetMicrosecondCounter()
+    {
+      VM.Call(1116);
+      return VM.StackPopInt();
+    }
+
+    ///  Forces the creature to always walk
+    public static System.IntPtr EffectForceWalk()
+    {
+      VM.Call(1117);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
 
   }

@@ -846,6 +846,48 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Return&apos;s the currently-possessed game object of a player.
+    /// <param name="oPlayer">The player object (e.g. from GetFirst/NextPC()).</param>
+    /// <returns>the actual game object of oPlayer, or OBJECT_INVALID on error.</returns>
+    public static uint GetGameObject(uint oPlayer)
+    {
+      const string sFunc = "GetGameObject";
+      VM.NWNX.SetFunction(NWNX_Player, sFunc);
+      VM.NWNX.StackPush(oPlayer);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopObject();
+    }
+
+    /// Override the ui discovery mask of oObject for oPlayer only
+    /// <param name="oPlayer">The player object.</param>
+    /// <param name="oObject">The target object.</param>
+    /// <param name="nMask">A mask of OBJECT_UI_DISCOVERY_*, or -1 to clear the override</param>
+    public static void SetObjectUiDiscoveryMaskOverride(uint oPlayer, uint oObject, int nMask)
+    {
+      const string sFunc = "SetObjectUiDiscoveryMaskOverride";
+      VM.NWNX.SetFunction(NWNX_Player, sFunc);
+      VM.NWNX.StackPush(nMask);
+      VM.NWNX.StackPush(oObject);
+      VM.NWNX.StackPush(oPlayer);
+      VM.NWNX.Call();
+    }
+
+    /// Send a party invite from oInviter to oPlayer
+    /// <param name="oPlayer">The player to invite</param>
+    /// <param name="oInviter">The one inviting the player</param>
+    /// <param name="bForceInvite">TRUE: Sends the invite even if the target ignores invites</param>
+    /// <param name="bHideDialog">TRUE: Does not show the party invitation dialog</param>
+    public static void SendPartyInvite(uint oPlayer, uint oInviter, int bForceInvite = FALSE, int bHideDialog = FALSE)
+    {
+      const string sFunc = "SendPartyInvite";
+      VM.NWNX.SetFunction(NWNX_Player, sFunc);
+      VM.NWNX.StackPush(bHideDialog);
+      VM.NWNX.StackPush(bForceInvite);
+      VM.NWNX.StackPush(oInviter);
+      VM.NWNX.StackPush(oPlayer);
+      VM.NWNX.Call();
+    }
+
     // @}
     public static void INTERNAL_StopGuiTimingBar(uint player, string script = "", int id = -1)
     {

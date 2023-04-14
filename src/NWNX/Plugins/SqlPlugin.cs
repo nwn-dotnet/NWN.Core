@@ -227,6 +227,15 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
+    /// Set the next query to return full binary results **ON THE FIRST COLUMN ONLY**.
+    /// @note This is ONLY needed on PostgreSQL, and ONLY if you want to deserialize raw bytea in NWNX_SQL_ReadFullObjectInActiveRow with base64=FALSE.
+    public static void PostgreSQL_SetNextQueryResultsBinaryMode()
+    {
+      const string sFunc = "PostgreSQL_SetNextQueryResultsBinaryMode";
+      VM.NWNX.SetFunction(NWNX_SQL, sFunc);
+      VM.NWNX.Call();
+    }
+
     // @}
   }
 }

@@ -8,6 +8,20 @@ namespace NWN.Core.NWNX
     public const string NWNX_Effect = "NWNX_Effect";
 
     ///&lt; @private
+    /// EQUIPPED effects are always associated with a slotted item:
+    /// Setting this duration type requires the effect creator
+    /// to be set to the (already equipped) item that should remove
+    /// this effect when unequipped.
+    /// Removal behaviour for effects where the creator is NOT a equipped
+    /// item is undefined.
+    /// They are not removed by resting, cannot be dispelled, etc.
+    public const int DURATION_TYPE_EQUIPPED = 3;
+
+    /// These are feat/racial effects used internally by the game to
+    /// implement things like movement speed changes and darkvision.
+    /// They cannot be removed by resting, dispelling, etc.
+    public const int DURATION_TYPE_INNATE = 4;
+
     /// An unpacked effect
     /// Convert native effect type to unpacked structure.
     /// <param name="e">The effect to convert.</param>
@@ -31,45 +45,6 @@ namespace NWN.Core.NWNX
       __NWNX_Effect_ResolvePack(sFunc, e);
       VM.NWNX.Call();
       return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
-    }
-
-    /// Set a script with optional data that runs when an effect expires
-    /// <param name="e">The effect.</param>
-    /// <param name="script">The script to run when the effect expires.</param>
-    /// <param name="data">Any other data you wish to send back to the script.</param>
-    /// @remark OBJECT_SELF in the script is the object the effect is applied to.
-    /// @note Only works for TEMPORARY and PERMANENT effects applied to an object.
-    public static System.IntPtr SetEffectExpiredScript(System.IntPtr e, string script, string data = "")
-    {
-      const string sFunc = "SetEffectExpiredScript";
-      VM.NWNX.SetFunction(NWNX_Effect, sFunc);
-      VM.NWNX.StackPush(data);
-      VM.NWNX.StackPush(script);
-      VM.NWNX.StackPush(e, ENGINE_STRUCTURE_EFFECT);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
-    }
-
-    /// Get the data set with NWNX_Effect_SetEffectExpiredScript()
-    /// @note Should only be called from a script set with NWNX_Effect_SetEffectExpiredScript().
-    /// <returns>The data attached to the effect.</returns>
-    public static string GetEffectExpiredData()
-    {
-      const string sFunc = "GetEffectExpiredData";
-      VM.NWNX.SetFunction(NWNX_Effect, sFunc);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopString();
-    }
-
-    /// Get the effect creator.
-    /// @note Should only be called from a script set with NWNX_Effect_SetEffectExpiredScript().
-    /// <returns>The object from which the effect originated.</returns>
-    public static uint GetEffectExpiredCreator()
-    {
-      const string sFunc = "GetEffectExpiredCreator";
-      VM.NWNX.SetFunction(NWNX_Effect, sFunc);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopObject();
     }
 
     /// replace an already applied effect on an object
@@ -154,15 +129,55 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Accessorize an EffectVisualEffect(), making it undispellable and unable to be removed by resting or death.
-    /// @note If linked with a non-visualeffect or a non-accessorized visualeffect it *will* get removed.
-    /// <param name="eEffect">An EffectVisualEffect(), does not work for other effect types.</param>
-    /// <returns>The accessorized effect or an unchanged effect if not an EffectVisualEffect().</returns>
-    public static System.IntPtr AccessorizeVisualEffect(System.IntPtr eEffect)
+    /// Sets an effect creator.
+    /// <param name="eEffect">The effect to be modified.</param>
+    /// <param name="oObject">The effect creator.</param>
+    /// <returns>The effect with creator field set.</returns>
+    public static System.IntPtr SetEffectCreator(System.IntPtr eEffect, uint oObject)
     {
-      const string sFunc = "AccessorizeVisualEffect";
+      const string sFunc = "SetEffectCreator";
+      VM.NWNX.SetFunction(NWNX_Effect, sFunc);
+      VM.NWNX.StackPush(oObject);
+      VM.NWNX.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+    }
+
+    /// Checks if the given effect is valid. Unlike the game builtin, this call considers internal types too.
+    /// <param name="eEffect">The effect to check</param>
+    /// <returns>TRUE if the effect is valid (including internal types).</returns>
+    public static int GetIsEffectValid(System.IntPtr eEffect)
+    {
+      const string sFunc = "GetIsEffectValid";
       VM.NWNX.SetFunction(NWNX_Effect, sFunc);
       VM.NWNX.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
+    /// Returns the number of applied effects on the given object.
+    /// <param name="oObject">The object to get the applied effect count for.</param>
+    /// <returns>The number of applied effects, including internal.</returns>
+    public static int GetAppliedEffectCount(uint oObject)
+    {
+      const string sFunc = "GetAppliedEffectCount";
+      VM.NWNX.SetFunction(NWNX_Effect, sFunc);
+      VM.NWNX.StackPush(oObject);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
+    /// Returns the nNth applied effect on a object.
+    /// <param name="oObject">The object to get the applied effect copy for.</param>
+    /// <param name="nNth">The effect index to get.</param>
+    /// @note Make sure to check with NWNX_Effect_GetIsEffectValid, as this iterator also includes internal effects.
+    /// <returns>A copy of the applied game effect, or a invalid effect.</returns>
+    public static System.IntPtr GetAppliedEffect(uint oObject, int nNth)
+    {
+      const string sFunc = "GetAppliedEffect";
+      VM.NWNX.SetFunction(NWNX_Effect, sFunc);
+      VM.NWNX.StackPush(nNth);
+      VM.NWNX.StackPush(oObject);
       VM.NWNX.Call();
       return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }

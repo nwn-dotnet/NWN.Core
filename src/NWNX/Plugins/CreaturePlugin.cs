@@ -36,32 +36,6 @@ namespace NWN.Core.NWNX
     public const int NWNX_CREATURE_MOVEMENT_TYPE_WALK_BACKWARDS = 4;
 
     // @}
-    /// @name Cleric Domains
-    /// @anchor cleric_domains
-    ///
-    /// The clerical domains.
-    /// @{
-    public const int NWNX_CREATURE_CLERIC_DOMAIN_AIR = 0;
-    public const int NWNX_CREATURE_CLERIC_DOMAIN_ANIMAL = 1;
-    public const int NWNX_CREATURE_CLERIC_DOMAIN_DEATH = 3;
-    public const int NWNX_CREATURE_CLERIC_DOMAIN_DESTRUCTION = 4;
-    public const int NWNX_CREATURE_CLERIC_DOMAIN_EARTH = 5;
-    public const int NWNX_CREATURE_CLERIC_DOMAIN_EVIL = 6;
-    public const int NWNX_CREATURE_CLERIC_DOMAIN_FIRE = 7;
-    public const int NWNX_CREATURE_CLERIC_DOMAIN_GOOD = 8;
-    public const int NWNX_CREATURE_CLERIC_DOMAIN_HEALING = 9;
-    public const int NWNX_CREATURE_CLERIC_DOMAIN_KNOWLEDGE = 10;
-    public const int NWNX_CREATURE_CLERIC_DOMAIN_MAGIC = 13;
-    public const int NWNX_CREATURE_CLERIC_DOMAIN_PLANT = 14;
-    public const int NWNX_CREATURE_CLERIC_DOMAIN_PROTECTION = 15;
-    public const int NWNX_CREATURE_CLERIC_DOMAIN_STRENGTH = 16;
-    public const int NWNX_CREATURE_CLERIC_DOMAIN_SUN = 17;
-    public const int NWNX_CREATURE_CLERIC_DOMAIN_TRAVEL = 18;
-    public const int NWNX_CREATURE_CLERIC_DOMAIN_TRICKERY = 19;
-    public const int NWNX_CREATURE_CLERIC_DOMAIN_WAR = 20;
-    public const int NWNX_CREATURE_CLERIC_DOMAIN_WATER = 21;
-
-    // @}
     /// @name Bonus Types
     /// @anchor bonus_types
     ///
@@ -94,8 +68,6 @@ namespace NWN.Core.NWNX
     // @}
     /// @struct NWNX_Creature_SpecialAbility
     /// A creature special ability.
-    /// @struct NWNX_Creature_MemorisedSpell
-    /// A memorised spell structure.
     /// Gives the creature a feat.
     /// <param name="creature">The creature object.</param>
     /// <param name="feat">The feat id.</param>
@@ -421,66 +393,6 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// Gets the count of memorised spells for a creature&apos;s class at a level.
-    /// <param name="creature">The creature object.</param>
-    /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
-    /// <param name="level">The spell level.</param>
-    /// <returns>The memorised spell count.</returns>
-    public static int GetMemorisedSpellCountByLevel(uint creature, int @class, int level)
-    {
-      const string sFunc = "GetMemorisedSpellCountByLevel";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(level);
-      VM.NWNX.StackPush(@class);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
-    }
-
-    /// Gets the memorised spell at a class level&apos;s index.
-    /// <param name="creature">The creature object.</param>
-    /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
-    /// <param name="level">The spell level.</param>
-    /// <param name="index">The index. Index bounds: 0 &lt;= index &lt; NWNX_Creature_GetMemorisedSpellCountByLevel().</param>
-    /// <returns>An NWNX_Creature_MemorisedSpell() struct.</returns>
-    public static MemorisedSpell GetMemorisedSpell(uint creature, int @class, int level, int index)
-    {
-      const string sFunc = "GetMemorisedSpell";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      MemorisedSpell spell = default;
-      VM.NWNX.StackPush(index);
-      VM.NWNX.StackPush(level);
-      VM.NWNX.StackPush(@class);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      spell.domain = VM.NWNX.StackPopInt();
-      spell.meta = VM.NWNX.StackPopInt();
-      spell.ready = VM.NWNX.StackPopInt();
-      spell.id = VM.NWNX.StackPopInt();
-      return spell;
-    }
-
-    /// Sets the memorised spell at a class level&apos;s index.
-    /// <param name="creature">The creature object.</param>
-    /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
-    /// <param name="level">The spell level.</param>
-    /// <param name="index">The index. Index bounds: 0 &lt;= index &lt; NWNX_Creature_GetMemorisedSpellCountByLevel().</param>
-    /// <param name="spell">An NWNX_Creature_MemorisedSpell() struct.</param>
-    public static void SetMemorisedSpell(uint creature, int @class, int level, int index, MemorisedSpell spell)
-    {
-      const string sFunc = "SetMemorisedSpell";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(spell.id);
-      VM.NWNX.StackPush(spell.ready);
-      VM.NWNX.StackPush(spell.meta);
-      VM.NWNX.StackPush(spell.domain);
-      VM.NWNX.StackPush(index);
-      VM.NWNX.StackPush(level);
-      VM.NWNX.StackPush(@class);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-    }
-
     /// Gets the remaining spell slots (innate casting) at a class level&apos;s index.
     /// <param name="creature">The creature object.</param>
     /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
@@ -529,40 +441,6 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// Gets the known spell count (innate casting) at a class level.
-    /// <param name="creature">The creature object.</param>
-    /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
-    /// <param name="level">The spell level.</param>
-    /// <returns>The known spell count.</returns>
-    public static int GetKnownSpellCount(uint creature, int @class, int level)
-    {
-      const string sFunc = "GetKnownSpellCount";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(level);
-      VM.NWNX.StackPush(@class);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
-    }
-
-    /// Gets the known spell at a class level&apos;s index.
-    /// <param name="creature">The creature object.</param>
-    /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
-    /// <param name="level">The spell level.</param>
-    /// <param name="index">The index. Index bounds: 0 &lt;= index &lt; NWNX_Creature_GetKnownSpellCount().</param>
-    /// <returns>The spell id.</returns>
-    public static int GetKnownSpell(uint creature, int @class, int level, int index)
-    {
-      const string sFunc = "GetKnownSpell";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(index);
-      VM.NWNX.StackPush(level);
-      VM.NWNX.StackPush(@class);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
-    }
-
     /// Add a spell to a creature&apos;s spellbook for class.
     /// <param name="creature">The creature object.</param>
     /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
@@ -589,36 +467,6 @@ namespace NWN.Core.NWNX
       const string sFunc = "RemoveKnownSpell";
       VM.NWNX.SetFunction(NWNX_Creature, sFunc);
       VM.NWNX.StackPush(spellId);
-      VM.NWNX.StackPush(level);
-      VM.NWNX.StackPush(@class);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-    }
-
-    /// Clear a specific spell from the creature&apos;s spellbook for class
-    /// <param name="creature">The creature object.</param>
-    /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
-    /// <param name="spellId">The spell to clear.</param>
-    public static void ClearMemorisedKnownSpells(uint creature, int @class, int spellId)
-    {
-      const string sFunc = "ClearMemorisedKnownSpells";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(spellId);
-      VM.NWNX.StackPush(@class);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-    }
-
-    /// Clear the memorised spell of the creature for the class, level and index.
-    /// <param name="creature">The creature object.</param>
-    /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
-    /// <param name="level">The spell level.</param>
-    /// <param name="index">The index. Index bounds: 0 &lt;= index &lt; NWNX_Creature_GetMemorisedSpellCountByLevel().</param>
-    public static void ClearMemorisedSpell(uint creature, int @class, int level, int index)
-    {
-      const string sFunc = "ClearMemorisedSpell";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(index);
       VM.NWNX.StackPush(level);
       VM.NWNX.StackPush(@class);
       VM.NWNX.StackPush(creature);
@@ -767,30 +615,6 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Get the soundset index for creature.
-    /// <param name="creature">The creature object.</param>
-    /// <returns>The soundset used by the creature.</returns>
-    public static int GetSoundset(uint creature)
-    {
-      const string sFunc = "GetSoundset";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
-    }
-
-    /// Set the soundset index for creature.
-    /// <param name="creature">The creature object.</param>
-    /// <param name="soundset">The soundset index.</param>
-    public static void SetSoundset(uint creature, int soundset)
-    {
-      const string sFunc = "SetSoundset";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(soundset);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-    }
-
     /// Set the base ranks in a skill for creature
     /// <param name="creature">The creature object.</param>
     /// <param name="skill">The skill id.</param>
@@ -905,18 +729,6 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// Sets the creature gender.
-    /// <param name="creature">The creature object.</param>
-    /// <param name="gender">The GENDER_ constant.</param>
-    public static void SetGender(uint creature, int gender)
-    {
-      const string sFunc = "SetGender";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(gender);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-    }
-
     /// Restore all creature feat uses.
     /// <param name="creature">The creature object.</param>
     public static void RestoreFeats(uint creature)
@@ -933,18 +745,6 @@ namespace NWN.Core.NWNX
     {
       const string sFunc = "RestoreSpecialAbilities";
       VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-    }
-
-    /// Restore all creature spells per day for given level.
-    /// <param name="creature">The creature object.</param>
-    /// <param name="level">The level to restore. If -1, all spells are restored.</param>
-    public static void RestoreSpells(uint creature, int level = -1)
-    {
-      const string sFunc = "RestoreSpells";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(level);
       VM.NWNX.StackPush(creature);
       VM.NWNX.Call();
     }
@@ -1368,17 +1168,6 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
-    /// Gets one of creature&apos;s domains.
-    /// <param name="creature">The creature object.</param>
-    /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
-    /// <param name="index">The first or second domain.</param>
-    /// @deprecated Use GetDomain(). This will be removed in future NWNX releases.
-    public static int GetDomain(uint creature, int @class, int index)
-    {
-      WriteTimestampedLogEntry("NWNX_Creature: GetDomain() is deprecated. Please use the basegame's GetDomain() instead");
-      return VM.NWNX.StackPopInt();
-    }
-
     /// Sets one of creature&apos;s domains.
     /// <param name="creature">The creature object.</param>
     /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
@@ -1393,16 +1182,6 @@ namespace NWN.Core.NWNX
       VM.NWNX.StackPush(@class);
       VM.NWNX.StackPush(creature);
       VM.NWNX.Call();
-    }
-
-    /// Gets the creature&apos;s specialist school.
-    /// <param name="creature">The creature object.</param>
-    /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
-    /// @deprecated Use GetSpecialization(). This will be removed in future NWNX releases.
-    public static int GetSpecialization(uint creature, int @class)
-    {
-      WriteTimestampedLogEntry("NWNX_Creature: GetSpecialization() is deprecated. Please use the basegame's GetSpecialization() instead");
-      return VM.NWNX.StackPopInt();
     }
 
     /// Sets creature&apos;s specialist school.
@@ -1702,20 +1481,6 @@ namespace NWN.Core.NWNX
       VM.NWNX.SetFunction(NWNX_Creature, sFunc);
       VM.NWNX.StackPush(nAssociateType);
       VM.NWNX.StackPush(oAssociate);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-    }
-
-    /// Set whether an effect icon is flashing or not.
-    /// <param name="oCreature">The target creature.</param>
-    /// <param name="nIconId">The icon id, see effecticons.2da.</param>
-    /// <param name="bFlashing">TRUE for flashing, FALSE for not flashing.</param>
-    public static void SetEffectIconFlashing(uint oCreature, int nIconId, int bFlashing)
-    {
-      const string sFunc = "SetEffectIconFlashing";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(bFlashing);
-      VM.NWNX.StackPush(nIconId);
       VM.NWNX.StackPush(oCreature);
       VM.NWNX.Call();
     }
@@ -2117,12 +1882,16 @@ namespace NWN.Core.NWNX
     /// <param name="fProjectileTime">The time in seconds for the projectile to reach the target. 0.0f for no projectile.</param>
     /// <param name="nProjectilePathType">A PROJECTILE_PATH_TYPE_* constant.</param>
     /// <param name="nProjectileSpellID">An optional spell ID which to use the projectile vfx of. -1 to use nSpellID&apos;s projectile vfx.</param>
-    public static void DoItemCastSpell(uint oCreature, uint oTarget, System.IntPtr locTarget, int nSpellID, int nCasterLevel, float fProjectileTime, int nProjectilePathType = PROJECTILE_PATH_TYPE_DEFAULT, int nProjectileSpellID = -1)
+    /// <param name="oItem">The spell cast item retrieved by GetSpellCastItem().</param>
+    /// <param name="sImpactScript">The spell impact script. Set to &quot;****&quot;&quot; to not run any impact script. If left blank, will execute nSpellID&apos;s impact script.</param>
+    public static void DoItemCastSpell(uint oCreature, uint oTarget, System.IntPtr locTarget, int nSpellID, int nCasterLevel, float fProjectileTime, int nProjectilePathType = PROJECTILE_PATH_TYPE_DEFAULT, int nProjectileSpellID = -1, uint oItem = OBJECT_INVALID, string sImpactScript = "")
     {
       const string sFunc = "DoItemCastSpell";
       VM.NWNX.SetFunction(NWNX_Creature, sFunc);
       uint oArea = GetAreaFromLocation(locTarget);
       System.Numerics.Vector3 vPosition = GetPositionFromLocation(locTarget);
+      VM.NWNX.StackPush(sImpactScript);
+      VM.NWNX.StackPush(oItem);
       VM.NWNX.StackPush(nProjectileSpellID);
       VM.NWNX.StackPush(nProjectilePathType);
       VM.NWNX.StackPush(fProjectileTime);
@@ -2256,46 +2025,6 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// Get the number of uses left of a spell.
-    /// @note This function is for caster classes that don&apos;t need to memorize spells.
-    /// <param name="oCreature">The creature.</param>
-    /// <param name="nSpellID">The spell ID.</param>
-    /// <param name="nMultiClass">The position of the class to check, 0-2</param>
-    /// <param name="nDomainLevel">The domain level if checking a domain spell.</param>
-    /// <param name="nMetaMagic">A METAMAGIC_* constant.</param>
-    /// <returns>The number of spell uses left or 0 on error.</returns>
-    public static int GetSpellUsesLeft(uint oCreature, int nSpellID, int nMultiClass, int nDomainLevel = 0, int nMetaMagic = METAMAGIC_NONE)
-    {
-      const string sFunc = "GetSpellUsesLeft";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(nMetaMagic);
-      VM.NWNX.StackPush(nDomainLevel);
-      VM.NWNX.StackPush(nMultiClass);
-      VM.NWNX.StackPush(nSpellID);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
-    }
-
-    /// Get the number of memorized ready spells by spellid.
-    /// @note This function is for caster classes that need to memorize spells.
-    /// <param name="oCreature">The creature.</param>
-    /// <param name="nSpellID">The spell ID.</param>
-    /// <param name="nMultiClass">The position of the class to check, 0-2</param>
-    /// <param name="nMetaMagic">A METAMAGIC_* constant.</param>
-    /// <returns>The number of spell uses left or 0 on error.</returns>
-    public static int GetMemorizedSpellReadyCount(uint oCreature, int nSpellID, int nMultiClass, int nMetaMagic = METAMAGIC_NONE)
-    {
-      const string sFunc = "GetMemorizedSpellReadyCount";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(nMetaMagic);
-      VM.NWNX.StackPush(nMultiClass);
-      VM.NWNX.StackPush(nSpellID);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
-    }
-
     /// Get whether oCreature is flanking oTargetCreature.
     /// <param name="oCreature">The creature object.</param>
     /// <param name="oTargetCreature">The target creature object.</param>
@@ -2338,6 +2067,72 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Gets the maximum number of bonus attacks a creature can have from EffectModifyAttacks().
+    /// <param name="oCreature">The creature.</param>
+    /// <returns>The maximum number of bonus attacks or 0 on error.</returns>
+    public static int GetMaximumBonusAttacks(uint oCreature)
+    {
+      const string sFunc = "GetMaximumBonusAttacks";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
+    /// Sets the maximum number of bonus attacks a creature can have from EffectModifyAttacks().
+    /// @note This function also removes the limit of 5 bonus attacks from EffectModifyAttacks().
+    /// <param name="oCreature">The creature.</param>
+    /// <param name="nMaxBonusAttacks">The maximum number of bonus attacks. Values &lt; 0 will set the limit back to the default of 5.</param>
+    /// <param name="bPersist">Whether the modifier should persist to .bic file (for PCs).</param>
+    /// @note Persistence is enabled after a server reset by the first use of this function. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
+    public static void SetMaximumBonusAttacks(uint oCreature, int nMaxBonusAttacks, int bPersist = FALSE)
+    {
+      const string sFunc = "SetMaximumBonusAttacks";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(bPersist);
+      VM.NWNX.StackPush(nMaxBonusAttacks);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+    }
+
+    /// Gets the current object oCreature&apos;s orientation is locked to.
+    /// <param name="oCreature">The creature object.</param>
+    /// <returns>The object oCreature&apos;s orientation is locked to, or OBJECT_INVALID if oCreature&apos;s orientation is not locked.</returns>
+    public static uint GetLockOrientationToObject(uint oCreature)
+    {
+      const string sFunc = "GetLockOrientationToObject";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopObject();
+    }
+
+    /// Locks oCreature&apos;s orientation to always face oTarget.
+    /// <param name="oCreature">The creature object.</param>
+    /// <param name="oTarget">The target to lock oCreature&apos;s orientation to. Use OBJECT_INVALID to remove the orientation lock.</param>
+    public static void SetLockOrientationToObject(uint oCreature, uint oTarget)
+    {
+      const string sFunc = "SetLockOrientationToObject";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(oTarget);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+    }
+
+    /// Causes oCreature to broadcast an Attack of Opportunity against themself.
+    /// <param name="oCreature">The creature object.</param>
+    /// <param name="oSingleCreature">A single creature to broadcast the Attack of Opporunity to. Use OBJECT_INVALID to broadcast to all nearby enemies.</param>
+    /// <param name="bMovement">Whether the Attack of Opportunity was caused by movement.</param>
+    public static void BroadcastAttackOfOpportunity(uint oCreature, uint oSingleCreature = OBJECT_INVALID, int bMovement = FALSE)
+    {
+      const string sFunc = "BroadcastAttackOfOpportunity";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(bMovement);
+      VM.NWNX.StackPush(oSingleCreature);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+    }
+
     // @}
   }
 
@@ -2346,13 +2141,5 @@ namespace NWN.Core.NWNX
     public int id;
     public int ready;
     public int level;
-  }
-
-  public struct MemorisedSpell
-  {
-    public int id;
-    public int ready;
-    public int meta;
-    public int domain;
   }
 }

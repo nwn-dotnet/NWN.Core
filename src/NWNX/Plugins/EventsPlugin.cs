@@ -491,7 +491,7 @@ namespace NWN.Core.NWNX
         Event Data Tag        | Type   | Notes
         ----------------------|--------|-------
         STAT                  | int    | Returns ABILITY_* constant
-        VALUE                 | int    | 
+        VALUE                 | int    |
         TARGET                | object | Convert to object with StringToObject()
         SET                   | int    | TRUE if setting stat, FALSE if modifying
     
@@ -536,8 +536,8 @@ namespace NWN.Core.NWNX
         Event Data Tag        | Type   | Notes
         ----------------------|--------|-------
         TARGET                | object | Convert to object with StringToObject()
-        FACTION_ID            | int    | Not the STANDARD_FACTION_* constants. See nwnx_creature->GetFaction(). 
-        FACTION_NAME          | string | 
+        FACTION_ID            | int    | Not the STANDARD_FACTION_* constants. See nwnx_creature->GetFaction().
+        FACTION_NAME          | string |
     
     _______________________________________
         ## DM Other Events
@@ -583,6 +583,7 @@ namespace NWN.Core.NWNX
         IP_ADDRESS            | string | The IP address of the connecting client
         VERSION_MAJOR         | int    | The client's major version, eg 8193, or 0 if unavailable.
         VERSION_MINOR         | int    | The client's minor version, eg 34, or 0 if unavailable.
+        VERSION_POSTFIX       | int    | The client's postfix version, eg 37, or 0 if unavailable.
         PLATFORM_ID           | int    | The client's platform id, PLAYER_DEVICE_PLATFORM_*, or 0 if unavailable.
     
         @note Skipping the _BEFORE event will cause the client's connection to be denied.
@@ -655,7 +656,7 @@ namespace NWN.Core.NWNX
     
         Event Data Tag        | Type   | Notes |
         ----------------------|--------|-------|
-        SPELL_MULTICLASS      | int | Index of the spell casting class (0-2) |
+        SPELL_MULTICLASS      | int | Index of the spell casting class (0-7) |
         SPELL_SLOT            | int | |
         SPELL_ID              | int | |
         SPELL_DOMAIN          | int | |
@@ -672,7 +673,7 @@ namespace NWN.Core.NWNX
     
         Event Data Tag        | Type   | Notes |
         ----------------------|--------|-------|
-        SPELL_MULTICLASS      | int    | Index of the spell casting class (0-2) |
+        SPELL_MULTICLASS      | int    | Index of the spell casting class (0-7) |
         SPELL_LEVEL           | int    | |
         SPELL_SLOT            | int    | |
     
@@ -959,6 +960,11 @@ namespace NWN.Core.NWNX
         Event Data Tag        | Type   | Notes
         ----------------------|--------|-------
         TRAP_OBJECT_ID        | object | Convert to object with StringToObject()
+        TARGET_OBJECT_ID      | object | Convert to object with StringToObject(), only in SET events
+        TARGET_POSITION_X     | float  | Only in SET events
+        TARGET_POSITION_Y     | float  | Only in SET events
+        TARGET_POSITION_Z     | float  | Only in SET events
+        NEEDS_TO_MOVE         | int    | TRUE/FALSE, only in _BEFORE events (not ENTER), if TRUE another _BEFORE event will be fired before the actual interaction with the trap
         TRAP_FORCE_SET        | int    | TRUE/FALSE, only in ENTER events
         ACTION_RESULT         | int    | TRUE/FALSE, only in _AFTER events (not ENTER)
     
@@ -1348,12 +1354,12 @@ namespace NWN.Core.NWNX
     
         Event Data Tag        | Type   | Notes
         ----------------------|--------|-------
-        TARGET_OBJECT_ID      | object | Convert to object with StringToObject() 
-        VISUAL_EFFECT         | int    | Index into visualeffects.2da 
-        DURATION              | float  | 
-        TARGET_POSITION_X     | float  | Will be 0.0 when playing visual effects on an object 
-        TARGET_POSITION_Y     | float  | Will be 0.0 when playing visual effects on an object 
-        TARGET_POSITION_Z     | float  | Will be 0.0 when playing visual effects on an object 
+        TARGET_OBJECT_ID      | object | Convert to object with StringToObject()
+        VISUAL_EFFECT         | int    | Index into visualeffects.2da
+        DURATION              | float  |
+        TARGET_POSITION_X     | float  | Will be 0.0 when playing visual effects on an object
+        TARGET_POSITION_Y     | float  | Will be 0.0 when playing visual effects on an object
+        TARGET_POSITION_Z     | float  | Will be 0.0 when playing visual effects on an object
     
         @note This is the `dm_visualeffect` console command.
         `TARGET_OBJECT_ID` will be `OBJECT_INVALID` when playing visual effects at a position in an area.
@@ -1373,6 +1379,15 @@ namespace NWN.Core.NWNX
         STORE                 | object | The store the item is being sold to or bought from. Convert to object with StringToObject() |
         PRICE                 | int    | The buy or sell price |
         RESULT                | int    | TRUE/FALSE whether the request was successful. Only in *_AFTER events.
+    
+        @warning RESULT in NWNX_ON_STORE_REQUEST_BUY_AFTER only fails if it's due to lack of gold.  It will not fail if item does not fit in player's inventory.  If you want to check and fail on that condition, you can do something like this in the NWNX_ON_STORE_REQUEST_BUY_AFTER event:
+        ```c
+    	if (!GetBaseItemFitsInInventory(GetBaseItemType(oItem), oPlayer))
+    	{
+    		NWNX_Events_SetEventResult("0");
+    		return;
+    	}
+        ```
     
     _______________________________________
         ## Server Send Area Events
@@ -1529,7 +1544,7 @@ namespace NWN.Core.NWNX
         ----------------------|--------|-------
         EVENT_TYPE            | int    | EVENT_SCRIPT_* in nwscript.nss |
         EVENT_SCRIPT          | int    | Script name running (can be empty) |
-        
+    
         @note This event should definitely be used with the Event ID Whitelist, which is turned on by default
         for this event. Until you add your EVENT_SCRIPT_ to the whitelist this event will not function:
         ```c
@@ -1548,40 +1563,394 @@ namespace NWN.Core.NWNX
     	----------------------|--------|-------
     	OBJECT                | object | The Object being used |
     _______________________________________
+    	## Broadcast Attack of Opportunity Events
+    	- NWNX_ON_BROADCAST_ATTACK_OF_OPPORTUNITY_BEFORE
+    	- NWNX_ON_BROADCAST_ATTACK_OF_OPPORTUNITY_AFTER
+    
+    	`OBJECT_SELF` = The creature broadcasting the Attack of Opportunity event
+    
+    	Event Data Tag        | Type   | Notes
+    	----------------------|--------|-------
+    	TARGET_OBJECT_ID      | object | A single object the attack of opportunity is being broadcast to. Convert to object with StringToObject() |
+        MOVEMENT              | int    | Whether this attack of opportunity is being triggered from movement |
+    _______________________________________
+    	## Combat Attack of Opportunity Events
+    	- NWNX_ON_COMBAT_ATTACK_OF_OPPORTUNITY_BEFORE
+    	- NWNX_ON_COMBAT_ATTACK_OF_OPPORTUNITY_AFTER
+    
+    	`OBJECT_SELF` = The creature performing the Attack of Opportunity against the broadcasting target.
+    
+    	Event Data Tag        | Type   | Notes
+    	----------------------|--------|-------
+    	TARGET_OBJECT_ID      | object | The target of the attack of opportunity. Convert to object with StringToObject() |
+    _______________________________________
     
     */
-    /*
-    
-    const int NWNX_EVENTS_OBJECT_TYPE_CREATURE          = 5;
-    const int NWNX_EVENTS_OBJECT_TYPE_ITEM              = 6;
-    const int NWNX_EVENTS_OBJECT_TYPE_TRIGGER           = 7;
-    const int NWNX_EVENTS_OBJECT_TYPE_PLACEABLE         = 9;
-    const int NWNX_EVENTS_OBJECT_TYPE_WAYPOINT          = 12;
-    const int NWNX_EVENTS_OBJECT_TYPE_ENCOUNTER         = 13;
-    const int NWNX_EVENTS_OBJECT_TYPE_PORTAL            = 15;
-    
-    */
-    /*
-    
-    const int NWNX_EVENTS_TIMING_BAR_TRAP_FLAG     = 1;
-    const int NWNX_EVENTS_TIMING_BAR_TRAP_RECOVER  = 2;
-    const int NWNX_EVENTS_TIMING_BAR_TRAP_DISARM   = 3;
-    const int NWNX_EVENTS_TIMING_BAR_TRAP_EXAMINE  = 4;
-    const int NWNX_EVENTS_TIMING_BAR_TRAP_SET      = 5;
-    const int NWNX_EVENTS_TIMING_BAR_REST          = 6;
-    const int NWNX_EVENTS_TIMING_BAR_UNLOCK        = 7;
-    const int NWNX_EVENTS_TIMING_BAR_LOCK          = 8;
-    const int NWNX_EVENTS_TIMING_BAR_CUSTOM        = 10;
-    
-    */
-    /*
-    
-    const int NWNX_EVENTS_DM_SET_VARIABLE_TYPE_INT          = 0;
-    const int NWNX_EVENTS_DM_SET_VARIABLE_TYPE_FLOAT        = 1;
-    const int NWNX_EVENTS_DM_SET_VARIABLE_TYPE_STRING       = 2;
-    const int NWNX_EVENTS_DM_SET_VARIABLE_TYPE_OBJECT       = 3;
-    
-    */
+    /// @name Events Event Constants
+    /// @anchor events_events
+    /// @{
+    public const string NWNX_ON_ADD_ASSOCIATE_BEFORE = "NWNX_ON_ADD_ASSOCIATE_BEFORE";
+    public const string NWNX_ON_ADD_ASSOCIATE_AFTER = "NWNX_ON_ADD_ASSOCIATE_AFTER";
+    public const string NWNX_ON_REMOVE_ASSOCIATE_BEFORE = "NWNX_ON_REMOVE_ASSOCIATE_BEFORE";
+    public const string NWNX_ON_REMOVE_ASSOCIATE_AFTER = "NWNX_ON_REMOVE_ASSOCIATE_AFTER";
+    public const string NWNX_ON_STEALTH_ENTER_BEFORE = "NWNX_ON_STEALTH_ENTER_BEFORE";
+    public const string NWNX_ON_STEALTH_ENTER_AFTER = "NWNX_ON_STEALTH_ENTER_AFTER";
+    public const string NWNX_ON_STEALTH_EXIT_BEFORE = "NWNX_ON_STEALTH_EXIT_BEFORE";
+    public const string NWNX_ON_STEALTH_EXIT_AFTER = "NWNX_ON_STEALTH_EXIT_AFTER";
+    public const string NWNX_ON_DETECT_ENTER_BEFORE = "NWNX_ON_DETECT_ENTER_BEFORE";
+    public const string NWNX_ON_DETECT_ENTER_AFTER = "NWNX_ON_DETECT_ENTER_AFTER";
+    public const string NWNX_ON_DETECT_EXIT_BEFORE = "NWNX_ON_DETECT_EXIT_BEFORE";
+    public const string NWNX_ON_DETECT_EXIT_AFTER = "NWNX_ON_DETECT_EXIT_AFTER";
+    public const string NWNX_ON_EXAMINE_OBJECT_BEFORE = "NWNX_ON_EXAMINE_OBJECT_BEFORE";
+    public const string NWNX_ON_EXAMINE_OBJECT_AFTER = "NWNX_ON_EXAMINE_OBJECT_AFTER";
+    public const string NWNX_ON_SET_NPC_FACTION_REPUTATION_BEFORE = "NWNX_ON_SET_NPC_FACTION_REPUTATION_BEFORE";
+    public const string NWNX_ON_SET_NPC_FACTION_REPUTATION_AFTER = "NWNX_ON_SET_NPC_FACTION_REPUTATION_AFTER";
+    public const string NWNX_ON_VALIDATE_USE_ITEM_BEFORE = "NWNX_ON_VALIDATE_USE_ITEM_BEFORE";
+    public const string NWNX_ON_VALIDATE_USE_ITEM_AFTER = "NWNX_ON_VALIDATE_USE_ITEM_AFTER";
+    public const string NWNX_ON_USE_ITEM_BEFORE = "NWNX_ON_USE_ITEM_BEFORE";
+    public const string NWNX_ON_USE_ITEM_AFTER = "NWNX_ON_USE_ITEM_AFTER";
+    public const string NWNX_ON_ITEM_INVENTORY_OPEN_BEFORE = "NWNX_ON_ITEM_INVENTORY_OPEN_BEFORE";
+    public const string NWNX_ON_ITEM_INVENTORY_OPEN_AFTER = "NWNX_ON_ITEM_INVENTORY_OPEN_AFTER";
+    public const string NWNX_ON_ITEM_INVENTORY_CLOSE_BEFORE = "NWNX_ON_ITEM_INVENTORY_CLOSE_BEFORE";
+    public const string NWNX_ON_ITEM_INVENTORY_CLOSE_AFTER = "NWNX_ON_ITEM_INVENTORY_CLOSE_AFTER";
+    public const string NWNX_ON_ITEM_AMMO_RELOAD_BEFORE = "NWNX_ON_ITEM_AMMO_RELOAD_BEFORE";
+    public const string NWNX_ON_ITEM_AMMO_RELOAD_AFTER = "NWNX_ON_ITEM_AMMO_RELOAD_AFTER";
+    public const string NWNX_ON_ITEM_SCROLL_LEARN_BEFORE = "NWNX_ON_ITEM_SCROLL_LEARN_BEFORE";
+    public const string NWNX_ON_ITEM_SCROLL_LEARN_AFTER = "NWNX_ON_ITEM_SCROLL_LEARN_AFTER";
+    public const string NWNX_ON_VALIDATE_ITEM_EQUIP_BEFORE = "NWNX_ON_VALIDATE_ITEM_EQUIP_BEFORE";
+    public const string NWNX_ON_VALIDATE_ITEM_EQUIP_AFTER = "NWNX_ON_VALIDATE_ITEM_EQUIP_AFTER";
+    public const string NWNX_ON_ITEM_EQUIP_BEFORE = "NWNX_ON_ITEM_EQUIP_BEFORE";
+    public const string NWNX_ON_ITEM_EQUIP_AFTER = "NWNX_ON_ITEM_EQUIP_AFTER";
+    public const string NWNX_ON_ITEM_UNEQUIP_BEFORE = "NWNX_ON_ITEM_UNEQUIP_BEFORE";
+    public const string NWNX_ON_ITEM_UNEQUIP_AFTER = "NWNX_ON_ITEM_UNEQUIP_AFTER";
+    public const string NWNX_ON_ITEM_DESTROY_OBJECT_BEFORE = "NWNX_ON_ITEM_DESTROY_OBJECT_BEFORE";
+    public const string NWNX_ON_ITEM_DESTROY_OBJECT_AFTER = "NWNX_ON_ITEM_DESTROY_OBJECT_AFTER";
+    public const string NWNX_ON_ITEM_DECREMENT_STACKSIZE_BEFORE = "NWNX_ON_ITEM_DECREMENT_STACKSIZE_BEFORE";
+    public const string NWNX_ON_ITEM_DECREMENT_STACKSIZE_AFTER = "NWNX_ON_ITEM_DECREMENT_STACKSIZE_AFTER";
+    public const string NWNX_ON_ITEM_USE_LORE_BEFORE = "NWNX_ON_ITEM_USE_LORE_BEFORE";
+    public const string NWNX_ON_ITEM_USE_LORE_AFTER = "NWNX_ON_ITEM_USE_LORE_AFTER";
+    public const string NWNX_ON_ITEM_PAY_TO_IDENTIFY_BEFORE = "NWNX_ON_ITEM_PAY_TO_IDENTIFY_BEFORE";
+    public const string NWNX_ON_ITEM_PAY_TO_IDENTIFY_AFTER = "NWNX_ON_ITEM_PAY_TO_IDENTIFY_AFTER";
+    public const string NWNX_ON_ITEM_SPLIT_BEFORE = "NWNX_ON_ITEM_SPLIT_BEFORE";
+    public const string NWNX_ON_ITEM_SPLIT_AFTER = "NWNX_ON_ITEM_SPLIT_AFTER";
+    public const string NWNX_ON_ITEM_MERGE_BEFORE = "NWNX_ON_ITEM_MERGE_BEFORE";
+    public const string NWNX_ON_ITEM_MERGE_AFTER = "NWNX_ON_ITEM_MERGE_AFTER";
+    public const string NWNX_ON_ITEM_ACQUIRE_BEFORE = "NWNX_ON_ITEM_ACQUIRE_BEFORE";
+    public const string NWNX_ON_ITEM_ACQUIRE_AFTER = "NWNX_ON_ITEM_ACQUIRE_AFTER";
+    public const string NWNX_ON_USE_FEAT_BEFORE = "NWNX_ON_USE_FEAT_BEFORE";
+    public const string NWNX_ON_USE_FEAT_AFTER = "NWNX_ON_USE_FEAT_AFTER";
+    public const string NWNX_ON_HAS_FEAT_BEFORE = "NWNX_ON_HAS_FEAT_BEFORE";
+    public const string NWNX_ON_HAS_FEAT_AFTER = "NWNX_ON_HAS_FEAT_AFTER";
+    public const string NWNX_ON_DM_GIVE_GOLD_BEFORE = "NWNX_ON_DM_GIVE_GOLD_BEFORE";
+    public const string NWNX_ON_DM_GIVE_GOLD_AFTER = "NWNX_ON_DM_GIVE_GOLD_AFTER";
+    public const string NWNX_ON_DM_GIVE_XP_BEFORE = "NWNX_ON_DM_GIVE_XP_BEFORE";
+    public const string NWNX_ON_DM_GIVE_XP_AFTER = "NWNX_ON_DM_GIVE_XP_AFTER";
+    public const string NWNX_ON_DM_GIVE_LEVEL_BEFORE = "NWNX_ON_DM_GIVE_LEVEL_BEFORE";
+    public const string NWNX_ON_DM_GIVE_LEVEL_AFTER = "NWNX_ON_DM_GIVE_LEVEL_AFTER";
+    public const string NWNX_ON_DM_GIVE_ALIGNMENT_BEFORE = "NWNX_ON_DM_GIVE_ALIGNMENT_BEFORE";
+    public const string NWNX_ON_DM_GIVE_ALIGNMENT_AFTER = "NWNX_ON_DM_GIVE_ALIGNMENT_AFTER";
+    public const string NWNX_ON_DM_SPAWN_OBJECT_BEFORE = "NWNX_ON_DM_SPAWN_OBJECT_BEFORE";
+    public const string NWNX_ON_DM_SPAWN_OBJECT_AFTER = "NWNX_ON_DM_SPAWN_OBJECT_AFTER";
+    public const string NWNX_ON_DM_GIVE_ITEM_BEFORE = "NWNX_ON_DM_GIVE_ITEM_BEFORE";
+    public const string NWNX_ON_DM_GIVE_ITEM_AFTER = "NWNX_ON_DM_GIVE_ITEM_AFTER";
+    public const string NWNX_ON_DM_HEAL_BEFORE = "NWNX_ON_DM_HEAL_BEFORE";
+    public const string NWNX_ON_DM_HEAL_AFTER = "NWNX_ON_DM_HEAL_AFTER";
+    public const string NWNX_ON_DM_KILL_BEFORE = "NWNX_ON_DM_KILL_BEFORE";
+    public const string NWNX_ON_DM_KILL_AFTER = "NWNX_ON_DM_KILL_AFTER";
+    public const string NWNX_ON_DM_TOGGLE_INVULNERABLE_BEFORE = "NWNX_ON_DM_TOGGLE_INVULNERABLE_BEFORE";
+    public const string NWNX_ON_DM_TOGGLE_INVULNERABLE_AFTER = "NWNX_ON_DM_TOGGLE_INVULNERABLE_AFTER";
+    public const string NWNX_ON_DM_FORCE_REST_BEFORE = "NWNX_ON_DM_FORCE_REST_BEFORE";
+    public const string NWNX_ON_DM_FORCE_REST_AFTER = "NWNX_ON_DM_FORCE_REST_AFTER";
+    public const string NWNX_ON_DM_LIMBO_BEFORE = "NWNX_ON_DM_LIMBO_BEFORE";
+    public const string NWNX_ON_DM_LIMBO_AFTER = "NWNX_ON_DM_LIMBO_AFTER";
+    public const string NWNX_ON_DM_TOGGLE_AI_BEFORE = "NWNX_ON_DM_TOGGLE_AI_BEFORE";
+    public const string NWNX_ON_DM_TOGGLE_AI_AFTER = "NWNX_ON_DM_TOGGLE_AI_AFTER";
+    public const string NWNX_ON_DM_TOGGLE_IMMORTAL_BEFORE = "NWNX_ON_DM_TOGGLE_IMMORTAL_BEFORE";
+    public const string NWNX_ON_DM_TOGGLE_IMMORTAL_AFTER = "NWNX_ON_DM_TOGGLE_IMMORTAL_AFTER";
+    public const string NWNX_ON_DM_GOTO_BEFORE = "NWNX_ON_DM_GOTO_BEFORE";
+    public const string NWNX_ON_DM_GOTO_AFTER = "NWNX_ON_DM_GOTO_AFTER";
+    public const string NWNX_ON_DM_POSSESS_BEFORE = "NWNX_ON_DM_POSSESS_BEFORE";
+    public const string NWNX_ON_DM_POSSESS_AFTER = "NWNX_ON_DM_POSSESS_AFTER";
+    public const string NWNX_ON_DM_POSSESS_FULL_POWER_BEFORE = "NWNX_ON_DM_POSSESS_FULL_POWER_BEFORE";
+    public const string NWNX_ON_DM_POSSESS_FULL_POWER_AFTER = "NWNX_ON_DM_POSSESS_FULL_POWER_AFTER";
+    public const string NWNX_ON_DM_TOGGLE_LOCK_BEFORE = "NWNX_ON_DM_TOGGLE_LOCK_BEFORE";
+    public const string NWNX_ON_DM_TOGGLE_LOCK_AFTER = "NWNX_ON_DM_TOGGLE_LOCK_AFTER";
+    public const string NWNX_ON_DM_DISABLE_TRAP_BEFORE = "NWNX_ON_DM_DISABLE_TRAP_BEFORE";
+    public const string NWNX_ON_DM_DISABLE_TRAP_AFTER = "NWNX_ON_DM_DISABLE_TRAP_AFTER";
+    public const string NWNX_ON_DM_JUMP_TO_POINT_BEFORE = "NWNX_ON_DM_JUMP_TO_POINT_BEFORE";
+    public const string NWNX_ON_DM_JUMP_TO_POINT_AFTER = "NWNX_ON_DM_JUMP_TO_POINT_AFTER";
+    public const string NWNX_ON_DM_JUMP_TARGET_TO_POINT_BEFORE = "NWNX_ON_DM_JUMP_TARGET_TO_POINT_BEFORE";
+    public const string NWNX_ON_DM_JUMP_TARGET_TO_POINT_AFTER = "NWNX_ON_DM_JUMP_TARGET_TO_POINT_AFTER";
+    public const string NWNX_ON_DM_JUMP_ALL_PLAYERS_TO_POINT_BEFORE = "NWNX_ON_DM_JUMP_ALL_PLAYERS_TO_POINT_BEFORE";
+    public const string NWNX_ON_DM_JUMP_ALL_PLAYERS_TO_POINT_AFTER = "NWNX_ON_DM_JUMP_ALL_PLAYERS_TO_POINT_AFTER";
+    public const string NWNX_ON_DM_CHANGE_DIFFICULTY_BEFORE = "NWNX_ON_DM_CHANGE_DIFFICULTY_BEFORE";
+    public const string NWNX_ON_DM_CHANGE_DIFFICULTY_AFTER = "NWNX_ON_DM_CHANGE_DIFFICULTY_AFTER";
+    public const string NWNX_ON_DM_VIEW_INVENTORY_BEFORE = "NWNX_ON_DM_VIEW_INVENTORY_BEFORE";
+    public const string NWNX_ON_DM_VIEW_INVENTORY_AFTER = "NWNX_ON_DM_VIEW_INVENTORY_AFTER";
+    public const string NWNX_ON_DM_SPAWN_TRAP_ON_OBJECT_BEFORE = "NWNX_ON_DM_SPAWN_TRAP_ON_OBJECT_BEFORE";
+    public const string NWNX_ON_DM_SPAWN_TRAP_ON_OBJECT_AFTER = "NWNX_ON_DM_SPAWN_TRAP_ON_OBJECT_AFTER";
+    public const string NWNX_ON_DM_DUMP_LOCALS_BEFORE = "NWNX_ON_DM_DUMP_LOCALS_BEFORE";
+    public const string NWNX_ON_DM_DUMP_LOCALS_AFTER = "NWNX_ON_DM_DUMP_LOCALS_AFTER";
+    public const string NWNX_ON_DM_PLAYERDM_LOGIN_BEFORE = "NWNX_ON_DM_PLAYERDM_LOGIN_BEFORE";
+    public const string NWNX_ON_DM_PLAYERDM_LOGIN_AFTER = "NWNX_ON_DM_PLAYERDM_LOGIN_AFTER";
+    public const string NWNX_ON_DM_PLAYERDM_LOGOUT_BEFORE = "NWNX_ON_DM_PLAYERDM_LOGOUT_BEFORE";
+    public const string NWNX_ON_DM_PLAYERDM_LOGOUT_AFTER = "NWNX_ON_DM_PLAYERDM_LOGOUT_AFTER";
+    public const string NWNX_ON_DM_SET_STAT_BEFORE = "NWNX_ON_DM_SET_STAT_BEFORE";
+    public const string NWNX_ON_DM_SET_STAT_AFTER = "NWNX_ON_DM_SET_STAT_AFTER";
+    public const string NWNX_ON_DM_GET_VARIABLE_BEFORE = "NWNX_ON_DM_GET_VARIABLE_BEFORE";
+    public const string NWNX_ON_DM_GET_VARIABLE_AFTER = "NWNX_ON_DM_GET_VARIABLE_AFTER";
+    public const string NWNX_ON_DM_SET_VARIABLE_BEFORE = "NWNX_ON_DM_SET_VARIABLE_BEFORE";
+    public const string NWNX_ON_DM_SET_VARIABLE_AFTER = "NWNX_ON_DM_SET_VARIABLE_AFTER";
+    public const string NWNX_ON_DM_SET_FACTION_BEFORE = "NWNX_ON_DM_SET_FACTION_BEFORE";
+    public const string NWNX_ON_DM_SET_FACTION_AFTER = "NWNX_ON_DM_SET_FACTION_AFTER";
+    public const string NWNX_ON_DM_APPEAR_BEFORE = "NWNX_ON_DM_APPEAR_BEFORE";
+    public const string NWNX_ON_DM_APPEAR_AFTER = "NWNX_ON_DM_APPEAR_AFTER";
+    public const string NWNX_ON_DM_DISAPPEAR_BEFORE = "NWNX_ON_DM_DISAPPEAR_BEFORE";
+    public const string NWNX_ON_DM_DISAPPEAR_AFTER = "NWNX_ON_DM_DISAPPEAR_AFTER";
+    public const string NWNX_ON_DM_TAKE_ITEM_BEFORE = "NWNX_ON_DM_TAKE_ITEM_BEFORE";
+    public const string NWNX_ON_DM_TAKE_ITEM_AFTER = "NWNX_ON_DM_TAKE_ITEM_AFTER";
+    public const string NWNX_ON_DM_SET_TIME_BEFORE = "NWNX_ON_DM_SET_TIME_BEFORE";
+    public const string NWNX_ON_DM_SET_TIME_AFTER = "NWNX_ON_DM_SET_TIME_AFTER";
+    public const string NWNX_ON_DM_SET_DATE_BEFORE = "NWNX_ON_DM_SET_DATE_BEFORE";
+    public const string NWNX_ON_DM_SET_DATE_AFTER = "NWNX_ON_DM_SET_DATE_AFTER";
+    public const string NWNX_ON_DM_SET_FACTION_REPUTATION_BEFORE = "NWNX_ON_DM_SET_FACTION_REPUTATION_BEFORE";
+    public const string NWNX_ON_DM_SET_FACTION_REPUTATION_AFTER = "NWNX_ON_DM_SET_FACTION_REPUTATION_AFTER";
+    public const string NWNX_ON_DM_GET_FACTION_REPUTATION_BEFORE = "NWNX_ON_DM_GET_FACTION_REPUTATION_BEFORE";
+    public const string NWNX_ON_DM_GET_FACTION_REPUTATION_AFTER = "NWNX_ON_DM_GET_FACTION_REPUTATION_AFTER";
+    public const string NWNX_ON_CLIENT_DISCONNECT_BEFORE = "NWNX_ON_CLIENT_DISCONNECT_BEFORE";
+    public const string NWNX_ON_CLIENT_DISCONNECT_AFTER = "NWNX_ON_CLIENT_DISCONNECT_AFTER";
+    public const string NWNX_ON_CLIENT_CONNECT_BEFORE = "NWNX_ON_CLIENT_CONNECT_BEFORE";
+    public const string NWNX_ON_CLIENT_CONNECT_AFTER = "NWNX_ON_CLIENT_CONNECT_AFTER";
+    public const string NWNX_ON_COMBAT_ENTER_BEFORE = "NWNX_ON_COMBAT_ENTER_BEFORE";
+    public const string NWNX_ON_COMBAT_ENTER_AFTER = "NWNX_ON_COMBAT_ENTER_AFTER";
+    public const string NWNX_ON_COMBAT_EXIT_BEFORE = "NWNX_ON_COMBAT_EXIT_BEFORE";
+    public const string NWNX_ON_COMBAT_EXIT_AFTER = "NWNX_ON_COMBAT_EXIT_AFTER";
+    public const string NWNX_ON_START_COMBAT_ROUND_BEFORE = "NWNX_ON_START_COMBAT_ROUND_BEFORE";
+    public const string NWNX_ON_START_COMBAT_ROUND_AFTER = "NWNX_ON_START_COMBAT_ROUND_AFTER";
+    public const string NWNX_ON_DISARM_BEFORE = "NWNX_ON_DISARM_BEFORE";
+    public const string NWNX_ON_DISARM_AFTER = "NWNX_ON_DISARM_AFTER";
+    public const string NWNX_ON_CAST_SPELL_BEFORE = "NWNX_ON_CAST_SPELL_BEFORE";
+    public const string NWNX_ON_CAST_SPELL_AFTER = "NWNX_ON_CAST_SPELL_AFTER";
+    public const string NWNX_ON_SET_MEMORIZED_SPELL_SLOT_BEFORE = "NWNX_SET_MEMORIZED_SPELL_SLOT_BEFORE";
+    public const string NWNX_ON_SET_MEMORIZED_SPELL_SLOT_AFTER = "NWNX_SET_MEMORIZED_SPELL_SLOT_AFTER";
+    public const string NWNX_ON_CLEAR_MEMORIZED_SPELL_SLOT_BEFORE = "NWNX_CLEAR_MEMORIZED_SPELL_SLOT_BEFORE";
+    public const string NWNX_ON_CLEAR_MEMORIZED_SPELL_SLOT_AFTER = "NWNX_CLEAR_MEMORIZED_SPELL_SLOT_AFTER";
+    public const string NWNX_ON_SPELL_INTERRUPTED_BEFORE = "NWNX_ON_SPELL_INTERRUPTED_BEFORE";
+    public const string NWNX_ON_SPELL_INTERRUPTED_AFTER = "NWNX_ON_SPELL_INTERRUPTED_AFTER";
+    public const string NWNX_ON_HEALER_KIT_BEFORE = "NWNX_ON_HEALER_KIT_BEFORE";
+    public const string NWNX_ON_HEALER_KIT_AFTER = "NWNX_ON_HEALER_KIT_AFTER";
+    public const string NWNX_ON_HEAL_BEFORE = "NWNX_ON_HEAL_BEFORE";
+    public const string NWNX_ON_HEAL_AFTER = "NWNX_ON_HEAL_AFTER";
+    public const string NWNX_ON_PARTY_LEAVE_BEFORE = "NWNX_ON_PARTY_LEAVE_BEFORE";
+    public const string NWNX_ON_PARTY_LEAVE_AFTER = "NWNX_ON_PARTY_LEAVE_AFTER";
+    public const string NWNX_ON_PARTY_KICK_BEFORE = "NWNX_ON_PARTY_KICK_BEFORE";
+    public const string NWNX_ON_PARTY_KICK_AFTER = "NWNX_ON_PARTY_KICK_AFTER";
+    public const string NWNX_ON_PARTY_TRANSFER_LEADERSHIP_BEFORE = "NWNX_ON_PARTY_TRANSFER_LEADERSHIP_BEFORE";
+    public const string NWNX_ON_PARTY_TRANSFER_LEADERSHIP_AFTER = "NWNX_ON_PARTY_TRANSFER_LEADERSHIP_AFTER";
+    public const string NWNX_ON_PARTY_INVITE_BEFORE = "NWNX_ON_PARTY_INVITE_BEFORE";
+    public const string NWNX_ON_PARTY_INVITE_AFTER = "NWNX_ON_PARTY_INVITE_AFTER";
+    public const string NWNX_ON_PARTY_IGNORE_INVITATION_BEFORE = "NWNX_ON_PARTY_IGNORE_INVITATION_BEFORE";
+    public const string NWNX_ON_PARTY_IGNORE_INVITATION_AFTER = "NWNX_ON_PARTY_IGNORE_INVITATION_AFTER";
+    public const string NWNX_ON_PARTY_ACCEPT_INVITATION_BEFORE = "NWNX_ON_PARTY_ACCEPT_INVITATION_BEFORE";
+    public const string NWNX_ON_PARTY_ACCEPT_INVITATION_AFTER = "NWNX_ON_PARTY_ACCEPT_INVITATION_AFTER";
+    public const string NWNX_ON_PARTY_REJECT_INVITATION_BEFORE = "NWNX_ON_PARTY_REJECT_INVITATION_BEFORE";
+    public const string NWNX_ON_PARTY_REJECT_INVITATION_AFTER = "NWNX_ON_PARTY_REJECT_INVITATION_AFTER";
+    public const string NWNX_ON_PARTY_KICK_HENCHMAN_BEFORE = "NWNX_ON_PARTY_KICK_HENCHMAN_BEFORE";
+    public const string NWNX_ON_PARTY_KICK_HENCHMAN_AFTER = "NWNX_ON_PARTY_KICK_HENCHMAN_AFTER";
+    public const string NWNX_ON_COMBAT_MODE_ON = "NWNX_ON_COMBAT_MODE_ON";
+    public const string NWNX_ON_COMBAT_MODE_OFF = "NWNX_ON_COMBAT_MODE_OFF";
+    public const string NWNX_ON_USE_SKILL_BEFORE = "NWNX_ON_USE_SKILL_BEFORE";
+    public const string NWNX_ON_USE_SKILL_AFTER = "NWNX_ON_USE_SKILL_AFTER";
+    public const string NWNX_ON_MAP_PIN_ADD_PIN_BEFORE = "NWNX_ON_MAP_PIN_ADD_PIN_BEFORE";
+    public const string NWNX_ON_MAP_PIN_ADD_PIN_AFTER = "NWNX_ON_MAP_PIN_ADD_PIN_AFTER";
+    public const string NWNX_ON_MAP_PIN_CHANGE_PIN_BEFORE = "NWNX_ON_MAP_PIN_CHANGE_PIN_BEFORE";
+    public const string NWNX_ON_MAP_PIN_CHANGE_PIN_AFTER = "NWNX_ON_MAP_PIN_CHANGE_PIN_AFTER";
+    public const string NWNX_ON_MAP_PIN_DESTROY_PIN_BEFORE = "NWNX_ON_MAP_PIN_DESTROY_PIN_BEFORE";
+    public const string NWNX_ON_MAP_PIN_DESTROY_PIN_AFTER = "NWNX_ON_MAP_PIN_DESTROY_PIN_AFTER";
+    public const string NWNX_ON_DO_LISTEN_DETECTION_BEFORE = "NWNX_ON_DO_LISTEN_DETECTION_BEFORE";
+    public const string NWNX_ON_DO_LISTEN_DETECTION_AFTER = "NWNX_ON_DO_LISTEN_DETECTION_AFTER";
+    public const string NWNX_ON_DO_SPOT_DETECTION_BEFORE = "NWNX_ON_DO_SPOT_DETECTION_BEFORE";
+    public const string NWNX_ON_DO_SPOT_DETECTION_AFTER = "NWNX_ON_DO_SPOT_DETECTION_AFTER";
+    public const string NWNX_ON_POLYMORPH_BEFORE = "NWNX_ON_POLYMORPH_BEFORE";
+    public const string NWNX_ON_POLYMORPH_AFTER = "NWNX_ON_POLYMORPH_AFTER";
+    public const string NWNX_ON_UNPOLYMORPH_BEFORE = "NWNX_ON_UNPOLYMORPH_BEFORE";
+    public const string NWNX_ON_UNPOLYMORPH_AFTER = "NWNX_ON_UNPOLYMORPH_AFTER";
+    public const string NWNX_ON_EFFECT_APPLIED_BEFORE = "NWNX_ON_EFFECT_APPLIED_BEFORE";
+    public const string NWNX_ON_EFFECT_APPLIED_AFTER = "NWNX_ON_EFFECT_APPLIED_AFTER";
+    public const string NWNX_ON_EFFECT_REMOVED_BEFORE = "NWNX_ON_EFFECT_REMOVED_BEFORE";
+    public const string NWNX_ON_EFFECT_REMOVED_AFTER = "NWNX_ON_EFFECT_REMOVED_AFTER";
+    public const string NWNX_ON_QUICKCHAT_BEFORE = "NWNX_ON_QUICKCHAT_BEFORE";
+    public const string NWNX_ON_QUICKCHAT_AFTER = "NWNX_ON_QUICKCHAT_AFTER";
+    public const string NWNX_ON_INVENTORY_OPEN_BEFORE = "NWNX_ON_INVENTORY_OPEN_BEFORE";
+    public const string NWNX_ON_INVENTORY_OPEN_AFTER = "NWNX_ON_INVENTORY_OPEN_AFTER";
+    public const string NWNX_ON_INVENTORY_SELECT_PANEL_BEFORE = "NWNX_ON_INVENTORY_SELECT_PANEL_BEFORE";
+    public const string NWNX_ON_INVENTORY_SELECT_PANEL_AFTER = "NWNX_ON_INVENTORY_SELECT_PANEL_AFTER";
+    public const string NWNX_ON_BARTER_START_BEFORE = "NWNX_ON_BARTER_START_BEFORE";
+    public const string NWNX_ON_BARTER_START_AFTER = "NWNX_ON_BARTER_START_AFTER";
+    public const string NWNX_ON_BARTER_END_BEFORE = "NWNX_ON_BARTER_END_BEFORE";
+    public const string NWNX_ON_BARTER_END_AFTER = "NWNX_ON_BARTER_END_AFTER";
+    public const string NWNX_ON_BARTER_ADD_ITEM_BEFORE = "NWNX_ON_BARTER_ADD_ITEM_BEFORE";
+    public const string NWNX_ON_BARTER_ADD_ITEM_AFTER = "NWNX_ON_BARTER_ADD_ITEM_AFTER";
+    public const string NWNX_ON_TRAP_DISARM_BEFORE = "NWNX_ON_TRAP_DISARM_BEFORE";
+    public const string NWNX_ON_TRAP_DISARM_AFTER = "NWNX_ON_TRAP_DISARM_AFTER";
+    public const string NWNX_ON_TRAP_ENTER_BEFORE = "NWNX_ON_TRAP_ENTER_BEFORE";
+    public const string NWNX_ON_TRAP_ENTER_AFTER = "NWNX_ON_TRAP_ENTER_AFTER";
+    public const string NWNX_ON_TRAP_EXAMINE_BEFORE = "NWNX_ON_TRAP_EXAMINE_BEFORE";
+    public const string NWNX_ON_TRAP_EXAMINE_AFTER = "NWNX_ON_TRAP_EXAMINE_AFTER";
+    public const string NWNX_ON_TRAP_FLAG_BEFORE = "NWNX_ON_TRAP_FLAG_BEFORE";
+    public const string NWNX_ON_TRAP_FLAG_AFTER = "NWNX_ON_TRAP_FLAG_AFTER";
+    public const string NWNX_ON_TRAP_RECOVER_BEFORE = "NWNX_ON_TRAP_RECOVER_BEFORE";
+    public const string NWNX_ON_TRAP_RECOVER_AFTER = "NWNX_ON_TRAP_RECOVER_AFTER";
+    public const string NWNX_ON_TRAP_SET_BEFORE = "NWNX_ON_TRAP_SET_BEFORE";
+    public const string NWNX_ON_TRAP_SET_AFTER = "NWNX_ON_TRAP_SET_AFTER";
+    public const string NWNX_ON_TIMING_BAR_START_BEFORE = "NWNX_ON_TIMING_BAR_START_BEFORE";
+    public const string NWNX_ON_TIMING_BAR_START_AFTER = "NWNX_ON_TIMING_BAR_START_AFTER";
+    public const string NWNX_ON_TIMING_BAR_STOP_BEFORE = "NWNX_ON_TIMING_BAR_STOP_BEFORE";
+    public const string NWNX_ON_TIMING_BAR_STOP_AFTER = "NWNX_ON_TIMING_BAR_STOP_AFTER";
+    public const string NWNX_ON_TIMING_BAR_CANCEL_BEFORE = "NWNX_ON_TIMING_BAR_CANCEL_BEFORE";
+    public const string NWNX_ON_TIMING_BAR_CANCEL_AFTER = "NWNX_ON_TIMING_BAR_CANCEL_AFTER";
+    public const string NWNX_ON_WEBHOOK_SUCCESS = "NWNX_ON_WEBHOOK_SUCCESS";
+    public const string NWNX_ON_WEBHOOK_FAILURE = "NWNX_ON_WEBHOOK_FAILURE";
+    public const string NWNX_ON_CHECK_STICKY_PLAYER_NAME_RESERVED_BEFORE = "NWNX_ON_CHECK_STICKY_PLAYER_NAME_RESERVED_BEFORE";
+    public const string NWNX_ON_CHECK_STICKY_PLAYER_NAME_RESERVED_AFTER = "NWNX_ON_CHECK_STICKY_PLAYER_NAME_RESERVED_AFTER";
+    public const string NWNX_ON_SERVER_CHARACTER_SAVE_BEFORE = "NWNX_ON_SERVER_CHARACTER_SAVE_BEFORE";
+    public const string NWNX_ON_SERVER_CHARACTER_SAVE_AFTER = "NWNX_ON_SERVER_CHARACTER_SAVE_AFTER";
+    public const string NWNX_ON_CLIENT_EXPORT_CHARACTER_BEFORE = "NWNX_ON_CLIENT_EXPORT_CHARACTER_BEFORE";
+    public const string NWNX_ON_CLIENT_EXPORT_CHARACTER_AFTER = "NWNX_ON_CLIENT_EXPORT_CHARACTER_AFTER";
+    public const string NWNX_ON_LEVEL_UP_BEFORE = "NWNX_ON_LEVEL_UP_BEFORE";
+    public const string NWNX_ON_LEVEL_UP_AFTER = "NWNX_ON_LEVEL_UP_AFTER";
+    public const string NWNX_ON_LEVEL_UP_AUTOMATIC_BEFORE = "NWNX_ON_LEVEL_UP_AUTOMATIC_BEFORE";
+    public const string NWNX_ON_LEVEL_UP_AUTOMATIC_AFTER = "NWNX_ON_LEVEL_UP_AUTOMATIC_AFTER";
+    public const string NWNX_ON_LEVEL_DOWN_BEFORE = "NWNX_ON_LEVEL_DOWN_BEFORE";
+    public const string NWNX_ON_LEVEL_DOWN_AFTER = "NWNX_ON_LEVEL_DOWN_AFTER";
+    public const string NWNX_ON_INVENTORY_ADD_ITEM_BEFORE = "NWNX_ON_INVENTORY_ADD_ITEM_BEFORE";
+    public const string NWNX_ON_INVENTORY_ADD_ITEM_AFTER = "NWNX_ON_INVENTORY_ADD_ITEM_AFTER";
+    public const string NWNX_ON_INVENTORY_REMOVE_ITEM_BEFORE = "NWNX_ON_INVENTORY_REMOVE_ITEM_BEFORE";
+    public const string NWNX_ON_INVENTORY_REMOVE_ITEM_AFTER = "NWNX_ON_INVENTORY_REMOVE_ITEM_AFTER";
+    public const string NWNX_ON_INVENTORY_ADD_GOLD_BEFORE = "NWNX_ON_INVENTORY_ADD_GOLD_BEFORE";
+    public const string NWNX_ON_INVENTORY_ADD_GOLD_AFTER = "NWNX_ON_INVENTORY_ADD_GOLD_AFTER";
+    public const string NWNX_ON_INVENTORY_REMOVE_GOLD_BEFORE = "NWNX_ON_INVENTORY_REMOVE_GOLD_BEFORE";
+    public const string NWNX_ON_INVENTORY_REMOVE_GOLD_AFTER = "NWNX_ON_INVENTORY_REMOVE_GOLD_AFTER";
+    public const string NWNX_ON_PVP_ATTITUDE_CHANGE_BEFORE = "NWNX_ON_PVP_ATTITUDE_CHANGE_BEFORE";
+    public const string NWNX_ON_PVP_ATTITUDE_CHANGE_AFTER = "NWNX_ON_PVP_ATTITUDE_CHANGE_AFTER";
+    public const string NWNX_ON_INPUT_WALK_TO_WAYPOINT_BEFORE = "NWNX_ON_INPUT_WALK_TO_WAYPOINT_BEFORE";
+    public const string NWNX_ON_INPUT_WALK_TO_WAYPOINT_AFTER = "NWNX_ON_INPUT_WALK_TO_WAYPOINT_AFTER";
+    public const string NWNX_ON_MATERIALCHANGE_BEFORE = "NWNX_ON_MATERIALCHANGE_BEFORE";
+    public const string NWNX_ON_MATERIALCHANGE_AFTER = "NWNX_ON_MATERIALCHANGE_AFTER";
+    public const string NWNX_ON_INPUT_ATTACK_OBJECT_BEFORE = "NWNX_ON_INPUT_ATTACK_OBJECT_BEFORE";
+    public const string NWNX_ON_INPUT_ATTACK_OBJECT_AFTER = "NWNX_ON_INPUT_ATTACK_OBJECT_AFTER";
+    public const string NWNX_ON_INPUT_FORCE_MOVE_TO_OBJECT_BEFORE = "NWNX_ON_INPUT_FORCE_MOVE_TO_OBJECT_BEFORE";
+    public const string NWNX_ON_INPUT_FORCE_MOVE_TO_OBJECT_AFTER = "NWNX_ON_INPUT_FORCE_MOVE_TO_OBJECT_AFTER";
+    public const string NWNX_ON_INPUT_CAST_SPELL_BEFORE = "NWNX_ON_INPUT_CAST_SPELL_BEFORE";
+    public const string NWNX_ON_INPUT_CAST_SPELL_AFTER = "NWNX_ON_INPUT_CAST_SPELL_AFTER";
+    public const string NWNX_ON_INPUT_KEYBOARD_BEFORE = "NWNX_ON_INPUT_KEYBOARD_BEFORE";
+    public const string NWNX_ON_INPUT_KEYBOARD_AFTER = "NWNX_ON_INPUT_KEYBOARD_AFTER";
+    public const string NWNX_ON_INPUT_TOGGLE_PAUSE_BEFORE = "NWNX_ON_INPUT_TOGGLE_PAUSE_BEFORE";
+    public const string NWNX_ON_INPUT_TOGGLE_PAUSE_AFTER = "NWNX_ON_INPUT_TOGGLE_PAUSE_AFTER";
+    public const string NWNX_ON_OBJECT_LOCK_BEFORE = "NWNX_ON_OBJECT_LOCK_BEFORE";
+    public const string NWNX_ON_OBJECT_LOCK_AFTER = "NWNX_ON_OBJECT_LOCK_AFTER";
+    public const string NWNX_ON_OBJECT_UNLOCK_BEFORE = "NWNX_ON_OBJECT_UNLOCK_BEFORE";
+    public const string NWNX_ON_OBJECT_UNLOCK_AFTER = "NWNX_ON_OBJECT_UNLOCK_AFTER";
+    public const string NWNX_ON_UUID_COLLISION_BEFORE = "NWNX_ON_UUID_COLLISION_BEFORE";
+    public const string NWNX_ON_UUID_COLLISION_AFTER = "NWNX_ON_UUID_COLLISION_AFTER";
+    public const string NWNX_ON_RESOURCE_ADDED = "NWNX_ON_RESOURCE_ADDED";
+    public const string NWNX_ON_RESOURCE_REMOVED = "NWNX_ON_RESOURCE_REMOVED";
+    public const string NWNX_ON_RESOURCE_MODIFIED = "NWNX_ON_RESOURCE_MODIFIED";
+    public const string NWNX_ON_ELC_VALIDATE_CHARACTER_BEFORE = "NWNX_ON_ELC_VALIDATE_CHARACTER_BEFORE";
+    public const string NWNX_ON_ELC_VALIDATE_CHARACTER_AFTER = "NWNX_ON_ELC_VALIDATE_CHARACTER_AFTER";
+    public const string NWNX_ON_QUICKBAR_SET_BUTTON_BEFORE = "NWNX_ON_QUICKBAR_SET_BUTTON_BEFORE";
+    public const string NWNX_ON_QUICKBAR_SET_BUTTON_AFTER = "NWNX_ON_QUICKBAR_SET_BUTTON_AFTER";
+    public const string NWNX_ON_CALENDAR_HOUR = "NWNX_ON_CALENDAR_HOUR";
+    public const string NWNX_ON_CALENDAR_DAY = "NWNX_ON_CALENDAR_DAY";
+    public const string NWNX_ON_CALENDAR_MONTH = "NWNX_ON_CALENDAR_MONTH";
+    public const string NWNX_ON_CALENDAR_YEAR = "NWNX_ON_CALENDAR_YEAR";
+    public const string NWNX_ON_CALENDAR_DAWN = "NWNX_ON_CALENDAR_DAWN";
+    public const string NWNX_ON_CALENDAR_DUSK = "NWNX_ON_CALENDAR_DUSK";
+    public const string NWNX_ON_BROADCAST_CAST_SPELL_BEFORE = "NWNX_ON_BROADCAST_CAST_SPELL_BEFORE";
+    public const string NWNX_ON_BROADCAST_CAST_SPELL_AFTER = "NWNX_ON_BROADCAST_CAST_SPELL_AFTER";
+    public const string NWNX_ON_DEBUG_RUN_SCRIPT_BEFORE = "NWNX_ON_DEBUG_RUN_SCRIPT_BEFORE";
+    public const string NWNX_ON_DEBUG_RUN_SCRIPT_AFTER = "NWNX_ON_DEBUG_RUN_SCRIPT_AFTER";
+    public const string NWNX_ON_DEBUG_RUN_SCRIPT_CHUNK_BEFORE = "NWNX_ON_DEBUG_RUN_SCRIPT_CHUNK_BEFORE";
+    public const string NWNX_ON_DEBUG_RUN_SCRIPT_CHUNK_AFTER = "NWNX_ON_DEBUG_RUN_SCRIPT_CHUNK_AFTER";
+    public const string NWNX_ON_DEBUG_PLAY_VISUAL_EFFECT_BEFORE = "NWNX_ON_DEBUG_PLAY_VISUAL_EFFECT_BEFORE";
+    public const string NWNX_ON_DEBUG_PLAY_VISUAL_EFFECT_AFTER = "NWNX_ON_DEBUG_PLAY_VISUAL_EFFECT_AFTER";
+    public const string NWNX_ON_STORE_REQUEST_BUY_BEFORE = "NWNX_ON_STORE_REQUEST_BUY_BEFORE";
+    public const string NWNX_ON_STORE_REQUEST_BUY_AFTER = "NWNX_ON_STORE_REQUEST_BUY_AFTER";
+    public const string NWNX_ON_STORE_REQUEST_SELL_BEFORE = "NWNX_ON_STORE_REQUEST_SELL_BEFORE";
+    public const string NWNX_ON_STORE_REQUEST_SELL_AFTER = "NWNX_ON_STORE_REQUEST_SELL_AFTER";
+    public const string NWNX_ON_SERVER_SEND_AREA_BEFORE = "NWNX_ON_SERVER_SEND_AREA_BEFORE";
+    public const string NWNX_ON_SERVER_SEND_AREA_AFTER = "NWNX_ON_SERVER_SEND_AREA_AFTER";
+    public const string NWNX_ON_JOURNAL_OPEN_BEFORE = "NWNX_ON_JOURNAL_OPEN_BEFORE";
+    public const string NWNX_ON_JOURNAL_OPEN_AFTER = "NWNX_ON_JOURNAL_OPEN_AFTER";
+    public const string NWNX_ON_JOURNAL_CLOSE_BEFORE = "NWNX_ON_JOURNAL_CLOSE_BEFORE";
+    public const string NWNX_ON_JOURNAL_CLOSE_AFTER = "NWNX_ON_JOURNAL_CLOSE_AFTER";
+    public const string NWNX_ON_INPUT_EMOTE_BEFORE = "NWNX_ON_INPUT_EMOTE_BEFORE";
+    public const string NWNX_ON_INPUT_EMOTE_AFTER = "NWNX_ON_INPUT_EMOTE_AFTER";
+    public const string NWNX_ON_COMBAT_DR_BROKEN_BEFORE = "NWNX_ON_COMBAT_DR_BROKEN_BEFORE";
+    public const string NWNX_ON_COMBAT_DR_BROKEN_AFTER = "NWNX_ON_COMBAT_DR_BROKEN_AFTER";
+    public const string NWNX_ON_UNPOSSESS_FAMILIAR_BEFORE = "NWNX_ON_UNPOSSESS_FAMILIAR_BEFORE";
+    public const string NWNX_ON_UNPOSSESS_FAMILIAR_AFTER = "NWNX_ON_UNPOSSESS_FAMILIAR_AFTER";
+    public const string NWNX_ON_CLIENT_LEVEL_UP_BEGIN_BEFORE = "NWNX_ON_CLIENT_LEVEL_UP_BEGIN_BEFORE";
+    public const string NWNX_ON_CLIENT_LEVEL_UP_BEGIN_AFTER = "NWNX_ON_CLIENT_LEVEL_UP_BEGIN_AFTER";
+    public const string NWNX_ON_POSSESS_FAMILIAR_BEFORE = "NWNX_ON_POSSESS_FAMILIAR_BEFORE";
+    public const string NWNX_ON_POSSESS_FAMILIAR_AFTER = "NWNX_ON_POSSESS_FAMILIAR_AFTER";
+    public const string NWNX_ON_CHARACTER_SHEET_PERMITTED_BEFORE = "NWNX_ON_CHARACTER_SHEET_PERMITTED_BEFORE";
+    public const string NWNX_ON_CHARACTER_SHEET_PERMITTED_AFTER = "NWNX_ON_CHARACTER_SHEET_PERMITTED_AFTER";
+    public const string NWNX_ON_CHARACTER_SHEET_OPEN_BEFORE = "NWNX_ON_CHARACTER_SHEET_OPEN_BEFORE";
+    public const string NWNX_ON_CHARACTER_SHEET_OPEN_AFTER = "NWNX_ON_CHARACTER_SHEET_OPEN_AFTER";
+    public const string NWNX_ON_CHARACTER_SHEET_CLOSE_BEFORE = "NWNX_ON_CHARACTER_SHEET_CLOSE_BEFORE";
+    public const string NWNX_ON_CHARACTER_SHEET_CLOSE_AFTER = "NWNX_ON_CHARACTER_SHEET_CLOSE_AFTER";
+    public const string NWNX_ON_CLIENT_SET_DEVICE_PROPERTY_BEFORE = "NWNX_ON_CLIENT_SET_DEVICE_PROPERTY_BEFORE";
+    public const string NWNX_ON_CLIENT_SET_DEVICE_PROPERTY_AFTER = "NWNX_ON_CLIENT_SET_DEVICE_PROPERTY_AFTER";
+    public const string NWNX_ON_INPUT_DROP_ITEM_BEFORE = "NWNX_ON_INPUT_DROP_ITEM_BEFORE";
+    public const string NWNX_ON_INPUT_DROP_ITEM_AFTER = "NWNX_ON_INPUT_DROP_ITEM_AFTER";
+    public const string NWNX_ON_DECREMENT_SPELL_COUNT_BEFORE = "NWNX_ON_DECREMENT_SPELL_COUNT_BEFORE";
+    public const string NWNX_ON_DECREMENT_SPELL_COUNT_AFTER = "NWNX_ON_DECREMENT_SPELL_COUNT_AFTER";
+    public const string NWNX_ON_RUN_EVENT_SCRIPT_BEFORE = "NWNX_ON_RUN_EVENT_SCRIPT_BEFORE";
+    public const string NWNX_ON_RUN_EVENT_SCRIPT_AFTER = "NWNX_ON_RUN_EVENT_SCRIPT_AFTER";
+    public const string NWNX_ON_OBJECT_USE_BEFORE = "NWNX_ON_OBJECT_USE_BEFORE";
+    public const string NWNX_ON_OBJECT_USE_AFTER = "NWNX_ON_OBJECT_USE_AFTER";
+    public const string NWNX_ON_BROADCAST_ATTACK_OF_OPPORTUNITY_BEFORE = "NWNX_ON_BROADCAST_ATTACK_OF_OPPORTUNITY_BEFORE";
+    public const string NWNX_ON_BROADCAST_ATTACK_OF_OPPORTUNITY_AFTER = "NWNX_ON_BROADCAST_ATTACK_OF_OPPORTUNITY_AFTER";
+    public const string NWNX_ON_COMBAT_ATTACK_OF_OPPORTUNITY_BEFORE = "NWNX_ON_COMBAT_ATTACK_OF_OPPORTUNITY_BEFORE";
+    public const string NWNX_ON_COMBAT_ATTACK_OF_OPPORTUNITY_AFTER = "NWNX_ON_COMBAT_ATTACK_OF_OPPORTUNITY_AFTER";
+
+    // @}
+    /// @name Events ObjectType Constants
+    /// @anchor events_objtype
+    /// @{
+    public const int NWNX_EVENTS_OBJECT_TYPE_CREATURE = 5;
+    public const int NWNX_EVENTS_OBJECT_TYPE_ITEM = 6;
+    public const int NWNX_EVENTS_OBJECT_TYPE_TRIGGER = 7;
+    public const int NWNX_EVENTS_OBJECT_TYPE_PLACEABLE = 9;
+    public const int NWNX_EVENTS_OBJECT_TYPE_WAYPOINT = 12;
+    public const int NWNX_EVENTS_OBJECT_TYPE_ENCOUNTER = 13;
+    public const int NWNX_EVENTS_OBJECT_TYPE_PORTAL = 15;
+
+    // @}
+    /// @name Events TimingBar Constants
+    /// @anchor events_timingbar
+    /// @{
+    public const int NWNX_EVENTS_TIMING_BAR_TRAP_FLAG = 1;
+    public const int NWNX_EVENTS_TIMING_BAR_TRAP_RECOVER = 2;
+    public const int NWNX_EVENTS_TIMING_BAR_TRAP_DISARM = 3;
+    public const int NWNX_EVENTS_TIMING_BAR_TRAP_EXAMINE = 4;
+    public const int NWNX_EVENTS_TIMING_BAR_TRAP_SET = 5;
+    public const int NWNX_EVENTS_TIMING_BAR_REST = 6;
+    public const int NWNX_EVENTS_TIMING_BAR_UNLOCK = 7;
+    public const int NWNX_EVENTS_TIMING_BAR_LOCK = 8;
+    public const int NWNX_EVENTS_TIMING_BAR_CUSTOM = 10;
+
+    // @}
+    /// @name Events SetVariable Constants
+    /// @anchor events_setvariable
+    /// @{
+    public const int NWNX_EVENTS_DM_SET_VARIABLE_TYPE_INT = 0;
+    public const int NWNX_EVENTS_DM_SET_VARIABLE_TYPE_FLOAT = 1;
+    public const int NWNX_EVENTS_DM_SET_VARIABLE_TYPE_STRING = 2;
+    public const int NWNX_EVENTS_DM_SET_VARIABLE_TYPE_OBJECT = 3;
+
+    // @}
     /// Scripts can subscribe to events.
     ///
     /// Some events are dispatched via the NWNX plugin (see NWNX_EVENTS_EVENT_* constants).
@@ -1606,6 +1975,16 @@ namespace NWN.Core.NWNX
       VM.NWNX.SetFunction(NWNX_Events, sFunc);
       VM.NWNX.StackPush(script);
       VM.NWNX.StackPush(evt);
+      VM.NWNX.Call();
+    }
+
+    /// Unsubscribe all scripts from all events starting with prefix.
+    /// <param name="prefix">the prefix to match against. Can be empty.</param>
+    public static void UnsubscribeAllStartingWith(string prefix)
+    {
+      const string sFunc = "UnsubscribeAllStartingWith";
+      VM.NWNX.SetFunction(NWNX_Events, sFunc);
+      VM.NWNX.StackPush(prefix);
       VM.NWNX.Call();
     }
 
@@ -1722,6 +2101,7 @@ namespace NWN.Core.NWNX
     /// - Decrement Spell Count event
     /// - Play Visual Effect event
     /// - EventScript event
+    /// - Attack of Opportunity events
     public static void SkipEvent()
     {
       const string sFunc = "SkipEvent";

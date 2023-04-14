@@ -82,17 +82,6 @@ namespace NWN.Core.NWNX
       return var;
     }
 
-    /// Convert an object id to the actual object.
-    /// <param name="id">The object id.</param>
-    /// <returns>An object from the provided object ID.</returns>
-    /// @remark This is the counterpart to ObjectToString.
-    /// @deprecated Use the basegame StringToObject() function. This will be removed in a future NWNX release.
-    public static uint StringToObject(string id)
-    {
-      WriteTimestampedLogEntry("WARNING: NWNX_Object_StringToObject() is deprecated, please use the basegame's StringToObject()");
-      return VM.NWNX.StackPopObject();
-    }
-
     /// Set oObject&apos;s position.
     /// <param name="oObject">The object.</param>
     /// <param name="vPosition">A vector position.</param>
@@ -236,20 +225,6 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
-    /// Check if an item can fit in an object&apos;s inventory.
-    /// <param name="obj">The object with an inventory.</param>
-    /// <param name="baseitem">The base item id to check for a fit.</param>
-    /// <returns>TRUE if an item of base item type can fit in object&apos;s inventory</returns>
-    public static int CheckFit(uint obj, int baseitem)
-    {
-      const string sFunc = "CheckFit";
-      VM.NWNX.SetFunction(NWNX_Object, sFunc);
-      VM.NWNX.StackPush(baseitem);
-      VM.NWNX.StackPush(obj);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
-    }
-
     /// Get an object&apos;s damage immunity.
     /// <param name="obj">The object.</param>
     /// <param name="damageType">The damage type to check for immunity. Use DAMAGE_TYPE_* constants.</param>
@@ -356,34 +331,6 @@ namespace NWN.Core.NWNX
       VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(sGeometry);
       VM.NWNX.StackPush(oTrigger);
-      VM.NWNX.Call();
-    }
-
-    /// Add an effect to an object that displays an icon and has no other effect.
-    /// @remark See effecticons.2da for a list of possible effect icons.
-    /// <param name="obj">The object to apply the effect.</param>
-    /// <param name="nIcon">The icon id.</param>
-    /// <param name="fDuration">If specified the effect will be temporary and last this length in seconds, otherwise the effect</param>
-    /// will be permanent.
-    public static void AddIconEffect(uint obj, int nIcon, float fDuration = 0.0f)
-    {
-      const string sFunc = "AddIconEffect";
-      VM.NWNX.SetFunction(NWNX_Object, sFunc);
-      VM.NWNX.StackPush(fDuration);
-      VM.NWNX.StackPush(nIcon);
-      VM.NWNX.StackPush(obj);
-      VM.NWNX.Call();
-    }
-
-    /// Remove an icon effect from an object that was added by the NWNX_Object_AddIconEffect() function.
-    /// <param name="obj">The object.</param>
-    /// <param name="nIcon">The icon id.</param>
-    public static void RemoveIconEffect(uint obj, int nIcon)
-    {
-      const string sFunc = "RemoveIconEffect";
-      VM.NWNX.SetFunction(NWNX_Object, sFunc);
-      VM.NWNX.StackPush(nIcon);
-      VM.NWNX.StackPush(obj);
       VM.NWNX.Call();
     }
 
@@ -582,21 +529,6 @@ namespace NWN.Core.NWNX
       VM.NWNX.StackPush(oObject);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
-    }
-
-    /// Cause oObject to face fDirection.
-    /// @note This function is almost identical to SetFacing(), the only difference being that it allows you to specify
-    /// the target object without the use of AssignCommand(). This is useful when you want to change the facing of an object
-    /// in an ExecuteScriptChunk() call where AssignCommand() does not work.
-    /// <param name="oObject">The object to change its facing of</param>
-    /// <param name="fDirection">The direction the object should face</param>
-    public static void SetFacing(uint oObject, float fDirection)
-    {
-      const string sFunc = "SetFacing";
-      VM.NWNX.SetFunction(NWNX_Object, sFunc);
-      VM.NWNX.StackPush(fDirection);
-      VM.NWNX.StackPush(oObject);
-      VM.NWNX.Call();
     }
 
     /// Clear all spell effects oObject has applied to others.
@@ -862,6 +794,18 @@ namespace NWN.Core.NWNX
       VM.NWNX.StackPush(oObject);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
+    }
+
+    /// Force the given object to carry the given UUID. Any other object currently owning the UUID is stripped of it.
+    /// <param name="oObject">The object</param>
+    /// <param name="sUUID">The UUID to force</param>
+    public static void ForceAssignUUID(uint oObject, string sUUID)
+    {
+      const string sFunc = "ForceAssignUUID";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
+      VM.NWNX.StackPush(sUUID);
+      VM.NWNX.StackPush(oObject);
+      VM.NWNX.Call();
     }
 
     // @}

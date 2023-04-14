@@ -96,6 +96,9 @@ namespace NWN.Core.NWNX
     public const int NWNX_ADMINISTRATION_OPTION_PLAYER_PARTY_CONTROL = 27;
 
     // TRUE/FALSE
+    public const int NWNX_ADMINISTRATION_OPTION_SHOW_PLAYER_JOIN_MESSAGES = 28;
+
+    // TRUE/FALSE
     // @}
     /// @name Administration Debug Types
     /// @anchor admin_debug

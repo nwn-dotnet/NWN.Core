@@ -100,7 +100,6 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
-    ///
     /// Convert an itemproperty type to an effect type.
     /// <param name="ip">The itemproperty to convert to an effect.</param>
     /// <returns>The converted effect.</returns>
@@ -123,20 +122,6 @@ namespace NWN.Core.NWNX
       VM.NWNX.StackPush(str);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
-    }
-
-    /// Determines if the supplied resref exists.
-    /// <param name="resref">The resref to check.</param>
-    /// <param name="type">The @ref resref_types &quot;Resref Type&quot;.</param>
-    /// <returns>TRUE/FALSE</returns>
-    public static int IsValidResRef(string resref, int type = NWNX_UTIL_RESREF_TYPE_CREATURE)
-    {
-      const string sFunc = "IsValidResRef";
-      VM.NWNX.SetFunction(NWNX_Util, sFunc);
-      VM.NWNX.StackPush(type);
-      VM.NWNX.StackPush(resref);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
     }
 
     /// Retrieves an environment variable.
@@ -184,19 +169,6 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopString();
     }
 
-    /// @anchor twoda_row_count
-    /// Gets the row count for a 2da.
-    /// <param name="str">The 2da to check (do not include the .2da).</param>
-    /// <returns>The amount of rows in the 2da.</returns>
-    public static int Get2DARowCount(string str)
-    {
-      const string sFunc = "Get2DARowCount";
-      VM.NWNX.SetFunction(NWNX_Util, sFunc);
-      VM.NWNX.StackPush(str);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
-    }
-
     /// Get the first resref of nType.
     /// <param name="nType">A @ref resref_types &quot;Resref Type&quot;.</param>
     /// <param name="sRegexFilter">Lets you filter out resrefs using a regexfilter.</param>
@@ -223,17 +195,6 @@ namespace NWN.Core.NWNX
       VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
-    }
-
-    /// Get the ticks per second of the server.
-    /// @remark Useful to dynamically detect lag and adjust behavior accordingly.
-    /// <returns>The ticks per second.</returns>
-    public static int GetServerTicksPerSecond()
-    {
-      const string sFunc = "GetServerTicksPerSecond";
-      VM.NWNX.SetFunction(NWNX_Util, sFunc);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
     }
 
     /// Get the last created object.
@@ -266,20 +227,6 @@ namespace NWN.Core.NWNX
       VM.NWNX.StackPush(bWrapIntoMain);
       VM.NWNX.StackPush(sScriptData);
       VM.NWNX.StackPush(sFileName);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopString();
-    }
-
-    /// Gets the contents of a .nss script file as a string.
-    /// <param name="sScriptName">The name of the script to get the contents of.</param>
-    /// <param name="nMaxLength">The max length of the return string, -1 to get everything</param>
-    /// <returns>The script file contents or &quot;&quot; on error.</returns>
-    public static string GetNSSContents(string sScriptName, int nMaxLength = -1)
-    {
-      const string sFunc = "GetNSSContents";
-      VM.NWNX.SetFunction(NWNX_Util, sFunc);
-      VM.NWNX.StackPush(nMaxLength);
-      VM.NWNX.StackPush(sScriptName);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
     }
@@ -386,10 +333,7 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if the plugin exists and is enabled, otherwise FALSE.</returns>
     public static int PluginExists(string sPlugin)
     {
-      const string sFunc = "PluginExists";
-      VM.NWNX.SetFunction(NWNX_Util, sFunc);
-      VM.NWNX.StackPush(sPlugin);
-      VM.NWNX.Call();
+      WriteTimestampedLogEntry("WARNING:  NWNX_Util_PluginExists is deprecated.  You should migrate to NWNX_PluginExists.");
       return VM.NWNX.StackPopInt();
     }
 
@@ -552,6 +496,20 @@ namespace NWN.Core.NWNX
       VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.StackPush(nEventID);
       VM.NWNX.Call();
+    }
+
+    /// Calculate the levenshtein distance of two strings
+    /// <param name="sString">The string to compare with.</param>
+    /// <param name="sCompareTo">The string to compare sString to.</param>
+    /// <returns>The number of characters different between the compared strings.</returns>
+    public static int GetStringLevenshteinDistance(string sString, string sCompareTo)
+    {
+      const string sFunc = "LevenshteinDistance";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
+      VM.NWNX.StackPush(sCompareTo);
+      VM.NWNX.StackPush(sString);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
     }
 
     // @}

@@ -718,6 +718,22 @@ namespace NWN.Core.NWNX
       return data;
     }
 
+    /// Set the default discoverability mask for objects in an area.
+    /// <param name="oArea">The area or OBJECT_INVALID to set a global mask for all areas. Per area masks will override the global mask.</param>
+    /// <param name="nObjectTypes">A mask of OBJECT_TYPE_* constants or OBJECT_TYPE_ALL for all suitable object types. Currently only works on Creatures, Doors (Hilite only), Items and Useable Placeables.</param>
+    /// <param name="nMask">A mask of OBJECT_UI_DISCOVERY_*</param>
+    /// <param name="bForceUpdate">If TRUE, will update the discovery mask of ALL objects in the area or module(if oArea == OBJECT_INVALID), according to the current mask. Use with care.</param>
+    public static void SetDefaultObjectUiDiscoveryMask(uint oArea, int nObjectTypes, int nMask, int bForceUpdate = FALSE)
+    {
+      const string sFunc = "SetDefaultObjectUiDiscoveryMask";
+      VM.NWNX.SetFunction(NWNX_Area, sFunc);
+      VM.NWNX.StackPush(bForceUpdate);
+      VM.NWNX.StackPush(nMask);
+      VM.NWNX.StackPush(nObjectTypes);
+      VM.NWNX.StackPush(oArea);
+      VM.NWNX.Call();
+    }
+
     // @}
   }
 
