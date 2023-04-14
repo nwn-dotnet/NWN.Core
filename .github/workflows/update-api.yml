@@ -126,4 +126,4 @@ jobs:
           git add -A src/NWN/NWScript.cs src/NWNX/Plugins/
           git diff-index --quiet HEAD src/NWN/NWScript.cs src/NWNX/Plugins/ ||
           git commit -m "Update APIs (NWNX: ${{ needs.download.outputs.nwnx_sha_short }}, NWN: ${{ needs.download.outputs.nwn_build }}.${{ needs.download.outputs.nwn_build_revision }}-${{ needs.download.outputs.nwn_build_postfix }})." &&
-          if [ ${{ github.event.inputs.tag }} != '' ]; then git tag ${{ github.event.inputs.tag }} && git push --atomic origin master ${{ github.event.inputs.tag }}; else git push; fi;
+          if [ ${{ github.event.inputs.tag }} != '' ]; then git tag ${{ github.event.inputs.tag }} && git push --atomic origin ${{ github.ref }} ${{ github.event.inputs.tag }}; else git push; fi;
