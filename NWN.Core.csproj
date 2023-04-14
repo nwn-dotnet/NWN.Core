@@ -20,7 +20,4 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
     </ItemGroup>
-    <ItemGroup>
-      <Compile Remove="src\NWNX\Plugins\TimePlugin.cs" />
-    </ItemGroup>
 </Project>
