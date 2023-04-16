@@ -183,10 +183,12 @@ namespace NWN.Core.NWNX
     /// Set Attack Event Data
     /// <param name="data">A NWNX_Damage_AttackEventData struct.</param>
     /// @note To use only in the Attack Event Script.
+    /// @note Setting iSneakAttack will only change the attack roll message and floating text feedback. Immunities and damage will have already been resolved by the time the attack event script is ran.
     public static void SetAttackEventData(AttackEventData data)
     {
       const string sFunc = "SetAttackEventData";
       VM.NWNX.SetFunction(NWNX_Damage, sFunc);
+      VM.NWNX.StackPush(data.iSneakAttack);
       VM.NWNX.StackPush(data.iAttackResult);
       VM.NWNX.StackPush(data.iCustom19);
       VM.NWNX.StackPush(data.iCustom18);

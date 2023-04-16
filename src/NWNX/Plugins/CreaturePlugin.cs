@@ -2095,6 +2095,17 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Inserts a cleave or great cleave attack into oCreature&apos;s current attack round against the nearest enemy within melee reach.
+    /// <param name="oCreature">The creature object.</param>
+    /// @note oCreature must have the cleave or great cleave feats, must be in combat, and must have available attacks remaining in their combat round to use for cleave attack.
+    public static void DoCleaveAttack(uint oCreature)
+    {
+      const string sFunc = "DoCleaveAttack";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+    }
+
     /// Gets the current object oCreature&apos;s orientation is locked to.
     /// <param name="oCreature">The creature object.</param>
     /// <returns>The object oCreature&apos;s orientation is locked to, or OBJECT_INVALID if oCreature&apos;s orientation is not locked.</returns>

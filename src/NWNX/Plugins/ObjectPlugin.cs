@@ -42,6 +42,13 @@ namespace NWN.Core.NWNX
     public const int NWNX_OBJECT_TYPE_INTERNAL_SOUND = 16;
 
     // @}
+    /// @anchor projectile_types
+    /// @name Projectile VFX Types
+    /// @{
+    public const int NWNX_OBJECT_SPELL_PROJECTILE_TYPE_DEFAULT = 6;
+    public const int NWNX_OBJECT_SPELL_PROJECTILE_TYPE_USE_PATH = 7;
+
+    // @}
     /// A local variable structure.
     /// Gets the count of all local variables.
     /// <param name="obj">The object.</param>
@@ -805,6 +812,38 @@ namespace NWN.Core.NWNX
       VM.NWNX.SetFunction(NWNX_Object, sFunc);
       VM.NWNX.StackPush(sUUID);
       VM.NWNX.StackPush(oObject);
+      VM.NWNX.Call();
+    }
+
+    /// Returns how many items are in oObject&apos;s inventory.
+    /// <param name="oObject">A creature, placeable, or item.</param>
+    /// <returns>Returns a count of how many items are in oObject&apos;s inventory.</returns>
+    public static int GetInventoryItemCount(uint oObject)
+    {
+      const string sFunc = "GetInventoryItemCount";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
+      VM.NWNX.StackPush(oObject);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
+    /// Override the projectile visual effect of ranged/throwing weapons and spells.
+    /// <param name="oCreature">The creature.</param>
+    /// <param name="nProjectileType">A @ref projectile_types &quot;NWNX_OBJECT_SPELL_PROJECTILE_TYPE_*&quot; constant or -1 to remove the override.</param>
+    /// <param name="nProjectilePathType">A &quot;PROJECTILE_PATH_TYPE_*&quot; constant or -1 to ignore.</param>
+    /// <param name="nSpellID">A &quot;SPELL_*&quot; constant. -1 to ignore.</param>
+    /// <param name="bPersist">Whether the override should persist to the .bic file (for PCs).</param>
+    /// @note Persistence is enabled after a server reset by the first use of this function. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
+    ///       This will override all spell projectile VFX from oCreature until the override is removed.
+    public static void OverrideSpellProjectileVFX(uint oCreature, int nProjectileType = -1, int nProjectilePathType = -1, int nSpellID = -1, int bPersist = FALSE)
+    {
+      const string sFunc = "OverrideSpellProjectileVFX";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
+      VM.NWNX.StackPush(bPersist);
+      VM.NWNX.StackPush(nSpellID);
+      VM.NWNX.StackPush(nProjectilePathType);
+      VM.NWNX.StackPush(nProjectileType);
+      VM.NWNX.StackPush(oCreature);
       VM.NWNX.Call();
     }
 
