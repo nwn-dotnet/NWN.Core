@@ -892,11 +892,13 @@ namespace NWN.Core.NWNX
     /// <param name="creature">The creature object.</param>
     /// <param name="class">The class id.</param>
     /// <param name="count">The amount of levels of class to add.</param>
+    /// <param name="package">The class package to use for leveling up (PACKAGE_INVALID = starting package)</param>
     /// @note This will not work on player characters.
-    public static void LevelUp(uint creature, int @class, int count = 1)
+    public static void LevelUp(uint creature, int @class, int count = 1, int package = PACKAGE_INVALID)
     {
       const string sFunc = "LevelUp";
       VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(package);
       VM.NWNX.StackPush(count);
       VM.NWNX.StackPush(@class);
       VM.NWNX.StackPush(creature);

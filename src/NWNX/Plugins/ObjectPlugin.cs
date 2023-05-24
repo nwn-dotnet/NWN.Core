@@ -847,6 +847,17 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Returns TRUE if the last spell was cast instantly. This function should only be called in a spell script.
+    /// @note To initialize the hooks used by this function it is recommended to call this function once in your module load script.
+    /// <returns>TRUE if the last spell was instant.</returns>
+    public static int GetLastSpellInstant()
+    {
+      const string sFunc = "GetLastSpellInstant";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
     // @}
   }
 
