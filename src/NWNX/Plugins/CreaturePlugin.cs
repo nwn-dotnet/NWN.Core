@@ -2146,6 +2146,34 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Returns the maximum price oStore will buy items from oCreature for.
+    /// <param name="oCreature">The creature object.</param>
+    /// <param name="oStore">The store object.</param>
+    /// <returns>The max buy price override. -1 = No maximum buy price, -2 = No override set.</returns>
+    public static int GetMaxSellToStorePriceOverride(uint oCreature, uint oStore)
+    {
+      const string sFunc = "GetMaxSellToStorePriceOverride";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(oStore);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
+    /// Overrides the maximum price oStore will buy items from oCreature for.
+    /// <param name="oCreature">The creature object.</param>
+    /// <param name="oStore">The store object.</param>
+    /// <param name="nMaxSellToPrice">The maximum buy price override. -1 = No maximum buy price, -2 = Remove the override.</param>
+    public static void SetMaxSellToStorePriceOverride(uint oCreature, uint oStore, int nMaxSellToPrice)
+    {
+      const string sFunc = "SetMaxSellToStorePriceOverride";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(nMaxSellToPrice);
+      VM.NWNX.StackPush(oStore);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+    }
+
     // @}
   }
 
