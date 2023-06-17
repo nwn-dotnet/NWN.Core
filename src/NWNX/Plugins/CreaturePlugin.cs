@@ -66,6 +66,8 @@ namespace NWN.Core.NWNX
 
     ///&lt; Random Elemental VFX
     // @}
+    public const int NWNX_CREATURE_ABILITY_NONE = 6;
+
     /// @struct NWNX_Creature_SpecialAbility
     /// A creature special ability.
     /// Gives the creature a feat.
@@ -2170,6 +2172,34 @@ namespace NWN.Core.NWNX
       VM.NWNX.SetFunction(NWNX_Creature, sFunc);
       VM.NWNX.StackPush(nMaxSellToPrice);
       VM.NWNX.StackPush(oStore);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+    }
+
+    /// Returns the creature&apos;s ability increase for nLevel.
+    /// <param name="oCreature">The creature object.</param>
+    /// <param name="nLevel">The level.</param>
+    /// <returns>An ABILITY_* constant, NWNX_CREATURE_ABILITY_NONE or -1 on error</returns>
+    public static int GetAbilityIncreaseByLevel(uint oCreature, int nLevel)
+    {
+      const string sFunc = "GetAbilityIncreaseByLevel";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(nLevel);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
+    /// Sets the creature&apos;s ability increase for nLevel.
+    /// <param name="oCreature">The creature object.</param>
+    /// <param name="nLevel">The level.</param>
+    /// <param name="nAbility">ABILITY_* constant or NWNX_CREATURE_ABILITY_NONE</param>
+    public static void SetAbilityIncreaseByLevel(uint oCreature, int nLevel, int nAbility)
+    {
+      const string sFunc = "SetAbilityIncreaseByLevel";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(nAbility);
+      VM.NWNX.StackPush(nLevel);
       VM.NWNX.StackPush(oCreature);
       VM.NWNX.Call();
     }
