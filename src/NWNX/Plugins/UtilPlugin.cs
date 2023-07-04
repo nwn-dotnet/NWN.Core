@@ -76,6 +76,14 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
+    /// Gets the module short file name.
+    /// <returns>The module file as a string.</returns>
+    public static string GetModuleFile()
+    {
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopString();
+    }
+
     /// Gets the value of customTokenNumber.
     /// <param name="customTokenNumber">The token number to query.</param>
     /// <returns>The string representation of the token value.</returns>

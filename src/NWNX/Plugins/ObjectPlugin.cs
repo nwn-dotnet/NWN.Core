@@ -858,6 +858,19 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
+    /// Sets the creator of a trap on door, placeable, or trigger. Also changes trap Faction to that of the new Creator.
+    /// @note Triggers (ground traps) will instantly update colour (Green/Red). Placeable/doors will not change if client has already seen them.
+    /// <param name="oObject">Door, placeable or trigger (trap) object</param>
+    /// <param name="oCreator">The new creator of the trap. Any non-creature creator will assign OBJECT_INVALID (similar to toolset-laid traps)</param>
+    public static void SetTrapCreator(uint oObject, uint oCreator)
+    {
+      const string sFunc = "SetTrapCreator";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
+      VM.NWNX.StackPush(oCreator);
+      VM.NWNX.StackPush(oObject);
+      VM.NWNX.Call();
+    }
+
     // @}
   }
 
