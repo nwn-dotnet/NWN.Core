@@ -2204,6 +2204,20 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Returns the creature&apos;s maximum attack range to a target
+    /// <param name="oCreature">The creature object.</param>
+    /// <param name="oTarget">The target to get the maximum attack range to</param>
+    /// <returns>The maximum attack range for oCreature to oTarget</returns>
+    public static float GetMaxAttackRange(uint oCreature, uint oTarget)
+    {
+      const string sFunc = "GetMaxAttackRange";
+      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
+      VM.NWNX.StackPush(oTarget);
+      VM.NWNX.StackPush(oCreature);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopFloat();
+    }
+
     // @}
   }
 
