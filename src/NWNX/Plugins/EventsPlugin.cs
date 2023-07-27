@@ -1664,6 +1664,19 @@ namespace NWN.Core.NWNX
         ----------------------|--------|-------
         PLAY                  | int | TRUE if the area is starting to play battle music, FALSE if stopping. |
     _______________________________________
+        ## Combat Attack Target Change Events
+        - NWNX_ON_ATTACK_TARGET_CHANGE_BEFORE
+        - NWNX_ON_ATTACK_TARGET_CHANGE_AFTER
+    
+        `OBJECT_SELF` = The creature changing the target its attacking.
+    
+        Event Data Tag        | Type   | Notes
+        ----------------------|--------|-------
+        OLD_TARGET_OBJECT_ID  | object | The old attack target. OBJECT_INVALID if there was no old target. Old target may be dead/invalid. Convert to object with StringToObject() |
+        NEW_TARGET_OBJECT_ID  | object | The new attack target. OBJECT_INVALID if there is no new target. Convert to object with StringToObject() |
+        AUTOMATIC_CHANGE      | int    | TRUE if the game automatically decided on the new target, FALSE if explicitly chosen |
+        RETARGETABLE          | int    | TRUE if the new target can be changed using NWNX_Events_SetEventResult() (Only in BEFORE) |
+    _______________________________________
     
     */
     /// @name Events Event Constants
@@ -2000,6 +2013,8 @@ namespace NWN.Core.NWNX
     public const string NWNX_ON_COMBAT_ATTACK_OF_OPPORTUNITY_AFTER = "NWNX_ON_COMBAT_ATTACK_OF_OPPORTUNITY_AFTER";
     public const string NWNX_ON_AREA_PLAY_BATTLE_MUSIC_BEFORE = "NWNX_ON_AREA_PLAY_BATTLE_MUSIC_BEFORE";
     public const string NWNX_ON_AREA_PLAY_BATTLE_MUSIC_AFTER = "NWNX_ON_AREA_PLAY_BATTLE_MUSIC_AFTER";
+    public const string NWNX_ON_ATTACK_TARGET_CHANGE_BEFORE = "NWNX_ON_ATTACK_TARGET_CHANGE_BEFORE";
+    public const string NWNX_ON_ATTACK_TARGET_CHANGE_AFTER = "NWNX_ON_ATTACK_TARGET_CHANGE_AFTER";
 
     // @}
     /// @name Events ObjectType Constants
@@ -2242,6 +2257,7 @@ namespace NWN.Core.NWNX
     /// - Stealth event -&gt; &quot;1&quot; to perform HiPS (without the feat), &quot;0&quot; to bypass HiPS
     /// - Faction set reputation event -&gt; The new reputation to apply instead. (&quot;0&quot; - &quot;100&quot;)
     /// - CharacterSheetPermitted event -&gt; &quot;1&quot; allow the player to view the character sheet or &quot;0&quot; to disallow
+    /// - Attack target change event -&gt; The new target object. Convert to string with ObjectToString()
     public static void SetEventResult(string data)
     {
       const string sFunc = "SetEventResult";
