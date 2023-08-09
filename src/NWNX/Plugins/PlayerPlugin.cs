@@ -908,6 +908,18 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Get the TURD for oPlayer
+    /// <param name="oPlayer">The offline player to get the TURD from</param>
+    /// <returns>the TURD object of oPlayer, or OBJECT_INVALID if no TURD exists</returns>
+    public static uint GetTURD(uint oPlayer)
+    {
+      const string sFunc = "GetTURD";
+      VM.NWNX.SetFunction(NWNX_Player, sFunc);
+      VM.NWNX.StackPush(oPlayer);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopObject();
+    }
+
     // @}
     public static void INTERNAL_StopGuiTimingBar(uint player, string script = "", int id = -1)
     {
