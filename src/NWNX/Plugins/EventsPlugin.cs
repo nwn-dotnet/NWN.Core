@@ -1606,6 +1606,29 @@ namespace NWN.Core.NWNX
         ----------------------|--------|-------
         OBJECT                | object | The Object being used |
     _______________________________________
+        ## Placeable Open Events (Placeables with inventory)
+        - NWNX_ON_PLACEABLE_OPEN_BEFORE
+        - NWNX_ON_PLACEABLE_OPEN_AFTER
+    
+        `OBJECT_SELF` = The placeable being openeed.
+    
+        Event Data Tag        | Type   | Notes
+        ----------------------|--------|-------
+        OBJECT                | object | The player opening. |
+        BEFORE_SKIPPED        | int    | TRUE/FALSE, only in _AFTER events|
+    _______________________________________
+        ## Placeable Close Events (Placeables with inventory)
+        - NWNX_ON_PLACEABLE_CLOSE_BEFORE
+        - NWNX_ON_PLACEABLE_CLOSE_AFTER
+    
+        `OBJECT_SELF` = The placeable being closed.
+    
+        Event Data Tag        | Type   | Notes
+        ----------------------|--------|-------
+        OBJECT                | object | The player closing. |
+    
+        @note Skipping event is not allowed (since otherwise client UI will hang and be glitchy)
+    _______________________________________
         ## Broadcast Safe Projectile Events
         - NWNX_ON_BROADCAST_SAFE_PROJECTILE_BEFORE
         - NWNX_ON_BROADCAST_SAFE_PROJECTILE_AFTER
@@ -1676,6 +1699,21 @@ namespace NWN.Core.NWNX
         NEW_TARGET_OBJECT_ID  | object | The new attack target. OBJECT_INVALID if there is no new target. Convert to object with StringToObject() |
         AUTOMATIC_CHANGE      | int    | TRUE if the game automatically decided on the new target, FALSE if explicitly chosen |
         RETARGETABLE          | int    | TRUE if the new target can be changed using NWNX_Events_SetEventResult() (Only in BEFORE) |
+    _______________________________________
+        ## Creature Tile Change Events
+        - NWNX_ON_CREATURE_TILE_CHANGE_BEFORE
+        - NWNX_ON_CREATURE_TILE_CHANGE_AFTER
+    
+        `OBJECT_SELF` = The creature changing tile positions.
+    
+        Event Data Tag        | Type   | Notes
+        ----------------------|--------|-------
+        OLD_TILE_INDEX        | int    | The index of the old tile. |
+        OLD_TILE_X            | int    | The tile grid x position of the old tile. |
+        OLD_TILE_Y            | int    | The tile grid y position of the old tile. |
+        NEW_TILE_INDEX        | int    | The index of the new tile. |
+        NEW_TILE_X            | int    | The tile grid x position of the new tile. |
+        NEW_TILE_Y            | int    | The tile grid y position of the new tile. |
     _______________________________________
     
     */
@@ -2005,6 +2043,10 @@ namespace NWN.Core.NWNX
     public const string NWNX_ON_RUN_EVENT_SCRIPT_AFTER = "NWNX_ON_RUN_EVENT_SCRIPT_AFTER";
     public const string NWNX_ON_OBJECT_USE_BEFORE = "NWNX_ON_OBJECT_USE_BEFORE";
     public const string NWNX_ON_OBJECT_USE_AFTER = "NWNX_ON_OBJECT_USE_AFTER";
+    public const string NWNX_ON_PLACEABLE_OPEN_BEFORE = "NWNX_ON_PLACEABLE_OPEN_BEFORE";
+    public const string NWNX_ON_PLACEABLE_OPEN_AFTER = "NWNX_ON_PLACEABLE_OPEN_AFTER";
+    public const string NWNX_ON_PLACEABLE_CLOSE_BEFORE = "NWNX_ON_PLACEABLE_CLOSE_BEFORE";
+    public const string NWNX_ON_PLACEABLE_CLOSE_AFTER = "NWNX_ON_PLACEABLE_CLOSE_AFTER";
     public const string NWNX_ON_BROADCAST_SAFE_PROJECTILE_BEFORE = "NWNX_ON_BROADCAST_SAFE_PROJECTILE_BEFORE";
     public const string NWNX_ON_BROADCAST_SAFE_PROJECTILE_AFTER = "NWNX_ON_BROADCAST_SAFE_PROJECTILE_AFTER";
     public const string NWNX_ON_BROADCAST_ATTACK_OF_OPPORTUNITY_BEFORE = "NWNX_ON_BROADCAST_ATTACK_OF_OPPORTUNITY_BEFORE";
@@ -2015,6 +2057,8 @@ namespace NWN.Core.NWNX
     public const string NWNX_ON_AREA_PLAY_BATTLE_MUSIC_AFTER = "NWNX_ON_AREA_PLAY_BATTLE_MUSIC_AFTER";
     public const string NWNX_ON_ATTACK_TARGET_CHANGE_BEFORE = "NWNX_ON_ATTACK_TARGET_CHANGE_BEFORE";
     public const string NWNX_ON_ATTACK_TARGET_CHANGE_AFTER = "NWNX_ON_ATTACK_TARGET_CHANGE_AFTER";
+    public const string NWNX_ON_CREATURE_TILE_CHANGE_BEFORE = "NWNX_ON_CREATURE_TILE_CHANGE_BEFORE";
+    public const string NWNX_ON_CREATURE_TILE_CHANGE_AFTER = "NWNX_ON_CREATURE_TILE_CHANGE_AFTER";
 
     // @}
     /// @name Events ObjectType Constants
