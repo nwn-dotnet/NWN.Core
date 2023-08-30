@@ -42,6 +42,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_FEAT_MODIFIER_VISUALEFFECT = 27;
     public const int NWNX_FEAT_MODIFIER_SPELLSAVEDCFORSCHOOL = 28;
     public const int NWNX_FEAT_MODIFIER_SPELLSAVEDCFORSPELL = 29;
+    public const int NWNX_FEAT_MODIFIER_DAMAGE = 30;
 
     ///@}
     /// Sets a feat modifier.
