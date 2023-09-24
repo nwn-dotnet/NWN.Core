@@ -816,7 +816,7 @@ namespace NWN.Core.NWNX
     }
 
     /// Returns how many items are in oObject&apos;s inventory.
-    /// <param name="oObject">A creature, placeable, or item.</param>
+    /// <param name="oObject">A creature, placeable, item or store.</param>
     /// <returns>Returns a count of how many items are in oObject&apos;s inventory.</returns>
     public static int GetInventoryItemCount(uint oObject)
     {
