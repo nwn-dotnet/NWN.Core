@@ -1736,7 +1736,7 @@ namespace NWN.Core.NWNX
     
         Event Data Tag        | Type   | Notes
         ----------------------|--------|-------
-        TARGET                | object | The object the creature is jumping to. Convert to object with StringToObject() |
+        OBJECT                | object | The object the creature is jumping to. Convert to object with StringToObject() |
     _______________________________________
         ## Item Property Effect Apply/Remove Events
         - NWNX_ON_ITEMPROPERTY_EFFECT_APPLIED_BEFORE
