@@ -14,6 +14,8 @@ namespace NWN.Core
 
     public delegate void AssertHandlerDelegate(string message, string stackTrace);
 
+    public delegate void CrashHandlerDelegate(int signal, string stackTrace);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct NativeEventHandles
     {
@@ -22,6 +24,7 @@ namespace NWN.Core
       public ClosureHandlerDelegate Closure;
       public SignalHandlerDelegate Signal;
       public AssertHandlerDelegate AssertFail;
+      public CrashHandlerDelegate CrashHandler;
     }
   }
 }

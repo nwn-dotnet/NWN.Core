@@ -84,6 +84,7 @@ namespace NWN.Core
       eventHandles.Closure = eventHandler.OnClosure;
       eventHandles.Signal = eventHandler.OnSignal;
       eventHandles.AssertFail = eventHandler.OnAssertFail;
+      eventHandles.CrashHandler = eventHandler.CrashHandler;
 
       RegisterEventHandles(eventHandles);
     }

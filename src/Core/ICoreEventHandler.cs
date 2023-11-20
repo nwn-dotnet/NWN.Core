@@ -37,5 +37,14 @@ namespace NWN.Core
     /// <param name="message">The failure message.</param>
     /// <param name="stackTrace">The native stack trace when this assertion failure occurred.</param>
     void OnAssertFail(string message, string stackTrace);
+
+    /// <summary>
+    /// Called when the server has entered an undefined state and is about to crash.
+    /// </summary>
+    /// <remarks>The implementation of this method should only attempt to log additional information, and NEVER attempt to save/modify existing state.<br/>
+    /// Anything invoked by this function is considered undefined behaviour.</remarks>
+    /// <param name="signal">The termination signal that was sent.</param>
+    /// <param name="stackTrace">The backtrace of the current call stack.</param>
+    void CrashHandler(int signal, string stackTrace);
   }
 }
