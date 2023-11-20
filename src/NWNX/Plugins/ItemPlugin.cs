@@ -190,6 +190,60 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
+    /// Set a modifier to the Minimum Level to Equip (Item Level Restriction).
+    /// <param name="oItem">The item object.</param>
+    /// <param name="nModifier">the modifier to apply (After any Override)</param>
+    /// <param name="bPersist">Whether the modifier should persist to gff field. Strongly Recommended to be TRUE (See warning)</param>
+    /// @note This function (or override partner) must be used each server reset to reenable persistence. Recommended use on OBJECT_INVALID OnModuleLoad.
+    /// @warning if Persistence is FALSE, or not renabled, beware characters may trigger ELC logging in with now-invalid ItemLevelRestrictions equipped.
+    public static void SetMinEquipLevelModifier(uint oItem, int nModifier, int bPersist = TRUE)
+    {
+      const string sFunc = "SetMinEquipLevelModifier";
+      VM.NWNX.SetFunction(NWNX_Item, sFunc);
+      VM.NWNX.StackPush(bPersist);
+      VM.NWNX.StackPush(nModifier);
+      VM.NWNX.StackPush(oItem);
+      VM.NWNX.Call();
+    }
+
+    /// Gets the applied modifier to the Minimum Level to Equip (Item Level Restriction).
+    /// <param name="oItem">The item object.</param>
+    public static int GetMinEquipLevelModifier(uint oItem)
+    {
+      const string sFunc = "GetMinEquipLevelModifier";
+      VM.NWNX.SetFunction(NWNX_Item, sFunc);
+      VM.NWNX.StackPush(oItem);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
+    /// Set an override to the Minimum Level to Equip (Item Level Restriction).
+    /// <param name="oItem">The item object.</param>
+    /// <param name="nOverride">the nOverride to apply (Before any Modifier)</param>
+    /// <param name="bPersist">Whether the modifier should persist to gff field. Strongly Recommended to be TRUE (See warning)</param>
+    /// @note This function (or modifier partner) must be used each server reset to reenable persistence. Recommended use on OBJECT_INVALID OnModuleLoad.
+    /// @warning if Persistence is FALSE, or not renabled, beware characters may trigger ELC logging in with now-invalid ItemLevelRestrictions equipped.
+    public static void SetMinEquipLevelOverride(uint oItem, int nOverride, int bPersist = TRUE)
+    {
+      const string sFunc = "SetMinEquipLevelOverride";
+      VM.NWNX.SetFunction(NWNX_Item, sFunc);
+      VM.NWNX.StackPush(bPersist);
+      VM.NWNX.StackPush(nOverride);
+      VM.NWNX.StackPush(oItem);
+      VM.NWNX.Call();
+    }
+
+    /// Gets the applied override to the Minimum Level to Equip (Item Level Restriction).
+    /// <param name="oItem">The item object.</param>
+    public static int GetMinEquipLevelOverride(uint oItem)
+    {
+      const string sFunc = "GetMinEquipLevelOverride";
+      VM.NWNX.SetFunction(NWNX_Item, sFunc);
+      VM.NWNX.StackPush(oItem);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
     // @}
   }
 }
