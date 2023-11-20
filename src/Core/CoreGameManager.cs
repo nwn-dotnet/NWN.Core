@@ -48,6 +48,14 @@ namespace NWN.Core
       Console.Error.WriteLine(managedStackTrace.ToString());
     }
 
+    public void CrashHandler(int signal, string stackTrace)
+    {
+      Console.WriteLine(stackTrace);
+
+      StackTrace managedStackTrace = new StackTrace(true);
+      Console.Error.WriteLine(managedStackTrace.ToString());
+    }
+
     int ICoreEventHandler.OnRunScript(string script, uint oidSelf)
     {
       int retVal = -1;
