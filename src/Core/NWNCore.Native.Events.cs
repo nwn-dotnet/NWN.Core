@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.InteropServices;
 
 namespace NWN.Core
@@ -26,5 +27,18 @@ namespace NWN.Core
       public AssertHandlerDelegate AssertFail;
       public CrashHandlerDelegate CrashHandler;
     }
+
+#if !NETCOREAPP3_1
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct NativeEventHandlesUnmanaged
+    {
+      public delegate* unmanaged<ulong, void> MainLoop;
+      public delegate* unmanaged<IntPtr, uint, int> RunScript;
+      public delegate* unmanaged<ulong, uint, void> Closure;
+      public delegate* unmanaged<IntPtr, void> Signal;
+      public delegate* unmanaged<IntPtr, IntPtr, void> AssertFail;
+      public delegate* unmanaged<int, IntPtr, void> CrashHandler;
+    }
+#endif
   }
 }

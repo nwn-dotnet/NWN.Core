@@ -17,7 +17,7 @@ namespace NWN.Core
     internal static NativeHandles NativeFunctions;
 
     // We hold a reference to prevent GC of the delegates.
-    private static NativeEventHandles eventHandles;
+    private static object eventHandles;
 
     public static int Init(IntPtr nativeHandlesPtr, int nativeHandlesLength, ICoreFunctionHandler functionHandler, ICoreEventHandler eventHandler)
     {
@@ -40,6 +40,19 @@ namespace NWN.Core
 
       return result;
     }
+
+#if !NETCOREAPP3_1
+    public static int Init(IntPtr nativeHandlesPtr, int nativeHandlesLength, ICoreFunctionHandler functionHandler, NativeEventHandlesUnmanaged eventCallbackHandles)
+    {
+      int result = Init(nativeHandlesPtr, nativeHandlesLength, functionHandler);
+      if (result == 0)
+      {
+        RegisterEventHandles(eventCallbackHandles);
+      }
+
+      return result;
+    }
+#endif
 
     public static int Init(IntPtr nativeHandlesPtr, int nativeHandlesLength, ICoreFunctionHandler functionHandler)
     {
@@ -89,18 +102,25 @@ namespace NWN.Core
       RegisterEventHandles(eventHandles);
     }
 
-    public static void RegisterEventHandles(NativeEventHandles eventCallbackHandles)
+    public static void RegisterEventHandles<T>(T eventCallbackHandles) where T : struct
     {
       if (FunctionHandler == null)
       {
         throw new InvalidOperationException("Init must be called first with a valid function handler.");
       }
 
+      int expectedSize = Marshal.SizeOf<NativeEventHandles>();
+      int actualSize = Marshal.SizeOf<T>();
+
+      if (actualSize != expectedSize)
+      {
+        throw new InvalidOperationException($"Invalid event handle structure specified. Expected size {expectedSize}, Actual size: {actualSize}");
+      }
+
       eventHandles = eventCallbackHandles;
-      int size = Marshal.SizeOf(typeof(NativeEventHandles));
-      IntPtr ptr = Marshal.AllocHGlobal(size);
+      IntPtr ptr = Marshal.AllocHGlobal(actualSize);
       Marshal.StructureToPtr(eventHandles, ptr, false);
-      NativeFunctions.RegisterHandlers(ptr, (uint)size);
+      NativeFunctions.RegisterHandlers(ptr, (uint)actualSize);
       Marshal.FreeHGlobal(ptr);
     }
   }
