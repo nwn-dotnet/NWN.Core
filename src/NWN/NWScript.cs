@@ -531,6 +531,22 @@ namespace NWN.Core
     public const int EFFECT_TYPE_BONUS_FEAT = 88;
     public const int EFFECT_TYPE_TIMESTOP_IMMUNITY = 89;
     public const int EFFECT_TYPE_FORCE_WALK = 90;
+
+    ///  The below values are used only if GetEffectType parameter bAllTypes is TRUE
+    public const int EFFECT_TYPE_APPEAR = 91;
+    public const int EFFECT_TYPE_CUTSCENE_DOMINATED = 92;
+    public const int EFFECT_TYPE_DAMAGE = 93;
+    public const int EFFECT_TYPE_DEATH = 94;
+    public const int EFFECT_TYPE_DISAPPEAR = 95;
+    public const int EFFECT_TYPE_HEAL = 96;
+    public const int EFFECT_TYPE_HITPOINTCHANGEWHENDYING = 97;
+    public const int EFFECT_TYPE_KNOCKDOWN = 98;
+    public const int EFFECT_TYPE_MODIFY_ATTACKS = 99;
+    public const int EFFECT_TYPE_SUMMON_CREATURE = 100;
+    public const int EFFECT_TYPE_TAUNT = 101;
+    public const int EFFECT_TYPE_WOUNDING = 102;
+
+    ///  End of valued returned by bAllTypes being TRUE
     public const int ITEM_APPR_TYPE_SIMPLE_MODEL = 0;
     public const int ITEM_APPR_TYPE_WEAPON_COLOR = 1;
     public const int ITEM_APPR_TYPE_WEAPON_MODEL = 2;
@@ -6186,6 +6202,8 @@ namespace NWN.Core
     public const int GUIEVENT_OPTIONS_OPEN = 24;
     public const int GUIEVENT_OPTIONS_CLOSE = 25;
     public const int GUIEVENT_RADIAL_OPEN = 26;
+    public const int GUIEVENT_CHATLOG_PORTRAIT_CLICK = 27;
+    public const int GUIEVENT_PLAYERLIST_PLAYER_TELL = 28;
     public const int JSON_TYPE_NULL = 0;
 
     ///  Also invalid
@@ -6260,6 +6278,7 @@ namespace NWN.Core
     public const string PLAYER_DEVICE_PROPERTY_UI_SPELLBOOK_SORT_SPELLS = "ui.spellbook.sort-spells";
     public const string PLAYER_DEVICE_PROPERTY_UI_RADIAL_SPELLCASTING_ALWAYS_SUBRADIAL = "ui.radial.spellcasting.always-show-as-subradial";
     public const string PLAYER_DEVICE_PROPERTY_UI_RADIAL_CLASS_ABILITIES_ALWAYS_SUBRADIAL = "ui.radial.class-abilities.always-show-as-subradial";
+    public const string PLAYER_DEVICE_PROPERTY_UI_DISPLAY_LOADSCREEN_HINTS_IN_CHATLOG = "ui.display-loadscreen-hints-in-chatlog";
     public const string PLAYER_DEVICE_PROPERTY_CAMERA_MODE = "camera.mode";
     public const string PLAYER_DEVICE_PROPERTY_CAMERA_EDGE_TURNING = "camera.edge-turning";
     public const string PLAYER_DEVICE_PROPERTY_CAMERA_DIALOG_ZOOM = "camera.dialog-zoom";
@@ -6380,6 +6399,10 @@ namespace NWN.Core
     public const int RESTYPE_JPG = 2081;
     public const int RESTYPE_CAF = 2082;
     public const int RESTYPE_JUI = 2083;
+    public const int RESTYPE_CDB = 2084;
+    public const int RESMAN_FILE_CONTENTS_FORMAT_RAW = 0;
+    public const int RESMAN_FILE_CONTENTS_FORMAT_BASE64 = 1;
+    public const int RESMAN_FILE_CONTENTS_FORMAT_HEX = 2;
 
     ///  For JsonArrayTransform():
     public const int JSON_ARRAY_SORT_ASCENDING = 1;
@@ -6516,6 +6539,16 @@ namespace NWN.Core
     public const int SETTILE_FLAG_RELOAD_GRASS = 1;
     public const int SETTILE_FLAG_RELOAD_BORDER = 2;
     public const int SETTILE_FLAG_RECOMPUTE_LIGHTING = 4;
+    public const int AUDIOSTREAM_IDENTIFIER_0 = 0;
+    public const int AUDIOSTREAM_IDENTIFIER_1 = 1;
+    public const int AUDIOSTREAM_IDENTIFIER_2 = 2;
+    public const int AUDIOSTREAM_IDENTIFIER_3 = 3;
+    public const int AUDIOSTREAM_IDENTIFIER_4 = 4;
+    public const int AUDIOSTREAM_IDENTIFIER_5 = 5;
+    public const int AUDIOSTREAM_IDENTIFIER_6 = 6;
+    public const int AUDIOSTREAM_IDENTIFIER_7 = 7;
+    public const int AUDIOSTREAM_IDENTIFIER_8 = 8;
+    public const int AUDIOSTREAM_IDENTIFIER_9 = 9;
     public const string sLanguage = "nwscript";
 
     ///  Get an integer between 0 and nMaxInteger-1.<br/>
@@ -6825,9 +6858,12 @@ namespace NWN.Core
     }
 
     ///  Get the possessor of oItem<br/>
+    ///  - bReturnBags: If TRUE will potentially return a bag container item the item is in, instead of<br/>
+    ///                 the object holding the bag. Make sure to check the returning item object type with this flag.<br/>
     ///  * Return value on error: OBJECT_INVALID
-    public static uint GetItemPossessor(uint oItem)
+    public static uint GetItemPossessor(uint oItem, int bReturnBags = FALSE)
     {
+      VM.StackPush(bReturnBags);
       VM.StackPush(oItem);
       VM.Call(29);
       return VM.StackPopObject();
@@ -7066,16 +7102,25 @@ namespace NWN.Core
     ///  This action casts a spell at oTarget.<br/>
     ///  - nSpell: SPELL_*<br/>
     ///  - oTarget: Target for the spell<br/>
-    ///  - nMetamagic: METAMAGIC_*<br/>
+    ///  - nMetaMagic: METAMAGIC_*. If nClass is specified, cannot be METAMAGIC_ANY.<br/>
+    ///  - bCheat: If this is TRUE, then the executor of the action doesn&amp;apos;t have to be<br/>
+    ///    able to cast the spell. Ignored if nClass is specified.<br/>
     ///  - bCheat: If this is TRUE, then the executor of the action doesn&amp;apos;t have to be<br/>
     ///    able to cast the spell.<br/>
-    ///  - nDomainLevel: TBD - SS<br/>
+    ///  - nDomainLevel: The level of the spell if cast from a domain slot.<br/>
+    ///    eg SPELL_HEAL can be spell level 5 on a cleric. Use 0 for no domain slot.<br/>
     ///  - nProjectilePathType: PROJECTILE_PATH_TYPE_*<br/>
     ///  - bInstantSpell: If this is TRUE, the spell is cast immediately. This allows<br/>
     ///    the end-user to simulate a high-level magic-user having lots of advance<br/>
-    ///    warning of impending trouble
-    public static void ActionCastSpellAtObject(int nSpell, uint oTarget, int nMetaMagic = METAMAGIC_ANY, int bCheat = FALSE, int nDomainLevel = 0, int nProjectilePathType = PROJECTILE_PATH_TYPE_DEFAULT, int bInstantSpell = FALSE)
+    ///    warning of impending trouble<br/>
+    ///  - nClass: If set to a CLASS_TYPE_* it will cast using that class specifically.<br/>
+    ///    CLASS_TYPE_INVALID will use spell abilities.<br/>
+    ///  - bSpontaneousCast: If set to TRUE will attempt to cast the given spell spontaneously,<br/>
+    ///    ie a Cleric casting Cure Light Wounds using any level 1 slot. Needs a valid nClass set.
+    public static void ActionCastSpellAtObject(int nSpell, uint oTarget, int nMetaMagic = METAMAGIC_ANY, int bCheat = FALSE, int nDomainLevel = 0, int nProjectilePathType = PROJECTILE_PATH_TYPE_DEFAULT, int bInstantSpell = FALSE, int nClass = -1, int bSpontaneousCast = FALSE)
     {
+      VM.StackPush(bSpontaneousCast);
+      VM.StackPush(nClass);
       VM.StackPush(bInstantSpell);
       VM.StackPush(nProjectilePathType);
       VM.StackPush(nDomainLevel);
@@ -7393,10 +7438,13 @@ namespace NWN.Core
     ///  Create a Damage Resistance effect that removes the first nAmount points of<br/>
     ///  damage of type nDamageType, up to nLimit (or infinite if nLimit is 0)<br/>
     ///  - nDamageType: DAMAGE_TYPE_*<br/>
-    ///  - nAmount<br/>
-    ///  - nLimit
-    public static System.IntPtr EffectDamageResistance(int nDamageType, int nAmount, int nLimit = 0)
+    ///  - nAmount: The amount of damage to soak each time the target is damaged.<br/>
+    ///  - nLimit: How much damage the effect can absorb before disappearing.<br/>
+    ///    Set to zero for infinite.<br/>
+    ///  - bRangedOnly: Set to TRUE to have this resistance only apply to ranged attacks.
+    public static System.IntPtr EffectDamageResistance(int nDamageType, int nAmount, int nLimit = 0, int bRangedOnly = FALSE)
     {
+      VM.StackPush(bRangedOnly);
       VM.StackPush(nLimit);
       VM.StackPush(nAmount);
       VM.StackPush(nDamageType);
@@ -7808,9 +7856,11 @@ namespace NWN.Core
     ///  - nAmount: amount of damage reduction<br/>
     ///  - nDamagePower: DAMAGE_POWER_*<br/>
     ///  - nLimit: How much damage the effect can absorb before disappearing.<br/>
-    ///    Set to zero for infinite
-    public static System.IntPtr EffectDamageReduction(int nAmount, int nDamagePower, int nLimit = 0)
+    ///    Set to zero for infinite<br/>
+    ///  - bRangedOnly: Set to TRUE to have this reduction only apply to ranged attacks 
+    public static System.IntPtr EffectDamageReduction(int nAmount, int nDamagePower, int nLimit = 0, int bRangedOnly = FALSE)
     {
+      VM.StackPush(bRangedOnly);
       VM.StackPush(nLimit);
       VM.StackPush(nDamagePower);
       VM.StackPush(nAmount);
@@ -8380,9 +8430,12 @@ namespace NWN.Core
     }
 
     ///  Get the effect type (EFFECT_TYPE_*) of eEffect.<br/>
+    ///  - bAllTypes: Set to TRUE to return additional values the game used to return EFFECT_INVALIDEFFECT for, specifically:<br/>
+    ///   EFFECT_TYPE: APPEAR, CUTSCENE_DOMINATED, DAMAGE, DEATH, DISAPPEAR, HEAL, HITPOINTCHANGEWHENDYING, KNOCKDOWN, MODIFYNUMATTACKS, SUMMON_CREATURE, TAUNT, WOUNDING<br/>
     ///  * Return value if eEffect is invalid: EFFECT_INVALIDEFFECT
-    public static int GetEffectType(System.IntPtr eEffect)
+    public static int GetEffectType(System.IntPtr eEffect, int bAllTypes = FALSE)
     {
+      VM.StackPush(bAllTypes);
       VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
       VM.Call(170);
       return VM.StackPopInt();
@@ -9103,15 +9156,26 @@ namespace NWN.Core
     ///  Cast spell nSpell at lTargetLocation.<br/>
     ///  - nSpell: SPELL_*<br/>
     ///  - lTargetLocation<br/>
-    ///  - nMetaMagic: METAMAGIC_*<br/>
+    ///  - nMetaMagic: METAMAGIC_*. If nClass is specified, cannot be METAMAGIC_ANY.<br/>
+    ///  - bCheat: If this is TRUE, then the executor of the action doesn&amp;apos;t have to be<br/>
+    ///    able to cast the spell. Ignored if nClass is specified.<br/>
     ///  - bCheat: If this is TRUE, then the executor of the action doesn&amp;apos;t have to be<br/>
     ///    able to cast the spell.<br/>
     ///  - nProjectilePathType: PROJECTILE_PATH_TYPE_*<br/>
     ///  - bInstantSpell: If this is TRUE, the spell is cast immediately; this allows<br/>
     ///    the end-user to simulate<br/>
-    ///    a high-level magic user having lots of advance warning of impending trouble.
-    public static void ActionCastSpellAtLocation(int nSpell, System.IntPtr lTargetLocation, int nMetaMagic = METAMAGIC_ANY, int bCheat = FALSE, int nProjectilePathType = PROJECTILE_PATH_TYPE_DEFAULT, int bInstantSpell = FALSE)
+    ///    a high-level magic user having lots of advance warning of impending trouble.<br/>
+    ///  - nClass: If set to a CLASS_TYPE_* it will cast using that class specifically.<br/>
+    ///    CLASS_TYPE_INVALID will use spell abilities.<br/>
+    ///  - bSpontaneousCast: If set to TRUE will attempt to cast the given spell spontaneously,<br/>
+    ///    ie a Cleric casting Cure Light Wounds using any level 1 slot. Needs a valid nClass set.<br/>
+    ///  - nDomainLevel: The level of the spell if cast from a domain slot.<br/>
+    ///    eg SPELL_HEAL can be spell level 5 on a cleric. Use 0 for no domain slot.
+    public static void ActionCastSpellAtLocation(int nSpell, System.IntPtr lTargetLocation, int nMetaMagic = METAMAGIC_ANY, int bCheat = FALSE, int nProjectilePathType = PROJECTILE_PATH_TYPE_DEFAULT, int bInstantSpell = FALSE, int nClass = -1, int bSpontaneousCast = FALSE, int nDomainlevel = 0)
     {
+      VM.StackPush(nDomainlevel);
+      VM.StackPush(bSpontaneousCast);
+      VM.StackPush(nClass);
       VM.StackPush(bInstantSpell);
       VM.StackPush(nProjectilePathType);
       VM.StackPush(bCheat);
@@ -9300,13 +9364,9 @@ namespace NWN.Core
       return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
 
-    ///  Set the name of oObject.<br/>
-    /// <br/>
-    ///  - oObject: the object for which you are changing the name (area, creature, placeable, item, or door).<br/>
-    ///  - sNewName: the new name that the object will use.<br/>
-    ///  Note: Setting an object&amp;apos;s name to &amp;quot;&amp;quot; will make the object<br/>
-    ///        revert to using the name it had originally before any<br/>
-    ///        SetName() calls were made on the object.
+    ///  Get the name of oObject.<br/>
+    ///  - bOriginalName:  if set to true any new name specified via a SetName scripting command<br/>
+    ///                    is ignored and the original object&amp;apos;s name is returned instead.
     public static string GetName(uint oObject, int bOriginalName = FALSE)
     {
       VM.StackPush(bOriginalName);
@@ -9593,11 +9653,13 @@ namespace NWN.Core
       VM.Call(284);
     }
 
-    ///  Determine whether oCreature has nFeat, and nFeat is useable.<br/>
+    ///  Determine whether oCreature has nFeat, optionally if nFeat is useable.<br/>
     ///  - nFeat: FEAT_*<br/>
-    ///  - oCreature
-    public static int GetHasFeat(int nFeat, uint oCreature = OBJECT_INVALID)
+    ///  - oCreature<br/>
+    ///  - bIgnoreUses: Will check if the creature has the given feat even if it has no uses remaining
+    public static int GetHasFeat(int nFeat, uint oCreature = OBJECT_INVALID, int bIgnoreUses = FALSE)
     {
+      VM.StackPush(bIgnoreUses);
       VM.StackPush(oCreature);
       VM.StackPush(nFeat);
       VM.Call(285);
@@ -12016,9 +12078,11 @@ namespace NWN.Core
     ///  - oCreatureToFloatAbove<br/>
     ///  - bBroadcastToFaction: If this is TRUE then only creatures in the same faction<br/>
     ///    as oCreatureToFloatAbove<br/>
-    ///    will see the floaty text, and only if they are within range (30 metres).
-    public static void FloatingTextStrRefOnCreature(int nStrRefToDisplay, uint oCreatureToFloatAbove, int bBroadcastToFaction = TRUE)
+    ///    will see the floaty text, and only if they are within range (30 metres).<br/>
+    ///  - bChatWindow:  If TRUE, the string reference will be displayed in oCreatureToFloatAbove&amp;apos;s chat window
+    public static void FloatingTextStrRefOnCreature(int nStrRefToDisplay, uint oCreatureToFloatAbove, int bBroadcastToFaction = TRUE, int bChatWindow = TRUE)
     {
+      VM.StackPush(bChatWindow);
       VM.StackPush(bBroadcastToFaction);
       VM.StackPush(oCreatureToFloatAbove);
       VM.StackPush(nStrRefToDisplay);
@@ -12032,9 +12096,11 @@ namespace NWN.Core
     ///  - oCreatureToFloatAbove<br/>
     ///  - bBroadcastToFaction: If this is TRUE then only creatures in the same faction<br/>
     ///    as oCreatureToFloatAbove<br/>
-    ///    will see the floaty text, and only if they are within range (30 metres).
-    public static void FloatingTextStringOnCreature(string sStringToDisplay, uint oCreatureToFloatAbove, int bBroadcastToFaction = TRUE)
+    ///    will see the floaty text, and only if they are within range (30 metres).<br/>
+    ///  - bChatWindow:  If TRUE, sStringToDisplay will be displayed in oCreatureToFloatAbove&amp;apos;s chat window.
+    public static void FloatingTextStringOnCreature(string sStringToDisplay, uint oCreatureToFloatAbove, int bBroadcastToFaction = TRUE, int bChatWindow = TRUE)
     {
+      VM.StackPush(bChatWindow);
       VM.StackPush(bBroadcastToFaction);
       VM.StackPush(oCreatureToFloatAbove);
       VM.StackPush(sStringToDisplay);
@@ -12804,7 +12870,7 @@ namespace NWN.Core
     }
 
     ///  Duplicates the object specified by oSource.<br/>
-    ///  NOTE: this command can be used for copying Creatures, Items, Placeables, Waypoints, Stores, Doors, Triggers.<br/>
+    ///  NOTE: this command can be used for copying Creatures, Items, Placeables, Waypoints, Stores, Doors, Triggers, Encounters.<br/>
     ///  If an owner is specified and the object is an item, it will be put into their inventory<br/>
     ///  Otherwise, it will be created at the location.<br/>
     ///  If a new tag is specified, it will be assigned to the new object.<br/>
@@ -12830,7 +12896,7 @@ namespace NWN.Core
     }
 
     ///  Stores an object with the given id.<br/>
-    ///  NOTE: this command can be used for storing Creatures, Items, Placeables, Waypoints, Stores, Doors, Triggers.<br/>
+    ///  NOTE: this command can be used for storing Creatures, Items, Placeables, Waypoints, Stores, Doors, Triggers, Encounters.<br/>
     ///  Returns 0 if it failled, 1 if it worked.<br/>
     ///  If bSaveObjectState is TRUE, local vars, effects, action queue, and transition info (triggers, doors) are saved out<br/>
     ///  (except for Combined Area Format, which always has object state saved out).
@@ -14824,17 +14890,17 @@ namespace NWN.Core
     ///  Returns the class that the spellcaster cast the<br/>
     ///  spell as.<br/>
     ///  - Returns CLASS_TYPE_INVALID if the caster has<br/>
-    ///    no valid class (placeables, etc...)
+    ///    no valid class (placeables, etc...)<br/>
+    ///  If used in an Area of Effect script it will return the creators spellcasting class.
     public static int GetLastSpellCastClass()
     {
       VM.Call(754);
       return VM.StackPopInt();
     }
 
-    ///  Sets the number of base attacks for the specified<br/>
-    ///  creatures. The range of values accepted are from<br/>
-    ///  1 to 6<br/>
-    ///  Note: This function does not work on Player Characters
+    ///  Sets the number of base attacks each round for the specified creature (PC or NPC).<br/>
+    ///  If set on a PC it will not be shown on their character sheet, but will save to BIC/savegame.<br/>
+    ///  - nBaseAttackBonus - Number of base attacks per round, 1 to 6
     public static void SetBaseAttackBonus(int nBaseAttackBonus, uint oCreature = OBJECT_INVALID)
     {
       VM.StackPush(oCreature);
@@ -16998,7 +17064,7 @@ namespace NWN.Core
 
     ///  Bind a object to a named parameter of the given prepared query.<br/>
     ///  Objects are serialized, NOT stored as a reference!<br/>
-    ///  Currently supported object types: Creatures, Items, Placeables, Waypoints, Stores, Doors, Triggers, Areas (CAF format)<br/>
+    ///  Currently supported object types: Creatures, Items, Placeables, Waypoints, Stores, Doors, Triggers, Encounters, Areas (CAF format)<br/>
     ///  If bSaveObjectState is TRUE, local vars, effects, action queue, and transition info (triggers, doors) are saved out<br/>
     ///  (except for Combined Area Format, which always has object state saved out).
     public static void SqlBindObject(System.IntPtr sqlQuery, string sParam, uint oObject, int bSaveObjectState = FALSE)
@@ -17413,7 +17479,9 @@ namespace NWN.Core
     ///  * GUIEVENT_DISABLED_PANEL_ATTEMPT_OPEN: For GUI_PANEL_CHARACTERSHEET, the owner of the character sheet.<br/>
     ///                                          For GUI_PANEL_EXAMINE_*, the object being examined.<br/>
     ///  * GUIEVENT_*SELECT_CREATURE: The creature that was (un)selected<br/>
-    ///  * GUIEVENT_EXAMINE_OBJECT: The object being examined.
+    ///  * GUIEVENT_EXAMINE_OBJECT: The object being examined.<br/>
+    ///  * GUIEVENT_CHATLOG_PORTRAIT_CLICK: The owner of the portrait.<br/>
+    ///  * GUIEVENT_PLAYERLIST_PLAYER_TELL: The selected player.
     public static uint GetLastGuiEventObject()
     {
       VM.Call(963);
@@ -17927,6 +17995,13 @@ namespace NWN.Core
     ///  * RESTYPE_UTW<br/>
     ///  * RESTYPE_UTE<br/>
     ///  * RESTYPE_UTM<br/>
+    ///  * RESTYPE_DLG<br/>
+    ///  * RESTYPE_UTS<br/>
+    ///  * RESTYPE_IFO<br/>
+    ///  * RESTYPE_FAC<br/>
+    ///  * RESTYPE_ITP<br/>
+    ///  * RESTYPE_GUI<br/>
+    ///  * RESTYPE_GFF<br/>
     ///  Returns a valid gff-type json structure, or a null value with JsonGetError() set.
     public static System.IntPtr TemplateToJson(string sResRef, int nResType)
     {
@@ -17968,10 +18043,12 @@ namespace NWN.Core
     ///  * The token is a integer for ease of handling only. You are not supposed to do anything with it, except store/pass it.<br/>
     ///  * The window ID needs to be alphanumeric and short. Only one window (per client) with the same ID can exist at a time.<br/>
     ///    Re-creating a window with the same id of one already open will immediately close the old one.<br/>
+    ///  * sEventScript is optional and overrides the NUI module event for this window only.<br/>
     ///  * See nw_inc_nui.nss for full documentation.<br/>
     ///  Returns the window token on success (&amp;gt;0), or 0 on error.
-    public static int NuiCreateFromResRef(uint oPlayer, string sResRef, string sWindowId = "")
+    public static int NuiCreateFromResRef(uint oPlayer, string sResRef, string sWindowId = "", string sEventScript = "")
     {
+      VM.StackPush(sEventScript);
       VM.StackPush(sWindowId);
       VM.StackPush(sResRef);
       VM.StackPush(oPlayer);
@@ -17983,10 +18060,12 @@ namespace NWN.Core
     ///  * The token is a integer for ease of handling only. You are not supposed to do anything with it, except store/pass it.<br/>
     ///  * The window ID needs to be alphanumeric and short. Only one window (per client) with the same ID can exist at a time.<br/>
     ///    Re-creating a window with the same id of one already open will immediately close the old one.<br/>
+    ///  * sEventScript is optional and overrides the NUI module event for this window only.<br/>
     ///  * See nw_inc_nui.nss for full documentation.<br/>
     ///  Returns the window token on success (&amp;gt;0), or 0 on error.
-    public static int NuiCreate(uint oPlayer, System.IntPtr jNui, string sWindowId = "")
+    public static int NuiCreate(uint oPlayer, System.IntPtr jNui, string sWindowId = "", string sEventScript = "")
     {
+      VM.StackPush(sEventScript);
       VM.StackPush(sWindowId);
       VM.StackPush(jNui, ENGINE_STRUCTURE_JSON);
       VM.StackPush(oPlayer);
@@ -18756,11 +18835,13 @@ namespace NWN.Core
     }
 
     ///  Get the contents of a file as string, as seen by the server&amp;apos;s resman.<br/>
-    ///  Note: If the file contains binary data it will return data up to the first null byte.<br/>
+    ///  Note: If the output contains binary data it will only return data up to the first null byte.<br/>
     ///  - nResType: a RESTYPE_* constant.<br/>
+    ///  - nFormat: one of RESMAN_FILE_CONTENTS_FORMAT_*<br/>
     ///  Returns &amp;quot;&amp;quot; if the file does not exist.
-    public static string ResManGetFileContents(string sResRef, int nResType)
+    public static string ResManGetFileContents(string sResRef, int nResType, int nFormat = RESMAN_FILE_CONTENTS_FORMAT_RAW)
     {
+      VM.StackPush(nFormat);
       VM.StackPush(nResType);
       VM.StackPush(sResRef);
       VM.Call(1071);
@@ -18811,7 +18892,7 @@ namespace NWN.Core
 
     ///  Sets the discoverability mask on oObject.<br/>
     ///  This allows toggling areahilite (TAB key by default) and mouseover discovery in the area view.<br/>
-    ///  * nMask is a mask of OBJECT_UI_DISCOVERY_MODE_*<br/>
+    ///  * nMask is a bitmask of OBJECT_UI_DISCOVERY_*<br/>
     ///  Will currently only work on Creatures, Doors (Hilite only), Items and Useable Placeables.<br/>
     ///  Does not affect inventory items.
     public static void SetObjectUiDiscoveryMask(uint oObject, int nMask = OBJECT_UI_DISCOVERY_DEFAULT)
@@ -19304,6 +19385,363 @@ namespace NWN.Core
     {
       VM.Call(1117);
       return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+    }
+
+    ///  Assign one of the available audio streams to play a specific file. This mechanism can be used<br/>
+    ///  to replace regular music playback, and synchronize it between clients.<br/>
+    ///  * There is currently no way to get playback state from clients.<br/>
+    ///  * Audio streams play in the streams channel which has its own volume setting in the client.<br/>
+    ///  * nStreamIdentifier is one of AUDIOSTREAM_IDENTIFIER_*.<br/>
+    ///  * Currently, only MP3 CBR files are supported and properly seekable.<br/>
+    ///  * Unlike regular music, audio streams do not pause on load screens.<br/>
+    ///  * If fSeekOffset is at or beyond the end of the stream, the seek offset will wrap around, even if the file is configured not to loop.<br/>
+    ///  * fFadeTime is in seconds to gradually fade in the audio instead of starting directly.<br/>
+    ///  * Only one type of fading can be active at once, for example:<br/>
+    ///    If you call StartAudioStream() with fFadeTime = 10.0f, any other audio stream functions with a fade time &amp;gt;0.0f will have no effect<br/>
+    ///    until StartAudioStream() is done fading.
+    public static void StartAudioStream(uint oPlayer, int nStreamIdentifier, string sResRef, int bLooping = FALSE, float fFadeTime = 0.0f, float fSeekOffset = -1.0f, float fVolume = 1.0f)
+    {
+      VM.StackPush(fVolume);
+      VM.StackPush(fSeekOffset);
+      VM.StackPush(fFadeTime);
+      VM.StackPush(bLooping);
+      VM.StackPush(sResRef);
+      VM.StackPush(nStreamIdentifier);
+      VM.StackPush(oPlayer);
+      VM.Call(1118);
+    }
+
+    ///  Stops the given audio stream.<br/>
+    ///  * fFadeTime is in seconds to gradually fade out the audio instead of stopping directly.<br/>
+    ///  * Only one type of fading can be active at once, for example:<br/>
+    ///    If you call StartAudioStream() with fFadeInTime = 10.0f, any other audio stream functions with a fade time &amp;gt;0.0f will have no effect<br/>
+    ///    until StartAudioStream() is done fading.<br/>
+    ///  * Will do nothing if the stream is currently not in use.
+    public static void StopAudioStream(uint oPlayer, int nStreamIdentifier, float fFadeTime = 0.0f)
+    {
+      VM.StackPush(fFadeTime);
+      VM.StackPush(nStreamIdentifier);
+      VM.StackPush(oPlayer);
+      VM.Call(1119);
+    }
+
+    ///  Un/pauses the given audio stream.<br/>
+    ///  * fFadeTime is in seconds to gradually fade the audio out/in instead of pausing/resuming directly.<br/>
+    ///  * Only one type of fading can be active at once, for example:<br/>
+    ///    If you call StartAudioStream() with fFadeInTime = 10.0f, any other audio stream functions with a fade time &amp;gt;0.0f will have no effect<br/>
+    ///    until StartAudioStream() is done fading.<br/>
+    ///  * Will do nothing if the stream is currently not in use.
+    public static void SetAudioStreamPaused(uint oPlayer, int nStreamIdentifier, int bPaused, float fFadeTime = 0.0f)
+    {
+      VM.StackPush(fFadeTime);
+      VM.StackPush(bPaused);
+      VM.StackPush(nStreamIdentifier);
+      VM.StackPush(oPlayer);
+      VM.Call(1120);
+    }
+
+    ///  Change volume of audio stream.<br/>
+    ///  * Volume is from 0.0 to 1.0.<br/>
+    ///  * fFadeTime is in seconds to gradually change the volume.<br/>
+    ///  * Only one type of fading can be active at once, for example:<br/>
+    ///    If you call StartAudioStream() with fFadeInTime = 10.0f, any other audio stream functions with a fade time &amp;gt;0.0f will have no effect<br/>
+    ///    until StartAudioStream() is done fading.<br/>
+    ///  * Subsequent calls to this function with fFadeTime &amp;gt;0.0f while already fading the volume<br/>
+    ///    will start the new fade with the previous&amp;apos; fade&amp;apos;s progress as starting point.<br/>
+    ///  * Will do nothing if the stream is currently not in use.
+    public static void SetAudioStreamVolume(uint oPlayer, int nStreamIdentifier, float fVolume = 1.0f, float fFadeTime = 0.0f)
+    {
+      VM.StackPush(fFadeTime);
+      VM.StackPush(fVolume);
+      VM.StackPush(nStreamIdentifier);
+      VM.StackPush(oPlayer);
+      VM.Call(1121);
+    }
+
+    ///  Seek the audio stream to the given offset.<br/>
+    ///  * When seeking at or beyond the end of a stream, the seek offset will wrap around, even if the file is configured not to loop.<br/>
+    ///  * Will do nothing if the stream is currently not in use.<br/>
+    ///  * Will do nothing if the stream is in ended state (reached end of file and looping is off). In this<br/>
+    ///    case, you need to restart the stream.
+    public static void SeekAudioStream(uint oPlayer, int nStreamIdentifier, float fSeconds)
+    {
+      VM.StackPush(fSeconds);
+      VM.StackPush(nStreamIdentifier);
+      VM.StackPush(oPlayer);
+      VM.Call(1122);
+    }
+
+    ///  Sets the effect creator<br/>
+    ///  - oCreator: The creator of the effect. Can be OBJECT_INVALID.
+    public static System.IntPtr SetEffectCreator(System.IntPtr eEffect, uint oCreator)
+    {
+      VM.StackPush(oCreator);
+      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.Call(1123);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+    }
+
+    ///  Sets the effect caster level<br/>
+    ///  - nCasterLevel: The caster level of the effect for the purposes of dispel magic and GetEffectCasterlevel. Must be &amp;gt;= 0.
+    public static System.IntPtr SetEffectCasterLevel(System.IntPtr eEffect, int nCasterLevel)
+    {
+      VM.StackPush(nCasterLevel);
+      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.Call(1124);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+    }
+
+    ///  Sets the effect spell id<br/>
+    ///  - nSpellId: The spell id for the purposes of effect stacking, dispel magic and GetEffectSpellId. Must be &amp;gt;= -1 (-1 being invalid/no spell)
+    public static System.IntPtr SetEffectSpellId(System.IntPtr eEffect, int nSpellId)
+    {
+      VM.StackPush(nSpellId);
+      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.Call(1125);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+    }
+
+    ///  Retrieve the column count of a prepared query.  <br/>
+    ///  * sqlQuery must be prepared before this function is called, but can be called before or after parameters are bound.<br/>
+    ///  * If the prepared query contains no columns (such as with an UPDATE or INSERT query), 0 is returned.<br/>
+    ///  * If a non-SELECT query contains a RETURNING clause, the number of columns in the RETURNING clause will be returned.<br/>
+    ///  * A returned value greater than 0 does not guarantee the query will return rows.
+    public static int SqlGetColumnCount(System.IntPtr sqlQuery)
+    {
+      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
+      VM.Call(1126);
+      return VM.StackPopInt();
+    }
+
+    ///  Retrieve the column name of the Nth column of a prepared query.<br/>
+    ///  * sqlQuery must be prepared before this function is called, but can be called before or after parameters are bound.<br/>
+    ///  * If the prepared query contains no columns (such as with an UPDATE or INSERT query), an empty string is returned.<br/>
+    ///  * If a non-SELECT query contains a RETURNING clause, the name of the nNth column in the RETURNING clause is returned.<br/>
+    ///  * If nNth is out of range, an sqlite error is broadcast and an empty string is returned.<br/>
+    ///  * The value of the AS clause will be returned, if the clause exists for the nNth column.<br/>
+    ///  * A returned non-empty string does not guarantee the query will return rows.
+    public static string SqlGetColumnName(System.IntPtr sqlQuery, int nNth)
+    {
+      VM.StackPush(nNth);
+      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
+      VM.Call(1127);
+      return VM.StackPopString();
+    }
+
+    ///  Gets the total number of spell abilities a creature has.
+    public static int GetSpellAbilityCount(uint oCreature)
+    {
+      VM.StackPush(oCreature);
+      VM.Call(1128);
+      return VM.StackPopInt();
+    }
+
+    ///  Gets the spell Id of the spell ability at the given index.<br/>
+    ///  - nIndex: the index of the spell ability. Bounds: 0 &amp;lt;= nIndex &amp;lt; GetSpellAbilityCount()<br/>
+    ///  Returns: a SPELL_* constant or -1 if the slot is not set.
+    public static int GetSpellAbilitySpell(uint oCreature, int nIndex)
+    {
+      VM.StackPush(nIndex);
+      VM.StackPush(oCreature);
+      VM.Call(1129);
+      return VM.StackPopInt();
+    }
+
+    ///  Gets the caster level of the spell ability in the given slot. Returns 0 by default.<br/>
+    ///  - nIndex: the index of the spell ability. Bounds: 0 &amp;lt;= nIndex &amp;lt; GetSpellAbilityCount()<br/>
+    ///  Returns: the caster level or -1 if the slot is not set.
+    public static int GetSpellAbilityCasterLevel(uint oCreature, int nIndex)
+    {
+      VM.StackPush(nIndex);
+      VM.StackPush(oCreature);
+      VM.Call(1130);
+      return VM.StackPopInt();
+    }
+
+    ///  Gets the ready state of a spell ability.<br/>
+    ///  - nIndex: the index of the spell ability. Bounds: 0 &amp;lt;= nIndex &amp;lt; GetSpellAbilityCount()<br/>
+    ///  Returns: TRUE/FALSE or -1 if the slot is not set.
+    public static int GetSpellAbilityReady(uint oCreature, int nIndex)
+    {
+      VM.StackPush(nIndex);
+      VM.StackPush(oCreature);
+      VM.Call(1131);
+      return VM.StackPopInt();
+    }
+
+    ///  Set the ready state of a spell ability slot.<br/>
+    ///  - nIndex: the index of the spell ability. Bounds: 0 &amp;lt;= nIndex &amp;lt; GetSpellAbilityCount()<br/>
+    ///  - bReady: TRUE to mark the slot ready.
+    public static void SetSpellAbilityReady(uint oCreature, int nIndex, int bReady = TRUE)
+    {
+      VM.StackPush(bReady);
+      VM.StackPush(nIndex);
+      VM.StackPush(oCreature);
+      VM.Call(1132);
+    }
+
+    ///  Serializes the given JSON structure (which must be a valid template spec) into a template.<br/>
+    ///  * The template will be stored in the TEMP: alias and currently NOT stored in savegames.<br/>
+    ///  * The stored template will override anything currently available in the module.<br/>
+    ///  * Supported GFF resource types are the same as TemplateToJson().<br/>
+    ///    However, some types will not be read by the game (e.g. module.IFO is only read at module load).<br/>
+    ///  * Returns TRUE if the serialization was successful.<br/>
+    ///  * Any target file in TEMP: will be overwritten, even if the serialisation is not successful.<br/>
+    ///    JsonToTemplate(JSON_NULL, ..) can be used to delete a previously-generated file.
+    public static int JsonToTemplate(System.IntPtr jTemplateSpec, string sResRef, int nResType)
+    {
+      VM.StackPush(nResType);
+      VM.StackPush(sResRef);
+      VM.StackPush(jTemplateSpec, ENGINE_STRUCTURE_JSON);
+      VM.Call(1133);
+      return VM.StackPopInt();
+    }
+
+    ///  Modifies jObject in-place (with no memory copies of the full object).<br/>
+    ///  jObject will have the key at sKey set to jValue.
+    public static void JsonObjectSetInplace(System.IntPtr jObject, string sKey, System.IntPtr jValue)
+    {
+      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(sKey);
+      VM.StackPush(jObject, ENGINE_STRUCTURE_JSON);
+      VM.Call(1134);
+    }
+
+    ///  Modifies jObject in-place (with no memory copies needed).<br/>
+    ///  jObject will have the element at the key sKey removed.<br/>
+    ///  Will do nothing if jObject is not a object, or sKey does not exist on the object.
+    public static void JsonObjectDelInplace(System.IntPtr jObject, string sKey)
+    {
+      VM.StackPush(sKey);
+      VM.StackPush(jObject, ENGINE_STRUCTURE_JSON);
+      VM.Call(1135);
+    }
+
+    ///  Modifies jArray in-place (with no memory copies needed).<br/>
+    ///  jArray will have jValue inserted at position nIndex.<br/>
+    ///  All succeeding elements in the array will move by one.<br/>
+    ///  By default (-1), inserts elements at the end of the array (&amp;quot;push&amp;quot;).<br/>
+    ///  nIndex = 0 inserts at the beginning of the array.
+    public static void JsonArrayInsertInplace(System.IntPtr jArray, System.IntPtr jValue, int nIndex = -1)
+    {
+      VM.StackPush(nIndex);
+      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(jArray, ENGINE_STRUCTURE_JSON);
+      VM.Call(1136);
+    }
+
+    ///  Modifies jArray in-place (with no memory copies needed).<br/>
+    ///  jArray will have jValue set at position nIndex.<br/>
+    ///  Will do nothing if jArray is not an array or nIndex is out of range.
+    public static void JsonArraySetInplace(System.IntPtr jArray, int nIndex, System.IntPtr jValue)
+    {
+      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(nIndex);
+      VM.StackPush(jArray, ENGINE_STRUCTURE_JSON);
+      VM.Call(1137);
+    }
+
+    ///  Modifies jArray in-place (with no memory copies needed).<br/>
+    ///  jArray will have the element at nIndex removed, and the array will be resized accordingly.<br/>
+    ///  Will do nothing if jArray is not an array or nIndex is out of range.
+    public static void JsonArrayDelInplace(System.IntPtr jArray, int nIndex)
+    {
+      VM.StackPush(nIndex);
+      VM.StackPush(jArray, ENGINE_STRUCTURE_JSON);
+      VM.Call(1138);
+    }
+
+    ///  Sets a grass override for nMaterialId in oArea.<br/>
+    ///  * You can have multiple grass types per area by using different materials.<br/>
+    ///  * You can add grass to areas that normally do not have grass, for example by calling this on the<br/>
+    ///    wood surface material(5) for an inn area.<br/>
+    /// <br/>
+    ///    - nMaterialId: a surface material, see surfacemat.2da. 3 is the default grass material.<br/>
+    ///    - sTexture: the grass texture, cannot be empty.<br/>
+    ///    - fDensity: the density of the grass.<br/>
+    ///    - fHeight: the height of the grass.<br/>
+    ///    - vAmbientColor: the ambient color of the grass, xyz as RGB clamped to 0.0-1.0f per value.<br/>
+    ///    - vDiffuseColor: the diffuse color of the grass, xyz as RGB clamped to 0.0-1.0f per value.
+    public static void SetAreaGrassOverride(uint oArea, int nMaterialId, string sTexture, float fDensity, float fHeight, System.Numerics.Vector3 vAmbientColor, System.Numerics.Vector3 vDiffuseColor)
+    {
+      VM.StackPush(vDiffuseColor);
+      VM.StackPush(vAmbientColor);
+      VM.StackPush(fHeight);
+      VM.StackPush(fDensity);
+      VM.StackPush(sTexture);
+      VM.StackPush(nMaterialId);
+      VM.StackPush(oArea);
+      VM.Call(1139);
+    }
+
+    ///  Remove a grass override from oArea for nMaterialId.
+    public static void RemoveAreaGrassOverride(uint oArea, int nMaterialId)
+    {
+      VM.StackPush(nMaterialId);
+      VM.StackPush(oArea);
+      VM.Call(1140);
+    }
+
+    ///  Set to TRUE to disable the default grass of oArea.
+    public static void SetAreaDefaultGrassDisabled(uint oArea, int bDisabled)
+    {
+      VM.StackPush(bDisabled);
+      VM.StackPush(oArea);
+      VM.Call(1141);
+    }
+
+    ///  Gets the NoRest area flag.<br/>
+    ///  Returns TRUE if resting is not allowed in the area.<br/>
+    ///  Passing in OBJECT_INVALID to parameter oArea will result in operating on the area of the caller.
+    public static int GetAreaNoRestFlag(uint oArea = OBJECT_INVALID)
+    {
+      VM.StackPush(oArea);
+      VM.Call(1142);
+      return VM.StackPopInt();
+    }
+
+    ///  Sets the NoRest flag on an area.<br/>
+    ///  Passing in OBJECT_INVALID to parameter oArea will result in operating on the area of the caller.
+    public static void SetAreaNoRestFlag(int bNoRestFlag, uint oArea = OBJECT_INVALID)
+    {
+      VM.StackPush(oArea);
+      VM.StackPush(bNoRestFlag);
+      VM.Call(1143);
+    }
+
+    ///  Sets the age of oCreature.
+    public static void SetAge(uint oCreature, int nAge)
+    {
+      VM.StackPush(nAge);
+      VM.StackPush(oCreature);
+      VM.Call(1144);
+    }
+
+    ///  Gets the base number of attacks oCreature can make every round<br/>
+    ///  Excludes additional effects such as haste, slow, spells, circle kick, attack modes, etc.<br/>
+    ///  * bCheckOverridenValue - Checks for SetBaseAttackBonus() on the creature, if FALSE will return the non-overriden version
+    public static int GetAttacksPerRound(uint oCreature, int bCheckOverridenValue = TRUE)
+    {
+      VM.StackPush(bCheckOverridenValue);
+      VM.StackPush(oCreature);
+      VM.Call(1145);
+      return VM.StackPopInt();
+    }
+
+    ///  Create an Enemy Attack Bonus effect. Creatures attacking the given creature with melee/ranged attacks or touch attacks get a bonus to hit.
+    public static System.IntPtr EffectEnemyAttackBonus(int nBonus)
+    {
+      VM.StackPush(nBonus);
+      VM.Call(1146);
+      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+    }
+
+    ///  Set to TRUE to disable the inaccessible tile border of oArea. Requires a client area reload to take effect.
+    public static void SetAreaTileBorderDisabled(uint oArea, int bDisabled)
+    {
+      VM.StackPush(bDisabled);
+      VM.StackPush(oArea);
+      VM.Call(1147);
     }
 
   }

@@ -520,6 +520,18 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
+    /// Sends a full object update of oObjectToUpdate to all clients
+    /// <param name="oObjectToUpdate">The object to update</param>
+    /// <param name="oPlayer">The player for which the objects needs to update, OBJECT_INVALID for all players</param>
+    public static void UpdateClientObject(uint oObjectToUpdate, uint oPlayer = OBJECT_INVALID)
+    {
+      const string sFunc = "UpdateClientObject";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
+      VM.NWNX.StackPush(oPlayer);
+      VM.NWNX.StackPush(oObjectToUpdate);
+      VM.NWNX.Call();
+    }
+
     // @}
   }
 
