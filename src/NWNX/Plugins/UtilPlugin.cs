@@ -532,6 +532,20 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Clean a resource directory, deleting all files of nResType.
+    /// <param name="sAlias">A resource directory alias, NWNX or one defined in the custom resource directory file.</param>
+    /// <param name="nResType">The type of file to delete or 0xFFFF for all types.</param>
+    /// <returns>TRUE if successful, FALSE on error.</returns>
+    public static int CleanResourceDirectory(string sAlias, int nResType = 65535)
+    {
+      const string sFunc = "CleanResourceDirectory";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
+      VM.NWNX.StackPush(nResType);
+      VM.NWNX.StackPush(sAlias);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopInt();
+    }
+
     // @}
   }
 

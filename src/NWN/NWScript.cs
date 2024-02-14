@@ -6279,6 +6279,8 @@ namespace NWN.Core
     public const string PLAYER_DEVICE_PROPERTY_UI_RADIAL_SPELLCASTING_ALWAYS_SUBRADIAL = "ui.radial.spellcasting.always-show-as-subradial";
     public const string PLAYER_DEVICE_PROPERTY_UI_RADIAL_CLASS_ABILITIES_ALWAYS_SUBRADIAL = "ui.radial.class-abilities.always-show-as-subradial";
     public const string PLAYER_DEVICE_PROPERTY_UI_DISPLAY_LOADSCREEN_HINTS_IN_CHATLOG = "ui.display-loadscreen-hints-in-chatlog";
+    public const string PLAYER_DEVICE_PROPERTY_UI_MOUSE_SCALE = "ui.mouse.scale.enabled";
+    public const string PLAYER_DEVICE_PROPERTY_UI_MOUSE_SCALE_VALUE = "ui.mouse.scale.value";
     public const string PLAYER_DEVICE_PROPERTY_CAMERA_MODE = "camera.mode";
     public const string PLAYER_DEVICE_PROPERTY_CAMERA_EDGE_TURNING = "camera.edge-turning";
     public const string PLAYER_DEVICE_PROPERTY_CAMERA_DIALOG_ZOOM = "camera.dialog-zoom";
@@ -7478,11 +7480,14 @@ namespace NWN.Core
       return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
 
-    ///  Get the level at which this creature cast it&amp;apos;s last spell (or spell-like ability)<br/>
-    ///  * Return value on error, or if oCreature has not yet cast a spell: 0;
-    public static int GetCasterLevel(uint oCreature)
+    ///  Get the caster level of an object. This is consistent with the caster level used when applying effects if OBJECT_SELF is used.<br/>
+    ///  - oObject: A creature will return the caster level of their currently cast spell or ability, or the item&amp;apos;s caster level if an item was used<br/>
+    ///             A placeable will return an automatic caster level: floor(10, (spell innate level * 2) - 1)<br/>
+    ///             An Area of Effect object will return the caster level that was used to create the Area of Effect.<br/>
+    ///  * Return value on error, or if oObject has not yet cast a spell: 0;
+    public static int GetCasterLevel(uint oObject)
     {
-      VM.StackPush(oCreature);
+      VM.StackPush(oObject);
       VM.Call(84);
       return VM.StackPopInt();
     }
@@ -9322,8 +9327,9 @@ namespace NWN.Core
       return VM.StackPopInt();
     }
 
-    ///  This is for use in a Spell script, it gets the ID of the spell that is being<br/>
-    ///  cast (SPELL_*).
+    ///  This is for use in a Spell script, it gets the ID of the spell that is being cast.<br/>
+    ///  If used in an Area of Effect script it will return the ID of the spell that generated the AOE effect.<br/>
+    ///  * Returns the spell ID (SPELL_*) or -1 if no spell was cast or on error
     public static int GetSpellId()
     {
       VM.Call(248);
