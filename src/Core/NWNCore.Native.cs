@@ -1,251 +1,126 @@
 using System;
 using System.Numerics;
 using System.Runtime.InteropServices;
-using System.Security;
 
 namespace NWN.Core
 {
+  /// <summary>
+  /// Exported C++ functions from NWNX_DotNET.
+  /// </summary>
   public static partial class NWNCore
   {
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate IntPtr GetFunctionPointerDelegate(string name);
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void CallBuiltIn(int id);
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void RegisterHandlersDelegate(IntPtr handlers, uint size);
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void RegisterHandlers(IntPtr handlers, uint size);
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void CallBuiltInDelegate(int id);
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void StackPushInteger(int value);
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void StackPushIntegerDelegate(int value);
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void StackPushFloat(float value);
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void StackPushFloatDelegate(float value);
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void StackPushString(string value);
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void StackPushStringDelegate(string value);
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void StackPushObject(uint value);
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void StackPushStringUTF8Delegate(string value);
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void StackPushVector(Vector3 value);
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void StackPushObjectDelegate(uint value);
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void StackPushGameDefinedStructure(int type, IntPtr str);
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void StackPushVectorDelegate(Vector3 value);
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern int StackPopInteger();
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void StackPushGameDefinedStructureDelegate(int type, IntPtr str);
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern float StackPopFloat();
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate int StackPopIntegerDelegate();
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern string StackPopString();
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate float StackPopFloatDelegate();
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern uint StackPopObject();
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate string StackPopStringDelegate();
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern Vector3 StackPopVector();
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate string StackPopStringUTF8Delegate();
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern IntPtr StackPopGameDefinedStructure(int type);
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate uint StackPopObjectDelegate();
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern IntPtr FreeGameDefinedStructure(int type, IntPtr str);
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate Vector3 StackPopVectorDelegate();
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern int ClosureAssignCommand(uint oid, ulong eventId);
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate IntPtr StackPopGameDefinedStructureDelegate(int type);
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern int ClosureDelayCommand(uint oid, float duration, ulong eventId);
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void FreeEffectDelegate(IntPtr ptr);
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern int ClosureActionDoCommand(uint oid, ulong eventId);
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void FreeEventDelegate(IntPtr ptr);
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void NWNXSetFunction(string plugin, string function);
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void FreeLocationDelegate(IntPtr ptr);
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void NWNXPushInt(int n);
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void FreeTalentDelegate(IntPtr ptr);
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void NWNXPushFloat(float f);
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void FreeItemPropertyDelegate(IntPtr ptr);
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void NWNXPushObject(uint o);
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate IntPtr FreeGameDefinedStructureDelegate(int type, IntPtr str);
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void NWNXPushString(string s);
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate int ClosureAssignCommandDelegate(uint oid, ulong eventId);
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void NWNXPushEffect(IntPtr e);
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate int ClosureDelayCommandDelegate(uint oid, float duration, ulong eventId);
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void NWNXPushItemProperty(IntPtr ip);
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate int ClosureActionDoCommandDelegate(uint oid, ulong eventId);
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern int NWNXPopInt();
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void NWNXSetFunctionDelegate(string plugin, string function);
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern float NWNXPopFloat();
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void NWNXPushIntDelegate(int n);
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern uint NWNXPopObject();
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void NWNXPushFloatDelegate(float f);
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern string NWNXPopString();
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void NWNXPushObjectDelegate(uint o);
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern IntPtr NWNXPopEffect();
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void NWNXPushStringDelegate(string s);
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern IntPtr NWNXPopItemProperty();
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void NWNXPushStringUTF8Delegate(string s);
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void NWNXCallFunction();
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void NWNXPushEffectDelegate(IntPtr e);
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern IntPtr RequestHook(IntPtr address, IntPtr managedFuncPtr, int priority);
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void NWNXPushItemPropertyDelegate(IntPtr ip);
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void ReturnHook(IntPtr hook);
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate int NWNXPopIntDelegate();
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void StackPushRawString(IntPtr charPtr);
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate float NWNXPopFloatDelegate();
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern IntPtr StackPopRawString();
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate uint NWNXPopObjectDelegate();
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void NWNXPushRawString(IntPtr charPtr);
 
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate string NWNXPopStringDelegate();
-
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate string NWNXPopStringUTF8Delegate();
-
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate IntPtr NWNXPopEffectDelegate();
-
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate IntPtr NWNXPopItemPropertyDelegate();
-
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void NWNXCallFunctionDelegate();
-
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate IntPtr RequestHookDelegate(IntPtr address, IntPtr managedFuncPtr, int priority);
-
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void ReturnHookDelegate(IntPtr hook);
-
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void StackPushRawStringDelegate(IntPtr charPtr);
-
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate IntPtr StackPopRawStringDelegate();
-
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void NWNXPushRawStringDelegate(IntPtr charPtr);
-
-    [SuppressUnmanagedCodeSecurity]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate IntPtr NWNXPopRawStringDelegate();
-
-    [StructLayout(LayoutKind.Sequential)]
-    public readonly struct NativeHandles
-    {
-      public readonly GetFunctionPointerDelegate GetFunctionPointer;
-      public readonly RegisterHandlersDelegate RegisterHandlers;
-      public readonly CallBuiltInDelegate CallBuiltIn;
-      public readonly StackPushIntegerDelegate StackPushInteger;
-      public readonly StackPushFloatDelegate StackPushFloat;
-      public readonly StackPushStringDelegate StackPushString;
-      public readonly StackPushStringUTF8Delegate StackPushStringUTF8;
-      public readonly StackPushObjectDelegate StackPushObject;
-      public readonly StackPushVectorDelegate StackPushVector;
-      public readonly StackPushGameDefinedStructureDelegate StackPushGameDefinedStructure;
-      public readonly StackPopIntegerDelegate StackPopInteger;
-      public readonly StackPopFloatDelegate StackPopFloat;
-      public readonly StackPopStringDelegate StackPopString;
-      public readonly StackPopStringUTF8Delegate StackPopStringUTF8;
-      public readonly StackPopObjectDelegate StackPopObject;
-      public readonly StackPopVectorDelegate StackPopVector;
-      public readonly StackPopGameDefinedStructureDelegate StackPopGameDefinedStructure;
-      public readonly FreeGameDefinedStructureDelegate FreeGameDefinedStructure;
-      public readonly ClosureAssignCommandDelegate ClosureAssignCommand;
-      public readonly ClosureDelayCommandDelegate ClosureDelayCommand;
-      public readonly ClosureActionDoCommandDelegate ClosureActionDoCommand;
-      public readonly NWNXSetFunctionDelegate NWNXSetFunction;
-      public readonly NWNXPushIntDelegate NWNXPushInt;
-      public readonly NWNXPushFloatDelegate NWNXPushFloat;
-      public readonly NWNXPushObjectDelegate NWNXPushObject;
-      public readonly NWNXPushStringDelegate NWNXPushString;
-      public readonly NWNXPushStringUTF8Delegate NWNXPushStringUTF8;
-      public readonly NWNXPushEffectDelegate NWNXPushEffect;
-      public readonly NWNXPushItemPropertyDelegate NWNXPushItemProperty;
-      public readonly NWNXPopIntDelegate NWNXPopInt;
-      public readonly NWNXPopFloatDelegate NWNXPopFloat;
-      public readonly NWNXPopObjectDelegate NWNXPopObject;
-      public readonly NWNXPopStringDelegate NWNXPopString;
-      public readonly NWNXPopStringUTF8Delegate NWNXPopStringUTF8;
-      public readonly NWNXPopEffectDelegate NWNXPopEffect;
-      public readonly NWNXPopItemPropertyDelegate NWNXPopItemProperty;
-      public readonly NWNXCallFunctionDelegate NWNXCallFunction;
-      public readonly GetNWNXExportedGlobalsDelegate GetNWNXExportedGlobals;
-      public readonly RequestHookDelegate RequestHook;
-      public readonly ReturnHookDelegate ReturnHook;
-      public readonly StackPushRawStringDelegate StackPushRawString;
-      public readonly StackPopRawStringDelegate StackPopRawString;
-      public readonly NWNXPushRawStringDelegate NWNXPushRawString;
-      public readonly NWNXPopRawStringDelegate NWNXPopRawString;
-    }
+    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
+    public static extern IntPtr NWNXPopRawString();
   }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -14,14 +15,12 @@ namespace NWN.Core
 
     internal static ICoreFunctionHandler? FunctionHandler;
 
-    internal static NativeHandles NativeFunctions;
-
     // We hold a reference to prevent GC of the delegates.
     private static object eventHandles;
 
-    public static int Init(IntPtr nativeHandlesPtr, int nativeHandlesLength, ICoreFunctionHandler functionHandler, ICoreEventHandler eventHandler)
+    public static int Init(ICoreFunctionHandler functionHandler, ICoreEventHandler eventHandler)
     {
-      int result = Init(nativeHandlesPtr, nativeHandlesLength, functionHandler);
+      int result = Init(functionHandler);
       if (result == 0)
       {
         RegisterEventHandles(eventHandler);
@@ -30,9 +29,9 @@ namespace NWN.Core
       return result;
     }
 
-    public static int Init(IntPtr nativeHandlesPtr, int nativeHandlesLength, ICoreFunctionHandler functionHandler, NativeEventHandles eventCallbackHandles)
+    public static int Init(ICoreFunctionHandler functionHandler, NativeEventHandles eventCallbackHandles)
     {
-      int result = Init(nativeHandlesPtr, nativeHandlesLength, functionHandler);
+      int result = Init(functionHandler);
       if (result == 0)
       {
         RegisterEventHandles(eventCallbackHandles);
@@ -42,9 +41,9 @@ namespace NWN.Core
     }
 
 #if !NETCOREAPP3_1
-    public static int Init(IntPtr nativeHandlesPtr, int nativeHandlesLength, ICoreFunctionHandler functionHandler, NativeEventHandlesUnmanaged eventCallbackHandles)
+    public static int Init(ICoreFunctionHandler functionHandler, NativeEventHandlesUnmanaged eventCallbackHandles)
     {
-      int result = Init(nativeHandlesPtr, nativeHandlesLength, functionHandler);
+      int result = Init(functionHandler);
       if (result == 0)
       {
         RegisterEventHandles(eventCallbackHandles);
@@ -54,39 +53,20 @@ namespace NWN.Core
     }
 #endif
 
-    public static int Init(IntPtr nativeHandlesPtr, int nativeHandlesLength, ICoreFunctionHandler functionHandler)
+    public static int Init(ICoreFunctionHandler functionHandler)
     {
       Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
       Encoding = Encoding.GetEncoding("windows-1252");
+      Marshal.PrelinkAll(typeof(NWNCore));
       FunctionHandler = functionHandler;
 
-      if (nativeHandlesPtr == IntPtr.Zero)
-      {
-        Console.WriteLine("Received NULL bootstrap structure");
-        return 1;
-      }
-
-      int expectedLength = Marshal.SizeOf(typeof(NativeHandles));
-      if (nativeHandlesLength < expectedLength)
-      {
-        Console.WriteLine($"Received bootstrap structure too small - actual={nativeHandlesLength}, expected={expectedLength}");
-        return 1;
-      }
-
-      if (nativeHandlesLength > expectedLength)
-      {
-        Console.WriteLine($"WARNING: Received bootstrap structure bigger than expected - actual={nativeHandlesLength}, expected={expectedLength}");
-        Console.WriteLine("         This usually means that native code version is ahead of the managed code");
-      }
-
-      NativeFunctions = Marshal.PtrToStructure<NativeHandles>(nativeHandlesPtr);
       return 0;
     }
 
-    public static int Init(IntPtr nativeHandlesPtr, int nativeHandlesLength, out CoreGameManager coreGameManager)
+    public static int Init(out CoreGameManager coreGameManager)
     {
       coreGameManager = new CoreGameManager();
-      return Init(nativeHandlesPtr, nativeHandlesLength, coreGameManager, coreGameManager);
+      return Init(coreGameManager, coreGameManager);
     }
 
     public static void RegisterEventHandles(ICoreEventHandler eventHandler)
@@ -120,7 +100,7 @@ namespace NWN.Core
       eventHandles = eventCallbackHandles;
       IntPtr ptr = Marshal.AllocHGlobal(actualSize);
       Marshal.StructureToPtr(eventHandles, ptr, false);
-      NativeFunctions.RegisterHandlers(ptr, (uint)actualSize);
+      RegisterHandlers(ptr, (uint)actualSize);
       Marshal.FreeHGlobal(ptr);
     }
   }
