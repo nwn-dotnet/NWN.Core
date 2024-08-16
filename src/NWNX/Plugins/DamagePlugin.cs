@@ -69,6 +69,7 @@ namespace NWN.Core.NWNX
       data.iCustom17 = VM.NWNX.StackPopInt();
       data.iCustom18 = VM.NWNX.StackPopInt();
       data.iCustom19 = VM.NWNX.StackPopInt();
+      data.iSpellId = VM.NWNX.StackPopInt();
       return data;
     }
 
@@ -312,6 +313,7 @@ namespace NWN.Core.NWNX
     public int iCustom17;
     public int iCustom18;
     public int iCustom19;
+    public int iSpellId;
   }
 
   public struct AttackEventData

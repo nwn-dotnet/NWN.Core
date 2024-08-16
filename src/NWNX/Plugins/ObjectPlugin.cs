@@ -871,6 +871,39 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Return the name of the object for nLanguage.
+    /// <param name="oObject">an object</param>
+    /// <param name="nLanguage">A PLAYER_LANGUAGE constant.</param>
+    /// <param name="nGender">  Gender to use, 0 or 1.</param>
+    /// <returns>The localized string.</returns>
+    public static string GetLocalizedName(uint oObject, int nLanguage, int nGender = 0)
+    {
+      const string sFunc = "GetLocalizedName";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
+      VM.NWNX.StackPush(nGender);
+      VM.NWNX.StackPush(nLanguage);
+      VM.NWNX.StackPush(oObject);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopString();
+    }
+
+    /// Set the name of the object as set in the toolset for nLanguage.
+    /// @note You may have to SetName(oObject, &quot;&quot;) for the translated string to show.
+    /// <param name="oObject">an object</param>
+    /// <param name="sName">New value to set</param>
+    /// <param name="nLanguage">A PLAYER_LANGUAGE constant.</param>
+    /// <param name="nGender">  Gender to use, 0 or 1.</param>
+    public static void SetLocalizedName(uint oObject, string sName, int nLanguage, int nGender = 0)
+    {
+      const string sFunc = "SetLocalizedName";
+      VM.NWNX.SetFunction(NWNX_Object, sFunc);
+      VM.NWNX.StackPush(nGender);
+      VM.NWNX.StackPush(nLanguage);
+      VM.NWNX.StackPush(sName);
+      VM.NWNX.StackPush(oObject);
+      VM.NWNX.Call();
+    }
+
     // @}
   }
 

@@ -546,6 +546,16 @@ namespace NWN.Core.NWNX
       return VM.NWNX.StackPopInt();
     }
 
+    /// Return the filename of the tlk file.
+    /// <returns>The name</returns>
+    public static string GetModuleTlkFile()
+    {
+      const string sFunc = "GetModuleTlkFile";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
+      VM.NWNX.Call();
+      return VM.NWNX.StackPopString();
+    }
+
     // @}
   }
 

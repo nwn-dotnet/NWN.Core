@@ -149,6 +149,15 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Set the Json value of a prepared statement at given position. 
+    /// Convienence function to match other Prepared(type) functions.
+    /// <param name="position">The nth ? in a prepared statement.</param>
+    /// <param name="value">The value to set.</param>
+    public static void PreparedJson(int position, System.IntPtr value)
+    {
+      PreparedString(position, JsonDump(value));
+    }
+
     /// Like NWNX_SQL_ReadDataInActiveRow, but for full serialized objects.
     ///
     /// The object will be deserialized and created in the game. New object ID is returned.

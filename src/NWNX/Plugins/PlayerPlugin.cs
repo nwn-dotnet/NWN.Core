@@ -627,10 +627,12 @@ namespace NWN.Core.NWNX
     /// <param name="oPlayer">The player to display the text to.</param>
     /// <param name="oCreature">The creature to display the text above.</param>
     /// <param name="sText">The text to display.</param>
-    public static void FloatingTextStringOnCreature(uint oPlayer, uint oCreature, string sText)
+    /// <param name="bChatWindow">If TRUE, sText will be displayed in oPlayer&apos;s chat window.</param>
+    public static void FloatingTextStringOnCreature(uint oPlayer, uint oCreature, string sText, int bChatWindow = TRUE)
     {
       const string sFunc = "FloatingTextStringOnCreature";
       VM.NWNX.SetFunction(NWNX_Player, sFunc);
+      VM.NWNX.StackPush(bChatWindow);
       VM.NWNX.StackPush(sText);
       VM.NWNX.StackPush(oCreature);
       VM.NWNX.StackPush(oPlayer);
@@ -806,6 +808,16 @@ namespace NWN.Core.NWNX
       VM.NWNX.Call();
     }
 
+    /// Make the player reload it&apos;s TlkTable.
+    /// <param name="oPlayer">The player.</param>
+    public static void ReloadTlk(uint oPlayer)
+    {
+      const string sFunc = "ReloadTlk";
+      VM.NWNX.SetFunction(NWNX_Player, sFunc);
+      VM.NWNX.StackPush(oPlayer);
+      VM.NWNX.Call();
+    }
+
     /// Update wind for oPlayer only.
     /// <param name="oPlayer">The player.</param>
     /// <param name="vDirection">The Wind&apos;s direction.</param>
@@ -918,6 +930,16 @@ namespace NWN.Core.NWNX
       VM.NWNX.StackPush(oPlayer);
       VM.NWNX.Call();
       return VM.NWNX.StackPopObject();
+    }
+
+    /// Reloads the color palettes for oPlayer
+    /// <param name="oPlayer">The player to reload the color palette for</param>
+    public static void ReloadColorPalettes(uint oPlayer)
+    {
+      const string sFunc = "ReloadColorPalettes";
+      VM.NWNX.SetFunction(NWNX_Player, sFunc);
+      VM.NWNX.StackPush(oPlayer);
+      VM.NWNX.Call();
     }
 
     // @}
