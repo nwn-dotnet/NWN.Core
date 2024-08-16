@@ -56,7 +56,7 @@ jobs:
 
       - name: Extract Server Image
         id: "nwn_extract"
-        uses: shrink/actions-docker-extract@v1
+        uses: shrink/actions-docker-extract@v3
         with:
           image: nwnxee/unified:${{ steps.revision.outputs.nwnx_sha_short }}
           path: /nwn
