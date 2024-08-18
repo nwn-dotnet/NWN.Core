@@ -113,10 +113,16 @@ namespace NWN.Core.NWNX
     ///
     /// [1] When specifying per-part coloring, the value 255 corresponds with the logical
     /// function &apos;clear colour override&apos;, which clears the per-part override for that part.
-    public static void SetItemAppearance(uint oItem, int nType, int nIndex, int nValue)
+    /// <param name="oItem">The item</param>
+    /// <param name="nType">The type</param>
+    /// <param name="nIndex">The index</param>
+    /// <param name="nValue">The value</param>
+    /// <param name="bUpdateCreatureAppearance">If TRUE, also update the appearance of oItem&apos;s possessor. Only works for armor/helmets/cloaks. Will remove the item from the quickbar as side effect.</param>
+    public static void SetItemAppearance(uint oItem, int nType, int nIndex, int nValue, int bUpdateCreatureAppearance = FALSE)
     {
       const string sFunc = "SetItemAppearance";
       VM.NWNX.SetFunction(NWNX_Item, sFunc);
+      VM.NWNX.StackPush(bUpdateCreatureAppearance);
       VM.NWNX.StackPush(nValue);
       VM.NWNX.StackPush(nIndex);
       VM.NWNX.StackPush(nType);
