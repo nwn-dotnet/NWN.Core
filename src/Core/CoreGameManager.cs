@@ -1,70 +1,76 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
+using NWN.Core.Native;
 
 namespace NWN.Core
 {
   /// <summary>
   /// Simple GameManager implementation. Used by default if no manager is specified during bootstrap.
   /// </summary>
-  public class CoreGameManager : ICoreFunctionHandler, ICoreEventHandler
+  public sealed class CoreGameManager : ICoreFunctionHandler
   {
     // Hook-able Events
     public delegate void ServerLoopEvent(ulong frame);
 
     /// <inheritdoc cref="ICoreEventHandler.OnMainLoop"/>
-    public event ServerLoopEvent? OnServerLoop;
+    public static event ServerLoopEvent? OnServerLoop;
 
     public delegate void SignalEvent(string signal);
 
     /// <inheritdoc cref="ICoreEventHandler.OnSignal"/>
-    public event SignalEvent? OnSignal;
+    public static event SignalEvent? OnSignal;
 
     public delegate void RunScriptEvent(string scriptName, uint objectSelf, out int scriptHandleResult);
 
     /// <inheritdoc cref="ICoreEventHandler.OnRunScript"/>
-    public event RunScriptEvent? OnRunScript;
+    public static event RunScriptEvent? OnRunScript;
 
     // Native Management
-    private readonly Stack<uint> scriptContexts = new Stack<uint>();
-    private readonly Dictionary<ulong, Action> closures = new Dictionary<ulong, Action>();
-    private ulong nextEventId;
+    private static readonly Stack<uint> scriptContexts = new Stack<uint>();
+    private static readonly Dictionary<ulong, Action> closures = new Dictionary<ulong, Action>();
+    private static ulong nextEventId;
 
     private const uint ObjectInvalid = 0x7F000000;
-    private uint objectSelf = ObjectInvalid;
+    private static uint objectSelf = ObjectInvalid;
 
     // Interface Implementations
     uint ICoreFunctionHandler.ObjectSelf => objectSelf;
 
-    void ICoreEventHandler.OnMainLoop(ulong frame)
-        => OnServerLoop?.Invoke(frame);
+    [UnmanagedCallersOnly]
+    internal static void MainLoopHandler(ulong frame) => OnServerLoop?.Invoke(frame);
 
-    void ICoreEventHandler.OnSignal(string signal)
-        => OnSignal?.Invoke(signal);
+    [UnmanagedCallersOnly]
+    internal static unsafe void SignalHandler(IntPtr pSignal) => OnSignal?.Invoke(NwStringMarshaller.ConvertToManaged((byte*)pSignal)!);
 
-    public void OnAssertFail(string message, string stackTrace)
+    [UnmanagedCallersOnly]
+    internal static void AssertFailHandler(IntPtr pMessage, IntPtr pStackTrace)
     {
       StackTrace managedStackTrace = new StackTrace(true);
       Console.Error.WriteLine(managedStackTrace.ToString());
     }
 
-    public void CrashHandler(int signal, string stackTrace)
+    [UnmanagedCallersOnly]
+    internal static unsafe void CrashHandler(int signal, IntPtr pStackTrace)
     {
-      Console.WriteLine(stackTrace);
+      Console.WriteLine(NwStringMarshaller.ConvertToManaged((byte*)pStackTrace));
 
       StackTrace managedStackTrace = new StackTrace(true);
       Console.Error.WriteLine(managedStackTrace.ToString());
     }
 
-    int ICoreEventHandler.OnRunScript(string script, uint oidSelf)
+    [UnmanagedCallersOnly]
+    internal static unsafe int RunScriptHandler(IntPtr pScript, uint oidSelf)
     {
       int retVal = -1;
       objectSelf = oidSelf;
       scriptContexts.Push(oidSelf);
+      string? script = NwStringMarshaller.ConvertToManaged((byte*)pScript);
 
       try
       {
-        OnRunScript?.Invoke(script, oidSelf, out retVal);
+        OnRunScript?.Invoke(script!, oidSelf, out retVal);
       }
       catch (Exception e)
       {
@@ -76,7 +82,8 @@ namespace NWN.Core
       return retVal;
     }
 
-    void ICoreEventHandler.OnClosure(ulong eid, uint oidSelf)
+    [UnmanagedCallersOnly]
+    internal static void ClosureHandler(ulong eid, uint oidSelf)
     {
       uint old = objectSelf;
       objectSelf = oidSelf;
