@@ -54,7 +54,7 @@ namespace NWN.Core
     [UnmanagedCallersOnly]
     internal static unsafe void CrashHandler(int signal, IntPtr pStackTrace)
     {
-      Console.WriteLine(NwStringMarshaller.ConvertToManaged((byte*)pStackTrace));
+      Console.Error.WriteLine(NwStringMarshaller.ConvertToManaged((byte*)pStackTrace));
 
       StackTrace managedStackTrace = new StackTrace(true);
       Console.Error.WriteLine(managedStackTrace.ToString());
