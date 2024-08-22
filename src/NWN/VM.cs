@@ -1,7 +1,6 @@
 using System;
 using System.Numerics;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 
 namespace NWN.Core
 {
@@ -22,12 +21,7 @@ namespace NWN.Core
     public static void StackPush(float value) => NWNCore.StackPushFloat(value);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-    public static void StackPush(string value)
-    {
-      IntPtr charPtr = GetNullTerminatedString(value);
-      NWNCore.StackPushRawString(charPtr);
-      Marshal.FreeHGlobal(charPtr);
-    }
+    public static void StackPush(string value) => NWNCore.StackPushRawString(value);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
     public static void StackPush(uint value) => NWNCore.StackPushObject(value);
@@ -48,7 +42,7 @@ namespace NWN.Core
     public static float StackPopFloat() => NWNCore.StackPopFloat();
 
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-    public static string? StackPopString() => ReadNullTerminatedString(NWNCore.StackPopRawString());
+    public static string? StackPopString() => NWNCore.StackPopRawString();
 
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
     public static uint StackPopObject() => NWNCore.StackPopObject();
@@ -76,43 +70,5 @@ namespace NWN.Core
 
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
     public static void ReturnHook(IntPtr funcPtr) => NWNCore.ReturnHook(funcPtr);
-
-    public static IntPtr GetNullTerminatedString(string? value)
-    {
-      if (value == null)
-      {
-        return IntPtr.Zero;
-      }
-
-      byte[] bytes = NWNCore.Encoding.GetBytes(value);
-      IntPtr buffer = Marshal.AllocHGlobal(bytes.Length + 1);
-      Marshal.Copy(bytes, 0, buffer, bytes.Length);
-
-      // Write null terminator
-      Marshal.WriteByte(buffer + bytes.Length, 0);
-      return buffer;
-    }
-
-    private static unsafe string? ReadNullTerminatedString(IntPtr cString)
-    {
-      if (cString == IntPtr.Zero)
-      {
-        return null;
-      }
-
-      byte* charPointer = (byte*)cString;
-      return NWNCore.Encoding.GetString(charPointer, GetStringLength(charPointer));
-    }
-
-    private static unsafe int GetStringLength(byte* cString)
-    {
-      byte* walk = cString;
-      while (*walk != 0)
-      {
-        walk++;
-      }
-
-      return (int)(walk - cString);
-    }
   }
 }

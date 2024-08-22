@@ -1,7 +1,6 @@
 using System;
 using System.Numerics;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 
 namespace NWN.Core
 {
@@ -27,12 +26,7 @@ namespace NWN.Core
       public static void StackPush(float value) => NWNCore.NWNXPushFloat(value);
 
       [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-      public static void StackPush(string value)
-      {
-        IntPtr charPtr = GetNullTerminatedString(value);
-        NWNCore.NWNXPushRawString(charPtr);
-        Marshal.FreeHGlobal(charPtr);
-      }
+      public static void StackPush(string value) => NWNCore.NWNXPushRawString(value);
 
       [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
       public static void StackPush(uint value) => NWNCore.NWNXPushObject(value);
@@ -79,7 +73,7 @@ namespace NWN.Core
       public static float StackPopFloat() => NWNCore.NWNXPopFloat();
 
       [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-      public static string? StackPopString() => ReadNullTerminatedString(NWNCore.NWNXPopRawString());
+      public static string? StackPopString() => NWNCore.NWNXPopRawString();
 
       [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
       public static uint StackPopObject() => NWNCore.NWNXPopObject();

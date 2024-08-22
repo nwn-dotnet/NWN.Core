@@ -1,6 +1,9 @@
 using System;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.Marshalling;
+using NWN.Core.Native;
 
 namespace NWN.Core
 {
@@ -9,118 +12,165 @@ namespace NWN.Core
   /// </summary>
   public static partial class NWNCore
   {
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void CallBuiltIn(int id);
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial void CallBuiltIn(int id);
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void RegisterHandlers(IntPtr handlers, uint size);
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial void StackPushInteger(int value);
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void StackPushInteger(int value);
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial void StackPushFloat(float value);
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void StackPushFloat(float value);
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial void StackPushString([MarshalUsing(typeof(Utf16StringMarshaller))] string? value);
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void StackPushString(string value);
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial void StackPushObject(uint value);
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void StackPushObject(uint value);
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial void StackPushVector([MarshalUsing(typeof(Vector3Marshaller))] Vector3 value);
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void StackPushVector(Vector3 value);
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial void StackPushGameDefinedStructure(int type, IntPtr value);
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void StackPushGameDefinedStructure(int type, IntPtr str);
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial int StackPopInteger();
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern int StackPopInteger();
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial float StackPopFloat();
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern float StackPopFloat();
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    [return: MarshalUsing(typeof(Utf16StringMarshaller))]
+    public static partial string StackPopString();
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern string StackPopString();
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial uint StackPopObject();
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern uint StackPopObject();
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    [return: MarshalUsing(typeof(Vector3Marshaller))]
+    public static partial Vector3 StackPopVector();
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern Vector3 StackPopVector();
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial IntPtr StackPopGameDefinedStructure(int type);
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern IntPtr StackPopGameDefinedStructure(int type);
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial IntPtr FreeGameDefinedStructure(int type, IntPtr value);
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern IntPtr FreeGameDefinedStructure(int type, IntPtr str);
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial int ClosureAssignCommand(uint oid, ulong eventId);
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern int ClosureAssignCommand(uint oid, ulong eventId);
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial int ClosureDelayCommand(uint oid, float duration, ulong eventId);
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern int ClosureDelayCommand(uint oid, float duration, ulong eventId);
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial int ClosureActionDoCommand(uint oid, ulong eventId);
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern int ClosureActionDoCommand(uint oid, ulong eventId);
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial void NWNXSetFunction([MarshalUsing(typeof(Utf16StringMarshaller))] string plugin, [MarshalUsing(typeof(Utf16StringMarshaller))] string function);
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void NWNXSetFunction(string plugin, string function);
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial void NWNXPushInt(int n);
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void NWNXPushInt(int n);
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial void NWNXPushFloat(float f);
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void NWNXPushFloat(float f);
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial void NWNXPushObject(uint o);
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void NWNXPushObject(uint o);
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial void NWNXPushString([MarshalUsing(typeof(Utf16StringMarshaller))] string s);
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void NWNXPushString(string s);
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial void NWNXPushEffect(IntPtr value);
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void NWNXPushEffect(IntPtr e);
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial void NWNXPushItemProperty(IntPtr value);
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void NWNXPushItemProperty(IntPtr ip);
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial int NWNXPopInt();
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern int NWNXPopInt();
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial float NWNXPopFloat();
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern float NWNXPopFloat();
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial uint NWNXPopObject();
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern uint NWNXPopObject();
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    [return: MarshalUsing(typeof(Utf16StringMarshaller))]
+    public static partial string NWNXPopString();
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern string NWNXPopString();
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial IntPtr NWNXPopEffect();
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern IntPtr NWNXPopEffect();
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial IntPtr NWNXPopItemProperty();
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern IntPtr NWNXPopItemProperty();
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial void NWNXCallFunction();
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void NWNXCallFunction();
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial IntPtr RequestHook(IntPtr address, IntPtr managedFuncPtr, int priority);
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern IntPtr RequestHook(IntPtr address, IntPtr managedFuncPtr, int priority);
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial void ReturnHook(IntPtr hook);
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void ReturnHook(IntPtr hook);
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static unsafe partial FunctionHook* RequestFunctionHook(IntPtr address, IntPtr managedFuncPtr, int priority);
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void StackPushRawString(IntPtr charPtr);
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static unsafe partial void ReturnFunctionHook(FunctionHook* hook);
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern IntPtr StackPopRawString();
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial void StackPushRawString([MarshalUsing(typeof(NwStringMarshaller))] string? value);
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void NWNXPushRawString(IntPtr charPtr);
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    [return: MarshalUsing(typeof(NwStringMarshaller))]
+    public static partial string? StackPopRawString();
 
-    [DllImport("NWNX_DotNET", CallingConvention = CallingConvention.Cdecl)]
-    public static extern IntPtr NWNXPopRawString();
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial void NWNXPushRawString([MarshalUsing(typeof(NwStringMarshaller))] string? value);
+
+    [LibraryImport("NWNX_DotNET")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    [return: MarshalUsing(typeof(NwStringMarshaller))]
+    public static partial string? NWNXPopRawString();
   }
 }
