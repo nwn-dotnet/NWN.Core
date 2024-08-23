@@ -9,7 +9,7 @@ namespace NWN.Core
   /// <summary>
   /// Simple GameManager implementation. Used by default if no manager is specified during bootstrap.
   /// </summary>
-  public sealed class CoreGameManager : ICoreFunctionHandler
+  public class CoreGameManager : ICoreFunctionHandler
   {
     // Hook-able Events
     public delegate void ServerLoopEvent(ulong frame);
