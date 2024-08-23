@@ -6771,7 +6771,7 @@ namespace NWN.Core
     public static void ActionMoveToLocation(System.IntPtr lDestination, int bRun = FALSE)
     {
       VM.StackPush(bRun);
-      VM.StackPush(lDestination, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lDestination);
       VM.Call(21);
     }
 
@@ -7512,7 +7512,7 @@ namespace NWN.Core
     ///  * No return value
     public static void RemoveEffect(uint oCreature, System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.StackPush(oCreature);
       VM.Call(87);
     }
@@ -7521,7 +7521,7 @@ namespace NWN.Core
     ///  * an object or else it will return FALSE
     public static int GetIsEffectValid(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.Call(88);
       return VM.StackPopInt();
     }
@@ -7530,7 +7530,7 @@ namespace NWN.Core
     ///  * Return value if eEffect is not valid: -1
     public static int GetEffectDurationType(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.Call(89);
       return VM.StackPopInt();
     }
@@ -7539,7 +7539,7 @@ namespace NWN.Core
     ///  * Return value on error: 0
     public static int GetEffectSubType(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.Call(90);
       return VM.StackPopInt();
     }
@@ -7548,7 +7548,7 @@ namespace NWN.Core
     ///  * Returns OBJECT_INVALID if eEffect is not a valid effect.
     public static uint GetEffectCreator(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.Call(91);
       return VM.StackPopObject();
     }
@@ -7778,7 +7778,7 @@ namespace NWN.Core
     ///  Magical effects are removed by resting, and by dispel magic
     public static System.IntPtr MagicalEffect(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.Call(112);
       return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
@@ -7788,7 +7788,7 @@ namespace NWN.Core
     ///  Permanent supernatural effects are not removed by resting
     public static System.IntPtr SupernaturalEffect(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.Call(113);
       return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
@@ -7798,7 +7798,7 @@ namespace NWN.Core
     ///  Extraordinary effects are removed by resting, but not by dispel magic
     public static System.IntPtr ExtraordinaryEffect(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.Call(114);
       return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
@@ -7983,7 +7983,7 @@ namespace NWN.Core
       VM.StackPush(vOrigin);
       VM.StackPush(nObjectFilter);
       VM.StackPush(bLineOfSight);
-      VM.StackPush(lTarget, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lTarget);
       VM.StackPush(fSize);
       VM.StackPush(nShape);
       VM.Call(128);
@@ -8019,7 +8019,7 @@ namespace NWN.Core
       VM.StackPush(vOrigin);
       VM.StackPush(nObjectFilter);
       VM.StackPush(bLineOfSight);
-      VM.StackPush(lTarget, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lTarget);
       VM.StackPush(fSize);
       VM.StackPush(nShape);
       VM.Call(129);
@@ -8050,7 +8050,7 @@ namespace NWN.Core
     ///                           can be set in the Scripts Tab of the Properties menu for the object/area/module.
     public static void SignalEvent(uint oObject, System.IntPtr evToRun)
     {
-      VM.StackPush(evToRun, ENGINE_STRUCTURE_EVENT);
+      VM.StackPush(ENGINE_STRUCTURE_EVENT, evToRun);
       VM.StackPush(oObject);
       VM.Call(131);
     }
@@ -8273,7 +8273,7 @@ namespace NWN.Core
     ///  Set oObject&amp;apos;s local location variable sVarname to lValue
     public static void SetLocalLocation(uint oObject, string sVarName, System.IntPtr lValue)
     {
-      VM.StackPush(lValue, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lValue);
       VM.StackPush(sVarName);
       VM.StackPush(oObject);
       VM.Call(152);
@@ -8441,7 +8441,7 @@ namespace NWN.Core
     public static int GetEffectType(System.IntPtr eEffect, int bAllTypes = FALSE)
     {
       VM.StackPush(bAllTypes);
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.Call(170);
       return VM.StackPopInt();
     }
@@ -8744,8 +8744,8 @@ namespace NWN.Core
     ///  packaged *only* with other visual effects in a link.
     public static System.IntPtr EffectLinkEffects(System.IntPtr eChildEffect, System.IntPtr eParentEffect)
     {
-      VM.StackPush(eParentEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.StackPush(eChildEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eParentEffect);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eChildEffect);
       VM.Call(199);
       return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
@@ -8945,7 +8945,7 @@ namespace NWN.Core
     ///  If lLocation is invalid, nothing will happen.
     public static void ActionJumpToLocation(System.IntPtr lLocation)
     {
-      VM.StackPush(lLocation, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lLocation);
       VM.Call(214);
     }
 
@@ -8965,8 +8965,8 @@ namespace NWN.Core
     public static void ApplyEffectAtLocation(int nDurationType, System.IntPtr eEffect, System.IntPtr lLocation, float fDuration = 0.0f)
     {
       VM.StackPush(fDuration);
-      VM.StackPush(lLocation, ENGINE_STRUCTURE_LOCATION);
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lLocation);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.StackPush(nDurationType);
       VM.Call(216);
     }
@@ -9000,7 +9000,7 @@ namespace NWN.Core
     {
       VM.StackPush(fDuration);
       VM.StackPush(oTarget);
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.StackPush(nDurationType);
       VM.Call(220);
     }
@@ -9026,7 +9026,7 @@ namespace NWN.Core
     ///  Get the position vector from lLocation.
     public static System.Numerics.Vector3 GetPositionFromLocation(System.IntPtr lLocation)
     {
-      VM.StackPush(lLocation, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lLocation);
       VM.Call(223);
       return VM.StackPopVector();
     }
@@ -9034,7 +9034,7 @@ namespace NWN.Core
     ///  Get the area&amp;apos;s object ID from lLocation.
     public static uint GetAreaFromLocation(System.IntPtr lLocation)
     {
-      VM.StackPush(lLocation, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lLocation);
       VM.Call(224);
       return VM.StackPopObject();
     }
@@ -9042,7 +9042,7 @@ namespace NWN.Core
     ///  Get the orientation value from lLocation.
     public static float GetFacingFromLocation(System.IntPtr lLocation)
     {
-      VM.StackPush(lLocation, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lLocation);
       VM.Call(225);
       return VM.StackPopFloat();
     }
@@ -9080,7 +9080,7 @@ namespace NWN.Core
       VM.StackPush(nSecondCriteriaValue);
       VM.StackPush(nSecondCriteriaType);
       VM.StackPush(nNth);
-      VM.StackPush(lLocation, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lLocation);
       VM.StackPush(nFirstCriteriaValue);
       VM.StackPush(nFirstCriteriaType);
       VM.Call(226);
@@ -9109,7 +9109,7 @@ namespace NWN.Core
     public static uint GetNearestObjectToLocation(int nObjectType, System.IntPtr lLocation, int nNth = 1)
     {
       VM.StackPush(nNth);
-      VM.StackPush(lLocation, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lLocation);
       VM.StackPush(nObjectType);
       VM.Call(228);
       return VM.StackPopObject();
@@ -9185,7 +9185,7 @@ namespace NWN.Core
       VM.StackPush(nProjectilePathType);
       VM.StackPush(bCheat);
       VM.StackPush(nMetaMagic);
-      VM.StackPush(lTargetLocation, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lTargetLocation);
       VM.StackPush(nSpell);
       VM.Call(234);
     }
@@ -9272,7 +9272,7 @@ namespace NWN.Core
     {
       VM.StackPush(sNewTag);
       VM.StackPush(bUseAppearAnimation);
-      VM.StackPush(lLocation, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lLocation);
       VM.StackPush(sTemplate);
       VM.StackPush(nObjectType);
       VM.Call(243);
@@ -9697,7 +9697,7 @@ namespace NWN.Core
         lTarget = LOCATION_INVALID;
       }
 
-      VM.StackPush(lTarget, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lTarget);
       VM.StackPush(nSubFeat);
       VM.StackPush(oTarget);
       VM.StackPush(nFeat);
@@ -9808,8 +9808,8 @@ namespace NWN.Core
     ///  Get the distance between lLocationA and lLocationB.
     public static float GetDistanceBetweenLocations(System.IntPtr lLocationA, System.IntPtr lLocationB)
     {
-      VM.StackPush(lLocationB, ENGINE_STRUCTURE_LOCATION);
-      VM.StackPush(lLocationA, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lLocationB);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lLocationA);
       VM.Call(298);
       return VM.StackPopFloat();
     }
@@ -9889,7 +9889,7 @@ namespace NWN.Core
     ///  * Returns -1 if eSpellEffect was applied outside a spell script.
     public static int GetEffectSpellId(System.IntPtr eSpellEffect)
     {
-      VM.StackPush(eSpellEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eSpellEffect);
       VM.Call(305);
       return VM.StackPopInt();
     }
@@ -9898,7 +9898,7 @@ namespace NWN.Core
     public static int GetCreatureHasTalent(System.IntPtr tTalent, uint oCreature = OBJECT_INVALID)
     {
       VM.StackPush(oCreature);
-      VM.StackPush(tTalent, ENGINE_STRUCTURE_TALENT);
+      VM.StackPush(ENGINE_STRUCTURE_TALENT, tTalent);
       VM.Call(306);
       return VM.StackPopInt();
     }
@@ -9932,15 +9932,15 @@ namespace NWN.Core
     public static void ActionUseTalentOnObject(System.IntPtr tChosenTalent, uint oTarget)
     {
       VM.StackPush(oTarget);
-      VM.StackPush(tChosenTalent, ENGINE_STRUCTURE_TALENT);
+      VM.StackPush(ENGINE_STRUCTURE_TALENT, tChosenTalent);
       VM.Call(309);
     }
 
     ///  Use tChosenTalent at lTargetLocation.
     public static void ActionUseTalentAtLocation(System.IntPtr tChosenTalent, System.IntPtr lTargetLocation)
     {
-      VM.StackPush(lTargetLocation, ENGINE_STRUCTURE_LOCATION);
-      VM.StackPush(tChosenTalent, ENGINE_STRUCTURE_TALENT);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lTargetLocation);
+      VM.StackPush(ENGINE_STRUCTURE_TALENT, tChosenTalent);
       VM.Call(310);
     }
 
@@ -9964,7 +9964,7 @@ namespace NWN.Core
     ///  Jump to lDestination.  The action is added to the TOP of the action queue.
     public static void JumpToLocation(System.IntPtr lDestination)
     {
-      VM.StackPush(lDestination, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lDestination);
       VM.Call(313);
     }
 
@@ -10363,7 +10363,7 @@ namespace NWN.Core
     {
       VM.StackPush(nGoodEvil);
       VM.StackPush(nLawChaos);
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.Call(355);
       return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
@@ -10374,7 +10374,7 @@ namespace NWN.Core
     public static System.IntPtr VersusRacialTypeEffect(System.IntPtr eEffect, int nRacialType)
     {
       VM.StackPush(nRacialType);
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.Call(356);
       return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
@@ -10382,7 +10382,7 @@ namespace NWN.Core
     ///  Set eEffect to be versus traps.
     public static System.IntPtr VersusTrapEffect(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.Call(357);
       return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
@@ -10398,7 +10398,7 @@ namespace NWN.Core
     ///  * Returns TRUE if tTalent is valid.
     public static int GetIsTalentValid(System.IntPtr tTalent)
     {
-      VM.StackPush(tTalent, ENGINE_STRUCTURE_TALENT);
+      VM.StackPush(ENGINE_STRUCTURE_TALENT, tTalent);
       VM.Call(359);
       return VM.StackPopInt();
     }
@@ -10408,7 +10408,7 @@ namespace NWN.Core
     {
       VM.StackPush(fMoveAwayRange);
       VM.StackPush(bRun);
-      VM.StackPush(lMoveAwayFrom, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lMoveAwayFrom);
       VM.Call(360);
     }
 
@@ -10425,7 +10425,7 @@ namespace NWN.Core
     ///  Get the type (TALENT_TYPE_*) of tTalent.
     public static int GetTypeFromTalent(System.IntPtr tTalent)
     {
-      VM.StackPush(tTalent, ENGINE_STRUCTURE_TALENT);
+      VM.StackPush(ENGINE_STRUCTURE_TALENT, tTalent);
       VM.Call(362);
       return VM.StackPopInt();
     }
@@ -10433,7 +10433,7 @@ namespace NWN.Core
     ///  Get the ID of tTalent.  This could be a SPELL_*, FEAT_* or SKILL_*.
     public static int GetIdFromTalent(System.IntPtr tTalent)
     {
-      VM.StackPush(tTalent, ENGINE_STRUCTURE_TALENT);
+      VM.StackPush(ENGINE_STRUCTURE_TALENT, tTalent);
       VM.Call(363);
       return VM.StackPopInt();
     }
@@ -10634,7 +10634,7 @@ namespace NWN.Core
     {
       VM.StackPush(fTimeout);
       VM.StackPush(bRun);
-      VM.StackPush(lDestination, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lDestination);
       VM.Call(382);
     }
 
@@ -11048,7 +11048,7 @@ namespace NWN.Core
     public static System.IntPtr EventActivateItem(uint oItem, System.IntPtr lTarget, uint oTarget = OBJECT_INVALID)
     {
       VM.StackPush(oTarget);
-      VM.StackPush(lTarget, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lTarget);
       VM.StackPush(oItem);
       VM.Call(424);
       return VM.StackPopStruct(ENGINE_STRUCTURE_EVENT);
@@ -11607,7 +11607,7 @@ namespace NWN.Core
     public static System.IntPtr EffectDisappearAppear(System.IntPtr lLocation, int nAnimation = 1)
     {
       VM.StackPush(nAnimation);
-      VM.StackPush(lLocation, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lLocation);
       VM.Call(480);
       return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
@@ -11836,7 +11836,7 @@ namespace NWN.Core
     public static void ActionCastFakeSpellAtLocation(int nSpell, System.IntPtr lTarget, int nProjectilePathType = PROJECTILE_PATH_TYPE_DEFAULT)
     {
       VM.StackPush(nProjectilePathType);
-      VM.StackPush(lTarget, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lTarget);
       VM.StackPush(nSpell);
       VM.Call(502);
     }
@@ -11958,7 +11958,7 @@ namespace NWN.Core
     {
       VM.StackPush(nMainLight2Color);
       VM.StackPush(nMainLight1Color);
-      VM.StackPush(lTileLocation, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lTileLocation);
       VM.Call(514);
     }
 
@@ -11971,7 +11971,7 @@ namespace NWN.Core
     {
       VM.StackPush(nSourceLight2Color);
       VM.StackPush(nSourceLight1Color);
-      VM.StackPush(lTileLocation, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lTileLocation);
       VM.Call(515);
     }
 
@@ -11989,7 +11989,7 @@ namespace NWN.Core
     ///  - lTile: the vector part of this is the tile grid (x,y) coordinate of the tile.
     public static int GetTileMainLight1Color(System.IntPtr lTile)
     {
-      VM.StackPush(lTile, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lTile);
       VM.Call(517);
       return VM.StackPopInt();
     }
@@ -12000,7 +12000,7 @@ namespace NWN.Core
     ///    tile.
     public static int GetTileMainLight2Color(System.IntPtr lTile)
     {
-      VM.StackPush(lTile, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lTile);
       VM.Call(518);
       return VM.StackPopInt();
     }
@@ -12011,7 +12011,7 @@ namespace NWN.Core
     ///    tile.
     public static int GetTileSourceLight1Color(System.IntPtr lTile)
     {
-      VM.StackPush(lTile, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lTile);
       VM.Call(519);
       return VM.StackPopInt();
     }
@@ -12022,7 +12022,7 @@ namespace NWN.Core
     ///    tile.
     public static int GetTileSourceLight2Color(System.IntPtr lTile)
     {
-      VM.StackPush(lTile, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lTile);
       VM.Call(520);
       return VM.StackPopInt();
     }
@@ -12772,7 +12772,7 @@ namespace NWN.Core
     public static void SetCampaignLocation(string sCampaignName, string sVarName, System.IntPtr locLocation, uint oPlayer = OBJECT_INVALID)
     {
       VM.StackPush(oPlayer);
-      VM.StackPush(locLocation, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, locLocation);
       VM.StackPush(sVarName);
       VM.StackPush(sCampaignName);
       VM.Call(592);
@@ -12886,7 +12886,7 @@ namespace NWN.Core
       VM.StackPush(bCopyLocalState);
       VM.StackPush(sNewTag);
       VM.StackPush(oOwner);
-      VM.StackPush(locLocation, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, locLocation);
       VM.StackPush(oSource);
       VM.Call(600);
       return VM.StackPopObject();
@@ -12926,7 +12926,7 @@ namespace NWN.Core
       VM.StackPush(bLoadObjectState);
       VM.StackPush(oPlayer);
       VM.StackPush(oOwner);
-      VM.StackPush(locLocation, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, locLocation);
       VM.StackPush(sVarName);
       VM.StackPush(sCampaignName);
       VM.Call(603);
@@ -12992,7 +12992,7 @@ namespace NWN.Core
     {
       VM.StackPush(fDuration);
       VM.StackPush(oItem);
-      VM.StackPush(ipProperty, ENGINE_STRUCTURE_ITEMPROPERTY);
+      VM.StackPush(ENGINE_STRUCTURE_ITEMPROPERTY, ipProperty);
       VM.StackPush(nDurationType);
       VM.Call(609);
     }
@@ -13000,7 +13000,7 @@ namespace NWN.Core
     ///  removes an item property from the specified item
     public static void RemoveItemProperty(uint oItem, System.IntPtr ipProperty)
     {
-      VM.StackPush(ipProperty, ENGINE_STRUCTURE_ITEMPROPERTY);
+      VM.StackPush(ENGINE_STRUCTURE_ITEMPROPERTY, ipProperty);
       VM.StackPush(oItem);
       VM.Call(610);
     }
@@ -13008,7 +13008,7 @@ namespace NWN.Core
     ///  if the item property is valid this will return true
     public static int GetIsItemPropertyValid(System.IntPtr ipProperty)
     {
-      VM.StackPush(ipProperty, ENGINE_STRUCTURE_ITEMPROPERTY);
+      VM.StackPush(ENGINE_STRUCTURE_ITEMPROPERTY, ipProperty);
       VM.Call(611);
       return VM.StackPopInt();
     }
@@ -13033,7 +13033,7 @@ namespace NWN.Core
     ///  will return the item property type (ie. holy avenger)
     public static int GetItemPropertyType(System.IntPtr ip)
     {
-      VM.StackPush(ip, ENGINE_STRUCTURE_ITEMPROPERTY);
+      VM.StackPush(ENGINE_STRUCTURE_ITEMPROPERTY, ip);
       VM.Call(614);
       return VM.StackPopInt();
     }
@@ -13041,7 +13041,7 @@ namespace NWN.Core
     ///  will return the duration type of the item property
     public static int GetItemPropertyDurationType(System.IntPtr ip)
     {
-      VM.StackPush(ip, ENGINE_STRUCTURE_ITEMPROPERTY);
+      VM.StackPush(ENGINE_STRUCTURE_ITEMPROPERTY, ip);
       VM.Call(615);
       return VM.StackPopInt();
     }
@@ -14710,7 +14710,7 @@ namespace NWN.Core
     ///  Returns the SubType number of the item property. See the 2DA files for value definitions.
     public static int GetItemPropertySubType(System.IntPtr iProperty)
     {
-      VM.StackPush(iProperty, ENGINE_STRUCTURE_ITEMPROPERTY);
+      VM.StackPush(ENGINE_STRUCTURE_ITEMPROPERTY, iProperty);
       VM.Call(734);
       return VM.StackPopInt();
     }
@@ -15032,7 +15032,7 @@ namespace NWN.Core
     ///  Returns the Cost Table number of the item property. See the 2DA files for value definitions.
     public static int GetItemPropertyCostTable(System.IntPtr iProp)
     {
-      VM.StackPush(iProp, ENGINE_STRUCTURE_ITEMPROPERTY);
+      VM.StackPush(ENGINE_STRUCTURE_ITEMPROPERTY, iProp);
       VM.Call(769);
       return VM.StackPopInt();
     }
@@ -15041,7 +15041,7 @@ namespace NWN.Core
     ///  See the 2DA files for value definitions.
     public static int GetItemPropertyCostTableValue(System.IntPtr iProp)
     {
-      VM.StackPush(iProp, ENGINE_STRUCTURE_ITEMPROPERTY);
+      VM.StackPush(ENGINE_STRUCTURE_ITEMPROPERTY, iProp);
       VM.Call(770);
       return VM.StackPopInt();
     }
@@ -15049,7 +15049,7 @@ namespace NWN.Core
     ///  Returns the Param1 number of the item property. See the 2DA files for value definitions.
     public static int GetItemPropertyParam1(System.IntPtr iProp)
     {
-      VM.StackPush(iProp, ENGINE_STRUCTURE_ITEMPROPERTY);
+      VM.StackPush(ENGINE_STRUCTURE_ITEMPROPERTY, iProp);
       VM.Call(771);
       return VM.StackPopInt();
     }
@@ -15057,7 +15057,7 @@ namespace NWN.Core
     ///  Returns the Param1 value of the item property. See the 2DA files for value definitions.
     public static int GetItemPropertyParam1Value(System.IntPtr iProp)
     {
-      VM.StackPush(iProp, ENGINE_STRUCTURE_ITEMPROPERTY);
+      VM.StackPush(ENGINE_STRUCTURE_ITEMPROPERTY, iProp);
       VM.Call(772);
       return VM.StackPopInt();
     }
@@ -15582,7 +15582,7 @@ namespace NWN.Core
       VM.StackPush(nFaction);
       VM.StackPush(sTag);
       VM.StackPush(fSize);
-      VM.StackPush(lLocation, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lLocation);
       VM.StackPush(nTrapType);
       VM.Call(809);
       return VM.StackPopObject();
@@ -16097,7 +16097,7 @@ namespace NWN.Core
     ///  - If no tag has been set, returns an empty string.
     public static string GetEffectTag(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.Call(849);
       return VM.StackPopString();
     }
@@ -16107,7 +16107,7 @@ namespace NWN.Core
     public static System.IntPtr TagEffect(System.IntPtr eEffect, string sNewTag)
     {
       VM.StackPush(sNewTag);
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.Call(850);
       return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
@@ -16117,7 +16117,7 @@ namespace NWN.Core
     ///  - If created by a spell-like ability, returns 0.
     public static int GetEffectCasterLevel(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.Call(851);
       return VM.StackPopInt();
     }
@@ -16126,7 +16126,7 @@ namespace NWN.Core
     ///  - Returns 0 if the duration type of the effect is not DURATION_TYPE_TEMPORARY.
     public static int GetEffectDuration(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.Call(852);
       return VM.StackPopInt();
     }
@@ -16135,7 +16135,7 @@ namespace NWN.Core
     ///  - Returns 0 if the duration type of the effect is not DURATION_TYPE_TEMPORARY.
     public static int GetEffectDurationRemaining(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.Call(853);
       return VM.StackPopInt();
     }
@@ -16144,7 +16144,7 @@ namespace NWN.Core
     ///  - If no tag has been set, returns an empty string.
     public static string GetItemPropertyTag(System.IntPtr nProperty)
     {
-      VM.StackPush(nProperty, ENGINE_STRUCTURE_ITEMPROPERTY);
+      VM.StackPush(ENGINE_STRUCTURE_ITEMPROPERTY, nProperty);
       VM.Call(854);
       return VM.StackPopString();
     }
@@ -16154,7 +16154,7 @@ namespace NWN.Core
     public static System.IntPtr TagItemProperty(System.IntPtr nProperty, string sNewTag)
     {
       VM.StackPush(sNewTag);
-      VM.StackPush(nProperty, ENGINE_STRUCTURE_ITEMPROPERTY);
+      VM.StackPush(ENGINE_STRUCTURE_ITEMPROPERTY, nProperty);
       VM.Call(855);
       return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
@@ -16163,7 +16163,7 @@ namespace NWN.Core
     ///  - Returns 0 if the duration type of the item property is not DURATION_TYPE_TEMPORARY.
     public static int GetItemPropertyDuration(System.IntPtr nProperty)
     {
-      VM.StackPush(nProperty, ENGINE_STRUCTURE_ITEMPROPERTY);
+      VM.StackPush(ENGINE_STRUCTURE_ITEMPROPERTY, nProperty);
       VM.Call(856);
       return VM.StackPopInt();
     }
@@ -16172,7 +16172,7 @@ namespace NWN.Core
     ///  - Returns 0 if the duration type of the item property is not DURATION_TYPE_TEMPORARY.
     public static int GetItemPropertyDurationRemaining(System.IntPtr nProperty)
     {
-      VM.StackPush(nProperty, ENGINE_STRUCTURE_ITEMPROPERTY);
+      VM.StackPush(ENGINE_STRUCTURE_ITEMPROPERTY, nProperty);
       VM.Call(857);
       return VM.StackPopInt();
     }
@@ -16377,7 +16377,7 @@ namespace NWN.Core
     ///  Returns 0 if the location is invalid or has no surface type.
     public static int GetSurfaceMaterial(System.IntPtr at)
     {
-      VM.StackPush(at, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, at);
       VM.Call(870);
       return VM.StackPopInt();
     }
@@ -16386,7 +16386,7 @@ namespace NWN.Core
     ///  Returns -6.0 for invalid locations.
     public static float GetGroundHeight(System.IntPtr at)
     {
-      VM.StackPush(at, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, at);
       VM.Call(871);
       return VM.StackPopFloat();
     }
@@ -16820,7 +16820,7 @@ namespace NWN.Core
     ///    or the item property is not uses/day.
     public static int GetItemPropertyUsesPerDayRemaining(uint oItem, System.IntPtr ip)
     {
-      VM.StackPush(ip, ENGINE_STRUCTURE_ITEMPROPERTY);
+      VM.StackPush(ENGINE_STRUCTURE_ITEMPROPERTY, ip);
       VM.StackPush(oItem);
       VM.Call(908);
       return VM.StackPopInt();
@@ -16832,7 +16832,7 @@ namespace NWN.Core
     public static void SetItemPropertyUsesPerDayRemaining(uint oItem, System.IntPtr ip, int nUsesPerDay)
     {
       VM.StackPush(nUsesPerDay);
-      VM.StackPush(ip, ENGINE_STRUCTURE_ITEMPROPERTY);
+      VM.StackPush(ENGINE_STRUCTURE_ITEMPROPERTY, ip);
       VM.StackPush(oItem);
       VM.Call(909);
     }
@@ -16848,7 +16848,7 @@ namespace NWN.Core
       VM.StackPush(bDecrementCharges);
       VM.StackPush(nSubPropertyIndex);
       VM.StackPush(oTarget);
-      VM.StackPush(ip, ENGINE_STRUCTURE_ITEMPROPERTY);
+      VM.StackPush(ENGINE_STRUCTURE_ITEMPROPERTY, ip);
       VM.StackPush(oItem);
       VM.Call(910);
     }
@@ -16863,8 +16863,8 @@ namespace NWN.Core
     {
       VM.StackPush(bDecrementCharges);
       VM.StackPush(nSubPropertyIndex);
-      VM.StackPush(lTarget, ENGINE_STRUCTURE_LOCATION);
-      VM.StackPush(ip, ENGINE_STRUCTURE_ITEMPROPERTY);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lTarget);
+      VM.StackPush(ENGINE_STRUCTURE_ITEMPROPERTY, ip);
       VM.StackPush(oItem);
       VM.Call(911);
     }
@@ -16975,7 +16975,7 @@ namespace NWN.Core
     ///  Additionally, all SQL errors are sent to all connected players.
     public static string SqlGetError(System.IntPtr sqlQuery)
     {
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
+      VM.StackPush(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
       VM.Call(922);
       return VM.StackPopString();
     }
@@ -17037,7 +17037,7 @@ namespace NWN.Core
     {
       VM.StackPush(nValue);
       VM.StackPush(sParam);
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
+      VM.StackPush(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
       VM.Call(925);
     }
 
@@ -17046,7 +17046,7 @@ namespace NWN.Core
     {
       VM.StackPush(fFloat);
       VM.StackPush(sParam);
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
+      VM.StackPush(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
       VM.Call(926);
     }
 
@@ -17055,7 +17055,7 @@ namespace NWN.Core
     {
       VM.StackPush(sString);
       VM.StackPush(sParam);
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
+      VM.StackPush(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
       VM.Call(927);
     }
 
@@ -17064,7 +17064,7 @@ namespace NWN.Core
     {
       VM.StackPush(vVector);
       VM.StackPush(sParam);
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
+      VM.StackPush(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
       VM.Call(928);
     }
 
@@ -17078,7 +17078,7 @@ namespace NWN.Core
       VM.StackPush(bSaveObjectState);
       VM.StackPush(oObject);
       VM.StackPush(sParam);
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
+      VM.StackPush(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
       VM.Call(929);
     }
 
@@ -17092,7 +17092,7 @@ namespace NWN.Core
     ///      SendMessageToPC(GetFirstPC(), &amp;quot;Found widget: &amp;quot; + SqlGetString(n, 0));
     public static int SqlStep(System.IntPtr sqlQuery)
     {
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
+      VM.StackPush(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
       VM.Call(930);
       return VM.StackPopInt();
     }
@@ -17104,7 +17104,7 @@ namespace NWN.Core
     public static int SqlGetInt(System.IntPtr sqlQuery, int nIndex)
     {
       VM.StackPush(nIndex);
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
+      VM.StackPush(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
       VM.Call(931);
       return VM.StackPopInt();
     }
@@ -17116,7 +17116,7 @@ namespace NWN.Core
     public static float SqlGetFloat(System.IntPtr sqlQuery, int nIndex)
     {
       VM.StackPush(nIndex);
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
+      VM.StackPush(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
       VM.Call(932);
       return VM.StackPopFloat();
     }
@@ -17128,7 +17128,7 @@ namespace NWN.Core
     public static string SqlGetString(System.IntPtr sqlQuery, int nIndex)
     {
       VM.StackPush(nIndex);
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
+      VM.StackPush(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
       VM.Call(933);
       return VM.StackPopString();
     }
@@ -17140,7 +17140,7 @@ namespace NWN.Core
     public static System.Numerics.Vector3 SqlGetVector(System.IntPtr sqlQuery, int nIndex)
     {
       VM.StackPush(nIndex);
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
+      VM.StackPush(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
       VM.Call(934);
       return VM.StackPopVector();
     }
@@ -17157,9 +17157,9 @@ namespace NWN.Core
     {
       VM.StackPush(bLoadObjectState);
       VM.StackPush(oInventory);
-      VM.StackPush(lSpawnAt, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, lSpawnAt);
       VM.StackPush(nIndex);
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
+      VM.StackPush(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
       VM.Call(935);
       return VM.StackPopObject();
     }
@@ -17208,7 +17208,7 @@ namespace NWN.Core
     public static int GetEffectInteger(System.IntPtr eEffect, int nIndex)
     {
       VM.StackPush(nIndex);
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.Call(939);
       return VM.StackPopInt();
     }
@@ -17220,7 +17220,7 @@ namespace NWN.Core
     public static float GetEffectFloat(System.IntPtr eEffect, int nIndex)
     {
       VM.StackPush(nIndex);
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.Call(940);
       return VM.StackPopFloat();
     }
@@ -17232,7 +17232,7 @@ namespace NWN.Core
     public static string GetEffectString(System.IntPtr eEffect, int nIndex)
     {
       VM.StackPush(nIndex);
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.Call(941);
       return VM.StackPopString();
     }
@@ -17244,7 +17244,7 @@ namespace NWN.Core
     public static uint GetEffectObject(System.IntPtr eEffect, int nIndex)
     {
       VM.StackPush(nIndex);
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.Call(942);
       return VM.StackPopObject();
     }
@@ -17256,7 +17256,7 @@ namespace NWN.Core
     public static System.Numerics.Vector3 GetEffectVector(System.IntPtr eEffect, int nIndex)
     {
       VM.StackPush(nIndex);
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.Call(943);
       return VM.StackPopVector();
     }
@@ -17293,7 +17293,7 @@ namespace NWN.Core
     ///    Modifications made to one reference are reflected on others.
     public static void SetLocalCassowary(uint oObject, string sVarName, System.IntPtr cSolver)
     {
-      VM.StackPush(cSolver, ENGINE_STRUCTURE_CASSOWARY);
+      VM.StackPush(ENGINE_STRUCTURE_CASSOWARY, cSolver);
       VM.StackPush(sVarName);
       VM.StackPush(oObject);
       VM.Call(946);
@@ -17315,7 +17315,7 @@ namespace NWN.Core
     ///  It is not necessary to call this for solvers you simply want to let go out of scope.
     public static void CassowaryReset(System.IntPtr cSolver)
     {
-      VM.StackPush(cSolver, ENGINE_STRUCTURE_CASSOWARY);
+      VM.StackPush(ENGINE_STRUCTURE_CASSOWARY, cSolver);
       VM.Call(948);
     }
 
@@ -17332,7 +17332,7 @@ namespace NWN.Core
     {
       VM.StackPush(fStrength);
       VM.StackPush(sConstraint);
-      VM.StackPush(cSolver, ENGINE_STRUCTURE_CASSOWARY);
+      VM.StackPush(ENGINE_STRUCTURE_CASSOWARY, cSolver);
       VM.Call(949);
       return VM.StackPopString();
     }
@@ -17348,7 +17348,7 @@ namespace NWN.Core
       VM.StackPush(fStrength);
       VM.StackPush(fValue);
       VM.StackPush(sVarName);
-      VM.StackPush(cSolver, ENGINE_STRUCTURE_CASSOWARY);
+      VM.StackPush(ENGINE_STRUCTURE_CASSOWARY, cSolver);
       VM.Call(950);
     }
 
@@ -17356,7 +17356,7 @@ namespace NWN.Core
     public static float CassowaryGetValue(System.IntPtr cSolver, string sVarName)
     {
       VM.StackPush(sVarName);
-      VM.StackPush(cSolver, ENGINE_STRUCTURE_CASSOWARY);
+      VM.StackPush(ENGINE_STRUCTURE_CASSOWARY, cSolver);
       VM.Call(951);
       return VM.StackPopFloat();
     }
@@ -17365,7 +17365,7 @@ namespace NWN.Core
     ///  complex systems.
     public static string CassowaryDebug(System.IntPtr cSolver)
     {
-      VM.StackPush(cSolver, ENGINE_STRUCTURE_CASSOWARY);
+      VM.StackPush(ENGINE_STRUCTURE_CASSOWARY, cSolver);
       VM.Call(952);
       return VM.StackPopString();
     }
@@ -17432,7 +17432,7 @@ namespace NWN.Core
     ///  Hides the effect icon of eEffect and of all effects currently linked to it.
     public static System.IntPtr HideEffectIcon(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.Call(958);
       return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
@@ -17550,7 +17550,7 @@ namespace NWN.Core
     public static string JsonDump(System.IntPtr jValue, int nIndent = -1)
     {
       VM.StackPush(nIndent);
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jValue);
       VM.Call(969);
       return VM.StackPopString();
     }
@@ -17559,7 +17559,7 @@ namespace NWN.Core
     ///  Returns JSON_TYPE_NULL if the value is empty.
     public static int JsonGetType(System.IntPtr jValue)
     {
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jValue);
       VM.Call(970);
       return VM.StackPopInt();
     }
@@ -17571,7 +17571,7 @@ namespace NWN.Core
     ///  All other types return 1.
     public static int JsonGetLength(System.IntPtr jValue)
     {
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jValue);
       VM.Call(971);
       return VM.StackPopInt();
     }
@@ -17580,7 +17580,7 @@ namespace NWN.Core
     ///  Currently only describes parse errors.
     public static string JsonGetError(System.IntPtr jValue)
     {
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jValue);
       VM.Call(972);
       return VM.StackPopString();
     }
@@ -17650,7 +17650,7 @@ namespace NWN.Core
     ///  NB: Strings are decoded from UTF-8 to the game-local charset.
     public static string JsonGetString(System.IntPtr jValue)
     {
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jValue);
       VM.Call(980);
       return VM.StackPopString();
     }
@@ -17663,7 +17663,7 @@ namespace NWN.Core
     ///      You will not lose data if you keep the value as a json element (via Object/ArrayGet).
     public static int JsonGetInt(System.IntPtr jValue)
     {
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jValue);
       VM.Call(981);
       return VM.StackPopInt();
     }
@@ -17675,7 +17675,7 @@ namespace NWN.Core
     ///      You will not lose data if you keep the value as a json element (via Object/ArrayGet).
     public static float JsonGetFloat(System.IntPtr jValue)
     {
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jValue);
       VM.Call(982);
       return VM.StackPopFloat();
     }
@@ -17684,7 +17684,7 @@ namespace NWN.Core
     ///  Returns a empty array if the object is empty or not a json object, with JsonGetError() filled in.
     public static System.IntPtr JsonObjectKeys(System.IntPtr jObject)
     {
-      VM.StackPush(jObject, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jObject);
       VM.Call(983);
       return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
     }
@@ -17694,7 +17694,7 @@ namespace NWN.Core
     public static System.IntPtr JsonObjectGet(System.IntPtr jObject, string sKey)
     {
       VM.StackPush(sKey);
-      VM.StackPush(jObject, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jObject);
       VM.Call(984);
       return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
     }
@@ -17703,9 +17703,9 @@ namespace NWN.Core
     ///  Returns a json null value if jObject is not a object, with JsonGetError() filled in.
     public static System.IntPtr JsonObjectSet(System.IntPtr jObject, string sKey, System.IntPtr jValue)
     {
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jValue);
       VM.StackPush(sKey);
-      VM.StackPush(jObject, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jObject);
       VM.Call(985);
       return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
     }
@@ -17715,7 +17715,7 @@ namespace NWN.Core
     public static System.IntPtr JsonObjectDel(System.IntPtr jObject, string sKey)
     {
       VM.StackPush(sKey);
-      VM.StackPush(jObject, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jObject);
       VM.Call(986);
       return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
     }
@@ -17725,7 +17725,7 @@ namespace NWN.Core
     public static System.IntPtr JsonArrayGet(System.IntPtr jArray, int nIndex)
     {
       VM.StackPush(nIndex);
-      VM.StackPush(jArray, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jArray);
       VM.Call(987);
       return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
     }
@@ -17735,9 +17735,9 @@ namespace NWN.Core
     ///  Returns a json null value if nIndex is out of bounds, with JsonGetError() filled in.
     public static System.IntPtr JsonArraySet(System.IntPtr jArray, int nIndex, System.IntPtr jValue)
     {
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jValue);
       VM.StackPush(nIndex);
-      VM.StackPush(jArray, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jArray);
       VM.Call(988);
       return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
     }
@@ -17751,8 +17751,8 @@ namespace NWN.Core
     public static System.IntPtr JsonArrayInsert(System.IntPtr jArray, System.IntPtr jValue, int nIndex = -1)
     {
       VM.StackPush(nIndex);
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
-      VM.StackPush(jArray, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jValue);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jArray);
       VM.Call(989);
       return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
     }
@@ -17764,7 +17764,7 @@ namespace NWN.Core
     public static System.IntPtr JsonArrayDel(System.IntPtr jArray, int nIndex)
     {
       VM.StackPush(nIndex);
-      VM.StackPush(jArray, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jArray);
       VM.Call(990);
       return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
     }
@@ -17792,8 +17792,8 @@ namespace NWN.Core
     {
       VM.StackPush(bLoadObjectState);
       VM.StackPush(oOwner);
-      VM.StackPush(locLocation, ENGINE_STRUCTURE_LOCATION);
-      VM.StackPush(jObject, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, locLocation);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jObject);
       VM.Call(992);
       return VM.StackPopObject();
     }
@@ -17830,7 +17830,7 @@ namespace NWN.Core
     public static System.IntPtr JsonPointer(System.IntPtr jData, string sPointer)
     {
       VM.StackPush(sPointer);
-      VM.StackPush(jData, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jData);
       VM.Call(993);
       return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
     }
@@ -17848,8 +17848,8 @@ namespace NWN.Core
     ///  See https://datatracker.ietf.org/doc/html/rfc7386 for more details on the patch rules.
     public static System.IntPtr JsonPatch(System.IntPtr jData, System.IntPtr jPatch)
     {
-      VM.StackPush(jPatch, ENGINE_STRUCTURE_JSON);
-      VM.StackPush(jData, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jPatch);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jData);
       VM.Call(994);
       return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
     }
@@ -17858,8 +17858,8 @@ namespace NWN.Core
     ///  Returns a json null value on error, with JsonGetError() filled in.
     public static System.IntPtr JsonDiff(System.IntPtr jLHS, System.IntPtr jRHS)
     {
-      VM.StackPush(jRHS, ENGINE_STRUCTURE_JSON);
-      VM.StackPush(jLHS, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jRHS);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jLHS);
       VM.Call(995);
       return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
     }
@@ -17870,8 +17870,8 @@ namespace NWN.Core
     ///  Returns a json null value on error, with JsonGetError() filled in.
     public static System.IntPtr JsonMerge(System.IntPtr jData, System.IntPtr jMerge)
     {
-      VM.StackPush(jMerge, ENGINE_STRUCTURE_JSON);
-      VM.StackPush(jData, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jMerge);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jData);
       VM.Call(996);
       return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
     }
@@ -17889,7 +17889,7 @@ namespace NWN.Core
     ///  Set oObject&amp;apos;s local json variable sVarName to jValue
     public static void SetLocalJson(uint oObject, string sVarName, System.IntPtr jValue)
     {
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jValue);
       VM.StackPush(sVarName);
       VM.StackPush(oObject);
       VM.Call(998);
@@ -17911,9 +17911,9 @@ namespace NWN.Core
     ///    SqlStep(v);
     public static void SqlBindJson(System.IntPtr sqlQuery, string sParam, System.IntPtr jValue)
     {
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jValue);
       VM.StackPush(sParam);
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
+      VM.StackPush(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
       VM.Call(1000);
     }
 
@@ -17924,7 +17924,7 @@ namespace NWN.Core
     public static System.IntPtr SqlGetJson(System.IntPtr sqlQuery, int nIndex)
     {
       VM.StackPush(nIndex);
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
+      VM.StackPush(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
       VM.Call(1001);
       return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
     }
@@ -17938,7 +17938,7 @@ namespace NWN.Core
     public static void SetCampaignJson(string sCampaignName, string sVarName, System.IntPtr jValue, uint oPlayer = OBJECT_INVALID)
     {
       VM.StackPush(oPlayer);
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jValue);
       VM.StackPush(sVarName);
       VM.StackPush(sCampaignName);
       VM.Call(1002);
@@ -18073,7 +18073,7 @@ namespace NWN.Core
     {
       VM.StackPush(sEventScript);
       VM.StackPush(sWindowId);
-      VM.StackPush(jNui, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jNui);
       VM.StackPush(oPlayer);
       VM.Call(1011);
       return VM.StackPopInt();
@@ -18176,7 +18176,7 @@ namespace NWN.Core
     ///  Does nothing if the given player+token is invalid.
     public static void NuiSetBind(uint oPlayer, int nUiToken, string sBindName, System.IntPtr jValue)
     {
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jValue);
       VM.StackPush(sBindName);
       VM.StackPush(nUiToken);
       VM.StackPush(oPlayer);
@@ -18187,7 +18187,7 @@ namespace NWN.Core
     ///  * This currently only works with the &amp;quot;group&amp;quot; element type, and the special &amp;quot;_window_&amp;quot; root group.
     public static void NuiSetGroupLayout(uint oPlayer, int nUiToken, string sElement, System.IntPtr jNui)
     {
-      VM.StackPush(jNui, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jNui);
       VM.StackPush(sElement);
       VM.StackPush(nUiToken);
       VM.StackPush(oPlayer);
@@ -18255,7 +18255,7 @@ namespace NWN.Core
     ///  Will do nothing if the window does not exist.
     public static void NuiSetUserData(uint oPlayer, int nToken, System.IntPtr jUserData)
     {
-      VM.StackPush(jUserData, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jUserData);
       VM.StackPush(nToken);
       VM.StackPush(oPlayer);
       VM.Call(1028);
@@ -18288,7 +18288,7 @@ namespace NWN.Core
     public static System.IntPtr JsonArrayTransform(System.IntPtr jArray, int nTransform)
     {
       VM.StackPush(nTransform);
-      VM.StackPush(jArray, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jArray);
       VM.Call(1030);
       return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
     }
@@ -18301,8 +18301,8 @@ namespace NWN.Core
     {
       VM.StackPush(nConditional);
       VM.StackPush(nNth);
-      VM.StackPush(jNeedle, ENGINE_STRUCTURE_JSON);
-      VM.StackPush(jHaystack, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jNeedle);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jHaystack);
       VM.Call(1031);
       return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
     }
@@ -18323,7 +18323,7 @@ namespace NWN.Core
     {
       VM.StackPush(nEndIndex);
       VM.StackPush(nBeginIndex);
-      VM.StackPush(jArray, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jArray);
       VM.Call(1032);
       return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
     }
@@ -18342,9 +18342,9 @@ namespace NWN.Core
     ///    Returns a new array containing all elements present in either array, but not both.
     public static System.IntPtr JsonSetOp(System.IntPtr jValue, int nOp, System.IntPtr jOther)
     {
-      VM.StackPush(jOther, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jOther);
       VM.StackPush(nOp);
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jValue);
       VM.Call(1033);
       return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
     }
@@ -18373,7 +18373,7 @@ namespace NWN.Core
     ///  Note: effects that modify state, Stunned/Knockdown/Deaf etc, WILL be removed on death.
     public static System.IntPtr UnyieldingEffect(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.Call(1036);
       return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
@@ -18381,7 +18381,7 @@ namespace NWN.Core
     ///  Set eEffect to ignore immunities and return eEffect.
     public static System.IntPtr IgnoreEffectImmunity(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.Call(1037);
       return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
@@ -19152,7 +19152,7 @@ namespace NWN.Core
     ///  it is unique and the same for all effects linked to it.
     public static string GetEffectLinkId(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.Call(1096);
       return VM.StackPopString();
     }
@@ -19193,7 +19193,7 @@ namespace NWN.Core
       VM.StackPush(nHeight);
       VM.StackPush(nOrientation);
       VM.StackPush(nTileID);
-      VM.StackPush(locTile, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, locTile);
       VM.Call(1098);
     }
 
@@ -19201,7 +19201,7 @@ namespace NWN.Core
     ///  Returns -1 on error.
     public static int GetTileID(System.IntPtr locTile)
     {
-      VM.StackPush(locTile, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, locTile);
       VM.Call(1099);
       return VM.StackPopInt();
     }
@@ -19210,7 +19210,7 @@ namespace NWN.Core
     ///  Returns -1 on error.
     public static int GetTileOrientation(System.IntPtr locTile)
     {
-      VM.StackPush(locTile, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, locTile);
       VM.Call(1100);
       return VM.StackPopInt();
     }
@@ -19219,7 +19219,7 @@ namespace NWN.Core
     ///  Returns -1 on error.
     public static int GetTileHeight(System.IntPtr locTile)
     {
-      VM.StackPush(locTile, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, locTile);
       VM.Call(1101);
       return VM.StackPopInt();
     }
@@ -19238,7 +19238,7 @@ namespace NWN.Core
       VM.StackPush(bAnimLoop3);
       VM.StackPush(bAnimLoop2);
       VM.StackPush(bAnimLoop1);
-      VM.StackPush(locTile, ENGINE_STRUCTURE_LOCATION);
+      VM.StackPush(ENGINE_STRUCTURE_LOCATION, locTile);
       VM.Call(1103);
     }
 
@@ -19265,7 +19265,7 @@ namespace NWN.Core
     {
       VM.StackPush(sTileset);
       VM.StackPush(nFlags);
-      VM.StackPush(jTileData, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jTileData);
       VM.StackPush(oArea);
       VM.Call(1104);
     }
@@ -19333,7 +19333,7 @@ namespace NWN.Core
     public static void SqlResetQuery(System.IntPtr sqlQuery, int bClearBinds = FALSE)
     {
       VM.StackPush(bClearBinds);
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
+      VM.StackPush(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
       VM.Call(1111);
     }
 
@@ -19482,7 +19482,7 @@ namespace NWN.Core
     public static System.IntPtr SetEffectCreator(System.IntPtr eEffect, uint oCreator)
     {
       VM.StackPush(oCreator);
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.Call(1123);
       return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
@@ -19492,7 +19492,7 @@ namespace NWN.Core
     public static System.IntPtr SetEffectCasterLevel(System.IntPtr eEffect, int nCasterLevel)
     {
       VM.StackPush(nCasterLevel);
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.Call(1124);
       return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
@@ -19502,7 +19502,7 @@ namespace NWN.Core
     public static System.IntPtr SetEffectSpellId(System.IntPtr eEffect, int nSpellId)
     {
       VM.StackPush(nSpellId);
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.Call(1125);
       return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
@@ -19514,7 +19514,7 @@ namespace NWN.Core
     ///  * A returned value greater than 0 does not guarantee the query will return rows.
     public static int SqlGetColumnCount(System.IntPtr sqlQuery)
     {
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
+      VM.StackPush(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
       VM.Call(1126);
       return VM.StackPopInt();
     }
@@ -19529,7 +19529,7 @@ namespace NWN.Core
     public static string SqlGetColumnName(System.IntPtr sqlQuery, int nNth)
     {
       VM.StackPush(nNth);
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
+      VM.StackPush(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
       VM.Call(1127);
       return VM.StackPopString();
     }
@@ -19598,7 +19598,7 @@ namespace NWN.Core
     {
       VM.StackPush(nResType);
       VM.StackPush(sResRef);
-      VM.StackPush(jTemplateSpec, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jTemplateSpec);
       VM.Call(1133);
       return VM.StackPopInt();
     }
@@ -19607,9 +19607,9 @@ namespace NWN.Core
     ///  jObject will have the key at sKey set to jValue.
     public static void JsonObjectSetInplace(System.IntPtr jObject, string sKey, System.IntPtr jValue)
     {
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jValue);
       VM.StackPush(sKey);
-      VM.StackPush(jObject, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jObject);
       VM.Call(1134);
     }
 
@@ -19619,7 +19619,7 @@ namespace NWN.Core
     public static void JsonObjectDelInplace(System.IntPtr jObject, string sKey)
     {
       VM.StackPush(sKey);
-      VM.StackPush(jObject, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jObject);
       VM.Call(1135);
     }
 
@@ -19631,8 +19631,8 @@ namespace NWN.Core
     public static void JsonArrayInsertInplace(System.IntPtr jArray, System.IntPtr jValue, int nIndex = -1)
     {
       VM.StackPush(nIndex);
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
-      VM.StackPush(jArray, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jValue);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jArray);
       VM.Call(1136);
     }
 
@@ -19641,9 +19641,9 @@ namespace NWN.Core
     ///  Will do nothing if jArray is not an array or nIndex is out of range.
     public static void JsonArraySetInplace(System.IntPtr jArray, int nIndex, System.IntPtr jValue)
     {
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jValue);
       VM.StackPush(nIndex);
-      VM.StackPush(jArray, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jArray);
       VM.Call(1137);
     }
 
@@ -19653,7 +19653,7 @@ namespace NWN.Core
     public static void JsonArrayDelInplace(System.IntPtr jArray, int nIndex)
     {
       VM.StackPush(nIndex);
-      VM.StackPush(jArray, ENGINE_STRUCTURE_JSON);
+      VM.StackPush(ENGINE_STRUCTURE_JSON, jArray);
       VM.Call(1138);
     }
 

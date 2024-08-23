@@ -103,7 +103,7 @@ namespace NWN.Core.NWNX
     {
       const string sFunc = "EffectTypeCast";
       VM.NWNX.SetFunction(NWNX_Util, sFunc);
-      VM.NWNX.StackPush(e, ENGINE_STRUCTURE_EFFECT);
+      VM.NWNX.StackPush(ENGINE_STRUCTURE_EFFECT, e);
       VM.NWNX.Call();
       return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
@@ -115,7 +115,7 @@ namespace NWN.Core.NWNX
     {
       const string sFunc = "EffectTypeCast";
       VM.NWNX.SetFunction(NWNX_Util, sFunc);
-      VM.NWNX.StackPush(ip, ENGINE_STRUCTURE_ITEMPROPERTY);
+      VM.NWNX.StackPush(ENGINE_STRUCTURE_ITEMPROPERTY, ip);
       VM.NWNX.Call();
       return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }

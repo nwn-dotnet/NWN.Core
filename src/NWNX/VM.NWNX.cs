@@ -1,12 +1,15 @@
 using System;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.Marshalling;
+using NWN.Core.Native;
 
 namespace NWN.Core
 {
   public static partial class VM
   {
-    public static class NWNX
+    public static partial class NWNX
     {
       static NWNX()
       {
@@ -16,74 +19,93 @@ namespace NWN.Core
         }
       }
 
-      [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-      public static void SetFunction(string plugin, string method) => NWNCore.NWNXSetFunction(plugin, method);
+      [LibraryImport("NWNX_DotNET", EntryPoint = "NWNXSetFunction")]
+      [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+      public static partial void SetFunction([MarshalUsing(typeof(Utf16StringMarshaller))] string plugin, [MarshalUsing(typeof(Utf16StringMarshaller))] string function);
 
-      [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-      public static void StackPush(int value) => NWNCore.NWNXPushInt(value);
+      [LibraryImport("NWNX_DotNET", EntryPoint = "NWNXPushInt")]
+      [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+      public static partial void StackPush(int value);
 
-      [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-      public static void StackPush(float value) => NWNCore.NWNXPushFloat(value);
+      [LibraryImport("NWNX_DotNET", EntryPoint = "NWNXPushFloat")]
+      [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+      public static partial void StackPush(float value);
 
-      [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-      public static void StackPush(string value) => NWNCore.NWNXPushRawString(value);
+      [LibraryImport("NWNX_DotNET", EntryPoint = "NWNXPushRawString")]
+      [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+      public static partial void StackPush([MarshalUsing(typeof(NwStringMarshaller))] string? value);
 
-      [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-      public static void StackPush(uint value) => NWNCore.NWNXPushObject(value);
+      [LibraryImport("NWNX_DotNET", EntryPoint = "NWNXPushObject")]
+      [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+      public static partial void StackPush(uint value);
 
       [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
       public static void StackPush(Vector3 vector)
       {
-        NWNCore.NWNXPushFloat(vector.X);
-        NWNCore.NWNXPushFloat(vector.Y);
-        NWNCore.NWNXPushFloat(vector.Z);
+        StackPush(vector.X);
+        StackPush(vector.Y);
+        StackPush(vector.Z);
       }
 
       [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-      public static void StackPush(IntPtr refValue, int engineType)
+      public static void StackPush(int engineType, IntPtr refValue)
       {
         switch (engineType)
         {
           case NWScript.ENGINE_STRUCTURE_EFFECT:
-            NWNCore.NWNXPushEffect(refValue);
+            PushEffect(refValue);
             break;
           case NWScript.ENGINE_STRUCTURE_ITEMPROPERTY:
-            NWNCore.NWNXPushItemProperty(refValue);
+            PushItemProperty(refValue);
             break;
           case NWScript.ENGINE_STRUCTURE_LOCATION:
             Vector3 pos = NWScript.GetPositionFromLocation(refValue);
-            NWNCore.NWNXPushFloat(NWScript.GetFacingFromLocation(refValue));
-            NWNCore.NWNXPushFloat(pos.Z);
-            NWNCore.NWNXPushFloat(pos.Y);
-            NWNCore.NWNXPushFloat(pos.X);
-            NWNCore.NWNXPushObject(NWScript.GetAreaFromLocation(refValue));
+            StackPush(NWScript.GetFacingFromLocation(refValue));
+            StackPush(pos.Z);
+            StackPush(pos.Y);
+            StackPush(pos.X);
+            StackPush(NWScript.GetAreaFromLocation(refValue));
             break;
           default:
             throw new NotSupportedException($"Native engine type not supported: {engineType}");
         }
       }
 
-      [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-      public static void Call() => NWNCore.NWNXCallFunction();
+      [LibraryImport("NWNX_DotNET", EntryPoint = "NWNXPushEffect")]
+      [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+      internal static partial void PushEffect(IntPtr value);
 
-      [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-      public static int StackPopInt() => NWNCore.NWNXPopInt();
+      [LibraryImport("NWNX_DotNET", EntryPoint = "NWNXPushItemProperty")]
+      [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+      internal static partial void PushItemProperty(IntPtr value);
 
-      [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-      public static float StackPopFloat() => NWNCore.NWNXPopFloat();
+      [LibraryImport("NWNX_DotNET", EntryPoint = "NWNXCallFunction")]
+      [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+      public static partial void Call();
 
-      [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-      public static string? StackPopString() => NWNCore.NWNXPopRawString();
+      [LibraryImport("NWNX_DotNET", EntryPoint = "NWNXPopInt")]
+      [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+      public static partial int StackPopInt();
 
-      [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-      public static uint StackPopObject() => NWNCore.NWNXPopObject();
+      [LibraryImport("NWNX_DotNET", EntryPoint = "NWNXPopFloat")]
+      [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+      public static partial float StackPopFloat();
+
+      [LibraryImport("NWNX_DotNET", EntryPoint = "NWNXPopRawString")]
+      [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+      [return: MarshalUsing(typeof(NwStringMarshaller))]
+      public static partial string? StackPopString();
+
+      [LibraryImport("NWNX_DotNET", EntryPoint = "NWNXPopObject")]
+      [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+      public static partial uint StackPopObject();
 
       [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
       public static Vector3 StackPopVector()
       {
-        float z = NWNCore.NWNXPopFloat();
-        float y = NWNCore.NWNXPopFloat();
-        float x = NWNCore.NWNXPopFloat();
+        float z = StackPopFloat();
+        float y = StackPopFloat();
+        float x = StackPopFloat();
 
         return new Vector3(x, y, z);
       }
@@ -93,11 +115,19 @@ namespace NWN.Core
       {
         return engineType switch
         {
-          NWScript.ENGINE_STRUCTURE_EFFECT => NWNCore.NWNXPopEffect(),
-          NWScript.ENGINE_STRUCTURE_ITEMPROPERTY => NWNCore.NWNXPopItemProperty(),
+          NWScript.ENGINE_STRUCTURE_EFFECT => PopEffect(),
+          NWScript.ENGINE_STRUCTURE_ITEMPROPERTY => PopItemProperty(),
           _ => throw new NotSupportedException($"Native engine type not supported: {engineType}")
         };
       }
+
+      [LibraryImport("NWNX_DotNET", EntryPoint = "NWNXPopEffect")]
+      [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+      internal static partial IntPtr PopEffect();
+
+      [LibraryImport("NWNX_DotNET", EntryPoint = "NWNXPopItemProperty")]
+      [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+      internal static partial IntPtr PopItemProperty();
     }
   }
 }
