@@ -6,7 +6,8 @@ using NWN.Core.Native;
 namespace NWN.Core
 {
   /// <summary>
-  /// Exported C++ functions from NWNX_DotNET.
+  /// Additional function exports from NWNX_DotNET.<br/>
+  /// VM functions are not defined here. See <see cref="VM"/>.
   /// </summary>
   public static partial class NWNCore
   {
