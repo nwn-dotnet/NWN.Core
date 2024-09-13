@@ -76,7 +76,7 @@ jobs:
           test -e ${GITHUB_WORKSPACE}/scripts/nwn/nwscript.nss
 
       - name: Upload Scripts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: nss_source
           path: ./scripts
@@ -95,7 +95,7 @@ jobs:
           persist-credentials: true
 
       - name: Download Scripts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: nss_source
           path: ./scripts
