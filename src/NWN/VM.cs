@@ -2,7 +2,8 @@ using System;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Text;
+using System.Runtime.InteropServices.Marshalling;
+using NWN.Core.Native;
 
 namespace NWN.Core
 {
@@ -16,110 +17,74 @@ namespace NWN.Core
       }
     }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-    public static void StackPush(int value) => NWNCore.NativeFunctions.StackPushInteger(value);
+    [LibraryImport("NWNX_DotNET", EntryPoint = "StackPushInteger")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial void StackPush(int value);
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-    public static void StackPush(float value) => NWNCore.NativeFunctions.StackPushFloat(value);
+    [LibraryImport("NWNX_DotNET", EntryPoint = "StackPushFloat")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial void StackPush(float value);
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-    public static void StackPush(string value)
-    {
-      IntPtr charPtr = GetNullTerminatedString(value);
-      NWNCore.NativeFunctions.StackPushRawString(charPtr);
-      Marshal.FreeHGlobal(charPtr);
-    }
+    [LibraryImport("NWNX_DotNET", EntryPoint = "StackPushRawString")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial void StackPush([MarshalUsing(typeof(NwStringMarshaller))] string? value);
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-    public static void StackPush(uint value) => NWNCore.NativeFunctions.StackPushObject(value);
+    [LibraryImport("NWNX_DotNET", EntryPoint = "StackPushObject")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial void StackPush(uint value);
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-    public static void StackPush(Vector3 vector) => NWNCore.NativeFunctions.StackPushVector(vector);
+    [LibraryImport("NWNX_DotNET", EntryPoint = "StackPushVector")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial void StackPush([MarshalUsing(typeof(Vector3Marshaller))] Vector3 value);
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-    public static void StackPush(IntPtr refValue, int engineType) => NWNCore.NativeFunctions.StackPushGameDefinedStructure(engineType, refValue);
+    [LibraryImport("NWNX_DotNET", EntryPoint = "StackPushGameDefinedStructure")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial void StackPush(int type, IntPtr value);
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-    public static void Call(int functionId) => NWNCore.NativeFunctions.CallBuiltIn(functionId);
+    [LibraryImport("NWNX_DotNET", EntryPoint = "CallBuiltIn")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial void Call(int id);
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-    public static int StackPopInt() => NWNCore.NativeFunctions.StackPopInteger();
+    [LibraryImport("NWNX_DotNET", EntryPoint = "StackPopInteger")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial int StackPopInt();
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-    public static float StackPopFloat() => NWNCore.NativeFunctions.StackPopFloat();
+    [LibraryImport("NWNX_DotNET", EntryPoint = "StackPopFloat")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial float StackPopFloat();
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-    public static string? StackPopString() => ReadNullTerminatedString(NWNCore.NativeFunctions.StackPopRawString());
+    [LibraryImport("NWNX_DotNET", EntryPoint = "StackPopRawString")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    [return: MarshalUsing(typeof(NwStringMarshaller))]
+    public static partial string? StackPopString();
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-    public static uint StackPopObject() => NWNCore.NativeFunctions.StackPopObject();
+    [LibraryImport("NWNX_DotNET", EntryPoint = "StackPopObject")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial uint StackPopObject();
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-    public static Vector3 StackPopVector() => NWNCore.NativeFunctions.StackPopVector();
+    [LibraryImport("NWNX_DotNET", EntryPoint = "StackPopVector")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    [return: MarshalUsing(typeof(Vector3Marshaller))]
+    public static partial Vector3 StackPopVector();
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-    public static IntPtr StackPopStruct(int engineType) => NWNCore.NativeFunctions.StackPopGameDefinedStructure(engineType);
+    [LibraryImport("NWNX_DotNET", EntryPoint = "StackPopGameDefinedStructure")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial IntPtr StackPopStruct(int type);
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-    public static void FreeGameDefinedStructure(int type, IntPtr str) => NWNCore.NativeFunctions.FreeGameDefinedStructure(type, str);
+    [LibraryImport("NWNX_DotNET", EntryPoint = "FreeGameDefinedStructure")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial IntPtr FreeGameDefinedStructure(int type, IntPtr value);
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-    public static IntPtr GetFunctionPointer(string name) => NWNCore.NativeFunctions.GetFunctionPointer(name);
+    [LibraryImport("NWNX_DotNET", EntryPoint = "ClosureAssignCommand")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial int ClosureAssignCommand(uint oid, ulong eventId);
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-    public static NWNCore.NWNXExportedGlobals GetNWNXExportedGlobals() => NWNCore.NativeFunctions.GetNWNXExportedGlobals();
+    [LibraryImport("NWNX_DotNET", EntryPoint = "ClosureDelayCommand")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial int ClosureDelayCommand(uint oid, float duration, ulong eventId);
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-    public static int ClosureAssignCommand(uint oid, ulong eventId) => NWNCore.NativeFunctions.ClosureAssignCommand(oid, eventId);
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-    public static int ClosureDelayCommand(uint oid, float duration, ulong eventId) => NWNCore.NativeFunctions.ClosureDelayCommand(oid, duration, eventId);
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-    public static int ClosureActionDoCommand(uint oid, ulong eventId) => NWNCore.NativeFunctions.ClosureActionDoCommand(oid, eventId);
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-    public static IntPtr RequestHook(IntPtr address, IntPtr managedFuncPtr, int priority) => NWNCore.NativeFunctions.RequestHook(address, managedFuncPtr, priority);
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-    public static void ReturnHook(IntPtr funcPtr) => NWNCore.NativeFunctions.ReturnHook(funcPtr);
-
-    public static IntPtr GetNullTerminatedString(string? value)
-    {
-      if (value == null)
-      {
-        return IntPtr.Zero;
-      }
-
-      byte[] bytes = NWNCore.Encoding.GetBytes(value);
-      IntPtr buffer = Marshal.AllocHGlobal(bytes.Length + 1);
-      Marshal.Copy(bytes, 0, buffer, bytes.Length);
-
-      // Write null terminator
-      Marshal.WriteByte(buffer + bytes.Length, 0);
-      return buffer;
-    }
-
-    private static unsafe string? ReadNullTerminatedString(IntPtr cString)
-    {
-      if (cString == IntPtr.Zero)
-      {
-        return null;
-      }
-
-      byte* charPointer = (byte*)cString;
-      return NWNCore.Encoding.GetString(charPointer, GetStringLength(charPointer));
-    }
-
-    private static unsafe int GetStringLength(byte* cString)
-    {
-      byte* walk = cString;
-      while (*walk != 0)
-      {
-        walk++;
-      }
-
-      return (int)(walk - cString);
-    }
+    [LibraryImport("NWNX_DotNET", EntryPoint = "ClosureActionDoCommand")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial int ClosureActionDoCommand(uint oid, ulong eventId);
   }
 }
