@@ -72,6 +72,8 @@ namespace NWN.Core.NWNX
     /// <returns>The mtime of the module file.</returns>
     public static int GetModuleMtime()
     {
+      const string sFunc = "GetModuleMtime";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
@@ -80,6 +82,8 @@ namespace NWN.Core.NWNX
     /// <returns>The module file as a string.</returns>
     public static string GetModuleFile()
     {
+      const string sFunc = "GetModuleFile";
+      VM.NWNX.SetFunction(NWNX_Util, sFunc);
       VM.NWNX.Call();
       return VM.NWNX.StackPopString();
     }
