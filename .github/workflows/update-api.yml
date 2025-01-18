@@ -1,35 +1,35 @@
 name: Update API Bindings
 
 on:
-  schedule:
-    - cron: "0 0 * * *"
   workflow_dispatch:
     inputs:
       tag:
         description: 'Commit Tag'
+  schedule:
+    - cron: "0 0 * * *"
 
 jobs:
   download:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     outputs:
-      nwnx_sha_short: ${{ steps.revision.outputs.nwnx_sha_short }}
-      nwn_build: ${{ steps.version.outputs.nwn_build }}
-      nwn_build_revision: ${{ steps.version.outputs.nwn_build_revision }}
-      nwn_build_postfix: ${{ steps.version.outputs.nwn_build_postfix }}
+      nwnx_sha_short: ${{ steps.revision.outputs.NWNX_SHA_SHORT }}
+      nwn_build: ${{ steps.version.outputs.NWN_BUILD }}
+      nwn_build_revision: ${{ steps.version.outputs.NWN_BUILD_REVISION }}
+      nwn_build_postfix: ${{ steps.version.outputs.NWN_BUILD_POSTFIX }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
-          path: ./repo
+          path: "./repo"
 
       - name: Download Tools
         run: |
-          wget https://github.com/niv/neverwinter.nim/releases/download/1.5.9/neverwinter.linux.amd64.zip && \
+          wget https://github.com/niv/neverwinter.nim/releases/download/2.0.1/neverwinter.linux.amd64.zip && \
           unzip neverwinter.linux.amd64.zip
 
       - name: Load Environment Info
         id: "dotenv"
-        uses: falti/dotenv-action@v0.2.6
+        uses: falti/dotenv-action@v1
         with:
           path: "./repo/.env"
 
@@ -37,28 +37,28 @@ jobs:
         id: "revision"
         run: |
           NWNX_SHA=$(curl -u "u:${{github.token}}" https://api.github.com/repos/nwnxee/unified/git/ref/tags/${{ steps.dotenv.outputs.nwnx_tag }} | jq .object.sha | tr -d '"')
-          echo ::set-output name=nwnx_sha::$( echo $NWNX_SHA )
-          echo ::set-output name=nwnx_sha_short::$( echo $NWNX_SHA | cut -c1-7 )
+          echo "NWNX_SHA=$NWNX_SHA" >> $GITHUB_OUTPUT
+          echo "NWNX_SHA_SHORT=$(echo $NWNX_SHA | cut -c1-8)" >> $GITHUB_OUTPUT
 
       - name: Checkout NWNX
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
-          repository: "nwnxee/unified"
           path: "./nwnx"
-          ref: ${{ steps.revision.outputs.nwnx_sha }}
+          repository: "nwnxee/unified"
+          ref: ${{ steps.revision.outputs.NWNX_SHA }}
 
       - name: Load Game Version
         id: "version"
         run: |
-          echo "::set-output name=nwn_build::$(grep 'set(TARGET_NWN_BUILD ' ./nwnx/CMakeLists.txt | cut -d' ' -f2 | sed 's/)//')"
-          echo "::set-output name=nwn_build_revision::$(grep 'set(TARGET_NWN_BUILD_REVISION ' ./nwnx/CMakeLists.txt | cut -d' ' -f2 | sed 's/)//')"
-          echo "::set-output name=nwn_build_postfix::$(grep 'set(TARGET_NWN_BUILD_POSTFIX ' ./nwnx/CMakeLists.txt | cut -d' ' -f2 | sed 's/)//')"
+          echo "NWN_BUILD=$(grep 'set(TARGET_NWN_BUILD ' ./nwnx/CMakeLists.txt | cut -d' ' -f2 | sed 's/)//')" >> $GITHUB_OUTPUT
+          echo "NWN_BUILD_REVISION=$(grep 'set(TARGET_NWN_BUILD_REVISION ' ./nwnx/CMakeLists.txt | cut -d' ' -f2 | sed 's/)//')" >> $GITHUB_OUTPUT
+          echo "NWN_BUILD_POSTFIX=$(grep 'set(TARGET_NWN_BUILD_POSTFIX ' ./nwnx/CMakeLists.txt | cut -d' ' -f2 | sed 's/)//')" >> $GITHUB_OUTPUT
 
       - name: Extract Server Image
         id: "nwn_extract"
         uses: shrink/actions-docker-extract@v3
         with:
-          image: nwnxee/unified:${{ steps.revision.outputs.nwnx_sha_short }}
+          image: nwnxee/unified:${{ steps.revision.outputs.NWNX_SHA_SHORT }}
           path: /nwn
 
       - name: Unpack Key File
@@ -88,7 +88,7 @@ jobs:
     needs: [download]
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           path: ./repo
           ssh-key: ${{ secrets.API_PUSH_KEY }}
@@ -102,16 +102,16 @@ jobs:
 
       - name: Convert
         run: |
-          su -c "rm -fv ${GITHUB_WORKSPACE}/repo/src/NWNX/Plugins/*"
-          dotnet /app/Nss2CSharp.dll "${GITHUB_WORKSPACE}/scripts/nwn" "${GITHUB_WORKSPACE}/repo/src/NWN" "${GITHUB_WORKSPACE}/scripts/nwnx" "${GITHUB_WORKSPACE}/repo/src/NWNX/Plugins"
-          if [ -z "$(ls -A ${GITHUB_WORKSPACE}/repo/src/NWNX/Plugins)" ]; then
+          su -c "rm -fv ${GITHUB_WORKSPACE}/repo/NWN.Core/src/NWNX/Plugins/*"
+          dotnet /app/Nss2CSharp.dll "${GITHUB_WORKSPACE}/scripts/nwn" "${GITHUB_WORKSPACE}/repo/NWN.Core/src/NWN" "${GITHUB_WORKSPACE}/scripts/nwnx" "${GITHUB_WORKSPACE}/repo/NWN.Core/src/NWNX/Plugins"
+          if [ -z "$(ls -A ${GITHUB_WORKSPACE}/repo/NWN.Core/src/NWNX/Plugins)" ]; then
             exit 1
           fi
 
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 8.0.x
+          global-json-file: ./repo/global.json
 
       - name: Test Build
         run: |

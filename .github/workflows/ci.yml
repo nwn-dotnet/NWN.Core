@@ -17,40 +17,41 @@ on:
 
 jobs:
   compile:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, 'skip ci')"
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
+          global-json-file: global.json
 
       - name: Build
         run: dotnet build --configuration Release
 
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     needs: compile
     outputs:
-      version: ${{ steps.vars.outputs.version }}
+      version: ${{ steps.vars.outputs.VERSION }}
+      tag: ${{ steps.vars.outputs.TAG }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
+          global-json-file: global.json
 
       - name: Version and Tag
         id: bump_version
-        uses: anothrNick/github-tag-action@1.61.0
+        uses: anothrNick/github-tag-action@1.71.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
@@ -63,7 +64,8 @@ jobs:
       - name: Prepare Outputs
         id: vars
         run: |
-          echo "::set-output name=version::$(echo ${{ steps.bump_version.outputs.tag }} | sed 's/[v]//g')"
+          echo "VERSION=$(echo ${{ steps.bump_version.outputs.tag }} | sed 's/[v]//g')" >> "$GITHUB_OUTPUT"
+          echo "TAG=$(echo ${{ steps.bump_version.outputs.tag }})" >> "$GITHUB_OUTPUT"
 
       - name: Build Release Binaries
         id: build
@@ -73,24 +75,54 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Binaries
-          path: bin/Release
+          path: NWN.Core/bin/Release/
           if-no-files-found: error
 
-  nuget:
-    runs-on: ubuntu-20.04
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+  release:
+    runs-on: ubuntu-latest
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
     needs: build
+    permissions:
+      contents: write
     steps:
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: '8.0.x'
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Download Release Artifacts
         uses: actions/download-artifact@v4
         with:
           name: Binaries
-          path: bin/Release
+          path: binaries
+
+      - name: Zip Binaries
+        run: zip -r ../NWN.Core.zip ./*
+        working-directory: binaries
+
+      - name: Upload Release Binaries
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create ${{ needs.build.outputs.tag }} --title "Release ${{ needs.build.outputs.version }}"
+          gh release upload ${{ needs.build.outputs.tag }} NWN.Core.zip
+
+  nuget:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    needs: build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Download Release Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: Binaries
+          path: bin/Release/
 
       - name: NuGet Publish
         run: dotnet nuget push bin/Release/*.nupkg --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json
