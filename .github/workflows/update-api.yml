@@ -38,7 +38,7 @@ jobs:
         run: |
           NWNX_SHA=$(curl -u "u:${{github.token}}" https://api.github.com/repos/nwnxee/unified/git/ref/tags/${{ steps.dotenv.outputs.nwnx_tag }} | jq .object.sha | tr -d '"')
           echo "NWNX_SHA=$NWNX_SHA" >> $GITHUB_OUTPUT
-          echo "NWNX_SHA_SHORT=$(echo $NWNX_SHA | cut -c1-8)" >> $GITHUB_OUTPUT
+          echo "NWNX_SHA_SHORT=$(echo $NWNX_SHA | cut -c1-7)" >> $GITHUB_OUTPUT
 
       - name: Checkout NWNX
         uses: actions/checkout@v4
