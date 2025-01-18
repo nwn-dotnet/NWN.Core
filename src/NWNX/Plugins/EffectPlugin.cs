@@ -30,7 +30,7 @@ namespace NWN.Core.NWNX
     {
       const string sFunc = "UnpackEffect";
       VM.NWNX.SetFunction(NWNX_Effect, sFunc);
-      VM.NWNX.StackPush(e, ENGINE_STRUCTURE_EFFECT);
+      VM.NWNX.StackPush(ENGINE_STRUCTURE_EFFECT, e);
       VM.NWNX.Call();
       return __NWNX_Effect_ResolveUnpack( sFunc);
     }
@@ -55,8 +55,8 @@ namespace NWN.Core.NWNX
     {
       const string sFunc = "ReplaceEffect";
       VM.NWNX.SetFunction(NWNX_Effect, sFunc);
-      VM.NWNX.StackPush(eNew, ENGINE_STRUCTURE_EFFECT);
-      VM.NWNX.StackPush(eOld, ENGINE_STRUCTURE_EFFECT);
+      VM.NWNX.StackPush(ENGINE_STRUCTURE_EFFECT, eNew);
+      VM.NWNX.StackPush(ENGINE_STRUCTURE_EFFECT, eOld);
       VM.NWNX.StackPush(obj);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
@@ -125,7 +125,7 @@ namespace NWN.Core.NWNX
       const string sFunc = "Apply";
       VM.NWNX.SetFunction(NWNX_Effect, sFunc);
       VM.NWNX.StackPush(oObject);
-      VM.NWNX.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.NWNX.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.NWNX.Call();
     }
 
@@ -138,7 +138,7 @@ namespace NWN.Core.NWNX
       const string sFunc = "SetEffectCreator";
       VM.NWNX.SetFunction(NWNX_Effect, sFunc);
       VM.NWNX.StackPush(oObject);
-      VM.NWNX.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.NWNX.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.NWNX.Call();
       return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
     }
@@ -150,7 +150,7 @@ namespace NWN.Core.NWNX
     {
       const string sFunc = "GetIsEffectValid";
       VM.NWNX.SetFunction(NWNX_Effect, sFunc);
-      VM.NWNX.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
+      VM.NWNX.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
       VM.NWNX.Call();
       return VM.NWNX.StackPopInt();
     }
@@ -260,9 +260,9 @@ namespace NWN.Core.NWNX
       VM.NWNX.StackPush(e.nCasterLevel);
       if (bReplace == FALSE)
       {
-        VM.NWNX.StackPush(e.eLinkLeft, ENGINE_STRUCTURE_EFFECT);
+        VM.NWNX.StackPush(ENGINE_STRUCTURE_EFFECT, e.eLinkLeft);
         VM.NWNX.StackPush(e.bLinkLeftValid);
-        VM.NWNX.StackPush(e.eLinkRight, ENGINE_STRUCTURE_EFFECT);
+        VM.NWNX.StackPush(ENGINE_STRUCTURE_EFFECT, e.eLinkRight);
         VM.NWNX.StackPush(e.bLinkRightValid);
       }
       VM.NWNX.StackPush(e.nNumIntegers);

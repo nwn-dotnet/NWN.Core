@@ -6557,16 +6557,16 @@ namespace NWN.Core
     ///  Return value on error: 0
     public static int Random(int nMaxInteger)
     {
-      VM.StackPush(nMaxInteger);
-      VM.Call(0);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nMaxInteger);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(0);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Output sString to the log file.
     public static void PrintString(string sString)
     {
-      VM.StackPush(sString);
-      VM.Call(1);
+      global::NWNX.NET.NWNXAPI.StackPushString(sString);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1);
     }
 
     ///  Output a formatted float to the log file.<br/>
@@ -6574,10 +6574,10 @@ namespace NWN.Core
     ///  - nDecimals should be a value from 0 to 9 inclusive.
     public static void PrintFloat(float fFloat, int nWidth = 18, int nDecimals = 9)
     {
-      VM.StackPush(nDecimals);
-      VM.StackPush(nWidth);
-      VM.StackPush(fFloat);
-      VM.Call(2);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDecimals);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nWidth);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fFloat);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(2);
     }
 
     ///  Convert fFloat into a string.<br/>
@@ -6585,25 +6585,25 @@ namespace NWN.Core
     ///  - nDecimals should be a value from 0 to 9 inclusive.
     public static string FloatToString(float fFloat, int nWidth = 18, int nDecimals = 9)
     {
-      VM.StackPush(nDecimals);
-      VM.StackPush(nWidth);
-      VM.StackPush(fFloat);
-      VM.Call(3);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDecimals);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nWidth);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fFloat);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(3);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Output nInteger to the log file.
     public static void PrintInteger(int nInteger)
     {
-      VM.StackPush(nInteger);
-      VM.Call(4);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nInteger);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(4);
     }
 
     ///  Output oObject&amp;apos;s ID to the log file.
     public static void PrintObject(uint oObject)
     {
-      VM.StackPush(oObject);
-      VM.Call(5);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(5);
     }
 
     ///  Assign aActionToAssign to oActionSubject.<br/>
@@ -6634,9 +6634,9 @@ namespace NWN.Core
     ///  If sScript does not specify a compiled script, nothing happens.
     public static void ExecuteScript(string sScript, uint oTarget = OBJECT_INVALID)
     {
-      VM.StackPush(oTarget);
-      VM.StackPush(sScript);
-      VM.Call(8);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.StackPushString(sScript);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(8);
     }
 
     ///  Clear all the actions of the caller.<br/>
@@ -6647,8 +6647,8 @@ namespace NWN.Core
     ///    engage in dialog, or other actions that they would normally have to wait for.
     public static void ClearAllActions(int nClearCombatState = FALSE)
     {
-      VM.StackPush(nClearCombatState);
-      VM.Call(9);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nClearCombatState);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(9);
     }
 
     ///  Cause the caller to face fDirection.<br/>
@@ -6657,8 +6657,8 @@ namespace NWN.Core
     ///    predefined. (0.0f=East, 90.0f=North, 180.0f=West, 270.0f=South)
     public static void SetFacing(float fDirection)
     {
-      VM.StackPush(fDirection);
-      VM.Call(10);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fDirection);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(10);
     }
 
     ///  Set the calendar to the specified date.<br/>
@@ -6673,10 +6673,10 @@ namespace NWN.Core
     ///     the calender being set to a year of 1352, a month of 9 and a day of 10.
     public static void SetCalendar(int nYear, int nMonth, int nDay)
     {
-      VM.StackPush(nDay);
-      VM.StackPush(nMonth);
-      VM.StackPush(nYear);
-      VM.Call(11);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDay);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nMonth);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nYear);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(11);
     }
 
     ///  Set the time to the time specified.<br/>
@@ -6695,60 +6695,60 @@ namespace NWN.Core
     ///     and the time being set to 18 hours, 10 minutes, 10 milliseconds.
     public static void SetTime(int nHour, int nMinute, int nSecond, int nMillisecond)
     {
-      VM.StackPush(nMillisecond);
-      VM.StackPush(nSecond);
-      VM.StackPush(nMinute);
-      VM.StackPush(nHour);
-      VM.Call(12);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nMillisecond);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSecond);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nMinute);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nHour);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(12);
     }
 
     ///  Get the current calendar year.
     public static int GetCalendarYear()
     {
-      VM.Call(13);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(13);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the current calendar month.
     public static int GetCalendarMonth()
     {
-      VM.Call(14);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(14);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the current calendar day.
     public static int GetCalendarDay()
     {
-      VM.Call(15);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(15);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the current hour.
     public static int GetTimeHour()
     {
-      VM.Call(16);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(16);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the current minute
     public static int GetTimeMinute()
     {
-      VM.Call(17);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(17);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the current second
     public static int GetTimeSecond()
     {
-      VM.Call(18);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(18);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the current millisecond
     public static int GetTimeMillisecond()
     {
-      VM.Call(19);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(19);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  The action subject will generate a random location near its current location<br/>
@@ -6759,7 +6759,7 @@ namespace NWN.Core
     ///    &amp;quot;ActionRandomWalk failed.&amp;quot;
     public static void ActionRandomWalk()
     {
-      VM.Call(20);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(20);
     }
 
     ///  The action subject will move to lDestination.<br/>
@@ -6770,9 +6770,9 @@ namespace NWN.Core
     ///    &amp;quot;MoveToPoint failed.&amp;quot;
     public static void ActionMoveToLocation(System.IntPtr lDestination, int bRun = FALSE)
     {
-      VM.StackPush(bRun);
-      VM.StackPush(lDestination, ENGINE_STRUCTURE_LOCATION);
-      VM.Call(21);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bRun);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lDestination);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(21);
     }
 
     ///  Cause the action subject to move to a certain distance from oMoveTo.<br/>
@@ -6784,10 +6784,10 @@ namespace NWN.Core
     ///    &amp;quot;ActionMoveToObject failed.&amp;quot;
     public static void ActionMoveToObject(uint oMoveTo, int bRun = FALSE, float fRange = 1.0f)
     {
-      VM.StackPush(fRange);
-      VM.StackPush(bRun);
-      VM.StackPush(oMoveTo);
-      VM.Call(22);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fRange);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bRun);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oMoveTo);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(22);
     }
 
     ///  Cause the action subject to move to a certain distance away from oFleeFrom.<br/>
@@ -6801,19 +6801,19 @@ namespace NWN.Core
     ///    &amp;quot;ActionMoveAwayFromObject failed.&amp;quot;
     public static void ActionMoveAwayFromObject(uint oFleeFrom, int bRun = FALSE, float fMoveAwayRange = 40.0f)
     {
-      VM.StackPush(fMoveAwayRange);
-      VM.StackPush(bRun);
-      VM.StackPush(oFleeFrom);
-      VM.Call(23);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fMoveAwayRange);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bRun);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oFleeFrom);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(23);
     }
 
     ///  Get the area that oTarget is currently in<br/>
     ///  * Return value on error: OBJECT_INVALID
     public static uint GetArea(uint oTarget)
     {
-      VM.StackPush(oTarget);
-      VM.Call(24);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(24);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  The value returned by this function depends on the object type of the caller:<br/>
@@ -6826,8 +6826,8 @@ namespace NWN.Core
     ///   event.  Otherwise, it should only be called in OnEnter scripts.
     public static uint GetEnteringObject()
     {
-      VM.Call(25);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(25);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the object that last left the caller.  This function works on triggers,<br/>
@@ -6836,17 +6836,17 @@ namespace NWN.Core
     ///  Should only be called in OnExit scripts.
     public static uint GetExitingObject()
     {
-      VM.Call(26);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(26);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the position of oTarget<br/>
     ///  * Return value on error: vector (0.0f, 0.0f, 0.0f)
     public static System.Numerics.Vector3 GetPosition(uint oTarget)
     {
-      VM.StackPush(oTarget);
-      VM.Call(27);
-      return VM.StackPopVector();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(27);
+      return global::NWNX.NET.NWNXAPI.StackPopVector();
     }
 
     ///  Get the direction in which oTarget is facing, expressed as a float between<br/>
@@ -6854,9 +6854,9 @@ namespace NWN.Core
     ///  * Return value on error: -1.0f
     public static float GetFacing(uint oTarget)
     {
-      VM.StackPush(oTarget);
-      VM.Call(28);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(28);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Get the possessor of oItem<br/>
@@ -6865,20 +6865,20 @@ namespace NWN.Core
     ///  * Return value on error: OBJECT_INVALID
     public static uint GetItemPossessor(uint oItem, int bReturnBags = FALSE)
     {
-      VM.StackPush(bReturnBags);
-      VM.StackPush(oItem);
-      VM.Call(29);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bReturnBags);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(29);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the object possessed by oCreature with the tag sItemTag<br/>
     ///  * Return value on error: OBJECT_INVALID
     public static uint GetItemPossessedBy(uint oCreature, string sItemTag)
     {
-      VM.StackPush(sItemTag);
-      VM.StackPush(oCreature);
-      VM.Call(30);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushString(sItemTag);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(30);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Create an item with the template sItemTemplate in oTarget&amp;apos;s inventory.<br/>
@@ -6891,12 +6891,12 @@ namespace NWN.Core
     ///  overflowed, the function will return the overflowed stack that was created.
     public static uint CreateItemOnObject(string sItemTemplate, uint oTarget = OBJECT_INVALID, int nStackSize = 1, string sNewTag = "")
     {
-      VM.StackPush(sNewTag);
-      VM.StackPush(nStackSize);
-      VM.StackPush(oTarget);
-      VM.StackPush(sItemTemplate);
-      VM.Call(31);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushString(sNewTag);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nStackSize);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.StackPushString(sItemTemplate);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(31);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Equip oItem into nInventorySlot.<br/>
@@ -6916,16 +6916,16 @@ namespace NWN.Core
     ///        4) The creature possesses the required feats to equip the item (such as weapon proficiencies).
     public static void ActionEquipItem(uint oItem, int nInventorySlot)
     {
-      VM.StackPush(nInventorySlot);
-      VM.StackPush(oItem);
-      VM.Call(32);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nInventorySlot);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(32);
     }
 
     ///  Unequip oItem from whatever slot it is currently in.
     public static void ActionUnequipItem(uint oItem)
     {
-      VM.StackPush(oItem);
-      VM.Call(33);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(33);
     }
 
     ///  Pick up oItem from the ground.<br/>
@@ -6933,8 +6933,8 @@ namespace NWN.Core
     ///    &amp;quot;ActionPickUpItem failed.&amp;quot;
     public static void ActionPickUpItem(uint oItem)
     {
-      VM.StackPush(oItem);
-      VM.Call(34);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(34);
     }
 
     ///  Put down oItem on the ground.<br/>
@@ -6942,8 +6942,8 @@ namespace NWN.Core
     ///    &amp;quot;ActionPutDownItem failed.&amp;quot;
     public static void ActionPutDownItem(uint oItem)
     {
-      VM.StackPush(oItem);
-      VM.Call(35);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(35);
     }
 
     ///  Get the last attacker of oAttackee.  This should only be used ONLY in the<br/>
@@ -6951,18 +6951,18 @@ namespace NWN.Core
     ///  * Return value on error: OBJECT_INVALID
     public static uint GetLastAttacker(uint oAttackee = OBJECT_INVALID)
     {
-      VM.StackPush(oAttackee);
-      VM.Call(36);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oAttackee);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(36);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Attack oAttackee.<br/>
     ///  - bPassive: If this is TRUE, attack is in passive mode.
     public static void ActionAttack(uint oAttackee, int bPassive = FALSE)
     {
-      VM.StackPush(bPassive);
-      VM.StackPush(oAttackee);
-      VM.Call(37);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bPassive);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oAttackee);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(37);
     }
 
     ///  Get the creature nearest to oTarget, subject to all the criteria specified.<br/>
@@ -6993,16 +6993,16 @@ namespace NWN.Core
     ///  * Return value on error: OBJECT_INVALID
     public static uint GetNearestCreature(int nFirstCriteriaType, int nFirstCriteriaValue, uint oTarget = OBJECT_INVALID, int nNth = 1, int nSecondCriteriaType = -1, int nSecondCriteriaValue = -1, int nThirdCriteriaType = -1, int nThirdCriteriaValue = -1)
     {
-      VM.StackPush(nThirdCriteriaValue);
-      VM.StackPush(nThirdCriteriaType);
-      VM.StackPush(nSecondCriteriaValue);
-      VM.StackPush(nSecondCriteriaType);
-      VM.StackPush(nNth);
-      VM.StackPush(oTarget);
-      VM.StackPush(nFirstCriteriaValue);
-      VM.StackPush(nFirstCriteriaType);
-      VM.Call(38);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nThirdCriteriaValue);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nThirdCriteriaType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSecondCriteriaValue);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSecondCriteriaType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNth);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFirstCriteriaValue);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFirstCriteriaType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(38);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Add a speak action to the action subject.<br/>
@@ -7010,9 +7010,9 @@ namespace NWN.Core
     ///  - nTalkVolume: TALKVOLUME_*
     public static void ActionSpeakString(string sStringToSpeak, int nTalkVolume = TALKVOLUME_TALK)
     {
-      VM.StackPush(nTalkVolume);
-      VM.StackPush(sStringToSpeak);
-      VM.Call(39);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nTalkVolume);
+      global::NWNX.NET.NWNXAPI.StackPushString(sStringToSpeak);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(39);
     }
 
     ///  Cause the action subject to play an animation<br/>
@@ -7022,41 +7022,41 @@ namespace NWN.Core
     ///    Forget animations)
     public static void ActionPlayAnimation(int nAnimation, float fSpeed = 1.0f, float fDurationSeconds = 0.0f)
     {
-      VM.StackPush(fDurationSeconds);
-      VM.StackPush(fSpeed);
-      VM.StackPush(nAnimation);
-      VM.Call(40);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fDurationSeconds);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fSpeed);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAnimation);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(40);
     }
 
     ///  Get the distance from the caller to oObject in metres.<br/>
     ///  * Return value on error: -1.0f
     public static float GetDistanceToObject(uint oObject)
     {
-      VM.StackPush(oObject);
-      VM.Call(41);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(41);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  * Returns TRUE if oObject is a valid object.
     public static int GetIsObjectValid(uint oObject)
     {
-      VM.StackPush(oObject);
-      VM.Call(42);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(42);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Cause the action subject to open oDoor
     public static void ActionOpenDoor(uint oDoor)
     {
-      VM.StackPush(oDoor);
-      VM.Call(43);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oDoor);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(43);
     }
 
     ///  Cause the action subject to close oDoor
     public static void ActionCloseDoor(uint oDoor)
     {
-      VM.StackPush(oDoor);
-      VM.Call(44);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oDoor);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(44);
     }
 
     ///  Change the direction in which the camera is facing<br/>
@@ -7077,11 +7077,11 @@ namespace NWN.Core
     ///  Pitch 1-89
     public static void SetCameraFacing(float fDirection, float fDistance = -1.0f, float fPitch = -1.0f, int nTransitionType = CAMERA_TRANSITION_TYPE_SNAP)
     {
-      VM.StackPush(nTransitionType);
-      VM.StackPush(fPitch);
-      VM.StackPush(fDistance);
-      VM.StackPush(fDirection);
-      VM.Call(45);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nTransitionType);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fPitch);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fDistance);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fDirection);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(45);
     }
 
     ///  Play sSoundName<br/>
@@ -7089,16 +7089,16 @@ namespace NWN.Core
     ///  This will play a mono sound from the location of the object running the command.
     public static void PlaySound(string sSoundName)
     {
-      VM.StackPush(sSoundName);
-      VM.Call(46);
+      global::NWNX.NET.NWNXAPI.StackPushString(sSoundName);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(46);
     }
 
     ///  Get the object at which the caller last cast a spell<br/>
     ///  * Return value on error: OBJECT_INVALID
     public static uint GetSpellTargetObject()
     {
-      VM.Call(47);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(47);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  This action casts a spell at oTarget.<br/>
@@ -7121,179 +7121,179 @@ namespace NWN.Core
     ///    ie a Cleric casting Cure Light Wounds using any level 1 slot. Needs a valid nClass set.
     public static void ActionCastSpellAtObject(int nSpell, uint oTarget, int nMetaMagic = METAMAGIC_ANY, int bCheat = FALSE, int nDomainLevel = 0, int nProjectilePathType = PROJECTILE_PATH_TYPE_DEFAULT, int bInstantSpell = FALSE, int nClass = -1, int bSpontaneousCast = FALSE)
     {
-      VM.StackPush(bSpontaneousCast);
-      VM.StackPush(nClass);
-      VM.StackPush(bInstantSpell);
-      VM.StackPush(nProjectilePathType);
-      VM.StackPush(nDomainLevel);
-      VM.StackPush(bCheat);
-      VM.StackPush(nMetaMagic);
-      VM.StackPush(oTarget);
-      VM.StackPush(nSpell);
-      VM.Call(48);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bSpontaneousCast);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nClass);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bInstantSpell);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nProjectilePathType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDomainLevel);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bCheat);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nMetaMagic);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpell);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(48);
     }
 
     ///  Get the current hitpoints of oObject<br/>
     ///  * Return value on error: 0
     public static int GetCurrentHitPoints(uint oObject = OBJECT_INVALID)
     {
-      VM.StackPush(oObject);
-      VM.Call(49);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(49);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the maximum hitpoints of oObject<br/>
     ///  * Return value on error: 0
     public static int GetMaxHitPoints(uint oObject = OBJECT_INVALID)
     {
-      VM.StackPush(oObject);
-      VM.Call(50);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(50);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get oObject&amp;apos;s local integer variable sVarName<br/>
     ///  * Return value on error: 0
     public static int GetLocalInt(uint oObject, string sVarName)
     {
-      VM.StackPush(sVarName);
-      VM.StackPush(oObject);
-      VM.Call(51);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(51);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get oObject&amp;apos;s local float variable sVarName<br/>
     ///  * Return value on error: 0.0f
     public static float GetLocalFloat(uint oObject, string sVarName)
     {
-      VM.StackPush(sVarName);
-      VM.StackPush(oObject);
-      VM.Call(52);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(52);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Get oObject&amp;apos;s local string variable sVarName<br/>
     ///  * Return value on error: &amp;quot;&amp;quot;
     public static string GetLocalString(uint oObject, string sVarName)
     {
-      VM.StackPush(sVarName);
-      VM.StackPush(oObject);
-      VM.Call(53);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(53);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Get oObject&amp;apos;s local object variable sVarName<br/>
     ///  * Return value on error: OBJECT_INVALID
     public static uint GetLocalObject(uint oObject, string sVarName)
     {
-      VM.StackPush(sVarName);
-      VM.StackPush(oObject);
-      VM.Call(54);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(54);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Set oObject&amp;apos;s local integer variable sVarName to nValue
     public static void SetLocalInt(uint oObject, string sVarName, int nValue)
     {
-      VM.StackPush(nValue);
-      VM.StackPush(sVarName);
-      VM.StackPush(oObject);
-      VM.Call(55);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nValue);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(55);
     }
 
     ///  Set oObject&amp;apos;s local float variable sVarName to nValue
     public static void SetLocalFloat(uint oObject, string sVarName, float fValue)
     {
-      VM.StackPush(fValue);
-      VM.StackPush(sVarName);
-      VM.StackPush(oObject);
-      VM.Call(56);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fValue);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(56);
     }
 
     ///  Set oObject&amp;apos;s local string variable sVarName to nValue
     public static void SetLocalString(uint oObject, string sVarName, string sValue)
     {
-      VM.StackPush(sValue);
-      VM.StackPush(sVarName);
-      VM.StackPush(oObject);
-      VM.Call(57);
+      global::NWNX.NET.NWNXAPI.StackPushString(sValue);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(57);
     }
 
     ///  Set oObject&amp;apos;s local object variable sVarName to nValue
     public static void SetLocalObject(uint oObject, string sVarName, uint oValue)
     {
-      VM.StackPush(oValue);
-      VM.StackPush(sVarName);
-      VM.StackPush(oObject);
-      VM.Call(58);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oValue);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(58);
     }
 
     ///  Get the length of sString<br/>
     ///  * Return value on error: -1
     public static int GetStringLength(string sString)
     {
-      VM.StackPush(sString);
-      VM.Call(59);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushString(sString);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(59);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Convert sString into upper case<br/>
     ///  * Return value on error: &amp;quot;&amp;quot;
     public static string GetStringUpperCase(string sString)
     {
-      VM.StackPush(sString);
-      VM.Call(60);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushString(sString);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(60);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Convert sString into lower case<br/>
     ///  * Return value on error: &amp;quot;&amp;quot;
     public static string GetStringLowerCase(string sString)
     {
-      VM.StackPush(sString);
-      VM.Call(61);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushString(sString);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(61);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Get nCount characters from the right end of sString<br/>
     ///  * Return value on error: &amp;quot;&amp;quot;
     public static string GetStringRight(string sString, int nCount)
     {
-      VM.StackPush(nCount);
-      VM.StackPush(sString);
-      VM.Call(62);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nCount);
+      global::NWNX.NET.NWNXAPI.StackPushString(sString);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(62);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Get nCounter characters from the left end of sString<br/>
     ///  * Return value on error: &amp;quot;&amp;quot;
     public static string GetStringLeft(string sString, int nCount)
     {
-      VM.StackPush(nCount);
-      VM.StackPush(sString);
-      VM.Call(63);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nCount);
+      global::NWNX.NET.NWNXAPI.StackPushString(sString);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(63);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Insert sString into sDestination at nPosition<br/>
     ///  * Return value on error: &amp;quot;&amp;quot;
     public static string InsertString(string sDestination, string sString, int nPosition)
     {
-      VM.StackPush(nPosition);
-      VM.StackPush(sString);
-      VM.StackPush(sDestination);
-      VM.Call(64);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPosition);
+      global::NWNX.NET.NWNXAPI.StackPushString(sString);
+      global::NWNX.NET.NWNXAPI.StackPushString(sDestination);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(64);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Get nCount characters from sString, starting at nStart<br/>
     ///  * Return value on error: &amp;quot;&amp;quot;
     public static string GetSubString(string sString, int nStart, int nCount)
     {
-      VM.StackPush(nCount);
-      VM.StackPush(nStart);
-      VM.StackPush(sString);
-      VM.Call(65);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nCount);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nStart);
+      global::NWNX.NET.NWNXAPI.StackPushString(sString);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(65);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Find the position of sSubstring inside sString<br/>
@@ -7301,116 +7301,116 @@ namespace NWN.Core
     ///  * Return value on error: -1
     public static int FindSubString(string sString, string sSubString, int nStart = 0)
     {
-      VM.StackPush(nStart);
-      VM.StackPush(sSubString);
-      VM.StackPush(sString);
-      VM.Call(66);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nStart);
+      global::NWNX.NET.NWNXAPI.StackPushString(sSubString);
+      global::NWNX.NET.NWNXAPI.StackPushString(sString);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(66);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  math operations<br/>
     ///  Maths operation: absolute value of fValue
     public static float fabs(float fValue)
     {
-      VM.StackPush(fValue);
-      VM.Call(67);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(67);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Maths operation: cosine of fValue
     public static float cos(float fValue)
     {
-      VM.StackPush(fValue);
-      VM.Call(68);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(68);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Maths operation: sine of fValue
     public static float sin(float fValue)
     {
-      VM.StackPush(fValue);
-      VM.Call(69);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(69);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Maths operation: tan of fValue
     public static float tan(float fValue)
     {
-      VM.StackPush(fValue);
-      VM.Call(70);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(70);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Maths operation: arccosine of fValue<br/>
     ///  * Returns zero if fValue &amp;gt; 1 or fValue &amp;lt; -1
     public static float acos(float fValue)
     {
-      VM.StackPush(fValue);
-      VM.Call(71);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(71);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Maths operation: arcsine of fValue<br/>
     ///  * Returns zero if fValue &amp;gt;1 or fValue &amp;lt; -1
     public static float asin(float fValue)
     {
-      VM.StackPush(fValue);
-      VM.Call(72);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(72);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Maths operation: arctan of fValue
     public static float atan(float fValue)
     {
-      VM.StackPush(fValue);
-      VM.Call(73);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(73);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Maths operation: log of fValue<br/>
     ///  * Returns zero if fValue &amp;lt;= zero
     public static float log(float fValue)
     {
-      VM.StackPush(fValue);
-      VM.Call(74);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(74);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Maths operation: fValue is raised to the power of fExponent<br/>
     ///  * Returns zero if fValue ==0 and fExponent &amp;lt;0
     public static float pow(float fValue, float fExponent)
     {
-      VM.StackPush(fExponent);
-      VM.StackPush(fValue);
-      VM.Call(75);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fExponent);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(75);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Maths operation: square root of fValue<br/>
     ///  * Returns zero if fValue &amp;lt;0
     public static float sqrt(float fValue)
     {
-      VM.StackPush(fValue);
-      VM.Call(76);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(76);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Maths operation: integer absolute value of nValue<br/>
     ///  * Return value on error: 0
     public static int abs(int nValue)
     {
-      VM.StackPush(nValue);
-      VM.Call(77);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(77);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Create a Heal effect. This should be applied as an instantaneous effect.<br/>
     ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nDamageToHeal &amp;lt; 0.
     public static System.IntPtr EffectHeal(int nDamageToHeal)
     {
-      VM.StackPush(nDamageToHeal);
-      VM.Call(78);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamageToHeal);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(78);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Damage effect<br/>
@@ -7420,21 +7420,21 @@ namespace NWN.Core
     ///  - nDamagePower: DAMAGE_POWER_*
     public static System.IntPtr EffectDamage(int nDamageAmount, int nDamageType = DAMAGE_TYPE_MAGICAL, int nDamagePower = DAMAGE_POWER_NORMAL)
     {
-      VM.StackPush(nDamagePower);
-      VM.StackPush(nDamageType);
-      VM.StackPush(nDamageAmount);
-      VM.Call(79);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamagePower);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamageType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamageAmount);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(79);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create an Ability Increase effect<br/>
     ///  - bAbilityToIncrease: ABILITY_*
     public static System.IntPtr EffectAbilityIncrease(int nAbilityToIncrease, int nModifyBy)
     {
-      VM.StackPush(nModifyBy);
-      VM.StackPush(nAbilityToIncrease);
-      VM.Call(80);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nModifyBy);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAbilityToIncrease);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(80);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Damage Resistance effect that removes the first nAmount points of<br/>
@@ -7446,19 +7446,19 @@ namespace NWN.Core
     ///  - bRangedOnly: Set to TRUE to have this resistance only apply to ranged attacks.
     public static System.IntPtr EffectDamageResistance(int nDamageType, int nAmount, int nLimit = 0, int bRangedOnly = FALSE)
     {
-      VM.StackPush(bRangedOnly);
-      VM.StackPush(nLimit);
-      VM.StackPush(nAmount);
-      VM.StackPush(nDamageType);
-      VM.Call(81);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bRangedOnly);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nLimit);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAmount);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamageType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(81);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Resurrection effect. This should be applied as an instantaneous effect.
     public static System.IntPtr EffectResurrection()
     {
-      VM.Call(82);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(82);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Summon Creature effect.  The creature is created and placed into the<br/>
@@ -7472,12 +7472,12 @@ namespace NWN.Core
     ///    it will use the appear animation, and if it&amp;apos;s 2 it will use appear2 (which doesn&amp;apos;t exist for most creatures)
     public static System.IntPtr EffectSummonCreature(string sCreatureResref, int nVisualEffectId = VFX_NONE, float fDelaySeconds = 0.0f, int nUseAppearAnimation = 0)
     {
-      VM.StackPush(nUseAppearAnimation);
-      VM.StackPush(fDelaySeconds);
-      VM.StackPush(nVisualEffectId);
-      VM.StackPush(sCreatureResref);
-      VM.Call(83);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nUseAppearAnimation);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fDelaySeconds);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nVisualEffectId);
+      global::NWNX.NET.NWNXAPI.StackPushString(sCreatureResref);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(83);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Get the caster level of an object. This is consistent with the caster level used when applying effects if OBJECT_SELF is used.<br/>
@@ -7487,79 +7487,79 @@ namespace NWN.Core
     ///  * Return value on error, or if oObject has not yet cast a spell: 0;
     public static int GetCasterLevel(uint oObject)
     {
-      VM.StackPush(oObject);
-      VM.Call(84);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(84);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the first in-game effect on oCreature.
     public static System.IntPtr GetFirstEffect(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(85);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(85);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Get the next in-game effect on oCreature.
     public static System.IntPtr GetNextEffect(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(86);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(86);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Remove eEffect from oCreature.<br/>
     ///  * No return value
     public static void RemoveEffect(uint oCreature, System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.StackPush(oCreature);
-      VM.Call(87);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(87);
     }
 
     ///  * Returns TRUE if eEffect is a valid effect. The effect must have been applied to<br/>
     ///  * an object or else it will return FALSE
     public static int GetIsEffectValid(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(88);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(88);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the duration type (DURATION_TYPE_*) of eEffect.<br/>
     ///  * Return value if eEffect is not valid: -1
     public static int GetEffectDurationType(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(89);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(89);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the subtype (SUBTYPE_*) of eEffect.<br/>
     ///  * Return value on error: 0
     public static int GetEffectSubType(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(90);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(90);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the object that created eEffect.<br/>
     ///  * Returns OBJECT_INVALID if eEffect is not a valid effect.
     public static uint GetEffectCreator(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(91);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(91);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Convert nInteger into a string.<br/>
     ///  * Return value on error: &amp;quot;&amp;quot;
     public static string IntToString(int nInteger)
     {
-      VM.StackPush(nInteger);
-      VM.Call(92);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nInteger);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(92);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Get the first object in oArea.<br/>
@@ -7569,10 +7569,10 @@ namespace NWN.Core
     ///  * Return value on error: OBJECT_INVALID
     public static uint GetFirstObjectInArea(uint oArea = OBJECT_INVALID, int nObjectFilter = OBJECT_TYPE_ALL)
     {
-      VM.StackPush(nObjectFilter);
-      VM.StackPush(oArea);
-      VM.Call(93);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nObjectFilter);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(93);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the next object in oArea.<br/>
@@ -7582,91 +7582,91 @@ namespace NWN.Core
     ///  * Return value on error: OBJECT_INVALID
     public static uint GetNextObjectInArea(uint oArea = OBJECT_INVALID, int nObjectFilter = OBJECT_TYPE_ALL)
     {
-      VM.StackPush(nObjectFilter);
-      VM.StackPush(oArea);
-      VM.Call(94);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nObjectFilter);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(94);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the total from rolling (nNumDice x d2 dice).<br/>
     ///  - nNumDice: If this is less than 1, the value 1 will be used.
     public static int d2(int nNumDice = 1)
     {
-      VM.StackPush(nNumDice);
-      VM.Call(95);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNumDice);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(95);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the total from rolling (nNumDice x d3 dice).<br/>
     ///  - nNumDice: If this is less than 1, the value 1 will be used.
     public static int d3(int nNumDice = 1)
     {
-      VM.StackPush(nNumDice);
-      VM.Call(96);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNumDice);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(96);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the total from rolling (nNumDice x d4 dice).<br/>
     ///  - nNumDice: If this is less than 1, the value 1 will be used.
     public static int d4(int nNumDice = 1)
     {
-      VM.StackPush(nNumDice);
-      VM.Call(97);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNumDice);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(97);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the total from rolling (nNumDice x d6 dice).<br/>
     ///  - nNumDice: If this is less than 1, the value 1 will be used.
     public static int d6(int nNumDice = 1)
     {
-      VM.StackPush(nNumDice);
-      VM.Call(98);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNumDice);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(98);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the total from rolling (nNumDice x d8 dice).<br/>
     ///  - nNumDice: If this is less than 1, the value 1 will be used.
     public static int d8(int nNumDice = 1)
     {
-      VM.StackPush(nNumDice);
-      VM.Call(99);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNumDice);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(99);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the total from rolling (nNumDice x d10 dice).<br/>
     ///  - nNumDice: If this is less than 1, the value 1 will be used.
     public static int d10(int nNumDice = 1)
     {
-      VM.StackPush(nNumDice);
-      VM.Call(100);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNumDice);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(100);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the total from rolling (nNumDice x d12 dice).<br/>
     ///  - nNumDice: If this is less than 1, the value 1 will be used.
     public static int d12(int nNumDice = 1)
     {
-      VM.StackPush(nNumDice);
-      VM.Call(101);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNumDice);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(101);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the total from rolling (nNumDice x d20 dice).<br/>
     ///  - nNumDice: If this is less than 1, the value 1 will be used.
     public static int d20(int nNumDice = 1)
     {
-      VM.StackPush(nNumDice);
-      VM.Call(102);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNumDice);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(102);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the total from rolling (nNumDice x d100 dice).<br/>
     ///  - nNumDice: If this is less than 1, the value 1 will be used.
     public static int d100(int nNumDice = 1)
     {
-      VM.StackPush(nNumDice);
-      VM.Call(103);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNumDice);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(103);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the magnitude of vVector; this can be used to determine the<br/>
@@ -7674,35 +7674,35 @@ namespace NWN.Core
     ///  * Return value on error: 0.0f
     public static float VectorMagnitude(System.Numerics.Vector3 vVector)
     {
-      VM.StackPush(vVector);
-      VM.Call(104);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushVector(vVector);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(104);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Get the metamagic type (METAMAGIC_*) of the last spell cast by the caller<br/>
     ///  * Return value if the caster is not a valid object: -1
     public static int GetMetaMagicFeat()
     {
-      VM.Call(105);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(105);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the object type (OBJECT_TYPE_*) of oTarget<br/>
     ///  * Return value if oTarget is not a valid object: -1
     public static int GetObjectType(uint oTarget)
     {
-      VM.StackPush(oTarget);
-      VM.Call(106);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(106);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the racial type (RACIAL_TYPE_*) of oCreature<br/>
     ///  * Return value if oCreature is not a valid creature: RACIAL_TYPE_INVALID
     public static int GetRacialType(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(107);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(107);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Do a Fortitude Save check for the given DC<br/>
@@ -7717,12 +7717,12 @@ namespace NWN.Core
     ///  GetAreaOfEffectCreator() into oSaveVersus!!
     public static int FortitudeSave(uint oCreature, int nDC, int nSaveType = SAVING_THROW_TYPE_NONE, uint oSaveVersus = OBJECT_INVALID)
     {
-      VM.StackPush(oSaveVersus);
-      VM.StackPush(nSaveType);
-      VM.StackPush(nDC);
-      VM.StackPush(oCreature);
-      VM.Call(108);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSaveVersus);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSaveType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDC);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(108);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Does a Reflex Save check for the given DC<br/>
@@ -7737,12 +7737,12 @@ namespace NWN.Core
     ///  GetAreaOfEffectCreator() into oSaveVersus!!
     public static int ReflexSave(uint oCreature, int nDC, int nSaveType = SAVING_THROW_TYPE_NONE, uint oSaveVersus = OBJECT_INVALID)
     {
-      VM.StackPush(oSaveVersus);
-      VM.StackPush(nSaveType);
-      VM.StackPush(nDC);
-      VM.StackPush(oCreature);
-      VM.Call(109);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSaveVersus);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSaveType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDC);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(109);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Does a Will Save check for the given DC<br/>
@@ -7757,20 +7757,20 @@ namespace NWN.Core
     ///  GetAreaOfEffectCreator() into oSaveVersus!!
     public static int WillSave(uint oCreature, int nDC, int nSaveType = SAVING_THROW_TYPE_NONE, uint oSaveVersus = OBJECT_INVALID)
     {
-      VM.StackPush(oSaveVersus);
-      VM.StackPush(nSaveType);
-      VM.StackPush(nDC);
-      VM.StackPush(oCreature);
-      VM.Call(110);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSaveVersus);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSaveType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDC);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(110);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the DC to save against for a spell (10 + spell level + relevant ability<br/>
     ///  bonus).  This can be called by a creature or by an Area of Effect object.
     public static int GetSpellSaveDC()
     {
-      VM.Call(111);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(111);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Set the subtype of eEffect to Magical and return eEffect.<br/>
@@ -7778,9 +7778,9 @@ namespace NWN.Core
     ///  Magical effects are removed by resting, and by dispel magic
     public static System.IntPtr MagicalEffect(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(112);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(112);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Set the subtype of eEffect to Supernatural and return eEffect.<br/>
@@ -7788,9 +7788,9 @@ namespace NWN.Core
     ///  Permanent supernatural effects are not removed by resting
     public static System.IntPtr SupernaturalEffect(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(113);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(113);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Set the subtype of eEffect to Extraordinary and return eEffect.<br/>
@@ -7798,9 +7798,9 @@ namespace NWN.Core
     ///  Extraordinary effects are removed by resting, but not by dispel magic
     public static System.IntPtr ExtraordinaryEffect(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(114);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(114);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create an AC Increase effect<br/>
@@ -7810,11 +7810,11 @@ namespace NWN.Core
     ///    * Default value for nDamageType should only ever be used in this function prototype.
     public static System.IntPtr EffectACIncrease(int nValue, int nModifyType = AC_DODGE_BONUS, int nDamageType = AC_VS_DAMAGE_TYPE_ALL)
     {
-      VM.StackPush(nDamageType);
-      VM.StackPush(nModifyType);
-      VM.StackPush(nValue);
-      VM.Call(115);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamageType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nModifyType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(115);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  If oObject is a creature, this will return that creature&amp;apos;s armour class<br/>
@@ -7823,10 +7823,10 @@ namespace NWN.Core
     ///  * Return value if oObject is not a creature, item, door or placeable: -1
     public static int GetAC(uint oObject, int nForFutureUse = 0)
     {
-      VM.StackPush(nForFutureUse);
-      VM.StackPush(oObject);
-      VM.Call(116);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nForFutureUse);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(116);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Create a Saving Throw Increase effect<br/>
@@ -7839,11 +7839,11 @@ namespace NWN.Core
     ///  - nSaveType: SAVING_THROW_TYPE_* (e.g. SAVING_THROW_TYPE_ACID )
     public static System.IntPtr EffectSavingThrowIncrease(int nSave, int nValue, int nSaveType = SAVING_THROW_TYPE_ALL)
     {
-      VM.StackPush(nSaveType);
-      VM.StackPush(nValue);
-      VM.StackPush(nSave);
-      VM.Call(117);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSaveType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nValue);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSave);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(117);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create an Attack Increase effect<br/>
@@ -7851,10 +7851,10 @@ namespace NWN.Core
     ///  - nModifierType: ATTACK_BONUS_*
     public static System.IntPtr EffectAttackIncrease(int nBonus, int nModifierType = ATTACK_BONUS_MISC)
     {
-      VM.StackPush(nModifierType);
-      VM.StackPush(nBonus);
-      VM.Call(118);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nModifierType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBonus);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(118);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Damage Reduction effect<br/>
@@ -7865,12 +7865,12 @@ namespace NWN.Core
     ///  - bRangedOnly: Set to TRUE to have this reduction only apply to ranged attacks 
     public static System.IntPtr EffectDamageReduction(int nAmount, int nDamagePower, int nLimit = 0, int bRangedOnly = FALSE)
     {
-      VM.StackPush(bRangedOnly);
-      VM.StackPush(nLimit);
-      VM.StackPush(nDamagePower);
-      VM.StackPush(nAmount);
-      VM.Call(119);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bRangedOnly);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nLimit);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamagePower);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAmount);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(119);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Damage Increase effect<br/>
@@ -7880,37 +7880,37 @@ namespace NWN.Core
     ///        result in odd behaviour.
     public static System.IntPtr EffectDamageIncrease(int nBonus, int nDamageType = DAMAGE_TYPE_MAGICAL)
     {
-      VM.StackPush(nDamageType);
-      VM.StackPush(nBonus);
-      VM.Call(120);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamageType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBonus);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(120);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Convert nRounds into a number of seconds<br/>
     ///  A round is always 6.0 seconds
     public static float RoundsToSeconds(int nRounds)
     {
-      VM.StackPush(nRounds);
-      VM.Call(121);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nRounds);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(121);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Convert nHours into a number of seconds<br/>
     ///  The result will depend on how many minutes there are per hour (game-time)
     public static float HoursToSeconds(int nHours)
     {
-      VM.StackPush(nHours);
-      VM.Call(122);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nHours);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(122);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Convert nTurns into a number of seconds<br/>
     ///  A turn is always 60.0 seconds
     public static float TurnsToSeconds(int nTurns)
     {
-      VM.StackPush(nTurns);
-      VM.Call(123);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nTurns);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(123);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Get an integer between 0 and 100 (inclusive) to represent oCreature&amp;apos;s<br/>
@@ -7919,9 +7919,9 @@ namespace NWN.Core
     ///  * Return value if oCreature is not a valid creature: -1
     public static int GetLawChaosValue(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(124);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(124);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get an integer between 0 and 100 (inclusive) to represent oCreature&amp;apos;s<br/>
@@ -7930,27 +7930,27 @@ namespace NWN.Core
     ///  * Return value if oCreature is not a valid creature: -1
     public static int GetGoodEvilValue(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(125);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(125);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Return an ALIGNMENT_* constant to represent oCreature&amp;apos;s law/chaos alignment<br/>
     ///  * Return value if oCreature is not a valid creature: -1
     public static int GetAlignmentLawChaos(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(126);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(126);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Return an ALIGNMENT_* constant to represent oCreature&amp;apos;s good/evil alignment<br/>
     ///  * Return value if oCreature is not a valid creature: -1
     public static int GetAlignmentGoodEvil(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(127);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(127);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the first object in nShape<br/>
@@ -7980,14 +7980,14 @@ namespace NWN.Core
     ///  Return value on error: OBJECT_INVALID
     public static uint GetFirstObjectInShape(int nShape, float fSize, System.IntPtr lTarget, int bLineOfSight = FALSE, int nObjectFilter = OBJECT_TYPE_CREATURE, System.Numerics.Vector3 vOrigin = default)
     {
-      VM.StackPush(vOrigin);
-      VM.StackPush(nObjectFilter);
-      VM.StackPush(bLineOfSight);
-      VM.StackPush(lTarget, ENGINE_STRUCTURE_LOCATION);
-      VM.StackPush(fSize);
-      VM.StackPush(nShape);
-      VM.Call(128);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushVector(vOrigin);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nObjectFilter);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bLineOfSight);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lTarget);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fSize);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nShape);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(128);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the next object in nShape<br/>
@@ -8016,14 +8016,14 @@ namespace NWN.Core
     ///  Return value on error: OBJECT_INVALID
     public static uint GetNextObjectInShape(int nShape, float fSize, System.IntPtr lTarget, int bLineOfSight = FALSE, int nObjectFilter = OBJECT_TYPE_CREATURE, System.Numerics.Vector3 vOrigin = default)
     {
-      VM.StackPush(vOrigin);
-      VM.StackPush(nObjectFilter);
-      VM.StackPush(bLineOfSight);
-      VM.StackPush(lTarget, ENGINE_STRUCTURE_LOCATION);
-      VM.StackPush(fSize);
-      VM.StackPush(nShape);
-      VM.Call(129);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushVector(vOrigin);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nObjectFilter);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bLineOfSight);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lTarget);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fSize);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nShape);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(129);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Create an Entangle effect<br/>
@@ -8031,8 +8031,8 @@ namespace NWN.Core
     ///  (-2) to all attacks and a -4 to AC.
     public static System.IntPtr EffectEntangle()
     {
-      VM.Call(130);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(130);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Causes object oObject to run the event evToRun. The script on the object that is<br/>
@@ -8050,9 +8050,9 @@ namespace NWN.Core
     ///                           can be set in the Scripts Tab of the Properties menu for the object/area/module.
     public static void SignalEvent(uint oObject, System.IntPtr evToRun)
     {
-      VM.StackPush(evToRun, ENGINE_STRUCTURE_EVENT);
-      VM.StackPush(oObject);
-      VM.Call(131);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EVENT, evToRun);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(131);
     }
 
     ///  Create an event of the type nUserDefinedEventNumber<br/>
@@ -8070,9 +8070,9 @@ namespace NWN.Core
     ///     that was used when the event was signaled.
     public static System.IntPtr EventUserDefined(int nUserDefinedEventNumber)
     {
-      VM.StackPush(nUserDefinedEventNumber);
-      VM.Call(132);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EVENT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nUserDefinedEventNumber);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(132);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EVENT);
     }
 
     ///  Create a Death effect<br/>
@@ -8081,10 +8081,10 @@ namespace NWN.Core
     ///  - nDisplayFeedback
     public static System.IntPtr EffectDeath(int nSpectacularDeath = FALSE, int nDisplayFeedback = TRUE)
     {
-      VM.StackPush(nDisplayFeedback);
-      VM.StackPush(nSpectacularDeath);
-      VM.Call(133);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDisplayFeedback);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpectacularDeath);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(133);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Knockdown effect<br/>
@@ -8093,8 +8093,8 @@ namespace NWN.Core
     ///  duration minimum (1 second to fall, 1 second sitting, 1 second to get up).
     public static System.IntPtr EffectKnockdown()
     {
-      VM.Call(134);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(134);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Give oItem to oGiveTo<br/>
@@ -8102,9 +8102,9 @@ namespace NWN.Core
     ///  happen.
     public static void ActionGiveItem(uint oItem, uint oGiveTo)
     {
-      VM.StackPush(oGiveTo);
-      VM.StackPush(oItem);
-      VM.Call(135);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oGiveTo);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(135);
     }
 
     ///  Take oItem from oTakeFrom<br/>
@@ -8112,17 +8112,17 @@ namespace NWN.Core
     ///  will happen.
     public static void ActionTakeItem(uint oItem, uint oTakeFrom)
     {
-      VM.StackPush(oTakeFrom);
-      VM.StackPush(oItem);
-      VM.Call(136);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTakeFrom);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(136);
     }
 
     ///  Normalize vVector
     public static System.Numerics.Vector3 VectorNormalize(System.Numerics.Vector3 vVector)
     {
-      VM.StackPush(vVector);
-      VM.Call(137);
-      return VM.StackPopVector();
+      global::NWNX.NET.NWNXAPI.StackPushVector(vVector);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(137);
+      return global::NWNX.NET.NWNXAPI.StackPopVector();
     }
 
     ///  Create a Curse effect.<br/>
@@ -8134,14 +8134,14 @@ namespace NWN.Core
     ///  - nChaMod: charisma modifier
     public static System.IntPtr EffectCurse(int nStrMod = 1, int nDexMod = 1, int nConMod = 1, int nIntMod = 1, int nWisMod = 1, int nChaMod = 1)
     {
-      VM.StackPush(nChaMod);
-      VM.StackPush(nWisMod);
-      VM.StackPush(nIntMod);
-      VM.StackPush(nConMod);
-      VM.StackPush(nDexMod);
-      VM.StackPush(nStrMod);
-      VM.Call(138);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nChaMod);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nWisMod);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIntMod);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nConMod);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDexMod);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nStrMod);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(138);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Get the ability score of type nAbility for a creature (otherwise 0)<br/>
@@ -8152,19 +8152,19 @@ namespace NWN.Core
     ///  Return value on error: 0
     public static int GetAbilityScore(uint oCreature, int nAbilityType, int nBaseAbilityScore = FALSE)
     {
-      VM.StackPush(nBaseAbilityScore);
-      VM.StackPush(nAbilityType);
-      VM.StackPush(oCreature);
-      VM.Call(139);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBaseAbilityScore);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAbilityType);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(139);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  * Returns TRUE if oCreature is a dead NPC, dead PC or a dying PC.
     public static int GetIsDead(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(140);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(140);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Output vVector to the logfile.<br/>
@@ -8172,42 +8172,42 @@ namespace NWN.Core
     ///  - bPrepend: if this is TRUE, the message will be prefixed with &amp;quot;PRINTVECTOR:&amp;quot;
     public static void PrintVector(System.Numerics.Vector3 vVector, int bPrepend)
     {
-      VM.StackPush(bPrepend);
-      VM.StackPush(vVector);
-      VM.Call(141);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bPrepend);
+      global::NWNX.NET.NWNXAPI.StackPushVector(vVector);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(141);
     }
 
     ///  Create a vector with the specified values for x, y and z
     public static System.Numerics.Vector3 Vector(float x = 0.0f, float y = 0.0f, float z = 0.0f)
     {
-      VM.StackPush(z);
-      VM.StackPush(y);
-      VM.StackPush(x);
-      VM.Call(142);
-      return VM.StackPopVector();
+      global::NWNX.NET.NWNXAPI.StackPushFloat(z);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(y);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(x);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(142);
+      return global::NWNX.NET.NWNXAPI.StackPopVector();
     }
 
     ///  Cause the caller to face vTarget
     public static void SetFacingPoint(System.Numerics.Vector3 vTarget)
     {
-      VM.StackPush(vTarget);
-      VM.Call(143);
+      global::NWNX.NET.NWNXAPI.StackPushVector(vTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(143);
     }
 
     ///  Convert fAngle to a vector
     public static System.Numerics.Vector3 AngleToVector(float fAngle)
     {
-      VM.StackPush(fAngle);
-      VM.Call(144);
-      return VM.StackPopVector();
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fAngle);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(144);
+      return global::NWNX.NET.NWNXAPI.StackPopVector();
     }
 
     ///  Convert vVector to an angle
     public static float VectorToAngle(System.Numerics.Vector3 vVector)
     {
-      VM.StackPush(vVector);
-      VM.Call(145);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushVector(vVector);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(145);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  The caller will perform a Melee Touch Attack on oTarget<br/>
@@ -8216,27 +8216,27 @@ namespace NWN.Core
     ///  * Returns 0 on a miss, 1 on a hit and 2 on a critical hit
     public static int TouchAttackMelee(uint oTarget, int bDisplayFeedback = TRUE)
     {
-      VM.StackPush(bDisplayFeedback);
-      VM.StackPush(oTarget);
-      VM.Call(146);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bDisplayFeedback);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(146);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  The caller will perform a Ranged Touch Attack on oTarget<br/>
     ///  * Returns 0 on a miss, 1 on a hit and 2 on a critical hit
     public static int TouchAttackRanged(uint oTarget, int bDisplayFeedback = TRUE)
     {
-      VM.StackPush(bDisplayFeedback);
-      VM.StackPush(oTarget);
-      VM.Call(147);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bDisplayFeedback);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(147);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Create a Paralyze effect
     public static System.IntPtr EffectParalyze()
     {
-      VM.Call(148);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(148);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Spell Immunity effect.<br/>
@@ -8248,51 +8248,51 @@ namespace NWN.Core
     ///    invalid.
     public static System.IntPtr EffectSpellImmunity(int nImmunityToSpell = SPELL_ALL_SPELLS)
     {
-      VM.StackPush(nImmunityToSpell);
-      VM.Call(149);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nImmunityToSpell);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(149);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Deaf effect
     public static System.IntPtr EffectDeaf()
     {
-      VM.Call(150);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(150);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Get the distance in metres between oObjectA and oObjectB.<br/>
     ///  * Return value if either object is invalid: 0.0f
     public static float GetDistanceBetween(uint oObjectA, uint oObjectB)
     {
-      VM.StackPush(oObjectB);
-      VM.StackPush(oObjectA);
-      VM.Call(151);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObjectB);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObjectA);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(151);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Set oObject&amp;apos;s local location variable sVarname to lValue
     public static void SetLocalLocation(uint oObject, string sVarName, System.IntPtr lValue)
     {
-      VM.StackPush(lValue, ENGINE_STRUCTURE_LOCATION);
-      VM.StackPush(sVarName);
-      VM.StackPush(oObject);
-      VM.Call(152);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lValue);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(152);
     }
 
     ///  Get oObject&amp;apos;s local location variable sVarname
     public static System.IntPtr GetLocalLocation(uint oObject, string sVarName)
     {
-      VM.StackPush(sVarName);
-      VM.StackPush(oObject);
-      VM.Call(153);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_LOCATION);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(153);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_LOCATION);
     }
 
     ///  Create a Sleep effect
     public static System.IntPtr EffectSleep()
     {
-      VM.Call(154);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(154);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Get the object which is in oCreature&amp;apos;s specified inventory slot<br/>
@@ -8302,68 +8302,68 @@ namespace NWN.Core
     ///    item in nInventorySlot.
     public static uint GetItemInSlot(int nInventorySlot, uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.StackPush(nInventorySlot);
-      VM.Call(155);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nInventorySlot);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(155);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Create a Charm effect
     public static System.IntPtr EffectCharmed()
     {
-      VM.Call(156);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(156);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Confuse effect
     public static System.IntPtr EffectConfused()
     {
-      VM.Call(157);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(157);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Frighten effect
     public static System.IntPtr EffectFrightened()
     {
-      VM.Call(158);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(158);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Dominate effect
     public static System.IntPtr EffectDominated()
     {
-      VM.Call(159);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(159);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Daze effect
     public static System.IntPtr EffectDazed()
     {
-      VM.Call(160);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(160);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Stun effect
     public static System.IntPtr EffectStunned()
     {
-      VM.Call(161);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(161);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Set whether oTarget&amp;apos;s action stack can be modified
     public static void SetCommandable(int bCommandable, uint oTarget = OBJECT_INVALID)
     {
-      VM.StackPush(oTarget);
-      VM.StackPush(bCommandable);
-      VM.Call(162);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bCommandable);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(162);
     }
 
     ///  Determine whether oTarget&amp;apos;s action stack can be modified.
     public static int GetCommandable(uint oTarget = OBJECT_INVALID)
     {
-      VM.StackPush(oTarget);
-      VM.Call(163);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(163);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Create a Regenerate effect.<br/>
@@ -8371,10 +8371,10 @@ namespace NWN.Core
     ///  - fIntervalSeconds: length of interval in seconds
     public static System.IntPtr EffectRegenerate(int nAmount, float fIntervalSeconds)
     {
-      VM.StackPush(fIntervalSeconds);
-      VM.StackPush(nAmount);
-      VM.Call(164);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fIntervalSeconds);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAmount);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(164);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Movement Speed Increase effect.<br/>
@@ -8385,18 +8385,18 @@ namespace NWN.Core
     ///    99 = almost twice as fast
     public static System.IntPtr EffectMovementSpeedIncrease(int nPercentChange)
     {
-      VM.StackPush(nPercentChange);
-      VM.Call(165);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPercentChange);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(165);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Get the number of hitdice for oCreature.<br/>
     ///  * Return value if oCreature is not a valid creature: 0
     public static int GetHitDice(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(166);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(166);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  The action subject will follow oFollow until a ClearAllActions() is called.<br/>
@@ -8405,18 +8405,18 @@ namespace NWN.Core
     ///  * No return value
     public static void ActionForceFollowObject(uint oFollow, float fFollowDistance = 0.0f)
     {
-      VM.StackPush(fFollowDistance);
-      VM.StackPush(oFollow);
-      VM.Call(167);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fFollowDistance);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oFollow);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(167);
     }
 
     ///  Get the Tag of oObject<br/>
     ///  * Return value if oObject is not a valid object: &amp;quot;&amp;quot;
     public static string GetTag(uint oObject)
     {
-      VM.StackPush(oObject);
-      VM.Call(168);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(168);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Do a Spell Resistance check between oCaster and oTarget, returning TRUE if<br/>
@@ -8428,10 +8428,10 @@ namespace NWN.Core
     ///  * Return value if spell resisted via spell absorption: 3
     public static int ResistSpell(uint oCaster, uint oTarget)
     {
-      VM.StackPush(oTarget);
-      VM.StackPush(oCaster);
-      VM.Call(169);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCaster);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(169);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the effect type (EFFECT_TYPE_*) of eEffect.<br/>
@@ -8440,75 +8440,75 @@ namespace NWN.Core
     ///  * Return value if eEffect is invalid: EFFECT_INVALIDEFFECT
     public static int GetEffectType(System.IntPtr eEffect, int bAllTypes = FALSE)
     {
-      VM.StackPush(bAllTypes);
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(170);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bAllTypes);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(170);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Create an Area Of Effect effect in the area of the creature it is applied to.<br/>
     ///  If the scripts are not specified, default ones will be used.
     public static System.IntPtr EffectAreaOfEffect(int nAreaEffectId, string sOnEnterScript = "", string sHeartbeatScript = "", string sOnExitScript = "")
     {
-      VM.StackPush(sOnExitScript);
-      VM.StackPush(sHeartbeatScript);
-      VM.StackPush(sOnEnterScript);
-      VM.StackPush(nAreaEffectId);
-      VM.Call(171);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushString(sOnExitScript);
+      global::NWNX.NET.NWNXAPI.StackPushString(sHeartbeatScript);
+      global::NWNX.NET.NWNXAPI.StackPushString(sOnEnterScript);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAreaEffectId);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(171);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  * Returns TRUE if the Faction Ids of the two objects are the same
     public static int GetFactionEqual(uint oFirstObject, uint oSecondObject = OBJECT_INVALID)
     {
-      VM.StackPush(oSecondObject);
-      VM.StackPush(oFirstObject);
-      VM.Call(172);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSecondObject);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oFirstObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(172);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Make oObjectToChangeFaction join the faction of oMemberOfFactionToJoin.<br/>
     ///  NB. ** This will only work for two NPCs **
     public static void ChangeFaction(uint oObjectToChangeFaction, uint oMemberOfFactionToJoin)
     {
-      VM.StackPush(oMemberOfFactionToJoin);
-      VM.StackPush(oObjectToChangeFaction);
-      VM.Call(173);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oMemberOfFactionToJoin);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObjectToChangeFaction);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(173);
     }
 
     ///  * Returns TRUE if oObject is listening for something
     public static int GetIsListening(uint oObject)
     {
-      VM.StackPush(oObject);
-      VM.Call(174);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(174);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Set whether oObject is listening.
     public static void SetListening(uint oObject, int bValue)
     {
-      VM.StackPush(bValue);
-      VM.StackPush(oObject);
-      VM.Call(175);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bValue);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(175);
     }
 
     ///  Set the string for oObject to listen for.<br/>
     ///  Note: this does not set oObject to be listening.
     public static void SetListenPattern(uint oObject, string sPattern, int nNumber = 0)
     {
-      VM.StackPush(nNumber);
-      VM.StackPush(sPattern);
-      VM.StackPush(oObject);
-      VM.Call(176);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNumber);
+      global::NWNX.NET.NWNXAPI.StackPushString(sPattern);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(176);
     }
 
     ///  * Returns TRUE if sStringToTest matches sPattern.
     public static int TestStringAgainstPattern(string sPattern, string sStringToTest)
     {
-      VM.StackPush(sStringToTest);
-      VM.StackPush(sPattern);
-      VM.Call(177);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushString(sStringToTest);
+      global::NWNX.NET.NWNXAPI.StackPushString(sPattern);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(177);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the appropriate matched string (this should only be used in<br/>
@@ -8516,17 +8516,17 @@ namespace NWN.Core
     ///  * Returns the appropriate matched string, otherwise returns &amp;quot;&amp;quot;
     public static string GetMatchedSubstring(int nString)
     {
-      VM.StackPush(nString);
-      VM.Call(178);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nString);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(178);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Get the number of string parameters available.<br/>
     ///  * Returns -1 if no string matched (this could be because of a dialogue event)
     public static int GetMatchedSubstringsCount()
     {
-      VM.Call(179);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(179);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  * Create a Visual Effect that can be applied to an object.<br/>
@@ -8535,33 +8535,33 @@ namespace NWN.Core
     ///    be generated, on which to play the effect
     public static System.IntPtr EffectVisualEffect(int nVisualEffectId, int nMissEffect = FALSE, float fScale = 1.0f, System.Numerics.Vector3 vTranslate = default, System.Numerics.Vector3 vRotate = default)
     {
-      VM.StackPush(vRotate);
-      VM.StackPush(vTranslate);
-      VM.StackPush(fScale);
-      VM.StackPush(nMissEffect);
-      VM.StackPush(nVisualEffectId);
-      VM.Call(180);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushVector(vRotate);
+      global::NWNX.NET.NWNXAPI.StackPushVector(vTranslate);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fScale);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nMissEffect);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nVisualEffectId);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(180);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Get the weakest member of oFactionMember&amp;apos;s faction.<br/>
     ///  * Returns OBJECT_INVALID if oFactionMember&amp;apos;s faction is invalid.
     public static uint GetFactionWeakestMember(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
     {
-      VM.StackPush(bMustBeVisible);
-      VM.StackPush(oFactionMember);
-      VM.Call(181);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bMustBeVisible);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oFactionMember);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(181);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the strongest member of oFactionMember&amp;apos;s faction.<br/>
     ///  * Returns OBJECT_INVALID if oFactionMember&amp;apos;s faction is invalid.
     public static uint GetFactionStrongestMember(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
     {
-      VM.StackPush(bMustBeVisible);
-      VM.StackPush(oFactionMember);
-      VM.Call(182);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bMustBeVisible);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oFactionMember);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(182);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the member of oFactionMember&amp;apos;s faction that has taken the most hit points<br/>
@@ -8569,10 +8569,10 @@ namespace NWN.Core
     ///  * Returns OBJECT_INVALID if oFactionMember&amp;apos;s faction is invalid.
     public static uint GetFactionMostDamagedMember(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
     {
-      VM.StackPush(bMustBeVisible);
-      VM.StackPush(oFactionMember);
-      VM.Call(183);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bMustBeVisible);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oFactionMember);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(183);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the member of oFactionMember&amp;apos;s faction that has taken the fewest hit<br/>
@@ -8580,19 +8580,19 @@ namespace NWN.Core
     ///  * Returns OBJECT_INVALID if oFactionMember&amp;apos;s faction is invalid.
     public static uint GetFactionLeastDamagedMember(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
     {
-      VM.StackPush(bMustBeVisible);
-      VM.StackPush(oFactionMember);
-      VM.Call(184);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bMustBeVisible);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oFactionMember);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(184);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the amount of gold held by oFactionMember&amp;apos;s faction.<br/>
     ///  * Returns -1 if oFactionMember&amp;apos;s faction is invalid.
     public static int GetFactionGold(uint oFactionMember)
     {
-      VM.StackPush(oFactionMember);
-      VM.Call(185);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oFactionMember);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(185);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get an integer between 0 and 100 (inclusive) that represents how<br/>
@@ -8600,10 +8600,10 @@ namespace NWN.Core
     ///  * Return value on error: -1
     public static int GetFactionAverageReputation(uint oSourceFactionMember, uint oTarget)
     {
-      VM.StackPush(oTarget);
-      VM.StackPush(oSourceFactionMember);
-      VM.Call(186);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSourceFactionMember);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(186);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get an integer between 0 and 100 (inclusive) that represents the average<br/>
@@ -8611,9 +8611,9 @@ namespace NWN.Core
     ///  * Return value on error: -1
     public static int GetFactionAverageGoodEvilAlignment(uint oFactionMember)
     {
-      VM.StackPush(oFactionMember);
-      VM.Call(187);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oFactionMember);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(187);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get an integer between 0 and 100 (inclusive) that represents the average<br/>
@@ -8621,27 +8621,27 @@ namespace NWN.Core
     ///  * Return value on error: -1
     public static int GetFactionAverageLawChaosAlignment(uint oFactionMember)
     {
-      VM.StackPush(oFactionMember);
-      VM.Call(188);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oFactionMember);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(188);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the average level of the members of the faction.<br/>
     ///  * Return value on error: -1
     public static int GetFactionAverageLevel(uint oFactionMember)
     {
-      VM.StackPush(oFactionMember);
-      VM.Call(189);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oFactionMember);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(189);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the average XP of the members of the faction.<br/>
     ///  * Return value on error: -1
     public static int GetFactionAverageXP(uint oFactionMember)
     {
-      VM.StackPush(oFactionMember);
-      VM.Call(190);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oFactionMember);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(190);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the most frequent class in the faction - this can be compared with the<br/>
@@ -8649,29 +8649,29 @@ namespace NWN.Core
     ///  * Return value on error: -1
     public static int GetFactionMostFrequentClass(uint oFactionMember)
     {
-      VM.StackPush(oFactionMember);
-      VM.Call(191);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oFactionMember);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(191);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the object faction member with the lowest armour class.<br/>
     ///  * Returns OBJECT_INVALID if oFactionMember&amp;apos;s faction is invalid.
     public static uint GetFactionWorstAC(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
     {
-      VM.StackPush(bMustBeVisible);
-      VM.StackPush(oFactionMember);
-      VM.Call(192);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bMustBeVisible);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oFactionMember);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(192);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the object faction member with the highest armour class.<br/>
     ///  * Returns OBJECT_INVALID if oFactionMember&amp;apos;s faction is invalid.
     public static uint GetFactionBestAC(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
     {
-      VM.StackPush(bMustBeVisible);
-      VM.StackPush(oFactionMember);
-      VM.Call(193);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bMustBeVisible);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oFactionMember);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(193);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Sit in oChair.<br/>
@@ -8688,8 +8688,8 @@ namespace NWN.Core
     ///  }
     public static void ActionSit(uint oChair)
     {
-      VM.StackPush(oChair);
-      VM.Call(194);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oChair);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(194);
     }
 
     ///  In an onConversation script this gets the number of the string pattern<br/>
@@ -8697,25 +8697,25 @@ namespace NWN.Core
     ///  * Returns -1 if no string matched
     public static int GetListenPatternNumber()
     {
-      VM.Call(195);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(195);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Jump to an object ID, or as near to it as possible.
     public static void ActionJumpToObject(uint oToJumpTo, int bWalkStraightLineToPoint = TRUE)
     {
-      VM.StackPush(bWalkStraightLineToPoint);
-      VM.StackPush(oToJumpTo);
-      VM.Call(196);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bWalkStraightLineToPoint);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oToJumpTo);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(196);
     }
 
     ///  Get the first waypoint with the specified tag.<br/>
     ///  * Returns OBJECT_INVALID if the waypoint cannot be found.
     public static uint GetWaypointByTag(string sWaypointTag)
     {
-      VM.StackPush(sWaypointTag);
-      VM.Call(197);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushString(sWaypointTag);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(197);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the destination object for the given object.<br/>
@@ -8728,9 +8728,9 @@ namespace NWN.Core
     ///  * Returns OBJECT_INVALID if oTransition does not hold a target.
     public static uint GetTransitionTarget(uint oTransition)
     {
-      VM.StackPush(oTransition);
-      VM.Call(198);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTransition);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(198);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Link the two supplied effects, returning eChildEffect as a child of<br/>
@@ -8744,10 +8744,10 @@ namespace NWN.Core
     ///  packaged *only* with other visual effects in a link.
     public static System.IntPtr EffectLinkEffects(System.IntPtr eChildEffect, System.IntPtr eParentEffect)
     {
-      VM.StackPush(eParentEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.StackPush(eChildEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(199);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eParentEffect);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eChildEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(199);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Get the nNth object with the specified tag.<br/>
@@ -8757,10 +8757,10 @@ namespace NWN.Core
     ///  Note: The module cannot be retrieved by GetObjectByTag(), use GetModule() instead.
     public static uint GetObjectByTag(string sTag, int nNth = 0)
     {
-      VM.StackPush(nNth);
-      VM.StackPush(sTag);
-      VM.Call(200);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNth);
+      global::NWNX.NET.NWNXAPI.StackPushString(sTag);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(200);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Adjust the alignment of oSubject.<br/>
@@ -8788,18 +8788,18 @@ namespace NWN.Core
     ///  * No return value
     public static void AdjustAlignment(uint oSubject, int nAlignment, int nShift, int bAllPartyMembers = TRUE)
     {
-      VM.StackPush(bAllPartyMembers);
-      VM.StackPush(nShift);
-      VM.StackPush(nAlignment);
-      VM.StackPush(oSubject);
-      VM.Call(201);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bAllPartyMembers);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nShift);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAlignment);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSubject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(201);
     }
 
     ///  Do nothing for fSeconds seconds.
     public static void ActionWait(float fSeconds)
     {
-      VM.StackPush(fSeconds);
-      VM.Call(202);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fSeconds);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(202);
     }
 
     ///  Set the transition bitmap of a player; this should only be called in area<br/>
@@ -8814,9 +8814,9 @@ namespace NWN.Core
     ///    area transition bitmap
     public static void SetAreaTransitionBMP(int nPredefinedAreaTransition, string sCustomAreaTransitionBMP = "")
     {
-      VM.StackPush(sCustomAreaTransitionBMP);
-      VM.StackPush(nPredefinedAreaTransition);
-      VM.Call(203);
+      global::NWNX.NET.NWNXAPI.StackPushString(sCustomAreaTransitionBMP);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPredefinedAreaTransition);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(203);
     }
 
     ///  Starts a conversation with oObjectToConverseWith - this will cause their<br/>
@@ -8827,23 +8827,23 @@ namespace NWN.Core
     ///  Turn off bPlayHello if you don&amp;apos;t want the initial greeting to play
     public static void ActionStartConversation(uint oObjectToConverseWith, string sDialogResRef = "", int bPrivateConversation = FALSE, int bPlayHello = TRUE)
     {
-      VM.StackPush(bPlayHello);
-      VM.StackPush(bPrivateConversation);
-      VM.StackPush(sDialogResRef);
-      VM.StackPush(oObjectToConverseWith);
-      VM.Call(204);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bPlayHello);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bPrivateConversation);
+      global::NWNX.NET.NWNXAPI.StackPushString(sDialogResRef);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObjectToConverseWith);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(204);
     }
 
     ///  Pause the current conversation.
     public static void ActionPauseConversation()
     {
-      VM.Call(205);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(205);
     }
 
     ///  Resume a conversation after it has been paused.
     public static void ActionResumeConversation()
     {
-      VM.Call(206);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(206);
     }
 
     ///  Create a Beam effect.<br/>
@@ -8856,15 +8856,15 @@ namespace NWN.Core
     ///    not valid.
     public static System.IntPtr EffectBeam(int nBeamVisualEffect, uint oEffector, int nBodyPart, int bMissEffect = FALSE, float fScale = 1.0f, System.Numerics.Vector3 vTranslate = default, System.Numerics.Vector3 vRotate = default)
     {
-      VM.StackPush(vRotate);
-      VM.StackPush(vTranslate);
-      VM.StackPush(fScale);
-      VM.StackPush(bMissEffect);
-      VM.StackPush(nBodyPart);
-      VM.StackPush(oEffector);
-      VM.StackPush(nBeamVisualEffect);
-      VM.Call(207);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushVector(vRotate);
+      global::NWNX.NET.NWNXAPI.StackPushVector(vTranslate);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fScale);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bMissEffect);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBodyPart);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oEffector);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBeamVisualEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(207);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Get an integer between 0 and 100 (inclusive) that represents how oSource<br/>
@@ -8875,10 +8875,10 @@ namespace NWN.Core
     ///  * Returns -1 if oSource or oTarget does not identify a valid object
     public static int GetReputation(uint oSource, uint oTarget)
     {
-      VM.StackPush(oTarget);
-      VM.StackPush(oSource);
-      VM.Call(208);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSource);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(208);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Adjust how oSourceFactionMember&amp;apos;s faction feels about oTarget by the<br/>
@@ -8896,10 +8896,10 @@ namespace NWN.Core
     ///  Note: Will fail if oSourceFactionMember is a plot object.
     public static void AdjustReputation(uint oTarget, uint oSourceFactionMember, int nAdjustment)
     {
-      VM.StackPush(nAdjustment);
-      VM.StackPush(oSourceFactionMember);
-      VM.StackPush(oTarget);
-      VM.Call(209);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAdjustment);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSourceFactionMember);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(209);
     }
 
     ///  Get the creature that is currently sitting on the specified object.<br/>
@@ -8907,9 +8907,9 @@ namespace NWN.Core
     ///  * Returns OBJECT_INVALID if oChair is not a valid placeable.
     public static uint GetSittingCreature(uint oChair)
     {
-      VM.StackPush(oChair);
-      VM.Call(210);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oChair);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(210);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the creature that is going to attack oTarget.<br/>
@@ -8919,34 +8919,34 @@ namespace NWN.Core
     ///  * Returns OBJECT_INVALID if oTarget is not a valid creature.
     public static uint GetGoingToBeAttackedBy(uint oTarget)
     {
-      VM.StackPush(oTarget);
-      VM.Call(211);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(211);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Create a Spell Resistance Increase effect.<br/>
     ///  - nValue: size of spell resistance increase
     public static System.IntPtr EffectSpellResistanceIncrease(int nValue)
     {
-      VM.StackPush(nValue);
-      VM.Call(212);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(212);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Get the location of oObject.
     public static System.IntPtr GetLocation(uint oObject)
     {
-      VM.StackPush(oObject);
-      VM.Call(213);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_LOCATION);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(213);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_LOCATION);
     }
 
     ///  The subject will jump to lLocation instantly (even between areas).<br/>
     ///  If lLocation is invalid, nothing will happen.
     public static void ActionJumpToLocation(System.IntPtr lLocation)
     {
-      VM.StackPush(lLocation, ENGINE_STRUCTURE_LOCATION);
-      VM.Call(214);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lLocation);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(214);
     }
 
     ///  Create a location.<br/>
@@ -8954,55 +8954,55 @@ namespace NWN.Core
     ///  and all other values 0.0f. Declared but not initialised location variables default to this value.
     public static System.IntPtr Location(uint oArea, System.Numerics.Vector3 vPosition, float fOrientation)
     {
-      VM.StackPush(fOrientation);
-      VM.StackPush(vPosition);
-      VM.StackPush(oArea);
-      VM.Call(215);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_LOCATION);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fOrientation);
+      global::NWNX.NET.NWNXAPI.StackPushVector(vPosition);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(215);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_LOCATION);
     }
 
     ///  Apply eEffect at lLocation.
     public static void ApplyEffectAtLocation(int nDurationType, System.IntPtr eEffect, System.IntPtr lLocation, float fDuration = 0.0f)
     {
-      VM.StackPush(fDuration);
-      VM.StackPush(lLocation, ENGINE_STRUCTURE_LOCATION);
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.StackPush(nDurationType);
-      VM.Call(216);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fDuration);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lLocation);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDurationType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(216);
     }
 
     ///  * Returns TRUE if oCreature is a Player Controlled character.
     public static int GetIsPC(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(217);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(217);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Convert fFeet into a number of meters.
     public static float FeetToMeters(float fFeet)
     {
-      VM.StackPush(fFeet);
-      VM.Call(218);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fFeet);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(218);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Convert fYards into a number of meters.
     public static float YardsToMeters(float fYards)
     {
-      VM.StackPush(fYards);
-      VM.Call(219);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fYards);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(219);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Apply eEffect to oTarget.
     public static void ApplyEffectToObject(int nDurationType, System.IntPtr eEffect, uint oTarget, float fDuration = 0.0f)
     {
-      VM.StackPush(fDuration);
-      VM.StackPush(oTarget);
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.StackPush(nDurationType);
-      VM.Call(220);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fDuration);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDurationType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(220);
     }
 
     ///  The caller will immediately speak sStringToSpeak (this is different from<br/>
@@ -9011,40 +9011,40 @@ namespace NWN.Core
     ///  - nTalkVolume: TALKVOLUME_*
     public static void SpeakString(string sStringToSpeak, int nTalkVolume = TALKVOLUME_TALK)
     {
-      VM.StackPush(nTalkVolume);
-      VM.StackPush(sStringToSpeak);
-      VM.Call(221);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nTalkVolume);
+      global::NWNX.NET.NWNXAPI.StackPushString(sStringToSpeak);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(221);
     }
 
     ///  Get the location of the caller&amp;apos;s last spell target.
     public static System.IntPtr GetSpellTargetLocation()
     {
-      VM.Call(222);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_LOCATION);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(222);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_LOCATION);
     }
 
     ///  Get the position vector from lLocation.
     public static System.Numerics.Vector3 GetPositionFromLocation(System.IntPtr lLocation)
     {
-      VM.StackPush(lLocation, ENGINE_STRUCTURE_LOCATION);
-      VM.Call(223);
-      return VM.StackPopVector();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lLocation);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(223);
+      return global::NWNX.NET.NWNXAPI.StackPopVector();
     }
 
     ///  Get the area&amp;apos;s object ID from lLocation.
     public static uint GetAreaFromLocation(System.IntPtr lLocation)
     {
-      VM.StackPush(lLocation, ENGINE_STRUCTURE_LOCATION);
-      VM.Call(224);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lLocation);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(224);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the orientation value from lLocation.
     public static float GetFacingFromLocation(System.IntPtr lLocation)
     {
-      VM.StackPush(lLocation, ENGINE_STRUCTURE_LOCATION);
-      VM.Call(225);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lLocation);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(225);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Get the creature nearest to lLocation, subject to all the criteria specified.<br/>
@@ -9075,16 +9075,16 @@ namespace NWN.Core
     ///  * Return value on error: OBJECT_INVALID
     public static uint GetNearestCreatureToLocation(int nFirstCriteriaType, int nFirstCriteriaValue, System.IntPtr lLocation, int nNth = 1, int nSecondCriteriaType = -1, int nSecondCriteriaValue = -1, int nThirdCriteriaType = -1, int nThirdCriteriaValue = -1)
     {
-      VM.StackPush(nThirdCriteriaValue);
-      VM.StackPush(nThirdCriteriaType);
-      VM.StackPush(nSecondCriteriaValue);
-      VM.StackPush(nSecondCriteriaType);
-      VM.StackPush(nNth);
-      VM.StackPush(lLocation, ENGINE_STRUCTURE_LOCATION);
-      VM.StackPush(nFirstCriteriaValue);
-      VM.StackPush(nFirstCriteriaType);
-      VM.Call(226);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nThirdCriteriaValue);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nThirdCriteriaType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSecondCriteriaValue);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSecondCriteriaType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNth);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lLocation);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFirstCriteriaValue);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFirstCriteriaType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(226);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the Nth object nearest to oTarget that is of the specified type.<br/>
@@ -9094,11 +9094,11 @@ namespace NWN.Core
     ///  * Return value on error: OBJECT_INVALID
     public static uint GetNearestObject(int nObjectType = OBJECT_TYPE_ALL, uint oTarget = OBJECT_INVALID, int nNth = 1)
     {
-      VM.StackPush(nNth);
-      VM.StackPush(oTarget);
-      VM.StackPush(nObjectType);
-      VM.Call(227);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNth);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nObjectType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(227);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the nNth object nearest to lLocation that is of the specified type.<br/>
@@ -9108,54 +9108,54 @@ namespace NWN.Core
     ///  * Return value on error: OBJECT_INVALID
     public static uint GetNearestObjectToLocation(int nObjectType, System.IntPtr lLocation, int nNth = 1)
     {
-      VM.StackPush(nNth);
-      VM.StackPush(lLocation, ENGINE_STRUCTURE_LOCATION);
-      VM.StackPush(nObjectType);
-      VM.Call(228);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNth);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lLocation);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nObjectType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(228);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the nth Object nearest to oTarget that has sTag as its tag.<br/>
     ///  * Return value on error: OBJECT_INVALID
     public static uint GetNearestObjectByTag(string sTag, uint oTarget = OBJECT_INVALID, int nNth = 1)
     {
-      VM.StackPush(nNth);
-      VM.StackPush(oTarget);
-      VM.StackPush(sTag);
-      VM.Call(229);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNth);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.StackPushString(sTag);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(229);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Convert nInteger into a floating point number.
     public static float IntToFloat(int nInteger)
     {
-      VM.StackPush(nInteger);
-      VM.Call(230);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nInteger);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(230);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Convert fFloat into the nearest integer.
     public static int FloatToInt(float fFloat)
     {
-      VM.StackPush(fFloat);
-      VM.Call(231);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fFloat);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(231);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Convert sNumber into an integer.
     public static int StringToInt(string sNumber)
     {
-      VM.StackPush(sNumber);
-      VM.Call(232);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushString(sNumber);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(232);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Convert sNumber into a floating point number.
     public static float StringToFloat(string sNumber)
     {
-      VM.StackPush(sNumber);
-      VM.Call(233);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushString(sNumber);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(233);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Cast spell nSpell at lTargetLocation.<br/>
@@ -9178,60 +9178,60 @@ namespace NWN.Core
     ///    eg SPELL_HEAL can be spell level 5 on a cleric. Use 0 for no domain slot.
     public static void ActionCastSpellAtLocation(int nSpell, System.IntPtr lTargetLocation, int nMetaMagic = METAMAGIC_ANY, int bCheat = FALSE, int nProjectilePathType = PROJECTILE_PATH_TYPE_DEFAULT, int bInstantSpell = FALSE, int nClass = -1, int bSpontaneousCast = FALSE, int nDomainlevel = 0)
     {
-      VM.StackPush(nDomainlevel);
-      VM.StackPush(bSpontaneousCast);
-      VM.StackPush(nClass);
-      VM.StackPush(bInstantSpell);
-      VM.StackPush(nProjectilePathType);
-      VM.StackPush(bCheat);
-      VM.StackPush(nMetaMagic);
-      VM.StackPush(lTargetLocation, ENGINE_STRUCTURE_LOCATION);
-      VM.StackPush(nSpell);
-      VM.Call(234);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDomainlevel);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bSpontaneousCast);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nClass);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bInstantSpell);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nProjectilePathType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bCheat);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nMetaMagic);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lTargetLocation);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpell);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(234);
     }
 
     ///  * Returns TRUE if oSource considers oTarget as an enemy.
     public static int GetIsEnemy(uint oTarget, uint oSource = OBJECT_INVALID)
     {
-      VM.StackPush(oSource);
-      VM.StackPush(oTarget);
-      VM.Call(235);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSource);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(235);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  * Returns TRUE if oSource considers oTarget as a friend.
     public static int GetIsFriend(uint oTarget, uint oSource = OBJECT_INVALID)
     {
-      VM.StackPush(oSource);
-      VM.StackPush(oTarget);
-      VM.Call(236);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSource);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(236);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  * Returns TRUE if oSource considers oTarget as neutral.
     public static int GetIsNeutral(uint oTarget, uint oSource = OBJECT_INVALID)
     {
-      VM.StackPush(oSource);
-      VM.StackPush(oTarget);
-      VM.Call(237);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSource);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(237);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the PC that is involved in the conversation.<br/>
     ///  * Returns OBJECT_INVALID on error.
     public static uint GetPCSpeaker()
     {
-      VM.Call(238);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(238);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get a string from the talk table using nStrRef.
     public static string GetStringByStrRef(int nStrRef, int nGender = GENDER_MALE)
     {
-      VM.StackPush(nGender);
-      VM.StackPush(nStrRef);
-      VM.Call(239);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nGender);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nStrRef);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(239);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Causes the creature to speak a translated string.<br/>
@@ -9239,26 +9239,26 @@ namespace NWN.Core
     ///  - nTalkVolume: TALKVOLUME_*
     public static void ActionSpeakStringByStrRef(int nStrRef, int nTalkVolume = TALKVOLUME_TALK)
     {
-      VM.StackPush(nTalkVolume);
-      VM.StackPush(nStrRef);
-      VM.Call(240);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nTalkVolume);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nStrRef);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(240);
     }
 
     ///  Destroy oObject (irrevocably).<br/>
     ///  This will not work on modules and areas.
     public static void DestroyObject(uint oDestroy, float fDelay = 0.0f)
     {
-      VM.StackPush(fDelay);
-      VM.StackPush(oDestroy);
-      VM.Call(241);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fDelay);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oDestroy);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(241);
     }
 
     ///  Get the module.<br/>
     ///  * Return value on error: OBJECT_INVALID
     public static uint GetModule()
     {
-      VM.Call(242);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(242);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Create an object of the specified type at lLocation.<br/>
@@ -9270,13 +9270,13 @@ namespace NWN.Core
     ///  - sNewTag - if this string is not empty, it will replace the default tag from the template
     public static uint CreateObject(int nObjectType, string sTemplate, System.IntPtr lLocation, int bUseAppearAnimation = FALSE, string sNewTag = "")
     {
-      VM.StackPush(sNewTag);
-      VM.StackPush(bUseAppearAnimation);
-      VM.StackPush(lLocation, ENGINE_STRUCTURE_LOCATION);
-      VM.StackPush(sTemplate);
-      VM.StackPush(nObjectType);
-      VM.Call(243);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushString(sNewTag);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bUseAppearAnimation);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lLocation);
+      global::NWNX.NET.NWNXAPI.StackPushString(sTemplate);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nObjectType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(243);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Create an event which triggers the &amp;quot;SpellCastAt&amp;quot; script<br/>
@@ -9296,11 +9296,11 @@ namespace NWN.Core
     ///      GetLastSpellHarmful() to determine if the spell cast at the object was harmful.
     public static System.IntPtr EventSpellCastAt(uint oCaster, int nSpell, int bHarmful = TRUE)
     {
-      VM.StackPush(bHarmful);
-      VM.StackPush(nSpell);
-      VM.StackPush(oCaster);
-      VM.Call(244);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EVENT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bHarmful);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpell);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCaster);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(244);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EVENT);
     }
 
     ///  This is for use in a &amp;quot;Spell Cast&amp;quot; script, it gets who cast the spell.<br/>
@@ -9308,23 +9308,23 @@ namespace NWN.Core
     ///  * Returns OBJECT_INVALID if the caller is not a creature, placeable or door.
     public static uint GetLastSpellCaster()
     {
-      VM.Call(245);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(245);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  This is for use in a &amp;quot;Spell Cast&amp;quot; script, it gets the ID of the spell that<br/>
     ///  was cast.
     public static int GetLastSpell()
     {
-      VM.Call(246);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(246);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  This is for use in a user-defined script, it gets the event number.
     public static int GetUserDefinedEventNumber()
     {
-      VM.Call(247);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(247);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  This is for use in a Spell script, it gets the ID of the spell that is being cast.<br/>
@@ -9332,42 +9332,42 @@ namespace NWN.Core
     ///  * Returns the spell ID (SPELL_*) or -1 if no spell was cast or on error
     public static int GetSpellId()
     {
-      VM.Call(248);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(248);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Generate a random name.<br/>
     ///  nNameType: The type of random name to be generated (NAME_*)
     public static string RandomName(int nNameType = NAME_FIRST_GENERIC_MALE)
     {
-      VM.StackPush(nNameType);
-      VM.Call(249);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNameType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(249);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Create a Poison effect.<br/>
     ///  - nPoisonType: POISON_*
     public static System.IntPtr EffectPoison(int nPoisonType)
     {
-      VM.StackPush(nPoisonType);
-      VM.Call(250);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPoisonType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(250);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Disease effect.<br/>
     ///  - nDiseaseType: DISEASE_*
     public static System.IntPtr EffectDisease(int nDiseaseType)
     {
-      VM.StackPush(nDiseaseType);
-      VM.Call(251);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDiseaseType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(251);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Silence effect.
     public static System.IntPtr EffectSilence()
     {
-      VM.Call(252);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(252);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Get the name of oObject.<br/>
@@ -9375,18 +9375,18 @@ namespace NWN.Core
     ///                    is ignored and the original object&amp;apos;s name is returned instead.
     public static string GetName(uint oObject, int bOriginalName = FALSE)
     {
-      VM.StackPush(bOriginalName);
-      VM.StackPush(oObject);
-      VM.Call(253);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bOriginalName);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(253);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Use this in a conversation script to get the person with whom you are conversing.<br/>
     ///  * Returns OBJECT_INVALID if the caller is not a valid creature.
     public static uint GetLastSpeaker()
     {
-      VM.Call(254);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(254);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Use this in an OnDialog script to start up the dialog tree.<br/>
@@ -9395,58 +9395,58 @@ namespace NWN.Core
     ///    event will be used
     public static int BeginConversation(string sResRef = "", uint oObjectToDialog = OBJECT_INVALID)
     {
-      VM.StackPush(oObjectToDialog);
-      VM.StackPush(sResRef);
-      VM.Call(255);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObjectToDialog);
+      global::NWNX.NET.NWNXAPI.StackPushString(sResRef);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(255);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Use this in an OnPerception script to get the object that was perceived.<br/>
     ///  * Returns OBJECT_INVALID if the caller is not a valid creature.
     public static uint GetLastPerceived()
     {
-      VM.Call(256);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(256);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Use this in an OnPerception script to determine whether the object that was<br/>
     ///  perceived was heard.
     public static int GetLastPerceptionHeard()
     {
-      VM.Call(257);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(257);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Use this in an OnPerception script to determine whether the object that was<br/>
     ///  perceived has become inaudible.
     public static int GetLastPerceptionInaudible()
     {
-      VM.Call(258);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(258);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Use this in an OnPerception script to determine whether the object that was<br/>
     ///  perceived was seen.
     public static int GetLastPerceptionSeen()
     {
-      VM.Call(259);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(259);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Use this in an OnClosed script to get the object that closed the door or placeable.<br/>
     ///  * Returns OBJECT_INVALID if the caller is not a valid door or placeable.
     public static uint GetLastClosedBy()
     {
-      VM.Call(260);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(260);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Use this in an OnPerception script to determine whether the object that was<br/>
     ///  perceived has vanished.
     public static int GetLastPerceptionVanished()
     {
-      VM.Call(261);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(261);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the first object within oPersistentObject.<br/>
@@ -9457,11 +9457,11 @@ namespace NWN.Core
     ///  * Returns OBJECT_INVALID if no object is found.
     public static uint GetFirstInPersistentObject(uint oPersistentObject = OBJECT_INVALID, int nResidentObjectType = OBJECT_TYPE_CREATURE, int nPersistentZone = PERSISTENT_ZONE_ACTIVE)
     {
-      VM.StackPush(nPersistentZone);
-      VM.StackPush(nResidentObjectType);
-      VM.StackPush(oPersistentObject);
-      VM.Call(262);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPersistentZone);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nResidentObjectType);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPersistentObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(262);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the next object within oPersistentObject.<br/>
@@ -9472,91 +9472,91 @@ namespace NWN.Core
     ///  * Returns OBJECT_INVALID if no object is found.
     public static uint GetNextInPersistentObject(uint oPersistentObject = OBJECT_INVALID, int nResidentObjectType = OBJECT_TYPE_CREATURE, int nPersistentZone = PERSISTENT_ZONE_ACTIVE)
     {
-      VM.StackPush(nPersistentZone);
-      VM.StackPush(nResidentObjectType);
-      VM.StackPush(oPersistentObject);
-      VM.Call(263);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPersistentZone);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nResidentObjectType);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPersistentObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(263);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  This returns the creator of oAreaOfEffectObject.<br/>
     ///  * Returns OBJECT_INVALID if oAreaOfEffectObject is not a valid Area of Effect object.
     public static uint GetAreaOfEffectCreator(uint oAreaOfEffectObject = OBJECT_INVALID)
     {
-      VM.StackPush(oAreaOfEffectObject);
-      VM.Call(264);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oAreaOfEffectObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(264);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Delete oObject&amp;apos;s local integer variable sVarName
     public static void DeleteLocalInt(uint oObject, string sVarName)
     {
-      VM.StackPush(sVarName);
-      VM.StackPush(oObject);
-      VM.Call(265);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(265);
     }
 
     ///  Delete oObject&amp;apos;s local float variable sVarName
     public static void DeleteLocalFloat(uint oObject, string sVarName)
     {
-      VM.StackPush(sVarName);
-      VM.StackPush(oObject);
-      VM.Call(266);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(266);
     }
 
     ///  Delete oObject&amp;apos;s local string variable sVarName
     public static void DeleteLocalString(uint oObject, string sVarName)
     {
-      VM.StackPush(sVarName);
-      VM.StackPush(oObject);
-      VM.Call(267);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(267);
     }
 
     ///  Delete oObject&amp;apos;s local object variable sVarName
     public static void DeleteLocalObject(uint oObject, string sVarName)
     {
-      VM.StackPush(sVarName);
-      VM.StackPush(oObject);
-      VM.Call(268);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(268);
     }
 
     ///  Delete oObject&amp;apos;s local location variable sVarName
     public static void DeleteLocalLocation(uint oObject, string sVarName)
     {
-      VM.StackPush(sVarName);
-      VM.StackPush(oObject);
-      VM.Call(269);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(269);
     }
 
     ///  Create a Haste effect.
     public static System.IntPtr EffectHaste()
     {
-      VM.Call(270);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(270);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Slow effect.
     public static System.IntPtr EffectSlow()
     {
-      VM.Call(271);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(271);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Convert oObject into a hexadecimal string.
     public static string ObjectToString(uint oObject)
     {
-      VM.StackPush(oObject);
-      VM.Call(272);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(272);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Create an Immunity effect.<br/>
     ///  - nImmunityType: IMMUNITY_TYPE_*
     public static System.IntPtr EffectImmunity(int nImmunityType)
     {
-      VM.StackPush(nImmunityType);
-      VM.Call(273);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nImmunityType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(273);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  - oCreature<br/>
@@ -9566,11 +9566,11 @@ namespace NWN.Core
     ///  * Returns TRUE if oCreature has immunity of type nImmunity versus oVersus.
     public static int GetIsImmune(uint oCreature, int nImmunityType, uint oVersus = OBJECT_INVALID)
     {
-      VM.StackPush(oVersus);
-      VM.StackPush(nImmunityType);
-      VM.StackPush(oCreature);
-      VM.Call(274);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oVersus);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nImmunityType);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(274);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Creates a Damage Immunity Increase effect.<br/>
@@ -9578,18 +9578,18 @@ namespace NWN.Core
     ///  - nPercentImmunity
     public static System.IntPtr EffectDamageImmunityIncrease(int nDamageType, int nPercentImmunity)
     {
-      VM.StackPush(nPercentImmunity);
-      VM.StackPush(nDamageType);
-      VM.Call(275);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPercentImmunity);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamageType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(275);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Determine whether oEncounter is active.
     public static int GetEncounterActive(uint oEncounter = OBJECT_INVALID)
     {
-      VM.StackPush(oEncounter);
-      VM.Call(276);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oEncounter);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(276);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Set oEncounter&amp;apos;s active state to nNewValue.<br/>
@@ -9597,49 +9597,49 @@ namespace NWN.Core
     ///  - oEncounter
     public static void SetEncounterActive(int nNewValue, uint oEncounter = OBJECT_INVALID)
     {
-      VM.StackPush(oEncounter);
-      VM.StackPush(nNewValue);
-      VM.Call(277);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oEncounter);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNewValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(277);
     }
 
     ///  Get the maximum number of times that oEncounter will spawn.
     public static int GetEncounterSpawnsMax(uint oEncounter = OBJECT_INVALID)
     {
-      VM.StackPush(oEncounter);
-      VM.Call(278);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oEncounter);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(278);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Set the maximum number of times that oEncounter can spawn
     public static void SetEncounterSpawnsMax(int nNewValue, uint oEncounter = OBJECT_INVALID)
     {
-      VM.StackPush(oEncounter);
-      VM.StackPush(nNewValue);
-      VM.Call(279);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oEncounter);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNewValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(279);
     }
 
     ///  Get the number of times that oEncounter has spawned so far
     public static int GetEncounterSpawnsCurrent(uint oEncounter = OBJECT_INVALID)
     {
-      VM.StackPush(oEncounter);
-      VM.Call(280);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oEncounter);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(280);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Set the number of times that oEncounter has spawned so far
     public static void SetEncounterSpawnsCurrent(int nNewValue, uint oEncounter = OBJECT_INVALID)
     {
-      VM.StackPush(oEncounter);
-      VM.StackPush(nNewValue);
-      VM.Call(281);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oEncounter);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNewValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(281);
     }
 
     ///  Use this in an OnItemAcquired script to get the item that was acquired.<br/>
     ///  * Returns OBJECT_INVALID if the module is not valid.
     public static uint GetModuleItemAcquired()
     {
-      VM.Call(282);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(282);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Use this in an OnItemAcquired script to get the creatre that previously<br/>
@@ -9647,16 +9647,16 @@ namespace NWN.Core
     ///  * Returns OBJECT_INVALID if the item was picked up from the ground.
     public static uint GetModuleItemAcquiredFrom()
     {
-      VM.Call(283);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(283);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Set the value for a custom token.
     public static void SetCustomToken(int nCustomTokenNumber, string sTokenValue)
     {
-      VM.StackPush(sTokenValue);
-      VM.StackPush(nCustomTokenNumber);
-      VM.Call(284);
+      global::NWNX.NET.NWNXAPI.StackPushString(sTokenValue);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nCustomTokenNumber);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(284);
     }
 
     ///  Determine whether oCreature has nFeat, optionally if nFeat is useable.<br/>
@@ -9665,11 +9665,11 @@ namespace NWN.Core
     ///  - bIgnoreUses: Will check if the creature has the given feat even if it has no uses remaining
     public static int GetHasFeat(int nFeat, uint oCreature = OBJECT_INVALID, int bIgnoreUses = FALSE)
     {
-      VM.StackPush(bIgnoreUses);
-      VM.StackPush(oCreature);
-      VM.StackPush(nFeat);
-      VM.Call(285);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bIgnoreUses);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFeat);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(285);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Determine whether oCreature has nSkill, and nSkill is useable.<br/>
@@ -9677,10 +9677,10 @@ namespace NWN.Core
     ///  - oCreature
     public static int GetHasSkill(int nSkill, uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.StackPush(nSkill);
-      VM.Call(286);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSkill);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(286);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Use nFeat on oTarget.<br/>
@@ -9697,11 +9697,11 @@ namespace NWN.Core
         lTarget = LOCATION_INVALID;
       }
 
-      VM.StackPush(lTarget, ENGINE_STRUCTURE_LOCATION);
-      VM.StackPush(nSubFeat);
-      VM.StackPush(oTarget);
-      VM.StackPush(nFeat);
-      VM.Call(287);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lTarget);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSubFeat);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFeat);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(287);
     }
 
     ///  Runs the action &amp;quot;UseSkill&amp;quot; on the current creature<br/>
@@ -9712,11 +9712,11 @@ namespace NWN.Core
     ///  - oItemUsed: Item to use in conjunction with the skill
     public static void ActionUseSkill(int nSkill, uint oTarget, int nSubSkill = 0, uint oItemUsed = OBJECT_INVALID)
     {
-      VM.StackPush(oItemUsed);
-      VM.StackPush(nSubSkill);
-      VM.StackPush(oTarget);
-      VM.StackPush(nSkill);
-      VM.Call(288);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItemUsed);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSubSkill);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSkill);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(288);
     }
 
     ///  Determine whether oSource sees oTarget.<br/>
@@ -9724,10 +9724,10 @@ namespace NWN.Core
     ///        maintained for non-creature objects.
     public static int GetObjectSeen(uint oTarget, uint oSource = OBJECT_INVALID)
     {
-      VM.StackPush(oSource);
-      VM.StackPush(oTarget);
-      VM.Call(289);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSource);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(289);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Determine whether oSource hears oTarget.<br/>
@@ -9735,33 +9735,33 @@ namespace NWN.Core
     ///        maintained for non-creature objects.
     public static int GetObjectHeard(uint oTarget, uint oSource = OBJECT_INVALID)
     {
-      VM.StackPush(oSource);
-      VM.StackPush(oTarget);
-      VM.Call(290);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSource);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(290);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Use this in an OnPlayerDeath module script to get the last player that died.
     public static uint GetLastPlayerDied()
     {
-      VM.Call(291);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(291);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Use this in an OnItemLost script to get the item that was lost/dropped.<br/>
     ///  * Returns OBJECT_INVALID if the module is not valid.
     public static uint GetModuleItemLost()
     {
-      VM.Call(292);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(292);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Use this in an OnItemLost script to get the creature that lost the item.<br/>
     ///  * Returns OBJECT_INVALID if the module is not valid.
     public static uint GetModuleItemLostBy()
     {
-      VM.Call(293);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(293);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Do aActionToDo.
@@ -9783,8 +9783,8 @@ namespace NWN.Core
     ///  the creature and click on the Scripts Tab. Then specify a script for the OnConversation event.
     public static System.IntPtr EventConversation()
     {
-      VM.Call(295);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EVENT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(295);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EVENT);
     }
 
     ///  Set the difficulty level of oEncounter.<br/>
@@ -9792,26 +9792,26 @@ namespace NWN.Core
     ///  - oEncounter
     public static void SetEncounterDifficulty(int nEncounterDifficulty, uint oEncounter = OBJECT_INVALID)
     {
-      VM.StackPush(oEncounter);
-      VM.StackPush(nEncounterDifficulty);
-      VM.Call(296);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oEncounter);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nEncounterDifficulty);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(296);
     }
 
     ///  Get the difficulty level of oEncounter.
     public static int GetEncounterDifficulty(uint oEncounter = OBJECT_INVALID)
     {
-      VM.StackPush(oEncounter);
-      VM.Call(297);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oEncounter);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(297);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the distance between lLocationA and lLocationB.
     public static float GetDistanceBetweenLocations(System.IntPtr lLocationA, System.IntPtr lLocationB)
     {
-      VM.StackPush(lLocationB, ENGINE_STRUCTURE_LOCATION);
-      VM.StackPush(lLocationA, ENGINE_STRUCTURE_LOCATION);
-      VM.Call(298);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lLocationB);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lLocationA);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(298);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Use this in spell scripts to get nDamage adjusted by oTarget&amp;apos;s reflex and<br/>
@@ -9823,13 +9823,13 @@ namespace NWN.Core
     ///  - oSaveVersus
     public static int GetReflexAdjustedDamage(int nDamage, uint oTarget, int nDC, int nSaveType = SAVING_THROW_TYPE_NONE, uint oSaveVersus = OBJECT_INVALID)
     {
-      VM.StackPush(oSaveVersus);
-      VM.StackPush(nSaveType);
-      VM.StackPush(nDC);
-      VM.StackPush(oTarget);
-      VM.StackPush(nDamage);
-      VM.Call(299);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSaveVersus);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSaveType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDC);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamage);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(299);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Play nAnimation immediately.<br/>
@@ -9838,37 +9838,37 @@ namespace NWN.Core
     ///  - fSeconds
     public static void PlayAnimation(int nAnimation, float fSpeed = 1.0f, float fSeconds = 0.0f)
     {
-      VM.StackPush(fSeconds);
-      VM.StackPush(fSpeed);
-      VM.StackPush(nAnimation);
-      VM.Call(300);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fSeconds);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fSpeed);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAnimation);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(300);
     }
 
     ///  Create a Spell Talent.<br/>
     ///  - nSpell: SPELL_*
     public static System.IntPtr TalentSpell(int nSpell)
     {
-      VM.StackPush(nSpell);
-      VM.Call(301);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_TALENT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpell);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(301);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_TALENT);
     }
 
     ///  Create a Feat Talent.<br/>
     ///  - nFeat: FEAT_*
     public static System.IntPtr TalentFeat(int nFeat)
     {
-      VM.StackPush(nFeat);
-      VM.Call(302);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_TALENT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFeat);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(302);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_TALENT);
     }
 
     ///  Create a Skill Talent.<br/>
     ///  - nSkill: SKILL_*
     public static System.IntPtr TalentSkill(int nSkill)
     {
-      VM.StackPush(nSkill);
-      VM.Call(303);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_TALENT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSkill);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(303);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_TALENT);
     }
 
     ///  Determines whether oObject has any effects applied by nSpell<br/>
@@ -9879,28 +9879,28 @@ namespace NWN.Core
     ///    then the spell id on the effect will be invalid.
     public static int GetHasSpellEffect(int nSpell, uint oObject = OBJECT_INVALID)
     {
-      VM.StackPush(oObject);
-      VM.StackPush(nSpell);
-      VM.Call(304);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpell);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(304);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the spell (SPELL_*) that applied eSpellEffect.<br/>
     ///  * Returns -1 if eSpellEffect was applied outside a spell script.
     public static int GetEffectSpellId(System.IntPtr eSpellEffect)
     {
-      VM.StackPush(eSpellEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(305);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eSpellEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(305);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Determine whether oCreature has tTalent.
     public static int GetCreatureHasTalent(System.IntPtr tTalent, uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.StackPush(tTalent, ENGINE_STRUCTURE_TALENT);
-      VM.Call(306);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_TALENT, tTalent);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(306);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get a random talent of oCreature, within nCategory.<br/>
@@ -9908,10 +9908,10 @@ namespace NWN.Core
     ///  - oCreature
     public static System.IntPtr GetCreatureTalentRandom(int nCategory, uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.StackPush(nCategory);
-      VM.Call(307);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_TALENT);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nCategory);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(307);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_TALENT);
     }
 
     ///  Get the best talent (i.e. closest to nCRMax without going over) of oCreature,<br/>
@@ -9921,51 +9921,51 @@ namespace NWN.Core
     ///  - oCreature
     public static System.IntPtr GetCreatureTalentBest(int nCategory, int nCRMax, uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.StackPush(nCRMax);
-      VM.StackPush(nCategory);
-      VM.Call(308);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_TALENT);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nCRMax);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nCategory);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(308);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_TALENT);
     }
 
     ///  Use tChosenTalent on oTarget.
     public static void ActionUseTalentOnObject(System.IntPtr tChosenTalent, uint oTarget)
     {
-      VM.StackPush(oTarget);
-      VM.StackPush(tChosenTalent, ENGINE_STRUCTURE_TALENT);
-      VM.Call(309);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_TALENT, tChosenTalent);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(309);
     }
 
     ///  Use tChosenTalent at lTargetLocation.
     public static void ActionUseTalentAtLocation(System.IntPtr tChosenTalent, System.IntPtr lTargetLocation)
     {
-      VM.StackPush(lTargetLocation, ENGINE_STRUCTURE_LOCATION);
-      VM.StackPush(tChosenTalent, ENGINE_STRUCTURE_TALENT);
-      VM.Call(310);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lTargetLocation);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_TALENT, tChosenTalent);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(310);
     }
 
     ///  Get the gold piece value of oItem.<br/>
     ///  * Returns 0 if oItem is not a valid item.
     public static int GetGoldPieceValue(uint oItem)
     {
-      VM.StackPush(oItem);
-      VM.Call(311);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(311);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  * Returns TRUE if oCreature is of a playable racial type.
     public static int GetIsPlayableRacialType(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(312);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(312);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Jump to lDestination.  The action is added to the TOP of the action queue.
     public static void JumpToLocation(System.IntPtr lDestination)
     {
-      VM.StackPush(lDestination, ENGINE_STRUCTURE_LOCATION);
-      VM.Call(313);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lDestination);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(313);
     }
 
     ///  Create a Temporary Hitpoints effect.<br/>
@@ -9973,9 +9973,9 @@ namespace NWN.Core
     ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nHitPoints &amp;lt; 0.
     public static System.IntPtr EffectTemporaryHitpoints(int nHitPoints)
     {
-      VM.StackPush(nHitPoints);
-      VM.Call(314);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nHitPoints);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(314);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Get the number of ranks that oTarget has in nSkill.<br/>
@@ -9987,70 +9987,70 @@ namespace NWN.Core
     ///  * Returns 0 if nSkill is untrained.
     public static int GetSkillRank(int nSkill, uint oTarget = OBJECT_INVALID, int nBaseSkillRank = FALSE)
     {
-      VM.StackPush(nBaseSkillRank);
-      VM.StackPush(oTarget);
-      VM.StackPush(nSkill);
-      VM.Call(315);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBaseSkillRank);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSkill);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(315);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the attack target of oCreature.<br/>
     ///  This only works when oCreature is in combat.
     public static uint GetAttackTarget(uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.Call(316);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(316);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the attack type (SPECIAL_ATTACK_*) of oCreature&amp;apos;s last attack.<br/>
     ///  This only works when oCreature is in combat.
     public static int GetLastAttackType(uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.Call(317);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(317);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the attack mode (COMBAT_MODE_*) of oCreature&amp;apos;s last attack.<br/>
     ///  This only works when oCreature is in combat.
     public static int GetLastAttackMode(uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.Call(318);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(318);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the master of oAssociate.
     public static uint GetMaster(uint oAssociate = OBJECT_INVALID)
     {
-      VM.StackPush(oAssociate);
-      VM.Call(319);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oAssociate);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(319);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  * Returns TRUE if oCreature is in combat.
     public static int GetIsInCombat(uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.Call(320);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(320);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the last command (ASSOCIATE_COMMAND_*) issued to oAssociate.
     public static int GetLastAssociateCommand(uint oAssociate = OBJECT_INVALID)
     {
-      VM.StackPush(oAssociate);
-      VM.Call(321);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oAssociate);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(321);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Give nGP gold to oCreature.
     public static void GiveGoldToCreature(uint oCreature, int nGP)
     {
-      VM.StackPush(nGP);
-      VM.StackPush(oCreature);
-      VM.Call(322);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nGP);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(322);
     }
 
     ///  Set the destroyable status of the caller.<br/>
@@ -10060,26 +10060,26 @@ namespace NWN.Core
     ///  - bSelectableWhenDead: If this is TRUE, the caller is selectable after death.
     public static void SetIsDestroyable(int bDestroyable, int bRaiseable = TRUE, int bSelectableWhenDead = FALSE)
     {
-      VM.StackPush(bSelectableWhenDead);
-      VM.StackPush(bRaiseable);
-      VM.StackPush(bDestroyable);
-      VM.Call(323);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bSelectableWhenDead);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bRaiseable);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bDestroyable);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(323);
     }
 
     ///  Set the locked state of oTarget, which can be a door or a placeable object.
     public static void SetLocked(uint oTarget, int bLocked)
     {
-      VM.StackPush(bLocked);
-      VM.StackPush(oTarget);
-      VM.Call(324);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bLocked);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(324);
     }
 
     ///  Get the locked state of oTarget, which can be a door or a placeable object.
     public static int GetLocked(uint oTarget)
     {
-      VM.StackPush(oTarget);
-      VM.Call(325);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(325);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Use this in a trigger&amp;apos;s OnClick event script to get the object that last<br/>
@@ -10089,31 +10089,31 @@ namespace NWN.Core
     ///  instead use GetPlaceableLastClickedBy();
     public static uint GetClickingObject()
     {
-      VM.Call(326);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(326);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Initialise oTarget to listen for the standard Associates commands.
     public static void SetAssociateListenPatterns(uint oTarget = OBJECT_INVALID)
     {
-      VM.StackPush(oTarget);
-      VM.Call(327);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(327);
     }
 
     ///  Get the last weapon that oCreature used in an attack.<br/>
     ///  * Returns OBJECT_INVALID if oCreature did not attack, or has no weapon equipped.
     public static uint GetLastWeaponUsed(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(328);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(328);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Use oPlaceable.
     public static void ActionInteractObject(uint oPlaceable)
     {
-      VM.StackPush(oPlaceable);
-      VM.Call(329);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlaceable);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(329);
     }
 
     ///  Get the last object that used the placeable object that is calling this function.<br/>
@@ -10121,8 +10121,8 @@ namespace NWN.Core
     ///    a door.
     public static uint GetLastUsedBy()
     {
-      VM.Call(330);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(330);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Returns the ability modifier for the specified ability<br/>
@@ -10131,48 +10131,48 @@ namespace NWN.Core
     ///  - oCreature
     public static int GetAbilityModifier(int nAbility, uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.StackPush(nAbility);
-      VM.Call(331);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAbility);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(331);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Determined whether oItem has been identified.
     public static int GetIdentified(uint oItem)
     {
-      VM.StackPush(oItem);
-      VM.Call(332);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(332);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Set whether oItem has been identified.
     public static void SetIdentified(uint oItem, int bIdentified)
     {
-      VM.StackPush(bIdentified);
-      VM.StackPush(oItem);
-      VM.Call(333);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bIdentified);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(333);
     }
 
     ///  Summon an Animal Companion
     public static void SummonAnimalCompanion(uint oMaster = OBJECT_INVALID)
     {
-      VM.StackPush(oMaster);
-      VM.Call(334);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oMaster);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(334);
     }
 
     ///  Summon a Familiar
     public static void SummonFamiliar(uint oMaster = OBJECT_INVALID)
     {
-      VM.StackPush(oMaster);
-      VM.Call(335);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oMaster);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(335);
     }
 
     ///  Get the last blocking door encountered by the caller of this function.<br/>
     ///  * Returns OBJECT_INVALID if the caller is not a valid creature.
     public static uint GetBlockingDoor()
     {
-      VM.Call(336);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(336);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  - oTargetDoor<br/>
@@ -10180,18 +10180,18 @@ namespace NWN.Core
     ///  * Returns TRUE if nDoorAction can be performed on oTargetDoor.
     public static int GetIsDoorActionPossible(uint oTargetDoor, int nDoorAction)
     {
-      VM.StackPush(nDoorAction);
-      VM.StackPush(oTargetDoor);
-      VM.Call(337);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDoorAction);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTargetDoor);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(337);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Perform nDoorAction on oTargetDoor.
     public static void DoDoorAction(uint oTargetDoor, int nDoorAction)
     {
-      VM.StackPush(nDoorAction);
-      VM.StackPush(oTargetDoor);
-      VM.Call(338);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDoorAction);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTargetDoor);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(338);
     }
 
     ///  Get the first item in oTarget&amp;apos;s inventory (start to cycle through oTarget&amp;apos;s<br/>
@@ -10200,9 +10200,9 @@ namespace NWN.Core
     ///    or if no item is found.
     public static uint GetFirstItemInInventory(uint oTarget = OBJECT_INVALID)
     {
-      VM.StackPush(oTarget);
-      VM.Call(339);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(339);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the next item in oTarget&amp;apos;s inventory (continue to cycle through oTarget&amp;apos;s<br/>
@@ -10211,9 +10211,9 @@ namespace NWN.Core
     ///    or if no item is found.
     public static uint GetNextItemInInventory(uint oTarget = OBJECT_INVALID)
     {
-      VM.StackPush(oTarget);
-      VM.Call(340);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(340);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  A creature can have up to three classes.  This function determines the<br/>
@@ -10225,10 +10225,10 @@ namespace NWN.Core
     ///    nClassLocation=1) or if oCreature is not a valid creature.
     public static int GetClassByPosition(int nClassPosition, uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.StackPush(nClassPosition);
-      VM.Call(341);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nClassPosition);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(341);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  A creature can have up to three classes.  This function determines the<br/>
@@ -10240,10 +10240,10 @@ namespace NWN.Core
     ///    or if oCreature is not a valid creature.
     public static int GetLevelByPosition(int nClassPosition, uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.StackPush(nClassPosition);
-      VM.Call(342);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nClassPosition);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(342);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Determine the levels that oCreature holds in nClassType.<br/>
@@ -10251,35 +10251,35 @@ namespace NWN.Core
     ///  - oCreature
     public static int GetLevelByClass(int nClassType, uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.StackPush(nClassType);
-      VM.Call(343);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nClassType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(343);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the amount of damage of type nDamageType that has been dealt to the caller.<br/>
     ///  - nDamageType: DAMAGE_TYPE_*
     public static int GetDamageDealtByType(int nDamageType)
     {
-      VM.StackPush(nDamageType);
-      VM.Call(344);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamageType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(344);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the total amount of damage that has been dealt to the caller.
     public static int GetTotalDamageDealt()
     {
-      VM.Call(345);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(345);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the last object that damaged oObject<br/>
     ///  * Returns OBJECT_INVALID if the passed in object is not a valid object.
     public static uint GetLastDamager(uint oObject = OBJECT_INVALID)
     {
-      VM.StackPush(oObject);
-      VM.Call(346);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(346);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the last object that disarmed the trap on the caller.<br/>
@@ -10287,32 +10287,32 @@ namespace NWN.Core
     ///    door.
     public static uint GetLastDisarmed()
     {
-      VM.Call(347);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(347);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the last object that disturbed the inventory of the caller.<br/>
     ///  * Returns OBJECT_INVALID if the caller is not a valid creature or placeable.
     public static uint GetLastDisturbed()
     {
-      VM.Call(348);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(348);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the last object that locked the caller.<br/>
     ///  * Returns OBJECT_INVALID if the caller is not a valid door or placeable.
     public static uint GetLastLocked()
     {
-      VM.Call(349);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(349);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the last object that unlocked the caller.<br/>
     ///  * Returns OBJECT_INVALID if the caller is not a valid door or placeable.
     public static uint GetLastUnlocked()
     {
-      VM.Call(350);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(350);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Create a Skill Increase effect.<br/>
@@ -10321,10 +10321,10 @@ namespace NWN.Core
     ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nSkill is invalid.
     public static System.IntPtr EffectSkillIncrease(int nSkill, int nValue)
     {
-      VM.StackPush(nValue);
-      VM.StackPush(nSkill);
-      VM.Call(351);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nValue);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSkill);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(351);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Get the type of disturbance (INVENTORY_DISTURB_*) that caused the caller&amp;apos;s<br/>
@@ -10332,16 +10332,16 @@ namespace NWN.Core
     ///  placeables.
     public static int GetInventoryDisturbType()
     {
-      VM.Call(352);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(352);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  get the item that caused the caller&amp;apos;s OnInventoryDisturbed script to fire.<br/>
     ///  * Returns OBJECT_INVALID if the caller is not a valid object.
     public static uint GetInventoryDisturbItem()
     {
-      VM.Call(353);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(353);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the henchman belonging to oMaster.<br/>
@@ -10349,10 +10349,10 @@ namespace NWN.Core
     ///  -nNth: Which henchman to return.
     public static uint GetHenchman(uint oMaster = OBJECT_INVALID, int nNth = 1)
     {
-      VM.StackPush(nNth);
-      VM.StackPush(oMaster);
-      VM.Call(354);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNth);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oMaster);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(354);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Set eEffect to be versus a specific alignment.<br/>
@@ -10361,11 +10361,11 @@ namespace NWN.Core
     ///  - nGoodEvil: ALIGNMENT_GOOD/ALIGNMENT_EVIL/ALIGNMENT_ALL
     public static System.IntPtr VersusAlignmentEffect(System.IntPtr eEffect, int nLawChaos = ALIGNMENT_ALL, int nGoodEvil = ALIGNMENT_ALL)
     {
-      VM.StackPush(nGoodEvil);
-      VM.StackPush(nLawChaos);
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(355);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nGoodEvil);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nLawChaos);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(355);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Set eEffect to be versus nRacialType.<br/>
@@ -10373,43 +10373,43 @@ namespace NWN.Core
     ///  - nRacialType: RACIAL_TYPE_*
     public static System.IntPtr VersusRacialTypeEffect(System.IntPtr eEffect, int nRacialType)
     {
-      VM.StackPush(nRacialType);
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(356);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nRacialType);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(356);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Set eEffect to be versus traps.
     public static System.IntPtr VersusTrapEffect(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(357);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(357);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Get the gender of oCreature.
     public static int GetGender(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(358);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(358);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  * Returns TRUE if tTalent is valid.
     public static int GetIsTalentValid(System.IntPtr tTalent)
     {
-      VM.StackPush(tTalent, ENGINE_STRUCTURE_TALENT);
-      VM.Call(359);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_TALENT, tTalent);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(359);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Causes the action subject to move away from lMoveAwayFrom.
     public static void ActionMoveAwayFromLocation(System.IntPtr lMoveAwayFrom, int bRun = FALSE, float fMoveAwayRange = 40.0f)
     {
-      VM.StackPush(fMoveAwayRange);
-      VM.StackPush(bRun);
-      VM.StackPush(lMoveAwayFrom, ENGINE_STRUCTURE_LOCATION);
-      VM.Call(360);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fMoveAwayRange);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bRun);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lMoveAwayFrom);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(360);
     }
 
     ///  Get the target that the caller attempted to attack - this should be used in<br/>
@@ -10418,24 +10418,24 @@ namespace NWN.Core
     ///  * Returns OBJECT_INVALID if the caller is not a valid creature.
     public static uint GetAttemptedAttackTarget()
     {
-      VM.Call(361);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(361);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the type (TALENT_TYPE_*) of tTalent.
     public static int GetTypeFromTalent(System.IntPtr tTalent)
     {
-      VM.StackPush(tTalent, ENGINE_STRUCTURE_TALENT);
-      VM.Call(362);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_TALENT, tTalent);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(362);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the ID of tTalent.  This could be a SPELL_*, FEAT_* or SKILL_*.
     public static int GetIdFromTalent(System.IntPtr tTalent)
     {
-      VM.StackPush(tTalent, ENGINE_STRUCTURE_TALENT);
-      VM.Call(363);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_TALENT, tTalent);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(363);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the associate of type nAssociateType belonging to oMaster.<br/>
@@ -10445,28 +10445,28 @@ namespace NWN.Core
     ///  * Returns OBJECT_INVALID if no such associate exists.
     public static uint GetAssociate(int nAssociateType, uint oMaster = OBJECT_INVALID, int nTh = 1)
     {
-      VM.StackPush(nTh);
-      VM.StackPush(oMaster);
-      VM.StackPush(nAssociateType);
-      VM.Call(364);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nTh);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oMaster);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAssociateType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(364);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Add oHenchman as a henchman to oMaster<br/>
     ///  If oHenchman is either a DM or a player character, this will have no effect.
     public static void AddHenchman(uint oMaster, uint oHenchman = OBJECT_INVALID)
     {
-      VM.StackPush(oHenchman);
-      VM.StackPush(oMaster);
-      VM.Call(365);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oHenchman);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oMaster);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(365);
     }
 
     ///  Remove oHenchman from the service of oMaster, returning them to their original faction.
     public static void RemoveHenchman(uint oMaster, uint oHenchman = OBJECT_INVALID)
     {
-      VM.StackPush(oHenchman);
-      VM.StackPush(oMaster);
-      VM.Call(366);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oHenchman);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oMaster);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(366);
     }
 
     ///  Add a journal quest entry to oCreature.<br/>
@@ -10481,13 +10481,13 @@ namespace NWN.Core
     ///    number than the one it is currently on
     public static void AddJournalQuestEntry(string szPlotID, int nState, uint oCreature, int bAllPartyMembers = TRUE, int bAllPlayers = FALSE, int bAllowOverrideHigher = FALSE)
     {
-      VM.StackPush(bAllowOverrideHigher);
-      VM.StackPush(bAllPlayers);
-      VM.StackPush(bAllPartyMembers);
-      VM.StackPush(oCreature);
-      VM.StackPush(nState);
-      VM.StackPush(szPlotID);
-      VM.Call(367);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bAllowOverrideHigher);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bAllPlayers);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bAllPartyMembers);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nState);
+      global::NWNX.NET.NWNXAPI.StackPushString(szPlotID);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(367);
     }
 
     ///  Remove a journal quest entry from oCreature.<br/>
@@ -10499,11 +10499,11 @@ namespace NWN.Core
     ///    everyone in the world
     public static void RemoveJournalQuestEntry(string szPlotID, uint oCreature, int bAllPartyMembers = TRUE, int bAllPlayers = FALSE)
     {
-      VM.StackPush(bAllPlayers);
-      VM.StackPush(bAllPartyMembers);
-      VM.StackPush(oCreature);
-      VM.StackPush(szPlotID);
-      VM.Call(368);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bAllPlayers);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bAllPartyMembers);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.StackPushString(szPlotID);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(368);
     }
 
     ///  Get the public part of the CD Key that oPlayer used when logging in.<br/>
@@ -10512,50 +10512,50 @@ namespace NWN.Core
     ///    (otherwise returns an empty string in single player mode).
     public static string GetPCPublicCDKey(uint oPlayer, int nSinglePlayerCDKey = FALSE)
     {
-      VM.StackPush(nSinglePlayerCDKey);
-      VM.StackPush(oPlayer);
-      VM.Call(369);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSinglePlayerCDKey);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(369);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Get the IP address from which oPlayer has connected.
     public static string GetPCIPAddress(uint oPlayer)
     {
-      VM.StackPush(oPlayer);
-      VM.Call(370);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(370);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Get the name of oPlayer.
     public static string GetPCPlayerName(uint oPlayer)
     {
-      VM.StackPush(oPlayer);
-      VM.Call(371);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(371);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Sets oPlayer and oTarget to like each other.
     public static void SetPCLike(uint oPlayer, uint oTarget)
     {
-      VM.StackPush(oTarget);
-      VM.StackPush(oPlayer);
-      VM.Call(372);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(372);
     }
 
     ///  Sets oPlayer and oTarget to dislike each other.
     public static void SetPCDislike(uint oPlayer, uint oTarget)
     {
-      VM.StackPush(oTarget);
-      VM.StackPush(oPlayer);
-      VM.Call(373);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(373);
     }
 
     ///  Send a server message (szMessage) to the oPlayer.
     public static void SendMessageToPC(uint oPlayer, string szMessage)
     {
-      VM.StackPush(szMessage);
-      VM.StackPush(oPlayer);
-      VM.Call(374);
+      global::NWNX.NET.NWNXAPI.StackPushString(szMessage);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(374);
     }
 
     ///  Get the target at which the caller attempted to cast a spell.<br/>
@@ -10564,16 +10564,16 @@ namespace NWN.Core
     ///  * Returns OBJECT_INVALID if the caller is not a valid creature.
     public static uint GetAttemptedSpellTarget()
     {
-      VM.Call(375);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(375);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the last creature that opened the caller.<br/>
     ///  * Returns OBJECT_INVALID if the caller is not a valid door, placeable or store.
     public static uint GetLastOpenedBy()
     {
-      VM.Call(376);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(376);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Determines the number of times that oCreature has nSpell memorised.<br/>
@@ -10581,10 +10581,10 @@ namespace NWN.Core
     ///  - oCreature
     public static int GetHasSpell(int nSpell, uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.StackPush(nSpell);
-      VM.Call(377);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpell);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(377);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Open oStore for oPC.<br/>
@@ -10592,19 +10592,19 @@ namespace NWN.Core
     ///  - nBonusMarkDown is added to the stores default mark down percentage on items bought (-100 to 100)
     public static void OpenStore(uint oStore, uint oPC, int nBonusMarkUp = 0, int nBonusMarkDown = 0)
     {
-      VM.StackPush(nBonusMarkDown);
-      VM.StackPush(nBonusMarkUp);
-      VM.StackPush(oPC);
-      VM.StackPush(oStore);
-      VM.Call(378);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBonusMarkDown);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBonusMarkUp);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPC);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oStore);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(378);
     }
 
     ///  Create a Turned effect.<br/>
     ///  Turned effects are supernatural by default.
     public static System.IntPtr EffectTurned()
     {
-      VM.Call(379);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(379);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Get the first member of oMemberOfFaction&amp;apos;s faction (start to cycle through<br/>
@@ -10612,10 +10612,10 @@ namespace NWN.Core
     ///  * Returns OBJECT_INVALID if oMemberOfFaction&amp;apos;s faction is invalid.
     public static uint GetFirstFactionMember(uint oMemberOfFaction, int bPCOnly = TRUE)
     {
-      VM.StackPush(bPCOnly);
-      VM.StackPush(oMemberOfFaction);
-      VM.Call(380);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bPCOnly);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oMemberOfFaction);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(380);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the next member of oMemberOfFaction&amp;apos;s faction (continue to cycle through<br/>
@@ -10623,45 +10623,45 @@ namespace NWN.Core
     ///  * Returns OBJECT_INVALID if oMemberOfFaction&amp;apos;s faction is invalid.
     public static uint GetNextFactionMember(uint oMemberOfFaction, int bPCOnly = TRUE)
     {
-      VM.StackPush(bPCOnly);
-      VM.StackPush(oMemberOfFaction);
-      VM.Call(381);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bPCOnly);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oMemberOfFaction);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(381);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Force the action subject to move to lDestination.
     public static void ActionForceMoveToLocation(System.IntPtr lDestination, int bRun = FALSE, float fTimeout = 30.0f)
     {
-      VM.StackPush(fTimeout);
-      VM.StackPush(bRun);
-      VM.StackPush(lDestination, ENGINE_STRUCTURE_LOCATION);
-      VM.Call(382);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fTimeout);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bRun);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lDestination);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(382);
     }
 
     ///  Force the action subject to move to oMoveTo.
     public static void ActionForceMoveToObject(uint oMoveTo, int bRun = FALSE, float fRange = 1.0f, float fTimeout = 30.0f)
     {
-      VM.StackPush(fTimeout);
-      VM.StackPush(fRange);
-      VM.StackPush(bRun);
-      VM.StackPush(oMoveTo);
-      VM.Call(383);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fTimeout);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fRange);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bRun);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oMoveTo);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(383);
     }
 
     ///  Get the experience assigned in the journal editor for szPlotID.
     public static int GetJournalQuestExperience(string szPlotID)
     {
-      VM.StackPush(szPlotID);
-      VM.Call(384);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushString(szPlotID);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(384);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Jump to oToJumpTo (the action is added to the top of the action queue).
     public static void JumpToObject(uint oToJumpTo, int nWalkStraightLineToPoint = 1)
     {
-      VM.StackPush(nWalkStraightLineToPoint);
-      VM.StackPush(oToJumpTo);
-      VM.Call(385);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nWalkStraightLineToPoint);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oToJumpTo);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(385);
     }
 
     ///  Set whether oMapPin is enabled.<br/>
@@ -10669,9 +10669,9 @@ namespace NWN.Core
     ///  - nEnabled: 0=Off, 1=On
     public static void SetMapPinEnabled(uint oMapPin, int nEnabled)
     {
-      VM.StackPush(nEnabled);
-      VM.StackPush(oMapPin);
-      VM.Call(386);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nEnabled);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oMapPin);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(386);
     }
 
     ///  Create a Hit Point Change When Dying effect.<br/>
@@ -10679,9 +10679,9 @@ namespace NWN.Core
     ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if fHitPointChangePerRound is 0.
     public static System.IntPtr EffectHitPointChangeWhenDying(float fHitPointChangePerRound)
     {
-      VM.StackPush(fHitPointChangePerRound);
-      VM.Call(387);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fHitPointChangePerRound);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(387);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Spawn a GUI panel for the client that controls oPC.<br/>
@@ -10691,17 +10691,17 @@ namespace NWN.Core
     ///  * Nothing happens if oPC is not a player character or if an invalid value is used for nGUIPanel.
     public static void PopUpGUIPanel(uint oPC, int nGUIPanel)
     {
-      VM.StackPush(nGUIPanel);
-      VM.StackPush(oPC);
-      VM.Call(388);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nGUIPanel);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPC);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(388);
     }
 
     ///  Clear all personal feelings that oSource has about oTarget.
     public static void ClearPersonalReputation(uint oTarget, uint oSource = OBJECT_INVALID)
     {
-      VM.StackPush(oSource);
-      VM.StackPush(oTarget);
-      VM.Call(389);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSource);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(389);
     }
 
     ///  oSource will temporarily be friends towards oTarget.<br/>
@@ -10719,11 +10719,11 @@ namespace NWN.Core
     ///  (faction reputation + total personal reputation) &amp;gt;= REPUTATION_TYPE_FRIEND.
     public static void SetIsTemporaryFriend(uint oTarget, uint oSource = OBJECT_INVALID, int bDecays = FALSE, float fDurationInSeconds = 180.0f)
     {
-      VM.StackPush(fDurationInSeconds);
-      VM.StackPush(bDecays);
-      VM.StackPush(oSource);
-      VM.StackPush(oTarget);
-      VM.Call(390);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fDurationInSeconds);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bDecays);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSource);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(390);
     }
 
     ///  Make oSource into a temporary enemy of oTarget using personal reputation.<br/>
@@ -10738,11 +10738,11 @@ namespace NWN.Core
     ///  (faction reputation + total personal reputation) &amp;lt;= REPUTATION_TYPE_ENEMY.
     public static void SetIsTemporaryEnemy(uint oTarget, uint oSource = OBJECT_INVALID, int bDecays = FALSE, float fDurationInSeconds = 180.0f)
     {
-      VM.StackPush(fDurationInSeconds);
-      VM.StackPush(bDecays);
-      VM.StackPush(oSource);
-      VM.StackPush(oTarget);
-      VM.Call(391);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fDurationInSeconds);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bDecays);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSource);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(391);
     }
 
     ///  Make oSource temporarily neutral to oTarget using personal reputation.<br/>
@@ -10758,35 +10758,35 @@ namespace NWN.Core
     ///  (faction reputation + total personal reputation) &amp;lt; REPUTATION_TYPE_FRIEND.
     public static void SetIsTemporaryNeutral(uint oTarget, uint oSource = OBJECT_INVALID, int bDecays = FALSE, float fDurationInSeconds = 180.0f)
     {
-      VM.StackPush(fDurationInSeconds);
-      VM.StackPush(bDecays);
-      VM.StackPush(oSource);
-      VM.StackPush(oTarget);
-      VM.Call(392);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fDurationInSeconds);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bDecays);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSource);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(392);
     }
 
     ///  Gives nXpAmount to oCreature.
     public static void GiveXPToCreature(uint oCreature, int nXpAmount)
     {
-      VM.StackPush(nXpAmount);
-      VM.StackPush(oCreature);
-      VM.Call(393);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nXpAmount);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(393);
     }
 
     ///  Sets oCreature&amp;apos;s experience to nXpAmount.
     public static void SetXP(uint oCreature, int nXpAmount)
     {
-      VM.StackPush(nXpAmount);
-      VM.StackPush(oCreature);
-      VM.Call(394);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nXpAmount);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(394);
     }
 
     ///  Get oCreature&amp;apos;s experience.
     public static int GetXP(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(395);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(395);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Convert nInteger to hex, returning the hex value as a string.<br/>
@@ -10794,18 +10794,18 @@ namespace NWN.Core
     ///    (8 digits in total).
     public static string IntToHexString(int nInteger)
     {
-      VM.StackPush(nInteger);
-      VM.Call(396);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nInteger);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(396);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Get the base item type (BASE_ITEM_*) of oItem.<br/>
     ///  * Returns BASE_ITEM_INVALID if oItem is an invalid item.
     public static int GetBaseItemType(uint oItem)
     {
-      VM.StackPush(oItem);
-      VM.Call(397);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(397);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Determines whether oItem has nProperty.<br/>
@@ -10815,10 +10815,10 @@ namespace NWN.Core
     ///    nProperty.
     public static int GetItemHasItemProperty(uint oItem, int nProperty)
     {
-      VM.StackPush(nProperty);
-      VM.StackPush(oItem);
-      VM.Call(398);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nProperty);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(398);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  The creature will equip the melee weapon in its possession that can do the<br/>
@@ -10830,9 +10830,9 @@ namespace NWN.Core
     ///  - bOffHand
     public static void ActionEquipMostDamagingMelee(uint oVersus = OBJECT_INVALID, int bOffHand = FALSE)
     {
-      VM.StackPush(bOffHand);
-      VM.StackPush(oVersus);
-      VM.Call(399);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bOffHand);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oVersus);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(399);
     }
 
     ///  The creature will equip the range weapon in its possession that can do the<br/>
@@ -10842,17 +10842,17 @@ namespace NWN.Core
     ///  - oVersus: You can try to get the most damaging weapon against oVersus
     public static void ActionEquipMostDamagingRanged(uint oVersus = OBJECT_INVALID)
     {
-      VM.StackPush(oVersus);
-      VM.Call(400);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oVersus);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(400);
     }
 
     ///  Get the Armour Class of oItem.<br/>
     ///  * Return 0 if the oItem is not a valid item, or if oItem has no armour value.
     public static int GetItemACValue(uint oItem)
     {
-      VM.StackPush(oItem);
-      VM.Call(401);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(401);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  The creature will rest if not in combat and no enemies are nearby.<br/>
@@ -10864,8 +10864,8 @@ namespace NWN.Core
     ///                                      but is in a different room behind a closed door.
     public static void ActionRest(int bCreatureToEnemyLineOfSightCheck = FALSE)
     {
-      VM.StackPush(bCreatureToEnemyLineOfSightCheck);
-      VM.Call(402);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bCreatureToEnemyLineOfSightCheck);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(402);
     }
 
     ///  Expose/Hide the entire map of oArea for oPlayer.<br/>
@@ -10874,67 +10874,67 @@ namespace NWN.Core
     ///  - bExplored: TRUE/FALSE. Whether the map should be completely explored or hidden.
     public static void ExploreAreaForPlayer(uint oArea, uint oPlayer, int bExplored = TRUE)
     {
-      VM.StackPush(bExplored);
-      VM.StackPush(oPlayer);
-      VM.StackPush(oArea);
-      VM.Call(403);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bExplored);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(403);
     }
 
     ///  The creature will equip the armour in its possession that has the highest<br/>
     ///  armour class.
     public static void ActionEquipMostEffectiveArmor()
     {
-      VM.Call(404);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(404);
     }
 
     ///  * Returns TRUE if it is currently day.
     public static int GetIsDay()
     {
-      VM.Call(405);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(405);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  * Returns TRUE if it is currently night.
     public static int GetIsNight()
     {
-      VM.Call(406);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(406);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  * Returns TRUE if it is currently dawn.
     public static int GetIsDawn()
     {
-      VM.Call(407);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(407);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  * Returns TRUE if it is currently dusk.
     public static int GetIsDusk()
     {
-      VM.Call(408);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(408);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  * Returns TRUE if oCreature was spawned from an encounter.
     public static int GetIsEncounterCreature(uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.Call(409);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(409);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Use this in an OnPlayerDying module script to get the last player who is dying.
     public static uint GetLastPlayerDying()
     {
-      VM.Call(410);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(410);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the starting location of the module.
     public static System.IntPtr GetStartingLocation()
     {
-      VM.Call(411);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_LOCATION);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(411);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_LOCATION);
     }
 
     ///  Make oCreatureToChange join one of the standard factions.<br/>
@@ -10942,23 +10942,23 @@ namespace NWN.Core
     ///  - nStandardFaction: STANDARD_FACTION_*
     public static void ChangeToStandardFaction(uint oCreatureToChange, int nStandardFaction)
     {
-      VM.StackPush(nStandardFaction);
-      VM.StackPush(oCreatureToChange);
-      VM.Call(412);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nStandardFaction);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreatureToChange);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(412);
     }
 
     ///  Play oSound.
     public static void SoundObjectPlay(uint oSound)
     {
-      VM.StackPush(oSound);
-      VM.Call(413);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSound);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(413);
     }
 
     ///  Stop playing oSound.
     public static void SoundObjectStop(uint oSound)
     {
-      VM.StackPush(oSound);
-      VM.Call(414);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSound);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(414);
     }
 
     ///  Set the volume of oSound.<br/>
@@ -10966,17 +10966,17 @@ namespace NWN.Core
     ///  - nVolume: 0-127
     public static void SoundObjectSetVolume(uint oSound, int nVolume)
     {
-      VM.StackPush(nVolume);
-      VM.StackPush(oSound);
-      VM.Call(415);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nVolume);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSound);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(415);
     }
 
     ///  Set the position of oSound.
     public static void SoundObjectSetPosition(uint oSound, System.Numerics.Vector3 vPosition)
     {
-      VM.StackPush(vPosition);
-      VM.StackPush(oSound);
-      VM.Call(416);
+      global::NWNX.NET.NWNXAPI.StackPushVector(vPosition);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSound);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(416);
     }
 
     ///  Immediately speak a conversation one-liner.<br/>
@@ -10985,25 +10985,25 @@ namespace NWN.Core
     ///    in the string.
     public static void SpeakOneLinerConversation(string sDialogResRef = "", uint oTokenTarget = OBJECT_TYPE_INVALID)
     {
-      VM.StackPush(oTokenTarget);
-      VM.StackPush(sDialogResRef);
-      VM.Call(417);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTokenTarget);
+      global::NWNX.NET.NWNXAPI.StackPushString(sDialogResRef);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(417);
     }
 
     ///  Get the amount of gold possessed by oTarget.
     public static int GetGold(uint oTarget = OBJECT_INVALID)
     {
-      VM.StackPush(oTarget);
-      VM.Call(418);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(418);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Use this in an OnRespawnButtonPressed module script to get the object id of<br/>
     ///  the player who last pressed the respawn button.
     public static uint GetLastRespawnButtonPresser()
     {
-      VM.Call(419);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(419);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  * Returns TRUE if oCreature is the Dungeon Master.<br/>
@@ -11011,9 +11011,9 @@ namespace NWN.Core
     ///  To determine if oCreature is a DM Possessed creature, use GetIsDMPossessed()
     public static int GetIsDM(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(420);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(420);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Play a voice chat.<br/>
@@ -11021,18 +11021,18 @@ namespace NWN.Core
     ///  - oTarget
     public static void PlayVoiceChat(int nVoiceChatID, uint oTarget = OBJECT_INVALID)
     {
-      VM.StackPush(oTarget);
-      VM.StackPush(nVoiceChatID);
-      VM.Call(421);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nVoiceChatID);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(421);
     }
 
     ///  * Returns TRUE if the weapon equipped is capable of damaging oVersus.
     public static int GetIsWeaponEffective(uint oVersus = OBJECT_INVALID, int bOffHand = FALSE)
     {
-      VM.StackPush(bOffHand);
-      VM.StackPush(oVersus);
-      VM.Call(422);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bOffHand);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oVersus);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(422);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Use this in a SpellCast script to determine whether the spell was considered<br/>
@@ -11040,32 +11040,32 @@ namespace NWN.Core
     ///  * Returns TRUE if the last spell cast was harmful.
     public static int GetLastSpellHarmful()
     {
-      VM.Call(423);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(423);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Activate oItem.
     public static System.IntPtr EventActivateItem(uint oItem, System.IntPtr lTarget, uint oTarget = OBJECT_INVALID)
     {
-      VM.StackPush(oTarget);
-      VM.StackPush(lTarget, ENGINE_STRUCTURE_LOCATION);
-      VM.StackPush(oItem);
-      VM.Call(424);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EVENT);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lTarget);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(424);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EVENT);
     }
 
     ///  Play the background music for oArea.
     public static void MusicBackgroundPlay(uint oArea)
     {
-      VM.StackPush(oArea);
-      VM.Call(425);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(425);
     }
 
     ///  Stop the background music for oArea.
     public static void MusicBackgroundStop(uint oArea)
     {
-      VM.StackPush(oArea);
-      VM.Call(426);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(426);
     }
 
     ///  Set the delay for the background music for oArea.<br/>
@@ -11073,9 +11073,9 @@ namespace NWN.Core
     ///  - nDelay: delay in milliseconds
     public static void MusicBackgroundSetDelay(uint oArea, int nDelay)
     {
-      VM.StackPush(nDelay);
-      VM.StackPush(oArea);
-      VM.Call(427);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDelay);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(427);
     }
 
     ///  Change the background day track for oArea to nTrack.<br/>
@@ -11083,9 +11083,9 @@ namespace NWN.Core
     ///  - nTrack
     public static void MusicBackgroundChangeDay(uint oArea, int nTrack)
     {
-      VM.StackPush(nTrack);
-      VM.StackPush(oArea);
-      VM.Call(428);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nTrack);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(428);
     }
 
     ///  Change the background night track for oArea to nTrack.<br/>
@@ -11093,23 +11093,23 @@ namespace NWN.Core
     ///  - nTrack
     public static void MusicBackgroundChangeNight(uint oArea, int nTrack)
     {
-      VM.StackPush(nTrack);
-      VM.StackPush(oArea);
-      VM.Call(429);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nTrack);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(429);
     }
 
     ///  Play the battle music for oArea.
     public static void MusicBattlePlay(uint oArea)
     {
-      VM.StackPush(oArea);
-      VM.Call(430);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(430);
     }
 
     ///  Stop the battle music for oArea.
     public static void MusicBattleStop(uint oArea)
     {
-      VM.StackPush(oArea);
-      VM.Call(431);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(431);
     }
 
     ///  Change the battle track for oArea.<br/>
@@ -11117,23 +11117,23 @@ namespace NWN.Core
     ///  - nTrack
     public static void MusicBattleChange(uint oArea, int nTrack)
     {
-      VM.StackPush(nTrack);
-      VM.StackPush(oArea);
-      VM.Call(432);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nTrack);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(432);
     }
 
     ///  Play the ambient sound for oArea.
     public static void AmbientSoundPlay(uint oArea)
     {
-      VM.StackPush(oArea);
-      VM.Call(433);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(433);
     }
 
     ///  Stop the ambient sound for oArea.
     public static void AmbientSoundStop(uint oArea)
     {
-      VM.StackPush(oArea);
-      VM.Call(434);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(434);
     }
 
     ///  Change the ambient day track for oArea to nTrack.<br/>
@@ -11141,9 +11141,9 @@ namespace NWN.Core
     ///  - nTrack
     public static void AmbientSoundChangeDay(uint oArea, int nTrack)
     {
-      VM.StackPush(nTrack);
-      VM.StackPush(oArea);
-      VM.Call(435);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nTrack);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(435);
     }
 
     ///  Change the ambient night track for oArea to nTrack.<br/>
@@ -11151,61 +11151,61 @@ namespace NWN.Core
     ///  - nTrack
     public static void AmbientSoundChangeNight(uint oArea, int nTrack)
     {
-      VM.StackPush(nTrack);
-      VM.StackPush(oArea);
-      VM.Call(436);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nTrack);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(436);
     }
 
     ///  Get the object that killed the caller.
     public static uint GetLastKiller()
     {
-      VM.Call(437);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(437);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Use this in a spell script to get the item used to cast the spell.
     public static uint GetSpellCastItem()
     {
-      VM.Call(438);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(438);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Use this in an OnItemActivated module script to get the item that was activated.
     public static uint GetItemActivated()
     {
-      VM.Call(439);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(439);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Use this in an OnItemActivated module script to get the creature that<br/>
     ///  activated the item.
     public static uint GetItemActivator()
     {
-      VM.Call(440);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(440);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Use this in an OnItemActivated module script to get the location of the item&amp;apos;s<br/>
     ///  target.
     public static System.IntPtr GetItemActivatedTargetLocation()
     {
-      VM.Call(441);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_LOCATION);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(441);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_LOCATION);
     }
 
     ///  Use this in an OnItemActivated module script to get the item&amp;apos;s target.
     public static uint GetItemActivatedTarget()
     {
-      VM.Call(442);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(442);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  * Returns TRUE if oObject (which is a placeable or a door) is currently open.
     public static int GetIsOpen(uint oObject)
     {
-      VM.StackPush(oObject);
-      VM.Call(443);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(443);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Take nAmount of gold from oCreatureToTakeFrom.<br/>
@@ -11215,18 +11215,18 @@ namespace NWN.Core
     ///    gold will be destroyed and will vanish from the game.
     public static void TakeGoldFromCreature(int nAmount, uint oCreatureToTakeFrom, int bDestroy = FALSE)
     {
-      VM.StackPush(bDestroy);
-      VM.StackPush(oCreatureToTakeFrom);
-      VM.StackPush(nAmount);
-      VM.Call(444);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bDestroy);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreatureToTakeFrom);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAmount);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(444);
     }
 
     ///  Determine whether oObject is in conversation.
     public static int IsInConversation(uint oObject)
     {
-      VM.StackPush(oObject);
-      VM.Call(445);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(445);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Create an Ability Decrease effect.<br/>
@@ -11234,10 +11234,10 @@ namespace NWN.Core
     ///  - nModifyBy: This is the amount by which to decrement the ability
     public static System.IntPtr EffectAbilityDecrease(int nAbility, int nModifyBy)
     {
-      VM.StackPush(nModifyBy);
-      VM.StackPush(nAbility);
-      VM.Call(446);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nModifyBy);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAbility);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(446);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create an Attack Decrease effect.<br/>
@@ -11245,10 +11245,10 @@ namespace NWN.Core
     ///  - nModifierType: ATTACK_BONUS_*
     public static System.IntPtr EffectAttackDecrease(int nPenalty, int nModifierType = ATTACK_BONUS_MISC)
     {
-      VM.StackPush(nModifierType);
-      VM.StackPush(nPenalty);
-      VM.Call(447);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nModifierType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPenalty);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(447);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Damage Decrease effect.<br/>
@@ -11256,10 +11256,10 @@ namespace NWN.Core
     ///  - nDamageType: DAMAGE_TYPE_*
     public static System.IntPtr EffectDamageDecrease(int nPenalty, int nDamageType = DAMAGE_TYPE_MAGICAL)
     {
-      VM.StackPush(nDamageType);
-      VM.StackPush(nPenalty);
-      VM.Call(448);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamageType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPenalty);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(448);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Damage Immunity Decrease effect.<br/>
@@ -11267,10 +11267,10 @@ namespace NWN.Core
     ///  - nPercentImmunity
     public static System.IntPtr EffectDamageImmunityDecrease(int nDamageType, int nPercentImmunity)
     {
-      VM.StackPush(nPercentImmunity);
-      VM.StackPush(nDamageType);
-      VM.Call(449);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPercentImmunity);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamageType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(449);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create an AC Decrease effect.<br/>
@@ -11280,11 +11280,11 @@ namespace NWN.Core
     ///    * Default value for nDamageType should only ever be used in this function prototype.
     public static System.IntPtr EffectACDecrease(int nValue, int nModifyType = AC_DODGE_BONUS, int nDamageType = AC_VS_DAMAGE_TYPE_ALL)
     {
-      VM.StackPush(nDamageType);
-      VM.StackPush(nModifyType);
-      VM.StackPush(nValue);
-      VM.Call(450);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamageType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nModifyType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(450);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Movement Speed Decrease effect.<br/>
@@ -11295,9 +11295,9 @@ namespace NWN.Core
     ///    99 = almost immobile
     public static System.IntPtr EffectMovementSpeedDecrease(int nPercentChange)
     {
-      VM.StackPush(nPercentChange);
-      VM.Call(451);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPercentChange);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(451);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Saving Throw Decrease effect.<br/>
@@ -11310,45 +11310,45 @@ namespace NWN.Core
     ///  - nSaveType: SAVING_THROW_TYPE_* (e.g. SAVING_THROW_TYPE_ACID )
     public static System.IntPtr EffectSavingThrowDecrease(int nSave, int nValue, int nSaveType = SAVING_THROW_TYPE_ALL)
     {
-      VM.StackPush(nSaveType);
-      VM.StackPush(nValue);
-      VM.StackPush(nSave);
-      VM.Call(452);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSaveType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nValue);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSave);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(452);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Skill Decrease effect.<br/>
     ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nSkill is invalid.
     public static System.IntPtr EffectSkillDecrease(int nSkill, int nValue)
     {
-      VM.StackPush(nValue);
-      VM.StackPush(nSkill);
-      VM.Call(453);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nValue);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSkill);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(453);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Spell Resistance Decrease effect.
     public static System.IntPtr EffectSpellResistanceDecrease(int nValue)
     {
-      VM.StackPush(nValue);
-      VM.Call(454);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(454);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Determine whether oTarget is a plot object.
     public static int GetPlotFlag(uint oTarget = OBJECT_INVALID)
     {
-      VM.StackPush(oTarget);
-      VM.Call(455);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(455);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Set oTarget&amp;apos;s plot object status.
     public static void SetPlotFlag(uint oTarget, int nPlotFlag)
     {
-      VM.StackPush(nPlotFlag);
-      VM.StackPush(oTarget);
-      VM.Call(456);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPlotFlag);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(456);
     }
 
     ///  Create an Invisibility effect.<br/>
@@ -11357,9 +11357,9 @@ namespace NWN.Core
     ///    is invalid.
     public static System.IntPtr EffectInvisibility(int nInvisibilityType)
     {
-      VM.StackPush(nInvisibilityType);
-      VM.Call(457);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nInvisibilityType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(457);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Concealment effect.<br/>
@@ -11369,17 +11369,17 @@ namespace NWN.Core
     ///    nPercentage &amp;gt; 100.
     public static System.IntPtr EffectConcealment(int nPercentage, int nMissType = MISS_CHANCE_TYPE_NORMAL)
     {
-      VM.StackPush(nMissType);
-      VM.StackPush(nPercentage);
-      VM.Call(458);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nMissType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPercentage);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(458);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Darkness effect.
     public static System.IntPtr EffectDarkness()
     {
-      VM.Call(459);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(459);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Dispel Magic All effect.<br/>
@@ -11388,16 +11388,16 @@ namespace NWN.Core
     ///  effect.
     public static System.IntPtr EffectDispelMagicAll(int nCasterLevel = USE_CREATURE_LEVEL)
     {
-      VM.StackPush(nCasterLevel);
-      VM.Call(460);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nCasterLevel);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(460);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create an Ultravision effect.
     public static System.IntPtr EffectUltravision()
     {
-      VM.Call(461);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(461);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Negative Level effect.<br/>
@@ -11405,19 +11405,19 @@ namespace NWN.Core
     ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nNumLevels &amp;gt; 100.
     public static System.IntPtr EffectNegativeLevel(int nNumLevels, int bHPBonus = FALSE)
     {
-      VM.StackPush(bHPBonus);
-      VM.StackPush(nNumLevels);
-      VM.Call(462);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bHPBonus);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNumLevels);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(462);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Polymorph effect.
     public static System.IntPtr EffectPolymorph(int nPolymorphSelection, int nLocked = FALSE)
     {
-      VM.StackPush(nLocked);
-      VM.StackPush(nPolymorphSelection);
-      VM.Call(463);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nLocked);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPolymorphSelection);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(463);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Sanctuary effect.<br/>
@@ -11425,37 +11425,37 @@ namespace NWN.Core
     ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nDifficultyClass &amp;lt;= 0.
     public static System.IntPtr EffectSanctuary(int nDifficultyClass)
     {
-      VM.StackPush(nDifficultyClass);
-      VM.Call(464);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDifficultyClass);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(464);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a True Seeing effect.
     public static System.IntPtr EffectTrueSeeing()
     {
-      VM.Call(465);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(465);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a See Invisible effect.
     public static System.IntPtr EffectSeeInvisible()
     {
-      VM.Call(466);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(466);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Time Stop effect.
     public static System.IntPtr EffectTimeStop()
     {
-      VM.Call(467);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(467);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Blindness effect.
     public static System.IntPtr EffectBlindness()
     {
-      VM.Call(468);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(468);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Determine whether oSource has a friendly reaction towards oTarget, depending<br/>
@@ -11466,10 +11466,10 @@ namespace NWN.Core
     ///  * Returns TRUE if oSource has a friendly reaction towards oTarget
     public static int GetIsReactionTypeFriendly(uint oTarget, uint oSource = OBJECT_INVALID)
     {
-      VM.StackPush(oSource);
-      VM.StackPush(oTarget);
-      VM.Call(469);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSource);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(469);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Determine whether oSource has a neutral reaction towards oTarget, depending<br/>
@@ -11480,10 +11480,10 @@ namespace NWN.Core
     ///  * Returns TRUE if oSource has a neutral reaction towards oTarget
     public static int GetIsReactionTypeNeutral(uint oTarget, uint oSource = OBJECT_INVALID)
     {
-      VM.StackPush(oSource);
-      VM.StackPush(oTarget);
-      VM.Call(470);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSource);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(470);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Determine whether oSource has a Hostile reaction towards oTarget, depending<br/>
@@ -11494,10 +11494,10 @@ namespace NWN.Core
     ///  * Returns TRUE if oSource has a hostile reaction towards oTarget
     public static int GetIsReactionTypeHostile(uint oTarget, uint oSource = OBJECT_INVALID)
     {
-      VM.StackPush(oSource);
-      VM.StackPush(oTarget);
-      VM.Call(471);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSource);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(471);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Create a Spell Level Absorption effect.<br/>
@@ -11511,11 +11511,11 @@ namespace NWN.Core
     ///    is invalid.
     public static System.IntPtr EffectSpellLevelAbsorption(int nMaxSpellLevelAbsorbed, int nTotalSpellLevelsAbsorbed = 0, int nSpellSchool = SPELL_SCHOOL_GENERAL)
     {
-      VM.StackPush(nSpellSchool);
-      VM.StackPush(nTotalSpellLevelsAbsorbed);
-      VM.StackPush(nMaxSpellLevelAbsorbed);
-      VM.Call(472);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellSchool);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nTotalSpellLevelsAbsorbed);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nMaxSpellLevelAbsorbed);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(472);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Dispel Magic Best effect.<br/>
@@ -11524,9 +11524,9 @@ namespace NWN.Core
     ///  effect.
     public static System.IntPtr EffectDispelMagicBest(int nCasterLevel = USE_CREATURE_LEVEL)
     {
-      VM.StackPush(nCasterLevel);
-      VM.Call(473);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nCasterLevel);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(473);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Try to send oTarget to a new server defined by sIPaddress.<br/>
@@ -11544,20 +11544,20 @@ namespace NWN.Core
     ///    character.
     public static void ActivatePortal(uint oTarget, string sIPaddress = "", string sPassword = "", string sWaypointTag = "", int bSeemless = FALSE)
     {
-      VM.StackPush(bSeemless);
-      VM.StackPush(sWaypointTag);
-      VM.StackPush(sPassword);
-      VM.StackPush(sIPaddress);
-      VM.StackPush(oTarget);
-      VM.Call(474);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bSeemless);
+      global::NWNX.NET.NWNXAPI.StackPushString(sWaypointTag);
+      global::NWNX.NET.NWNXAPI.StackPushString(sPassword);
+      global::NWNX.NET.NWNXAPI.StackPushString(sIPaddress);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(474);
     }
 
     ///  Get the number of stacked items that oItem comprises.
     public static int GetNumStackedItems(uint oItem)
     {
-      VM.StackPush(oItem);
-      VM.Call(475);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(475);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Use this on an NPC to cause all creatures within a 10-metre radius to stop<br/>
@@ -11566,7 +11566,7 @@ namespace NWN.Core
     ///  or an object that is not a creature, nothing will happen.
     public static void SurrenderToEnemies()
     {
-      VM.Call(476);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(476);
     }
 
     ///  Create a Miss Chance effect.<br/>
@@ -11576,27 +11576,27 @@ namespace NWN.Core
     ///    nPercentage &amp;gt; 100.
     public static System.IntPtr EffectMissChance(int nPercentage, int nMissChanceType = MISS_CHANCE_TYPE_NORMAL)
     {
-      VM.StackPush(nMissChanceType);
-      VM.StackPush(nPercentage);
-      VM.Call(477);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nMissChanceType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPercentage);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(477);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Get the number of Hitdice worth of Turn Resistance that oUndead may have.<br/>
     ///  This will only work on undead creatures.
     public static int GetTurnResistanceHD(uint oUndead = OBJECT_INVALID)
     {
-      VM.StackPush(oUndead);
-      VM.Call(478);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oUndead);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(478);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the size (CREATURE_SIZE_*) of oCreature.
     public static int GetCreatureSize(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(479);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(479);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Create a Disappear/Appear effect.<br/>
@@ -11606,10 +11606,10 @@ namespace NWN.Core
     ///  only have animation 1, although a few have 2 (like beholders)
     public static System.IntPtr EffectDisappearAppear(System.IntPtr lLocation, int nAnimation = 1)
     {
-      VM.StackPush(nAnimation);
-      VM.StackPush(lLocation, ENGINE_STRUCTURE_LOCATION);
-      VM.Call(480);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAnimation);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lLocation);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(480);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Disappear effect to make the object &amp;quot;fly away&amp;quot; and then destroy<br/>
@@ -11618,9 +11618,9 @@ namespace NWN.Core
     ///  only have animation 1, although a few have 2 (like beholders)
     public static System.IntPtr EffectDisappear(int nAnimation = 1)
     {
-      VM.StackPush(nAnimation);
-      VM.Call(481);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAnimation);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(481);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create an Appear effect to make the object &amp;quot;fly in&amp;quot;.<br/>
@@ -11628,25 +11628,25 @@ namespace NWN.Core
     ///  only have animation 1, although a few have 2 (like beholders)
     public static System.IntPtr EffectAppear(int nAnimation = 1)
     {
-      VM.StackPush(nAnimation);
-      VM.Call(482);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAnimation);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(482);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  The action subject will unlock oTarget, which can be a door or a placeable<br/>
     ///  object.
     public static void ActionUnlockObject(uint oTarget)
     {
-      VM.StackPush(oTarget);
-      VM.Call(483);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(483);
     }
 
     ///  The action subject will lock oTarget, which can be a door or a placeable<br/>
     ///  object.
     public static void ActionLockObject(uint oTarget)
     {
-      VM.StackPush(oTarget);
-      VM.Call(484);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(484);
     }
 
     ///  Create a Modify Attacks effect to add attacks.<br/>
@@ -11654,18 +11654,18 @@ namespace NWN.Core
     ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nAttacks &amp;gt; 5.
     public static System.IntPtr EffectModifyAttacks(int nAttacks)
     {
-      VM.StackPush(nAttacks);
-      VM.Call(485);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAttacks);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(485);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Get the last trap detected by oTarget.<br/>
     ///  * Return value on error: OBJECT_INVALID
     public static uint GetLastTrapDetected(uint oTarget = OBJECT_INVALID)
     {
-      VM.StackPush(oTarget);
-      VM.Call(486);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(486);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Create a Damage Shield effect which does (nDamageAmount + nRandomAmount)<br/>
@@ -11677,11 +11677,11 @@ namespace NWN.Core
     ///        result in odd behaviour.
     public static System.IntPtr EffectDamageShield(int nDamageAmount, int nRandomAmount, int nDamageType)
     {
-      VM.StackPush(nDamageType);
-      VM.StackPush(nRandomAmount);
-      VM.StackPush(nDamageAmount);
-      VM.Call(487);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamageType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nRandomAmount);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamageAmount);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(487);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Get the trap nearest to oTarget.<br/>
@@ -11692,10 +11692,10 @@ namespace NWN.Core
     ///    by oTarget.
     public static uint GetNearestTrapToObject(uint oTarget = OBJECT_INVALID, int nTrapDetected = TRUE)
     {
-      VM.StackPush(nTrapDetected);
-      VM.StackPush(oTarget);
-      VM.Call(488);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nTrapDetected);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(488);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the name of oCreature&amp;apos;s deity.<br/>
@@ -11703,18 +11703,18 @@ namespace NWN.Core
     ///    oCreature).
     public static string GetDeity(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(489);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(489);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Get the name of oCreature&amp;apos;s sub race.<br/>
     ///  * Returns &amp;quot;&amp;quot; if oCreature is invalid (or if sub race is blank for oCreature).
     public static string GetSubRace(uint oTarget)
     {
-      VM.StackPush(oTarget);
-      VM.Call(490);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(490);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Get oTarget&amp;apos;s base fortitude saving throw value (this will only work for<br/>
@@ -11722,9 +11722,9 @@ namespace NWN.Core
     ///  * Returns 0 if oTarget is invalid.
     public static int GetFortitudeSavingThrow(uint oTarget)
     {
-      VM.StackPush(oTarget);
-      VM.Call(491);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(491);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get oTarget&amp;apos;s base will saving throw value (this will only work for creatures,<br/>
@@ -11732,9 +11732,9 @@ namespace NWN.Core
     ///  * Returns 0 if oTarget is invalid.
     public static int GetWillSavingThrow(uint oTarget)
     {
-      VM.StackPush(oTarget);
-      VM.Call(492);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(492);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get oTarget&amp;apos;s base reflex saving throw value (this will only work for<br/>
@@ -11742,36 +11742,36 @@ namespace NWN.Core
     ///  * Returns 0 if oTarget is invalid.
     public static int GetReflexSavingThrow(uint oTarget)
     {
-      VM.StackPush(oTarget);
-      VM.Call(493);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(493);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get oCreature&amp;apos;s challenge rating.<br/>
     ///  * Returns 0.0 if oCreature is invalid.
     public static float GetChallengeRating(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(494);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(494);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Get oCreature&amp;apos;s age.<br/>
     ///  * Returns 0 if oCreature is invalid.
     public static int GetAge(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(495);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(495);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get oCreature&amp;apos;s movement rate.<br/>
     ///  * Returns 0 if oCreature is invalid.
     public static int GetMovementRate(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(496);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(496);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get oCreature&amp;apos;s familiar creature type (FAMILIAR_CREATURE_TYPE_*).<br/>
@@ -11779,9 +11779,9 @@ namespace NWN.Core
     ///    currently have a familiar.
     public static int GetFamiliarCreatureType(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(497);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(497);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get oCreature&amp;apos;s animal companion creature type<br/>
@@ -11790,9 +11790,9 @@ namespace NWN.Core
     ///    not currently have an animal companion.
     public static int GetAnimalCompanionCreatureType(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(498);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(498);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get oCreature&amp;apos;s familiar&amp;apos;s name.<br/>
@@ -11800,9 +11800,9 @@ namespace NWN.Core
     ///  have a familiar or if the familiar&amp;apos;s name is blank.
     public static string GetFamiliarName(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(499);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(499);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Get oCreature&amp;apos;s animal companion&amp;apos;s name.<br/>
@@ -11810,9 +11810,9 @@ namespace NWN.Core
     ///  have an animal companion or if the animal companion&amp;apos;s name is blank.
     public static string GetAnimalCompanionName(uint oTarget)
     {
-      VM.StackPush(oTarget);
-      VM.Call(500);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(500);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  The action subject will fake casting a spell at oTarget; the conjure and cast<br/>
@@ -11822,10 +11822,10 @@ namespace NWN.Core
     ///  - nProjectilePathType: PROJECTILE_PATH_TYPE_*
     public static void ActionCastFakeSpellAtObject(int nSpell, uint oTarget, int nProjectilePathType = PROJECTILE_PATH_TYPE_DEFAULT)
     {
-      VM.StackPush(nProjectilePathType);
-      VM.StackPush(oTarget);
-      VM.StackPush(nSpell);
-      VM.Call(501);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nProjectilePathType);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpell);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(501);
     }
 
     ///  The action subject will fake casting a spell at lLocation; the conjure and<br/>
@@ -11835,19 +11835,19 @@ namespace NWN.Core
     ///  - nProjectilePathType: PROJECTILE_PATH_TYPE_*
     public static void ActionCastFakeSpellAtLocation(int nSpell, System.IntPtr lTarget, int nProjectilePathType = PROJECTILE_PATH_TYPE_DEFAULT)
     {
-      VM.StackPush(nProjectilePathType);
-      VM.StackPush(lTarget, ENGINE_STRUCTURE_LOCATION);
-      VM.StackPush(nSpell);
-      VM.Call(502);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nProjectilePathType);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lTarget);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpell);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(502);
     }
 
     ///  Removes oAssociate from the service of oMaster, returning them to their<br/>
     ///  original faction.
     public static void RemoveSummonedAssociate(uint oMaster, uint oAssociate = OBJECT_INVALID)
     {
-      VM.StackPush(oAssociate);
-      VM.StackPush(oMaster);
-      VM.Call(503);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oAssociate);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oMaster);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(503);
     }
 
     ///  Set the camera mode for oPlayer.<br/>
@@ -11857,24 +11857,24 @@ namespace NWN.Core
     ///    happens.
     public static void SetCameraMode(uint oPlayer, int nCameraMode)
     {
-      VM.StackPush(nCameraMode);
-      VM.StackPush(oPlayer);
-      VM.Call(504);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nCameraMode);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(504);
     }
 
     ///  * Returns TRUE if oCreature is resting.
     public static int GetIsResting(uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.Call(505);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(505);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the last PC that has rested in the module.
     public static uint GetLastPCRested()
     {
-      VM.Call(506);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(506);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Set the weather for oTarget.<br/>
@@ -11887,25 +11887,25 @@ namespace NWN.Core
     ///       the appropriate precipitation *without stopping*.
     public static void SetWeather(uint oTarget, int nWeather)
     {
-      VM.StackPush(nWeather);
-      VM.StackPush(oTarget);
-      VM.Call(507);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nWeather);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(507);
     }
 
     ///  Determine the type (REST_EVENTTYPE_REST_*) of the last rest event (as<br/>
     ///  returned from the OnPCRested module event).
     public static int GetLastRestEventType()
     {
-      VM.Call(508);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(508);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Shut down the currently loaded module and start a new one (moving all<br/>
     ///  currently-connected players to the starting point.
     public static void StartNewModule(string sModuleName)
     {
-      VM.StackPush(sModuleName);
-      VM.Call(509);
+      global::NWNX.NET.NWNXAPI.StackPushString(sModuleName);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(509);
     }
 
     ///  Create a Swarm effect.<br/>
@@ -11919,34 +11919,34 @@ namespace NWN.Core
     ///  - sCreatureTemplate4
     public static System.IntPtr EffectSwarm(int nLooping, string sCreatureTemplate1, string sCreatureTemplate2 = "", string sCreatureTemplate3 = "", string sCreatureTemplate4 = "")
     {
-      VM.StackPush(sCreatureTemplate4);
-      VM.StackPush(sCreatureTemplate3);
-      VM.StackPush(sCreatureTemplate2);
-      VM.StackPush(sCreatureTemplate1);
-      VM.StackPush(nLooping);
-      VM.Call(510);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushString(sCreatureTemplate4);
+      global::NWNX.NET.NWNXAPI.StackPushString(sCreatureTemplate3);
+      global::NWNX.NET.NWNXAPI.StackPushString(sCreatureTemplate2);
+      global::NWNX.NET.NWNXAPI.StackPushString(sCreatureTemplate1);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nLooping);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(510);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  * Returns TRUE if oItem is a ranged weapon.
     public static int GetWeaponRanged(uint oItem)
     {
-      VM.StackPush(oItem);
-      VM.Call(511);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(511);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Only if we are in a single player game, AutoSave the game.
     public static void DoSinglePlayerAutoSave()
     {
-      VM.Call(512);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(512);
     }
 
     ///  Get the game difficulty (GAME_DIFFICULTY_*).
     public static int GetGameDifficulty()
     {
-      VM.Call(513);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(513);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Set the main light color on the tile at lTileLocation.<br/>
@@ -11956,10 +11956,10 @@ namespace NWN.Core
     ///  - nMainLight2Color: TILE_MAIN_LIGHT_COLOR_*
     public static void SetTileMainLightColor(System.IntPtr lTileLocation, int nMainLight1Color, int nMainLight2Color)
     {
-      VM.StackPush(nMainLight2Color);
-      VM.StackPush(nMainLight1Color);
-      VM.StackPush(lTileLocation, ENGINE_STRUCTURE_LOCATION);
-      VM.Call(514);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nMainLight2Color);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nMainLight1Color);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lTileLocation);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(514);
     }
 
     ///  Set the source light color on the tile at lTileLocation.<br/>
@@ -11969,10 +11969,10 @@ namespace NWN.Core
     ///  - nSourceLight2Color: TILE_SOURCE_LIGHT_COLOR_*
     public static void SetTileSourceLightColor(System.IntPtr lTileLocation, int nSourceLight1Color, int nSourceLight2Color)
     {
-      VM.StackPush(nSourceLight2Color);
-      VM.StackPush(nSourceLight1Color);
-      VM.StackPush(lTileLocation, ENGINE_STRUCTURE_LOCATION);
-      VM.Call(515);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSourceLight2Color);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSourceLight1Color);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lTileLocation);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(515);
     }
 
     ///  All clients in oArea will recompute the static lighting.<br/>
@@ -11980,8 +11980,8 @@ namespace NWN.Core
     ///  placeables with lights have been added/deleted.
     public static void RecomputeStaticLighting(uint oArea)
     {
-      VM.StackPush(oArea);
-      VM.Call(516);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(516);
     }
 
     ///  Get the color (TILE_MAIN_LIGHT_COLOR_*) for the main light 1 of the tile at<br/>
@@ -11989,9 +11989,9 @@ namespace NWN.Core
     ///  - lTile: the vector part of this is the tile grid (x,y) coordinate of the tile.
     public static int GetTileMainLight1Color(System.IntPtr lTile)
     {
-      VM.StackPush(lTile, ENGINE_STRUCTURE_LOCATION);
-      VM.Call(517);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lTile);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(517);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the color (TILE_MAIN_LIGHT_COLOR_*) for the main light 2 of the tile at<br/>
@@ -12000,9 +12000,9 @@ namespace NWN.Core
     ///    tile.
     public static int GetTileMainLight2Color(System.IntPtr lTile)
     {
-      VM.StackPush(lTile, ENGINE_STRUCTURE_LOCATION);
-      VM.Call(518);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lTile);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(518);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the color (TILE_SOURCE_LIGHT_COLOR_*) for the source light 1 of the tile<br/>
@@ -12011,9 +12011,9 @@ namespace NWN.Core
     ///    tile.
     public static int GetTileSourceLight1Color(System.IntPtr lTile)
     {
-      VM.StackPush(lTile, ENGINE_STRUCTURE_LOCATION);
-      VM.Call(519);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lTile);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(519);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the color (TILE_SOURCE_LIGHT_COLOR_*) for the source light 2 of the tile<br/>
@@ -12022,9 +12022,9 @@ namespace NWN.Core
     ///    tile.
     public static int GetTileSourceLight2Color(System.IntPtr lTile)
     {
-      VM.StackPush(lTile, ENGINE_STRUCTURE_LOCATION);
-      VM.Call(520);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lTile);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(520);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Make the corresponding panel button on the player&amp;apos;s client start or stop<br/>
@@ -12035,18 +12035,18 @@ namespace NWN.Core
     ///    nButton will stop flashing.
     public static void SetPanelButtonFlash(uint oPlayer, int nButton, int nEnableFlash)
     {
-      VM.StackPush(nEnableFlash);
-      VM.StackPush(nButton);
-      VM.StackPush(oPlayer);
-      VM.Call(521);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nEnableFlash);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nButton);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(521);
     }
 
     ///  Get the current action (ACTION_*) that oObject is executing.
     public static int GetCurrentAction(uint oObject = OBJECT_INVALID)
     {
-      VM.StackPush(oObject);
-      VM.Call(522);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(522);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Set how nStandardFaction feels about oCreature.<br/>
@@ -12055,10 +12055,10 @@ namespace NWN.Core
     ///  - oCreature
     public static void SetStandardFactionReputation(int nStandardFaction, int nNewReputation, uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.StackPush(nNewReputation);
-      VM.StackPush(nStandardFaction);
-      VM.Call(523);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNewReputation);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nStandardFaction);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(523);
     }
 
     ///  Find out how nStandardFaction feels about oCreature.<br/>
@@ -12071,10 +12071,10 @@ namespace NWN.Core
     ///  90-100 :  Friendly.
     public static int GetStandardFactionReputation(int nStandardFaction, uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.StackPush(nStandardFaction);
-      VM.Call(524);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nStandardFaction);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(524);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Display floaty text above the specified creature.<br/>
@@ -12088,11 +12088,11 @@ namespace NWN.Core
     ///  - bChatWindow:  If TRUE, the string reference will be displayed in oCreatureToFloatAbove&amp;apos;s chat window
     public static void FloatingTextStrRefOnCreature(int nStrRefToDisplay, uint oCreatureToFloatAbove, int bBroadcastToFaction = TRUE, int bChatWindow = TRUE)
     {
-      VM.StackPush(bChatWindow);
-      VM.StackPush(bBroadcastToFaction);
-      VM.StackPush(oCreatureToFloatAbove);
-      VM.StackPush(nStrRefToDisplay);
-      VM.Call(525);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bChatWindow);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bBroadcastToFaction);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreatureToFloatAbove);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nStrRefToDisplay);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(525);
     }
 
     ///  Display floaty text above the specified creature.<br/>
@@ -12106,29 +12106,29 @@ namespace NWN.Core
     ///  - bChatWindow:  If TRUE, sStringToDisplay will be displayed in oCreatureToFloatAbove&amp;apos;s chat window.
     public static void FloatingTextStringOnCreature(string sStringToDisplay, uint oCreatureToFloatAbove, int bBroadcastToFaction = TRUE, int bChatWindow = TRUE)
     {
-      VM.StackPush(bChatWindow);
-      VM.StackPush(bBroadcastToFaction);
-      VM.StackPush(oCreatureToFloatAbove);
-      VM.StackPush(sStringToDisplay);
-      VM.Call(526);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bChatWindow);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bBroadcastToFaction);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreatureToFloatAbove);
+      global::NWNX.NET.NWNXAPI.StackPushString(sStringToDisplay);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(526);
     }
 
     ///  - oTrapObject: a placeable, door or trigger<br/>
     ///  * Returns TRUE if oTrapObject is disarmable.
     public static int GetTrapDisarmable(uint oTrapObject)
     {
-      VM.StackPush(oTrapObject);
-      VM.Call(527);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTrapObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(527);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  - oTrapObject: a placeable, door or trigger<br/>
     ///  * Returns TRUE if oTrapObject is detectable.
     public static int GetTrapDetectable(uint oTrapObject)
     {
-      VM.StackPush(oTrapObject);
-      VM.Call(528);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTrapObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(528);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  - oTrapObject: a placeable, door or trigger<br/>
@@ -12136,28 +12136,28 @@ namespace NWN.Core
     ///  * Returns TRUE if oCreature has detected oTrapObject
     public static int GetTrapDetectedBy(uint oTrapObject, uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.StackPush(oTrapObject);
-      VM.Call(529);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTrapObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(529);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  - oTrapObject: a placeable, door or trigger<br/>
     ///  * Returns TRUE if oTrapObject has been flagged as visible to all creatures.
     public static int GetTrapFlagged(uint oTrapObject)
     {
-      VM.StackPush(oTrapObject);
-      VM.Call(530);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTrapObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(530);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the trap base type (TRAP_BASE_TYPE_*) of oTrapObject.<br/>
     ///  - oTrapObject: a placeable, door or trigger
     public static int GetTrapBaseType(uint oTrapObject)
     {
-      VM.StackPush(oTrapObject);
-      VM.Call(531);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTrapObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(531);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  - oTrapObject: a placeable, door or trigger<br/>
@@ -12165,9 +12165,9 @@ namespace NWN.Core
     ///    after firing.
     public static int GetTrapOneShot(uint oTrapObject)
     {
-      VM.StackPush(oTrapObject);
-      VM.Call(532);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTrapObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(532);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the creator of oTrapObject, the creature that set the trap.<br/>
@@ -12175,83 +12175,83 @@ namespace NWN.Core
     ///  * Returns OBJECT_INVALID if oTrapObject was created in the toolset.
     public static uint GetTrapCreator(uint oTrapObject)
     {
-      VM.StackPush(oTrapObject);
-      VM.Call(533);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTrapObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(533);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the tag of the key that will disarm oTrapObject.<br/>
     ///  - oTrapObject: a placeable, door or trigger
     public static string GetTrapKeyTag(uint oTrapObject)
     {
-      VM.StackPush(oTrapObject);
-      VM.Call(534);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTrapObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(534);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Get the DC for disarming oTrapObject.<br/>
     ///  - oTrapObject: a placeable, door or trigger
     public static int GetTrapDisarmDC(uint oTrapObject)
     {
-      VM.StackPush(oTrapObject);
-      VM.Call(535);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTrapObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(535);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the DC for detecting oTrapObject.<br/>
     ///  - oTrapObject: a placeable, door or trigger
     public static int GetTrapDetectDC(uint oTrapObject)
     {
-      VM.StackPush(oTrapObject);
-      VM.Call(536);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTrapObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(536);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  * Returns TRUE if a specific key is required to open the lock on oObject.
     public static int GetLockKeyRequired(uint oObject)
     {
-      VM.StackPush(oObject);
-      VM.Call(537);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(537);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the tag of the key that will open the lock on oObject.
     public static string GetLockKeyTag(uint oObject)
     {
-      VM.StackPush(oObject);
-      VM.Call(538);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(538);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  * Returns TRUE if the lock on oObject is lockable.
     public static int GetLockLockable(uint oObject)
     {
-      VM.StackPush(oObject);
-      VM.Call(539);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(539);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the DC for unlocking oObject.
     public static int GetLockUnlockDC(uint oObject)
     {
-      VM.StackPush(oObject);
-      VM.Call(540);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(540);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the DC for locking oObject.
     public static int GetLockLockDC(uint oObject)
     {
-      VM.StackPush(oObject);
-      VM.Call(541);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(541);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the last PC that levelled up.
     public static uint GetPCLevellingUp()
     {
-      VM.Call(542);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(542);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  - nFeat: FEAT_*<br/>
@@ -12259,10 +12259,10 @@ namespace NWN.Core
     ///  * Returns TRUE if oObject has effects on it originating from nFeat.
     public static int GetHasFeatEffect(int nFeat, uint oObject = OBJECT_INVALID)
     {
-      VM.StackPush(oObject);
-      VM.StackPush(nFeat);
-      VM.Call(543);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFeat);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(543);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Set the status of the illumination for oPlaceable.<br/>
@@ -12280,17 +12280,17 @@ namespace NWN.Core
     ///    doesn&amp;apos;t have a light, nothing will happen.
     public static void SetPlaceableIllumination(uint oPlaceable = OBJECT_INVALID, int bIlluminate = TRUE)
     {
-      VM.StackPush(bIlluminate);
-      VM.StackPush(oPlaceable);
-      VM.Call(544);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bIlluminate);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlaceable);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(544);
     }
 
     ///  * Returns TRUE if the illumination for oPlaceable is on
     public static int GetPlaceableIllumination(uint oPlaceable = OBJECT_INVALID)
     {
-      VM.StackPush(oPlaceable);
-      VM.Call(545);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlaceable);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(545);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  - oPlaceable<br/>
@@ -12298,10 +12298,10 @@ namespace NWN.Core
     ///  * Returns TRUE if nPlacebleAction is valid for oPlaceable.
     public static int GetIsPlaceableObjectActionPossible(uint oPlaceable, int nPlaceableAction)
     {
-      VM.StackPush(nPlaceableAction);
-      VM.StackPush(oPlaceable);
-      VM.Call(546);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPlaceableAction);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlaceable);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(546);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  The caller performs nPlaceableAction on oPlaceable.<br/>
@@ -12309,25 +12309,25 @@ namespace NWN.Core
     ///  - nPlaceableAction: PLACEABLE_ACTION_*
     public static void DoPlaceableObjectAction(uint oPlaceable, int nPlaceableAction)
     {
-      VM.StackPush(nPlaceableAction);
-      VM.StackPush(oPlaceable);
-      VM.Call(547);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPlaceableAction);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlaceable);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(547);
     }
 
     ///  Get the first PC in the player list.<br/>
     ///  This resets the position in the player list for GetNextPC().
     public static uint GetFirstPC()
     {
-      VM.Call(548);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(548);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the next PC in the player list.<br/>
     ///  This picks up where the last GetFirstPC() or GetNextPC() left off.
     public static uint GetNextPC()
     {
-      VM.Call(549);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(549);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Set whether or not the creature oDetector has detected the trapped object oTrap.<br/>
@@ -12336,20 +12336,20 @@ namespace NWN.Core
     ///  - bDetected: A Boolean that sets whether the trapped object has been detected or not.
     public static int SetTrapDetectedBy(uint oTrap, uint oDetector, int bDetected = TRUE)
     {
-      VM.StackPush(bDetected);
-      VM.StackPush(oDetector);
-      VM.StackPush(oTrap);
-      VM.Call(550);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bDetected);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oDetector);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTrap);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(550);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Note: Only placeables, doors and triggers can be trapped.<br/>
     ///  * Returns TRUE if oObject is trapped.
     public static int GetIsTrapped(uint oObject)
     {
-      VM.StackPush(oObject);
-      VM.Call(551);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(551);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Create a Turn Resistance Decrease effect.<br/>
@@ -12357,9 +12357,9 @@ namespace NWN.Core
     /// /  decrease
     public static System.IntPtr EffectTurnResistanceDecrease(int nHitDice)
     {
-      VM.StackPush(nHitDice);
-      VM.Call(552);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nHitDice);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(552);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create a Turn Resistance Increase effect.<br/>
@@ -12367,9 +12367,9 @@ namespace NWN.Core
     ///    increase
     public static System.IntPtr EffectTurnResistanceIncrease(int nHitDice)
     {
-      VM.StackPush(nHitDice);
-      VM.Call(553);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nHitDice);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(553);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Spawn in the Death GUI.<br/>
@@ -12385,20 +12385,20 @@ namespace NWN.Core
     ///  - sHelpString
     public static void PopUpDeathGUIPanel(uint oPC, int bRespawnButtonEnabled = TRUE, int bWaitForHelpButtonEnabled = TRUE, int nHelpStringReference = 0, string sHelpString = "")
     {
-      VM.StackPush(sHelpString);
-      VM.StackPush(nHelpStringReference);
-      VM.StackPush(bWaitForHelpButtonEnabled);
-      VM.StackPush(bRespawnButtonEnabled);
-      VM.StackPush(oPC);
-      VM.Call(554);
+      global::NWNX.NET.NWNXAPI.StackPushString(sHelpString);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nHelpStringReference);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bWaitForHelpButtonEnabled);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bRespawnButtonEnabled);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPC);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(554);
     }
 
     ///  Disable oTrap.<br/>
     ///  - oTrap: a placeable, door or trigger.
     public static void SetTrapDisabled(uint oTrap)
     {
-      VM.StackPush(oTrap);
-      VM.Call(555);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTrap);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(555);
     }
 
     ///  Get the last object that was sent as a GetLastAttacker(), GetLastDamager(),<br/>
@@ -12414,39 +12414,39 @@ namespace NWN.Core
     ///  6) This value will never be a dead/destroyed creature
     public static uint GetLastHostileActor(uint oVictim = OBJECT_INVALID)
     {
-      VM.StackPush(oVictim);
-      VM.Call(556);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oVictim);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(556);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Force all the characters of the players who are currently in the game to<br/>
     ///  be exported to their respective directories i.e. LocalVault/ServerVault/ etc.
     public static void ExportAllCharacters()
     {
-      VM.Call(557);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(557);
     }
 
     ///  Get the Day Track for oArea.
     public static int MusicBackgroundGetDayTrack(uint oArea)
     {
-      VM.StackPush(oArea);
-      VM.Call(558);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(558);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the Night Track for oArea.
     public static int MusicBackgroundGetNightTrack(uint oArea)
     {
-      VM.StackPush(oArea);
-      VM.Call(559);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(559);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Write sLogEntry as a timestamped entry into the log file
     public static void WriteTimestampedLogEntry(string sLogEntry)
     {
-      VM.StackPush(sLogEntry);
-      VM.Call(560);
+      global::NWNX.NET.NWNXAPI.StackPushString(sLogEntry);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(560);
     }
 
     ///  Get the module&amp;apos;s name in the language of the server that&amp;apos;s running it.<br/>
@@ -12454,8 +12454,8 @@ namespace NWN.Core
     ///    empty string
     public static string GetModuleName()
     {
-      VM.Call(561);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(561);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Get the player leader of the faction of which oMemberOfFaction is a member.<br/>
@@ -12463,40 +12463,40 @@ namespace NWN.Core
     ///    or oMemberOfFaction is a member of a NPC faction.
     public static uint GetFactionLeader(uint oMemberOfFaction)
     {
-      VM.StackPush(oMemberOfFaction);
-      VM.Call(562);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oMemberOfFaction);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(562);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Sends szMessage to all the Dungeon Masters currently on the server.
     public static void SendMessageToAllDMs(string szMessage)
     {
-      VM.StackPush(szMessage);
-      VM.Call(563);
+      global::NWNX.NET.NWNXAPI.StackPushString(szMessage);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(563);
     }
 
     ///  End the currently running game, play sEndMovie then return all players to the<br/>
     ///  game&amp;apos;s main menu.
     public static void EndGame(string sEndMovie)
     {
-      VM.StackPush(sEndMovie);
-      VM.Call(564);
+      global::NWNX.NET.NWNXAPI.StackPushString(sEndMovie);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(564);
     }
 
     ///  Remove oPlayer from the server.<br/>
     ///  You can optionally specify a reason to override the text shown to the player.
     public static void BootPC(uint oPlayer, string sReason = "")
     {
-      VM.StackPush(sReason);
-      VM.StackPush(oPlayer);
-      VM.Call(565);
+      global::NWNX.NET.NWNXAPI.StackPushString(sReason);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(565);
     }
 
     ///  Counterspell oCounterSpellTarget.
     public static void ActionCounterSpell(uint oCounterSpellTarget)
     {
-      VM.StackPush(oCounterSpellTarget);
-      VM.Call(566);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCounterSpellTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(566);
     }
 
     ///  Set the ambient day volume for oArea to nVolume.<br/>
@@ -12504,9 +12504,9 @@ namespace NWN.Core
     ///  - nVolume: 0 - 100
     public static void AmbientSoundSetDayVolume(uint oArea, int nVolume)
     {
-      VM.StackPush(nVolume);
-      VM.StackPush(oArea);
-      VM.Call(567);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nVolume);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(567);
     }
 
     ///  Set the ambient night volume for oArea to nVolume.<br/>
@@ -12514,17 +12514,17 @@ namespace NWN.Core
     ///  - nVolume: 0 - 100
     public static void AmbientSoundSetNightVolume(uint oArea, int nVolume)
     {
-      VM.StackPush(nVolume);
-      VM.StackPush(oArea);
-      VM.Call(568);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nVolume);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(568);
     }
 
     ///  Get the Battle Track for oArea.
     public static int MusicBackgroundGetBattleTrack(uint oArea)
     {
-      VM.StackPush(oArea);
-      VM.Call(569);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(569);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Determine whether oObject has an inventory.<br/>
@@ -12532,18 +12532,18 @@ namespace NWN.Core
     ///  * Returns FALSE for all other object types.
     public static int GetHasInventory(uint oObject)
     {
-      VM.StackPush(oObject);
-      VM.Call(570);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(570);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the duration (in seconds) of the sound attached to nStrRef<br/>
     ///  * Returns 0.0f if no duration is stored or if no sound is attached
     public static float GetStrRefSoundDuration(int nStrRef)
     {
-      VM.StackPush(nStrRef);
-      VM.Call(571);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nStrRef);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(571);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Add oPC to oPartyLeader&amp;apos;s party.  This will only work on two PCs.<br/>
@@ -12551,17 +12551,17 @@ namespace NWN.Core
     ///  - oPartyLeader: player already in the party
     public static void AddToParty(uint oPC, uint oPartyLeader)
     {
-      VM.StackPush(oPartyLeader);
-      VM.StackPush(oPC);
-      VM.Call(572);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPartyLeader);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPC);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(572);
     }
 
     ///  Remove oPC from their current party. This will only work on a PC.<br/>
     ///  - oPC: removes this player from whatever party they&amp;apos;re currently in.
     public static void RemoveFromParty(uint oPC)
     {
-      VM.StackPush(oPC);
-      VM.Call(573);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPC);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(573);
     }
 
     ///  Returns the stealth mode of the specified creature.<br/>
@@ -12569,9 +12569,9 @@ namespace NWN.Core
     ///  * Returns a constant STEALTH_MODE_*
     public static int GetStealthMode(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(574);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(574);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the detection mode of the specified creature.<br/>
@@ -12579,9 +12579,9 @@ namespace NWN.Core
     ///  * Returns a constant DETECT_MODE_*
     public static int GetDetectMode(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(575);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(575);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the defensive casting mode of the specified creature.<br/>
@@ -12589,9 +12589,9 @@ namespace NWN.Core
     ///  * Returns a constant DEFENSIVE_CASTING_MODE_*
     public static int GetDefensiveCastingMode(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(576);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(576);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  returns the appearance type of the specified creature.<br/>
@@ -12599,9 +12599,9 @@ namespace NWN.Core
     ///  * returns APPEARANCE_TYPE_INVALID for non creatures/invalid creatures
     public static int GetAppearanceType(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(577);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(577);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  SpawnScriptDebugger() will attempt to communicate with the a running script debugger<br/>
@@ -12616,7 +12616,7 @@ namespace NWN.Core
     ///  debugging the script.
     public static void SpawnScriptDebugger()
     {
-      VM.Call(578);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(578);
     }
 
     ///  in an onItemAcquired script, returns the size of the stack of the item<br/>
@@ -12624,8 +12624,8 @@ namespace NWN.Core
     ///  * returns the stack size of the item acquired
     public static int GetModuleItemAcquiredStackSize()
     {
-      VM.Call(579);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(579);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Decrement the remaining uses per day for this creature by one.<br/>
@@ -12633,9 +12633,9 @@ namespace NWN.Core
     ///  - nFeat: constant FEAT_*
     public static void DecrementRemainingFeatUses(uint oCreature, int nFeat)
     {
-      VM.StackPush(nFeat);
-      VM.StackPush(oCreature);
-      VM.Call(580);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFeat);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(580);
     }
 
     ///  Decrement the remaining uses per day for this creature by one.<br/>
@@ -12643,26 +12643,26 @@ namespace NWN.Core
     ///  - nSpell: constant SPELL_*
     public static void DecrementRemainingSpellUses(uint oCreature, int nSpell)
     {
-      VM.StackPush(nSpell);
-      VM.StackPush(oCreature);
-      VM.Call(581);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpell);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(581);
     }
 
     ///  returns the template used to create this object (if appropriate)<br/>
     ///  * returns an empty string when no template found
     public static string GetResRef(uint oObject)
     {
-      VM.StackPush(oObject);
-      VM.Call(582);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(582);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  returns an effect that will petrify the target<br/>
     ///  * currently applies EffectParalyze and the stoneskin visual effect.
     public static System.IntPtr EffectPetrify()
     {
-      VM.Call(583);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(583);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  duplicates the item and returns a new object<br/>
@@ -12678,44 +12678,44 @@ namespace NWN.Core
     ///    then it will do so and return the merged object.
     public static uint CopyItem(uint oItem, uint oTargetInventory = OBJECT_INVALID, int bCopyVars = FALSE)
     {
-      VM.StackPush(bCopyVars);
-      VM.StackPush(oTargetInventory);
-      VM.StackPush(oItem);
-      VM.Call(584);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bCopyVars);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTargetInventory);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(584);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  returns an effect that is guaranteed to paralyze a creature.<br/>
     ///  this effect is identical to EffectParalyze except that it cannot be resisted.
     public static System.IntPtr EffectCutsceneParalyze()
     {
-      VM.Call(585);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(585);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  returns TRUE if the item CAN be dropped<br/>
     ///  Droppable items will appear on a creature&amp;apos;s remains when the creature is killed.
     public static int GetDroppableFlag(uint oItem)
     {
-      VM.StackPush(oItem);
-      VM.Call(586);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(586);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  returns TRUE if the object is usable
     public static int GetUseableFlag(uint oObject = OBJECT_INVALID)
     {
-      VM.StackPush(oObject);
-      VM.Call(587);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(587);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  returns TRUE if the item is stolen
     public static int GetStolenFlag(uint oStolen)
     {
-      VM.StackPush(oStolen);
-      VM.Call(588);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oStolen);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(588);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  This stores a float out to the specified campaign database<br/>
@@ -12726,11 +12726,11 @@ namespace NWN.Core
     ///  If you want a variable to pertain to a specific player in the game, provide a player object.
     public static void SetCampaignFloat(string sCampaignName, string sVarName, float flFloat, uint oPlayer = OBJECT_INVALID)
     {
-      VM.StackPush(oPlayer);
-      VM.StackPush(flFloat);
-      VM.StackPush(sVarName);
-      VM.StackPush(sCampaignName);
-      VM.Call(589);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(flFloat);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushString(sCampaignName);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(589);
     }
 
     ///  This stores an int out to the specified campaign database<br/>
@@ -12741,11 +12741,11 @@ namespace NWN.Core
     ///  If you want a variable to pertain to a specific player in the game, provide a player object.
     public static void SetCampaignInt(string sCampaignName, string sVarName, int nInt, uint oPlayer = OBJECT_INVALID)
     {
-      VM.StackPush(oPlayer);
-      VM.StackPush(nInt);
-      VM.StackPush(sVarName);
-      VM.StackPush(sCampaignName);
-      VM.Call(590);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nInt);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushString(sCampaignName);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(590);
     }
 
     ///  This stores a vector out to the specified campaign database<br/>
@@ -12756,11 +12756,11 @@ namespace NWN.Core
     ///  If you want a variable to pertain to a specific player in the game, provide a player object.
     public static void SetCampaignVector(string sCampaignName, string sVarName, System.Numerics.Vector3 vVector, uint oPlayer = OBJECT_INVALID)
     {
-      VM.StackPush(oPlayer);
-      VM.StackPush(vVector);
-      VM.StackPush(sVarName);
-      VM.StackPush(sCampaignName);
-      VM.Call(591);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.StackPushVector(vVector);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushString(sCampaignName);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(591);
     }
 
     ///  This stores a location out to the specified campaign database<br/>
@@ -12771,11 +12771,11 @@ namespace NWN.Core
     ///  If you want a variable to pertain to a specific player in the game, provide a player object.
     public static void SetCampaignLocation(string sCampaignName, string sVarName, System.IntPtr locLocation, uint oPlayer = OBJECT_INVALID)
     {
-      VM.StackPush(oPlayer);
-      VM.StackPush(locLocation, ENGINE_STRUCTURE_LOCATION);
-      VM.StackPush(sVarName);
-      VM.StackPush(sCampaignName);
-      VM.Call(592);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, locLocation);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushString(sCampaignName);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(592);
     }
 
     ///  This stores a string out to the specified campaign database<br/>
@@ -12786,18 +12786,18 @@ namespace NWN.Core
     ///  If you want a variable to pertain to a specific player in the game, provide a player object.
     public static void SetCampaignString(string sCampaignName, string sVarName, string sString, uint oPlayer = OBJECT_INVALID)
     {
-      VM.StackPush(oPlayer);
-      VM.StackPush(sString);
-      VM.StackPush(sVarName);
-      VM.StackPush(sCampaignName);
-      VM.Call(593);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.StackPushString(sString);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushString(sCampaignName);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(593);
     }
 
     ///  This will delete the entire campaign database if it exists.
     public static void DestroyCampaignDatabase(string sCampaignName)
     {
-      VM.StackPush(sCampaignName);
-      VM.Call(594);
+      global::NWNX.NET.NWNXAPI.StackPushString(sCampaignName);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(594);
     }
 
     ///  This will read a float from the  specified campaign database<br/>
@@ -12808,11 +12808,11 @@ namespace NWN.Core
     ///  If you want a variable to pertain to a specific player in the game, provide a player object.
     public static float GetCampaignFloat(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
     {
-      VM.StackPush(oPlayer);
-      VM.StackPush(sVarName);
-      VM.StackPush(sCampaignName);
-      VM.Call(595);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushString(sCampaignName);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(595);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  This will read an int from the  specified campaign database<br/>
@@ -12823,11 +12823,11 @@ namespace NWN.Core
     ///  If you want a variable to pertain to a specific player in the game, provide a player object.
     public static int GetCampaignInt(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
     {
-      VM.StackPush(oPlayer);
-      VM.StackPush(sVarName);
-      VM.StackPush(sCampaignName);
-      VM.Call(596);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushString(sCampaignName);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(596);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  This will read a vector from the  specified campaign database<br/>
@@ -12838,11 +12838,11 @@ namespace NWN.Core
     ///  If you want a variable to pertain to a specific player in the game, provide a player object.
     public static System.Numerics.Vector3 GetCampaignVector(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
     {
-      VM.StackPush(oPlayer);
-      VM.StackPush(sVarName);
-      VM.StackPush(sCampaignName);
-      VM.Call(597);
-      return VM.StackPopVector();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushString(sCampaignName);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(597);
+      return global::NWNX.NET.NWNXAPI.StackPopVector();
     }
 
     ///  This will read a location from the  specified campaign database<br/>
@@ -12853,11 +12853,11 @@ namespace NWN.Core
     ///  If you want a variable to pertain to a specific player in the game, provide a player object.
     public static System.IntPtr GetCampaignLocation(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
     {
-      VM.StackPush(oPlayer);
-      VM.StackPush(sVarName);
-      VM.StackPush(sCampaignName);
-      VM.Call(598);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_LOCATION);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushString(sCampaignName);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(598);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_LOCATION);
     }
 
     ///  This will read a string from the  specified campaign database<br/>
@@ -12868,11 +12868,11 @@ namespace NWN.Core
     ///  If you want a variable to pertain to a specific player in the game, provide a player object.
     public static string GetCampaignString(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
     {
-      VM.StackPush(oPlayer);
-      VM.StackPush(sVarName);
-      VM.StackPush(sCampaignName);
-      VM.Call(599);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushString(sCampaignName);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(599);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Duplicates the object specified by oSource.<br/>
@@ -12883,22 +12883,22 @@ namespace NWN.Core
     ///  If bCopyLocalState is TRUE, local vars, effects, action queue, and transition info (triggers, doors) are copied over.
     public static uint CopyObject(uint oSource, System.IntPtr locLocation, uint oOwner = OBJECT_INVALID, string sNewTag = "", int bCopyLocalState = FALSE)
     {
-      VM.StackPush(bCopyLocalState);
-      VM.StackPush(sNewTag);
-      VM.StackPush(oOwner);
-      VM.StackPush(locLocation, ENGINE_STRUCTURE_LOCATION);
-      VM.StackPush(oSource);
-      VM.Call(600);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bCopyLocalState);
+      global::NWNX.NET.NWNXAPI.StackPushString(sNewTag);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oOwner);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, locLocation);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSource);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(600);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  This will remove ANY campaign variable. Regardless of type.
     public static void DeleteCampaignVariable(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
     {
-      VM.StackPush(oPlayer);
-      VM.StackPush(sVarName);
-      VM.StackPush(sCampaignName);
-      VM.Call(601);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushString(sCampaignName);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(601);
     }
 
     ///  Stores an object with the given id.<br/>
@@ -12908,13 +12908,13 @@ namespace NWN.Core
     ///  (except for Combined Area Format, which always has object state saved out).
     public static int StoreCampaignObject(string sCampaignName, string sVarName, uint oObject, uint oPlayer = OBJECT_INVALID, int bSaveObjectState = FALSE)
     {
-      VM.StackPush(bSaveObjectState);
-      VM.StackPush(oPlayer);
-      VM.StackPush(oObject);
-      VM.StackPush(sVarName);
-      VM.StackPush(sCampaignName);
-      VM.Call(602);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bSaveObjectState);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushString(sCampaignName);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(602);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Use RetrieveCampaign with the given id to restore it.<br/>
@@ -12923,31 +12923,31 @@ namespace NWN.Core
     ///  If bLoadObjectState is TRUE, local vars, effects, action queue, and transition info (triggers, doors) are read in.
     public static uint RetrieveCampaignObject(string sCampaignName, string sVarName, System.IntPtr locLocation, uint oOwner = OBJECT_INVALID, uint oPlayer = OBJECT_INVALID, int bLoadObjectState = FALSE)
     {
-      VM.StackPush(bLoadObjectState);
-      VM.StackPush(oPlayer);
-      VM.StackPush(oOwner);
-      VM.StackPush(locLocation, ENGINE_STRUCTURE_LOCATION);
-      VM.StackPush(sVarName);
-      VM.StackPush(sCampaignName);
-      VM.Call(603);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bLoadObjectState);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oOwner);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, locLocation);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushString(sCampaignName);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(603);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Returns an effect that is guaranteed to dominate a creature<br/>
     ///  Like EffectDominated but cannot be resisted
     public static System.IntPtr EffectCutsceneDominated()
     {
-      VM.Call(604);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(604);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Returns stack size of an item<br/>
     ///  - oItem: item to query
     public static int GetItemStackSize(uint oItem)
     {
-      VM.StackPush(oItem);
-      VM.Call(605);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(605);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets stack size of an item.<br/>
@@ -12958,18 +12958,18 @@ namespace NWN.Core
     ///    then it will set the stack to the maximum size
     public static void SetItemStackSize(uint oItem, int nSize)
     {
-      VM.StackPush(nSize);
-      VM.StackPush(oItem);
-      VM.Call(606);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSize);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(606);
     }
 
     ///  Returns charges left on an item<br/>
     ///  - oItem: item to query
     public static int GetItemCharges(uint oItem)
     {
-      VM.StackPush(oItem);
-      VM.Call(607);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(607);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets charges left on an item.<br/>
@@ -12980,9 +12980,9 @@ namespace NWN.Core
     ///    will be destroyed.
     public static void SetItemCharges(uint oItem, int nCharges)
     {
-      VM.StackPush(nCharges);
-      VM.StackPush(oItem);
-      VM.Call(608);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nCharges);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(608);
     }
 
     ///  ***********************  START OF ITEM PROPERTY FUNCTIONS  **********************<br/>
@@ -12990,60 +12990,60 @@ namespace NWN.Core
     ///  Only temporary and permanent duration types are allowed.
     public static void AddItemProperty(int nDurationType, System.IntPtr ipProperty, uint oItem, float fDuration = 0.0f)
     {
-      VM.StackPush(fDuration);
-      VM.StackPush(oItem);
-      VM.StackPush(ipProperty, ENGINE_STRUCTURE_ITEMPROPERTY);
-      VM.StackPush(nDurationType);
-      VM.Call(609);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fDuration);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY, ipProperty);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDurationType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(609);
     }
 
     ///  removes an item property from the specified item
     public static void RemoveItemProperty(uint oItem, System.IntPtr ipProperty)
     {
-      VM.StackPush(ipProperty, ENGINE_STRUCTURE_ITEMPROPERTY);
-      VM.StackPush(oItem);
-      VM.Call(610);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY, ipProperty);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(610);
     }
 
     ///  if the item property is valid this will return true
     public static int GetIsItemPropertyValid(System.IntPtr ipProperty)
     {
-      VM.StackPush(ipProperty, ENGINE_STRUCTURE_ITEMPROPERTY);
-      VM.Call(611);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY, ipProperty);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(611);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Gets the first item property on an item
     public static System.IntPtr GetFirstItemProperty(uint oItem)
     {
-      VM.StackPush(oItem);
-      VM.Call(612);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(612);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Will keep retrieving the next and the next item property on an Item,<br/>
     ///  will return an invalid item property when the list is empty.
     public static System.IntPtr GetNextItemProperty(uint oItem)
     {
-      VM.StackPush(oItem);
-      VM.Call(613);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(613);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  will return the item property type (ie. holy avenger)
     public static int GetItemPropertyType(System.IntPtr ip)
     {
-      VM.StackPush(ip, ENGINE_STRUCTURE_ITEMPROPERTY);
-      VM.Call(614);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY, ip);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(614);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  will return the duration type of the item property
     public static int GetItemPropertyDurationType(System.IntPtr ip)
     {
-      VM.StackPush(ip, ENGINE_STRUCTURE_ITEMPROPERTY);
-      VM.Call(615);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY, ip);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(615);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns Item property ability bonus.  You need to specify an<br/>
@@ -13051,10 +13051,10 @@ namespace NWN.Core
     ///  be a positive integer between 1 and 12.
     public static System.IntPtr ItemPropertyAbilityBonus(int nAbility, int nBonus)
     {
-      VM.StackPush(nBonus);
-      VM.StackPush(nAbility);
-      VM.Call(616);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBonus);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAbility);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(616);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property AC bonus.  You need to specify the bonus.<br/>
@@ -13062,9 +13062,9 @@ namespace NWN.Core
     ///  type depends on the item it is being applied to.
     public static System.IntPtr ItemPropertyACBonus(int nBonus)
     {
-      VM.StackPush(nBonus);
-      VM.Call(617);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBonus);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(617);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property AC bonus vs. alignment group.  An example of<br/>
@@ -13074,10 +13074,10 @@ namespace NWN.Core
     ///  type depends on the item it is being applied to.
     public static System.IntPtr ItemPropertyACBonusVsAlign(int nAlignGroup, int nACBonus)
     {
-      VM.StackPush(nACBonus);
-      VM.StackPush(nAlignGroup);
-      VM.Call(618);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nACBonus);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAlignGroup);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(618);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property AC bonus vs. Damage type (ie. piercing).  You<br/>
@@ -13088,10 +13088,10 @@ namespace NWN.Core
     ///        physical types.
     public static System.IntPtr ItemPropertyACBonusVsDmgType(int nDamageType, int nACBonus)
     {
-      VM.StackPush(nACBonus);
-      VM.StackPush(nDamageType);
-      VM.Call(619);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nACBonus);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamageType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(619);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property AC bonus vs. Racial group.  You need to specify<br/>
@@ -13100,10 +13100,10 @@ namespace NWN.Core
     ///  on the item it is being applied to.
     public static System.IntPtr ItemPropertyACBonusVsRace(int nRace, int nACBonus)
     {
-      VM.StackPush(nACBonus);
-      VM.StackPush(nRace);
-      VM.Call(620);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nACBonus);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nRace);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(620);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property AC bonus vs. Specific alignment.  You need to<br/>
@@ -13112,10 +13112,10 @@ namespace NWN.Core
     ///  modifier type depends on the item it is being applied to.
     public static System.IntPtr ItemPropertyACBonusVsSAlign(int nAlign, int nACBonus)
     {
-      VM.StackPush(nACBonus);
-      VM.StackPush(nAlign);
-      VM.Call(621);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nACBonus);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAlign);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(621);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Enhancement bonus.  You need to specify the<br/>
@@ -13123,9 +13123,9 @@ namespace NWN.Core
     ///  1 and 20.
     public static System.IntPtr ItemPropertyEnhancementBonus(int nEnhancementBonus)
     {
-      VM.StackPush(nEnhancementBonus);
-      VM.Call(622);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nEnhancementBonus);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(622);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Enhancement bonus vs. an Alignment group.  You<br/>
@@ -13134,10 +13134,10 @@ namespace NWN.Core
     ///  between 1 and 20.
     public static System.IntPtr ItemPropertyEnhancementBonusVsAlign(int nAlignGroup, int nBonus)
     {
-      VM.StackPush(nBonus);
-      VM.StackPush(nAlignGroup);
-      VM.Call(623);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBonus);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAlignGroup);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(623);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Enhancement bonus vs. Racial group.  You need<br/>
@@ -13146,10 +13146,10 @@ namespace NWN.Core
     ///  1 and 20.
     public static System.IntPtr ItemPropertyEnhancementBonusVsRace(int nRace, int nBonus)
     {
-      VM.StackPush(nBonus);
-      VM.StackPush(nRace);
-      VM.Call(624);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBonus);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nRace);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(624);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Enhancement bonus vs. a specific alignment.  You<br/>
@@ -13158,10 +13158,10 @@ namespace NWN.Core
     ///  1 and 20.
     public static System.IntPtr ItemPropertyEnhancementBonusVsSAlign(int nAlign, int nBonus)
     {
-      VM.StackPush(nBonus);
-      VM.StackPush(nAlign);
-      VM.Call(625);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBonus);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAlign);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(625);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Enhancment penalty.  You need to specify the<br/>
@@ -13169,27 +13169,27 @@ namespace NWN.Core
     ///  integer between 1 and 5 (ie. 1 = -1).
     public static System.IntPtr ItemPropertyEnhancementPenalty(int nPenalty)
     {
-      VM.StackPush(nPenalty);
-      VM.Call(626);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPenalty);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(626);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property weight reduction.  You need to specify the weight<br/>
     ///  reduction constant(IP_CONST_REDUCEDWEIGHT_*).
     public static System.IntPtr ItemPropertyWeightReduction(int nReduction)
     {
-      VM.StackPush(nReduction);
-      VM.Call(627);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nReduction);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(627);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Bonus Feat.  You need to specify the the feat<br/>
     ///  constant(IP_CONST_FEAT_*).
     public static System.IntPtr ItemPropertyBonusFeat(int nFeat)
     {
-      VM.StackPush(nFeat);
-      VM.Call(628);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFeat);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(628);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Bonus level spell (Bonus spell of level).  You must<br/>
@@ -13198,10 +13198,10 @@ namespace NWN.Core
     ///  bonus spell should be an integer between 0 and 9.
     public static System.IntPtr ItemPropertyBonusLevelSpell(int nClass, int nSpellLevel)
     {
-      VM.StackPush(nSpellLevel);
-      VM.StackPush(nClass);
-      VM.Call(629);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellLevel);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nClass);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(629);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Cast spell.  You must specify the spell constant<br/>
@@ -13593,10 +13593,10 @@ namespace NWN.Core
     /// 
     public static System.IntPtr ItemPropertyCastSpell(int nSpell, int nNumUses)
     {
-      VM.StackPush(nNumUses);
-      VM.StackPush(nSpell);
-      VM.Call(630);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNumUses);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpell);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(630);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property damage bonus.  You must specify the damage type constant<br/>
@@ -13605,10 +13605,10 @@ namespace NWN.Core
     ///        Cold, Electrical, Fire, Piercing, Slashing, Sonic.
     public static System.IntPtr ItemPropertyDamageBonus(int nDamageType, int nDamage)
     {
-      VM.StackPush(nDamage);
-      VM.StackPush(nDamageType);
-      VM.Call(631);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamage);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamageType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(631);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property damage bonus vs. Alignment groups.  You must specify the<br/>
@@ -13618,11 +13618,11 @@ namespace NWN.Core
     ///        Cold, Electrical, Fire, Piercing, Slashing, Sonic.
     public static System.IntPtr ItemPropertyDamageBonusVsAlign(int nAlignGroup, int nDamageType, int nDamage)
     {
-      VM.StackPush(nDamage);
-      VM.StackPush(nDamageType);
-      VM.StackPush(nAlignGroup);
-      VM.Call(632);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamage);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamageType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAlignGroup);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(632);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property damage bonus vs. specific race.  You must specify the<br/>
@@ -13632,11 +13632,11 @@ namespace NWN.Core
     ///        Cold, Electrical, Fire, Piercing, Slashing, Sonic.
     public static System.IntPtr ItemPropertyDamageBonusVsRace(int nRace, int nDamageType, int nDamage)
     {
-      VM.StackPush(nDamage);
-      VM.StackPush(nDamageType);
-      VM.StackPush(nRace);
-      VM.Call(633);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamage);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamageType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nRace);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(633);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property damage bonus vs. specific alignment.  You must specify the<br/>
@@ -13646,11 +13646,11 @@ namespace NWN.Core
     ///        Cold, Electrical, Fire, Piercing, Slashing, Sonic.
     public static System.IntPtr ItemPropertyDamageBonusVsSAlign(int nAlign, int nDamageType, int nDamage)
     {
-      VM.StackPush(nDamage);
-      VM.StackPush(nDamageType);
-      VM.StackPush(nAlign);
-      VM.Call(634);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamage);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamageType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAlign);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(634);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property damage immunity.  You must specify the damage type constant<br/>
@@ -13660,19 +13660,19 @@ namespace NWN.Core
     ///        Cold, Electrical, Fire, Piercing, Slashing, Sonic.
     public static System.IntPtr ItemPropertyDamageImmunity(int nDamageType, int nImmuneBonus)
     {
-      VM.StackPush(nImmuneBonus);
-      VM.StackPush(nDamageType);
-      VM.Call(635);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nImmuneBonus);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamageType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(635);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property damage penalty.  You must specify the damage penalty.<br/>
     ///  The damage penalty should be a POSITIVE integer between 1 and 5 (ie. 1 = -1).
     public static System.IntPtr ItemPropertyDamagePenalty(int nPenalty)
     {
-      VM.StackPush(nPenalty);
-      VM.Call(636);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPenalty);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(636);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property damage reduction.  You must specify the enhancment level<br/>
@@ -13681,10 +13681,10 @@ namespace NWN.Core
     ///  up if your weapon is not of high enough enhancement.
     public static System.IntPtr ItemPropertyDamageReduction(int nEnhancement, int nHPSoak)
     {
-      VM.StackPush(nHPSoak);
-      VM.StackPush(nEnhancement);
-      VM.Call(637);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nHPSoak);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nEnhancement);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(637);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property damage resistance.  You must specify the damage type<br/>
@@ -13692,10 +13692,10 @@ namespace NWN.Core
     ///  (IP_CONST_DAMAGERESIST_*) that will be resisted against each round.
     public static System.IntPtr ItemPropertyDamageResistance(int nDamageType, int nHPResist)
     {
-      VM.StackPush(nHPResist);
-      VM.StackPush(nDamageType);
-      VM.Call(638);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nHPResist);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamageType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(638);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property damage vulnerability.  You must specify the damage type<br/>
@@ -13703,17 +13703,17 @@ namespace NWN.Core
     ///  and the percentage vulnerability constant(IP_CONST_DAMAGEVULNERABILITY_*).
     public static System.IntPtr ItemPropertyDamageVulnerability(int nDamageType, int nVulnerability)
     {
-      VM.StackPush(nVulnerability);
-      VM.StackPush(nDamageType);
-      VM.Call(639);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nVulnerability);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamageType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(639);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Return Item property Darkvision.
     public static System.IntPtr ItemPropertyDarkvision()
     {
-      VM.Call(640);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(640);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Return Item property decrease ability score.  You must specify the ability<br/>
@@ -13721,10 +13721,10 @@ namespace NWN.Core
     ///  a POSITIVE integer between 1 and 10 (ie. 1 = -1).
     public static System.IntPtr ItemPropertyDecreaseAbility(int nAbility, int nModifier)
     {
-      VM.StackPush(nModifier);
-      VM.StackPush(nAbility);
-      VM.Call(641);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nModifier);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAbility);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(641);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property decrease Armor Class.  You must specify the armor<br/>
@@ -13732,10 +13732,10 @@ namespace NWN.Core
     ///  The penalty must be a POSITIVE integer between 1 and 5 (ie. 1 = -1).
     public static System.IntPtr ItemPropertyDecreaseAC(int nModifierType, int nPenalty)
     {
-      VM.StackPush(nPenalty);
-      VM.StackPush(nModifierType);
-      VM.Call(642);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPenalty);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nModifierType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(642);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property decrease skill.  You must specify the constant for the<br/>
@@ -13743,10 +13743,10 @@ namespace NWN.Core
     ///  must be a POSITIVE integer between 1 and 10 (ie. 1 = -1).
     public static System.IntPtr ItemPropertyDecreaseSkill(int nSkill, int nPenalty)
     {
-      VM.StackPush(nPenalty);
-      VM.StackPush(nSkill);
-      VM.Call(643);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPenalty);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSkill);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(643);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property container reduced weight.  This is used for special<br/>
@@ -13754,9 +13754,9 @@ namespace NWN.Core
     ///  specify the container weight reduction type constant(IP_CONST_CONTAINERWEIGHTRED_*).
     public static System.IntPtr ItemPropertyContainerReducedWeight(int nContainerType)
     {
-      VM.StackPush(nContainerType);
-      VM.Call(644);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nContainerType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(644);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property extra melee damage type.  You must specify the extra<br/>
@@ -13766,9 +13766,9 @@ namespace NWN.Core
     ///  NOTE: It is also only applicable to melee weapons.
     public static System.IntPtr ItemPropertyExtraMeleeDamageType(int nDamageType)
     {
-      VM.StackPush(nDamageType);
-      VM.Call(645);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamageType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(645);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property extra ranged damage type.  You must specify the extra<br/>
@@ -13778,48 +13778,48 @@ namespace NWN.Core
     ///  NOTE: It is also only applicable to ranged weapons.
     public static System.IntPtr ItemPropertyExtraRangeDamageType(int nDamageType)
     {
-      VM.StackPush(nDamageType);
-      VM.Call(646);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamageType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(646);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property haste.
     public static System.IntPtr ItemPropertyHaste()
     {
-      VM.Call(647);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(647);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Holy Avenger.
     public static System.IntPtr ItemPropertyHolyAvenger()
     {
-      VM.Call(648);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(648);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property immunity to miscellaneous effects.  You must specify the<br/>
     ///  effect to which the user is immune, it is a constant(IP_CONST_IMMUNITYMISC_*).
     public static System.IntPtr ItemPropertyImmunityMisc(int nImmunityType)
     {
-      VM.StackPush(nImmunityType);
-      VM.Call(649);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nImmunityType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(649);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property improved evasion.
     public static System.IntPtr ItemPropertyImprovedEvasion()
     {
-      VM.Call(650);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(650);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property bonus spell resistance.  You must specify the bonus spell<br/>
     ///  resistance constant(IP_CONST_SPELLRESISTANCEBONUS_*).
     public static System.IntPtr ItemPropertyBonusSpellResistance(int nBonus)
     {
-      VM.StackPush(nBonus);
-      VM.Call(651);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBonus);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(651);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property saving throw bonus vs. a specific effect or damage type.<br/>
@@ -13828,10 +13828,10 @@ namespace NWN.Core
     ///  between 1 and 20.
     public static System.IntPtr ItemPropertyBonusSavingThrowVsX(int nBonusType, int nBonus)
     {
-      VM.StackPush(nBonus);
-      VM.StackPush(nBonusType);
-      VM.Call(652);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBonus);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBonusType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(652);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property saving throw bonus to the base type (ie. will, reflex,<br/>
@@ -13840,18 +13840,18 @@ namespace NWN.Core
     ///  bonus must be an integer between 1 and 20.
     public static System.IntPtr ItemPropertyBonusSavingThrow(int nBaseSaveType, int nBonus)
     {
-      VM.StackPush(nBonus);
-      VM.StackPush(nBaseSaveType);
-      VM.Call(653);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBonus);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBaseSaveType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(653);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property keen.  This means a critical threat range of 19-20 on a<br/>
     ///  weapon will be increased to 17-20 etc.
     public static System.IntPtr ItemPropertyKeen()
     {
-      VM.Call(654);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(654);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property light.  You must specify the intesity constant of the<br/>
@@ -13859,10 +13859,10 @@ namespace NWN.Core
     ///  (IP_CONST_LIGHTCOLOR_*).
     public static System.IntPtr ItemPropertyLight(int nBrightness, int nColor)
     {
-      VM.StackPush(nColor);
-      VM.StackPush(nBrightness);
-      VM.Call(655);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nColor);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBrightness);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(655);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Max range strength modification (ie. mighty).  You must<br/>
@@ -13870,17 +13870,17 @@ namespace NWN.Core
     ///  The modifier must be a positive integer between 1 and 20.
     public static System.IntPtr ItemPropertyMaxRangeStrengthMod(int nModifier)
     {
-      VM.StackPush(nModifier);
-      VM.Call(656);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nModifier);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(656);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property no damage.  This means the weapon will do no damage in<br/>
     ///  combat.
     public static System.IntPtr ItemPropertyNoDamage()
     {
-      VM.Call(657);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(657);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property on hit -&amp;gt; do effect property.  You must specify the on<br/>
@@ -13924,11 +13924,11 @@ namespace NWN.Core
     ///                          constant(IP_CONST_ONHIT_DURATION_*)
     public static System.IntPtr ItemPropertyOnHitProps(int nProperty, int nSaveDC, int nSpecial = 0)
     {
-      VM.StackPush(nSpecial);
-      VM.StackPush(nSaveDC);
-      VM.StackPush(nProperty);
-      VM.Call(658);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpecial);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSaveDC);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nProperty);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(658);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property reduced saving throw vs. an effect or damage type.  You must<br/>
@@ -13937,10 +13937,10 @@ namespace NWN.Core
     ///  (ie. 1 = -1).
     public static System.IntPtr ItemPropertyReducedSavingThrowVsX(int nBaseSaveType, int nPenalty)
     {
-      VM.StackPush(nPenalty);
-      VM.StackPush(nBaseSaveType);
-      VM.Call(659);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPenalty);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBaseSaveType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(659);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property reduced saving to base type.  You must specify the base<br/>
@@ -13949,19 +13949,19 @@ namespace NWN.Core
     ///  The penalty must be a POSITIVE integer between 1 and 20 (ie. 1 = -1).
     public static System.IntPtr ItemPropertyReducedSavingThrow(int nBonusType, int nPenalty)
     {
-      VM.StackPush(nPenalty);
-      VM.StackPush(nBonusType);
-      VM.Call(660);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPenalty);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBonusType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(660);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property regeneration.  You must specify the regeneration amount.<br/>
     ///  The amount must be an integer between 1 and 20.
     public static System.IntPtr ItemPropertyRegeneration(int nRegenAmount)
     {
-      VM.StackPush(nRegenAmount);
-      VM.Call(661);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nRegenAmount);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(661);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property skill bonus.  You must specify the skill to which the user<br/>
@@ -13969,46 +13969,46 @@ namespace NWN.Core
     ///  be an integer between 1 and 50.
     public static System.IntPtr ItemPropertySkillBonus(int nSkill, int nBonus)
     {
-      VM.StackPush(nBonus);
-      VM.StackPush(nSkill);
-      VM.Call(662);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBonus);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSkill);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(662);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property spell immunity vs. specific spell.  You must specify the<br/>
     ///  spell to which the user will be immune(IP_CONST_IMMUNITYSPELL_*).
     public static System.IntPtr ItemPropertySpellImmunitySpecific(int nSpell)
     {
-      VM.StackPush(nSpell);
-      VM.Call(663);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpell);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(663);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property spell immunity vs. spell school.  You must specify the<br/>
     ///  school to which the user will be immune(IP_CONST_SPELLSCHOOL_*).
     public static System.IntPtr ItemPropertySpellImmunitySchool(int nSchool)
     {
-      VM.StackPush(nSchool);
-      VM.Call(664);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSchool);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(664);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Thieves tools.  You must specify the modifier you wish<br/>
     ///  the tools to have.  The modifier must be an integer between 1 and 12.
     public static System.IntPtr ItemPropertyThievesTools(int nModifier)
     {
-      VM.StackPush(nModifier);
-      VM.Call(665);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nModifier);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(665);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Attack bonus.  You must specify an attack bonus.  The bonus<br/>
     ///  must be an integer between 1 and 20.
     public static System.IntPtr ItemPropertyAttackBonus(int nBonus)
     {
-      VM.StackPush(nBonus);
-      VM.Call(666);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBonus);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(666);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Attack bonus vs. alignment group.  You must specify the<br/>
@@ -14016,10 +14016,10 @@ namespace NWN.Core
     ///  bonus must be an integer between 1 and 20.
     public static System.IntPtr ItemPropertyAttackBonusVsAlign(int nAlignGroup, int nBonus)
     {
-      VM.StackPush(nBonus);
-      VM.StackPush(nAlignGroup);
-      VM.Call(667);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBonus);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAlignGroup);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(667);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property attack bonus vs. racial group.  You must specify the<br/>
@@ -14027,10 +14027,10 @@ namespace NWN.Core
     ///  must be an integer between 1 and 20.
     public static System.IntPtr ItemPropertyAttackBonusVsRace(int nRace, int nBonus)
     {
-      VM.StackPush(nBonus);
-      VM.StackPush(nRace);
-      VM.Call(668);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBonus);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nRace);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(668);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property attack bonus vs. a specific alignment.  You must specify<br/>
@@ -14038,19 +14038,19 @@ namespace NWN.Core
     ///  attack bonus.  The bonus must be an integer between 1 and 20.
     public static System.IntPtr ItemPropertyAttackBonusVsSAlign(int nAlignment, int nBonus)
     {
-      VM.StackPush(nBonus);
-      VM.StackPush(nAlignment);
-      VM.Call(669);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBonus);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAlignment);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(669);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property attack penalty.  You must specify the attack penalty.<br/>
     ///  The penalty must be a POSITIVE integer between 1 and 5 (ie. 1 = -1).
     public static System.IntPtr ItemPropertyAttackPenalty(int nPenalty)
     {
-      VM.StackPush(nPenalty);
-      VM.Call(670);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPenalty);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(670);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property unlimited ammo.  If you leave the parameter field blank<br/>
@@ -14060,78 +14060,78 @@ namespace NWN.Core
     ///       (IP_CONST_UNLIMITEDAMMO_*).
     public static System.IntPtr ItemPropertyUnlimitedAmmo(int nAmmoDamage = IP_CONST_UNLIMITEDAMMO_BASIC)
     {
-      VM.StackPush(nAmmoDamage);
-      VM.Call(671);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAmmoDamage);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(671);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property limit use by alignment group.  You must specify the<br/>
     ///  alignment group(s) that you want to be able to use this item(IP_CONST_ALIGNMENTGROUP_*).
     public static System.IntPtr ItemPropertyLimitUseByAlign(int nAlignGroup)
     {
-      VM.StackPush(nAlignGroup);
-      VM.Call(672);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAlignGroup);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(672);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property limit use by class.  You must specify the class(es) who<br/>
     ///  are able to use this item(IP_CONST_CLASS_*).
     public static System.IntPtr ItemPropertyLimitUseByClass(int nClass)
     {
-      VM.StackPush(nClass);
-      VM.Call(673);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nClass);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(673);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property limit use by race.  You must specify the race(s) who are<br/>
     ///  allowed to use this item(IP_CONST_RACIALTYPE_*).
     public static System.IntPtr ItemPropertyLimitUseByRace(int nRace)
     {
-      VM.StackPush(nRace);
-      VM.Call(674);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nRace);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(674);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property limit use by specific alignment.  You must specify the<br/>
     ///  alignment(s) of those allowed to use the item(IP_CONST_ALIGNMENT_*).
     public static System.IntPtr ItemPropertyLimitUseBySAlign(int nAlignment)
     {
-      VM.StackPush(nAlignment);
-      VM.Call(675);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAlignment);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(675);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  replace this function it does nothing.
     public static System.IntPtr BadBadReplaceMeThisDoesNothing()
     {
-      VM.Call(676);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(676);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property vampiric regeneration.  You must specify the amount of<br/>
     ///  regeneration.  The regen amount must be an integer between 1 and 20.
     public static System.IntPtr ItemPropertyVampiricRegeneration(int nRegenAmount)
     {
-      VM.StackPush(nRegenAmount);
-      VM.Call(677);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nRegenAmount);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(677);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Trap.  You must specify the trap level constant<br/>
     ///  (IP_CONST_TRAPSTRENGTH_*) and the trap type constant(IP_CONST_TRAPTYPE_*).
     public static System.IntPtr ItemPropertyTrap(int nTrapLevel, int nTrapType)
     {
-      VM.StackPush(nTrapType);
-      VM.StackPush(nTrapLevel);
-      VM.Call(678);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nTrapType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nTrapLevel);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(678);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property true seeing.
     public static System.IntPtr ItemPropertyTrueSeeing()
     {
-      VM.Call(679);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(679);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Monster on hit apply effect property.  You must specify<br/>
@@ -14155,35 +14155,35 @@ namespace NWN.Core
     ///        gore, and slam).  IT WILL NOT WORK ON NORMAL WEAPONS.
     public static System.IntPtr ItemPropertyOnMonsterHitProperties(int nProperty, int nSpecial = 0)
     {
-      VM.StackPush(nSpecial);
-      VM.StackPush(nProperty);
-      VM.Call(680);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpecial);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nProperty);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(680);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property turn resistance.  You must specify the resistance bonus.<br/>
     ///  The bonus must be an integer between 1 and 50.
     public static System.IntPtr ItemPropertyTurnResistance(int nModifier)
     {
-      VM.StackPush(nModifier);
-      VM.Call(681);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nModifier);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(681);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Massive Critical.  You must specify the extra damage<br/>
     ///  constant(IP_CONST_DAMAGEBONUS_*) of the criticals.
     public static System.IntPtr ItemPropertyMassiveCritical(int nDamage)
     {
-      VM.StackPush(nDamage);
-      VM.Call(682);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamage);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(682);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property free action.
     public static System.IntPtr ItemPropertyFreeAction()
     {
-      VM.Call(683);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(683);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property monster damage.  You must specify the amount of damage<br/>
@@ -14192,9 +14192,9 @@ namespace NWN.Core
     ///        gore, and slam).  IT WILL NOT WORK ON NORMAL WEAPONS.
     public static System.IntPtr ItemPropertyMonsterDamage(int nDamage)
     {
-      VM.StackPush(nDamage);
-      VM.Call(684);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDamage);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(684);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property immunity to spell level.  You must specify the level of<br/>
@@ -14203,9 +14203,9 @@ namespace NWN.Core
     ///  3rd level and lower spells.
     public static System.IntPtr ItemPropertyImmunityToSpellLevel(int nLevel)
     {
-      VM.StackPush(nLevel);
-      VM.Call(685);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nLevel);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(685);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property special walk.  If no parameters are specified it will<br/>
@@ -14213,27 +14213,27 @@ namespace NWN.Core
     ///  to the user.
     public static System.IntPtr ItemPropertySpecialWalk(int nWalkType = 0)
     {
-      VM.StackPush(nWalkType);
-      VM.Call(686);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nWalkType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(686);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property healers kit.  You must specify the level of the kit.<br/>
     ///  The modifier must be an integer between 1 and 12.
     public static System.IntPtr ItemPropertyHealersKit(int nModifier)
     {
-      VM.StackPush(nModifier);
-      VM.Call(687);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nModifier);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(687);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property weight increase.  You must specify the weight increase<br/>
     ///  constant(IP_CONST_WEIGHTINCREASE_*).
     public static System.IntPtr ItemPropertyWeightIncrease(int nWeight)
     {
-      VM.StackPush(nWeight);
-      VM.Call(688);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nWeight);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(688);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  ***********************  END OF ITEM PROPERTY FUNCTIONS  **************************<br/>
@@ -14243,11 +14243,11 @@ namespace NWN.Core
     ///  - nDifficulty: Difficulty class of skill
     public static int GetIsSkillSuccessful(uint oTarget, int nSkill, int nDifficulty)
     {
-      VM.StackPush(nDifficulty);
-      VM.StackPush(nSkill);
-      VM.StackPush(oTarget);
-      VM.Call(689);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDifficulty);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSkill);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(689);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Creates an effect that inhibits spells<br/>
@@ -14255,10 +14255,10 @@ namespace NWN.Core
     ///  - nSpellSchool - the school of spells affected.
     public static System.IntPtr EffectSpellFailure(int nPercent = 100, int nSpellSchool = SPELL_SCHOOL_GENERAL)
     {
-      VM.StackPush(nSpellSchool);
-      VM.StackPush(nPercent);
-      VM.Call(690);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellSchool);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPercent);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(690);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Causes the object to instantly speak a translated string.<br/>
@@ -14267,9 +14267,9 @@ namespace NWN.Core
     ///  - nTalkVolume: TALKVOLUME_*
     public static void SpeakStringByStrRef(int nStrRef, int nTalkVolume = TALKVOLUME_TALK)
     {
-      VM.StackPush(nTalkVolume);
-      VM.StackPush(nStrRef);
-      VM.Call(691);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nTalkVolume);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nStrRef);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(691);
     }
 
     ///  Sets the given creature into cutscene mode.  This prevents the player from<br/>
@@ -14283,52 +14283,52 @@ namespace NWN.Core
     ///  was when SetCutsceneMode(oPlayer, TRUE) was called.
     public static void SetCutsceneMode(uint oCreature, int nInCutscene = TRUE, int nLeftClickingEnabled = FALSE)
     {
-      VM.StackPush(nLeftClickingEnabled);
-      VM.StackPush(nInCutscene);
-      VM.StackPush(oCreature);
-      VM.Call(692);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nLeftClickingEnabled);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nInCutscene);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(692);
     }
 
     ///  Gets the last player character to cancel from a cutscene.
     public static uint GetLastPCToCancelCutscene()
     {
-      VM.Call(693);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(693);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Gets the length of the specified wavefile, in seconds<br/>
     ///  Only works for sounds used for dialog.
     public static float GetDialogSoundLength(int nStrRef)
     {
-      VM.StackPush(nStrRef);
-      VM.Call(694);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nStrRef);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(694);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Fades the screen for the given creature/player from black to regular screen<br/>
     ///  - oCreature: creature controlled by player that should fade from black
     public static void FadeFromBlack(uint oCreature, float fSpeed = FADE_SPEED_MEDIUM)
     {
-      VM.StackPush(fSpeed);
-      VM.StackPush(oCreature);
-      VM.Call(695);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fSpeed);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(695);
     }
 
     ///  Fades the screen for the given creature/player from regular screen to black<br/>
     ///  - oCreature: creature controlled by player that should fade to black
     public static void FadeToBlack(uint oCreature, float fSpeed = FADE_SPEED_MEDIUM)
     {
-      VM.StackPush(fSpeed);
-      VM.StackPush(oCreature);
-      VM.Call(696);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fSpeed);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(696);
     }
 
     ///  Removes any fading or black screen.<br/>
     ///  - oCreature: creature controlled by player that should be cleared
     public static void StopFade(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(697);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(697);
     }
 
     ///  Sets the screen to black.  Can be used in preparation for a fade-in (FadeFromBlack)<br/>
@@ -14336,16 +14336,16 @@ namespace NWN.Core
     ///  - oCreature: creature controlled by player that should see black screen
     public static void BlackScreen(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(698);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(698);
     }
 
     ///  Returns the base attach bonus for the given creature.
     public static int GetBaseAttackBonus(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(699);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(699);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Set a creature&amp;apos;s immortality flag.<br/>
@@ -14355,9 +14355,9 @@ namespace NWN.Core
     ///  This scripting command only works on Creature objects.
     public static void SetImmortal(uint oCreature, int bImmortal)
     {
-      VM.StackPush(bImmortal);
-      VM.StackPush(oCreature);
-      VM.Call(700);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bImmortal);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(700);
     }
 
     ///  Open&amp;apos;s this creature&amp;apos;s inventory panel for this player<br/>
@@ -14367,16 +14367,16 @@ namespace NWN.Core
     ///  * Players can view their own inventory, or that of their henchman, familiar or animal companion
     public static void OpenInventory(uint oCreature, uint oPlayer)
     {
-      VM.StackPush(oPlayer);
-      VM.StackPush(oCreature);
-      VM.Call(701);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(701);
     }
 
     ///  Stores the current camera mode and position so that it can be restored (using<br/>
     ///  RestoreCameraFacing())
     public static void StoreCameraFacing()
     {
-      VM.Call(702);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(702);
     }
 
     ///  Restores the camera mode and position to what they were last time StoreCameraFacing<br/>
@@ -14384,7 +14384,7 @@ namespace NWN.Core
     ///  previous call to StoreCameraFacing.
     public static void RestoreCameraFacing()
     {
-      VM.Call(703);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(703);
     }
 
     ///  Levels up a creature using default settings.<br/>
@@ -14398,12 +14398,12 @@ namespace NWN.Core
     ///  if nPackage is PACKAGE_INVALID then it will use the starting package assigned to that class or just the class package
     public static int LevelUpHenchman(uint oCreature, int nClass = CLASS_TYPE_INVALID, int bReadyAllSpells = FALSE, int nPackage = PACKAGE_INVALID)
     {
-      VM.StackPush(nPackage);
-      VM.StackPush(bReadyAllSpells);
-      VM.StackPush(nClass);
-      VM.StackPush(oCreature);
-      VM.Call(704);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPackage);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bReadyAllSpells);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nClass);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(704);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets the droppable flag on an item<br/>
@@ -14412,9 +14412,9 @@ namespace NWN.Core
     ///  Droppable items will appear on a creature&amp;apos;s remains when the creature is killed.
     public static void SetDroppableFlag(uint oItem, int bDroppable)
     {
-      VM.StackPush(bDroppable);
-      VM.StackPush(oItem);
-      VM.Call(705);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bDroppable);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(705);
     }
 
     ///  Gets the weight of an item, or the total carried weight of a creature in tenths<br/>
@@ -14422,24 +14422,24 @@ namespace NWN.Core
     ///  - oTarget: the item or creature for which the weight is needed
     public static int GetWeight(uint oTarget = OBJECT_INVALID)
     {
-      VM.StackPush(oTarget);
-      VM.Call(706);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(706);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Gets the object that acquired the module item.  May be a creature, item, or placeable
     public static uint GetModuleItemAcquiredBy()
     {
-      VM.Call(707);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(707);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the immortal flag on a creature
     public static int GetImmortal(uint oTarget = OBJECT_INVALID)
     {
-      VM.StackPush(oTarget);
-      VM.Call(708);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(708);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Does a single attack on every hostile creature within 10ft. of the attacker<br/>
@@ -14453,9 +14453,9 @@ namespace NWN.Core
     ///  - int bImproved: If TRUE, the improved version of whirlwind is used
     public static void DoWhirlwindAttack(int bDisplayFeedback = TRUE, int bImproved = FALSE)
     {
-      VM.StackPush(bImproved);
-      VM.StackPush(bDisplayFeedback);
-      VM.Call(709);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bImproved);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bDisplayFeedback);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(709);
     }
 
     ///  Gets a value from a 2DA file on the server and returns it as a string<br/>
@@ -14466,19 +14466,19 @@ namespace NWN.Core
     ///  * returns an empty string if file, row, or column not found
     public static string Get2DAString(string s2DA, string sColumn, int nRow)
     {
-      VM.StackPush(nRow);
-      VM.StackPush(sColumn);
-      VM.StackPush(s2DA);
-      VM.Call(710);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nRow);
+      global::NWNX.NET.NWNXAPI.StackPushString(sColumn);
+      global::NWNX.NET.NWNXAPI.StackPushString(s2DA);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(710);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Returns an effect of type EFFECT_TYPE_ETHEREAL which works just like EffectSanctuary<br/>
     ///  except that the observers get no saving throw
     public static System.IntPtr EffectEthereal()
     {
-      VM.Call(711);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(711);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Gets the current AI Level that the creature is running at.<br/>
@@ -14486,9 +14486,9 @@ namespace NWN.Core
     ///  AI_LEVEL_INVALID, AI_LEVEL_VERY_LOW, AI_LEVEL_LOW, AI_LEVEL_NORMAL, AI_LEVEL_HIGH, AI_LEVEL_VERY_HIGH
     public static int GetAILevel(uint oTarget = OBJECT_INVALID)
     {
-      VM.StackPush(oTarget);
-      VM.Call(712);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(712);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets the current AI Level of the creature to the value specified. Does not work on Players.<br/>
@@ -14503,9 +14503,9 @@ namespace NWN.Core
     ///  AI_LEVEL_HIGH     - High priority, smartest AI, but extremely high CPU usage required for AI. Avoid using this. It is most likely only ever needed for cutscenes.
     public static void SetAILevel(uint oTarget, int nAILevel)
     {
-      VM.StackPush(nAILevel);
-      VM.StackPush(oTarget);
-      VM.Call(713);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAILevel);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(713);
     }
 
     ///  This will return TRUE if the creature running the script is a familiar currently<br/>
@@ -14513,9 +14513,9 @@ namespace NWN.Core
     ///  returns FALSE if not or if the creature object is invalid
     public static int GetIsPossessedFamiliar(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(714);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(714);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  This will cause a Player Creature to unpossess his/her familiar.  It will work if run<br/>
@@ -14523,24 +14523,24 @@ namespace NWN.Core
     ///  any DM possession.
     public static void UnpossessFamiliar(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(715);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(715);
     }
 
     ///  This will return TRUE if the area is flagged as either interior or underground.
     public static int GetIsAreaInterior(uint oArea = OBJECT_INVALID)
     {
-      VM.StackPush(oArea);
-      VM.Call(716);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(716);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Send a server message (szMessage) to the oPlayer.
     public static void SendMessageToPCByStrRef(uint oPlayer, int nStrRef)
     {
-      VM.StackPush(nStrRef);
-      VM.StackPush(oPlayer);
-      VM.Call(717);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nStrRef);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(717);
     }
 
     ///  Increment the remaining uses per day for this creature by one.<br/>
@@ -14549,42 +14549,42 @@ namespace NWN.Core
     ///  - nFeat: constant FEAT_*
     public static void IncrementRemainingFeatUses(uint oCreature, int nFeat)
     {
-      VM.StackPush(nFeat);
-      VM.StackPush(oCreature);
-      VM.Call(718);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFeat);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(718);
     }
 
     ///  Force the character of the player specified to be exported to its respective directory<br/>
     ///  i.e. LocalVault/ServerVault/ etc.
     public static void ExportSingleCharacter(uint oPlayer)
     {
-      VM.StackPush(oPlayer);
-      VM.Call(719);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(719);
     }
 
     ///  This will play a sound that is associated with a stringRef, it will be a mono sound from the location of the object running the command.<br/>
     ///  if nRunAsAction is off then the sound is forced to play intantly.
     public static void PlaySoundByStrRef(int nStrRef, int nRunAsAction = TRUE)
     {
-      VM.StackPush(nRunAsAction);
-      VM.StackPush(nStrRef);
-      VM.Call(720);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nRunAsAction);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nStrRef);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(720);
     }
 
     ///  Set the name of oCreature&amp;apos;s sub race to sSubRace.
     public static void SetSubRace(uint oCreature, string sSubRace)
     {
-      VM.StackPush(sSubRace);
-      VM.StackPush(oCreature);
-      VM.Call(721);
+      global::NWNX.NET.NWNXAPI.StackPushString(sSubRace);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(721);
     }
 
     ///  Set the name of oCreature&amp;apos;s Deity to sDeity.
     public static void SetDeity(uint oCreature, string sDeity)
     {
-      VM.StackPush(sDeity);
-      VM.StackPush(oCreature);
-      VM.Call(722);
+      global::NWNX.NET.NWNXAPI.StackPushString(sDeity);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(722);
     }
 
     ///  Returns TRUE if the creature oCreature is currently possessed by a DM character.<br/>
@@ -14593,9 +14593,9 @@ namespace NWN.Core
     ///  To determine if oCreature is a DM character use GetIsDM()
     public static int GetIsDMPossessed(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(723);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(723);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Gets the current weather conditions for the area oArea.<br/>
@@ -14603,55 +14603,55 @@ namespace NWN.Core
     ///    Note: If called on an Interior area, this will always return WEATHER_CLEAR.
     public static int GetWeather(uint oArea)
     {
-      VM.StackPush(oArea);
-      VM.Call(724);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(724);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns AREA_NATURAL if the area oArea is natural, AREA_ARTIFICIAL otherwise.<br/>
     ///  Returns AREA_INVALID, on an error.
     public static int GetIsAreaNatural(uint oArea)
     {
-      VM.StackPush(oArea);
-      VM.Call(725);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(725);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns AREA_ABOVEGROUND if the area oArea is above ground, AREA_UNDERGROUND otherwise.<br/>
     ///  Returns AREA_INVALID, on an error.
     public static int GetIsAreaAboveGround(uint oArea)
     {
-      VM.StackPush(oArea);
-      VM.Call(726);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(726);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Use this to get the item last equipped by a player character in OnPlayerEquipItem..
     public static uint GetPCItemLastEquipped()
     {
-      VM.Call(727);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(727);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Use this to get the player character who last equipped an item in OnPlayerEquipItem..
     public static uint GetPCItemLastEquippedBy()
     {
-      VM.Call(728);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(728);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Use this to get the item last unequipped by a player character in OnPlayerEquipItem..
     public static uint GetPCItemLastUnequipped()
     {
-      VM.Call(729);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(729);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Use this to get the player character who last unequipped an item in OnPlayerUnEquipItem..
     public static uint GetPCItemLastUnequippedBy()
     {
-      VM.Call(730);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(730);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Creates a new copy of an item, while making a single change to the appearance of the item.<br/>
@@ -14676,24 +14676,24 @@ namespace NWN.Core
     ///  function &amp;apos;clear colour override&amp;apos;, which clears the per-part override for that part.
     public static uint CopyItemAndModify(uint oItem, int nType, int nIndex, int nNewValue, int bCopyVars = FALSE)
     {
-      VM.StackPush(bCopyVars);
-      VM.StackPush(nNewValue);
-      VM.StackPush(nIndex);
-      VM.StackPush(nType);
-      VM.StackPush(oItem);
-      VM.Call(731);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bCopyVars);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNewValue);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nType);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(731);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Queries the current value of the appearance settings on an item. The parameters are<br/>
     ///  identical to those of CopyItemAndModify().
     public static int GetItemAppearance(uint oItem, int nType, int nIndex)
     {
-      VM.StackPush(nIndex);
-      VM.StackPush(nType);
-      VM.StackPush(oItem);
-      VM.Call(732);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nType);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(732);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Creates an item property that (when applied to a weapon item) causes a spell to be cast<br/>
@@ -14701,78 +14701,78 @@ namespace NWN.Core
     ///  - nSpell uses the IP_CONST_ONHIT_CASTSPELL_* constants
     public static System.IntPtr ItemPropertyOnHitCastSpell(int nSpell, int nLevel)
     {
-      VM.StackPush(nLevel);
-      VM.StackPush(nSpell);
-      VM.Call(733);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nLevel);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpell);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(733);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns the SubType number of the item property. See the 2DA files for value definitions.
     public static int GetItemPropertySubType(System.IntPtr iProperty)
     {
-      VM.StackPush(iProperty, ENGINE_STRUCTURE_ITEMPROPERTY);
-      VM.Call(734);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY, iProperty);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(734);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Gets the status of ACTION_MODE_* modes on a creature.
     public static int GetActionMode(uint oCreature, int nMode)
     {
-      VM.StackPush(nMode);
-      VM.StackPush(oCreature);
-      VM.Call(735);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nMode);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(735);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets the status of modes ACTION_MODE_* on a creature.
     public static void SetActionMode(uint oCreature, int nMode, int nStatus)
     {
-      VM.StackPush(nStatus);
-      VM.StackPush(nMode);
-      VM.StackPush(oCreature);
-      VM.Call(736);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nStatus);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nMode);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(736);
     }
 
     ///  Returns the current arcane spell failure factor of a creature
     public static int GetArcaneSpellFailure(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(737);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(737);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Makes a player examine the object oExamine. This causes the examination<br/>
     ///  pop-up box to appear for the object specified.
     public static void ActionExamine(uint oExamine)
     {
-      VM.StackPush(oExamine);
-      VM.Call(738);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oExamine);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(738);
     }
 
     ///  Creates a visual effect (ITEM_VISUAL_*) that may be applied to<br/>
     ///  melee weapons only.
     public static System.IntPtr ItemPropertyVisualEffect(int nEffect)
     {
-      VM.StackPush(nEffect);
-      VM.Call(739);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(739);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Sets the lootable state of a *living* NPC creature.<br/>
     ///  This function will *not* work on players or dead creatures.
     public static void SetLootable(uint oCreature, int bLootable)
     {
-      VM.StackPush(bLootable);
-      VM.StackPush(oCreature);
-      VM.Call(740);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bLootable);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(740);
     }
 
     ///  Returns the lootable state of a creature.
     public static int GetLootable(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(741);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(741);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the current movement rate factor<br/>
@@ -14780,9 +14780,9 @@ namespace NWN.Core
     ///  NOTE: This will be a value between 0.1, 2.0 (10%-200%)
     public static float GetCutsceneCameraMoveRate(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(742);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(742);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Sets the current movement rate factor for the cutscene<br/>
@@ -14790,48 +14790,48 @@ namespace NWN.Core
     ///  NOTE: You can only set values between 0.1, 2.0 (10%-200%)
     public static void SetCutsceneCameraMoveRate(uint oCreature, float fRate)
     {
-      VM.StackPush(fRate);
-      VM.StackPush(oCreature);
-      VM.Call(743);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fRate);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(743);
     }
 
     ///  Returns TRUE if the item is cursed and cannot be dropped
     public static int GetItemCursedFlag(uint oItem)
     {
-      VM.StackPush(oItem);
-      VM.Call(744);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(744);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  When cursed, items cannot be dropped
     public static void SetItemCursedFlag(uint oItem, int nCursed)
     {
-      VM.StackPush(nCursed);
-      VM.StackPush(oItem);
-      VM.Call(745);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nCursed);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(745);
     }
 
     ///  Sets the maximum number of henchmen
     public static void SetMaxHenchmen(int nNumHenchmen)
     {
-      VM.StackPush(nNumHenchmen);
-      VM.Call(746);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNumHenchmen);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(746);
     }
 
     ///  Gets the maximum number of henchmen
     public static int GetMaxHenchmen()
     {
-      VM.Call(747);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(747);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the associate type of the specified creature.<br/>
     ///  - Returns ASSOCIATE_TYPE_NONE if the creature is not the associate of anyone.
     public static int GetAssociateType(uint oAssociate)
     {
-      VM.StackPush(oAssociate);
-      VM.Call(748);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oAssociate);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(748);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the spell resistance of the specified creature.<br/>
@@ -14839,9 +14839,9 @@ namespace NWN.Core
     ///    creature is passed in.
     public static int GetSpellResistance(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(749);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(749);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Changes the current Day/Night cycle for this player to night<br/>
@@ -14849,9 +14849,9 @@ namespace NWN.Core
     ///  - fTransitionTime: how long the transition should take
     public static void DayToNight(uint oPlayer, float fTransitionTime = 0.0f)
     {
-      VM.StackPush(fTransitionTime);
-      VM.StackPush(oPlayer);
-      VM.Call(750);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fTransitionTime);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(750);
     }
 
     ///  Changes the current Day/Night cycle for this player to daylight<br/>
@@ -14859,9 +14859,9 @@ namespace NWN.Core
     ///  - fTransitionTime: how long the transition should take
     public static void NightToDay(uint oPlayer, float fTransitionTime = 0.0f)
     {
-      VM.StackPush(fTransitionTime);
-      VM.StackPush(oPlayer);
-      VM.Call(751);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fTransitionTime);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(751);
     }
 
     ///  Returns whether or not there is a direct line of sight<br/>
@@ -14871,10 +14871,10 @@ namespace NWN.Core
     ///               degrade performance if used frequently.
     public static int LineOfSightObject(uint oSource, uint oTarget)
     {
-      VM.StackPush(oTarget);
-      VM.StackPush(oSource);
-      VM.Call(752);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSource);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(752);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns whether or not there is a direct line of sight<br/>
@@ -14887,10 +14887,10 @@ namespace NWN.Core
     ///               degrade performance if used frequently.
     public static int LineOfSightVector(System.Numerics.Vector3 vSource, System.Numerics.Vector3 vTarget)
     {
-      VM.StackPush(vTarget);
-      VM.StackPush(vSource);
-      VM.Call(753);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushVector(vTarget);
+      global::NWNX.NET.NWNXAPI.StackPushVector(vSource);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(753);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the class that the spellcaster cast the<br/>
@@ -14900,8 +14900,8 @@ namespace NWN.Core
     ///  If used in an Area of Effect script it will return the creators spellcasting class.
     public static int GetLastSpellCastClass()
     {
-      VM.Call(754);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(754);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets the number of base attacks each round for the specified creature (PC or NPC).<br/>
@@ -14909,17 +14909,17 @@ namespace NWN.Core
     ///  - nBaseAttackBonus - Number of base attacks per round, 1 to 6
     public static void SetBaseAttackBonus(int nBaseAttackBonus, uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.StackPush(nBaseAttackBonus);
-      VM.Call(755);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBaseAttackBonus);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(755);
     }
 
     ///  Restores the number of base attacks back to it&amp;apos;s<br/>
     ///  original state.
     public static void RestoreBaseAttackBonus(uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.Call(756);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(756);
     }
 
     ///  Creates a cutscene ghost effect, this will allow creatures<br/>
@@ -14927,51 +14927,51 @@ namespace NWN.Core
     ///  for the duration of the effect.
     public static System.IntPtr EffectCutsceneGhost()
     {
-      VM.Call(757);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(757);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Creates an item property that offsets the effect on arcane spell failure<br/>
     ///  that a particular item has. Parameters come from the ITEM_PROP_ASF_* group.
     public static System.IntPtr ItemPropertyArcaneSpellFailure(int nModLevel)
     {
-      VM.StackPush(nModLevel);
-      VM.Call(758);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nModLevel);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(758);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns the amount of gold a store currently has. -1 indicates it is not using gold.<br/>
     ///  -2 indicates the store could not be located.
     public static int GetStoreGold(uint oidStore)
     {
-      VM.StackPush(oidStore);
-      VM.Call(759);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oidStore);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(759);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets the amount of gold a store has. -1 means the store does not use gold.
     public static void SetStoreGold(uint oidStore, int nGold)
     {
-      VM.StackPush(nGold);
-      VM.StackPush(oidStore);
-      VM.Call(760);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nGold);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oidStore);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(760);
     }
 
     ///  Gets the maximum amount a store will pay for any item. -1 means price unlimited.<br/>
     ///  -2 indicates the store could not be located.
     public static int GetStoreMaxBuyPrice(uint oidStore)
     {
-      VM.StackPush(oidStore);
-      VM.Call(761);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oidStore);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(761);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets the maximum amount a store will pay for any item. -1 means price unlimited.
     public static void SetStoreMaxBuyPrice(uint oidStore, int nMaxBuy)
     {
-      VM.StackPush(nMaxBuy);
-      VM.StackPush(oidStore);
-      VM.Call(762);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nMaxBuy);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oidStore);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(762);
     }
 
     ///  Gets the amount a store charges for identifying an item. Default is 100. -1 means<br/>
@@ -14979,43 +14979,43 @@ namespace NWN.Core
     ///  -2 indicates the store could not be located.
     public static int GetStoreIdentifyCost(uint oidStore)
     {
-      VM.StackPush(oidStore);
-      VM.Call(763);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oidStore);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(763);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets the amount a store charges for identifying an item. Default is 100. -1 means<br/>
     ///  the store will not identify items.
     public static void SetStoreIdentifyCost(uint oidStore, int nCost)
     {
-      VM.StackPush(nCost);
-      VM.StackPush(oidStore);
-      VM.Call(764);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nCost);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oidStore);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(764);
     }
 
     ///  Sets the creature&amp;apos;s appearance type to the value specified (uses the APPEARANCE_TYPE_XXX constants)
     public static void SetCreatureAppearanceType(uint oCreature, int nAppearanceType)
     {
-      VM.StackPush(nAppearanceType);
-      VM.StackPush(oCreature);
-      VM.Call(765);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAppearanceType);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(765);
     }
 
     ///  Returns the default package selected for this creature to level up with<br/>
     ///  - returns PACKAGE_INVALID if error occurs
     public static int GetCreatureStartingPackage(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(766);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(766);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns an effect that when applied will paralyze the target&amp;apos;s legs, rendering<br/>
     ///  them unable to walk but otherwise unpenalized. This effect cannot be resisted.
     public static System.IntPtr EffectCutsceneImmobilize()
     {
-      VM.Call(767);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(767);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Is this creature in the given subarea? (trigger, area of effect object, etc..)<br/>
@@ -15023,76 +15023,76 @@ namespace NWN.Core
     ///  not if it is physically within the space of the subarea
     public static int GetIsInSubArea(uint oCreature, uint oSubArea = OBJECT_INVALID)
     {
-      VM.StackPush(oSubArea);
-      VM.StackPush(oCreature);
-      VM.Call(768);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSubArea);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(768);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the Cost Table number of the item property. See the 2DA files for value definitions.
     public static int GetItemPropertyCostTable(System.IntPtr iProp)
     {
-      VM.StackPush(iProp, ENGINE_STRUCTURE_ITEMPROPERTY);
-      VM.Call(769);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY, iProp);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(769);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the Cost Table value (index of the cost table) of the item property.<br/>
     ///  See the 2DA files for value definitions.
     public static int GetItemPropertyCostTableValue(System.IntPtr iProp)
     {
-      VM.StackPush(iProp, ENGINE_STRUCTURE_ITEMPROPERTY);
-      VM.Call(770);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY, iProp);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(770);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the Param1 number of the item property. See the 2DA files for value definitions.
     public static int GetItemPropertyParam1(System.IntPtr iProp)
     {
-      VM.StackPush(iProp, ENGINE_STRUCTURE_ITEMPROPERTY);
-      VM.Call(771);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY, iProp);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(771);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the Param1 value of the item property. See the 2DA files for value definitions.
     public static int GetItemPropertyParam1Value(System.IntPtr iProp)
     {
-      VM.StackPush(iProp, ENGINE_STRUCTURE_ITEMPROPERTY);
-      VM.Call(772);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY, iProp);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(772);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Is this creature able to be disarmed? (checks disarm flag on creature, and if<br/>
     ///  the creature actually has a weapon equipped in their right hand that is droppable)
     public static int GetIsCreatureDisarmable(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(773);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(773);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets whether this item is &amp;apos;stolen&amp;apos; or not
     public static void SetStolenFlag(uint oItem, int nStolenFlag)
     {
-      VM.StackPush(nStolenFlag);
-      VM.StackPush(oItem);
-      VM.Call(774);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nStolenFlag);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(774);
     }
 
     ///  Instantly gives this creature the benefits of a rest (restored hitpoints, spells, feats, etc..)
     public static void ForceRest(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(775);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(775);
     }
 
     ///  Forces this player&amp;apos;s camera to be set to this height. Setting this value to zero will<br/>
     ///  restore the camera to the racial default height.
     public static void SetCameraHeight(uint oPlayer, float fHeight = 0.0f)
     {
-      VM.StackPush(fHeight);
-      VM.StackPush(oPlayer);
-      VM.Call(776);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fHeight);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(776);
     }
 
     ///  Changes the sky that is displayed in the specified area.<br/>
@@ -15101,17 +15101,17 @@ namespace NWN.Core
     ///  If an object other than an area is specified, will use the area that the object is currently in.
     public static void SetSkyBox(int nSkyBox, uint oArea = OBJECT_INVALID)
     {
-      VM.StackPush(oArea);
-      VM.StackPush(nSkyBox);
-      VM.Call(777);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSkyBox);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(777);
     }
 
     ///  Returns the creature&amp;apos;s currently set PhenoType (body type).
     public static int GetPhenoType(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(778);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(778);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets the creature&amp;apos;s PhenoType (body type) to the type specified.<br/>
@@ -15125,9 +15125,9 @@ namespace NWN.Core
     ///  default playable races).
     public static void SetPhenoType(int nPhenoType, uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.StackPush(nPhenoType);
-      VM.Call(779);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPhenoType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(779);
     }
 
     ///  Sets the fog color in the area specified.<br/>
@@ -15144,11 +15144,11 @@ namespace NWN.Core
     ///  If fFadeTime is above 0.0, it will fade to the new color in the amount of seconds specified. 
     public static void SetFogColor(int nFogType, int nFogColor, uint oArea = OBJECT_INVALID, float fFadeTime = 0.0f)
     {
-      VM.StackPush(fFadeTime);
-      VM.StackPush(oArea);
-      VM.StackPush(nFogColor);
-      VM.StackPush(nFogType);
-      VM.Call(780);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fFadeTime);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFogColor);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFogType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(780);
     }
 
     ///  Gets the current cutscene state of the player specified by oCreature.<br/>
@@ -15157,9 +15157,9 @@ namespace NWN.Core
     ///  (such as specifying a non creature object).
     public static int GetCutsceneMode(uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.Call(781);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(781);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Gets the skybox that is currently displayed in the specified area.<br/>
@@ -15169,9 +15169,9 @@ namespace NWN.Core
     ///  If an object other than an area is specified, will use the area that the object is currently in.
     public static int GetSkyBox(uint oArea = OBJECT_INVALID)
     {
-      VM.StackPush(oArea);
-      VM.Call(782);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(782);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Gets the fog color in the area specified.<br/>
@@ -15181,10 +15181,10 @@ namespace NWN.Core
     ///  If an object other than an area is specified, will use the area that the object is currently in.
     public static int GetFogColor(int nFogType, uint oArea = OBJECT_INVALID)
     {
-      VM.StackPush(oArea);
-      VM.StackPush(nFogType);
-      VM.Call(783);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFogType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(783);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets the fog amount in the area specified.<br/>
@@ -15194,10 +15194,10 @@ namespace NWN.Core
     ///  If an object other than an area is specified, will use the area that the object is currently in.
     public static void SetFogAmount(int nFogType, int nFogAmount, uint oArea = OBJECT_INVALID)
     {
-      VM.StackPush(oArea);
-      VM.StackPush(nFogAmount);
-      VM.StackPush(nFogType);
-      VM.Call(784);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFogAmount);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFogType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(784);
     }
 
     ///  Gets the fog amount in the area specified.<br/>
@@ -15207,18 +15207,18 @@ namespace NWN.Core
     ///  If an object other than an area is specified, will use the area that the object is currently in.
     public static int GetFogAmount(int nFogType, uint oArea = OBJECT_INVALID)
     {
-      VM.StackPush(oArea);
-      VM.StackPush(nFogType);
-      VM.Call(785);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFogType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(785);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  returns TRUE if the item CAN be pickpocketed
     public static int GetPickpocketableFlag(uint oItem)
     {
-      VM.StackPush(oItem);
-      VM.Call(786);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(786);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets the Pickpocketable flag on an item<br/>
@@ -15226,9 +15226,9 @@ namespace NWN.Core
     ///  - bPickpocketable: TRUE or FALSE, whether the item can be pickpocketed.
     public static void SetPickpocketableFlag(uint oItem, int bPickpocketable)
     {
-      VM.StackPush(bPickpocketable);
-      VM.StackPush(oItem);
-      VM.Call(787);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bPickpocketable);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(787);
     }
 
     ///  returns the footstep type of the creature specified.<br/>
@@ -15238,9 +15238,9 @@ namespace NWN.Core
     ///  used on creature that has no footstep sounds by default (e.g. Will-O&amp;apos;-Wisp).
     public static int GetFootstepType(uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.Call(788);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(788);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets the footstep type of the creature specified.<br/>
@@ -15267,9 +15267,9 @@ namespace NWN.Core
     ///  - oCreature: the creature to change the footstep sound for.
     public static void SetFootstepType(int nFootstepType, uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.StackPush(nFootstepType);
-      VM.Call(789);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFootstepType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(789);
     }
 
     ///  returns the Wing type of the creature specified.<br/>
@@ -15285,9 +15285,9 @@ namespace NWN.Core
     ///  wing type changed in the toolset.
     public static int GetCreatureWingType(uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.Call(790);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(790);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets the Wing type of the creature specified.<br/>
@@ -15305,9 +15305,9 @@ namespace NWN.Core
     ///  and MODELTYPE &amp;apos;W&amp;apos;in the appearance.2da
     public static void SetCreatureWingType(int nWingType, uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.StackPush(nWingType);
-      VM.Call(791);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nWingType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(791);
     }
 
     ///  returns the model number being used for the body part and creature specified<br/>
@@ -15343,10 +15343,10 @@ namespace NWN.Core
     ///       CREATURE_PART_HEAD
     public static int GetCreatureBodyPart(int nPart, uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.StackPush(nPart);
-      VM.Call(792);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPart);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(792);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets the body part model to be used on the creature specified.<br/>
@@ -15383,10 +15383,10 @@ namespace NWN.Core
     ///  i.e. The model types for the playable races (&amp;apos;P&amp;apos;) in the appearance.2da
     public static void SetCreatureBodyPart(int nPart, int nModelNumber, uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.StackPush(nModelNumber);
-      VM.StackPush(nPart);
-      VM.Call(793);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nModelNumber);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPart);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(793);
     }
 
     ///  returns the Tail type of the creature specified.<br/>
@@ -15399,9 +15399,9 @@ namespace NWN.Core
     ///  Tail type changed in the toolset.
     public static int GetCreatureTailType(uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.Call(794);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(794);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets the Tail type of the creature specified.<br/>
@@ -15416,9 +15416,9 @@ namespace NWN.Core
     ///  and MODELTYPE &amp;apos;T&amp;apos;in the appearance.2da
     public static void SetCreatureTailType(int nTailType, uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.StackPush(nTailType);
-      VM.Call(795);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nTailType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(795);
     }
 
     ///  returns the Hardness of a Door or Placeable object.<br/>
@@ -15427,9 +15427,9 @@ namespace NWN.Core
     ///  neither a door nor a placeable object.
     public static int GetHardness(uint oObject = OBJECT_INVALID)
     {
-      VM.StackPush(oObject);
-      VM.Call(796);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(796);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets the Hardness of a Door or Placeable object.<br/>
@@ -15439,9 +15439,9 @@ namespace NWN.Core
     ///  a door nor a placeable.
     public static void SetHardness(int nHardness, uint oObject = OBJECT_INVALID)
     {
-      VM.StackPush(oObject);
-      VM.StackPush(nHardness);
-      VM.Call(797);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nHardness);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(797);
     }
 
     ///  When set the object can not be opened unless the<br/>
@@ -15452,9 +15452,9 @@ namespace NWN.Core
     ///  - nKeyRequired: TRUE/FALSE
     public static void SetLockKeyRequired(uint oObject, int nKeyRequired = TRUE)
     {
-      VM.StackPush(nKeyRequired);
-      VM.StackPush(oObject);
-      VM.Call(798);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nKeyRequired);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(798);
     }
 
     ///  Set the key tag required to open object oObject.<br/>
@@ -15465,9 +15465,9 @@ namespace NWN.Core
     ///  - sNewKeyTag: the key tag required to open the locked object.
     public static void SetLockKeyTag(uint oObject, string sNewKeyTag)
     {
-      VM.StackPush(sNewKeyTag);
-      VM.StackPush(oObject);
-      VM.Call(799);
+      global::NWNX.NET.NWNXAPI.StackPushString(sNewKeyTag);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(799);
     }
 
     ///  Sets whether or not the object can be locked.<br/>
@@ -15475,9 +15475,9 @@ namespace NWN.Core
     ///  - nLockable: TRUE/FALSE
     public static void SetLockLockable(uint oObject, int nLockable = TRUE)
     {
-      VM.StackPush(nLockable);
-      VM.StackPush(oObject);
-      VM.Call(800);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nLockable);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(800);
     }
 
     ///  Sets the DC for unlocking the object.<br/>
@@ -15485,9 +15485,9 @@ namespace NWN.Core
     ///  - nNewUnlockDC: must be between 0 and 250.
     public static void SetLockUnlockDC(uint oObject, int nNewUnlockDC)
     {
-      VM.StackPush(nNewUnlockDC);
-      VM.StackPush(oObject);
-      VM.Call(801);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNewUnlockDC);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(801);
     }
 
     ///  Sets the DC for locking the object.<br/>
@@ -15495,9 +15495,9 @@ namespace NWN.Core
     ///  - nNewLockDC: must be between 0 and 250.
     public static void SetLockLockDC(uint oObject, int nNewLockDC)
     {
-      VM.StackPush(nNewLockDC);
-      VM.StackPush(oObject);
-      VM.Call(802);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNewLockDC);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(802);
     }
 
     ///  Sets whether or not the trapped object can be disarmed.<br/>
@@ -15505,9 +15505,9 @@ namespace NWN.Core
     ///  - nDisarmable: TRUE/FALSE
     public static void SetTrapDisarmable(uint oTrapObject, int nDisarmable = TRUE)
     {
-      VM.StackPush(nDisarmable);
-      VM.StackPush(oTrapObject);
-      VM.Call(803);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDisarmable);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTrapObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(803);
     }
 
     ///  Sets whether or not the trapped object can be detected.<br/>
@@ -15517,9 +15517,9 @@ namespace NWN.Core
     ///  not make the trap disappear if it has already been detected.
     public static void SetTrapDetectable(uint oTrapObject, int nDetectable = TRUE)
     {
-      VM.StackPush(nDetectable);
-      VM.StackPush(oTrapObject);
-      VM.Call(804);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDetectable);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTrapObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(804);
     }
 
     ///  Sets whether or not the trap is a one-shot trap<br/>
@@ -15528,18 +15528,18 @@ namespace NWN.Core
     ///  - nOneShot: TRUE/FALSE
     public static void SetTrapOneShot(uint oTrapObject, int nOneShot = TRUE)
     {
-      VM.StackPush(nOneShot);
-      VM.StackPush(oTrapObject);
-      VM.Call(805);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nOneShot);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTrapObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(805);
     }
 
     ///  Set the tag of the key that will disarm oTrapObject.<br/>
     ///  - oTrapObject: a placeable, door or trigger
     public static void SetTrapKeyTag(uint oTrapObject, string sKeyTag)
     {
-      VM.StackPush(sKeyTag);
-      VM.StackPush(oTrapObject);
-      VM.Call(806);
+      global::NWNX.NET.NWNXAPI.StackPushString(sKeyTag);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTrapObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(806);
     }
 
     ///  Set the DC for disarming oTrapObject.<br/>
@@ -15547,9 +15547,9 @@ namespace NWN.Core
     ///  - nDisarmDC: must be between 0 and 250.
     public static void SetTrapDisarmDC(uint oTrapObject, int nDisarmDC)
     {
-      VM.StackPush(nDisarmDC);
-      VM.StackPush(oTrapObject);
-      VM.Call(807);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDisarmDC);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTrapObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(807);
     }
 
     ///  Set the DC for detecting oTrapObject.<br/>
@@ -15557,9 +15557,9 @@ namespace NWN.Core
     ///  - nDetectDC: must be between 0 and 250.
     public static void SetTrapDetectDC(uint oTrapObject, int nDetectDC)
     {
-      VM.StackPush(nDetectDC);
-      VM.StackPush(oTrapObject);
-      VM.Call(808);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDetectDC);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTrapObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(808);
     }
 
     ///  Creates a square Trap object.<br/>
@@ -15577,15 +15577,15 @@ namespace NWN.Core
     ///                            traps.2da).
     public static uint CreateTrapAtLocation(int nTrapType, System.IntPtr lLocation, float fSize = 2.0f, string sTag = "", int nFaction = STANDARD_FACTION_HOSTILE, string sOnDisarmScript = "", string sOnTrapTriggeredScript = "")
     {
-      VM.StackPush(sOnTrapTriggeredScript);
-      VM.StackPush(sOnDisarmScript);
-      VM.StackPush(nFaction);
-      VM.StackPush(sTag);
-      VM.StackPush(fSize);
-      VM.StackPush(lLocation, ENGINE_STRUCTURE_LOCATION);
-      VM.StackPush(nTrapType);
-      VM.Call(809);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushString(sOnTrapTriggeredScript);
+      global::NWNX.NET.NWNXAPI.StackPushString(sOnDisarmScript);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFaction);
+      global::NWNX.NET.NWNXAPI.StackPushString(sTag);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fSize);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lLocation);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nTrapType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(809);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Creates a Trap on the object specified.<br/>
@@ -15604,12 +15604,12 @@ namespace NWN.Core
     ///        that the trap was created on (i.e. oObject) to any subsequent SetTrap* commands.
     public static void CreateTrapOnObject(int nTrapType, uint oObject, int nFaction = STANDARD_FACTION_HOSTILE, string sOnDisarmScript = "", string sOnTrapTriggeredScript = "")
     {
-      VM.StackPush(sOnTrapTriggeredScript);
-      VM.StackPush(sOnDisarmScript);
-      VM.StackPush(nFaction);
-      VM.StackPush(oObject);
-      VM.StackPush(nTrapType);
-      VM.Call(810);
+      global::NWNX.NET.NWNXAPI.StackPushString(sOnTrapTriggeredScript);
+      global::NWNX.NET.NWNXAPI.StackPushString(sOnDisarmScript);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFaction);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nTrapType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(810);
     }
 
     ///  Set the Will saving throw value of the Door or Placeable object oObject.<br/>
@@ -15617,9 +15617,9 @@ namespace NWN.Core
     ///  - nWillSave: must be between 0 and 250.
     public static void SetWillSavingThrow(uint oObject, int nWillSave)
     {
-      VM.StackPush(nWillSave);
-      VM.StackPush(oObject);
-      VM.Call(811);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nWillSave);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(811);
     }
 
     ///  Set the Reflex saving throw value of the Door or Placeable object oObject.<br/>
@@ -15627,9 +15627,9 @@ namespace NWN.Core
     ///  - nReflexSave: must be between 0 and 250.
     public static void SetReflexSavingThrow(uint oObject, int nReflexSave)
     {
-      VM.StackPush(nReflexSave);
-      VM.StackPush(oObject);
-      VM.Call(812);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nReflexSave);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(812);
     }
 
     ///  Set the Fortitude saving throw value of the Door or Placeable object oObject.<br/>
@@ -15637,9 +15637,9 @@ namespace NWN.Core
     ///  - nFortitudeSave: must be between 0 and 250.
     public static void SetFortitudeSavingThrow(uint oObject, int nFortitudeSave)
     {
-      VM.StackPush(nFortitudeSave);
-      VM.StackPush(oObject);
-      VM.Call(813);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFortitudeSave);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(813);
     }
 
     ///  returns the resref (TILESET_RESREF_*) of the tileset used to create area oArea.<br/>
@@ -15664,42 +15664,42 @@ namespace NWN.Core
     ///  * returns an empty string on an error.
     public static string GetTilesetResRef(uint oArea)
     {
-      VM.StackPush(oArea);
-      VM.Call(814);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(814);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  - oTrapObject: a placeable, door or trigger<br/>
     ///  * Returns TRUE if oTrapObject can be recovered.
     public static int GetTrapRecoverable(uint oTrapObject)
     {
-      VM.StackPush(oTrapObject);
-      VM.Call(815);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTrapObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(815);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets whether or not the trapped object can be recovered.<br/>
     ///  - oTrapObject: a placeable, door or trigger
     public static void SetTrapRecoverable(uint oTrapObject, int nRecoverable = TRUE)
     {
-      VM.StackPush(nRecoverable);
-      VM.StackPush(oTrapObject);
-      VM.Call(816);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nRecoverable);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTrapObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(816);
     }
 
     ///  Get the XP scale being used for the module.
     public static int GetModuleXPScale()
     {
-      VM.Call(817);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(817);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Set the XP scale used by the module.<br/>
     ///  - nXPScale: The XP scale to be used. Must be between 0 and 200.
     public static void SetModuleXPScale(int nXPScale)
     {
-      VM.StackPush(nXPScale);
-      VM.Call(818);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nXPScale);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(818);
     }
 
     ///  Get the feedback message that will be displayed when trying to unlock the object oObject.<br/>
@@ -15707,9 +15707,9 @@ namespace NWN.Core
     ///  Returns an empty string &amp;quot;&amp;quot; on an error or if the game&amp;apos;s default feedback message is being used
     public static string GetKeyRequiredFeedback(uint oObject)
     {
-      VM.StackPush(oObject);
-      VM.Call(819);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(819);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Set the feedback message that is displayed when trying to unlock the object oObject.<br/>
@@ -15721,18 +15721,18 @@ namespace NWN.Core
     ///                      to use the game&amp;apos;s default message, set sFeedbackMessage to &amp;quot;&amp;quot;
     public static void SetKeyRequiredFeedback(uint oObject, string sFeedbackMessage)
     {
-      VM.StackPush(sFeedbackMessage);
-      VM.StackPush(oObject);
-      VM.Call(820);
+      global::NWNX.NET.NWNXAPI.StackPushString(sFeedbackMessage);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(820);
     }
 
     ///  - oTrapObject: a placeable, door or trigger<br/>
     ///  * Returns TRUE if oTrapObject is active
     public static int GetTrapActive(uint oTrapObject)
     {
-      VM.StackPush(oTrapObject);
-      VM.Call(821);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTrapObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(821);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets whether or not the trap is an active trap<br/>
@@ -15745,9 +15745,9 @@ namespace NWN.Core
     ///  To make an inactive trap not detectable call SetTrapDetectable()
     public static void SetTrapActive(uint oTrapObject, int nActive = TRUE)
     {
-      VM.StackPush(nActive);
-      VM.StackPush(oTrapObject);
-      VM.Call(822);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nActive);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTrapObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(822);
     }
 
     ///  Locks the player&amp;apos;s camera pitch to its current pitch setting,<br/>
@@ -15757,9 +15757,9 @@ namespace NWN.Core
     ///  - bLocked: TRUE/FALSE.
     public static void LockCameraPitch(uint oPlayer, int bLocked = TRUE)
     {
-      VM.StackPush(bLocked);
-      VM.StackPush(oPlayer);
-      VM.Call(823);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bLocked);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(823);
     }
 
     ///  Locks the player&amp;apos;s camera distance to its current distance setting,<br/>
@@ -15769,9 +15769,9 @@ namespace NWN.Core
     ///  - bLocked: TRUE/FALSE.
     public static void LockCameraDistance(uint oPlayer, int bLocked = TRUE)
     {
-      VM.StackPush(bLocked);
-      VM.StackPush(oPlayer);
-      VM.Call(824);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bLocked);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(824);
     }
 
     ///  Locks the player&amp;apos;s camera direction to its current direction,<br/>
@@ -15782,9 +15782,9 @@ namespace NWN.Core
     ///  - bLocked: TRUE/FALSE.
     public static void LockCameraDirection(uint oPlayer, int bLocked = TRUE)
     {
-      VM.StackPush(bLocked);
-      VM.StackPush(oPlayer);
-      VM.Call(825);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bLocked);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(825);
     }
 
     ///  Get the last object that default clicked (left clicked) on the placeable object<br/>
@@ -15793,8 +15793,8 @@ namespace NWN.Core
     ///  * Returns OBJECT_INVALID if it is called by something other than a placeable.
     public static uint GetPlaceableLastClickedBy()
     {
-      VM.Call(826);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(826);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  returns TRUE if the item is flagged as infinite.<br/>
@@ -15804,9 +15804,9 @@ namespace NWN.Core
     ///  buys the item (non-infinite items will disappear from the store when purchased).
     public static int GetInfiniteFlag(uint oItem)
     {
-      VM.StackPush(oItem);
-      VM.Call(827);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(827);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets the Infinite flag on an item<br/>
@@ -15817,9 +15817,9 @@ namespace NWN.Core
     ///  buys the item (non-infinite items will disappear from the store when purchased).
     public static void SetInfiniteFlag(uint oItem, int bInfinite = TRUE)
     {
-      VM.StackPush(bInfinite);
-      VM.StackPush(oItem);
-      VM.Call(828);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bInfinite);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(828);
     }
 
     ///  Gets the size of the area.<br/>
@@ -15832,10 +15832,10 @@ namespace NWN.Core
     ///  If an object other than an area is specified, will use the area that the object is currently in.
     public static int GetAreaSize(int nAreaDimension, uint oArea = OBJECT_INVALID)
     {
-      VM.StackPush(oArea);
-      VM.StackPush(nAreaDimension);
-      VM.Call(829);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAreaDimension);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(829);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Set the name of oObject.<br/>
@@ -15846,9 +15846,9 @@ namespace NWN.Core
     ///        SetName() calls were made on the object.
     public static void SetName(uint oObject, string sNewName = "")
     {
-      VM.StackPush(sNewName);
-      VM.StackPush(oObject);
-      VM.Call(830);
+      global::NWNX.NET.NWNXAPI.StackPushString(sNewName);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(830);
     }
 
     ///  Get the PortraitId of oTarget.<br/>
@@ -15861,9 +15861,9 @@ namespace NWN.Core
     ///           try using GetPortraitResRef() instead.
     public static int GetPortraitId(uint oTarget = OBJECT_INVALID)
     {
-      VM.StackPush(oTarget);
-      VM.Call(831);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(831);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Change the portrait of oTarget to use the Portrait Id specified.<br/>
@@ -15875,9 +15875,9 @@ namespace NWN.Core
     ///        to be set to the appropriate portrait ResRef for the Id specified.
     public static void SetPortraitId(uint oTarget, int nPortraitId)
     {
-      VM.StackPush(nPortraitId);
-      VM.StackPush(oTarget);
-      VM.Call(832);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nPortraitId);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(832);
     }
 
     ///  Get the Portrait ResRef of oTarget.<br/>
@@ -15886,9 +15886,9 @@ namespace NWN.Core
     ///           The Portrait ResRef will not include a trailing size letter.
     public static string GetPortraitResRef(uint oTarget = OBJECT_INVALID)
     {
-      VM.StackPush(oTarget);
-      VM.Call(833);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(833);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Change the portrait of oTarget to use the Portrait ResRef specified.<br/>
@@ -15900,9 +15900,9 @@ namespace NWN.Core
     ///        to be set to PORTRAIT_INVALID.
     public static void SetPortraitResRef(uint oTarget, string sPortraitResRef)
     {
-      VM.StackPush(sPortraitResRef);
-      VM.StackPush(oTarget);
-      VM.Call(834);
+      global::NWNX.NET.NWNXAPI.StackPushString(sPortraitResRef);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(834);
     }
 
     ///  Set oTarget&amp;apos;s useable object status.<br/>
@@ -15910,9 +15910,9 @@ namespace NWN.Core
     ///  On items, it affects interactivity when they&amp;apos;re on the ground, and not useability in inventory.
     public static void SetUseableFlag(uint oTarget, int nUseableFlag)
     {
-      VM.StackPush(nUseableFlag);
-      VM.StackPush(oTarget);
-      VM.Call(835);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nUseableFlag);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(835);
     }
 
     ///  Get the description of oObject.<br/>
@@ -15925,11 +15925,11 @@ namespace NWN.Core
     ///                 effect on objects other than items.
     public static string GetDescription(uint oObject, int bOriginalDescription = FALSE, int bIdentifiedDescription = TRUE)
     {
-      VM.StackPush(bIdentifiedDescription);
-      VM.StackPush(bOriginalDescription);
-      VM.StackPush(oObject);
-      VM.Call(836);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bIdentifiedDescription);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bOriginalDescription);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(836);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Set the description of oObject.<br/>
@@ -15944,10 +15944,10 @@ namespace NWN.Core
     ///        SetDescription() calls were made on the object.
     public static void SetDescription(uint oObject, string sNewDescription = "", int bIdentifiedDescription = TRUE)
     {
-      VM.StackPush(bIdentifiedDescription);
-      VM.StackPush(sNewDescription);
-      VM.StackPush(oObject);
-      VM.Call(837);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bIdentifiedDescription);
+      global::NWNX.NET.NWNXAPI.StackPushString(sNewDescription);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(837);
     }
 
     ///  Get the PC that sent the last player chat(text) message.<br/>
@@ -15956,8 +15956,8 @@ namespace NWN.Core
     ///  Note: Private tells do not trigger a OnPlayerChat event.
     public static uint GetPCChatSpeaker()
     {
-      VM.Call(838);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(838);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the last player chat(text) message that was sent.<br/>
@@ -15966,8 +15966,8 @@ namespace NWN.Core
     ///  Note: Private tells do not trigger a OnPlayerChat event.
     public static string GetPCChatMessage()
     {
-      VM.Call(839);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(839);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Get the volume of the last player chat(text) message that was sent.<br/>
@@ -15983,8 +15983,8 @@ namespace NWN.Core
     ///  Note: Private tells do not trigger a OnPlayerChat event.
     public static int GetPCChatVolume()
     {
-      VM.Call(840);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(840);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Set the last player chat(text) message before it gets sent to other players.<br/>
@@ -15995,8 +15995,8 @@ namespace NWN.Core
     ///  Note: The new chat message gets sent after the OnPlayerChat script exits.
     public static void SetPCChatMessage(string sNewChatMessage = "")
     {
-      VM.StackPush(sNewChatMessage);
-      VM.Call(841);
+      global::NWNX.NET.NWNXAPI.StackPushString(sNewChatMessage);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(841);
     }
 
     ///  Set the last player chat(text) volume before it gets sent to other players.<br/>
@@ -16010,8 +16010,8 @@ namespace NWN.Core
     ///  Note: The new chat message gets sent after the OnPlayerChat script exits.
     public static void SetPCChatVolume(int nTalkVolume = TALKVOLUME_TALK)
     {
-      VM.StackPush(nTalkVolume);
-      VM.Call(842);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nTalkVolume);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(842);
     }
 
     ///  Get the Color of oObject from the color channel specified.<br/>
@@ -16025,10 +16025,10 @@ namespace NWN.Core
     ///  * Returns -1 on error.
     public static int GetColor(uint oObject, int nColorChannel)
     {
-      VM.StackPush(nColorChannel);
-      VM.StackPush(oObject);
-      VM.Call(843);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nColorChannel);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(843);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Set the color channel of oObject to the color specified.<br/>
@@ -16042,10 +16042,10 @@ namespace NWN.Core
     ///  - nColorValue: The color you want to set (0-175).
     public static void SetColor(uint oObject, int nColorChannel, int nColorValue)
     {
-      VM.StackPush(nColorValue);
-      VM.StackPush(nColorChannel);
-      VM.StackPush(oObject);
-      VM.Call(844);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nColorValue);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nColorChannel);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(844);
     }
 
     ///  Returns Item property Material.  You need to specify the Material Type.<br/>
@@ -16053,9 +16053,9 @@ namespace NWN.Core
     ///  Note: The Material Type property will only affect the cost of the item if you modify the cost in the iprp_matcost.2da.
     public static System.IntPtr ItemPropertyMaterial(int nMaterialType)
     {
-      VM.StackPush(nMaterialType);
-      VM.Call(845);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nMaterialType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(845);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns Item property Quality. You need to specify the Quality.<br/>
@@ -16064,9 +16064,9 @@ namespace NWN.Core
     ///  Note: The quality property will only affect the cost of the item if you modify the cost in the iprp_qualcost.2da.
     public static System.IntPtr ItemPropertyQuality(int nQuality)
     {
-      VM.StackPush(nQuality);
-      VM.Call(846);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nQuality);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(846);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns a generic Additional Item property. You need to specify the Additional property.<br/>
@@ -16075,9 +16075,9 @@ namespace NWN.Core
     ///  Note: The additional property only affects the cost of the item if you modify the cost in the iprp_addcost.2da.
     public static System.IntPtr ItemPropertyAdditional(int nAdditionalProperty)
     {
-      VM.StackPush(nAdditionalProperty);
-      VM.Call(847);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAdditionalProperty);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(847);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Sets a new tag for oObject.<br/>
@@ -16088,28 +16088,28 @@ namespace NWN.Core
     ///        Changing waypoint, door or trigger tags will break their area transitions.
     public static void SetTag(uint oObject, string sNewTag)
     {
-      VM.StackPush(sNewTag);
-      VM.StackPush(oObject);
-      VM.Call(848);
+      global::NWNX.NET.NWNXAPI.StackPushString(sNewTag);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(848);
     }
 
     ///  Returns the string tag set for the provided effect.<br/>
     ///  - If no tag has been set, returns an empty string.
     public static string GetEffectTag(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(849);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(849);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Tags the effect with the provided string.<br/>
     ///  - Any other tags in the link will be overwritten.
     public static System.IntPtr TagEffect(System.IntPtr eEffect, string sNewTag)
     {
-      VM.StackPush(sNewTag);
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(850);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushString(sNewTag);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(850);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Returns the caster level of the creature who created the effect.<br/>
@@ -16117,64 +16117,64 @@ namespace NWN.Core
     ///  - If created by a spell-like ability, returns 0.
     public static int GetEffectCasterLevel(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(851);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(851);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the total duration of the effect in seconds.<br/>
     ///  - Returns 0 if the duration type of the effect is not DURATION_TYPE_TEMPORARY.
     public static int GetEffectDuration(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(852);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(852);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the remaining duration of the effect in seconds.<br/>
     ///  - Returns 0 if the duration type of the effect is not DURATION_TYPE_TEMPORARY.
     public static int GetEffectDurationRemaining(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(853);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(853);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the string tag set for the provided item property.<br/>
     ///  - If no tag has been set, returns an empty string.
     public static string GetItemPropertyTag(System.IntPtr nProperty)
     {
-      VM.StackPush(nProperty, ENGINE_STRUCTURE_ITEMPROPERTY);
-      VM.Call(854);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY, nProperty);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(854);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Tags the item property with the provided string.<br/>
     ///  - Any tags currently set on the item property will be overwritten.
     public static System.IntPtr TagItemProperty(System.IntPtr nProperty, string sNewTag)
     {
-      VM.StackPush(sNewTag);
-      VM.StackPush(nProperty, ENGINE_STRUCTURE_ITEMPROPERTY);
-      VM.Call(855);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushString(sNewTag);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY, nProperty);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(855);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Returns the total duration of the item property in seconds.<br/>
     ///  - Returns 0 if the duration type of the item property is not DURATION_TYPE_TEMPORARY.
     public static int GetItemPropertyDuration(System.IntPtr nProperty)
     {
-      VM.StackPush(nProperty, ENGINE_STRUCTURE_ITEMPROPERTY);
-      VM.Call(856);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY, nProperty);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(856);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the remaining duration of the item property in seconds.<br/>
     ///  - Returns 0 if the duration type of the item property is not DURATION_TYPE_TEMPORARY.
     public static int GetItemPropertyDurationRemaining(System.IntPtr nProperty)
     {
-      VM.StackPush(nProperty, ENGINE_STRUCTURE_ITEMPROPERTY);
-      VM.Call(857);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY, nProperty);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(857);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Instances a new area from the given sSourceResRef, which needs to be a existing module area.<br/>
@@ -16196,11 +16196,11 @@ namespace NWN.Core
     ///        polymorphed creatures, personal reputation, and associates will currently fail to restore correctly.
     public static uint CreateArea(string sSourceResRef, string sNewTag = "", string sNewName = "")
     {
-      VM.StackPush(sNewName);
-      VM.StackPush(sNewTag);
-      VM.StackPush(sSourceResRef);
-      VM.Call(858);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushString(sNewName);
+      global::NWNX.NET.NWNXAPI.StackPushString(sNewTag);
+      global::NWNX.NET.NWNXAPI.StackPushString(sSourceResRef);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(858);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Destroys the given area object and everything in it.<br/>
@@ -16216,9 +16216,9 @@ namespace NWN.Core
     ///     1: Area destroyed successfully.
     public static int DestroyArea(uint oArea)
     {
-      VM.StackPush(oArea);
-      VM.Call(859);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(859);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Creates a copy of a existing area, including everything inside of it (except players).<br/>
@@ -16240,26 +16240,26 @@ namespace NWN.Core
     ///        If you need to know the resref of your new area, you can call GetResRef on it.
     public static uint CopyArea(uint oArea, string sNewTag = "", string sNewName = "")
     {
-      VM.StackPush(sNewName);
-      VM.StackPush(sNewTag);
-      VM.StackPush(oArea);
-      VM.Call(860);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushString(sNewName);
+      global::NWNX.NET.NWNXAPI.StackPushString(sNewTag);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(860);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Returns the first area in the module.
     public static uint GetFirstArea()
     {
-      VM.Call(861);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(861);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Returns the next area in the module (after GetFirstArea), or OBJECT_INVALID if no more<br/>
     ///  areas are loaded.
     public static uint GetNextArea()
     {
-      VM.Call(862);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(862);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Sets the transition target for oTransition.<br/>
@@ -16277,9 +16277,9 @@ namespace NWN.Core
     ///    destination for a transition will not work in a predictable fashion.
     public static void SetTransitionTarget(uint oTransition, uint oTarget)
     {
-      VM.StackPush(oTarget);
-      VM.StackPush(oTransition);
-      VM.Call(863);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTransition);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(863);
     }
 
     ///  Sets whether the provided item should be hidden when equipped.<br/>
@@ -16289,17 +16289,17 @@ namespace NWN.Core
     ///  - nValue should be TRUE or FALSE.
     public static void SetHiddenWhenEquipped(uint oItem, int nValue)
     {
-      VM.StackPush(nValue);
-      VM.StackPush(oItem);
-      VM.Call(864);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nValue);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(864);
     }
 
     ///  Returns whether the provided item is hidden when equipped.
     public static int GetHiddenWhenEquipped(uint oItem)
     {
-      VM.StackPush(oItem);
-      VM.Call(865);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(865);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets if the given creature has explored tile at x, y of the given area.<br/>
@@ -16314,13 +16314,13 @@ namespace NWN.Core
     ///    1: Tile was explored before setting newState.
     public static int SetTileExplored(uint creature, uint area, int x, int y, int newState)
     {
-      VM.StackPush(newState);
-      VM.StackPush(y);
-      VM.StackPush(x);
-      VM.StackPush(area);
-      VM.StackPush(creature);
-      VM.Call(866);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(newState);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(y);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(x);
+      global::NWNX.NET.NWNXAPI.StackPushObject(area);
+      global::NWNX.NET.NWNXAPI.StackPushObject(creature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(866);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns whether the given tile at x, y, for the given creature in the stated<br/>
@@ -16336,12 +16336,12 @@ namespace NWN.Core
     ///    1: Tile is explored.
     public static int GetTileExplored(uint creature, uint area, int x, int y)
     {
-      VM.StackPush(y);
-      VM.StackPush(x);
-      VM.StackPush(area);
-      VM.StackPush(creature);
-      VM.Call(867);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(y);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(x);
+      global::NWNX.NET.NWNXAPI.StackPushObject(area);
+      global::NWNX.NET.NWNXAPI.StackPushObject(creature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(867);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets the creature to auto-explore the map as it walks around.<br/>
@@ -16357,19 +16357,19 @@ namespace NWN.Core
     ///  Returns the previous state (or -1 if non-creature).
     public static int SetCreatureExploresMinimap(uint creature, int newState)
     {
-      VM.StackPush(newState);
-      VM.StackPush(creature);
-      VM.Call(868);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(newState);
+      global::NWNX.NET.NWNXAPI.StackPushObject(creature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(868);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns TRUE if the creature is set to auto-explore the map as it walks around (on by default).<br/>
     ///  Returns FALSE if creature is not actually a creature.
     public static int GetCreatureExploresMinimap(uint creature)
     {
-      VM.StackPush(creature);
-      VM.Call(869);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(creature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(869);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the surface material at the given location. (This is<br/>
@@ -16377,66 +16377,66 @@ namespace NWN.Core
     ///  Returns 0 if the location is invalid or has no surface type.
     public static int GetSurfaceMaterial(System.IntPtr at)
     {
-      VM.StackPush(at, ENGINE_STRUCTURE_LOCATION);
-      VM.Call(870);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, at);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(870);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the z-offset at which the walkmesh is at the given location.<br/>
     ///  Returns -6.0 for invalid locations.
     public static float GetGroundHeight(System.IntPtr at)
     {
-      VM.StackPush(at, ENGINE_STRUCTURE_LOCATION);
-      VM.Call(871);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, at);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(871);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Gets the attack bonus limit.<br/>
     ///  - The default value is 20.
     public static int GetAttackBonusLimit()
     {
-      VM.Call(872);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(872);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Gets the damage bonus limit.<br/>
     ///  - The default value is 100.
     public static int GetDamageBonusLimit()
     {
-      VM.Call(873);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(873);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Gets the saving throw bonus limit.<br/>
     ///  - The default value is 20.
     public static int GetSavingThrowBonusLimit()
     {
-      VM.Call(874);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(874);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Gets the ability bonus limit.<br/>
     ///  - The default value is 12.
     public static int GetAbilityBonusLimit()
     {
-      VM.Call(875);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(875);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Gets the ability penalty limit.<br/>
     ///  - The default value is 30.
     public static int GetAbilityPenaltyLimit()
     {
-      VM.Call(876);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(876);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Gets the skill bonus limit.<br/>
     ///  - The default value is 50.
     public static int GetSkillBonusLimit()
     {
-      VM.Call(877);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(877);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets the attack bonus limit.<br/>
@@ -16445,8 +16445,8 @@ namespace NWN.Core
     ///  - This script call will temporarily override user/server configuration for the running module only.
     public static void SetAttackBonusLimit(int nNewLimit)
     {
-      VM.StackPush(nNewLimit);
-      VM.Call(878);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNewLimit);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(878);
     }
 
     ///  Sets the damage bonus limit.<br/>
@@ -16455,8 +16455,8 @@ namespace NWN.Core
     ///  - This script call will temporarily override user/server configuration for the running module only.
     public static void SetDamageBonusLimit(int nNewLimit)
     {
-      VM.StackPush(nNewLimit);
-      VM.Call(879);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNewLimit);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(879);
     }
 
     ///  Sets the saving throw bonus limit.<br/>
@@ -16465,8 +16465,8 @@ namespace NWN.Core
     ///  - This script call will temporarily override user/server configuration for the running module only.
     public static void SetSavingThrowBonusLimit(int nNewLimit)
     {
-      VM.StackPush(nNewLimit);
-      VM.Call(880);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNewLimit);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(880);
     }
 
     ///  Sets the ability bonus limit.<br/>
@@ -16475,8 +16475,8 @@ namespace NWN.Core
     ///  - This script call will temporarily override user/server configuration for the running module only.
     public static void SetAbilityBonusLimit(int nNewLimit)
     {
-      VM.StackPush(nNewLimit);
-      VM.Call(881);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNewLimit);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(881);
     }
 
     ///  Sets the ability penalty limit.<br/>
@@ -16485,8 +16485,8 @@ namespace NWN.Core
     ///  - This script call will temporarily override user/server configuration for the running module only.
     public static void SetAbilityPenaltyLimit(int nNewLimit)
     {
-      VM.StackPush(nNewLimit);
-      VM.Call(882);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNewLimit);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(882);
     }
 
     ///  Sets the skill bonus limit.<br/>
@@ -16495,17 +16495,17 @@ namespace NWN.Core
     ///  - This script call will temporarily override user/server configuration for the running module only.
     public static void SetSkillBonusLimit(int nNewLimit)
     {
-      VM.StackPush(nNewLimit);
-      VM.Call(883);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNewLimit);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(883);
     }
 
     ///  Get if oPlayer is currently connected over a relay (instead of directly).<br/>
     ///  Returns FALSE for any other object, including OBJECT_INVALID.
     public static int GetIsPlayerConnectionRelayed(uint oPlayer)
     {
-      VM.StackPush(oPlayer);
-      VM.Call(884);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(884);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the event script for the given object and handler.<br/>
@@ -16513,10 +16513,10 @@ namespace NWN.Core
     ///  have the requested handler.
     public static string GetEventScript(uint oObject, int nHandler)
     {
-      VM.StackPush(nHandler);
-      VM.StackPush(oObject);
-      VM.Call(885);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nHandler);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(885);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Sets the given event script for the given object and handler.<br/>
@@ -16524,11 +16524,11 @@ namespace NWN.Core
     ///  Will fail if oObject is invalid or does not have the requested handler.
     public static int SetEventScript(uint oObject, int nHandler, string sScript)
     {
-      VM.StackPush(sScript);
-      VM.StackPush(nHandler);
-      VM.StackPush(oObject);
-      VM.Call(886);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushString(sScript);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nHandler);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(886);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Gets a visual transform on the given object.<br/>
@@ -16538,12 +16538,12 @@ namespace NWN.Core
     ///  Returns the current (or default) value.
     public static float GetObjectVisualTransform(uint oObject, int nTransform, int bCurrentLerp = FALSE, int nScope = OBJECT_VISUAL_TRANSFORM_DATA_SCOPE_BASE)
     {
-      VM.StackPush(nScope);
-      VM.StackPush(bCurrentLerp);
-      VM.StackPush(nTransform);
-      VM.StackPush(oObject);
-      VM.Call(887);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nScope);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bCurrentLerp);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nTransform);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(887);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Sets a visual transform on the given object.<br/>
@@ -16556,17 +16556,17 @@ namespace NWN.Core
     ///  Returns the old/previous value.
     public static float SetObjectVisualTransform(uint oObject, int nTransform, float fValue, int nLerpType = OBJECT_VISUAL_TRANSFORM_LERP_NONE, float fLerpDuration = 0.0f, int bPauseWithGame = TRUE, int nScope = OBJECT_VISUAL_TRANSFORM_DATA_SCOPE_BASE, int nBehaviorFlags = OBJECT_VISUAL_TRANSFORM_BEHAVIOR_DEFAULT, int nRepeats = 0)
     {
-      VM.StackPush(nRepeats);
-      VM.StackPush(nBehaviorFlags);
-      VM.StackPush(nScope);
-      VM.StackPush(bPauseWithGame);
-      VM.StackPush(fLerpDuration);
-      VM.StackPush(nLerpType);
-      VM.StackPush(fValue);
-      VM.StackPush(nTransform);
-      VM.StackPush(oObject);
-      VM.Call(888);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nRepeats);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBehaviorFlags);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nScope);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bPauseWithGame);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fLerpDuration);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nLerpType);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fValue);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nTransform);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(888);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Sets an integer material shader uniform override.<br/>
@@ -16574,11 +16574,11 @@ namespace NWN.Core
     ///  - sParam needs to be a valid shader parameter already defined on the material.
     public static void SetMaterialShaderUniformInt(uint oObject, string sMaterial, string sParam, int nValue)
     {
-      VM.StackPush(nValue);
-      VM.StackPush(sParam);
-      VM.StackPush(sMaterial);
-      VM.StackPush(oObject);
-      VM.Call(889);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nValue);
+      global::NWNX.NET.NWNXAPI.StackPushString(sParam);
+      global::NWNX.NET.NWNXAPI.StackPushString(sMaterial);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(889);
     }
 
     ///  Sets a vec4 material shader uniform override.<br/>
@@ -16587,14 +16587,14 @@ namespace NWN.Core
     ///  - You can specify a single float value to set just a float, instead of a vec4.
     public static void SetMaterialShaderUniformVec4(uint oObject, string sMaterial, string sParam, float fValue1, float fValue2 = 0.0f, float fValue3 = 0.0f, float fValue4 = 0.0f)
     {
-      VM.StackPush(fValue4);
-      VM.StackPush(fValue3);
-      VM.StackPush(fValue2);
-      VM.StackPush(fValue1);
-      VM.StackPush(sParam);
-      VM.StackPush(sMaterial);
-      VM.StackPush(oObject);
-      VM.Call(890);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fValue4);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fValue3);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fValue2);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fValue1);
+      global::NWNX.NET.NWNXAPI.StackPushString(sParam);
+      global::NWNX.NET.NWNXAPI.StackPushString(sMaterial);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(890);
     }
 
     ///  Resets material shader parameters on the given object:<br/>
@@ -16603,10 +16603,10 @@ namespace NWN.Core
     ///  - Supply both to only reset shader uniforms of that name on meshes with that material.
     public static void ResetMaterialShaderUniforms(uint oObject, string sMaterial = "", string sParam = "")
     {
-      VM.StackPush(sParam);
-      VM.StackPush(sMaterial);
-      VM.StackPush(oObject);
-      VM.Call(891);
+      global::NWNX.NET.NWNXAPI.StackPushString(sParam);
+      global::NWNX.NET.NWNXAPI.StackPushString(sMaterial);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(891);
     }
 
     ///  Vibrate the player&amp;apos;s device or controller. Does nothing if vibration is not supported.<br/>
@@ -16615,11 +16615,11 @@ namespace NWN.Core
     ///  - fSeconds is the number of seconds to vibrate
     public static void Vibrate(uint oPlayer, int nMotor, float fStrength, float fSeconds)
     {
-      VM.StackPush(fSeconds);
-      VM.StackPush(fStrength);
-      VM.StackPush(nMotor);
-      VM.StackPush(oPlayer);
-      VM.Call(892);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fSeconds);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fStrength);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nMotor);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(892);
     }
 
     ///  Unlock an achievement for the given player who must be logged in.<br/>
@@ -16629,12 +16629,12 @@ namespace NWN.Core
     ///  - nMaxValue is the maximum value of the associate achievement stat
     public static void UnlockAchievement(uint oPlayer, string sId, int nLastValue = 0, int nCurValue = 0, int nMaxValue = 0)
     {
-      VM.StackPush(nMaxValue);
-      VM.StackPush(nCurValue);
-      VM.StackPush(nLastValue);
-      VM.StackPush(sId);
-      VM.StackPush(oPlayer);
-      VM.Call(893);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nMaxValue);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nCurValue);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nLastValue);
+      global::NWNX.NET.NWNXAPI.StackPushString(sId);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(893);
     }
 
     ///  Execute a script chunk.<br/>
@@ -16645,19 +16645,19 @@ namespace NWN.Core
     ///  Returns &amp;quot;&amp;quot; on success, or the compilation error.
     public static string ExecuteScriptChunk(string sScriptChunk, uint oObject = OBJECT_INVALID, int bWrapIntoMain = TRUE)
     {
-      VM.StackPush(bWrapIntoMain);
-      VM.StackPush(oObject);
-      VM.StackPush(sScriptChunk);
-      VM.Call(894);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bWrapIntoMain);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.StackPushString(sScriptChunk);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(894);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Returns a UUID. This UUID will not be associated with any object.<br/>
     ///  The generated UUID is currently a v4.
     public static string GetRandomUUID()
     {
-      VM.Call(895);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(895);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Returns the given objects&amp;apos; UUID. This UUID is persisted across save boundaries,<br/>
@@ -16685,31 +16685,31 @@ namespace NWN.Core
     ///  Will return &amp;quot;&amp;quot; (empty string) when the given object cannot carry a UUID.
     public static string GetObjectUUID(uint oObject)
     {
-      VM.StackPush(oObject);
-      VM.Call(896);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(896);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Forces the given object to receive a new UUID, discarding the current value.
     public static void ForceRefreshObjectUUID(uint oObject)
     {
-      VM.StackPush(oObject);
-      VM.Call(897);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(897);
     }
 
     ///  Looks up a object on the server by it&amp;apos;s UUID.<br/>
     ///  Returns OBJECT_INVALID if the UUID is not on the server.
     public static uint GetObjectByUUID(string sUUID)
     {
-      VM.StackPush(sUUID);
-      VM.Call(898);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushString(sUUID);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(898);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Do not call. This does nothing on this platform except to return an error.
     public static void Reserved899()
     {
-      VM.Call(899);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(899);
     }
 
     ///  Makes oPC load texture sNewName instead of sOldName.<br/>
@@ -16717,10 +16717,10 @@ namespace NWN.Core
     ///  Setting sNewName to &amp;quot;&amp;quot; will clear the override and revert to original.
     public static void SetTextureOverride(string sOldName, string sNewName = "", uint oPC = OBJECT_INVALID)
     {
-      VM.StackPush(oPC);
-      VM.StackPush(sNewName);
-      VM.StackPush(sOldName);
-      VM.Call(900);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPC);
+      global::NWNX.NET.NWNXAPI.StackPushString(sNewName);
+      global::NWNX.NET.NWNXAPI.StackPushString(sOldName);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(900);
     }
 
     ///  Displays sMsg on oPC&amp;apos;s screen.<br/>
@@ -16738,17 +16738,17 @@ namespace NWN.Core
     ///   sFont - If specified, use this custom font instead of default console font.
     public static void PostString(uint oPC, string sMsg, int nX = 0, int nY = 0, int nAnchor = SCREEN_ANCHOR_TOP_LEFT, float fLife = 10.0f, int nRGBA = 2147418367, int nRGBA2 = 2147418367, int nID = 0, string sFont = "")
     {
-      VM.StackPush(sFont);
-      VM.StackPush(nID);
-      VM.StackPush(nRGBA2);
-      VM.StackPush(nRGBA);
-      VM.StackPush(fLife);
-      VM.StackPush(nAnchor);
-      VM.StackPush(nY);
-      VM.StackPush(nX);
-      VM.StackPush(sMsg);
-      VM.StackPush(oPC);
-      VM.Call(901);
+      global::NWNX.NET.NWNXAPI.StackPushString(sFont);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nID);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nRGBA2);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nRGBA);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fLife);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAnchor);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nX);
+      global::NWNX.NET.NWNXAPI.StackPushString(sMsg);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPC);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(901);
     }
 
     ///  Returns oCreature&amp;apos;s spell school specialization in nClass (SPELL_SCHOOL_* constants)<br/>
@@ -16756,10 +16756,10 @@ namespace NWN.Core
     ///  Returns -1 on error
     public static int GetSpecialization(uint oCreature, int nClass = CLASS_TYPE_WIZARD)
     {
-      VM.StackPush(nClass);
-      VM.StackPush(oCreature);
-      VM.Call(902);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nClass);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(902);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns oCreature&amp;apos;s domain in nClass (DOMAIN_* constants)<br/>
@@ -16768,11 +16768,11 @@ namespace NWN.Core
     ///  Returns -1 on error
     public static int GetDomain(uint oCreature, int nDomainIndex = 1, int nClass = CLASS_TYPE_CLERIC)
     {
-      VM.StackPush(nClass);
-      VM.StackPush(nDomainIndex);
-      VM.StackPush(oCreature);
-      VM.Call(903);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nClass);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDomainIndex);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(903);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the patch build number of oPlayer (i.e. the 8193 out of &amp;quot;87.8193.35-29 abcdef01&amp;quot;).<br/>
@@ -16780,9 +16780,9 @@ namespace NWN.Core
     ///  player version is old enough not to send this bit of build info to the server.
     public static int GetPlayerBuildVersionMajor(uint oPlayer)
     {
-      VM.StackPush(oPlayer);
-      VM.Call(904);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(904);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the patch revision number of oPlayer (i.e. the 35 out of &amp;quot;87.8193.35-29 abcdef01&amp;quot;).<br/>
@@ -16790,9 +16790,9 @@ namespace NWN.Core
     ///  player version is old enough not to send this bit of build info to the server.
     public static int GetPlayerBuildVersionMinor(uint oPlayer)
     {
-      VM.StackPush(oPlayer);
-      VM.Call(905);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(905);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the script parameter value for a given parameter name.<br/>
@@ -16801,18 +16801,18 @@ namespace NWN.Core
     ///  * Will return &amp;quot;&amp;quot; if a parameter with the given name does not exist.
     public static string GetScriptParam(string sParamName)
     {
-      VM.StackPush(sParamName);
-      VM.Call(906);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushString(sParamName);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(906);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Set a script parameter value for the next script to be run.<br/>
     ///  Call this function to set parameters right before calling ExecuteScript().
     public static void SetScriptParam(string sParamName, string sParamValue)
     {
-      VM.StackPush(sParamValue);
-      VM.StackPush(sParamName);
-      VM.Call(907);
+      global::NWNX.NET.NWNXAPI.StackPushString(sParamValue);
+      global::NWNX.NET.NWNXAPI.StackPushString(sParamName);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(907);
     }
 
     ///  Returns the number of uses per day remaining of the given item and item property.<br/>
@@ -16820,10 +16820,10 @@ namespace NWN.Core
     ///    or the item property is not uses/day.
     public static int GetItemPropertyUsesPerDayRemaining(uint oItem, System.IntPtr ip)
     {
-      VM.StackPush(ip, ENGINE_STRUCTURE_ITEMPROPERTY);
-      VM.StackPush(oItem);
-      VM.Call(908);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY, ip);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(908);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets the number of uses per day remaining of the given item and item property.<br/>
@@ -16831,10 +16831,10 @@ namespace NWN.Core
     ///  * Will constrain nUsesPerDay to the maximum allowed as the cost table defines.
     public static void SetItemPropertyUsesPerDayRemaining(uint oItem, System.IntPtr ip, int nUsesPerDay)
     {
-      VM.StackPush(nUsesPerDay);
-      VM.StackPush(ip, ENGINE_STRUCTURE_ITEMPROPERTY);
-      VM.StackPush(oItem);
-      VM.Call(909);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nUsesPerDay);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY, ip);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(909);
     }
 
     ///  Queue an action to use an active item property.<br/>
@@ -16845,12 +16845,12 @@ namespace NWN.Core
     ///  * bDecrementCharges - decrement charges if item property is limited
     public static void ActionUseItemOnObject(uint oItem, System.IntPtr ip, uint oTarget, int nSubPropertyIndex = 0, int bDecrementCharges = TRUE)
     {
-      VM.StackPush(bDecrementCharges);
-      VM.StackPush(nSubPropertyIndex);
-      VM.StackPush(oTarget);
-      VM.StackPush(ip, ENGINE_STRUCTURE_ITEMPROPERTY);
-      VM.StackPush(oItem);
-      VM.Call(910);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bDecrementCharges);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSubPropertyIndex);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY, ip);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(910);
     }
 
     ///  Queue an action to use an active item property.<br/>
@@ -16861,23 +16861,23 @@ namespace NWN.Core
     ///  * bDecrementCharges - decrement charges if item property is limited
     public static void ActionUseItemAtLocation(uint oItem, System.IntPtr ip, System.IntPtr lTarget, int nSubPropertyIndex = 0, int bDecrementCharges = TRUE)
     {
-      VM.StackPush(bDecrementCharges);
-      VM.StackPush(nSubPropertyIndex);
-      VM.StackPush(lTarget, ENGINE_STRUCTURE_LOCATION);
-      VM.StackPush(ip, ENGINE_STRUCTURE_ITEMPROPERTY);
-      VM.StackPush(oItem);
-      VM.Call(911);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bDecrementCharges);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSubPropertyIndex);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lTarget);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY, ip);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oItem);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(911);
     }
 
     ///  Makes oPC enter a targeting mode, letting them select an object as a target<br/>
     ///  If a PC selects a target or cancels out, it will trigger the module OnPlayerTarget event.
     public static void EnterTargetingMode(uint oPC, int nValidObjectTypes = OBJECT_TYPE_ALL, int nMouseCursorId = MOUSECURSOR_MAGIC, int nBadTargetCursor = MOUSECURSOR_NOMAGIC)
     {
-      VM.StackPush(nBadTargetCursor);
-      VM.StackPush(nMouseCursorId);
-      VM.StackPush(nValidObjectTypes);
-      VM.StackPush(oPC);
-      VM.Call(912);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBadTargetCursor);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nMouseCursorId);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nValidObjectTypes);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPC);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(912);
     }
 
     ///  Gets the target object in the module OnPlayerTarget event.<br/>
@@ -16885,39 +16885,39 @@ namespace NWN.Core
     ///  Note: returns OBJECT_INVALID if the player cancelled out of targeting mode.
     public static uint GetTargetingModeSelectedObject()
     {
-      VM.Call(913);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(913);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Gets the target position in the module OnPlayerTarget event.
     public static System.Numerics.Vector3 GetTargetingModeSelectedPosition()
     {
-      VM.Call(914);
-      return VM.StackPopVector();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(914);
+      return global::NWNX.NET.NWNXAPI.StackPopVector();
     }
 
     ///  Gets the player object that triggered the OnPlayerTarget event.
     public static uint GetLastPlayerToSelectTarget()
     {
-      VM.Call(915);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(915);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Sets oObject&amp;apos;s hilite color to nColor<br/>
     ///  The nColor format is 0xRRGGBB; -1 clears the color override.
     public static void SetObjectHiliteColor(uint oObject, int nColor = -1)
     {
-      VM.StackPush(nColor);
-      VM.StackPush(oObject);
-      VM.Call(916);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nColor);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(916);
     }
 
     ///  Sets the cursor (MOUSECURSOR_*) to use when hovering over oObject
     public static void SetObjectMouseCursor(uint oObject, int nCursor = -1)
     {
-      VM.StackPush(nCursor);
-      VM.StackPush(oObject);
-      VM.Call(917);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nCursor);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(917);
     }
 
     ///  Returns TRUE if the given player-controlled creature has DM privileges<br/>
@@ -16925,9 +16925,9 @@ namespace NWN.Core
     ///  Note: GetIsDM() also returns TRUE for player creature DMs.
     public static int GetIsPlayerDM(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(918);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(918);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets the detailed wind data for oArea<br/>
@@ -16937,12 +16937,12 @@ namespace NWN.Core
     ///    HEAVY: vDirection=(1.0, 1.0, 0.0), fMagnitude=2.0, fYaw=150.0, fPitch=5.0
     public static void SetAreaWind(uint oArea, System.Numerics.Vector3 vDirection, float fMagnitude, float fYaw, float fPitch)
     {
-      VM.StackPush(fPitch);
-      VM.StackPush(fYaw);
-      VM.StackPush(fMagnitude);
-      VM.StackPush(vDirection);
-      VM.StackPush(oArea);
-      VM.Call(919);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fPitch);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fYaw);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fMagnitude);
+      global::NWNX.NET.NWNXAPI.StackPushVector(vDirection);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(919);
     }
 
     ///  Replace&amp;apos;s oObject&amp;apos;s texture sOld with sNew.<br/>
@@ -16951,10 +16951,10 @@ namespace NWN.Core
     ///  sNew must refer to a simple texture, not PLT
     public static void ReplaceObjectTexture(uint oObject, string sOld, string sNew = "")
     {
-      VM.StackPush(sNew);
-      VM.StackPush(sOld);
-      VM.StackPush(oObject);
-      VM.Call(920);
+      global::NWNX.NET.NWNXAPI.StackPushString(sNew);
+      global::NWNX.NET.NWNXAPI.StackPushString(sOld);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(920);
     }
 
     ///  Destroys the given sqlite database, clearing out all data and schema.<br/>
@@ -16966,8 +16966,8 @@ namespace NWN.Core
     ///           To reset a campaign database, please use DestroyCampaignDatabase().
     public static void SqlDestroyDatabase(uint oObject)
     {
-      VM.StackPush(oObject);
-      VM.Call(921);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(921);
     }
 
     ///  Returns &amp;quot;&amp;quot; if the last Sql command succeeded; or a human-readable error otherwise.<br/>
@@ -16975,9 +16975,9 @@ namespace NWN.Core
     ///  Additionally, all SQL errors are sent to all connected players.
     public static string SqlGetError(System.IntPtr sqlQuery)
     {
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
-      VM.Call(922);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(922);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Sets up a query.<br/>
@@ -16995,10 +16995,10 @@ namespace NWN.Core
     ///  Please check the SQLite_README.txt file in lang/en/docs/ for the list of builtin functions.
     public static System.IntPtr SqlPrepareQueryCampaign(string sDatabase, string sQuery)
     {
-      VM.StackPush(sQuery);
-      VM.StackPush(sDatabase);
-      VM.Call(923);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_SQLQUERY);
+      global::NWNX.NET.NWNXAPI.StackPushString(sQuery);
+      global::NWNX.NET.NWNXAPI.StackPushString(sDatabase);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(923);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_SQLQUERY);
     }
 
     ///  Sets up a query.<br/>
@@ -17022,10 +17022,10 @@ namespace NWN.Core
     ///  Please check the SQLite_README.txt file in lang/en/docs/ for the list of builtin functions.
     public static System.IntPtr SqlPrepareQueryObject(uint oObject, string sQuery)
     {
-      VM.StackPush(sQuery);
-      VM.StackPush(oObject);
-      VM.Call(924);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_SQLQUERY);
+      global::NWNX.NET.NWNXAPI.StackPushString(sQuery);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(924);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_SQLQUERY);
     }
 
     ///  Bind an integer to a named parameter of the given prepared query.<br/>
@@ -17035,37 +17035,37 @@ namespace NWN.Core
     ///    SqlStep(v);
     public static void SqlBindInt(System.IntPtr sqlQuery, string sParam, int nValue)
     {
-      VM.StackPush(nValue);
-      VM.StackPush(sParam);
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
-      VM.Call(925);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nValue);
+      global::NWNX.NET.NWNXAPI.StackPushString(sParam);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(925);
     }
 
     ///  Bind a float to a named parameter of the given prepared query.
     public static void SqlBindFloat(System.IntPtr sqlQuery, string sParam, float fFloat)
     {
-      VM.StackPush(fFloat);
-      VM.StackPush(sParam);
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
-      VM.Call(926);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fFloat);
+      global::NWNX.NET.NWNXAPI.StackPushString(sParam);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(926);
     }
 
     ///  Bind a string to a named parameter of the given prepared query.
     public static void SqlBindString(System.IntPtr sqlQuery, string sParam, string sString)
     {
-      VM.StackPush(sString);
-      VM.StackPush(sParam);
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
-      VM.Call(927);
+      global::NWNX.NET.NWNXAPI.StackPushString(sString);
+      global::NWNX.NET.NWNXAPI.StackPushString(sParam);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(927);
     }
 
     ///  Bind a vector to a named parameter of the given prepared query.
     public static void SqlBindVector(System.IntPtr sqlQuery, string sParam, System.Numerics.Vector3 vVector)
     {
-      VM.StackPush(vVector);
-      VM.StackPush(sParam);
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
-      VM.Call(928);
+      global::NWNX.NET.NWNXAPI.StackPushVector(vVector);
+      global::NWNX.NET.NWNXAPI.StackPushString(sParam);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(928);
     }
 
     ///  Bind a object to a named parameter of the given prepared query.<br/>
@@ -17075,11 +17075,11 @@ namespace NWN.Core
     ///  (except for Combined Area Format, which always has object state saved out).
     public static void SqlBindObject(System.IntPtr sqlQuery, string sParam, uint oObject, int bSaveObjectState = FALSE)
     {
-      VM.StackPush(bSaveObjectState);
-      VM.StackPush(oObject);
-      VM.StackPush(sParam);
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
-      VM.Call(929);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bSaveObjectState);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.StackPushString(sParam);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(929);
     }
 
     ///  Executes the given query and fetches a row; returning true if row data was<br/>
@@ -17092,9 +17092,9 @@ namespace NWN.Core
     ///      SendMessageToPC(GetFirstPC(), &amp;quot;Found widget: &amp;quot; + SqlGetString(n, 0));
     public static int SqlStep(System.IntPtr sqlQuery)
     {
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
-      VM.Call(930);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(930);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Retrieve a column cast as an integer of the currently stepped row.<br/>
@@ -17103,10 +17103,10 @@ namespace NWN.Core
     ///  In traditional fashion, nIndex starts at 0.
     public static int SqlGetInt(System.IntPtr sqlQuery, int nIndex)
     {
-      VM.StackPush(nIndex);
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
-      VM.Call(931);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(931);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Retrieve a column cast as a float of the currently stepped row.<br/>
@@ -17115,10 +17115,10 @@ namespace NWN.Core
     ///  In traditional fashion, nIndex starts at 0.
     public static float SqlGetFloat(System.IntPtr sqlQuery, int nIndex)
     {
-      VM.StackPush(nIndex);
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
-      VM.Call(932);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(932);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Retrieve a column cast as a string of the currently stepped row.<br/>
@@ -17127,10 +17127,10 @@ namespace NWN.Core
     ///  In traditional fashion, nIndex starts at 0.
     public static string SqlGetString(System.IntPtr sqlQuery, int nIndex)
     {
-      VM.StackPush(nIndex);
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
-      VM.Call(933);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(933);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Retrieve a vector of the currently stepped query.<br/>
@@ -17139,10 +17139,10 @@ namespace NWN.Core
     ///  In traditional fashion, nIndex starts at 0.
     public static System.Numerics.Vector3 SqlGetVector(System.IntPtr sqlQuery, int nIndex)
     {
-      VM.StackPush(nIndex);
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
-      VM.Call(934);
-      return VM.StackPopVector();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(934);
+      return global::NWNX.NET.NWNXAPI.StackPopVector();
     }
 
     ///  Retrieve a object of the currently stepped query.<br/>
@@ -17155,22 +17155,22 @@ namespace NWN.Core
     ///  If bLoadObjectState is TRUE, local vars, effects, action queue, and transition info (triggers, doors) are read in.
     public static uint SqlGetObject(System.IntPtr sqlQuery, int nIndex, System.IntPtr lSpawnAt, uint oInventory = OBJECT_INVALID, int bLoadObjectState = FALSE)
     {
-      VM.StackPush(bLoadObjectState);
-      VM.StackPush(oInventory);
-      VM.StackPush(lSpawnAt, ENGINE_STRUCTURE_LOCATION);
-      VM.StackPush(nIndex);
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
-      VM.Call(935);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bLoadObjectState);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oInventory);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, lSpawnAt);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(935);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Convert sHex, a string containing a hexadecimal object id,<br/>
     ///  into a object reference. Counterpart to ObjectToString().
     public static uint StringToObject(string sHex)
     {
-      VM.StackPush(sHex);
-      VM.Call(936);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushString(sHex);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(936);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Sets the current hitpoints of oObject.<br/>
@@ -17182,9 +17182,9 @@ namespace NWN.Core
     ///  * This will not advise player parties in the combat log.
     public static void SetCurrentHitPoints(uint oObject, int nHitPoints)
     {
-      VM.StackPush(nHitPoints);
-      VM.StackPush(oObject);
-      VM.Call(937);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nHitPoints);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(937);
     }
 
     ///  Returns the currently executing event (EVENT_SCRIPT_*) or 0 if not determinable.<br/>
@@ -17196,9 +17196,9 @@ namespace NWN.Core
     ///  In cases like these calling the function with bInheritParent = TRUE will return the wrong event ID.
     public static int GetCurrentlyRunningEvent(int bInheritParent = TRUE)
     {
-      VM.StackPush(bInheritParent);
-      VM.Call(938);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bInheritParent);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(938);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the integer parameter of eEffect at nIndex.<br/>
@@ -17207,10 +17207,10 @@ namespace NWN.Core
     ///  Returns: the value or 0 on error/when not set.
     public static int GetEffectInteger(System.IntPtr eEffect, int nIndex)
     {
-      VM.StackPush(nIndex);
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(939);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(939);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the float parameter of eEffect at nIndex.<br/>
@@ -17219,10 +17219,10 @@ namespace NWN.Core
     ///  Returns: the value or 0.0f on error/when not set.
     public static float GetEffectFloat(System.IntPtr eEffect, int nIndex)
     {
-      VM.StackPush(nIndex);
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(940);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(940);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Get the string parameter of eEffect at nIndex.<br/>
@@ -17231,10 +17231,10 @@ namespace NWN.Core
     ///  Returns: the value or &amp;quot;&amp;quot; on error/when not set.
     public static string GetEffectString(System.IntPtr eEffect, int nIndex)
     {
-      VM.StackPush(nIndex);
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(941);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(941);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Get the object parameter of eEffect at nIndex.<br/>
@@ -17243,10 +17243,10 @@ namespace NWN.Core
     ///  Returns: the value or OBJECT_INVALID on error/when not set.
     public static uint GetEffectObject(System.IntPtr eEffect, int nIndex)
     {
-      VM.StackPush(nIndex);
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(942);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(942);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Get the vector parameter of eEffect at nIndex.<br/>
@@ -17255,10 +17255,10 @@ namespace NWN.Core
     ///  Returns: the value or {0.0f, 0.0f, 0.0f} on error/when not set.
     public static System.Numerics.Vector3 GetEffectVector(System.IntPtr eEffect, int nIndex)
     {
-      VM.StackPush(nIndex);
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(943);
-      return VM.StackPopVector();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(943);
+      return global::NWNX.NET.NWNXAPI.StackPopVector();
     }
 
     ///  Check if nBaseItemType fits in oTarget&amp;apos;s inventory.<br/>
@@ -17268,10 +17268,10 @@ namespace NWN.Core
     ///  Returns: TRUE if the baseitem type fits, FALSE if not or on error.
     public static int GetBaseItemFitsInInventory(int nBaseItemType, uint oTarget)
     {
-      VM.StackPush(oTarget);
-      VM.StackPush(nBaseItemType);
-      VM.Call(944);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBaseItemType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(944);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get oObject&amp;apos;s local cassowary variable reference sVarName<br/>
@@ -17281,10 +17281,10 @@ namespace NWN.Core
     ///    Modifications made to one reference are reflected on others.
     public static System.IntPtr GetLocalCassowary(uint oObject, string sVarName)
     {
-      VM.StackPush(sVarName);
-      VM.StackPush(oObject);
-      VM.Call(945);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_CASSOWARY);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(945);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_CASSOWARY);
     }
 
     ///  Set a reference to the given solver on oObject.<br/>
@@ -17293,10 +17293,10 @@ namespace NWN.Core
     ///    Modifications made to one reference are reflected on others.
     public static void SetLocalCassowary(uint oObject, string sVarName, System.IntPtr cSolver)
     {
-      VM.StackPush(cSolver, ENGINE_STRUCTURE_CASSOWARY);
-      VM.StackPush(sVarName);
-      VM.StackPush(oObject);
-      VM.Call(946);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_CASSOWARY, cSolver);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(946);
     }
 
     ///  Delete local solver reference.<br/>
@@ -17305,9 +17305,9 @@ namespace NWN.Core
     ///    Modifications made to one reference are reflected on others.
     public static void DeleteLocalCassowary(uint oObject, string sVarName)
     {
-      VM.StackPush(sVarName);
-      VM.StackPush(oObject);
-      VM.Call(947);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(947);
     }
 
     ///  Clear out this solver, removing all state, constraints and suggestions.<br/>
@@ -17315,8 +17315,8 @@ namespace NWN.Core
     ///  It is not necessary to call this for solvers you simply want to let go out of scope.
     public static void CassowaryReset(System.IntPtr cSolver)
     {
-      VM.StackPush(cSolver, ENGINE_STRUCTURE_CASSOWARY);
-      VM.Call(948);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_CASSOWARY, cSolver);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(948);
     }
 
     ///  Add a constraint to the system.<br/>
@@ -17330,11 +17330,11 @@ namespace NWN.Core
     ///  * Returns &amp;quot;&amp;quot; on success, or the parser/constraint system error message.
     public static string CassowaryConstrain(System.IntPtr cSolver, string sConstraint, float fStrength = CASSOWARY_STRENGTH_REQUIRED)
     {
-      VM.StackPush(fStrength);
-      VM.StackPush(sConstraint);
-      VM.StackPush(cSolver, ENGINE_STRUCTURE_CASSOWARY);
-      VM.Call(949);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fStrength);
+      global::NWNX.NET.NWNXAPI.StackPushString(sConstraint);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_CASSOWARY, cSolver);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(949);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Suggest a value to the solver.<br/>
@@ -17345,38 +17345,38 @@ namespace NWN.Core
     ///    Suggested values cannot be required, as suggesting a value must not invalidate the solver.
     public static void CassowarySuggestValue(System.IntPtr cSolver, string sVarName, float fValue, float fStrength = CASSOWARY_STRENGTH_STRONG)
     {
-      VM.StackPush(fStrength);
-      VM.StackPush(fValue);
-      VM.StackPush(sVarName);
-      VM.StackPush(cSolver, ENGINE_STRUCTURE_CASSOWARY);
-      VM.Call(950);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fStrength);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fValue);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_CASSOWARY, cSolver);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(950);
     }
 
     ///  Get the value for the given variable, or 0.0 on error.
     public static float CassowaryGetValue(System.IntPtr cSolver, string sVarName)
     {
-      VM.StackPush(sVarName);
-      VM.StackPush(cSolver, ENGINE_STRUCTURE_CASSOWARY);
-      VM.Call(951);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_CASSOWARY, cSolver);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(951);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Gets a printable debug state of the given solver, which may help you debug<br/>
     ///  complex systems.
     public static string CassowaryDebug(System.IntPtr cSolver)
     {
-      VM.StackPush(cSolver, ENGINE_STRUCTURE_CASSOWARY);
-      VM.Call(952);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_CASSOWARY, cSolver);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(952);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Overrides a given strref to always return sValue instead of what is in the TLK file.<br/>
     ///  Setting sValue to &amp;quot;&amp;quot; will delete the override
     public static void SetTlkOverride(int nStrRef, string sValue = "")
     {
-      VM.StackPush(sValue);
-      VM.StackPush(nStrRef);
-      VM.Call(953);
+      global::NWNX.NET.NWNXAPI.StackPushString(sValue);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nStrRef);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(953);
     }
 
     ///  Constructs a custom itemproperty given all the parameters explicitly.<br/>
@@ -17384,12 +17384,12 @@ namespace NWN.Core
     ///  Use GetItemProperty{Type,SubType,CostTableValue,Param1Value} to see the values for a given itemproperty.
     public static System.IntPtr ItemPropertyCustom(int nType, int nSubType = -1, int nCostTableValue = -1, int nParam1Value = -1)
     {
-      VM.StackPush(nParam1Value);
-      VM.StackPush(nCostTableValue);
-      VM.StackPush(nSubType);
-      VM.StackPush(nType);
-      VM.Call(954);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_ITEMPROPERTY);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nParam1Value);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nCostTableValue);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSubType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(954);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
     }
 
     ///  Create a RunScript effect.<br/>
@@ -17403,13 +17403,13 @@ namespace NWN.Core
     ///  * sData: An optional string of data saved in the effect, retrievable with GetEffectString() at index 0.
     public static System.IntPtr EffectRunScript(string sOnAppliedScript = "", string sOnRemovedScript = "", string sOnIntervalScript = "", float fInterval = 0.0f, string sData = "")
     {
-      VM.StackPush(sData);
-      VM.StackPush(fInterval);
-      VM.StackPush(sOnIntervalScript);
-      VM.StackPush(sOnRemovedScript);
-      VM.StackPush(sOnAppliedScript);
-      VM.Call(955);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushString(sData);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fInterval);
+      global::NWNX.NET.NWNXAPI.StackPushString(sOnIntervalScript);
+      global::NWNX.NET.NWNXAPI.StackPushString(sOnRemovedScript);
+      global::NWNX.NET.NWNXAPI.StackPushString(sOnAppliedScript);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(955);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Get the effect that last triggered an EffectRunScript() script.<br/>
@@ -17417,24 +17417,24 @@ namespace NWN.Core
     ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT when called outside of an EffectRunScript() script.
     public static System.IntPtr GetLastRunScriptEffect()
     {
-      VM.Call(956);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(956);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Get the script type (RUNSCRIPT_EFFECT_SCRIPT_TYPE_*) of the last triggered EffectRunScript() script.<br/>
     ///  * Returns 0 when called outside of an EffectRunScript() script.
     public static int GetLastRunScriptEffectScriptType()
     {
-      VM.Call(957);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(957);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Hides the effect icon of eEffect and of all effects currently linked to it.
     public static System.IntPtr HideEffectIcon(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(958);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(958);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Create an Icon effect.<br/>
@@ -17443,23 +17443,23 @@ namespace NWN.Core
     ///  Returns an effect of type EFFECT_TYPE_INVALIDEFFECT when nIconID is &amp;lt; 1 or &amp;gt; 255.
     public static System.IntPtr EffectIcon(int nIconID)
     {
-      VM.StackPush(nIconID);
-      VM.Call(959);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIconID);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(959);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Gets the player that last triggered the module OnPlayerGuiEvent event.
     public static uint GetLastGuiEventPlayer()
     {
-      VM.Call(960);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(960);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Gets the last triggered GUIEVENT_* in the module OnPlayerGuiEvent event.
     public static int GetLastGuiEventType()
     {
-      VM.Call(961);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(961);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Gets an optional integer of specific gui events in the module OnPlayerGuiEvent event.<br/>
@@ -17473,8 +17473,8 @@ namespace NWN.Core
     ///  * GUIEVENT_EXAMINE_OBJECT: A GUI_PANEL_EXAMINE_* constant
     public static int GetLastGuiEventInteger()
     {
-      VM.Call(962);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(962);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Gets an optional object of specific gui events in the module OnPlayerGuiEvent event.<br/>
@@ -17490,8 +17490,8 @@ namespace NWN.Core
     ///  * GUIEVENT_PLAYERLIST_PLAYER_TELL: The selected player.
     public static uint GetLastGuiEventObject()
     {
-      VM.Call(963);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(963);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Disable a gui panel for the client that controls oPlayer.<br/>
@@ -17503,32 +17503,32 @@ namespace NWN.Core
     ///  * nGuiPanel: A GUI_PANEL_* constant, except GUI_PANEL_PLAYER_DEATH.
     public static void SetGuiPanelDisabled(uint oPlayer, int nGuiPanel, int bDisabled, uint oTarget = OBJECT_INVALID)
     {
-      VM.StackPush(oTarget);
-      VM.StackPush(bDisabled);
-      VM.StackPush(nGuiPanel);
-      VM.StackPush(oPlayer);
-      VM.Call(964);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bDisabled);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nGuiPanel);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(964);
     }
 
     ///  Gets the ID (1..8) of the last tile action performed in OnPlayerTileAction
     public static int GetLastTileActionId()
     {
-      VM.Call(965);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(965);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Gets the target position in the module OnPlayerTileAction event.
     public static System.Numerics.Vector3 GetLastTileActionPosition()
     {
-      VM.Call(966);
-      return VM.StackPopVector();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(966);
+      return global::NWNX.NET.NWNXAPI.StackPopVector();
     }
 
     ///  Gets the player object that triggered the OnPlayerTileAction event.
     public static uint GetLastPlayerToDoTileAction()
     {
-      VM.Call(967);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(967);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Parse the given string as a valid json value, and returns the corresponding type.<br/>
@@ -17538,9 +17538,9 @@ namespace NWN.Core
     ///      will contain UTF-8 data.
     public static System.IntPtr JsonParse(string sJson)
     {
-      VM.StackPush(sJson);
-      VM.Call(968);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushString(sJson);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(968);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Dump the given json value into a string that can be read back in via JsonParse.<br/>
@@ -17549,19 +17549,19 @@ namespace NWN.Core
     ///  NB: The dumped string is in game-local encoding, with all non-ascii characters escaped.
     public static string JsonDump(System.IntPtr jValue, int nIndent = -1)
     {
-      VM.StackPush(nIndent);
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
-      VM.Call(969);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndent);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(969);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Describes the type of the given json value.<br/>
     ///  Returns JSON_TYPE_NULL if the value is empty.
     public static int JsonGetType(System.IntPtr jValue)
     {
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
-      VM.Call(970);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(970);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the length of the given json type.<br/>
@@ -17571,43 +17571,43 @@ namespace NWN.Core
     ///  All other types return 1.
     public static int JsonGetLength(System.IntPtr jValue)
     {
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
-      VM.Call(971);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(971);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the error message if the value has errored out.<br/>
     ///  Currently only describes parse errors.
     public static string JsonGetError(System.IntPtr jValue)
     {
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
-      VM.Call(972);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(972);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Create a NULL json value, seeded with a optional error message for JsonGetError().<br/>
     ///  You can say JSON_NULL for default parameters on functions to initialise with a null value.
     public static System.IntPtr JsonNull(string sError = "")
     {
-      VM.StackPush(sError);
-      VM.Call(973);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushString(sError);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(973);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Create a empty json object.<br/>
     ///  You can say JSON_OBJECT for default parameters on functions to initialise with an empty object.
     public static System.IntPtr JsonObject()
     {
-      VM.Call(974);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(974);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Create a empty json array.<br/>
     ///  You can say JSON_ARRAY for default parameters on functions to initialise with an empty array.
     public static System.IntPtr JsonArray()
     {
-      VM.Call(975);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(975);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Create a json string value.<br/>
@@ -17615,34 +17615,34 @@ namespace NWN.Core
     ///  NB: Strings are encoded to UTF-8 from the game-local charset.
     public static System.IntPtr JsonString(string sValue)
     {
-      VM.StackPush(sValue);
-      VM.Call(976);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushString(sValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(976);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Create a json integer value.
     public static System.IntPtr JsonInt(int nValue)
     {
-      VM.StackPush(nValue);
-      VM.Call(977);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(977);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Create a json floating point value.
     public static System.IntPtr JsonFloat(float fValue)
     {
-      VM.StackPush(fValue);
-      VM.Call(978);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(978);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Create a json bool valye.<br/>
     ///  You can say JSON_TRUE or JSON_FALSE for default parameters on functions to initialise with a bool.
     public static System.IntPtr JsonBool(int bValue)
     {
-      VM.StackPush(bValue);
-      VM.Call(979);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(979);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Returns a string representation of the json value.<br/>
@@ -17650,9 +17650,9 @@ namespace NWN.Core
     ///  NB: Strings are decoded from UTF-8 to the game-local charset.
     public static string JsonGetString(System.IntPtr jValue)
     {
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
-      VM.Call(980);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(980);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Returns a int representation of the json value, casting where possible.<br/>
@@ -17663,9 +17663,9 @@ namespace NWN.Core
     ///      You will not lose data if you keep the value as a json element (via Object/ArrayGet).
     public static int JsonGetInt(System.IntPtr jValue)
     {
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
-      VM.Call(981);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(981);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns a float representation of the json value, casting where possible.<br/>
@@ -17675,59 +17675,59 @@ namespace NWN.Core
     ///      You will not lose data if you keep the value as a json element (via Object/ArrayGet).
     public static float JsonGetFloat(System.IntPtr jValue)
     {
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
-      VM.Call(982);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(982);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Returns a json array containing all keys of jObject.<br/>
     ///  Returns a empty array if the object is empty or not a json object, with JsonGetError() filled in.
     public static System.IntPtr JsonObjectKeys(System.IntPtr jObject)
     {
-      VM.StackPush(jObject, ENGINE_STRUCTURE_JSON);
-      VM.Call(983);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(983);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Returns the key value of sKey on the object jObect.<br/>
     ///  Returns a null json value if jObject is not a object or sKey does not exist on the object, with JsonGetError() filled in.
     public static System.IntPtr JsonObjectGet(System.IntPtr jObject, string sKey)
     {
-      VM.StackPush(sKey);
-      VM.StackPush(jObject, ENGINE_STRUCTURE_JSON);
-      VM.Call(984);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushString(sKey);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(984);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Returns a modified copy of jObject with the key at sKey set to jValue.<br/>
     ///  Returns a json null value if jObject is not a object, with JsonGetError() filled in.
     public static System.IntPtr JsonObjectSet(System.IntPtr jObject, string sKey, System.IntPtr jValue)
     {
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
-      VM.StackPush(sKey);
-      VM.StackPush(jObject, ENGINE_STRUCTURE_JSON);
-      VM.Call(985);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jValue);
+      global::NWNX.NET.NWNXAPI.StackPushString(sKey);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(985);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Returns a modified copy of jObject with the key at sKey deleted.<br/>
     ///  Returns a json null value if jObject is not a object, with JsonGetError() filled in.
     public static System.IntPtr JsonObjectDel(System.IntPtr jObject, string sKey)
     {
-      VM.StackPush(sKey);
-      VM.StackPush(jObject, ENGINE_STRUCTURE_JSON);
-      VM.Call(986);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushString(sKey);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(986);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Gets the json object at jArray index position nIndex.<br/>
     ///  Returns a json null value if the index is out of bounds, with JsonGetError() filled in.
     public static System.IntPtr JsonArrayGet(System.IntPtr jArray, int nIndex)
     {
-      VM.StackPush(nIndex);
-      VM.StackPush(jArray, ENGINE_STRUCTURE_JSON);
-      VM.Call(987);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jArray);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(987);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Returns a modified copy of jArray with position nIndex set to jValue.<br/>
@@ -17735,11 +17735,11 @@ namespace NWN.Core
     ///  Returns a json null value if nIndex is out of bounds, with JsonGetError() filled in.
     public static System.IntPtr JsonArraySet(System.IntPtr jArray, int nIndex, System.IntPtr jValue)
     {
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
-      VM.StackPush(nIndex);
-      VM.StackPush(jArray, ENGINE_STRUCTURE_JSON);
-      VM.Call(988);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jValue);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jArray);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(988);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Returns a modified copy of jArray with jValue inserted at position nIndex.<br/>
@@ -17750,11 +17750,11 @@ namespace NWN.Core
     ///  Returns a json null value if nIndex is not 0 or -1 and out of bounds, with JsonGetError() filled in.
     public static System.IntPtr JsonArrayInsert(System.IntPtr jArray, System.IntPtr jValue, int nIndex = -1)
     {
-      VM.StackPush(nIndex);
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
-      VM.StackPush(jArray, ENGINE_STRUCTURE_JSON);
-      VM.Call(989);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jValue);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jArray);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(989);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Returns a modified copy of jArray with the element at position nIndex removed,<br/>
@@ -17763,10 +17763,10 @@ namespace NWN.Core
     ///  Returns a json null value if nIndex is out of bounds, with JsonGetError() filled in.
     public static System.IntPtr JsonArrayDel(System.IntPtr jArray, int nIndex)
     {
-      VM.StackPush(nIndex);
-      VM.StackPush(jArray, ENGINE_STRUCTURE_JSON);
-      VM.Call(990);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jArray);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(990);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Transforms the given object into a json structure.<br/>
@@ -17777,10 +17777,10 @@ namespace NWN.Core
     ///  (except for Combined Area Format, which always has object state saved out).
     public static System.IntPtr ObjectToJson(uint oObject, int bSaveObjectState = FALSE)
     {
-      VM.StackPush(bSaveObjectState);
-      VM.StackPush(oObject);
-      VM.Call(991);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bSaveObjectState);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(991);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Deserializes the game object described in jObject.<br/>
@@ -17790,12 +17790,12 @@ namespace NWN.Core
     ///  If bLoadObjectState is TRUE, local vars, effects, action queue, and transition info (triggers, doors) are read in.
     public static uint JsonToObject(System.IntPtr jObject, System.IntPtr locLocation, uint oOwner = OBJECT_INVALID, int bLoadObjectState = FALSE)
     {
-      VM.StackPush(bLoadObjectState);
-      VM.StackPush(oOwner);
-      VM.StackPush(locLocation, ENGINE_STRUCTURE_LOCATION);
-      VM.StackPush(jObject, ENGINE_STRUCTURE_JSON);
-      VM.Call(992);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bLoadObjectState);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oOwner);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, locLocation);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(992);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Returns the element at the given JSON pointer value.<br/>
@@ -17829,10 +17829,10 @@ namespace NWN.Core
     ///  Returns a json null value on error, with JsonGetError() filled in.
     public static System.IntPtr JsonPointer(System.IntPtr jData, string sPointer)
     {
-      VM.StackPush(sPointer);
-      VM.StackPush(jData, ENGINE_STRUCTURE_JSON);
-      VM.Call(993);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushString(sPointer);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jData);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(993);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Return a modified copy of jData with jPatch applied, according to the rules described below.<br/>
@@ -17848,20 +17848,20 @@ namespace NWN.Core
     ///  See https://datatracker.ietf.org/doc/html/rfc7386 for more details on the patch rules.
     public static System.IntPtr JsonPatch(System.IntPtr jData, System.IntPtr jPatch)
     {
-      VM.StackPush(jPatch, ENGINE_STRUCTURE_JSON);
-      VM.StackPush(jData, ENGINE_STRUCTURE_JSON);
-      VM.Call(994);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jPatch);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jData);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(994);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Returns the diff (described as a json structure you can pass into JsonPatch) between the two objects.<br/>
     ///  Returns a json null value on error, with JsonGetError() filled in.
     public static System.IntPtr JsonDiff(System.IntPtr jLHS, System.IntPtr jRHS)
     {
-      VM.StackPush(jRHS, ENGINE_STRUCTURE_JSON);
-      VM.StackPush(jLHS, ENGINE_STRUCTURE_JSON);
-      VM.Call(995);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jRHS);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jLHS);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(995);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Returns a modified copy of jData with jMerge merged into it. This is an alternative to<br/>
@@ -17870,37 +17870,37 @@ namespace NWN.Core
     ///  Returns a json null value on error, with JsonGetError() filled in.
     public static System.IntPtr JsonMerge(System.IntPtr jData, System.IntPtr jMerge)
     {
-      VM.StackPush(jMerge, ENGINE_STRUCTURE_JSON);
-      VM.StackPush(jData, ENGINE_STRUCTURE_JSON);
-      VM.Call(996);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jMerge);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jData);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(996);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Get oObject&amp;apos;s local json variable sVarName<br/>
     ///  * Return value on error: json null type
     public static System.IntPtr GetLocalJson(uint oObject, string sVarName)
     {
-      VM.StackPush(sVarName);
-      VM.StackPush(oObject);
-      VM.Call(997);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(997);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Set oObject&amp;apos;s local json variable sVarName to jValue
     public static void SetLocalJson(uint oObject, string sVarName, System.IntPtr jValue)
     {
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
-      VM.StackPush(sVarName);
-      VM.StackPush(oObject);
-      VM.Call(998);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jValue);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(998);
     }
 
     ///  Delete oObject&amp;apos;s local json variable sVarName
     public static void DeleteLocalJson(uint oObject, string sVarName)
     {
-      VM.StackPush(sVarName);
-      VM.StackPush(oObject);
-      VM.Call(999);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(999);
     }
 
     ///  Bind an json to a named parameter of the given prepared query.<br/>
@@ -17911,10 +17911,10 @@ namespace NWN.Core
     ///    SqlStep(v);
     public static void SqlBindJson(System.IntPtr sqlQuery, string sParam, System.IntPtr jValue)
     {
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
-      VM.StackPush(sParam);
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
-      VM.Call(1000);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jValue);
+      global::NWNX.NET.NWNXAPI.StackPushString(sParam);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1000);
     }
 
     ///  Retrieve a column cast as a json value of the currently stepped row.<br/>
@@ -17923,10 +17923,10 @@ namespace NWN.Core
     ///  In traditional fashion, nIndex starts at 0.
     public static System.IntPtr SqlGetJson(System.IntPtr sqlQuery, int nIndex)
     {
-      VM.StackPush(nIndex);
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
-      VM.Call(1001);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1001);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  This stores a json out to the specified campaign database<br/>
@@ -17937,11 +17937,11 @@ namespace NWN.Core
     ///  If you want a variable to pertain to a specific player in the game, provide a player object.
     public static void SetCampaignJson(string sCampaignName, string sVarName, System.IntPtr jValue, uint oPlayer = OBJECT_INVALID)
     {
-      VM.StackPush(oPlayer);
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
-      VM.StackPush(sVarName);
-      VM.StackPush(sCampaignName);
-      VM.Call(1002);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jValue);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushString(sCampaignName);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1002);
     }
 
     ///  This will read a json from the  specified campaign database<br/>
@@ -17952,11 +17952,11 @@ namespace NWN.Core
     ///  If you want a variable to pertain to a specific player in the game, provide a player object.
     public static System.IntPtr GetCampaignJson(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
     {
-      VM.StackPush(oPlayer);
-      VM.StackPush(sVarName);
-      VM.StackPush(sCampaignName);
-      VM.Call(1003);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.StackPushString(sVarName);
+      global::NWNX.NET.NWNXAPI.StackPushString(sCampaignName);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1003);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Gets a device property/capability as advertised by the client.<br/>
@@ -17968,26 +17968,26 @@ namespace NWN.Core
     ///  - the player has disabled sending device properties (Options-&amp;gt;Game-&amp;gt;Privacy).
     public static int GetPlayerDeviceProperty(uint oPlayer, string sProperty)
     {
-      VM.StackPush(sProperty);
-      VM.StackPush(oPlayer);
-      VM.Call(1004);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushString(sProperty);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1004);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the LANGUAGE_xx code of the given player, or -1 if unavailable.
     public static int GetPlayerLanguage(uint oPlayer)
     {
-      VM.StackPush(oPlayer);
-      VM.Call(1005);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1005);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns one of PLAYER_DEVICE_PLATFORM_xxx, or 0 if unavailable.
     public static int GetPlayerDevicePlatform(uint oPlayer)
     {
-      VM.StackPush(oPlayer);
-      VM.Call(1006);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1006);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Deserializes the given resref/template into a JSON structure.<br/>
@@ -18011,10 +18011,10 @@ namespace NWN.Core
     ///  Returns a valid gff-type json structure, or a null value with JsonGetError() set.
     public static System.IntPtr TemplateToJson(string sResRef, int nResType)
     {
-      VM.StackPush(nResType);
-      VM.StackPush(sResRef);
-      VM.Call(1007);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nResType);
+      global::NWNX.NET.NWNXAPI.StackPushString(sResRef);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1007);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Returns the resource location of sResRef.nResType, as seen by the running module.<br/>
@@ -18022,10 +18022,10 @@ namespace NWN.Core
     ///  Returns &amp;quot;&amp;quot; if the resource does not exist in the search space.
     public static string ResManGetAliasFor(string sResRef, int nResType)
     {
-      VM.StackPush(nResType);
-      VM.StackPush(sResRef);
-      VM.Call(1008);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nResType);
+      global::NWNX.NET.NWNXAPI.StackPushString(sResRef);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1008);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Finds the nNth available resref starting with sPrefix.<br/>
@@ -18035,13 +18035,13 @@ namespace NWN.Core
     ///  Returns &amp;quot;&amp;quot; if no such resref exists.
     public static string ResManFindPrefix(string sPrefix, int nResType, int nNth = 1, int bSearchBaseData = FALSE, string sOnlyKeyTable = "")
     {
-      VM.StackPush(sOnlyKeyTable);
-      VM.StackPush(bSearchBaseData);
-      VM.StackPush(nNth);
-      VM.StackPush(nResType);
-      VM.StackPush(sPrefix);
-      VM.Call(1009);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushString(sOnlyKeyTable);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bSearchBaseData);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNth);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nResType);
+      global::NWNX.NET.NWNXAPI.StackPushString(sPrefix);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1009);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Create a NUI window from the given resref(.jui) for the given player.<br/>
@@ -18054,12 +18054,12 @@ namespace NWN.Core
     ///  Returns the window token on success (&amp;gt;0), or 0 on error.
     public static int NuiCreateFromResRef(uint oPlayer, string sResRef, string sWindowId = "", string sEventScript = "")
     {
-      VM.StackPush(sEventScript);
-      VM.StackPush(sWindowId);
-      VM.StackPush(sResRef);
-      VM.StackPush(oPlayer);
-      VM.Call(1010);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushString(sEventScript);
+      global::NWNX.NET.NWNXAPI.StackPushString(sWindowId);
+      global::NWNX.NET.NWNXAPI.StackPushString(sResRef);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1010);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Create a NUI window inline for the given player.<br/>
@@ -18071,12 +18071,12 @@ namespace NWN.Core
     ///  Returns the window token on success (&amp;gt;0), or 0 on error.
     public static int NuiCreate(uint oPlayer, System.IntPtr jNui, string sWindowId = "", string sEventScript = "")
     {
-      VM.StackPush(sEventScript);
-      VM.StackPush(sWindowId);
-      VM.StackPush(jNui, ENGINE_STRUCTURE_JSON);
-      VM.StackPush(oPlayer);
-      VM.Call(1011);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushString(sEventScript);
+      global::NWNX.NET.NWNXAPI.StackPushString(sWindowId);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jNui);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1011);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  You can look up windows by ID, if you gave them one.<br/>
@@ -18085,10 +18085,10 @@ namespace NWN.Core
     ///  Returns the token if found, or 0.
     public static int NuiFindWindow(uint oPlayer, string sId)
     {
-      VM.StackPush(sId);
-      VM.StackPush(oPlayer);
-      VM.Call(1012);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushString(sId);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1012);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Destroys the given window, by token, immediately closing it on the client.<br/>
@@ -18097,38 +18097,38 @@ namespace NWN.Core
     ///  The client will close the window asynchronously.
     public static void NuiDestroy(uint oPlayer, int nUiToken)
     {
-      VM.StackPush(nUiToken);
-      VM.StackPush(oPlayer);
-      VM.Call(1013);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nUiToken);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1013);
     }
 
     ///  Returns the originating player of the current event.
     public static uint NuiGetEventPlayer()
     {
-      VM.Call(1014);
-      return VM.StackPopObject();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1014);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
     ///  Gets the window token of the current event (or 0 if not in a event).
     public static int NuiGetEventWindow()
     {
-      VM.Call(1015);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1015);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the event type of the current event.<br/>
     ///  * See nw_inc_nui.nss for full documentation of all events.
     public static string NuiGetEventType()
     {
-      VM.Call(1016);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1016);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Returns the ID of the widget that triggered the event.
     public static string NuiGetEventElement()
     {
-      VM.Call(1017);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1017);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Get the array index of the current event.<br/>
@@ -18136,18 +18136,18 @@ namespace NWN.Core
     ///  Returns -1 if the event is not originating from within an array.
     public static int NuiGetEventArrayIndex()
     {
-      VM.Call(1018);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1018);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the window ID of the window described by nUiToken.<br/>
     ///  Returns &amp;quot;&amp;quot; on error, or if the window has no ID.
     public static string NuiGetWindowId(uint oPlayer, int nUiToken)
     {
-      VM.StackPush(nUiToken);
-      VM.StackPush(oPlayer);
-      VM.Call(1019);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nUiToken);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1019);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Gets the json value for the given player, token and bind.<br/>
@@ -18157,11 +18157,11 @@ namespace NWN.Core
     ///  Returns a json null value if the bind does not exist.
     public static System.IntPtr NuiGetBind(uint oPlayer, int nUiToken, string sBindName)
     {
-      VM.StackPush(sBindName);
-      VM.StackPush(nUiToken);
-      VM.StackPush(oPlayer);
-      VM.Call(1020);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushString(sBindName);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nUiToken);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1020);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Sets a json value for the given player, token and bind.<br/>
@@ -18176,22 +18176,22 @@ namespace NWN.Core
     ///  Does nothing if the given player+token is invalid.
     public static void NuiSetBind(uint oPlayer, int nUiToken, string sBindName, System.IntPtr jValue)
     {
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
-      VM.StackPush(sBindName);
-      VM.StackPush(nUiToken);
-      VM.StackPush(oPlayer);
-      VM.Call(1021);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jValue);
+      global::NWNX.NET.NWNXAPI.StackPushString(sBindName);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nUiToken);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1021);
     }
 
     ///  Swaps out the given element (by id) with the given nui layout (partial).<br/>
     ///  * This currently only works with the &amp;quot;group&amp;quot; element type, and the special &amp;quot;_window_&amp;quot; root group.
     public static void NuiSetGroupLayout(uint oPlayer, int nUiToken, string sElement, System.IntPtr jNui)
     {
-      VM.StackPush(jNui, ENGINE_STRUCTURE_JSON);
-      VM.StackPush(sElement);
-      VM.StackPush(nUiToken);
-      VM.StackPush(oPlayer);
-      VM.Call(1022);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jNui);
+      global::NWNX.NET.NWNXAPI.StackPushString(sElement);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nUiToken);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1022);
     }
 
     ///  Mark the given bind name as watched.<br/>
@@ -18199,12 +18199,12 @@ namespace NWN.Core
     ///  Be careful with binding nui data inside a watch event handler: It&amp;apos;s easy to accidentally recurse yourself into a stack overflow.
     public static int NuiSetBindWatch(uint oPlayer, int nUiToken, string sBind, int bWatch)
     {
-      VM.StackPush(bWatch);
-      VM.StackPush(sBind);
-      VM.StackPush(nUiToken);
-      VM.StackPush(oPlayer);
-      VM.Call(1023);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bWatch);
+      global::NWNX.NET.NWNXAPI.StackPushString(sBind);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nUiToken);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1023);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the nNth window token of the player, or 0.<br/>
@@ -18212,10 +18212,10 @@ namespace NWN.Core
     ///  Iterator is not write-safe: Calling DestroyWindow() will invalidate move following offsets by one.
     public static int NuiGetNthWindow(uint oPlayer, int nNth = 0)
     {
-      VM.StackPush(nNth);
-      VM.StackPush(oPlayer);
-      VM.Call(1024);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNth);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1024);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Return the nNth bind name of the given window, or &amp;quot;&amp;quot;.<br/>
@@ -18223,30 +18223,30 @@ namespace NWN.Core
     ///  If FALSE, iterates all known binds on the window (either set locally or in UI).
     public static string NuiGetNthBind(uint oPlayer, int nToken, int bWatched, int nNth = 0)
     {
-      VM.StackPush(nNth);
-      VM.StackPush(bWatched);
-      VM.StackPush(nToken);
-      VM.StackPush(oPlayer);
-      VM.Call(1025);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNth);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bWatched);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nToken);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1025);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Returns the event payload, specific to the event.<br/>
     ///  Returns JsonNull if event has no payload.
     public static System.IntPtr NuiGetEventPayload()
     {
-      VM.Call(1026);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1026);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Get the userdata of the given window token.<br/>
     ///  Returns JsonNull if the window does not exist on the given player, or has no userdata set.
     public static System.IntPtr NuiGetUserData(uint oPlayer, int nToken)
     {
-      VM.StackPush(nToken);
-      VM.StackPush(oPlayer);
-      VM.Call(1027);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nToken);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1027);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Sets an arbitrary json value as userdata on the given window token.<br/>
@@ -18255,10 +18255,10 @@ namespace NWN.Core
     ///  Will do nothing if the window does not exist.
     public static void NuiSetUserData(uint oPlayer, int nToken, System.IntPtr jUserData)
     {
-      VM.StackPush(jUserData, ENGINE_STRUCTURE_JSON);
-      VM.StackPush(nToken);
-      VM.StackPush(oPlayer);
-      VM.Call(1028);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jUserData);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nToken);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1028);
     }
 
     ///  Returns the number of script instructions remaining for the currently-running script.<br/>
@@ -18268,8 +18268,8 @@ namespace NWN.Core
     ///  Note: Running this command and checking/handling the value also takes up some instructions.
     public static int GetScriptInstructionsRemaining()
     {
-      VM.Call(1029);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1029);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns a modified copy of jArray with the value order changed according to nTransform:<br/>
@@ -18287,10 +18287,10 @@ namespace NWN.Core
     ///    Returns the first non-null entry. Empty-ish values (e.g. &amp;quot;&amp;quot;, 0) are not considered null, only the json scalar type.
     public static System.IntPtr JsonArrayTransform(System.IntPtr jArray, int nTransform)
     {
-      VM.StackPush(nTransform);
-      VM.StackPush(jArray, ENGINE_STRUCTURE_JSON);
-      VM.Call(1030);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nTransform);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jArray);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1030);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Returns the nth-matching index or key of jNeedle in jHaystack.<br/>
@@ -18299,12 +18299,12 @@ namespace NWN.Core
     ///  Return null when not found or on any error.
     public static System.IntPtr JsonFind(System.IntPtr jHaystack, System.IntPtr jNeedle, int nNth = 0, int nConditional = JSON_FIND_EQUAL)
     {
-      VM.StackPush(nConditional);
-      VM.StackPush(nNth);
-      VM.StackPush(jNeedle, ENGINE_STRUCTURE_JSON);
-      VM.StackPush(jHaystack, ENGINE_STRUCTURE_JSON);
-      VM.Call(1031);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nConditional);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNth);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jNeedle);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jHaystack);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1031);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Returns a copy of the range (nBeginIndex, nEndIndex) inclusive of jArray.<br/>
@@ -18321,11 +18321,11 @@ namespace NWN.Core
     ///  Returns a null type on error, including type mismatches.
     public static System.IntPtr JsonArrayGetRange(System.IntPtr jArray, int nBeginIndex, int nEndIndex)
     {
-      VM.StackPush(nEndIndex);
-      VM.StackPush(nBeginIndex);
-      VM.StackPush(jArray, ENGINE_STRUCTURE_JSON);
-      VM.Call(1032);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nEndIndex);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBeginIndex);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jArray);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1032);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Returns the result of a set operation on two arrays.<br/>
@@ -18342,29 +18342,29 @@ namespace NWN.Core
     ///    Returns a new array containing all elements present in either array, but not both.
     public static System.IntPtr JsonSetOp(System.IntPtr jValue, int nOp, System.IntPtr jOther)
     {
-      VM.StackPush(jOther, ENGINE_STRUCTURE_JSON);
-      VM.StackPush(nOp);
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
-      VM.Call(1033);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jOther);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nOp);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1033);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Returns the column name of s2DA at nColumn index (starting at 0).<br/>
     ///  Returns &amp;quot;&amp;quot; if column nColumn doesn&amp;apos;t exist (at end).
     public static string Get2DAColumn(string s2DA, int nColumnIdx)
     {
-      VM.StackPush(nColumnIdx);
-      VM.StackPush(s2DA);
-      VM.Call(1034);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nColumnIdx);
+      global::NWNX.NET.NWNXAPI.StackPushString(s2DA);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1034);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Returns the number of defined rows in the 2da s2DA.
     public static int Get2DARowCount(string s2DA)
     {
-      VM.StackPush(s2DA);
-      VM.Call(1035);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushString(s2DA);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1035);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Set the subtype of eEffect to Unyielding and return eEffect.<br/>
@@ -18373,17 +18373,17 @@ namespace NWN.Core
     ///  Note: effects that modify state, Stunned/Knockdown/Deaf etc, WILL be removed on death.
     public static System.IntPtr UnyieldingEffect(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(1036);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1036);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Set eEffect to ignore immunities and return eEffect.
     public static System.IntPtr IgnoreEffectImmunity(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(1037);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1037);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Sets the global shader uniform for the player to the specified float.<br/>
@@ -18393,10 +18393,10 @@ namespace NWN.Core
     ///  - nShader: SHADER_UNIFORM_*
     public static void SetShaderUniformFloat(uint oPlayer, int nShader, float fValue)
     {
-      VM.StackPush(fValue);
-      VM.StackPush(nShader);
-      VM.StackPush(oPlayer);
-      VM.Call(1038);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fValue);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nShader);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1038);
     }
 
     ///  Sets the global shader uniform for the player to the specified integer.<br/>
@@ -18406,10 +18406,10 @@ namespace NWN.Core
     ///  - nShader: SHADER_UNIFORM_*
     public static void SetShaderUniformInt(uint oPlayer, int nShader, int nValue)
     {
-      VM.StackPush(nValue);
-      VM.StackPush(nShader);
-      VM.StackPush(oPlayer);
-      VM.Call(1039);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nValue);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nShader);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1039);
     }
 
     ///  Sets the global shader uniform for the player to the specified vec4.<br/>
@@ -18419,13 +18419,13 @@ namespace NWN.Core
     ///  - nShader: SHADER_UNIFORM_*
     public static void SetShaderUniformVec(uint oPlayer, int nShader, float fX, float fY, float fZ, float fW)
     {
-      VM.StackPush(fW);
-      VM.StackPush(fZ);
-      VM.StackPush(fY);
-      VM.StackPush(fX);
-      VM.StackPush(nShader);
-      VM.StackPush(oPlayer);
-      VM.Call(1040);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fW);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fZ);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fY);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fX);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nShader);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1040);
     }
 
     ///  Sets the spell targeting data manually for the player. This data is usually specified in spells.2da.<br/>
@@ -18436,13 +18436,13 @@ namespace NWN.Core
     ///  - nFlags: SPELL_TARGETING_FLAGS_*
     public static void SetSpellTargetingData(uint oPlayer, int nSpell, int nShape, float fSizeX, float fSizeY, int nFlags)
     {
-      VM.StackPush(nFlags);
-      VM.StackPush(fSizeY);
-      VM.StackPush(fSizeX);
-      VM.StackPush(nShape);
-      VM.StackPush(nSpell);
-      VM.StackPush(oPlayer);
-      VM.Call(1041);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFlags);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fSizeY);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fSizeX);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nShape);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpell);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1041);
     }
 
     ///  Sets the spell targeting data which is used for the next call to EnterTargetingMode() for this player.<br/>
@@ -18453,15 +18453,15 @@ namespace NWN.Core
     ///  - nFeat: FEAT_* (optional, passed to the shader but does nothing by default, you need to edit the shader to use it)
     public static void SetEnterTargetingModeData(uint oPlayer, int nShape, float fSizeX, float fSizeY, int nFlags, float fRange = 0.0f, int nSpell = -1, int nFeat = -1)
     {
-      VM.StackPush(nFeat);
-      VM.StackPush(nSpell);
-      VM.StackPush(fRange);
-      VM.StackPush(nFlags);
-      VM.StackPush(fSizeY);
-      VM.StackPush(fSizeX);
-      VM.StackPush(nShape);
-      VM.StackPush(oPlayer);
-      VM.Call(1042);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFeat);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpell);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fRange);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFlags);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fSizeY);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fSizeX);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nShape);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1042);
     }
 
     ///  Gets the number of memorized spell slots for a given spell level.<br/>
@@ -18470,11 +18470,11 @@ namespace NWN.Core
     ///  Returns: the number of spell slots.
     public static int GetMemorizedSpellCountByLevel(uint oCreature, int nClassType, int nSpellLevel)
     {
-      VM.StackPush(nSpellLevel);
-      VM.StackPush(nClassType);
-      VM.StackPush(oCreature);
-      VM.Call(1043);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellLevel);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nClassType);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1043);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Gets the spell id of a memorized spell slot.<br/>
@@ -18484,12 +18484,12 @@ namespace NWN.Core
     ///  Returns: a SPELL_* constant or -1 if the slot is not set.
     public static int GetMemorizedSpellId(uint oCreature, int nClassType, int nSpellLevel, int nIndex)
     {
-      VM.StackPush(nIndex);
-      VM.StackPush(nSpellLevel);
-      VM.StackPush(nClassType);
-      VM.StackPush(oCreature);
-      VM.Call(1044);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellLevel);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nClassType);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1044);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Gets the ready state of a memorized spell slot.<br/>
@@ -18499,12 +18499,12 @@ namespace NWN.Core
     ///  Returns: TRUE/FALSE or -1 if the slot is not set.
     public static int GetMemorizedSpellReady(uint oCreature, int nClassType, int nSpellLevel, int nIndex)
     {
-      VM.StackPush(nIndex);
-      VM.StackPush(nSpellLevel);
-      VM.StackPush(nClassType);
-      VM.StackPush(oCreature);
-      VM.Call(1045);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellLevel);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nClassType);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1045);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Gets the metamagic of a memorized spell slot.<br/>
@@ -18514,12 +18514,12 @@ namespace NWN.Core
     ///  Returns: a METAMAGIC_* constant or -1 if the slot is not set.
     public static int GetMemorizedSpellMetaMagic(uint oCreature, int nClassType, int nSpellLevel, int nIndex)
     {
-      VM.StackPush(nIndex);
-      VM.StackPush(nSpellLevel);
-      VM.StackPush(nClassType);
-      VM.StackPush(oCreature);
-      VM.Call(1046);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellLevel);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nClassType);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1046);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Gets if the memorized spell slot has a domain spell.<br/>
@@ -18529,12 +18529,12 @@ namespace NWN.Core
     ///  Returns: TRUE/FALSE or -1 if the slot is not set.
     public static int GetMemorizedSpellIsDomainSpell(uint oCreature, int nClassType, int nSpellLevel, int nIndex)
     {
-      VM.StackPush(nIndex);
-      VM.StackPush(nSpellLevel);
-      VM.StackPush(nClassType);
-      VM.StackPush(oCreature);
-      VM.Call(1047);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellLevel);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nClassType);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1047);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Set a memorized spell slot.<br/>
@@ -18547,15 +18547,15 @@ namespace NWN.Core
     ///  - bIsDomainSpell: TRUE for a domain spell.
     public static void SetMemorizedSpell(uint oCreature, int nClassType, int nSpellLevel, int nIndex, int nSpellId, int bReady = TRUE, int nMetaMagic = METAMAGIC_NONE, int bIsDomainSpell = FALSE)
     {
-      VM.StackPush(bIsDomainSpell);
-      VM.StackPush(nMetaMagic);
-      VM.StackPush(bReady);
-      VM.StackPush(nSpellId);
-      VM.StackPush(nIndex);
-      VM.StackPush(nSpellLevel);
-      VM.StackPush(nClassType);
-      VM.StackPush(oCreature);
-      VM.Call(1048);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bIsDomainSpell);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nMetaMagic);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bReady);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellId);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellLevel);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nClassType);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1048);
     }
 
     ///  Set the ready state of a memorized spell slot.<br/>
@@ -18565,12 +18565,12 @@ namespace NWN.Core
     ///  - bReady: TRUE to mark the slot ready.
     public static void SetMemorizedSpellReady(uint oCreature, int nClassType, int nSpellLevel, int nIndex, int bReady)
     {
-      VM.StackPush(bReady);
-      VM.StackPush(nIndex);
-      VM.StackPush(nSpellLevel);
-      VM.StackPush(nClassType);
-      VM.StackPush(oCreature);
-      VM.Call(1049);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bReady);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellLevel);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nClassType);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1049);
     }
 
     ///  Clear a specific memorized spell slot.<br/>
@@ -18579,11 +18579,11 @@ namespace NWN.Core
     ///  - nIndex: the index of the spell slot. Bounds: 0 &amp;lt;= nIndex &amp;lt; GetMemorizedSpellCountByLevel()
     public static void ClearMemorizedSpell(uint oCreature, int nClassType, int nSpellLevel, int nIndex)
     {
-      VM.StackPush(nIndex);
-      VM.StackPush(nSpellLevel);
-      VM.StackPush(nClassType);
-      VM.StackPush(oCreature);
-      VM.Call(1050);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellLevel);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nClassType);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1050);
     }
 
     ///  Clear all memorized spell slots of a specific spell id, including metamagic&amp;apos;d ones.<br/>
@@ -18591,10 +18591,10 @@ namespace NWN.Core
     ///  - nSpellId: a SPELL_* constant.
     public static void ClearMemorizedSpellBySpellId(uint oCreature, int nClassType, int nSpellId)
     {
-      VM.StackPush(nSpellId);
-      VM.StackPush(nClassType);
-      VM.StackPush(oCreature);
-      VM.Call(1051);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellId);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nClassType);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1051);
     }
 
     ///  Gets the number of known spells for a given spell level.<br/>
@@ -18603,11 +18603,11 @@ namespace NWN.Core
     ///  Returns: the number of known spells.
     public static int GetKnownSpellCount(uint oCreature, int nClassType, int nSpellLevel)
     {
-      VM.StackPush(nSpellLevel);
-      VM.StackPush(nClassType);
-      VM.StackPush(oCreature);
-      VM.Call(1052);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellLevel);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nClassType);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1052);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Gets the spell id of a known spell.<br/>
@@ -18617,12 +18617,12 @@ namespace NWN.Core
     ///  Returns: a SPELL_* constant or -1 on error.
     public static int GetKnownSpellId(uint oCreature, int nClassType, int nSpellLevel, int nIndex)
     {
-      VM.StackPush(nIndex);
-      VM.StackPush(nSpellLevel);
-      VM.StackPush(nClassType);
-      VM.StackPush(oCreature);
-      VM.Call(1053);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellLevel);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nClassType);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1053);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Gets if a spell is in the known spell list.<br/>
@@ -18631,11 +18631,11 @@ namespace NWN.Core
     ///  Returns: TRUE if the spell is in the known spell list.
     public static int GetIsInKnownSpellList(uint oCreature, int nClassType, int nSpellId)
     {
-      VM.StackPush(nSpellId);
-      VM.StackPush(nClassType);
-      VM.StackPush(oCreature);
-      VM.Call(1054);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellId);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nClassType);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1054);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Gets the amount of uses a spell has left.<br/>
@@ -18646,13 +18646,13 @@ namespace NWN.Core
     ///  Returns: the amount of spell uses left.
     public static int GetSpellUsesLeft(uint oCreature, int nClassType, int nSpellId, int nMetaMagic = METAMAGIC_NONE, int nDomainLevel = 0)
     {
-      VM.StackPush(nDomainLevel);
-      VM.StackPush(nMetaMagic);
-      VM.StackPush(nSpellId);
-      VM.StackPush(nClassType);
-      VM.StackPush(oCreature);
-      VM.Call(1055);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nDomainLevel);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nMetaMagic);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellId);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nClassType);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1055);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Gets the spell level at which a class gets a spell.<br/>
@@ -18661,20 +18661,20 @@ namespace NWN.Core
     ///  Returns: the spell level or -1 if the class does not get the spell.
     public static int GetSpellLevelByClass(int nClassType, int nSpellId)
     {
-      VM.StackPush(nSpellId);
-      VM.StackPush(nClassType);
-      VM.Call(1056);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellId);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nClassType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1056);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Replaces oObject&amp;apos;s animation sOld with sNew.<br/>
     ///  Specifying sNew = &amp;quot;&amp;quot; will restore the original animation.
     public static void ReplaceObjectAnimation(uint oObject, string sOld, string sNew = "")
     {
-      VM.StackPush(sNew);
-      VM.StackPush(sOld);
-      VM.StackPush(oObject);
-      VM.Call(1057);
+      global::NWNX.NET.NWNXAPI.StackPushString(sNew);
+      global::NWNX.NET.NWNXAPI.StackPushString(sOld);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1057);
     }
 
     ///  Sets the distance (in meters) at which oObject info will be sent to clients (default 45.0)<br/>
@@ -18684,25 +18684,25 @@ namespace NWN.Core
     ///        impact graphics performance of clients. Use cautiously.
     public static void SetObjectVisibleDistance(uint oObject, float fDistance = 45.0f)
     {
-      VM.StackPush(fDistance);
-      VM.StackPush(oObject);
-      VM.Call(1058);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fDistance);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1058);
     }
 
     ///  Gets oObject&amp;apos;s visible distance, as set by SetObjectVisibleDistance()<br/>
     ///  Returns -1.0f on error
     public static float GetObjectVisibleDistance(uint oObject)
     {
-      VM.StackPush(oObject);
-      VM.Call(1059);
-      return VM.StackPopFloat();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1059);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
     ///  Sets the active game pause state - same as if the player requested pause.
     public static void SetGameActivePause(int bState)
     {
-      VM.StackPush(bState);
-      VM.Call(1060);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bState);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1060);
     }
 
     ///  Returns &amp;gt;0 if the game is currently paused:<br/>
@@ -18711,34 +18711,34 @@ namespace NWN.Core
     ///  - 2: Active Player Pause (optionally on top of timestop)
     public static int GetGamePauseState()
     {
-      VM.Call(1061);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1061);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Set the gender of oCreature.<br/>
     ///  - nGender: a GENDER_* constant.
     public static void SetGender(uint oCreature, int nGender)
     {
-      VM.StackPush(nGender);
-      VM.StackPush(oCreature);
-      VM.Call(1062);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nGender);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1062);
     }
 
     ///  Get the soundset of oCreature.<br/>
     ///  Returns -1 on error.
     public static int GetSoundset(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(1063);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1063);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Set the soundset of oCreature, see soundset.2da for possible values.
     public static void SetSoundset(uint oCreature, int nSoundset)
     {
-      VM.StackPush(nSoundset);
-      VM.StackPush(oCreature);
-      VM.Call(1064);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSoundset);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1064);
     }
 
     ///  Ready a spell level for oCreature.<br/>
@@ -18746,10 +18746,10 @@ namespace NWN.Core
     ///  - nClassType: a CLASS_TYPE_* constant or CLASS_TYPE_INVALID to ready the spell level for all classes.
     public static void ReadySpellLevel(uint oCreature, int nSpellLevel, int nClassType = CLASS_TYPE_INVALID)
     {
-      VM.StackPush(nClassType);
-      VM.StackPush(nSpellLevel);
-      VM.StackPush(oCreature);
-      VM.Call(1065);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nClassType);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellLevel);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1065);
     }
 
     ///  Makes oCreature controllable by oPlayer, if player party control is enabled<br/>
@@ -18758,9 +18758,9 @@ namespace NWN.Core
     ///     (e.g. the module) it will disable regular party control for this creature
     public static void SetCommandingPlayer(uint oCreature, uint oPlayer)
     {
-      VM.StackPush(oPlayer);
-      VM.StackPush(oCreature);
-      VM.Call(1066);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1066);
     }
 
     ///  Sets oPlayer&amp;apos;s camera limits that override any client configuration limits<br/>
@@ -18768,12 +18768,12 @@ namespace NWN.Core
     ///  NB: Like all other camera settings, this is not saved when saving the game
     public static void SetCameraLimits(uint oPlayer, float fMinPitch = -1.0f, float fMaxPitch = -1.0f, float fMinDist = -1.0f, float fMaxDist = -1.0f)
     {
-      VM.StackPush(fMaxDist);
-      VM.StackPush(fMinDist);
-      VM.StackPush(fMaxPitch);
-      VM.StackPush(fMinPitch);
-      VM.StackPush(oPlayer);
-      VM.Call(1067);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fMaxDist);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fMinDist);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fMaxPitch);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fMinPitch);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1067);
     }
 
     ///  Applies sRegExp on sValue, returning an array containing all matching groups.<br/>
@@ -18791,12 +18791,12 @@ namespace NWN.Core
     ///  * RegExpMatch(&amp;quot;^(test) (.+)$&amp;quot;, &amp;quot;test value&amp;quot;) -&amp;gt; [&amp;quot;test value&amp;quot;, &amp;quot;test&amp;quot;, &amp;quot;value&amp;quot;]
     public static System.IntPtr RegExpMatch(string sRegExp, string sValue, int nSyntaxFlags = REGEXP_ECMASCRIPT, int nMatchFlags = REGEXP_FORMAT_DEFAULT)
     {
-      VM.StackPush(nMatchFlags);
-      VM.StackPush(nSyntaxFlags);
-      VM.StackPush(sValue);
-      VM.StackPush(sRegExp);
-      VM.Call(1068);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nMatchFlags);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSyntaxFlags);
+      global::NWNX.NET.NWNXAPI.StackPushString(sValue);
+      global::NWNX.NET.NWNXAPI.StackPushString(sRegExp);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1068);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Iterates sValue with sRegExp.<br/>
@@ -18808,12 +18808,12 @@ namespace NWN.Core
     ///  Example: RegExpIterate(&amp;quot;(\\d)(\\S+)&amp;quot;, &amp;quot;1i 2am 3 4asentence&amp;quot;); -&amp;gt; [[&amp;quot;1i&amp;quot;, &amp;quot;1&amp;quot;, &amp;quot;i&amp;quot;], [&amp;quot;2am&amp;quot;, &amp;quot;2&amp;quot;, &amp;quot;am&amp;quot;], [&amp;quot;4sentence&amp;quot;, &amp;quot;4&amp;quot;, &amp;quot;sentence&amp;quot;]]
     public static System.IntPtr RegExpIterate(string sRegExp, string sValue, int nSyntaxFlags = REGEXP_ECMASCRIPT, int nMatchFlags = REGEXP_FORMAT_DEFAULT)
     {
-      VM.StackPush(nMatchFlags);
-      VM.StackPush(nSyntaxFlags);
-      VM.StackPush(sValue);
-      VM.StackPush(sRegExp);
-      VM.Call(1069);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nMatchFlags);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSyntaxFlags);
+      global::NWNX.NET.NWNXAPI.StackPushString(sValue);
+      global::NWNX.NET.NWNXAPI.StackPushString(sRegExp);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1069);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Replaces all matching sRegExp in sValue with sReplacement.<br/>
@@ -18831,13 +18831,13 @@ namespace NWN.Core
     ///  Example: RegExpReplace(&amp;quot;a+&amp;quot;, &amp;quot;vaaalue&amp;quot;, &amp;quot;[$&amp;]&amp;quot;)    =&amp;gt; &amp;quot;v[aaa]lue&amp;quot;
     public static string RegExpReplace(string sRegExp, string sValue, string sReplacement, int nSyntaxFlags = REGEXP_ECMASCRIPT, int nMatchFlags = REGEXP_FORMAT_DEFAULT)
     {
-      VM.StackPush(nMatchFlags);
-      VM.StackPush(nSyntaxFlags);
-      VM.StackPush(sReplacement);
-      VM.StackPush(sValue);
-      VM.StackPush(sRegExp);
-      VM.Call(1070);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nMatchFlags);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSyntaxFlags);
+      global::NWNX.NET.NWNXAPI.StackPushString(sReplacement);
+      global::NWNX.NET.NWNXAPI.StackPushString(sValue);
+      global::NWNX.NET.NWNXAPI.StackPushString(sRegExp);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1070);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Get the contents of a file as string, as seen by the server&amp;apos;s resman.<br/>
@@ -18847,11 +18847,11 @@ namespace NWN.Core
     ///  Returns &amp;quot;&amp;quot; if the file does not exist.
     public static string ResManGetFileContents(string sResRef, int nResType, int nFormat = RESMAN_FILE_CONTENTS_FORMAT_RAW)
     {
-      VM.StackPush(nFormat);
-      VM.StackPush(nResType);
-      VM.StackPush(sResRef);
-      VM.Call(1071);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFormat);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nResType);
+      global::NWNX.NET.NWNXAPI.StackPushString(sResRef);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1071);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Compile a script and place it in the server&amp;apos;s CURRENTGAME: folder.<br/>
@@ -18861,12 +18861,12 @@ namespace NWN.Core
     ///  Returns &amp;quot;&amp;quot; on success or the error on failure.
     public static string CompileScript(string sScriptName, string sScriptData, int bWrapIntoMain = FALSE, int bGenerateNDB = FALSE)
     {
-      VM.StackPush(bGenerateNDB);
-      VM.StackPush(bWrapIntoMain);
-      VM.StackPush(sScriptData);
-      VM.StackPush(sScriptName);
-      VM.Call(1072);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bGenerateNDB);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bWrapIntoMain);
+      global::NWNX.NET.NWNXAPI.StackPushString(sScriptData);
+      global::NWNX.NET.NWNXAPI.StackPushString(sScriptName);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1072);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Sets the object oPlayer&amp;apos;s camera will be attached to.<br/>
@@ -18881,19 +18881,19 @@ namespace NWN.Core
     ///        - The object the player&amp;apos;s camera is attached to is not saved when saving the game.
     public static void AttachCamera(uint oPlayer, uint oTarget, int bFindClearView = FALSE)
     {
-      VM.StackPush(bFindClearView);
-      VM.StackPush(oTarget);
-      VM.StackPush(oPlayer);
-      VM.Call(1073);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bFindClearView);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1073);
     }
 
     ///  Get the current discoverability mask of oObject.<br/>
     ///  Returns -1 if oObject cannot have a discovery mask.
     public static int GetObjectUiDiscoveryMask(uint oObject)
     {
-      VM.StackPush(oObject);
-      VM.Call(1074);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1074);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets the discoverability mask on oObject.<br/>
@@ -18903,9 +18903,9 @@ namespace NWN.Core
     ///  Does not affect inventory items.
     public static void SetObjectUiDiscoveryMask(uint oObject, int nMask = OBJECT_UI_DISCOVERY_DEFAULT)
     {
-      VM.StackPush(nMask);
-      VM.StackPush(oObject);
-      VM.Call(1075);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nMask);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1075);
     }
 
     ///  Sets a text override for the mouseover/tab-highlight text bubble of oObject.<br/>
@@ -18913,10 +18913,10 @@ namespace NWN.Core
     ///  * nMode is one of OBJECT_UI_TEXT_BUBBLE_OVERRIDE_*.
     public static void SetObjectTextBubbleOverride(uint oObject, int nMode, string sText)
     {
-      VM.StackPush(sText);
-      VM.StackPush(nMode);
-      VM.StackPush(oObject);
-      VM.Call(1076);
+      global::NWNX.NET.NWNXAPI.StackPushString(sText);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nMode);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1076);
     }
 
     ///  Immediately unsets a VTs for the given object, with no lerp.<br/>
@@ -18924,18 +18924,18 @@ namespace NWN.Core
     ///  Returns TRUE only if transforms were successfully removed (valid object, transforms existed).
     public static int ClearObjectVisualTransform(uint oObject, int nScope = -1)
     {
-      VM.StackPush(nScope);
-      VM.StackPush(oObject);
-      VM.Call(1077);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nScope);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1077);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Gets an optional vecror of specific gui events in the module OnPlayerGuiEvent event.<br/>
     ///  GUIEVENT_RADIAL_OPEN - World vector position of radial if on tile.
     public static System.Numerics.Vector3 GetLastGuiEventVector()
     {
-      VM.Call(1078);
-      return VM.StackPopVector();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1078);
+      return global::NWNX.NET.NWNXAPI.StackPopVector();
     }
 
     ///  Sets oPlayer&amp;apos;s camera settings that override any client configuration settings<br/>
@@ -18943,9 +18943,9 @@ namespace NWN.Core
     ///  NB: Like all other camera settings, this is not saved when saving the game
     public static void SetCameraFlags(uint oPlayer, int nFlags = 0)
     {
-      VM.StackPush(nFlags);
-      VM.StackPush(oPlayer);
-      VM.Call(1079);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFlags);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1079);
     }
 
     ///  Gets the light color in the area specified.<br/>
@@ -18955,10 +18955,10 @@ namespace NWN.Core
     ///  If an object other than an area is specified, will use the area that the object is currently in.
     public static int GetAreaLightColor(int nColorType, uint oArea = OBJECT_INVALID)
     {
-      VM.StackPush(oArea);
-      VM.StackPush(nColorType);
-      VM.Call(1080);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nColorType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1080);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets the light color in the area specified.<br/>
@@ -18975,11 +18975,11 @@ namespace NWN.Core
     ///  If fFadeTime is above 0.0, it will fade to the new color in the amount of seconds specified. 
     public static void SetAreaLightColor(int nColorType, int nColor, uint oArea = OBJECT_INVALID, float fFadeTime = 0.0f)
     {
-      VM.StackPush(fFadeTime);
-      VM.StackPush(oArea);
-      VM.StackPush(nColor);
-      VM.StackPush(nColorType);
-      VM.Call(1081);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fFadeTime);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nColor);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nColorType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1081);
     }
 
     ///  Gets the light direction of origin in the area specified.<br/>
@@ -18989,10 +18989,10 @@ namespace NWN.Core
     ///  If an object other than an area is specified, will use the area that the object is currently in.
     public static System.Numerics.Vector3 GetAreaLightDirection(int nLightType, uint oArea = OBJECT_INVALID)
     {
-      VM.StackPush(oArea);
-      VM.StackPush(nLightType);
-      VM.Call(1082);
-      return VM.StackPopVector();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nLightType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1082);
+      return global::NWNX.NET.NWNXAPI.StackPopVector();
     }
 
     ///  Sets the light direction of origin in the area specified.<br/>
@@ -19003,11 +19003,11 @@ namespace NWN.Core
     ///  If fFadeTime is above 0.0, it will fade to the new color in the amount of seconds specified. 
     public static void SetAreaLightDirection(int nLightType, System.Numerics.Vector3 vDirection, uint oArea = OBJECT_INVALID, float fFadeTime = 0.0f)
     {
-      VM.StackPush(fFadeTime);
-      VM.StackPush(oArea);
-      VM.StackPush(vDirection);
-      VM.StackPush(nLightType);
-      VM.Call(1083);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fFadeTime);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.StackPushVector(vDirection);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nLightType);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1083);
     }
 
     ///  This immediately aborts the running script.<br/>
@@ -19019,8 +19019,8 @@ namespace NWN.Core
     ///  - This call will never return.
     public static void AbortRunningScript(string sError = "")
     {
-      VM.StackPush(sError);
-      VM.Call(1084);
+      global::NWNX.NET.NWNXAPI.StackPushString(sError);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1084);
     }
 
     ///  Generate a VM debug view into the current execution location.<br/>
@@ -19040,9 +19040,9 @@ namespace NWN.Core
     ///              Only enough for you to re-identify which variable this might belong to.
     public static System.IntPtr GetScriptBacktrace(int bIncludeStack = TRUE)
     {
-      VM.StackPush(bIncludeStack);
-      VM.Call(1085);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_JSON);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bIncludeStack);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1085);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
     ///  Mark the current location in code as a jump target, identified by sLabel.<br/>
@@ -19053,9 +19053,9 @@ namespace NWN.Core
     ///    If you want to nest them, you need to manage nesting state externally.
     public static int SetJmp(string sLabel)
     {
-      VM.StackPush(sLabel);
-      VM.Call(1086);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushString(sLabel);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1086);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Jump execution back in time to the point where you called SetJmp with the same label.<br/>
@@ -19074,31 +19074,31 @@ namespace NWN.Core
     ///  - This call will never return.
     public static void LongJmp(string sLabel, int nRetVal = 1)
     {
-      VM.StackPush(nRetVal);
-      VM.StackPush(sLabel);
-      VM.Call(1087);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nRetVal);
+      global::NWNX.NET.NWNXAPI.StackPushString(sLabel);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1087);
     }
 
     ///  Returns TRUE if the given sLabel is a valid jump target at the current code location.
     public static int GetIsValidJmp(string sLabel)
     {
-      VM.StackPush(sLabel);
-      VM.Call(1088);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushString(sLabel);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1088);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Create a Pacified effect, making the creature unable to attack anyone
     public static System.IntPtr EffectPacified()
     {
-      VM.Call(1089);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1089);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Get the current script recursion level.
     public static int GetScriptRecursionLevel()
     {
-      VM.Call(1090);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1090);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the name of the script at a script recursion level.<br/>
@@ -19106,9 +19106,9 @@ namespace NWN.Core
     ///  Returns the script name or &amp;quot;&amp;quot; on error.
     public static string GetScriptName(int nRecursionLevel = -1)
     {
-      VM.StackPush(nRecursionLevel);
-      VM.Call(1091);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nRecursionLevel);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1091);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Get the script chunk attached to a script recursion level.<br/>
@@ -19116,9 +19116,9 @@ namespace NWN.Core
     ///  Returns the script chunk or &amp;quot;&amp;quot; on error / no script chunk attached.
     public static string GetScriptChunk(int nRecursionLevel = -1)
     {
-      VM.StackPush(nRecursionLevel);
-      VM.Call(1092);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nRecursionLevel);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1092);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Returns the patch postfix of oPlayer (i.e. the 29 out of &amp;quot;87.8193.35-29 abcdef01&amp;quot;).<br/>
@@ -19126,9 +19126,9 @@ namespace NWN.Core
     ///  player version is old enough not to send this bit of build info to the server.
     public static int GetPlayerBuildVersionPostfix(uint oPlayer)
     {
-      VM.StackPush(oPlayer);
-      VM.Call(1093);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1093);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the patch commit sha1 of oPlayer (i.e. the &amp;quot;abcdef01&amp;quot; out of &amp;quot;87.8193.35-29 abcdef01&amp;quot;).<br/>
@@ -19136,25 +19136,25 @@ namespace NWN.Core
     ///  player version is old enough not to send this bit of build info to the server.
     public static string GetPlayerBuildVersionCommitSha1(uint oPlayer)
     {
-      VM.StackPush(oPlayer);
-      VM.Call(1094);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1094);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  In the spell script returns the feat used, or -1 if no feat was used
     public static int GetSpellFeatId()
     {
-      VM.Call(1095);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1095);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the given effects Link ID. There is no guarantees about this identifier other than<br/>
     ///  it is unique and the same for all effects linked to it.
     public static string GetEffectLinkId(System.IntPtr eEffect)
     {
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(1096);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1096);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  If oCreature has nFeat, and nFeat is useable, returns the number of remaining uses left<br/>
@@ -19163,10 +19163,10 @@ namespace NWN.Core
     ///  - oCreature: Creature to check the feat of
     public static int GetFeatRemainingUses(int nFeat, uint oCreature = OBJECT_INVALID)
     {
-      VM.StackPush(oCreature);
-      VM.StackPush(nFeat);
-      VM.Call(1097);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFeat);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1097);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Change a tile in an area, it will also update the tile for all players in the area.<br/>
@@ -19189,57 +19189,57 @@ namespace NWN.Core
     ///            - SETTILE_FLAG_RECOMPUTE_LIGHTING: recomputes the area&amp;apos;s lighting and static shadows, use most of time.
     public static void SetTile(System.IntPtr locTile, int nTileID, int nOrientation, int nHeight = 0, int nFlags = SETTILE_FLAG_RECOMPUTE_LIGHTING)
     {
-      VM.StackPush(nFlags);
-      VM.StackPush(nHeight);
-      VM.StackPush(nOrientation);
-      VM.StackPush(nTileID);
-      VM.StackPush(locTile, ENGINE_STRUCTURE_LOCATION);
-      VM.Call(1098);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFlags);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nHeight);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nOrientation);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nTileID);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, locTile);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1098);
     }
 
     ///  Get the ID of the tile at location locTile.<br/>
     ///  Returns -1 on error.
     public static int GetTileID(System.IntPtr locTile)
     {
-      VM.StackPush(locTile, ENGINE_STRUCTURE_LOCATION);
-      VM.Call(1099);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, locTile);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1099);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the orientation of the tile at location locTile.<br/>
     ///  Returns -1 on error.
     public static int GetTileOrientation(System.IntPtr locTile)
     {
-      VM.StackPush(locTile, ENGINE_STRUCTURE_LOCATION);
-      VM.Call(1100);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, locTile);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1100);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Get the height of the tile at location locTile.<br/>
     ///  Returns -1 on error.
     public static int GetTileHeight(System.IntPtr locTile)
     {
-      VM.StackPush(locTile, ENGINE_STRUCTURE_LOCATION);
-      VM.Call(1101);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, locTile);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1101);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  All clients in oArea will reload the area&amp;apos;s grass.<br/>
     ///  This can be used to update the grass of an area after changing a tile with SetTile() that will have or used to have grass.
     public static void ReloadAreaGrass(uint oArea)
     {
-      VM.StackPush(oArea);
-      VM.Call(1102);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1102);
     }
 
     ///  Set the state of the tile animation loops of the tile at location locTile.
     public static void SetTileAnimationLoops(System.IntPtr locTile, int bAnimLoop1, int bAnimLoop2, int bAnimLoop3)
     {
-      VM.StackPush(bAnimLoop3);
-      VM.StackPush(bAnimLoop2);
-      VM.StackPush(bAnimLoop1);
-      VM.StackPush(locTile, ENGINE_STRUCTURE_LOCATION);
-      VM.Call(1103);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bAnimLoop3);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bAnimLoop2);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bAnimLoop1);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, locTile);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1103);
     }
 
     ///  Change multiple tiles in an area, it will also update the tiles for all players in the area.<br/>
@@ -19263,19 +19263,19 @@ namespace NWN.Core
     ///                       Make sure jTileData changes *all* tiles in the area and to a tile id that&amp;apos;s supported by sTileset.
     public static void SetTileJson(uint oArea, System.IntPtr jTileData, int nFlags = SETTILE_FLAG_RECOMPUTE_LIGHTING, string sTileset = "")
     {
-      VM.StackPush(sTileset);
-      VM.StackPush(nFlags);
-      VM.StackPush(jTileData, ENGINE_STRUCTURE_JSON);
-      VM.StackPush(oArea);
-      VM.Call(1104);
+      global::NWNX.NET.NWNXAPI.StackPushString(sTileset);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFlags);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jTileData);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1104);
     }
 
     ///  All clients in oArea will reload the inaccesible border tiles.<br/>
     ///  This can be used to update the edge tiles after changing a tile with SetTile().
     public static void ReloadAreaBorder(uint oArea)
     {
-      VM.StackPush(oArea);
-      VM.Call(1105);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1105);
     }
 
     ///  Sets whether or not oCreatures&amp;apos;s nIconId is flashing in their GUI icon bar.  If oCreature does not<br/>
@@ -19287,10 +19287,10 @@ namespace NWN.Core
     ///  - bFlashing: TRUE to force an existing icon to flash, FALSE to to stop.
     public static void SetEffectIconFlashing(uint oCreature, int nIconId, int bFlashing = TRUE)
     {
-      VM.StackPush(bFlashing);
-      VM.StackPush(nIconId);
-      VM.StackPush(oCreature);
-      VM.Call(1106);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bFlashing);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIconId);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1106);
     }
 
     ///  Creates a bonus feat effect. These act like the Bonus Feat item property,<br/>
@@ -19298,33 +19298,33 @@ namespace NWN.Core
     ///  - nFeat: FEAT_*
     public static System.IntPtr EffectBonusFeat(int nFeat)
     {
-      VM.StackPush(nFeat);
-      VM.Call(1107);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nFeat);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1107);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Returns the INVENTORY_SLOT_* constant of the last item equipped.  Can only be used in the<br/>
     ///  module&amp;apos;s OnPlayerEquip event.  Returns -1 on error.
     public static int GetPCItemLastEquippedSlot()
     {
-      VM.Call(1108);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1108);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the INVENTORY_SLOT_* constant of the last item unequipped.  Can only be used in the<br/>
     ///  module&amp;apos;s OnPlayerUnequip event.  Returns -1 on error.
     public static int GetPCItemLastUnequippedSlot()
     {
-      VM.Call(1109);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1109);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns TRUE if the last spell was cast spontaneously<br/>
     ///  eg; a Cleric casting SPELL_CURE_LIGHT_WOUNDS when it is not prepared, using another level 1 slot
     public static int GetSpellCastSpontaneously()
     {
-      VM.Call(1110);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1110);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Reset the given sqlquery, readying it for re-execution after it has been stepped.<br/>
@@ -19332,31 +19332,31 @@ namespace NWN.Core
     ///  This command only works on successfully-prepared queries that have not errored out.
     public static void SqlResetQuery(System.IntPtr sqlQuery, int bClearBinds = FALSE)
     {
-      VM.StackPush(bClearBinds);
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
-      VM.Call(1111);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bClearBinds);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1111);
     }
 
     ///  Provides immunity to the effects of EffectTimeStop which allows actions during other creatures time stop effects
     public static System.IntPtr EffectTimeStopImmunity()
     {
-      VM.Call(1112);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1112);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Return the current game tick rate (mainloop iterations per second).<br/>
     ///  This is equivalent to graphics frames per second when the module is running inside a client.
     public static int GetTickRate()
     {
-      VM.Call(1113);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1113);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the level of the last spell cast. This value is only valid in a Spell script.
     public static int GetLastSpellLevel()
     {
-      VM.Call(1114);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1114);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the 32bit integer hash of sString<br/>
@@ -19370,9 +19370,9 @@ namespace NWN.Core
     ///  NOTE: The exact algorithm used is XXH32(sString) ^ XXH32(&amp;quot;&amp;quot;). This means that HashString(&amp;quot;&amp;quot;) is 0.
     public static int HashString(string sString)
     {
-      VM.StackPush(sString);
-      VM.Call(1115);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushString(sString);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1115);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Returns the current microsecond counter value. This value is meaningless on its own, but can be subtracted<br/>
@@ -19382,15 +19382,15 @@ namespace NWN.Core
     ///      int nElapsedMicroseconds = GetMicrosecondCounter() - nMicrosecondsStart;
     public static int GetMicrosecondCounter()
     {
-      VM.Call(1116);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1116);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Forces the creature to always walk
     public static System.IntPtr EffectForceWalk()
     {
-      VM.Call(1117);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1117);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Assign one of the available audio streams to play a specific file. This mechanism can be used<br/>
@@ -19407,14 +19407,14 @@ namespace NWN.Core
     ///    until StartAudioStream() is done fading.
     public static void StartAudioStream(uint oPlayer, int nStreamIdentifier, string sResRef, int bLooping = FALSE, float fFadeTime = 0.0f, float fSeekOffset = -1.0f, float fVolume = 1.0f)
     {
-      VM.StackPush(fVolume);
-      VM.StackPush(fSeekOffset);
-      VM.StackPush(fFadeTime);
-      VM.StackPush(bLooping);
-      VM.StackPush(sResRef);
-      VM.StackPush(nStreamIdentifier);
-      VM.StackPush(oPlayer);
-      VM.Call(1118);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fVolume);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fSeekOffset);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fFadeTime);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bLooping);
+      global::NWNX.NET.NWNXAPI.StackPushString(sResRef);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nStreamIdentifier);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1118);
     }
 
     ///  Stops the given audio stream.<br/>
@@ -19425,10 +19425,10 @@ namespace NWN.Core
     ///  * Will do nothing if the stream is currently not in use.
     public static void StopAudioStream(uint oPlayer, int nStreamIdentifier, float fFadeTime = 0.0f)
     {
-      VM.StackPush(fFadeTime);
-      VM.StackPush(nStreamIdentifier);
-      VM.StackPush(oPlayer);
-      VM.Call(1119);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fFadeTime);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nStreamIdentifier);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1119);
     }
 
     ///  Un/pauses the given audio stream.<br/>
@@ -19439,11 +19439,11 @@ namespace NWN.Core
     ///  * Will do nothing if the stream is currently not in use.
     public static void SetAudioStreamPaused(uint oPlayer, int nStreamIdentifier, int bPaused, float fFadeTime = 0.0f)
     {
-      VM.StackPush(fFadeTime);
-      VM.StackPush(bPaused);
-      VM.StackPush(nStreamIdentifier);
-      VM.StackPush(oPlayer);
-      VM.Call(1120);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fFadeTime);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bPaused);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nStreamIdentifier);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1120);
     }
 
     ///  Change volume of audio stream.<br/>
@@ -19457,11 +19457,11 @@ namespace NWN.Core
     ///  * Will do nothing if the stream is currently not in use.
     public static void SetAudioStreamVolume(uint oPlayer, int nStreamIdentifier, float fVolume = 1.0f, float fFadeTime = 0.0f)
     {
-      VM.StackPush(fFadeTime);
-      VM.StackPush(fVolume);
-      VM.StackPush(nStreamIdentifier);
-      VM.StackPush(oPlayer);
-      VM.Call(1121);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fFadeTime);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fVolume);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nStreamIdentifier);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1121);
     }
 
     ///  Seek the audio stream to the given offset.<br/>
@@ -19471,40 +19471,40 @@ namespace NWN.Core
     ///    case, you need to restart the stream.
     public static void SeekAudioStream(uint oPlayer, int nStreamIdentifier, float fSeconds)
     {
-      VM.StackPush(fSeconds);
-      VM.StackPush(nStreamIdentifier);
-      VM.StackPush(oPlayer);
-      VM.Call(1122);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fSeconds);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nStreamIdentifier);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1122);
     }
 
     ///  Sets the effect creator<br/>
     ///  - oCreator: The creator of the effect. Can be OBJECT_INVALID.
     public static System.IntPtr SetEffectCreator(System.IntPtr eEffect, uint oCreator)
     {
-      VM.StackPush(oCreator);
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(1123);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreator);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1123);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Sets the effect caster level<br/>
     ///  - nCasterLevel: The caster level of the effect for the purposes of dispel magic and GetEffectCasterlevel. Must be &amp;gt;= 0.
     public static System.IntPtr SetEffectCasterLevel(System.IntPtr eEffect, int nCasterLevel)
     {
-      VM.StackPush(nCasterLevel);
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(1124);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nCasterLevel);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1124);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Sets the effect spell id<br/>
     ///  - nSpellId: The spell id for the purposes of effect stacking, dispel magic and GetEffectSpellId. Must be &amp;gt;= -1 (-1 being invalid/no spell)
     public static System.IntPtr SetEffectSpellId(System.IntPtr eEffect, int nSpellId)
     {
-      VM.StackPush(nSpellId);
-      VM.StackPush(eEffect, ENGINE_STRUCTURE_EFFECT);
-      VM.Call(1125);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellId);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1125);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Retrieve the column count of a prepared query.  <br/>
@@ -19514,9 +19514,9 @@ namespace NWN.Core
     ///  * A returned value greater than 0 does not guarantee the query will return rows.
     public static int SqlGetColumnCount(System.IntPtr sqlQuery)
     {
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
-      VM.Call(1126);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1126);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Retrieve the column name of the Nth column of a prepared query.<br/>
@@ -19528,18 +19528,18 @@ namespace NWN.Core
     ///  * A returned non-empty string does not guarantee the query will return rows.
     public static string SqlGetColumnName(System.IntPtr sqlQuery, int nNth)
     {
-      VM.StackPush(nNth);
-      VM.StackPush(sqlQuery, ENGINE_STRUCTURE_SQLQUERY);
-      VM.Call(1127);
-      return VM.StackPopString();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nNth);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQLQUERY, sqlQuery);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1127);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
     ///  Gets the total number of spell abilities a creature has.
     public static int GetSpellAbilityCount(uint oCreature)
     {
-      VM.StackPush(oCreature);
-      VM.Call(1128);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1128);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Gets the spell Id of the spell ability at the given index.<br/>
@@ -19547,10 +19547,10 @@ namespace NWN.Core
     ///  Returns: a SPELL_* constant or -1 if the slot is not set.
     public static int GetSpellAbilitySpell(uint oCreature, int nIndex)
     {
-      VM.StackPush(nIndex);
-      VM.StackPush(oCreature);
-      VM.Call(1129);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1129);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Gets the caster level of the spell ability in the given slot. Returns 0 by default.<br/>
@@ -19558,10 +19558,10 @@ namespace NWN.Core
     ///  Returns: the caster level or -1 if the slot is not set.
     public static int GetSpellAbilityCasterLevel(uint oCreature, int nIndex)
     {
-      VM.StackPush(nIndex);
-      VM.StackPush(oCreature);
-      VM.Call(1130);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1130);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Gets the ready state of a spell ability.<br/>
@@ -19569,10 +19569,10 @@ namespace NWN.Core
     ///  Returns: TRUE/FALSE or -1 if the slot is not set.
     public static int GetSpellAbilityReady(uint oCreature, int nIndex)
     {
-      VM.StackPush(nIndex);
-      VM.StackPush(oCreature);
-      VM.Call(1131);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1131);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Set the ready state of a spell ability slot.<br/>
@@ -19580,10 +19580,10 @@ namespace NWN.Core
     ///  - bReady: TRUE to mark the slot ready.
     public static void SetSpellAbilityReady(uint oCreature, int nIndex, int bReady = TRUE)
     {
-      VM.StackPush(bReady);
-      VM.StackPush(nIndex);
-      VM.StackPush(oCreature);
-      VM.Call(1132);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bReady);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1132);
     }
 
     ///  Serializes the given JSON structure (which must be a valid template spec) into a template.<br/>
@@ -19596,21 +19596,21 @@ namespace NWN.Core
     ///    JsonToTemplate(JSON_NULL, ..) can be used to delete a previously-generated file.
     public static int JsonToTemplate(System.IntPtr jTemplateSpec, string sResRef, int nResType)
     {
-      VM.StackPush(nResType);
-      VM.StackPush(sResRef);
-      VM.StackPush(jTemplateSpec, ENGINE_STRUCTURE_JSON);
-      VM.Call(1133);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nResType);
+      global::NWNX.NET.NWNXAPI.StackPushString(sResRef);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jTemplateSpec);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1133);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Modifies jObject in-place (with no memory copies of the full object).<br/>
     ///  jObject will have the key at sKey set to jValue.
     public static void JsonObjectSetInplace(System.IntPtr jObject, string sKey, System.IntPtr jValue)
     {
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
-      VM.StackPush(sKey);
-      VM.StackPush(jObject, ENGINE_STRUCTURE_JSON);
-      VM.Call(1134);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jValue);
+      global::NWNX.NET.NWNXAPI.StackPushString(sKey);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1134);
     }
 
     ///  Modifies jObject in-place (with no memory copies needed).<br/>
@@ -19618,9 +19618,9 @@ namespace NWN.Core
     ///  Will do nothing if jObject is not a object, or sKey does not exist on the object.
     public static void JsonObjectDelInplace(System.IntPtr jObject, string sKey)
     {
-      VM.StackPush(sKey);
-      VM.StackPush(jObject, ENGINE_STRUCTURE_JSON);
-      VM.Call(1135);
+      global::NWNX.NET.NWNXAPI.StackPushString(sKey);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1135);
     }
 
     ///  Modifies jArray in-place (with no memory copies needed).<br/>
@@ -19630,10 +19630,10 @@ namespace NWN.Core
     ///  nIndex = 0 inserts at the beginning of the array.
     public static void JsonArrayInsertInplace(System.IntPtr jArray, System.IntPtr jValue, int nIndex = -1)
     {
-      VM.StackPush(nIndex);
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
-      VM.StackPush(jArray, ENGINE_STRUCTURE_JSON);
-      VM.Call(1136);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jValue);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jArray);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1136);
     }
 
     ///  Modifies jArray in-place (with no memory copies needed).<br/>
@@ -19641,10 +19641,10 @@ namespace NWN.Core
     ///  Will do nothing if jArray is not an array or nIndex is out of range.
     public static void JsonArraySetInplace(System.IntPtr jArray, int nIndex, System.IntPtr jValue)
     {
-      VM.StackPush(jValue, ENGINE_STRUCTURE_JSON);
-      VM.StackPush(nIndex);
-      VM.StackPush(jArray, ENGINE_STRUCTURE_JSON);
-      VM.Call(1137);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jValue);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jArray);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1137);
     }
 
     ///  Modifies jArray in-place (with no memory copies needed).<br/>
@@ -19652,9 +19652,9 @@ namespace NWN.Core
     ///  Will do nothing if jArray is not an array or nIndex is out of range.
     public static void JsonArrayDelInplace(System.IntPtr jArray, int nIndex)
     {
-      VM.StackPush(nIndex);
-      VM.StackPush(jArray, ENGINE_STRUCTURE_JSON);
-      VM.Call(1138);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nIndex);
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jArray);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1138);
     }
 
     ///  Sets a grass override for nMaterialId in oArea.<br/>
@@ -19670,30 +19670,30 @@ namespace NWN.Core
     ///    - vDiffuseColor: the diffuse color of the grass, xyz as RGB clamped to 0.0-1.0f per value.
     public static void SetAreaGrassOverride(uint oArea, int nMaterialId, string sTexture, float fDensity, float fHeight, System.Numerics.Vector3 vAmbientColor, System.Numerics.Vector3 vDiffuseColor)
     {
-      VM.StackPush(vDiffuseColor);
-      VM.StackPush(vAmbientColor);
-      VM.StackPush(fHeight);
-      VM.StackPush(fDensity);
-      VM.StackPush(sTexture);
-      VM.StackPush(nMaterialId);
-      VM.StackPush(oArea);
-      VM.Call(1139);
+      global::NWNX.NET.NWNXAPI.StackPushVector(vDiffuseColor);
+      global::NWNX.NET.NWNXAPI.StackPushVector(vAmbientColor);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fHeight);
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fDensity);
+      global::NWNX.NET.NWNXAPI.StackPushString(sTexture);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nMaterialId);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1139);
     }
 
     ///  Remove a grass override from oArea for nMaterialId.
     public static void RemoveAreaGrassOverride(uint oArea, int nMaterialId)
     {
-      VM.StackPush(nMaterialId);
-      VM.StackPush(oArea);
-      VM.Call(1140);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nMaterialId);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1140);
     }
 
     ///  Set to TRUE to disable the default grass of oArea.
     public static void SetAreaDefaultGrassDisabled(uint oArea, int bDisabled)
     {
-      VM.StackPush(bDisabled);
-      VM.StackPush(oArea);
-      VM.Call(1141);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bDisabled);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1141);
     }
 
     ///  Gets the NoRest area flag.<br/>
@@ -19701,26 +19701,26 @@ namespace NWN.Core
     ///  Passing in OBJECT_INVALID to parameter oArea will result in operating on the area of the caller.
     public static int GetAreaNoRestFlag(uint oArea = OBJECT_INVALID)
     {
-      VM.StackPush(oArea);
-      VM.Call(1142);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1142);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Sets the NoRest flag on an area.<br/>
     ///  Passing in OBJECT_INVALID to parameter oArea will result in operating on the area of the caller.
     public static void SetAreaNoRestFlag(int bNoRestFlag, uint oArea = OBJECT_INVALID)
     {
-      VM.StackPush(oArea);
-      VM.StackPush(bNoRestFlag);
-      VM.Call(1143);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bNoRestFlag);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1143);
     }
 
     ///  Sets the age of oCreature.
     public static void SetAge(uint oCreature, int nAge)
     {
-      VM.StackPush(nAge);
-      VM.StackPush(oCreature);
-      VM.Call(1144);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nAge);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1144);
     }
 
     ///  Gets the base number of attacks oCreature can make every round<br/>
@@ -19728,26 +19728,26 @@ namespace NWN.Core
     ///  * bCheckOverridenValue - Checks for SetBaseAttackBonus() on the creature, if FALSE will return the non-overriden version
     public static int GetAttacksPerRound(uint oCreature, int bCheckOverridenValue = TRUE)
     {
-      VM.StackPush(bCheckOverridenValue);
-      VM.StackPush(oCreature);
-      VM.Call(1145);
-      return VM.StackPopInt();
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bCheckOverridenValue);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1145);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
     ///  Create an Enemy Attack Bonus effect. Creatures attacking the given creature with melee/ranged attacks or touch attacks get a bonus to hit.
     public static System.IntPtr EffectEnemyAttackBonus(int nBonus)
     {
-      VM.StackPush(nBonus);
-      VM.Call(1146);
-      return VM.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBonus);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1146);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
     ///  Set to TRUE to disable the inaccessible tile border of oArea. Requires a client area reload to take effect.
     public static void SetAreaTileBorderDisabled(uint oArea, int bDisabled)
     {
-      VM.StackPush(bDisabled);
-      VM.StackPush(oArea);
-      VM.Call(1147);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bDisabled);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1147);
     }
 
   }

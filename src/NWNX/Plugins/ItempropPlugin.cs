@@ -16,7 +16,7 @@ namespace NWN.Core.NWNX
     {
       const string sFunc = "UnpackIP";
       VM.NWNX.SetFunction(NWNX_ItemProperty, sFunc);
-      VM.NWNX.StackPush(ip, ENGINE_STRUCTURE_ITEMPROPERTY);
+      VM.NWNX.StackPush(ENGINE_STRUCTURE_ITEMPROPERTY, ip);
       VM.NWNX.Call();
       NWNX_IPUnpacked n = default;
       n.sID = VM.NWNX.StackPopString();
