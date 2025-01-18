@@ -1,5 +1,5 @@
 # NWN.Core #
-A NuGet package implementing core functionality for the [NWNXEE](https://github.com/nwnxee/unified "NWNXEE") DotNET plugin.
+A function library for base NWN and NWNX plugin nwscript functions.
 
 ## Why should I care about NWN.Core? ##
 NWN.Core is a low-level function wrapper that exposes all engine events, NWScript and relevant NWNX functionality to C#.
@@ -9,10 +9,10 @@ The library is automatically updated to match latest NWNEE and NWNXEE versions.
 
 NWN.Core exposes the base game functions by sorting them into static classes, and does not include object wrappers/enums or utilize other C# features.
 
-It can serve both as a primary tool in its own right for simpler setups and as a base for more elegant or abstract solutions.
+It is mainly intended to be consumed by other libraries for more elegant and abstracted solutions, but can be configured with a minimal wrapper for simple applications.
 
 ## Getting started ##
-Before getting started, you will need to install .NET 5 or greater. Installation instructions can be found [here](https://docs.microsoft.com/en-au/dotnet/core/install/linux).
+Before getting started, you will need to install .NET 8 or greater. Installation instructions can be found [here](https://docs.microsoft.com/en-au/dotnet/core/install/linux).
 
 1. Create a new C# project and add NWN.Core using [nuget](https://www.nuget.org/packages/NWN.Core). You can do this via the command line by opening the project directory, and running `dotnet add package NWN.Core`.
 
@@ -20,27 +20,47 @@ Before getting started, you will need to install .NET 5 or greater. Installation
 
 ```csharp
 using System;
+using System.Runtime.InteropServices;
 using NWN.Core;
+using NWNX.NET;
+using NWNX.NET.Native;
 
 namespace NWN
 {
-  public static class Internal
+  public static unsafe class Internal
   {
-    public static int Bootstrap(IntPtr nativeHandlesPtr, int nativeHandlesLength)
-    {
-      int retVal = NWNCore.Init(nativeHandlesPtr, nativeHandlesLength, out CoreGameManager coreGameManager);
-      coreGameManager.OnSignal += OnSignal;
-      coreGameManager.OnServerLoop += OnServerLoop;
-      coreGameManager.OnRunScript += OnRunScript;
+    private static readonly MyFunctionHandler myFunctionHandler = new MyFunctionHandler();
 
-      return retVal;
+    public static void Bootstrap()
+    {
+      NWNCore.Init(myFunctionHandler); // Bootstrap NWN Core
+      NWNXAPI.RegisterRunScriptHandler(&OnRunScript); // Register script handler function
     }
 
-    private static void OnRunScript(string scriptName, uint objectSelf, out int scriptHandlerResult) { scriptHandlerResult = -1; }
+    [UnmanagedCallersOnly]
+    private static int OnRunScript(IntPtr scriptPtr, uint oidSelf)
+    {
+      string? script = scriptPtr.ReadNullTerminatedString(); // Convert script into usable name.
+      myFunctionHandler.ObjectSelf = oidSelf; // Update OBJECT_SELF constant.
 
-    private static void OnSignal(string signal) {}
+      if (script == "my_script") // Check the script name matches our expected value
+      {
+        NWScript.WriteTimestampedLogEntry("Code from C#!");
+        return 0; // Signal that we handled this script call, and to skip any .nss scripts with the same name
+      }
 
-    private static void OnServerLoop(ulong frame) {}
+      return ~0;
+    }
+  }
+
+  public class MyFunctionHandler : ICoreFunctionHandler
+  {
+    public uint ObjectSelf { get; set; }
+
+    // Advanced setup - required for AssignCommand/DelayCommand/ActionDoCommand functions in NwScript
+    public void ClosureAssignCommand(uint obj, Action func) {}
+    public void ClosureDelayCommand(uint obj, float duration, Action func) {}
+    public void ClosureActionDoCommand(uint obj, Action func) {}
   }
 }
 ```
@@ -54,17 +74,18 @@ namespace NWN
     |----linux-x86
          |----nwserver-linux
          |----NWNX_DotNET.so
-    modbin/
+    dotnet/
     |----YourProject.dll
     |----NWN.Core.dll
+    |----NWNX.NET.dll
 ```
 
 7. Configure NWNX options to the following:
 
-|Option|Notes|
-|-|-|
-| NWNX_DOTNET_ASSEMBLY | Where `YourProject.dll` was built and copied to in step 5, without the extension. E.g: `NWNX_DOTNET_ASSEMBLY=/nwn/home/modbin/YourProject` |
-| NWNX_DOTNET_ENTRYPOINT | Can be left blank, UNLESS you put your Bootstrap function in a different namespace/class instead of "NWN.Internal" |
+|Option| Notes                                                                                                                                      |
+|-|--------------------------------------------------------------------------------------------------------------------------------------------|
+| NWNX_DOTNET_ASSEMBLY | Where `YourProject.dll` was built and copied to in step 5, without the extension. E.g: `NWNX_DOTNET_ASSEMBLY=/nwn/home/dotnet/YourProject` |
+| NWNX_DOTNET_ENTRYPOINT | Can be left blank, UNLESS you put your Bootstrap function in a different namespace/class instead of "NWN.Internal"                         |
 
 8. Run the server as mentioned in the instructions [here](https://github.com/nwnxee/unified#running-the-server-native).
 
@@ -72,43 +93,48 @@ namespace NWN
 
 Once you have bootstrapped the library, you are all set to use the API!
 
-NWN.Core sends 3 different events that can be hooked once you have bootstrapped the library.
+There are a few events that can be used through the underlying NWNX API:
 
 ```csharp
-      int retVal = NWNCore.Init(nativeHandlesPtr, nativeHandlesLength, out CoreGameManager coreGameManager);
-      coreGameManager.OnSignal += OnSignal;
-      coreGameManager.OnServerLoop += OnServerLoop;
-      coreGameManager.OnRunScript += OnRunScript;
+      NWNCore.Init(myFunctionHandler);
+      NWNXAPI.RegisterRunScriptHandler(&OnRunScript);
+      NWNXAPI.RegisterMainLoopHandler(&OnMainLoop);
+      NWNXAPI.RegisterSignalHandler(&OnSignal);
 ```
 
-The right assignment of `+=` is the name of your function to handle the event.
+The method parameter is the name of your function to handle the event.
 
 As an example, to write the module name to the console once the server starts:
 
 ```csharp
 using System;
+using System.Runtime.InteropServices;
 using NWN.Core;
+using NWNX.NET;
+using NWNX.NET.Native;
 
 namespace NWN
 {
-  public static class Internal
+  public static unsafe class Internal
   {
-    public static int Bootstrap(IntPtr nativeHandlesPtr, int nativeHandlesLength)
+    private static readonly MyFunctionHandler myFunctionHandler = new MyFunctionHandler();
+
+    public static void Bootstrap()
     {
       // Bootstrap NWN.Core
-      int retVal = NWNCore.Init(nativeHandlesPtr, nativeHandlesLength, out CoreGameManager coreGameManager);
+      NWNCore.Init(myFunctionHandler);
 
       // Register "private static void OnSignal" as the "OnSignal" handler.
-      coreGameManager.OnSignal += OnSignal;
-
-      // Return the bootstrap result.
-      return retVal;
+      NWNXAPI.RegisterSignalHandler(&OnSignal);
     }
 
-    // Since this was assigned as the OnSignal handler, it will be called on startup and shutdown.
-    private static void OnSignal(string signal)
+    [UnmanagedCallersOnly]
+    private static void OnSignal(IntPtr signalPtr)
     {
-      // Check for the correct signal.
+      // Convert signal to usable format
+      string? signal = signalPtr.ReadNullTerminatedString();
+
+      // Check for correct signal
       if (signal == "ON_MODULE_LOAD_FINISH")
       {
         // Get the module name.
@@ -119,13 +145,23 @@ namespace NWN
       }
     }
   }
+
+  public class MyFunctionHandler : ICoreFunctionHandler
+  {
+    public uint ObjectSelf { get; set; }
+
+    // Advanced setup - required for AssignCommand/DelayCommand/ActionDoCommand functions in NwScript
+    public void ClosureAssignCommand(uint obj, Action func) {}
+    public void ClosureDelayCommand(uint obj, float duration, Action func) {}
+    public void ClosureActionDoCommand(uint obj, Action func) {}
+  }
 }
 ```
 
-### OnMainLoop ###
+### NWNXAPI.RegisterMainLoopHandler ###
 This function is called on every repetition of the server's main loop. Nothing expensive should be done here, for obvious reasons.
 
-### OnRunScript ###
+### NWNXAPI.RegisterRunScriptHandler ###
 This function is called every time that the server attempts to call a native NWScript file (.ncs). Its parameters are the name of the script called and the object on which the script was called (and which will represent the value of the NWScript constant OBJECT_SELF in the script itself). The scriptHandlerResult value of this function can be -1, 0, or 1, each signifying something different:
 ```
 -1 : Function not handled by DotNET. This will attempt to call any actual .ncs with the right name.
@@ -134,7 +170,7 @@ This function is called every time that the server attempts to call a native NWS
 ```
 A result of either TRUE or FALSE will prevent any .ncs file with the same name from being called. The value is discarded except in the case of StartingConditional scripts, where it represents the return value of the StartingConditional() function. Most implementations will use some method such as a dictionary of delegates to control custom behavior based on the script name passed, but the details are left up to the individual.
 
-### OnSignal ###
+### RegisterSignalHandler ###
 This function is called during significant server events. The string parameter indicates which signal has occurred.
 ```
 "ON_MODULE_LOAD_FINISH" - Called just before the OnModuleLoad event. Perform any init requiring NWScript usage here.
@@ -220,7 +256,7 @@ You can then use the NWScript API like this, and the cleanup will be done automa
 ```
 
 ## Contribute ##
-If you would like to contribute, you are more than welcome to join the NWNXEE DotNET Discord [here](https://discord.gg/BY9cq3Q "NWNXEE DotNET Discord"). We welcome contributions and suggestions of all kinds.
+If you would like to contribute, you are more than welcome to join the NWNXEE Developer Discord [here](https://discord.gg/CukSHZq "NWNXEE Developer Discord"). We welcome contributions and suggestions of all kinds.
 
 ## Credits ##
 The NWNXEE DotNET plugin was written by [Milos Tijanic](https://github.com/mtijanic "Milos Tijanic").
