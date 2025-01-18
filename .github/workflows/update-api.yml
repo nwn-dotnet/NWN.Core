@@ -123,7 +123,7 @@ jobs:
           cd ${GITHUB_WORKSPACE}/repo
           git config user.name jhett12321
           git config user.email 10942655+jhett12321@users.noreply.github.com
-          git add -A src/NWN/NWScript.cs src/NWNX/Plugins/
-          git diff-index --quiet HEAD src/NWN/NWScript.cs src/NWNX/Plugins/ ||
+          git add -A NWN.Core/src/NWN/NWScript.cs NWN.Core/src/NWNX/Plugins/
+          git diff-index --quiet HEAD NWN.Core/src/NWN/NWScript.cs NWN.Core/src/NWNX/Plugins/ ||
           git commit -m "Update APIs (NWNX: ${{ needs.download.outputs.nwnx_sha_short }}, NWN: ${{ needs.download.outputs.nwn_build }}.${{ needs.download.outputs.nwn_build_revision }}-${{ needs.download.outputs.nwn_build_postfix }})." &&
           if [ ${{ github.event.inputs.tag }} != '' ]; then git tag ${{ github.event.inputs.tag }} && git push --atomic origin ${{ github.ref }} ${{ github.event.inputs.tag }}; else git push; fi;
