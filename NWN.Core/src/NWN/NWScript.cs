@@ -268,6 +268,7 @@ namespace NWN.Core
     public const int SAVING_THROW_TYPE_EVIL = 17;
     public const int SAVING_THROW_TYPE_LAW = 18;
     public const int SAVING_THROW_TYPE_CHAOS = 19;
+    public const int SAVING_THROW_TYPE_PARALYSIS = 20;
     public const int IMMUNITY_TYPE_NONE = 0;
     public const int IMMUNITY_TYPE_MIND_SPELLS = 1;
     public const int IMMUNITY_TYPE_POISON = 2;
@@ -6224,8 +6225,8 @@ namespace NWN.Core
     public const string PLAYER_DEVICE_PROPERTY_GUI_SCALE = "gui_scale";
 
     ///  Client config values:
-    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_ANTIALIASING_MODE = "graphics.video.anti-aliasing-mode";
-    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_ANISOTROPIC_FILTERING = "graphics.video.anisotropic-filtering.enabled";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_ANTIALIASING_MODE = "graphics.video.anti-aliasing.mode";
+    public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_ANISOTROPIC_FILTERING = "graphics.video.anisotropic-filtering.mode";
     public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_GAMMA = "graphics.gamma";
     public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_TEXTURE_ANIMATIONS = "graphics.texture-animations.enabled";
     public const string PLAYER_DEVICE_PROPERTY_GRAPHICS_SKYBOXES = "graphics.skyboxes.enabled";
@@ -6265,12 +6266,14 @@ namespace NWN.Core
     public const string PLAYER_DEVICE_PROPERTY_UI_MOUSEOVER_FEEDBACK = "ui.mouseover-feedback";
     public const string PLAYER_DEVICE_PROPERTY_UI_TEXT_BUBBLE = "ui.text-bubble-mode";
     public const string PLAYER_DEVICE_PROPERTY_UI_TARGETING_FEEDBACK = "ui.targeting-feedback-mode";
+    public const string PLAYER_DEVICE_PROPERTY_UI_CAN_CLICK_SELF_WHILE_WALKING = "ui.can-click-self-while-walking";
     public const string PLAYER_DEVICE_PROPERTY_UI_FLOATING_TEXT_FEEDBACK = "ui.floating-text-feedback";
     public const string PLAYER_DEVICE_PROPERTY_UI_FLOATING_TEXT_FEEDBACK_DAMAGE_TOTALS_ONLY = "ui.floating-text-feedback-damage-totals-only";
     public const string PLAYER_DEVICE_PROPERTY_UI_HIDE_QUICKCHAT_TEXT_IN_CHAT_WINDOW = "ui.hide-quick-chat-text-in-chat-window";
     public const string PLAYER_DEVICE_PROPERTY_UI_CONFIRM_SELFCAST_SPELLS = "ui.confirm-self-cast-spells";
     public const string PLAYER_DEVICE_PROPERTY_UI_CONFIRM_SELFCAST_FEATS = "ui.confirm-self-cast-feats";
     public const string PLAYER_DEVICE_PROPERTY_UI_CONFIRM_SELFCAST_ITEMS = "ui.confirm-self-cast-items";
+    public const string PLAYER_DEVICE_PROPERTY_UI_CHARGEN_SORT_CLASSES = "ui.chargen.sort-classes";
     public const string PLAYER_DEVICE_PROPERTY_UI_CHAT_PANE_PRIMARY_HEIGHT = "ui.chat.pane.primary.height";
     public const string PLAYER_DEVICE_PROPERTY_UI_CHAT_PANE_SECONDARY_HEIGHT = "ui.chat.pane.secondary.height";
     public const string PLAYER_DEVICE_PROPERTY_UI_CHAT_SWEAR_FILTER = "ui.chat.swear-filter.enabled";
@@ -6301,6 +6304,7 @@ namespace NWN.Core
     public const int PLAYER_DEVICE_PLATFORM_LINUX_ARM64 = 13;
     public const int PLAYER_DEVICE_PLATFORM_MAC_X86 = 20;
     public const int PLAYER_DEVICE_PLATFORM_MAC_X64 = 21;
+    public const int PLAYER_DEVICE_PLATFORM_MAC_ARM64 = 22;
     public const int PLAYER_DEVICE_PLATFORM_IOS = 30;
     public const int PLAYER_DEVICE_PLATFORM_ANDROID_ARM32 = 40;
     public const int PLAYER_DEVICE_PLATFORM_ANDROID_ARM64 = 41;
@@ -6551,6 +6555,8 @@ namespace NWN.Core
     public const int AUDIOSTREAM_IDENTIFIER_7 = 7;
     public const int AUDIOSTREAM_IDENTIFIER_8 = 8;
     public const int AUDIOSTREAM_IDENTIFIER_9 = 9;
+    public const int SPELL_FAILURE_TYPE_ALL = 0;
+    public const int SPELL_FAILURE_TYPE_ARCANE = 1;
     public const string sLanguage = "nwscript";
 
     ///  Get an integer between 0 and nMaxInteger-1.<br/>
@@ -6639,24 +6645,26 @@ namespace NWN.Core
       global::NWNX.NET.NWNXAPI.CallBuiltIn(8);
     }
 
-    ///  Clear all the actions of the caller.<br/>
+    ///  Clear all the actions of oObject.<br/>
     ///  * No return value, but if an error occurs, the log file will contain<br/>
     ///    &amp;quot;ClearAllActions failed.&amp;quot;.<br/>
     ///  - nClearCombatState: if true, this will immediately clear the combat state<br/>
     ///    on a creature, which will stop the combat music and allow them to rest,<br/>
     ///    engage in dialog, or other actions that they would normally have to wait for.
-    public static void ClearAllActions(int nClearCombatState = FALSE)
+    public static void ClearAllActions(int nClearCombatState = FALSE, uint oObject = OBJECT_INVALID)
     {
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
       global::NWNX.NET.NWNXAPI.StackPushInteger(nClearCombatState);
       global::NWNX.NET.NWNXAPI.CallBuiltIn(9);
     }
 
-    ///  Cause the caller to face fDirection.<br/>
+    ///  Cause oObject to face fDirection.<br/>
     ///  - fDirection is expressed as anticlockwise degrees from Due East.<br/>
     ///    DIRECTION_EAST, DIRECTION_NORTH, DIRECTION_WEST and DIRECTION_SOUTH are<br/>
     ///    predefined. (0.0f=East, 90.0f=North, 180.0f=West, 270.0f=South)
-    public static void SetFacing(float fDirection)
+    public static void SetFacing(float fDirection, uint oObject = OBJECT_INVALID)
     {
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
       global::NWNX.NET.NWNXAPI.StackPushFloat(fDirection);
       global::NWNX.NET.NWNXAPI.CallBuiltIn(10);
     }
@@ -7028,10 +7036,11 @@ namespace NWN.Core
       global::NWNX.NET.NWNXAPI.CallBuiltIn(40);
     }
 
-    ///  Get the distance from the caller to oObject in metres.<br/>
+    ///  Get the distance from oFrom to oObject in metres.<br/>
     ///  * Return value on error: -1.0f
-    public static float GetDistanceToObject(uint oObject)
+    public static float GetDistanceToObject(uint oObject, uint oFrom = OBJECT_INVALID)
     {
+      global::NWNX.NET.NWNXAPI.StackPushObject(oFrom);
       global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
       global::NWNX.NET.NWNXAPI.CallBuiltIn(41);
       return global::NWNX.NET.NWNXAPI.StackPopFloat();
@@ -7045,16 +7054,20 @@ namespace NWN.Core
       return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
-    ///  Cause the action subject to open oDoor
-    public static void ActionOpenDoor(uint oDoor)
+    ///  Cause the action subject to open oDoor<br/>
+    ///  - bRun: If TRUE, subject will run to the door instead of walking
+    public static void ActionOpenDoor(uint oDoor, int bRun = FALSE)
     {
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bRun);
       global::NWNX.NET.NWNXAPI.StackPushObject(oDoor);
       global::NWNX.NET.NWNXAPI.CallBuiltIn(43);
     }
 
-    ///  Cause the action subject to close oDoor
-    public static void ActionCloseDoor(uint oDoor)
+    ///  Cause the action subject to close oDoor<br/>
+    ///  - bRun: If TRUE, subject will run to the door instead of walking
+    public static void ActionCloseDoor(uint oDoor, int bRun = FALSE)
     {
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bRun);
       global::NWNX.NET.NWNXAPI.StackPushObject(oDoor);
       global::NWNX.NET.NWNXAPI.CallBuiltIn(44);
     }
@@ -7469,9 +7482,16 @@ namespace NWN.Core
     ///    creature being added to the area<br/>
     ///  - nUseAppearAnimation: should this creature play it&amp;apos;s &amp;quot;appear&amp;quot; animation when it is<br/>
     ///    summoned. If zero, it will just fade in somewhere near the target.  If the value is 1<br/>
-    ///    it will use the appear animation, and if it&amp;apos;s 2 it will use appear2 (which doesn&amp;apos;t exist for most creatures)
-    public static System.IntPtr EffectSummonCreature(string sCreatureResref, int nVisualEffectId = VFX_NONE, float fDelaySeconds = 0.0f, int nUseAppearAnimation = 0)
+    ///    it will use the appear animation, and if it&amp;apos;s 2 it will use appear2 (which doesn&amp;apos;t exist for most creatures)<br/>
+    ///  - nUnsummonVisualEffectId: VFX_* to apply when the creature is unsummoned<br/>
+    ///  - oSummonToAdd: If sCreatureResref is blank, this object (if they have no master) is instead added as the summon, applying nVisualEffectId at their location<br/>
+    ///                  fDelaySeconds and nUseAppearAnimation are unused, and no &amp;quot;Summoned a creature&amp;quot; feedback is sent, allowing you to do your own.<br/>
+    ///                  The creature otherwise acts like a summon from then on, including not giving out XP for being killed, and able to be <br/>
+    ///                  unsummoned by the master or when the effect expires.
+    public static System.IntPtr EffectSummonCreature(string sCreatureResref, int nVisualEffectId = VFX_NONE, float fDelaySeconds = 0.0f, int nUseAppearAnimation = 0, int nUnsummonVisualEffectId = VFX_IMP_UNSUMMON, uint oSummonToAdd = OBJECT_INVALID)
     {
+      global::NWNX.NET.NWNXAPI.StackPushObject(oSummonToAdd);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nUnsummonVisualEffectId);
       global::NWNX.NET.NWNXAPI.StackPushInteger(nUseAppearAnimation);
       global::NWNX.NET.NWNXAPI.StackPushFloat(fDelaySeconds);
       global::NWNX.NET.NWNXAPI.StackPushInteger(nVisualEffectId);
@@ -8187,9 +8207,10 @@ namespace NWN.Core
       return global::NWNX.NET.NWNXAPI.StackPopVector();
     }
 
-    ///  Cause the caller to face vTarget
-    public static void SetFacingPoint(System.Numerics.Vector3 vTarget)
+    ///  Cause oObject to face vTarget.
+    public static void SetFacingPoint(System.Numerics.Vector3 vTarget, uint oObject = OBJECT_INVALID)
     {
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
       global::NWNX.NET.NWNXAPI.StackPushVector(vTarget);
       global::NWNX.NET.NWNXAPI.CallBuiltIn(143);
     }
@@ -8210,22 +8231,24 @@ namespace NWN.Core
       return global::NWNX.NET.NWNXAPI.StackPopFloat();
     }
 
-    ///  The caller will perform a Melee Touch Attack on oTarget<br/>
+    ///  The oAttacker will perform a Melee Touch Attack on oTarget.<br/>
     ///  This is not an action, and it assumes the caller is already within range of<br/>
     ///  oTarget<br/>
     ///  * Returns 0 on a miss, 1 on a hit and 2 on a critical hit
-    public static int TouchAttackMelee(uint oTarget, int bDisplayFeedback = TRUE)
+    public static int TouchAttackMelee(uint oTarget, int bDisplayFeedback = TRUE, uint oAttacker = OBJECT_INVALID)
     {
+      global::NWNX.NET.NWNXAPI.StackPushObject(oAttacker);
       global::NWNX.NET.NWNXAPI.StackPushInteger(bDisplayFeedback);
       global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
       global::NWNX.NET.NWNXAPI.CallBuiltIn(146);
       return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
-    ///  The caller will perform a Ranged Touch Attack on oTarget<br/>
+    ///  The oAttacker will perform a Ranged Touch Attack on oTarget.<br/>
     ///  * Returns 0 on a miss, 1 on a hit and 2 on a critical hit
-    public static int TouchAttackRanged(uint oTarget, int bDisplayFeedback = TRUE)
+    public static int TouchAttackRanged(uint oTarget, int bDisplayFeedback = TRUE, uint oAttacker = OBJECT_INVALID)
     {
+      global::NWNX.NET.NWNXAPI.StackPushObject(oAttacker);
       global::NWNX.NET.NWNXAPI.StackPushInteger(bDisplayFeedback);
       global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
       global::NWNX.NET.NWNXAPI.CallBuiltIn(147);
@@ -9433,10 +9456,11 @@ namespace NWN.Core
       return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
-    ///  Use this in an OnClosed script to get the object that closed the door or placeable.<br/>
-    ///  * Returns OBJECT_INVALID if the caller is not a valid door or placeable.
-    public static uint GetLastClosedBy()
+    ///  Use this in an OnClosed script to get the object that closed oObject.<br/>
+    ///  * Returns OBJECT_INVALID if oObject is not a valid door, placeable or store.
+    public static uint GetLastClosedBy(uint oObject = OBJECT_INVALID)
     {
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
       global::NWNX.NET.NWNXAPI.CallBuiltIn(260);
       return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
@@ -10053,13 +10077,15 @@ namespace NWN.Core
       global::NWNX.NET.NWNXAPI.CallBuiltIn(322);
     }
 
-    ///  Set the destroyable status of the caller.<br/>
+    ///  Set the destroyable status of oObject<br/>
     ///  - bDestroyable: If this is FALSE, the caller does not fade out on death, but<br/>
     ///    sticks around as a corpse.<br/>
     ///  - bRaiseable: If this is TRUE, the caller can be raised via resurrection.<br/>
-    ///  - bSelectableWhenDead: If this is TRUE, the caller is selectable after death.
-    public static void SetIsDestroyable(int bDestroyable, int bRaiseable = TRUE, int bSelectableWhenDead = FALSE)
+    ///  - bSelectableWhenDead: If this is TRUE, the caller is selectable after death.<br/>
+    ///  - oObject: Object to affect.
+    public static void SetIsDestroyable(int bDestroyable, int bRaiseable = TRUE, int bSelectableWhenDead = FALSE, uint oObject = OBJECT_INVALID)
     {
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
       global::NWNX.NET.NWNXAPI.StackPushInteger(bSelectableWhenDead);
       global::NWNX.NET.NWNXAPI.StackPushInteger(bRaiseable);
       global::NWNX.NET.NWNXAPI.StackPushInteger(bDestroyable);
@@ -10196,7 +10222,7 @@ namespace NWN.Core
 
     ///  Get the first item in oTarget&amp;apos;s inventory (start to cycle through oTarget&amp;apos;s<br/>
     ///  inventory).<br/>
-    ///  * Returns OBJECT_INVALID if the caller is not a creature, item, placeable or store,<br/>
+    ///  * Returns OBJECT_INVALID if oTarget is not a creature, item, placeable or store,<br/>
     ///    or if no item is found.
     public static uint GetFirstItemInInventory(uint oTarget = OBJECT_INVALID)
     {
@@ -10207,7 +10233,7 @@ namespace NWN.Core
 
     ///  Get the next item in oTarget&amp;apos;s inventory (continue to cycle through oTarget&amp;apos;s<br/>
     ///  inventory).<br/>
-    ///  * Returns OBJECT_INVALID if the caller is not a creature, item, placeable or store,<br/>
+    ///  * Returns OBJECT_INVALID if oTarget is not a creature, item, placeable or store,<br/>
     ///    or if no item is found.
     public static uint GetNextItemInInventory(uint oTarget = OBJECT_INVALID)
     {
@@ -10274,7 +10300,7 @@ namespace NWN.Core
     }
 
     ///  Get the last object that damaged oObject<br/>
-    ///  * Returns OBJECT_INVALID if the passed in object is not a valid object.
+    ///  * Returns OBJECT_INVALID if oObject is not a valid object.
     public static uint GetLastDamager(uint oObject = OBJECT_INVALID)
     {
       global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
@@ -10291,26 +10317,29 @@ namespace NWN.Core
       return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
-    ///  Get the last object that disturbed the inventory of the caller.<br/>
-    ///  * Returns OBJECT_INVALID if the caller is not a valid creature or placeable.
-    public static uint GetLastDisturbed()
+    ///  Get the last object that disturbed the inventory of oObject.<br/>
+    ///  * Returns OBJECT_INVALID if oObject is not a valid creature or placeable.
+    public static uint GetLastDisturbed(uint oObject = OBJECT_INVALID)
     {
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
       global::NWNX.NET.NWNXAPI.CallBuiltIn(348);
       return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
-    ///  Get the last object that locked the caller.<br/>
-    ///  * Returns OBJECT_INVALID if the caller is not a valid door or placeable.
-    public static uint GetLastLocked()
+    ///  Get the last object that locked oObject.<br/>
+    ///  * Returns OBJECT_INVALID if oObject is not a valid door or placeable.
+    public static uint GetLastLocked(uint oObject = OBJECT_INVALID)
     {
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
       global::NWNX.NET.NWNXAPI.CallBuiltIn(349);
       return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
-    ///  Get the last object that unlocked the caller.<br/>
-    ///  * Returns OBJECT_INVALID if the caller is not a valid door or placeable.
-    public static uint GetLastUnlocked()
+    ///  Get the last object that unlocked oObject.<br/>
+    ///  * Returns OBJECT_INVALID if oObject is not a valid door or placeable.
+    public static uint GetLastUnlocked(uint oObject = OBJECT_INVALID)
     {
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
       global::NWNX.NET.NWNXAPI.CallBuiltIn(350);
       return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
@@ -10327,19 +10356,21 @@ namespace NWN.Core
       return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
-    ///  Get the type of disturbance (INVENTORY_DISTURB_*) that caused the caller&amp;apos;s<br/>
+    ///  Get the type of disturbance (INVENTORY_DISTURB_*) that caused the oObject&amp;apos;s<br/>
     ///  OnInventoryDisturbed script to fire.  This will only work for creatures and<br/>
     ///  placeables.
-    public static int GetInventoryDisturbType()
+    public static int GetInventoryDisturbType(uint oObject = OBJECT_INVALID)
     {
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
       global::NWNX.NET.NWNXAPI.CallBuiltIn(352);
       return global::NWNX.NET.NWNXAPI.StackPopInteger();
     }
 
-    ///  get the item that caused the caller&amp;apos;s OnInventoryDisturbed script to fire.<br/>
-    ///  * Returns OBJECT_INVALID if the caller is not a valid object.
-    public static uint GetInventoryDisturbItem()
+    ///  get the item that caused oObject&amp;apos;s OnInventoryDisturbed script to fire.<br/>
+    ///  * Returns OBJECT_INVALID if the oObject is not a valid object.
+    public static uint GetInventoryDisturbItem(uint oObject = OBJECT_INVALID)
     {
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
       global::NWNX.NET.NWNXAPI.CallBuiltIn(353);
       return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
@@ -10568,10 +10599,11 @@ namespace NWN.Core
       return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
 
-    ///  Get the last creature that opened the caller.<br/>
-    ///  * Returns OBJECT_INVALID if the caller is not a valid door, placeable or store.
-    public static uint GetLastOpenedBy()
+    ///  Get the last creature that opened oObject.<br/>
+    ///  * Returns OBJECT_INVALID if oObject is not a valid door, placeable or store.
+    public static uint GetLastOpenedBy(uint oObject = OBJECT_INVALID)
     {
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
       global::NWNX.NET.NWNXAPI.CallBuiltIn(376);
       return global::NWNX.NET.NWNXAPI.StackPopObject();
     }
@@ -11411,9 +11443,19 @@ namespace NWN.Core
       return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
     }
 
-    ///  Create a Polymorph effect.
-    public static System.IntPtr EffectPolymorph(int nPolymorphSelection, int nLocked = FALSE)
+    ///  Create a Polymorph effect.<br/>
+    ///  - nLocked: If TRUE the creature cannot cancel the polymorph. <br/>
+    ///  - nUnpolymorphVFX: If -1 no VFX will play when this polymorph is removed. Else will play the relevant VFX.<br/>
+    ///  - nSpellAbilityModifier: Set a custom spell ability modifier for the 3 polymorph spells. <br/>
+    ///                           Save DC is 10 + Innate spell level + this ability modifier.<br/>
+    ///                           -1 uses the creators spellcasting/feat using class spellcasting ability modifier.<br/>
+    ///  - nSpellAbilityCasterLevel: Set a custom caster level for the 3 polymorph spells.<br/>
+    ///                              Default (0) is to use the first class slot class level as previously.
+    public static System.IntPtr EffectPolymorph(int nPolymorphSelection, int nLocked = FALSE, int nUnpolymorphVFX = VFX_IMP_POLYMORPH, int nSpellAbilityModifier = -1, int nSpellAbilityCasterLevel = 0)
     {
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellAbilityCasterLevel);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellAbilityModifier);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nUnpolymorphVFX);
       global::NWNX.NET.NWNXAPI.StackPushInteger(nLocked);
       global::NWNX.NET.NWNXAPI.StackPushInteger(nPolymorphSelection);
       global::NWNX.NET.NWNXAPI.CallBuiltIn(463);
@@ -14252,9 +14294,11 @@ namespace NWN.Core
 
     ///  Creates an effect that inhibits spells<br/>
     ///  - nPercent - percentage of failure<br/>
-    ///  - nSpellSchool - the school of spells affected.
-    public static System.IntPtr EffectSpellFailure(int nPercent = 100, int nSpellSchool = SPELL_SCHOOL_GENERAL)
+    ///  - nSpellSchool - the school of spells affected. Only applies to SPELL_FAILURE_TYPE_ALL.<br/>
+    ///  - nSpellFailureType - Use SPELL_FAILURE_TYPE_* constants for different spell failure types
+    public static System.IntPtr EffectSpellFailure(int nPercent = 100, int nSpellSchool = SPELL_SCHOOL_GENERAL, int nSpellFailureType = SPELL_FAILURE_TYPE_ALL)
     {
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellFailureType);
       global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellSchool);
       global::NWNX.NET.NWNXAPI.StackPushInteger(nPercent);
       global::NWNX.NET.NWNXAPI.CallBuiltIn(690);
@@ -16870,7 +16914,8 @@ namespace NWN.Core
     }
 
     ///  Makes oPC enter a targeting mode, letting them select an object as a target<br/>
-    ///  If a PC selects a target or cancels out, it will trigger the module OnPlayerTarget event.
+    ///  If a PC selects a target or cancels out, it will trigger the module OnPlayerTarget event.<br/>
+    ///  * nValidObjectTypes - If you use 0 will cancel any current targeting mode the client is in.
     public static void EnterTargetingMode(uint oPC, int nValidObjectTypes = OBJECT_TYPE_ALL, int nMouseCursorId = MOUSECURSOR_MAGIC, int nBadTargetCursor = MOUSECURSOR_NOMAGIC)
     {
       global::NWNX.NET.NWNXAPI.StackPushInteger(nBadTargetCursor);
@@ -17636,7 +17681,7 @@ namespace NWN.Core
       return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
     }
 
-    ///  Create a json bool valye.<br/>
+    ///  Create a json bool value.<br/>
     ///  You can say JSON_TRUE or JSON_FALSE for default parameters on functions to initialise with a bool.
     public static System.IntPtr JsonBool(int bValue)
     {
@@ -17772,9 +17817,17 @@ namespace NWN.Core
     ///  Transforms the given object into a json structure.<br/>
     ///  The json format is compatible with what https://github.com/niv/neverwinter.nim@1.4.3+ emits.<br/>
     ///  Returns the null json type on errors, or if oObject is not serializable, with JsonGetError() filled in.<br/>
-    ///  Supported object types: creature, item, trigger, placeable, door, waypoint, encounter, store, area (combined format)<br/>
+    ///  Supported object types: creature, item, trigger, placeable, door, waypoint, encounter, store, area (combined format), soundobject<br/>
     ///  If bSaveObjectState is TRUE, local vars, effects, action queue, and transition info (triggers, doors) are saved out<br/>
-    ///  (except for Combined Area Format, which always has object state saved out).
+    ///  (except for Combined Area Format, which always has object state saved out).<br/>
+    /// <br/>
+    ///  N.B.:<br/>
+    ///    This function is for advanced usecases that require understanding of the game&amp;apos;s internals<br/>
+    ///    and how the engine loads and migrates data as the game is changed to support new features.<br/>
+    ///    The only guarantee given is that older data files can be loaded on newer game versions.<br/>
+    ///    As such, fields can become deprecated or change meaning. You need to handle this by<br/>
+    ///    either constructing a clean-room GFF file, or by writing migration code using the<br/>
+    ///    game/build version getters.
     public static System.IntPtr ObjectToJson(uint oObject, int bSaveObjectState = FALSE)
     {
       global::NWNX.NET.NWNXAPI.StackPushInteger(bSaveObjectState);
@@ -17785,9 +17838,17 @@ namespace NWN.Core
 
     ///  Deserializes the game object described in jObject.<br/>
     ///  Returns OBJECT_INVALID on errors.<br/>
-    ///  Supported object types: creature, item, trigger, placeable, door, waypoint, encounter, store, area (combined format)<br/>
+    ///  Supported object types: creature, item, trigger, placeable, door, waypoint, encounter, store, area (combined format), soundobject<br/>
     ///  For areas, locLocation is ignored.<br/>
-    ///  If bLoadObjectState is TRUE, local vars, effects, action queue, and transition info (triggers, doors) are read in.
+    ///  If bLoadObjectState is TRUE, local vars, effects, action queue, and transition info (triggers, doors) are read in.<br/>
+    /// <br/>
+    ///  N.B.:<br/>
+    ///    This function is for advanced usecases that require understanding of the game&amp;apos;s internals<br/>
+    ///    and how the engine loads and migrates data as the game is changed to support new features.<br/>
+    ///    The only guarantee given is that older data files can be loaded on newer game versions.<br/>
+    ///    As such, fields can become deprecated or change meaning. You need to handle this by<br/>
+    ///    either constructing a clean-room GFF file, or by writing migration code using the<br/>
+    ///    game/build version getters.
     public static uint JsonToObject(System.IntPtr jObject, System.IntPtr locLocation, uint oOwner = OBJECT_INVALID, int bLoadObjectState = FALSE)
     {
       global::NWNX.NET.NWNXAPI.StackPushInteger(bLoadObjectState);
@@ -18743,9 +18804,12 @@ namespace NWN.Core
 
     ///  Ready a spell level for oCreature.<br/>
     ///  - nSpellLevel: 0-9<br/>
-    ///  - nClassType: a CLASS_TYPE_* constant or CLASS_TYPE_INVALID to ready the spell level for all classes.
-    public static void ReadySpellLevel(uint oCreature, int nSpellLevel, int nClassType = CLASS_TYPE_INVALID)
+    ///  - nClassType: a CLASS_TYPE_* constant or CLASS_TYPE_INVALID to ready the spell level for all classes.<br/>
+    ///  - nSlotsToReady: The amount of spells to set to ready at the given spell level. 0 will clear all uses, negative numbers will<br/>
+    ///                   reduce the amount, positive increase the amount.
+    public static void ReadySpellLevel(uint oCreature, int nSpellLevel, int nClassType = CLASS_TYPE_INVALID, int nSlotsToReady = 255)
     {
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSlotsToReady);
       global::NWNX.NET.NWNXAPI.StackPushInteger(nClassType);
       global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellLevel);
       global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
@@ -19141,7 +19205,8 @@ namespace NWN.Core
       return global::NWNX.NET.NWNXAPI.StackPopString();
     }
 
-    ///  In the spell script returns the feat used, or -1 if no feat was used
+    ///  In the spell script returns the feat used, or -1 if no feat was used<br/>
+    ///  In an Area of Effect script returns the feat used to generate it (or -1 otherwise)
     public static int GetSpellFeatId()
     {
       global::NWNX.NET.NWNXAPI.CallBuiltIn(1095);
@@ -19320,7 +19385,8 @@ namespace NWN.Core
     }
 
     ///  Returns TRUE if the last spell was cast spontaneously<br/>
-    ///  eg; a Cleric casting SPELL_CURE_LIGHT_WOUNDS when it is not prepared, using another level 1 slot
+    ///  eg; a Cleric casting SPELL_CURE_LIGHT_WOUNDS when it is not prepared, using another level 1 slot<br/>
+    ///  Area of Effect objects can also retrieve if the spell used to generate it was casted spontaneously.
     public static int GetSpellCastSpontaneously()
     {
       global::NWNX.NET.NWNXAPI.CallBuiltIn(1110);
@@ -19748,6 +19814,342 @@ namespace NWN.Core
       global::NWNX.NET.NWNXAPI.StackPushInteger(bDisabled);
       global::NWNX.NET.NWNXAPI.StackPushObject(oArea);
       global::NWNX.NET.NWNXAPI.CallBuiltIn(1147);
+    }
+
+    ///  Checks if a object is destroyable (toggle this state with SetIsDestroyable)<br/>
+    ///  Returns TRUE if they can be destroyed, FALSE otherwise or in error
+    public static int GetIsDestroyable(uint oObject)
+    {
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1148);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
+    }
+
+    ///  Checks if a creature is able to be raised with EffectResurrection (toggle this state with SetIsDestroyable)<br/>
+    ///  Returns TRUE if they can be raised, FALSE otherwise or in error
+    public static int GetIsRaiseable(uint oCreature)
+    {
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1149);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
+    }
+
+    ///  Checks if a creature is able to be selected when dead (toggle this state with SetIsDestroyable)<br/>
+    ///  Returns TRUE if they can be selected, FALSE otherwise or in error
+    public static int GetIsSelectableWhenDead(uint oCreature)
+    {
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCreature);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1150);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
+    }
+
+    ///  Check if NWNX is currently running.<br/>
+    ///  Returns TRUE if NWNX is available, FALSE if not.
+    public static int NWNXGetIsAvailable()
+    {
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1151);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
+    }
+
+    ///  This is an internal function for NWNX, it will abort the script if called without NWNX running.
+    public static void NWNXCall(string sArg1, string sArg2)
+    {
+      global::NWNX.NET.NWNXAPI.StackPushString(sArg2);
+      global::NWNX.NET.NWNXAPI.StackPushString(sArg1);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1152);
+    }
+
+    ///  This is an internal function for NWNX, it will abort the script if called without NWNX running.
+    public static void NWNXPushInt(int nValue)
+    {
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1153);
+    }
+
+    ///  This is an internal function for NWNX, it will abort the script if called without NWNX running.
+    public static void NWNXPushFloat(float fValue)
+    {
+      global::NWNX.NET.NWNXAPI.StackPushFloat(fValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1154);
+    }
+
+    ///  This is an internal function for NWNX, it will abort the script if called without NWNX running.
+    public static void NWNXPushObject(uint oValue)
+    {
+      global::NWNX.NET.NWNXAPI.StackPushObject(oValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1155);
+    }
+
+    ///  This is an internal function for NWNX, it will abort the script if called without NWNX running.
+    public static void NWNXPushString(string sValue)
+    {
+      global::NWNX.NET.NWNXAPI.StackPushString(sValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1156);
+    }
+
+    ///  This is an internal function for NWNX, it will abort the script if called without NWNX running.
+    public static void NWNXPushVector(System.Numerics.Vector3 vValue)
+    {
+      global::NWNX.NET.NWNXAPI.StackPushVector(vValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1157);
+    }
+
+    ///  This is an internal function for NWNX, it will abort the script if called without NWNX running.
+    public static void NWNXPushLocation(System.IntPtr locValue)
+    {
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_LOCATION, locValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1158);
+    }
+
+    ///  This is an internal function for NWNX, it will abort the script if called without NWNX running.
+    public static void NWNXPushEffect(System.IntPtr eValue)
+    {
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EFFECT, eValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1159);
+    }
+
+    ///  This is an internal function for NWNX, it will abort the script if called without NWNX running.
+    public static void NWNXPushItemProperty(System.IntPtr ipValue)
+    {
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY, ipValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1160);
+    }
+
+    ///  This is an internal function for NWNX, it will abort the script if called without NWNX running.
+    public static void NWNXPushJson(System.IntPtr jValue)
+    {
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_JSON, jValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1161);
+    }
+
+    ///  This is an internal function for NWNX, it will abort the script if called without NWNX running.
+    public static void NWNXPushAction(System.Action aValue)
+    {
+      ;
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1162);
+    }
+
+    ///  This is an internal function for NWNX, it will abort the script if called without NWNX running.
+    public static void NWNXPushEvent(System.IntPtr eValue)
+    {
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_EVENT, eValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1163);
+    }
+
+    ///  This is an internal function for NWNX, it will abort the script if called without NWNX running.
+    public static void NWNXPushTalent(System.IntPtr tValue)
+    {
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_TALENT, tValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1164);
+    }
+
+    ///  This is an internal function for NWNX, it will abort the script if called without NWNX running.
+    public static void NWNXPushSqlquery(System.IntPtr sqlValue)
+    {
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_SQLQUERY, sqlValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1165);
+    }
+
+    ///  This is an internal function for NWNX, it will abort the script if called without NWNX running.
+    public static void NWNXPushCassowary(System.IntPtr cValue)
+    {
+      global::NWNX.NET.NWNXAPI.StackPushGameDefinedStructure(ENGINE_STRUCTURE_CASSOWARY, cValue);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1166);
+    }
+
+    ///  This is an internal function for NWNX, it will abort the script if called without NWNX running.
+    public static int NWNXPopInt()
+    {
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1167);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
+    }
+
+    ///  This is an internal function for NWNX, it will abort the script if called without NWNX running.
+    public static float NWNXPopFloat()
+    {
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1168);
+      return global::NWNX.NET.NWNXAPI.StackPopFloat();
+    }
+
+    ///  This is an internal function for NWNX, it will abort the script if called without NWNX running.
+    public static uint NWNXPopObject()
+    {
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1169);
+      return global::NWNX.NET.NWNXAPI.StackPopObject();
+    }
+
+    ///  This is an internal function for NWNX, it will abort the script if called without NWNX running.
+    public static string NWNXPopString()
+    {
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1170);
+      return global::NWNX.NET.NWNXAPI.StackPopString();
+    }
+
+    ///  This is an internal function for NWNX, it will abort the script if called without NWNX running.
+    public static System.Numerics.Vector3 NWNXPopVector()
+    {
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1171);
+      return global::NWNX.NET.NWNXAPI.StackPopVector();
+    }
+
+    ///  This is an internal function for NWNX, it will abort the script if called without NWNX running.
+    public static System.IntPtr NWNXPopLocation()
+    {
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1172);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_LOCATION);
+    }
+
+    ///  This is an internal function for NWNX, it will abort the script if called without NWNX running.
+    public static System.IntPtr NWNXPopEffect()
+    {
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1173);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EFFECT);
+    }
+
+    ///  This is an internal function for NWNX, it will abort the script if called without NWNX running.
+    public static System.IntPtr NWNXPopItemProperty()
+    {
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1174);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_ITEMPROPERTY);
+    }
+
+    ///  This is an internal function for NWNX, it will abort the script if called without NWNX running.
+    public static System.IntPtr NWNXPopJson()
+    {
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1175);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_JSON);
+    }
+
+    ///  This is an internal function for NWNX, it will abort the script if called without NWNX running.
+    public static System.IntPtr NWNXPopEvent()
+    {
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1176);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_EVENT);
+    }
+
+    ///  This is an internal function for NWNX, it will abort the script if called without NWNX running.
+    public static System.IntPtr NWNXPopTalent()
+    {
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1177);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_TALENT);
+    }
+
+    ///  This is an internal function for NWNX, it will abort the script if called without NWNX running.
+    public static System.IntPtr NWNXPopSqlquery()
+    {
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1178);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_SQLQUERY);
+    }
+
+    ///  This is an internal function for NWNX, it will abort the script if called without NWNX running.
+    public static System.IntPtr NWNXPopCassowary()
+    {
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1179);
+      return global::NWNX.NET.NWNXAPI.StackPopGameDefinedStructure(ENGINE_STRUCTURE_CASSOWARY);
+    }
+
+    ///  Does a spell resistance check. The roll is 1d20 + nCasterLevel + nCasterBonus vs. nSpellResistance<br/>
+    ///  - nSpellId         - The spell ID to use if other variables are not set. If -1 it will attempt to be auto-detected.<br/>
+    ///  - nCasterLevel     - The caster level. If -1 it attempts to find it automatically from oCaster.<br/>
+    ///  - nSpellResistance - The spell resistance to penetrate. If -1 it will use the spell resistance of oTarget.<br/>
+    ///  - bFeedback        - If TRUE displays feedback automatically, FALSE it suppresses it.<br/>
+    ///  Returns: TRUE if the target resists oCasters spell resistance roll, FALSE if failed or an error occured
+    public static int SpellResistanceCheck(uint oTarget, uint oCaster, int nSpellId = -1, int nCasterLevel = -1, int nSpellResistance = -1, int bFeedback = TRUE)
+    {
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bFeedback);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellResistance);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nCasterLevel);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellId);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCaster);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1180);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
+    }
+
+    ///  Does a spell immunity check. This checks for EFfectSpellImmunity and related item properties.<br/>
+    ///  - nSpellId  - The spell ID to check immunity of. If -1 it will attempt to be auto-detected.<br/>
+    ///  - bFeedback - If TRUE displays feedback automatically, FALSE it suppresses it.<br/>
+    ///  Returns: TRUE if the target is immune to nSpellId, FALSE if failed or an error occured
+    public static int SpellImmunityCheck(uint oTarget, uint oCaster, int nSpellId = -1, int bFeedback = TRUE)
+    {
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bFeedback);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellId);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCaster);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1181);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
+    }
+
+    ///  Does a spell absorption check that checks limited (eg Spell Mantle)<br/>
+    ///  - nSpellId      - The Spell Id. If -1 it will attempt to be auto-detected.<br/>
+    ///  - nSpellSchool  - The spell school to check for. If -1 uses nSpellId&amp;apos;s spell school.<br/>
+    ///  - nSpellLevel   - The spell level. If -1 uses nSpellId&amp;apos;s spell level (given the casters last spell cast class)<br/>
+    ///  - bRemoveLevels - If TRUE this removes spell levels from the effect that would stop it (and remove it if 0 or less remain), but if FALSE they will not be removed.<br/>
+    ///  - bFeedback     - If TRUE displays feedback automatically, FALSE it suppresses it.<br/>
+    ///  Returns: TRUE if the target absorbs oCasters spell, FALSE if failed or an error occured
+    public static int SpellAbsorptionLimitedCheck(uint oTarget, uint oCaster, int nSpellId = -1, int nSpellSchool = -1, int nSpellLevel = -1, int bRemoveLevels = TRUE, int bFeedback = TRUE)
+    {
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bFeedback);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bRemoveLevels);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellLevel);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellSchool);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellId);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCaster);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1182);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
+    }
+
+    ///  Does a spell absorption check that checks unlimited spell absorption effects (eg; Globes)<br/>
+    ///  - nSpellId     - The Spell Id. If -1 it will attempt to be auto-detected.<br/>
+    ///  - nSpellSchool - The spell school to check for. If -1 uses nSpellId&amp;apos;s spell school.<br/>
+    ///  - nSpellLevel  - The spell level. If -1 uses nSpellId&amp;apos;s spell level (given the casters last spell cast class)<br/>
+    ///  - bFeedback    - If TRUE displays feedback automatically, FALSE it suppresses it. As per existing ResistSpell convention it defaults to FALSE.<br/>
+    ///  Returns: TRUE if the target absorbs oCasters spell, FALSE if failed or an error occured
+    public static int SpellAbsorptionUnlimitedCheck(uint oTarget, uint oCaster, int nSpellId = -1, int nSpellSchool = -1, int nSpellLevel = -1, int bFeedback = FALSE)
+    {
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bFeedback);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellLevel);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellSchool);
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nSpellId);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oCaster);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oTarget);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1183);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
+    }
+
+    ///  Returns the network latency of this player device.<br/>
+    ///  The value is a round trip time (server-&amp;gt;player-&amp;gt;server) in milliseconds.<br/>
+    ///  * Players are pinged every 6000 milliseconds.<br/>
+    ///  * When bSmoothed is TRUE, returns a moving average over a longer timeframe.<br/>
+    ///    This average calculation is not strictly specified and subject to change,<br/>
+    ///    but intended to provide a reasonable average to rely on.<br/>
+    ///  * When bSmoothed is FALSE, returns the current/last received value.<br/>
+    ///  * Returns 0 if the client failed to respond to latency requests or no data is available.<br/>
+    ///    This is currently the case for clients that do not support this functionality (build &amp;lt;37).
+    public static int GetPlayerNetworkLatency(uint oPlayer, int bSmoothed = TRUE)
+    {
+      global::NWNX.NET.NWNXAPI.StackPushInteger(bSmoothed);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oPlayer);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1184);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
+    }
+
+    ///  Gets the creature or placeable body bag type (bodybag.2da entry)<br/>
+    ///  Returns -1 on error.
+    public static int GetBodyBag(uint oObject)
+    {
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1185);
+      return global::NWNX.NET.NWNXAPI.StackPopInteger();
+    }
+
+    ///  Sets the creature or placeable body bag type (bodybag.2da entry)
+    public static void SetBodyBag(uint oObject, int nBodyBag)
+    {
+      global::NWNX.NET.NWNXAPI.StackPushInteger(nBodyBag);
+      global::NWNX.NET.NWNXAPI.StackPushObject(oObject);
+      global::NWNX.NET.NWNXAPI.CallBuiltIn(1186);
     }
 
   }

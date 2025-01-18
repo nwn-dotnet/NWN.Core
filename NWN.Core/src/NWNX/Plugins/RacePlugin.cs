@@ -5,6 +5,10 @@ namespace NWN.Core.NWNX
   [NWNXPlugin(NWNX_Race)]
   public class RacePlugin
   {
+    /// @addtogroup race Race
+    /// Define racial and subrace characteristics.
+    /// @{
+    /// @file nwnx_race.nss
     public const string NWNX_Race = "NWNX_Race";
 
     ///&lt; @private
@@ -43,14 +47,12 @@ namespace NWN.Core.NWNX
     /// <param name="iParam1,">iParam2, iParam3 The parameters for this racial modifier.</param>
     public static void SetRacialModifier(int iRace, int iMod, int iParam1, int iParam2 = -559038737, int iParam3 = -559038737)
     {
-      const string sFunc = "SetRacialModifier";
-      VM.NWNX.SetFunction(NWNX_Race, sFunc);
-      VM.NWNX.StackPush(iParam3);
-      VM.NWNX.StackPush(iParam2);
-      VM.NWNX.StackPush(iParam1);
-      VM.NWNX.StackPush(iMod);
-      VM.NWNX.StackPush(iRace);
-      VM.NWNX.Call();
+      NWNXPushInt(iParam3);
+      NWNXPushInt(iParam2);
+      NWNXPushInt(iParam1);
+      NWNXPushInt(iMod);
+      NWNXPushInt(iRace);
+      NWNXCall(NWNX_Race, "SetRacialModifier");
     }
 
     /// Gets the parent race for a race.
@@ -58,11 +60,9 @@ namespace NWN.Core.NWNX
     /// <returns>The parent race if applicable, if not it just returns the race passed in.</returns>
     public static int GetParentRace(int iRace)
     {
-      const string sFunc = "GetParentRace";
-      VM.NWNX.SetFunction(NWNX_Race, sFunc);
-      VM.NWNX.StackPush(iRace);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(iRace);
+      NWNXCall(NWNX_Race, "GetParentRace");
+      return NWNXPopInt();
     }
 
     /// Associates the race with its favored enemy feat.
@@ -73,11 +73,27 @@ namespace NWN.Core.NWNX
     /// or Favored Enemy: Wild Elf
     public static void SetFavoredEnemyFeat(int iRace, int iFeat)
     {
-      const string sFunc = "SetFavoredEnemyFeat";
-      VM.NWNX.SetFunction(NWNX_Race, sFunc);
-      VM.NWNX.StackPush(iFeat);
-      VM.NWNX.StackPush(iRace);
-      VM.NWNX.Call();
+      NWNXPushInt(iFeat);
+      NWNXPushInt(iRace);
+      NWNXCall(NWNX_Race, "SetFavoredEnemyFeat");
+    }
+
+    /// Removes any nwnx_race &apos;Effects&apos; on the targeted creature. Suppression lasts until levelup, next login, or Reactivated by function.
+    /// <param name="oCreature">The creature to suppress</param>
+    /// @note Not all nwnx_race modifiers are achieved via effect. Those that are not directly consider the creatures current race.
+    public static void SuppressCreatureRaceEffects(uint creature)
+    {
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Race, "SuppressCreatureRaceEffects");
+    }
+
+    /// Reactivates the nwnx_race &apos;Effects&apos; on the targeted creature after they were Suppressed.
+    /// <param name="oCreature">The creature to reactive</param>
+    /// @note Safe to use on non-suppressed creatures - Triggers a refresh of effects but won&apos;t stack.
+    public static void ReactivateCreatureRaceEffects(uint oCreature)
+    {
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Race, "ReactivateCreatureRaceEffects");
     }
 
     // @}

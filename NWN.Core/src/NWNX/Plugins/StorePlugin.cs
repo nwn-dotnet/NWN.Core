@@ -5,6 +5,10 @@ namespace NWN.Core.NWNX
   [NWNXPlugin(NWNX_Store)]
   public class StorePlugin
   {
+    /// @addtogroup store
+    /// Functions exposing additional store properties.
+    /// @{
+    /// @file nwnx_store.nss
     public const string NWNX_Store = "NWNX_Store";
 
     ///&lt; @private
@@ -14,12 +18,10 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if the quest has been completed. -1 if the player does not have the journal entry.</returns>
     public static int GetIsRestrictedBuyItem(uint oStore, int nBaseItem)
     {
-      const string sFunc = "GetIsRestrictedBuyItem";
-      VM.NWNX.SetFunction(NWNX_Store, sFunc);
-      VM.NWNX.StackPush(nBaseItem);
-      VM.NWNX.StackPush(oStore);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(nBaseItem);
+      NWNXPushObject(oStore);
+      NWNXCall(NWNX_Store, "GetIsRestrictedBuyItem");
+      return NWNXPopInt();
     }
 
     /// Return the blackmarket mark down of a store
@@ -27,11 +29,9 @@ namespace NWN.Core.NWNX
     /// <returns>mark down of a store, -1 on error</returns>
     public static int GetBlackMarketMarkDown(uint oStore)
     {
-      const string sFunc = "GetBlackMarketMarkDown";
-      VM.NWNX.SetFunction(NWNX_Store, sFunc);
-      VM.NWNX.StackPush(oStore);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(oStore);
+      NWNXCall(NWNX_Store, "GetBlackMarketMarkDown");
+      return NWNXPopInt();
     }
 
     /// Set the blackmarket mark down of a store
@@ -39,11 +39,9 @@ namespace NWN.Core.NWNX
     /// <param name="nValue">The amount.</param>
     public static void SetBlackMarketMarkDown(uint oStore, int nValue)
     {
-      const string sFunc = "SetBlackMarketMarkDown";
-      VM.NWNX.SetFunction(NWNX_Store, sFunc);
-      VM.NWNX.StackPush(nValue);
-      VM.NWNX.StackPush(oStore);
-      VM.NWNX.Call();
+      NWNXPushInt(nValue);
+      NWNXPushObject(oStore);
+      NWNXCall(NWNX_Store, "SetBlackMarketMarkDown");
     }
 
     /// Return the mark down of a store
@@ -51,11 +49,9 @@ namespace NWN.Core.NWNX
     /// <returns>mark down of a store, -1 on error</returns>
     public static int GetMarkDown(uint oStore)
     {
-      const string sFunc = "GetMarkDown";
-      VM.NWNX.SetFunction(NWNX_Store, sFunc);
-      VM.NWNX.StackPush(oStore);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(oStore);
+      NWNXCall(NWNX_Store, "GetMarkDown");
+      return NWNXPopInt();
     }
 
     /// Set the mark down of a store
@@ -63,11 +59,9 @@ namespace NWN.Core.NWNX
     /// <param name="nValue">The amount.</param>
     public static void SetMarkDown(uint oStore, int nValue)
     {
-      const string sFunc = "SetMarkDown";
-      VM.NWNX.SetFunction(NWNX_Store, sFunc);
-      VM.NWNX.StackPush(nValue);
-      VM.NWNX.StackPush(oStore);
-      VM.NWNX.Call();
+      NWNXPushInt(nValue);
+      NWNXPushObject(oStore);
+      NWNXCall(NWNX_Store, "SetMarkDown");
     }
 
     /// Return the mark up of a store
@@ -75,11 +69,9 @@ namespace NWN.Core.NWNX
     /// <returns>mark up of a store, -1 on error</returns>
     public static int GetMarkUp(uint oStore)
     {
-      const string sFunc = "GetMarkUp";
-      VM.NWNX.SetFunction(NWNX_Store, sFunc);
-      VM.NWNX.StackPush(oStore);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(oStore);
+      NWNXCall(NWNX_Store, "GetMarkUp");
+      return NWNXPopInt();
     }
 
     /// Set the mark up of a store
@@ -87,11 +79,9 @@ namespace NWN.Core.NWNX
     /// <param name="nValue">The amount.</param>
     public static void SetMarkUp(uint oStore, int nValue)
     {
-      const string sFunc = "SetMarkUp";
-      VM.NWNX.SetFunction(NWNX_Store, sFunc);
-      VM.NWNX.StackPush(nValue);
-      VM.NWNX.StackPush(oStore);
-      VM.NWNX.Call();
+      NWNXPushInt(nValue);
+      NWNXPushObject(oStore);
+      NWNXCall(NWNX_Store, "SetMarkUp");
     }
 
     /// Return current customer count
@@ -99,11 +89,9 @@ namespace NWN.Core.NWNX
     /// <returns>count, or -1 on error</returns>
     public static int GetCurrentCustomersCount(uint oStore)
     {
-      const string sFunc = "GetCurrentCustomersCount";
-      VM.NWNX.SetFunction(NWNX_Store, sFunc);
-      VM.NWNX.StackPush(oStore);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(oStore);
+      NWNXCall(NWNX_Store, "GetCurrentCustomersCount");
+      return NWNXPopInt();
     }
 
     // @}

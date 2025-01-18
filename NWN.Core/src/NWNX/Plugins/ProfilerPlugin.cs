@@ -5,6 +5,11 @@ namespace NWN.Core.NWNX
   [NWNXPlugin(NWNX_Profiler)]
   public class ProfilerPlugin
   {
+    /// @addtogroup profiler Profiler
+    /// Functions to instrument nwscript code.
+    /// @remark These functions are for advanced users.
+    /// @{
+    /// @file nwnx_profiler.nss
     public const string NWNX_Profiler = "NWNX_Profiler";
 
     ///&lt; @private
@@ -32,24 +37,20 @@ namespace NWN.Core.NWNX
     /// <param name="tag0_value">The tag&apos;s value for which to filter.</param>
     public static void PushPerfScope(string name, string tag0_tag = "", string tag0_value = "")
     {
-      const string sFunc = "PushPerfScope";
-      VM.NWNX.SetFunction(NWNX_Profiler, sFunc);
-      VM.NWNX.StackPush(name);
       if (tag0_value!=""&&tag0_tag!="")
       {
-        VM.NWNX.StackPush(tag0_value);
-        VM.NWNX.StackPush(tag0_tag);
+        NWNXPushString(tag0_value);
+        NWNXPushString(tag0_tag);
       }
-      VM.NWNX.Call();
+      NWNXPushString(name);
+      NWNXCall(NWNX_Profiler, "PushPerfScope");
     }
 
     /// Pops a timing metric.
     /// @remark A metric must already be pushed.
     public static void PopPerfScope()
     {
-      const string sFunc = "PopPerfScope";
-      VM.NWNX.SetFunction(NWNX_Profiler, sFunc);
-      VM.NWNX.Call();
+      NWNXCall(NWNX_Profiler, "PopPerfScope");
     }
 
     // @}

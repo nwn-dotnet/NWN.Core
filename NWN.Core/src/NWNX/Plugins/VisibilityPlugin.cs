@@ -5,6 +5,10 @@ namespace NWN.Core.NWNX
   [NWNXPlugin(NWNX_Visibility)]
   public class VisibilityPlugin
   {
+    /// @addtogroup visibility Visibility
+    /// Functions to manipulate visibility of objects both globally or per observer
+    /// @{
+    /// @file nwnx_visibility.nss
     public const string NWNX_Visibility = "NWNX_Visibility";
 
     ///&lt; @private
@@ -34,12 +38,10 @@ namespace NWN.Core.NWNX
     /// <returns>The @ref vis_types &quot;Visibility Type&quot;.</returns>
     public static int GetVisibilityOverride(uint oPlayer, uint oTarget)
     {
-      const string sFunc = "GetVisibilityOverride";
-      VM.NWNX.SetFunction(NWNX_Visibility, sFunc);
-      VM.NWNX.StackPush(oTarget);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(oTarget);
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Visibility, "GetVisibilityOverride");
+      return NWNXPopInt();
     }
 
     /// Overrides the default visibility rules about how oPlayer perceives oTarget.
@@ -63,12 +65,10 @@ namespace NWN.Core.NWNX
     /// <param name="nOverride">The visibility type from @ref vis_types &quot;Visibility Types&quot;.</param>
     public static void SetVisibilityOverride(uint oPlayer, uint oTarget, int nOverride)
     {
-      const string sFunc = "SetVisibilityOverride";
-      VM.NWNX.SetFunction(NWNX_Visibility, sFunc);
-      VM.NWNX.StackPush(nOverride);
-      VM.NWNX.StackPush(oTarget);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
+      NWNXPushInt(nOverride);
+      NWNXPushObject(oTarget);
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Visibility, "SetVisibilityOverride");
     }
 
     // @}

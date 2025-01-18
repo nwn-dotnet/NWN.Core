@@ -5,6 +5,10 @@ namespace NWN.Core.NWNX
   [NWNXPlugin(NWNX_WebHook)]
   public class WebhookPlugin
   {
+    /// @addtogroup webhook Webhook
+    /// Send messages to external entities through web hooks.
+    /// @{
+    /// @file nwnx_webhook.nss
     public const string NWNX_WebHook = "NWNX_WebHook";
 
     ///&lt; @private
@@ -16,14 +20,12 @@ namespace NWN.Core.NWNX
     /// <param name="mrkdwn">Set to false if you do not wish your message&apos;s markdown be parsed.</param>
     public static void SendWebHookHTTPS(string host, string path, string message, string username = "", int mrkdwn = 1)
     {
-      const string sFunc = "SendWebHookHTTPS";
-      VM.NWNX.SetFunction(NWNX_WebHook, sFunc);
-      VM.NWNX.StackPush(mrkdwn);
-      VM.NWNX.StackPush(username);
-      VM.NWNX.StackPush(message);
-      VM.NWNX.StackPush(path);
-      VM.NWNX.StackPush(host);
-      VM.NWNX.Call();
+      NWNXPushInt(mrkdwn);
+      NWNXPushString(username);
+      NWNXPushString(message);
+      NWNXPushString(path);
+      NWNXPushString(host);
+      NWNXCall(NWNX_WebHook, "SendWebHookHTTPS");
     }
 
     /// Resends a webhook message after a defined delay.

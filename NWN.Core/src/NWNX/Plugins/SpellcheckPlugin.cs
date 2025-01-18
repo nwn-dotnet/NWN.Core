@@ -5,6 +5,10 @@ namespace NWN.Core.NWNX
   [NWNXPlugin(NWNX_SpellChecker)]
   public class SpellcheckPlugin
   {
+    /// @addtogroup spellchecker SpellChecker
+    /// Functions related to spellchecking
+    /// @{
+    /// @file nwnx_spellcheck.nss
     public const string NWNX_SpellChecker = "NWNX_SpellChecker";
 
     ///&lt; @private
@@ -17,11 +21,9 @@ namespace NWN.Core.NWNX
     /// Make use of **DelayCommands** and **AssignCommands**
     public static string FindMisspell(string sentence)
     {
-      const string sFunc = "FindMisspell";
-      VM.NWNX.SetFunction(NWNX_SpellChecker, sFunc);
-      VM.NWNX.StackPush(sentence);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopString();
+      NWNXPushString(sentence);
+      NWNXCall(NWNX_SpellChecker, "FindMisspell");
+      return NWNXPopString();
     }
 
     /// Get suggestions on a single word, comma delimited.
@@ -32,11 +34,9 @@ namespace NWN.Core.NWNX
     /// Make use of **DelayCommands** and **AssignCommands**
     public static string GetSuggestSpell(string word)
     {
-      const string sFunc = "GetSuggestSpell";
-      VM.NWNX.SetFunction(NWNX_SpellChecker, sFunc);
-      VM.NWNX.StackPush(word);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopString();
+      NWNXPushString(word);
+      NWNXCall(NWNX_SpellChecker, "GetSuggestSpell");
+      return NWNXPopString();
     }
 
     // @}

@@ -5,6 +5,10 @@ namespace NWN.Core.NWNX
   [NWNXPlugin(NWNX_Dialog)]
   public class DialogPlugin
   {
+    /// @addtogroup dialog Dialog
+    /// Functions exposing additional dialog properties
+    /// @{
+    /// @file nwnx_dialog.nss
     public const string NWNX_Dialog = "NWNX_Dialog";
 
     ///&lt; @private
@@ -44,20 +48,16 @@ namespace NWN.Core.NWNX
     /// <returns>A @ref dialog_node_types &quot;Node Type&quot;.  If called out of dialog, returns NWNX_DIALOG_NODE_TYPE_INVALID</returns>
     public static int GetCurrentNodeType()
     {
-      const string sFunc = "GetCurrentNodeType";
-      VM.NWNX.SetFunction(NWNX_Dialog, sFunc);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXCall(NWNX_Dialog, "GetCurrentNodeType");
+      return NWNXPopInt();
     }
 
     /// Get the @ref dialog_script_types &quot;Script Type&quot; of the current text node
     /// <returns>A @ref dialog_script_types &quot;Node Type&quot;. If called out of dialog, returns NWNX_DIALOG_SCRIPT_TYPE_OTHER</returns>
     public static int GetCurrentScriptType()
     {
-      const string sFunc = "GetCurrentScriptType";
-      VM.NWNX.SetFunction(NWNX_Dialog, sFunc);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXCall(NWNX_Dialog, "GetCurrentScriptType");
+      return NWNXPopInt();
     }
 
     /// Get the absolute ID of the current node in the conversation
@@ -66,10 +66,8 @@ namespace NWN.Core.NWNX
     /// <returns>The absolute ID in the dialog. If called out of dialog, returns -1</returns>
     public static int GetCurrentNodeID()
     {
-      const string sFunc = "GetCurrentNodeID";
-      VM.NWNX.SetFunction(NWNX_Dialog, sFunc);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXCall(NWNX_Dialog, "GetCurrentNodeID");
+      return NWNXPopInt();
     }
 
     /// Get the index of the current node in the list of replies/entries.
@@ -77,10 +75,8 @@ namespace NWN.Core.NWNX
     /// <returns>The index of the current node.</returns>
     public static int GetCurrentNodeIndex()
     {
-      const string sFunc = "GetCurrentNodeIndex";
-      VM.NWNX.SetFunction(NWNX_Dialog, sFunc);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXCall(NWNX_Dialog, "GetCurrentNodeIndex");
+      return NWNXPopInt();
     }
 
     /// Get the text of the current node
@@ -88,12 +84,10 @@ namespace NWN.Core.NWNX
     /// <param name="gender">The gender for the text.</param>
     public static string GetCurrentNodeText(int language = NWNX_DIALOG_LANGUAGE_ENGLISH, int gender = GENDER_MALE)
     {
-      const string sFunc = "GetCurrentNodeText";
-      VM.NWNX.SetFunction(NWNX_Dialog, sFunc);
-      VM.NWNX.StackPush(gender);
-      VM.NWNX.StackPush(language);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopString();
+      NWNXPushInt(gender);
+      NWNXPushInt(language);
+      NWNXCall(NWNX_Dialog, "GetCurrentNodeText");
+      return NWNXPopString();
     }
 
     /// Set the text of the current node for given language/gender
@@ -103,12 +97,10 @@ namespace NWN.Core.NWNX
     /// <param name="gender">The gender for the text.</param>
     public static void SetCurrentNodeText(string text, int language = NWNX_DIALOG_LANGUAGE_ENGLISH, int gender = GENDER_MALE)
     {
-      const string sFunc = "SetCurrentNodeText";
-      VM.NWNX.SetFunction(NWNX_Dialog, sFunc);
-      VM.NWNX.StackPush(gender);
-      VM.NWNX.StackPush(language);
-      VM.NWNX.StackPush(text);
-      VM.NWNX.Call();
+      NWNXPushInt(gender);
+      NWNXPushInt(language);
+      NWNXPushString(text);
+      NWNXCall(NWNX_Dialog, "SetCurrentNodeText");
     }
 
     /// End a conversation oObject is involved in, it will fire the OnAbort script of the conversation
@@ -116,10 +108,8 @@ namespace NWN.Core.NWNX
     /// <param name="oObject">The object in a conversation</param>
     public static void End(uint oObject)
     {
-      const string sFunc = "End";
-      VM.NWNX.SetFunction(NWNX_Dialog, sFunc);
-      VM.NWNX.StackPush(oObject);
-      VM.NWNX.Call();
+      NWNXPushObject(oObject);
+      NWNXCall(NWNX_Dialog, "End");
     }
 
     // @}

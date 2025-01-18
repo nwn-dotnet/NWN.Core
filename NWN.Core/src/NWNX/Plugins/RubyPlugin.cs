@@ -5,16 +5,18 @@ namespace NWN.Core.NWNX
   [NWNXPlugin(NWNX_Ruby)]
   public class RubyPlugin
   {
+    /// @addtogroup ruby Ruby
+    /// Allows users to execute arbitrary Ruby from the game.
+    /// @{
+    /// @file nwnx_ruby.nss
     public const string NWNX_Ruby = "NWNX_Ruby";
 
     ///&lt; @private
     public static string Evaluate(string sCode)
     {
-      const string sFunc = "Evaluate";
-      VM.NWNX.SetFunction(NWNX_Ruby, sFunc);
-      VM.NWNX.StackPush(sCode);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopString();
+      NWNXPushString(sCode);
+      NWNXCall(NWNX_Ruby, "Evaluate");
+      return NWNXPopString();
     }
 
     /// Evaluates some ruby code.

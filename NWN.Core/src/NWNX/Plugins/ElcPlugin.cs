@@ -5,6 +5,10 @@ namespace NWN.Core.NWNX
   [NWNXPlugin(NWNX_ELC)]
   public class ElcPlugin
   {
+    /// @addtogroup elc ELC
+    /// Replacement for ValidateCharacter: ELC &amp; ILR
+    /// @{
+    /// @file nwnx_elc.nss
     public const string NWNX_ELC = "NWNX_ELC";
 
     ///&lt; @private
@@ -80,10 +84,8 @@ namespace NWN.Core.NWNX
     /// <param name="sScript">The script name.</param>
     public static void SetELCScript(string sScript)
     {
-      const string sFunc = "SetELCScript";
-      VM.NWNX.SetFunction(NWNX_ELC, sFunc);
-      VM.NWNX.StackPush(sScript);
-      VM.NWNX.Call();
+      NWNXPushString(sScript);
+      NWNXCall(NWNX_ELC, "SetELCScript");
     }
 
     /// Enables a custom ELC Check that will call the ELC Script with the
@@ -93,19 +95,15 @@ namespace NWN.Core.NWNX
     /// if a player doesn&apos;t fail your custom check otherwise they won&apos;t be able to log in
     public static void EnableCustomELCCheck(int bEnabled)
     {
-      const string sFunc = "EnableCustomELCCheck";
-      VM.NWNX.SetFunction(NWNX_ELC, sFunc);
-      VM.NWNX.StackPush(bEnabled);
-      VM.NWNX.Call();
+      NWNXPushInt(bEnabled);
+      NWNXCall(NWNX_ELC, "EnableCustomELCCheck");
     }
 
     /// Skip an ELC Validation Failure Event
     /// @note Only to be called in the ELC Script
     public static void SkipValidationFailure()
     {
-      const string sFunc = "SkipValidationFailure";
-      VM.NWNX.SetFunction(NWNX_ELC, sFunc);
-      VM.NWNX.Call();
+      NWNXCall(NWNX_ELC, "SkipValidationFailure");
     }
 
     /// Get the validation failure type
@@ -113,10 +111,8 @@ namespace NWN.Core.NWNX
     /// @note Only to be called in the ELC Script
     public static int GetValidationFailureType()
     {
-      const string sFunc = "GetValidationFailureType";
-      VM.NWNX.SetFunction(NWNX_ELC, sFunc);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXCall(NWNX_ELC, "GetValidationFailureType");
+      return NWNXPopInt();
     }
 
     /// Get the validation failure subtype
@@ -124,10 +120,8 @@ namespace NWN.Core.NWNX
     /// @note Only to be called in the ELC Script
     public static int GetValidationFailureSubType()
     {
-      const string sFunc = "GetValidationFailureSubType";
-      VM.NWNX.SetFunction(NWNX_ELC, sFunc);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXCall(NWNX_ELC, "GetValidationFailureSubType");
+      return NWNXPopInt();
     }
 
     /// Get the failure message
@@ -135,10 +129,8 @@ namespace NWN.Core.NWNX
     /// @note Only to be called in the ELC Script
     public static int GetValidationFailureMessageStrRef()
     {
-      const string sFunc = "GetValidationFailureMessageStrRef";
-      VM.NWNX.SetFunction(NWNX_ELC, sFunc);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXCall(NWNX_ELC, "GetValidationFailureMessageStrRef");
+      return NWNXPopInt();
     }
 
     /// Set the failure message
@@ -146,10 +138,8 @@ namespace NWN.Core.NWNX
     /// @note Only to be called in the ELC Script
     public static void SetValidationFailureMessageStrRef(int nStrRef)
     {
-      const string sFunc = "SetValidationFailureMessageStrRef";
-      VM.NWNX.SetFunction(NWNX_ELC, sFunc);
-      VM.NWNX.StackPush(nStrRef);
-      VM.NWNX.Call();
+      NWNXPushInt(nStrRef);
+      NWNXCall(NWNX_ELC, "SetValidationFailureMessageStrRef");
     }
 
     /// Get the item that failed ILR validation
@@ -158,10 +148,8 @@ namespace NWN.Core.NWNX
     /// NWNX_ELC_VALIDATION_FAILURE_TYPE_ITEM validation failure.
     public static uint GetValidationFailureItem()
     {
-      const string sFunc = "GetValidationFailureItem";
-      VM.NWNX.SetFunction(NWNX_ELC, sFunc);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopObject();
+      NWNXCall(NWNX_ELC, "GetValidationFailureItem");
+      return NWNXPopObject();
     }
 
     /// Get the character level at which the validation failure occurred
@@ -170,10 +158,8 @@ namespace NWN.Core.NWNX
     /// @note Only to be called in the ELC Script
     public static int GetValidationFailureLevel()
     {
-      const string sFunc = "GetValidationFailureLevel";
-      VM.NWNX.SetFunction(NWNX_ELC, sFunc);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXCall(NWNX_ELC, "GetValidationFailureLevel");
+      return NWNXPopInt();
     }
 
     /// Get the ID of the skill that failed ELC validation
@@ -183,10 +169,8 @@ namespace NWN.Core.NWNX
     /// NWNX_ELC_VALIDATION_FAILURE_TYPE_SKILL validation failure.
     public static int GetValidationFailureSkillID()
     {
-      const string sFunc = "GetValidationFailureSkillID";
-      VM.NWNX.SetFunction(NWNX_ELC, sFunc);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXCall(NWNX_ELC, "GetValidationFailureSkillID");
+      return NWNXPopInt();
     }
 
     /// Get the ID of the feat that failed ELC validation
@@ -196,10 +180,8 @@ namespace NWN.Core.NWNX
     /// NWNX_ELC_VALIDATION_FAILURE_TYPE_FEAT validation failure.
     public static int GetValidationFailureFeatID()
     {
-      const string sFunc = "GetValidationFailureFeatID";
-      VM.NWNX.SetFunction(NWNX_ELC, sFunc);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXCall(NWNX_ELC, "GetValidationFailureFeatID");
+      return NWNXPopInt();
     }
 
     /// Get the ID of the spell that failed ELC validation
@@ -209,10 +191,8 @@ namespace NWN.Core.NWNX
     /// NWNX_ELC_VALIDATION_FAILURE_TYPE_SPELL validation failure.
     public static int GetValidationFailureSpellID()
     {
-      const string sFunc = "GetValidationFailureSpellID";
-      VM.NWNX.SetFunction(NWNX_ELC, sFunc);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXCall(NWNX_ELC, "GetValidationFailureSpellID");
+      return NWNXPopInt();
     }
 
     // @}

@@ -5,6 +5,10 @@ namespace NWN.Core.NWNX
   [NWNXPlugin(NWNX_NoStack)]
   public class NostackPlugin
   {
+    /// @addtogroup nostack NoStack
+    /// Functions to allow more control over ability/skill/bonuses stacking.
+    /// @{
+    /// @file nwnx_nostack.nss
     public const string NWNX_NoStack = "NWNX_NoStack";
 
     ///&lt; @private
@@ -29,11 +33,9 @@ namespace NWN.Core.NWNX
     /// <param name="type">The new type.</param>
     public static void SetSpellBonusType(int spell, int type)
     {
-      const string sFunc = "SetSpellBonusType";
-      VM.NWNX.SetFunction(NWNX_NoStack, sFunc);
-      VM.NWNX.StackPush(type);
-      VM.NWNX.StackPush(spell);
-      VM.NWNX.Call();
+      NWNXPushInt(type);
+      NWNXPushInt(spell);
+      NWNXCall(NWNX_NoStack, "SetSpellBonusType");
     }
 
     // @}

@@ -5,6 +5,10 @@ namespace NWN.Core.NWNX
   [NWNXPlugin(NWNX_Creature)]
   public class CreaturePlugin
   {
+    /// @addtogroup creature Creature
+    /// Functions exposing additional creature properties.
+    /// @{
+    /// @file nwnx_creature.nss
     public const string NWNX_Creature = "NWNX_Creature";
 
     ///&lt; @private
@@ -76,11 +80,9 @@ namespace NWN.Core.NWNX
     /// @remark Consider also using NWNX_Creature_AddFeatByLevel() to properly allocate the feat to a level
     public static void AddFeat(uint creature, int feat)
     {
-      const string sFunc = "AddFeat";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(feat);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(feat);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "AddFeat");
     }
 
     /// Gives the creature a feat assigned at a level
@@ -90,12 +92,10 @@ namespace NWN.Core.NWNX
     /// @remark Adds the feat to the stat list at the provided level.
     public static void AddFeatByLevel(uint creature, int feat, int level)
     {
-      const string sFunc = "AddFeatByLevel";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(level);
-      VM.NWNX.StackPush(feat);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(level);
+      NWNXPushInt(feat);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "AddFeatByLevel");
     }
 
     /// Removes a feat from a creature.
@@ -103,11 +103,9 @@ namespace NWN.Core.NWNX
     /// <param name="feat">The feat id.</param>
     public static void RemoveFeat(uint creature, int feat)
     {
-      const string sFunc = "RemoveFeat";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(feat);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(feat);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "RemoveFeat");
     }
 
     /// Removes the creature a feat assigned at a level
@@ -118,12 +116,10 @@ namespace NWN.Core.NWNX
     /// NWNX_Creature_RemoveFeat for this.
     public static void RemoveFeatByLevel(uint creature, int feat, int level)
     {
-      const string sFunc = "RemoveFeatByLevel";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(level);
-      VM.NWNX.StackPush(feat);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(level);
+      NWNXPushInt(feat);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "RemoveFeatByLevel");
     }
 
     /// Determines if the creature knows a feat.
@@ -133,12 +129,10 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if the creature has the feat, regardless if they have any usages left or not.</returns>
     public static int GetKnowsFeat(uint creature, int feat)
     {
-      const string sFunc = "GetKnowsFeat";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(feat);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(feat);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetKnowsFeat");
+      return NWNXPopInt();
     }
 
     /// Returns the count of feats learned at the provided level.
@@ -147,12 +141,10 @@ namespace NWN.Core.NWNX
     /// <returns>The count of feats.</returns>
     public static int GetFeatCountByLevel(uint creature, int level)
     {
-      const string sFunc = "GetFeatCountByLevel";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(level);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(level);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetFeatCountByLevel");
+      return NWNXPopInt();
     }
 
     /// Returns the feat learned at the level and index.
@@ -162,13 +154,11 @@ namespace NWN.Core.NWNX
     /// <returns>The feat id at the index.</returns>
     public static int GetFeatByLevel(uint creature, int level, int index)
     {
-      const string sFunc = "GetFeatByLevel";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(index);
-      VM.NWNX.StackPush(level);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(index);
+      NWNXPushInt(level);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetFeatByLevel");
+      return NWNXPopInt();
     }
 
     /// Returns the creature level where the specified feat was learned.
@@ -177,12 +167,10 @@ namespace NWN.Core.NWNX
     /// <returns>The character level that the specified feat was granted, otherwise 0 if the creature does not have this feat.</returns>
     public static int GetFeatGrantLevel(uint creature, int feat)
     {
-      const string sFunc = "GetFeatGrantLevel";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(feat);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(feat);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetFeatGrantLevel");
+      return NWNXPopInt();
     }
 
     /// Get the total number of feats known by creature.
@@ -190,11 +178,9 @@ namespace NWN.Core.NWNX
     /// <returns>The total feat count for the creature.</returns>
     public static int GetFeatCount(uint creature)
     {
-      const string sFunc = "GetFeatCount";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetFeatCount");
+      return NWNXPopInt();
     }
 
     /// Returns the creature&apos;s feat at a given index
@@ -203,12 +189,10 @@ namespace NWN.Core.NWNX
     /// <returns>The feat id at the index.</returns>
     public static int GetFeatByIndex(uint creature, int index)
     {
-      const string sFunc = "GetFeatByIndex";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(index);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(index);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetFeatByIndex");
+      return NWNXPopInt();
     }
 
     /// Gets if creature meets feat requirements.
@@ -217,12 +201,10 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if creature meets all requirements to take given feat</returns>
     public static int GetMeetsFeatRequirements(uint creature, int feat)
     {
-      const string sFunc = "GetMeetsFeatRequirements";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(feat);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(feat);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetMeetsFeatRequirements");
+      return NWNXPopInt();
     }
 
     /// Gets the count of special abilities of the creature.
@@ -230,11 +212,9 @@ namespace NWN.Core.NWNX
     /// <returns>The total special ability count.</returns>
     public static int GetSpecialAbilityCount(uint creature)
     {
-      const string sFunc = "GetSpecialAbilityCount";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetSpecialAbilityCount");
+      return NWNXPopInt();
     }
 
     /// Returns the creature&apos;s special ability at a given index.
@@ -243,15 +223,13 @@ namespace NWN.Core.NWNX
     /// <returns>An NWNX_Creature_SpecialAbility struct.</returns>
     public static SpecialAbility GetSpecialAbility(uint creature, int index)
     {
-      const string sFunc = "GetSpecialAbility";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
       SpecialAbility ability = default;
-      VM.NWNX.StackPush(index);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      ability.level = VM.NWNX.StackPopInt();
-      ability.ready = VM.NWNX.StackPopInt();
-      ability.id = VM.NWNX.StackPopInt();
+      NWNXPushInt(index);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetSpecialAbility");
+      ability.level = NWNXPopInt();
+      ability.ready = NWNXPopInt();
+      ability.id = NWNXPopInt();
       return ability;
     }
 
@@ -260,13 +238,11 @@ namespace NWN.Core.NWNX
     /// <param name="ability">An NWNX_Creature_SpecialAbility struct.</param>
     public static void AddSpecialAbility(uint creature, SpecialAbility ability)
     {
-      const string sFunc = "AddSpecialAbility";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(ability.id);
-      VM.NWNX.StackPush(ability.ready);
-      VM.NWNX.StackPush(ability.level);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(ability.id);
+      NWNXPushInt(ability.ready);
+      NWNXPushInt(ability.level);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "AddSpecialAbility");
     }
 
     /// Removes a special ability from a creature.
@@ -274,11 +250,9 @@ namespace NWN.Core.NWNX
     /// <param name="index">The index. Index bounds: 0 &lt;= index &lt; NWNX_Creature_GetSpecialAbilityCount().</param>
     public static void RemoveSpecialAbility(uint creature, int index)
     {
-      const string sFunc = "RemoveSpecialAbility";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(index);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(index);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "RemoveSpecialAbility");
     }
 
     /// Sets a special ability at the index for the creature.
@@ -287,14 +261,12 @@ namespace NWN.Core.NWNX
     /// <param name="ability">An NWNX_Creature_SpecialAbility struct.</param>
     public static void SetSpecialAbility(uint creature, int index, SpecialAbility ability)
     {
-      const string sFunc = "SetSpecialAbility";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(ability.id);
-      VM.NWNX.StackPush(ability.ready);
-      VM.NWNX.StackPush(ability.level);
-      VM.NWNX.StackPush(index);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(ability.id);
+      NWNXPushInt(ability.ready);
+      NWNXPushInt(ability.level);
+      NWNXPushInt(index);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetSpecialAbility");
     }
 
     /// Get the class taken by the creature at the provided level.
@@ -303,12 +275,10 @@ namespace NWN.Core.NWNX
     /// <returns>The class id.</returns>
     public static int GetClassByLevel(uint creature, int level)
     {
-      const string sFunc = "GetClassByLevel";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(level);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(level);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetClassByLevel");
+      return NWNXPopInt();
     }
 
     /// Sets the base AC for the creature.
@@ -316,11 +286,9 @@ namespace NWN.Core.NWNX
     /// <param name="ac">The base AC to set for the creature.</param>
     public static void SetBaseAC(uint creature, int ac)
     {
-      const string sFunc = "SetBaseAC";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(ac);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(ac);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetBaseAC");
     }
 
     /// Get the base AC for the creature.
@@ -328,11 +296,9 @@ namespace NWN.Core.NWNX
     /// <returns>The base AC.</returns>
     public static int GetBaseAC(uint creature)
     {
-      const string sFunc = "GetBaseAC";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetBaseAC");
+      return NWNXPopInt();
     }
 
     /// Sets the ability score of the creature to the provided value.
@@ -342,12 +308,10 @@ namespace NWN.Core.NWNX
     /// <param name="value">The value to set.</param>
     public static void SetRawAbilityScore(uint creature, int ability, int value)
     {
-      const string sFunc = "SetRawAbilityScore";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(value);
-      VM.NWNX.StackPush(ability);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(value);
+      NWNXPushInt(ability);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetRawAbilityScore");
     }
 
     /// Gets the ability score of the creature.
@@ -357,12 +321,10 @@ namespace NWN.Core.NWNX
     /// <returns>The ability score.</returns>
     public static int GetRawAbilityScore(uint creature, int ability)
     {
-      const string sFunc = "GetRawAbilityScore";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(ability);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(ability);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetRawAbilityScore");
+      return NWNXPopInt();
     }
 
     /// Adjusts the ability score of a creature.
@@ -372,12 +334,10 @@ namespace NWN.Core.NWNX
     /// <param name="modifier">The modifier value.</param>
     public static void ModifyRawAbilityScore(uint creature, int ability, int modifier)
     {
-      const string sFunc = "ModifyRawAbilityScore";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(modifier);
-      VM.NWNX.StackPush(ability);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(modifier);
+      NWNXPushInt(ability);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "ModifyRawAbilityScore");
     }
 
     /// Gets the raw ability score a polymorphed creature had prior to polymorphing.
@@ -387,12 +347,10 @@ namespace NWN.Core.NWNX
     /// <returns>The raw ability score.</returns>
     public static int GetPrePolymorphAbilityScore(uint creature, int ability)
     {
-      const string sFunc = "GetPrePolymorphAbilityScore";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(ability);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(ability);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetPrePolymorphAbilityScore");
+      return NWNXPopInt();
     }
 
     /// Gets the remaining spell slots (innate casting) at a class level&apos;s index.
@@ -402,13 +360,11 @@ namespace NWN.Core.NWNX
     /// <returns>The remaining spell slot count.</returns>
     public static int GetRemainingSpellSlots(uint creature, int @class, int level)
     {
-      const string sFunc = "GetRemainingSpellSlots";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(level);
-      VM.NWNX.StackPush(@class);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(level);
+      NWNXPushInt(@class);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetRemainingSpellSlots");
+      return NWNXPopInt();
     }
 
     /// Sets the remaining spell slots (innate casting) at a class level.
@@ -418,13 +374,11 @@ namespace NWN.Core.NWNX
     /// <param name="slots">The remaining spell slots to set.</param>
     public static void SetRemainingSpellSlots(uint creature, int @class, int level, int slots)
     {
-      const string sFunc = "SetRemainingSpellSlots";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(slots);
-      VM.NWNX.StackPush(level);
-      VM.NWNX.StackPush(@class);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(slots);
+      NWNXPushInt(level);
+      NWNXPushInt(@class);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetRemainingSpellSlots");
     }
 
     /// Gets the maximum spell slots (innate casting) at a class level.
@@ -434,13 +388,11 @@ namespace NWN.Core.NWNX
     /// <returns>The maximum spell slot count.</returns>
     public static int GetMaxSpellSlots(uint creature, int @class, int level)
     {
-      const string sFunc = "GetMaxSpellSlots";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(level);
-      VM.NWNX.StackPush(@class);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(level);
+      NWNXPushInt(@class);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetMaxSpellSlots");
+      return NWNXPopInt();
     }
 
     /// Add a spell to a creature&apos;s spellbook for class.
@@ -450,13 +402,11 @@ namespace NWN.Core.NWNX
     /// <param name="spellId">The spell to remove.</param>
     public static void AddKnownSpell(uint creature, int @class, int level, int spellId)
     {
-      const string sFunc = "AddKnownSpell";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(spellId);
-      VM.NWNX.StackPush(level);
-      VM.NWNX.StackPush(@class);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(spellId);
+      NWNXPushInt(level);
+      NWNXPushInt(@class);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "AddKnownSpell");
     }
 
     /// Remove a spell from creature&apos;s spellbook for class.
@@ -466,13 +416,11 @@ namespace NWN.Core.NWNX
     /// <param name="spellId">The spell to remove.</param>
     public static void RemoveKnownSpell(uint creature, int @class, int level, int spellId)
     {
-      const string sFunc = "RemoveKnownSpell";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(spellId);
-      VM.NWNX.StackPush(level);
-      VM.NWNX.StackPush(@class);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(spellId);
+      NWNXPushInt(level);
+      NWNXPushInt(@class);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "RemoveKnownSpell");
     }
 
     /// Gets the maximum hit points for creature for level.
@@ -481,12 +429,10 @@ namespace NWN.Core.NWNX
     /// <returns>The maximum hit points a creature can have for the class at the provided level.</returns>
     public static int GetMaxHitPointsByLevel(uint creature, int level)
     {
-      const string sFunc = "GetMaxHitPointsByLevel";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(level);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(level);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetMaxHitPointsByLevel");
+      return NWNXPopInt();
     }
 
     /// Sets the maximum hit points for creature.
@@ -495,12 +441,10 @@ namespace NWN.Core.NWNX
     /// <param name="value">The amount to set the max hit points.</param>
     public static void SetMaxHitPointsByLevel(uint creature, int level, int value)
     {
-      const string sFunc = "SetMaxHitPointsByLevel";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(value);
-      VM.NWNX.StackPush(level);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(value);
+      NWNXPushInt(level);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetMaxHitPointsByLevel");
     }
 
     /// Set creature&apos;s movement rate.
@@ -508,11 +452,9 @@ namespace NWN.Core.NWNX
     /// <param name="rate">The movement rate.</param>
     public static void SetMovementRate(uint creature, int rate)
     {
-      const string sFunc = "SetMovementRate";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(rate);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(rate);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetMovementRate");
     }
 
     /// Returns the creature&apos;s current movement rate factor.
@@ -521,11 +463,9 @@ namespace NWN.Core.NWNX
     /// <returns>The current movement rate factor.</returns>
     public static float GetMovementRateFactor(uint creature)
     {
-      const string sFunc = "GetMovementRateFactor";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopFloat();
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetMovementRateFactor");
+      return NWNXPopFloat();
     }
 
     /// Sets the creature&apos;s current movement rate factor.
@@ -534,11 +474,9 @@ namespace NWN.Core.NWNX
     /// <param name="rate">The rate to set.</param>
     public static void SetMovementRateFactor(uint creature, float factor)
     {
-      const string sFunc = "SetMovementRateFactor";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(factor);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushFloat(factor);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetMovementRateFactor");
     }
 
     /// Returns the creature&apos;s maximum movement rate cap.
@@ -547,11 +485,9 @@ namespace NWN.Core.NWNX
     /// <returns>The maximum movement rate cap.</returns>
     public static float GetMovementRateFactorCap(uint creature)
     {
-      const string sFunc = "GetMovementRateFactorCap";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopFloat();
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetMovementRateFactorCap");
+      return NWNXPopFloat();
     }
 
     /// Sets the creature&apos;s maximum movement rate cap.
@@ -560,11 +496,9 @@ namespace NWN.Core.NWNX
     /// <param name="cap">The cap to set.</param>
     public static void SetMovementRateFactorCap(uint creature, float cap)
     {
-      const string sFunc = "SetMovementRateFactorCap";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(cap);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushFloat(cap);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetMovementRateFactorCap");
     }
 
     /// Returns the creature&apos;s current movement type
@@ -572,11 +506,9 @@ namespace NWN.Core.NWNX
     /// <returns>An NWNX_CREATURE_MOVEMENT_TYPE_* constant.</returns>
     public static int GetMovementType(uint creature)
     {
-      const string sFunc = "GetMovementType";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetMovementType");
+      return NWNXPopInt();
     }
 
     /// Sets the maximum movement rate a creature can have while walking (not running)
@@ -586,11 +518,9 @@ namespace NWN.Core.NWNX
     /// Default value is 2000.0, which is the base human walk speed.
     public static void SetWalkRateCap(uint creature, float fWalkRate = 2000.0f)
     {
-      const string sFunc = "SetWalkRateCap";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(fWalkRate);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushFloat(fWalkRate);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetWalkRateCap");
     }
 
     /// Set creature&apos;s raw good/evil alignment value.
@@ -598,11 +528,9 @@ namespace NWN.Core.NWNX
     /// <param name="value">The value to set.</param>
     public static void SetAlignmentGoodEvil(uint creature, int value)
     {
-      const string sFunc = "SetAlignmentGoodEvil";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(value);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(value);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetAlignmentGoodEvil");
     }
 
     /// Set creature&apos;s raw law/chaos alignment value.
@@ -610,11 +538,9 @@ namespace NWN.Core.NWNX
     /// <param name="value">The value to set.</param>
     public static void SetAlignmentLawChaos(uint creature, int value)
     {
-      const string sFunc = "SetAlignmentLawChaos";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(value);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(value);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetAlignmentLawChaos");
     }
 
     /// Set the base ranks in a skill for creature
@@ -623,12 +549,10 @@ namespace NWN.Core.NWNX
     /// <param name="rank">The value to set as the skill rank.</param>
     public static void SetSkillRank(uint creature, int skill, int rank)
     {
-      const string sFunc = "SetSkillRank";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(rank);
-      VM.NWNX.StackPush(skill);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(rank);
+      NWNXPushInt(skill);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetSkillRank");
     }
 
     /// Get the ranks in a skill for creature assigned at a level.
@@ -638,13 +562,11 @@ namespace NWN.Core.NWNX
     /// <returns>The rank in a skill assigned at a level (-1 on error).</returns>
     public static int GetSkillRankByLevel(uint creature, int skill, int level)
     {
-      const string sFunc = "GetSkillRankByLevel";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(level);
-      VM.NWNX.StackPush(skill);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(level);
+      NWNXPushInt(skill);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetSkillRankByLevel");
+      return NWNXPopInt();
     }
 
     /// Set the ranks in a skill for creature assigned at a level.
@@ -655,13 +577,11 @@ namespace NWN.Core.NWNX
     /// <param name="rank">The value to set as the skill rank.</param>
     public static void SetSkillRankByLevel(uint creature, int skill, int rank, int level)
     {
-      const string sFunc = "SetSkillRankByLevel";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(level);
-      VM.NWNX.StackPush(rank);
-      VM.NWNX.StackPush(skill);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(level);
+      NWNXPushInt(rank);
+      NWNXPushInt(skill);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetSkillRankByLevel");
     }
 
     /// Set the class ID in a particular position for a creature.
@@ -673,13 +593,11 @@ namespace NWN.Core.NWNX
     /// of the old class in CNWLevelStats with the new classID.
     public static void SetClassByPosition(uint creature, int position, int classID, int bUpdateLevels = TRUE)
     {
-      const string sFunc = "SetClassByPosition";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(bUpdateLevels);
-      VM.NWNX.StackPush(classID);
-      VM.NWNX.StackPush(position);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(bUpdateLevels);
+      NWNXPushInt(classID);
+      NWNXPushInt(position);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetClassByPosition");
     }
 
     /// Set the level at the given position for a creature.
@@ -690,12 +608,10 @@ namespace NWN.Core.NWNX
     /// <param name="level">The level to set.</param>
     public static void SetLevelByPosition(uint creature, int position, int level)
     {
-      const string sFunc = "SetLevelByPosition";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(level);
-      VM.NWNX.StackPush(position);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(level);
+      NWNXPushInt(position);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetLevelByPosition");
     }
 
     /// Set creature&apos;s base attack bonus (BAB).
@@ -709,11 +625,9 @@ namespace NWN.Core.NWNX
     /// the bonus attacks per round for a creature, not the BAB.
     public static void SetBaseAttackBonus(uint creature, int bab)
     {
-      const string sFunc = "SetBaseAttackBonus";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(bab);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(bab);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetBaseAttackBonus");
     }
 
     /// Gets the creatures current attacks per round (using equipped weapon).
@@ -723,42 +637,34 @@ namespace NWN.Core.NWNX
     /// <returns>The attacks per round.</returns>
     public static int GetAttacksPerRound(uint creature, int bBaseAPR = FALSE)
     {
-      const string sFunc = "GetAttacksPerRound";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(bBaseAPR);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(bBaseAPR);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetAttacksPerRound");
+      return NWNXPopInt();
     }
 
     /// Restore all creature feat uses.
     /// <param name="creature">The creature object.</param>
     public static void RestoreFeats(uint creature)
     {
-      const string sFunc = "RestoreFeats";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "RestoreFeats");
     }
 
     /// Restore all creature special ability uses.
     /// <param name="creature">The creature object.</param>
     public static void RestoreSpecialAbilities(uint creature)
     {
-      const string sFunc = "RestoreSpecialAbilities";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "RestoreSpecialAbilities");
     }
 
     /// Restore uses for all items carried by the creature.
     /// <param name="creature">The creature object.</param>
     public static void RestoreItems(uint creature)
     {
-      const string sFunc = "RestoreItems";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "RestoreItems");
     }
 
     /// Sets the creature size.
@@ -766,11 +672,9 @@ namespace NWN.Core.NWNX
     /// <param name="size">Use CREATURE_SIZE_* constants.</param>
     public static void SetSize(uint creature, int size)
     {
-      const string sFunc = "SetSize";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(size);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(size);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetSize");
     }
 
     /// Gets the creature&apos;s remaining unspent skill points.
@@ -778,11 +682,9 @@ namespace NWN.Core.NWNX
     /// <returns>The remaining unspent skill points.</returns>
     public static int GetSkillPointsRemaining(uint creature)
     {
-      const string sFunc = "GetSkillPointsRemaining";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetSkillPointsRemaining");
+      return NWNXPopInt();
     }
 
     /// Sets the creature&apos;s remaining unspent skill points.
@@ -790,11 +692,9 @@ namespace NWN.Core.NWNX
     /// <param name="skillpoints">The value to set.</param>
     public static void SetSkillPointsRemaining(uint creature, int skillpoints)
     {
-      const string sFunc = "SetSkillPointsRemaining";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(skillpoints);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(skillpoints);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetSkillPointsRemaining");
     }
 
     /// Gets the creature&apos;s remaining unspent skill points for level.
@@ -803,12 +703,10 @@ namespace NWN.Core.NWNX
     /// <returns>The remaining unspent skill points for level.</returns>
     public static int GetSkillPointsRemainingByLevel(uint creature, int level)
     {
-      const string sFunc = "GetSkillPointsRemainingByLevel";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(level);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(level);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetSkillPointsRemainingByLevel");
+      return NWNXPopInt();
     }
 
     /// Sets the creature&apos;s remaining unspent skill points for level.
@@ -817,12 +715,10 @@ namespace NWN.Core.NWNX
     /// <param name="value">The value to set for level.</param>
     public static void SetSkillPointsRemainingByLevel(uint creature, int level, int value)
     {
-      const string sFunc = "SetSkillPointsRemainingByLevel";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(value);
-      VM.NWNX.StackPush(level);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(value);
+      NWNXPushInt(level);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetSkillPointsRemainingByLevel");
     }
 
     /// Sets the creature&apos;s racial type
@@ -830,11 +726,9 @@ namespace NWN.Core.NWNX
     /// <param name="racialtype">The racial type to set.</param>
     public static void SetRacialType(uint creature, int racialtype)
     {
-      const string sFunc = "SetRacialType";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(racialtype);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(racialtype);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetRacialType");
     }
 
     /// Sets the creature&apos;s gold without sending a feedback message
@@ -842,11 +736,9 @@ namespace NWN.Core.NWNX
     /// <param name="gold">The amount of gold to set for their creature.</param>
     public static void SetGold(uint creature, int gold)
     {
-      const string sFunc = "SetGold";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(gold);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(gold);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetGold");
     }
 
     /// Sets corpse decay time in milliseconds
@@ -854,11 +746,9 @@ namespace NWN.Core.NWNX
     /// <param name="nDecayTime">The corpse decay time.</param>
     public static void SetCorpseDecayTime(uint creature, int nDecayTime)
     {
-      const string sFunc = "SetCorpseDecayTime";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(nDecayTime);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(nDecayTime);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetCorpseDecayTime");
     }
 
     /// Gets the creature&apos;s base save.
@@ -868,12 +758,10 @@ namespace NWN.Core.NWNX
     /// @note This will include any modifiers set in the toolset.
     public static int GetBaseSavingThrow(uint creature, int which)
     {
-      const string sFunc = "GetBaseSavingThrow";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(which);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(which);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetBaseSavingThrow");
+      return NWNXPopInt();
     }
 
     /// Sets the creature&apos;s base save.
@@ -882,12 +770,10 @@ namespace NWN.Core.NWNX
     /// <param name="value">The base save value.</param>
     public static void SetBaseSavingThrow(uint creature, int which, int value)
     {
-      const string sFunc = "SetBaseSavingThrow";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(value);
-      VM.NWNX.StackPush(which);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(value);
+      NWNXPushInt(which);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetBaseSavingThrow");
     }
 
     /// Add levels of class to the creature, bypassing all validation
@@ -898,13 +784,11 @@ namespace NWN.Core.NWNX
     /// @note This will not work on player characters.
     public static void LevelUp(uint creature, int @class, int count = 1, int package = PACKAGE_INVALID)
     {
-      const string sFunc = "LevelUp";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(package);
-      VM.NWNX.StackPush(count);
-      VM.NWNX.StackPush(@class);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(package);
+      NWNXPushInt(count);
+      NWNXPushInt(@class);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "LevelUp");
     }
 
     /// Remove last levels from a creature.
@@ -913,11 +797,9 @@ namespace NWN.Core.NWNX
     /// @note This will not work on player characters.
     public static void LevelDown(uint creature, int count = 1)
     {
-      const string sFunc = "LevelDown";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(count);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(count);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "LevelDown");
     }
 
     /// Sets the creature&apos;s challenge rating
@@ -925,11 +807,9 @@ namespace NWN.Core.NWNX
     /// <param name="fCR">The challenge rating.</param>
     public static void SetChallengeRating(uint creature, float fCR)
     {
-      const string sFunc = "SetChallengeRating";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(fCR);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushFloat(fCR);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetChallengeRating");
     }
 
     /// Returns the creature&apos;s highest attack bonus based on its own stats.
@@ -946,8 +826,6 @@ namespace NWN.Core.NWNX
     /// <returns>The highest attack bonus.</returns>
     public static int GetAttackBonus(uint creature, int isMelee = -1, int isTouchAttack = FALSE, int isOffhand = FALSE, int includeBaseAttackBonus = TRUE)
     {
-      const string sFunc = "GetAttackBonus";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
       if (isMelee==-1)
       {
         uint oWeapon = GetItemInSlot(INVENTORY_SLOT_RIGHTHAND, creature);
@@ -960,13 +838,13 @@ namespace NWN.Core.NWNX
           isMelee = TRUE;
         }
       }
-      VM.NWNX.StackPush(includeBaseAttackBonus);
-      VM.NWNX.StackPush(isOffhand);
-      VM.NWNX.StackPush(isTouchAttack);
-      VM.NWNX.StackPush(isMelee);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(includeBaseAttackBonus);
+      NWNXPushInt(isOffhand);
+      NWNXPushInt(isTouchAttack);
+      NWNXPushInt(isMelee);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetAttackBonus");
+      return NWNXPopInt();
     }
 
     /// Get highest level version of feat possessed by creature.
@@ -976,12 +854,10 @@ namespace NWN.Core.NWNX
     /// <returns>The highest level version of the feat.</returns>
     public static int GetHighestLevelOfFeat(uint creature, int feat)
     {
-      const string sFunc = "GetHighestLevelOfFeat";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(feat);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(feat);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetHighestLevelOfFeat");
+      return NWNXPopInt();
     }
 
     /// Get feat remaining uses.
@@ -990,12 +866,10 @@ namespace NWN.Core.NWNX
     /// <returns>The amount of remaining uses.</returns>
     public static int GetFeatRemainingUses(uint creature, int feat)
     {
-      const string sFunc = "GetFeatRemainingUses";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(feat);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(feat);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetFeatRemainingUses");
+      return NWNXPopInt();
     }
 
     /// Get feat total uses.
@@ -1004,12 +878,10 @@ namespace NWN.Core.NWNX
     /// <returns>The total uses.</returns>
     public static int GetFeatTotalUses(uint creature, int feat)
     {
-      const string sFunc = "GetFeatTotalUses";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(feat);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(feat);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetFeatTotalUses");
+      return NWNXPopInt();
     }
 
     /// Set feat remaining uses.
@@ -1018,12 +890,10 @@ namespace NWN.Core.NWNX
     /// <param name="uses">The amount of remaining uses.</param>
     public static void SetFeatRemainingUses(uint creature, int feat, int uses)
     {
-      const string sFunc = "SetFeatRemainingUses";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(uses);
-      VM.NWNX.StackPush(feat);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(uses);
+      NWNXPushInt(feat);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetFeatRemainingUses");
     }
 
     /// Get total effect bonus
@@ -1042,20 +912,18 @@ namespace NWN.Core.NWNX
     /// <returns>The bonus value.</returns>
     public static int GetTotalEffectBonus(uint creature, int bonusType = NWNX_CREATURE_BONUS_TYPE_ATTACK, uint target = OBJECT_INVALID, int isElemental = 0, int isForceMax = 0, int savetype = -1, int saveSpecificType = -1, int skill = -1, int abilityScore = -1, int isOffhand = FALSE)
     {
-      const string sFunc = "GetTotalEffectBonus";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(isOffhand);
-      VM.NWNX.StackPush(abilityScore);
-      VM.NWNX.StackPush(skill);
-      VM.NWNX.StackPush(saveSpecificType);
-      VM.NWNX.StackPush(savetype);
-      VM.NWNX.StackPush(isForceMax);
-      VM.NWNX.StackPush(isElemental);
-      VM.NWNX.StackPush(target);
-      VM.NWNX.StackPush(bonusType);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(isOffhand);
+      NWNXPushInt(abilityScore);
+      NWNXPushInt(skill);
+      NWNXPushInt(saveSpecificType);
+      NWNXPushInt(savetype);
+      NWNXPushInt(isForceMax);
+      NWNXPushInt(isElemental);
+      NWNXPushObject(target);
+      NWNXPushInt(bonusType);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetTotalEffectBonus");
+      return NWNXPopInt();
     }
 
     /// Set the original first or last name of creature
@@ -1065,12 +933,10 @@ namespace NWN.Core.NWNX
     /// @note For PCs this will persist to the .bic file if saved. Requires a relog to update.
     public static void SetOriginalName(uint creature, string name, int isLastName)
     {
-      const string sFunc = "SetOriginalName";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(isLastName);
-      VM.NWNX.StackPush(name);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(isLastName);
+      NWNXPushString(name);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetOriginalName");
     }
 
     /// Get the original first or last name of creature
@@ -1079,12 +945,10 @@ namespace NWN.Core.NWNX
     /// <returns>The original first or last name of the creature.</returns>
     public static string GetOriginalName(uint creature, int isLastName)
     {
-      const string sFunc = "GetOriginalName";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(isLastName);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopString();
+      NWNXPushInt(isLastName);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetOriginalName");
+      return NWNXPopString();
     }
 
     /// Set creature&apos;s spell resistance
@@ -1093,11 +957,9 @@ namespace NWN.Core.NWNX
     /// @warning This setting will be overwritten by effects and once those effects fade the old setting (typically 0) will be set.
     public static void SetSpellResistance(uint creature, int sr)
     {
-      const string sFunc = "SetSpellResistance";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(sr);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(sr);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetSpellResistance");
     }
 
     /// Set creature&apos;s animal companion creature type
@@ -1105,11 +967,9 @@ namespace NWN.Core.NWNX
     /// <param name="type">The type from ANIMAL_COMPANION_CREATURE_TYPE_*.</param>
     public static void SetAnimalCompanionCreatureType(uint creature, int type)
     {
-      const string sFunc = "SetAnimalCompanionCreatureType";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(type);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(type);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetAnimalCompanionCreatureType");
     }
 
     /// Set creature&apos;s familiar creature type
@@ -1117,11 +977,9 @@ namespace NWN.Core.NWNX
     /// <param name="type">The type from FAMILIAR_CREATURE_TYPE_*.</param>
     public static void SetFamiliarCreatureType(uint creature, int type)
     {
-      const string sFunc = "SetFamiliarCreatureType";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(type);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(type);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetFamiliarCreatureType");
     }
 
     /// Set creature&apos;s animal companion&apos;s name
@@ -1129,11 +987,9 @@ namespace NWN.Core.NWNX
     /// <param name="name">The name to give their animal companion.</param>
     public static void SetAnimalCompanionName(uint creature, string name)
     {
-      const string sFunc = "SetAnimalCompanionName";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(name);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushString(name);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetAnimalCompanionName");
     }
 
     /// Set creature&apos;s familiar&apos;s name
@@ -1141,11 +997,9 @@ namespace NWN.Core.NWNX
     /// <param name="name">The name to give their familiar.</param>
     public static void SetFamiliarName(uint creature, string name)
     {
-      const string sFunc = "SetFamiliarName";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(name);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushString(name);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetFamiliarName");
     }
 
     /// Get whether the creature can be disarmed.
@@ -1153,11 +1007,9 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if the creature can be disarmed.</returns>
     public static int GetDisarmable(uint creature)
     {
-      const string sFunc = "GetDisarmable";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetDisarmable");
+      return NWNXPopInt();
     }
 
     /// Set whether a creature can be disarmed.
@@ -1165,11 +1017,9 @@ namespace NWN.Core.NWNX
     /// <param name="disarmable">Set to TRUE if the creature can be disarmed.</param>
     public static void SetDisarmable(uint creature, int disarmable)
     {
-      const string sFunc = "SetDisarmable";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(disarmable);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(disarmable);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetDisarmable");
     }
 
     /// Sets one of creature&apos;s domains.
@@ -1179,13 +1029,11 @@ namespace NWN.Core.NWNX
     /// <param name="domain">The domain constant to set.</param>
     public static void SetDomain(uint creature, int @class, int index, int domain)
     {
-      const string sFunc = "SetDomain";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(domain);
-      VM.NWNX.StackPush(index);
-      VM.NWNX.StackPush(@class);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(domain);
+      NWNXPushInt(index);
+      NWNXPushInt(@class);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetDomain");
     }
 
     /// Sets creature&apos;s specialist school.
@@ -1194,12 +1042,10 @@ namespace NWN.Core.NWNX
     /// <param name="school">The school constant.</param>
     public static void SetSpecialization(uint creature, int @class, int school)
     {
-      const string sFunc = "SetSpecialization";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(school);
-      VM.NWNX.StackPush(@class);
-      VM.NWNX.StackPush(creature);
-      VM.NWNX.Call();
+      NWNXPushInt(school);
+      NWNXPushInt(@class);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetSpecialization");
     }
 
     /// Sets oCreatures faction to be the faction with id nFactionId.
@@ -1207,11 +1053,9 @@ namespace NWN.Core.NWNX
     /// <param name="nFactionId">The faction id we want the creature to join.</param>
     public static void SetFaction(uint oCreature, int nFactionId)
     {
-      const string sFunc = "SetFaction";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(nFactionId);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushInt(nFactionId);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "SetFaction");
     }
 
     /// Gets the faction id from oCreature
@@ -1219,11 +1063,9 @@ namespace NWN.Core.NWNX
     /// <returns>faction id as an integer, -1 when used against invalid creature or invalid object.</returns>
     public static int GetFaction(uint oCreature)
     {
-      const string sFunc = "GetFaction";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetFaction");
+      return NWNXPopInt();
     }
 
     /// Get whether a creature is flat-footed.
@@ -1231,11 +1073,9 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if the creature is flat-footed.</returns>
     public static int GetFlatFooted(uint oCreature)
     {
-      const string sFunc = "GetFlatFooted";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetFlatFooted");
+      return NWNXPopInt();
     }
 
     /// Serialize oCreature&apos;s quickbar to a base64 string
@@ -1243,11 +1083,9 @@ namespace NWN.Core.NWNX
     /// <returns>A base64 string representation of oCreature&apos;s quickbar.</returns>
     public static string SerializeQuickbar(uint oCreature)
     {
-      const string sFunc = "SerializeQuickbar";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopString();
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "SerializeQuickbar");
+      return NWNXPopString();
     }
 
     /// Deserialize sSerializedQuickbar for oCreature
@@ -1256,12 +1094,10 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE on success</returns>
     public static int DeserializeQuickbar(uint oCreature, string sSerializedQuickbar)
     {
-      const string sFunc = "DeserializeQuickbar";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(sSerializedQuickbar);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushString(sSerializedQuickbar);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "DeserializeQuickbar");
+      return NWNXPopInt();
     }
 
     /// Sets a caster level modifier for oCreature
@@ -1271,13 +1107,11 @@ namespace NWN.Core.NWNX
     /// <param name="bPersist">whether the modifier should be persisted to the .bic file if applicable</param>
     public static void SetCasterLevelModifier(uint oCreature, int nClass, int nModifier, int bPersist = FALSE)
     {
-      const string sFunc = "SetCasterLevelModifier";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(bPersist);
-      VM.NWNX.StackPush(nModifier);
-      VM.NWNX.StackPush(nClass);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushInt(bPersist);
+      NWNXPushInt(nModifier);
+      NWNXPushInt(nClass);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "SetCasterLevelModifier");
     }
 
     /// Gets the current caster level modifier for oCreature
@@ -1286,12 +1120,10 @@ namespace NWN.Core.NWNX
     /// <returns>the current caster level modifier for the creature</returns>
     public static int GetCasterLevelModifier(uint oCreature, int nClass)
     {
-      const string sFunc = "GetCasterLevelModifier";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(nClass);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(nClass);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetCasterLevelModifier");
+      return NWNXPopInt();
     }
 
     /// Sets a caster level override for oCreature
@@ -1301,13 +1133,11 @@ namespace NWN.Core.NWNX
     /// <param name="bPersist">whether the override should be persisted to the .bic file if applicable</param>
     public static void SetCasterLevelOverride(uint oCreature, int nClass, int nCasterLevel, int bPersist = FALSE)
     {
-      const string sFunc = "SetCasterLevelOverride";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(bPersist);
-      VM.NWNX.StackPush(nCasterLevel);
-      VM.NWNX.StackPush(nClass);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushInt(bPersist);
+      NWNXPushInt(nCasterLevel);
+      NWNXPushInt(nClass);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "SetCasterLevelOverride");
     }
 
     /// Gets the current caster level override for oCreature
@@ -1316,22 +1146,18 @@ namespace NWN.Core.NWNX
     /// <returns>the current caster level override for the creature or -1 if not set</returns>
     public static int GetCasterLevelOverride(uint oCreature, int nClass)
     {
-      const string sFunc = "GetCasterLevelOverride";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(nClass);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(nClass);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetCasterLevelOverride");
+      return NWNXPopInt();
     }
 
     /// Move a creature to limbo.
     /// <param name="oCreature">The creature object.</param>
     public static void JumpToLimbo(uint oCreature)
     {
-      const string sFunc = "JumpToLimbo";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "JumpToLimbo");
     }
 
     /// Sets the critical hit multiplier modifier for the Creature
@@ -1343,14 +1169,12 @@ namespace NWN.Core.NWNX
     /// @note Persistence is activated each server reset by the first use of either &apos;SetCriticalMultiplier*&apos; functions. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
     public static void SetCriticalMultiplierModifier(uint oCreature, int nModifier, int nHand = 0, int bPersist = FALSE, int nBaseItem = -1)
     {
-      const string sFunc = "SetCriticalMultiplierModifier";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(nBaseItem);
-      VM.NWNX.StackPush(bPersist);
-      VM.NWNX.StackPush(nHand);
-      VM.NWNX.StackPush(nModifier);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushInt(nBaseItem);
+      NWNXPushInt(bPersist);
+      NWNXPushInt(nHand);
+      NWNXPushInt(nModifier);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "SetCriticalMultiplierModifier");
     }
 
     /// Gets the critical hit multiplier modifier for the Creature
@@ -1360,13 +1184,11 @@ namespace NWN.Core.NWNX
     /// <returns>the current critical hit multiplier modifier for the creature</returns>
     public static int GetCriticalMultiplierModifier(uint oCreature, int nHand = 0, int nBaseItem = -1)
     {
-      const string sFunc = "GetCriticalMultiplierModifier";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(nBaseItem);
-      VM.NWNX.StackPush(nHand);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(nBaseItem);
+      NWNXPushInt(nHand);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetCriticalMultiplierModifier");
+      return NWNXPopInt();
     }
 
     /// Sets the critical hit multiplier override for the Creature.
@@ -1378,14 +1200,12 @@ namespace NWN.Core.NWNX
     /// @note Persistence is activated each server reset by the first use of either &apos;SetCriticalMultiplier*&apos; functions. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
     public static void SetCriticalMultiplierOverride(uint oCreature, int nOverride, int nHand = 0, int bPersist = FALSE, int nBaseItem = -1)
     {
-      const string sFunc = "SetCriticalMultiplierOverride";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(nBaseItem);
-      VM.NWNX.StackPush(bPersist);
-      VM.NWNX.StackPush(nHand);
-      VM.NWNX.StackPush(nOverride);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushInt(nBaseItem);
+      NWNXPushInt(bPersist);
+      NWNXPushInt(nHand);
+      NWNXPushInt(nOverride);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "SetCriticalMultiplierOverride");
     }
 
     /// Gets the critical hit multiplier override for the Creature
@@ -1395,13 +1215,11 @@ namespace NWN.Core.NWNX
     /// <returns>the current critical hit multiplier override for the creature. No override == -1</returns>
     public static int GetCriticalMultiplierOverride(uint oCreature, int nHand = 0, int nBaseItem = -1)
     {
-      const string sFunc = "GetCriticalMultiplierOverride";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(nBaseItem);
-      VM.NWNX.StackPush(nHand);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(nBaseItem);
+      NWNXPushInt(nHand);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetCriticalMultiplierOverride");
+      return NWNXPopInt();
     }
 
     /// Sets the critical hit range modifier for the creature.
@@ -1413,14 +1231,12 @@ namespace NWN.Core.NWNX
     /// @note Persistence is activated each server reset by the first use of either &apos;SetCriticalRange*&apos; functions. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
     public static void SetCriticalRangeModifier(uint oCreature, int nModifier, int nHand = 0, int bPersist = FALSE, int nBaseItem = -1)
     {
-      const string sFunc = "SetCriticalRangeModifier";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(nBaseItem);
-      VM.NWNX.StackPush(bPersist);
-      VM.NWNX.StackPush(nHand);
-      VM.NWNX.StackPush(nModifier);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushInt(nBaseItem);
+      NWNXPushInt(bPersist);
+      NWNXPushInt(nHand);
+      NWNXPushInt(nModifier);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "SetCriticalRangeModifier");
     }
 
     /// Gets the critical hit range modifier for the creature.
@@ -1430,13 +1246,11 @@ namespace NWN.Core.NWNX
     /// <returns>the current critical hit range modifier for the creature</returns>
     public static int GetCriticalRangeModifier(uint oCreature, int nHand = 0, int nBaseItem = -1)
     {
-      const string sFunc = "GetCriticalRangeModifier";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(nBaseItem);
-      VM.NWNX.StackPush(nHand);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(nBaseItem);
+      NWNXPushInt(nHand);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetCriticalRangeModifier");
+      return NWNXPopInt();
     }
 
     /// Sets the critical hit range Override for the creature.
@@ -1448,14 +1262,12 @@ namespace NWN.Core.NWNX
     /// @note Persistence is activated each server reset by the first use of either &apos;SetCriticalRange*&apos; functions. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
     public static void SetCriticalRangeOverride(uint oCreature, int nOverride, int nHand = 0, int bPersist = FALSE, int nBaseItem = -1)
     {
-      const string sFunc = "SetCriticalRangeOverride";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(nBaseItem);
-      VM.NWNX.StackPush(bPersist);
-      VM.NWNX.StackPush(nHand);
-      VM.NWNX.StackPush(nOverride);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushInt(nBaseItem);
+      NWNXPushInt(bPersist);
+      NWNXPushInt(nHand);
+      NWNXPushInt(nOverride);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "SetCriticalRangeOverride");
     }
 
     /// Sets the critical hit range Override for the creature.
@@ -1465,13 +1277,11 @@ namespace NWN.Core.NWNX
     /// <returns>the current critical hit range override for the creature. No override == -1</returns>
     public static int GetCriticalRangeOverride(uint oCreature, int nHand = 0, int nBaseItem = -1)
     {
-      const string sFunc = "GetCriticalRangeOverride";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(nBaseItem);
-      VM.NWNX.StackPush(nHand);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(nBaseItem);
+      NWNXPushInt(nHand);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetCriticalRangeOverride");
+      return NWNXPopInt();
     }
 
     /// Add oAssociate as nAssociateType to oCreature
@@ -1481,12 +1291,10 @@ namespace NWN.Core.NWNX
     /// <param name="nAssociateType">The associate type, one of ASSOCIATE_TYPE_*, except _NONE</param>
     public static void AddAssociate(uint oCreature, uint oAssociate, int nAssociateType)
     {
-      const string sFunc = "AddAssociate";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(nAssociateType);
-      VM.NWNX.StackPush(oAssociate);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushInt(nAssociateType);
+      NWNXPushObject(oAssociate);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "AddAssociate");
     }
 
     /// Override the damage level of oCreature.
@@ -1495,11 +1303,9 @@ namespace NWN.Core.NWNX
     /// <param name="nDamageLevel">A damage level, see damagelevels.2da. Allowed values: 0-255 or -1 to remove the override.</param>
     public static void OverrideDamageLevel(uint oCreature, int nDamageLevel)
     {
-      const string sFunc = "OverrideDamageLevel";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(nDamageLevel);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushInt(nDamageLevel);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "OverrideDamageLevel");
     }
 
     /// Set the encounter source of oCreature.
@@ -1507,11 +1313,9 @@ namespace NWN.Core.NWNX
     /// <param name="oEncounter">The source encounter</param>
     public static void SetEncounter(uint oCreature, uint oEncounter)
     {
-      const string sFunc = "SetEncounter";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oEncounter);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushObject(oEncounter);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "SetEncounter");
     }
 
     /// Get the encounter source of oCreature.
@@ -1519,11 +1323,9 @@ namespace NWN.Core.NWNX
     /// <returns>The encounter, OBJECT_INVALID if not part of an encounter or on error</returns>
     public static uint GetEncounter(uint oCreature)
     {
-      const string sFunc = "GetEncounter";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopObject();
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetEncounter");
+      return NWNXPopObject();
     }
 
     /// Get if oCreature is currently bartering.
@@ -1531,11 +1333,9 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if oCreature is bartering, FALSE if not or on error.</returns>
     public static int GetIsBartering(uint oCreature)
     {
-      const string sFunc = "GetIsBartering";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetIsBartering");
+      return NWNXPopInt();
     }
 
     /// Sets caster level for the last item used. Use in a spellhook or spell event before to set caster level for any spells cast from the item.
@@ -1543,11 +1343,9 @@ namespace NWN.Core.NWNX
     /// <param name="nCasterLvl">the desired caster level.</param>
     public static void SetLastItemCasterLevel(uint oCreature, int nCasterLvl)
     {
-      const string sFunc = "SetLastItemCasterLevel";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(nCasterLvl);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushInt(nCasterLvl);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "SetLastItemCasterLevel");
     }
 
     /// Gets the caster level of the last item used.
@@ -1555,11 +1353,9 @@ namespace NWN.Core.NWNX
     /// <returns>returns the creatures last used item&apos;s level.</returns>
     public static int GetLastItemCasterLevel(uint oCreature)
     {
-      const string sFunc = "GetLastItemCasterLevel";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetLastItemCasterLevel");
+      return NWNXPopInt();
     }
 
     /// Gets the Armor classed of attacked against versus
@@ -1569,13 +1365,11 @@ namespace NWN.Core.NWNX
     /// <returns>-255 on Error, Flat footed AC if oVersus is invalid or the Attacked AC versus oVersus.</returns>
     public static int GetArmorClassVersus(uint oAttacked, uint oVersus, int nTouch = FALSE)
     {
-      const string sFunc = "GetArmorClassVersus";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(nTouch);
-      VM.NWNX.StackPush(oVersus);
-      VM.NWNX.StackPush(oAttacked);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(nTouch);
+      NWNXPushObject(oVersus);
+      NWNXPushObject(oAttacked);
+      NWNXCall(NWNX_Creature, "GetArmorClassVersus");
+      return NWNXPopInt();
     }
 
     /// Gets the current walk animation of oCreature.
@@ -1583,11 +1377,9 @@ namespace NWN.Core.NWNX
     /// <returns>-1 on Error, otherwise the walk animation number</returns>
     public static int GetWalkAnimation(uint oCreature)
     {
-      const string sFunc = "GetWalkAnimation";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetWalkAnimation");
+      return NWNXPopInt();
     }
 
     /// Sets the current walk animation of oCreature.
@@ -1595,11 +1387,9 @@ namespace NWN.Core.NWNX
     /// <param name="nAnimation">The walk animation number.</param>
     public static void SetWalkAnimation(uint oCreature, int nAnimation)
     {
-      const string sFunc = "SetWalkAnimation";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(nAnimation);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushInt(nAnimation);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "SetWalkAnimation");
     }
 
     /// Changes the attack modifier depending on the dice roll. Used to skip autofail on 1 and autosucceed on 20 as well.
@@ -1608,12 +1398,10 @@ namespace NWN.Core.NWNX
     /// <param name="nModifier">The modifier to the attack, use 0 to turn off autofail for 1/autosucceed for 20 with no attack modifier value.</param>
     public static void SetAttackRollOverride(uint oCreature, int nRoll, int nModifier)
     {
-      const string sFunc = "SetAttackRollOverride";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(nModifier);
-      VM.NWNX.StackPush(nRoll);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushInt(nModifier);
+      NWNXPushInt(nRoll);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "SetAttackRollOverride");
     }
 
     /// Works like the tweak but can be turned on and off for all creatures or single ones.
@@ -1622,11 +1410,9 @@ namespace NWN.Core.NWNX
     /// @note Use this command on_module_load instead of the NWNX_TWEAKS_PARRY_ALL_ATTACKS tweak if using NWNX_Creature_SetAttackRollOverride()
     public static void SetParryAllAttacks(uint oCreature, int bParry)
     {
-      const string sFunc = "SetParryAllAttacks";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(bParry);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushInt(bParry);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "SetParryAllAttacks");
     }
 
     /// Gets the NoPermanentDeath flag of oCreature.
@@ -1634,11 +1420,9 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE/FALSE or -1 on error.</returns>
     public static int GetNoPermanentDeath(uint oCreature)
     {
-      const string sFunc = "GetNoPermanentDeath";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetNoPermanentDeath");
+      return NWNXPopInt();
     }
 
     /// Sets the NoPermanentDeath flag of oCreature.
@@ -1646,11 +1430,9 @@ namespace NWN.Core.NWNX
     /// <param name="bNoPermanentDeath">TRUE/FALSE.</param>
     public static void SetNoPermanentDeath(uint oCreature, int bNoPermanentDeath)
     {
-      const string sFunc = "SetNoPermanentDeath";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(bNoPermanentDeath);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushInt(bNoPermanentDeath);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "SetNoPermanentDeath");
     }
 
     /// Compute a safe location for oCreature.
@@ -1661,20 +1443,12 @@ namespace NWN.Core.NWNX
     /// <returns>A safe location as vector, will return vPosition if one wasn&apos;t found. Returns {0.0, 0.0, 0.0} on error.</returns>
     public static System.Numerics.Vector3 ComputeSafeLocation(uint oCreature, System.Numerics.Vector3 vPosition, float fRadius = 20.0f, int bWalkStraightLineRequired = TRUE)
     {
-      const string sFunc = "ComputeSafeLocation";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(bWalkStraightLineRequired);
-      VM.NWNX.StackPush(fRadius);
-      VM.NWNX.StackPush(vPosition.X);
-      VM.NWNX.StackPush(vPosition.Y);
-      VM.NWNX.StackPush(vPosition.Z);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      System.Numerics.Vector3 v = default;
-      v.Z = VM.NWNX.StackPopFloat();
-      v.Y = VM.NWNX.StackPopFloat();
-      v.X = VM.NWNX.StackPopFloat();
-      return v;
+      NWNXPushInt(bWalkStraightLineRequired);
+      NWNXPushFloat(fRadius);
+      NWNXPushVector(vPosition);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "ComputeSafeLocation");
+      return NWNXPopVector( );
     }
 
     /// Update oCreature&apos;s perception of oTargetCreature.
@@ -1682,11 +1456,9 @@ namespace NWN.Core.NWNX
     /// <param name="oTargetCreature">The target creature.</param>
     public static void DoPerceptionUpdateOnCreature(uint oCreature, uint oTargetCreature)
     {
-      const string sFunc = "DoPerceptionUpdateOnCreature";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oTargetCreature);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushObject(oTargetCreature);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "DoPerceptionUpdateOnCreature");
     }
 
     /// Get a creatures personal space (meters from center to non-creature objects).
@@ -1694,11 +1466,9 @@ namespace NWN.Core.NWNX
     /// <returns>The creatures personal space.</returns>
     public static float GetPersonalSpace(uint oCreature)
     {
-      const string sFunc = "GetPersonalSpace";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopFloat();
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetPersonalSpace");
+      return NWNXPopFloat();
     }
 
     /// Set a creatures personal space (meters from center to non-creature objects).
@@ -1706,11 +1476,9 @@ namespace NWN.Core.NWNX
     /// <param name="fPerspace">The creatures personal space.</param>
     public static void SetPersonalSpace(uint oCreature, float fPerspace)
     {
-      const string sFunc = "SetPersonalSpace";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(fPerspace);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushFloat(fPerspace);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "SetPersonalSpace");
     }
 
     /// Get a creatures creature personal space (meters from center to other creatures).
@@ -1718,11 +1486,9 @@ namespace NWN.Core.NWNX
     /// <returns>The creatures creature personal space.</returns>
     public static float GetCreaturePersonalSpace(uint oCreature)
     {
-      const string sFunc = "GetCreaturePersonalSpace";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopFloat();
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetCreaturePersonalSpace");
+      return NWNXPopFloat();
     }
 
     /// Set a creatures creature personal space (meters from center to other creatures).
@@ -1730,11 +1496,9 @@ namespace NWN.Core.NWNX
     /// <param name="fCrePerspace">The creatures creature personal space.</param>
     public static void SetCreaturePersonalSpace(uint oCreature, float fCrePerspace)
     {
-      const string sFunc = "SetCreaturePersonalSpace";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(fCrePerspace);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushFloat(fCrePerspace);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "SetCreaturePersonalSpace");
     }
 
     /// Get a creatures height.
@@ -1742,11 +1506,9 @@ namespace NWN.Core.NWNX
     /// <returns>The creatures height.</returns>
     public static float GetHeight(uint oCreature)
     {
-      const string sFunc = "GetHeight";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopFloat();
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetHeight");
+      return NWNXPopFloat();
     }
 
     /// Set a creatures height.
@@ -1754,11 +1516,9 @@ namespace NWN.Core.NWNX
     /// <param name="fHeight">The creatures height.</param>
     public static void SetHeight(uint oCreature, float fHeight)
     {
-      const string sFunc = "SetHeight";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(fHeight);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushFloat(fHeight);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "SetHeight");
     }
 
     /// Get a creatures hit distance.
@@ -1766,11 +1526,9 @@ namespace NWN.Core.NWNX
     /// <returns>The creatures hit distance.</returns>
     public static float GetHitDistance(uint oCreature)
     {
-      const string sFunc = "GetHitDistance";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopFloat();
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetHitDistance");
+      return NWNXPopFloat();
     }
 
     /// Set a creatures hit distance.
@@ -1778,11 +1536,9 @@ namespace NWN.Core.NWNX
     /// <param name="fHitDist">The creatures hit distance.</param>
     public static void SetHitDistance(uint oCreature, float fHitDist)
     {
-      const string sFunc = "SetHitDistance";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(fHitDist);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushFloat(fHitDist);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "SetHitDistance");
     }
 
     /// Get a creatures preferred attack distance.
@@ -1790,11 +1546,9 @@ namespace NWN.Core.NWNX
     /// <returns>The creatures preferred attack distance.</returns>
     public static float GetPreferredAttackDistance(uint oCreature)
     {
-      const string sFunc = "GetPreferredAttackDistance";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopFloat();
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetPreferredAttackDistance");
+      return NWNXPopFloat();
     }
 
     /// Set a creatures preferred attack distance.
@@ -1802,33 +1556,27 @@ namespace NWN.Core.NWNX
     /// <param name="fPrefAtckDist">The creatures preferred attack distance.</param>
     public static void SetPreferredAttackDistance(uint oCreature, float fPrefAtckDist)
     {
-      const string sFunc = "SetPreferredAttackDistance";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(fPrefAtckDist);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushFloat(fPrefAtckDist);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "SetPreferredAttackDistance");
     }
 
     /// Get the skill penalty from wearing armor.
     /// <param name="oCreature">The creature.</param>
     public static int GetArmorCheckPenalty(uint oCreature)
     {
-      const string sFunc = "GetArmorCheckPenalty";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetArmorCheckPenalty");
+      return NWNXPopInt();
     }
 
     /// Get the skill penalty from wearing a shield.
     /// <param name="oCreature">The creature.</param>
     public static int GetShieldCheckPenalty(uint oCreature)
     {
-      const string sFunc = "GetShieldCheckPenalty";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetShieldCheckPenalty");
+      return NWNXPopInt();
     }
 
     /// Sets a chance for normal Effect Immunities to be bypassed
@@ -1840,13 +1588,11 @@ namespace NWN.Core.NWNX
     /// @note Where an Outgoing and Incoming bypass both attempt opposing outcomes, both are ignored and the immunity status without bypass will apply.
     public static void SetBypassEffectImmunity(uint oCreature, int nImmunityType, int nChance = 100, int bPersist = FALSE)
     {
-      const string sFunc = "SetBypassEffectImmunity";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(bPersist);
-      VM.NWNX.StackPush(nChance);
-      VM.NWNX.StackPush(nImmunityType);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushInt(bPersist);
+      NWNXPushInt(nChance);
+      NWNXPushInt(nImmunityType);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "SetBypassEffectImmunity");
     }
 
     /// Gets a chance for normal Effect Immunities to be bypassed
@@ -1855,12 +1601,10 @@ namespace NWN.Core.NWNX
     /// <returns>the current critical hit multiplier modifier for the creature</returns>
     public static int GetBypassEffectImmunity(uint oCreature, int nImmunityType)
     {
-      const string sFunc = "GetBypassEffectImmunity";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(nImmunityType);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(nImmunityType);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetBypassEffectImmunity");
+      return NWNXPopInt();
     }
 
     /// Sets the killer of oCreature to oKiller.
@@ -1868,11 +1612,9 @@ namespace NWN.Core.NWNX
     /// <param name="oKiller">The killer.</param>
     public static void SetLastKiller(uint oCreature, uint oKiller)
     {
-      const string sFunc = "SetLastKiller";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oKiller);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushObject(oKiller);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "SetLastKiller");
     }
 
     /// Instantly cast a spell at a target or location.
@@ -1890,24 +1632,17 @@ namespace NWN.Core.NWNX
     /// <param name="sImpactScript">The spell impact script. Set to &quot;****&quot;&quot; to not run any impact script. If left blank, will execute nSpellID&apos;s impact script.</param>
     public static void DoItemCastSpell(uint oCreature, uint oTarget, System.IntPtr locTarget, int nSpellID, int nCasterLevel, float fProjectileTime, int nProjectilePathType = PROJECTILE_PATH_TYPE_DEFAULT, int nProjectileSpellID = -1, uint oItem = OBJECT_INVALID, string sImpactScript = "")
     {
-      const string sFunc = "DoItemCastSpell";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      uint oArea = GetAreaFromLocation(locTarget);
-      System.Numerics.Vector3 vPosition = GetPositionFromLocation(locTarget);
-      VM.NWNX.StackPush(sImpactScript);
-      VM.NWNX.StackPush(oItem);
-      VM.NWNX.StackPush(nProjectileSpellID);
-      VM.NWNX.StackPush(nProjectilePathType);
-      VM.NWNX.StackPush(fProjectileTime);
-      VM.NWNX.StackPush(nCasterLevel);
-      VM.NWNX.StackPush(nSpellID);
-      VM.NWNX.StackPush(vPosition.Z);
-      VM.NWNX.StackPush(vPosition.Y);
-      VM.NWNX.StackPush(vPosition.X);
-      VM.NWNX.StackPush(oArea);
-      VM.NWNX.StackPush(oTarget);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushString(sImpactScript);
+      NWNXPushObject(oItem);
+      NWNXPushInt(nProjectileSpellID);
+      NWNXPushInt(nProjectilePathType);
+      NWNXPushFloat(fProjectileTime);
+      NWNXPushInt(nCasterLevel);
+      NWNXPushInt(nSpellID);
+      NWNXPushLocation(locTarget);
+      NWNXPushObject(oTarget);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "DoItemCastSpell");
     }
 
     /// Have oCreature instantly equip oItem to nInventorySlot.
@@ -1917,13 +1652,11 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE on success, FALSE on failure.</returns>
     public static int RunEquip(uint oCreature, uint oItem, int nInventorySlot)
     {
-      const string sFunc = "RunEquip";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(nInventorySlot);
-      VM.NWNX.StackPush(oItem);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(nInventorySlot);
+      NWNXPushObject(oItem);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "RunEquip");
+      return NWNXPopInt();
     }
 
     /// Have oCreature instantly unequip oItem.
@@ -1932,12 +1665,10 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE on success, FALSE on failure.</returns>
     public static int RunUnequip(uint oCreature, uint oItem)
     {
-      const string sFunc = "RunUnequip";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oItem);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(oItem);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "RunUnequip");
+      return NWNXPopInt();
     }
 
     /// Override the elemental projectile visual effect of ranged/throwing weapons.
@@ -1947,12 +1678,10 @@ namespace NWN.Core.NWNX
     /// @note Persistence is enabled after a server reset by the first use of this function. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
     public static void OverrideRangedProjectileVFX(uint oCreature, int nProjectileVFX, int bPersist = FALSE)
     {
-      const string sFunc = "OverrideRangedProjectileVFX";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(bPersist);
-      VM.NWNX.StackPush(nProjectileVFX);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushInt(bPersist);
+      NWNXPushInt(nProjectileVFX);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "OverrideRangedProjectileVFX");
     }
 
     /// Sets a custom Initiative modifier
@@ -1963,12 +1692,10 @@ namespace NWN.Core.NWNX
     /// @warning This modifier takes precedence over an NWNX_Race Initiative modifier; they&apos;re not additive
     public static void SetInitiativeModifier(uint oCreature, int nMod, int bPersist = FALSE)
     {
-      const string sFunc = "SetInitiativeModifier";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(bPersist);
-      VM.NWNX.StackPush(nMod);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushInt(bPersist);
+      NWNXPushInt(nMod);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "SetInitiativeModifier");
     }
 
     /// Gets the custom Initiative modifier.
@@ -1976,11 +1703,9 @@ namespace NWN.Core.NWNX
     /// <returns>the current custom initiative modifier for the creature</returns>
     public static int GetInitiativeModifier(uint oCreature)
     {
-      const string sFunc = "GetInitiativeModifier";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetInitiativeModifier");
+      return NWNXPopInt();
     }
 
     /// Gets the Body Bag of a creature
@@ -1988,11 +1713,9 @@ namespace NWN.Core.NWNX
     /// <returns>The creatures assigned Body Bag</returns>
     public static uint GetBodyBag(uint oCreature)
     {
-      const string sFunc = "GetBodyBag";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopObject();
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetBodyBag");
+      return NWNXPopObject();
     }
 
     /// Add a cast spell action to oCreature&apos;s action queue.
@@ -2010,23 +1733,19 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if the action was successfully added to oCreature&apos;s action queue.</returns>
     public static int AddCastSpellActions(uint oCreature, uint oTarget, System.Numerics.Vector3 vTargetLocation, int nSpellID, int nMultiClass, int nMetaMagic = METAMAGIC_NONE, int nDomainLevel = 0, int nProjectilePathType = PROJECTILE_PATH_TYPE_DEFAULT, int bInstant = FALSE, int bClearActions = FALSE, int bAddToFront = FALSE)
     {
-      const string sFunc = "AddCastSpellActions";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(bAddToFront);
-      VM.NWNX.StackPush(bClearActions);
-      VM.NWNX.StackPush(bInstant);
-      VM.NWNX.StackPush(nProjectilePathType);
-      VM.NWNX.StackPush(nDomainLevel);
-      VM.NWNX.StackPush(nMetaMagic);
-      VM.NWNX.StackPush(nMultiClass);
-      VM.NWNX.StackPush(nSpellID);
-      VM.NWNX.StackPush(vTargetLocation.Z);
-      VM.NWNX.StackPush(vTargetLocation.Y);
-      VM.NWNX.StackPush(vTargetLocation.X);
-      VM.NWNX.StackPush(oTarget);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(bAddToFront);
+      NWNXPushInt(bClearActions);
+      NWNXPushInt(bInstant);
+      NWNXPushInt(nProjectilePathType);
+      NWNXPushInt(nDomainLevel);
+      NWNXPushInt(nMetaMagic);
+      NWNXPushInt(nMultiClass);
+      NWNXPushInt(nSpellID);
+      NWNXPushVector(vTargetLocation);
+      NWNXPushObject(oTarget);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "AddCastSpellActions");
+      return NWNXPopInt();
     }
 
     /// Get whether oCreature is flanking oTargetCreature.
@@ -2035,12 +1754,10 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if oCreature is flanking oTargetCreature.</returns>
     public static int GetIsFlanking(uint oCreature, uint oTargetCreature)
     {
-      const string sFunc = "GetIsFlanking";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oTargetCreature);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(oTargetCreature);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetIsFlanking");
+      return NWNXPopInt();
     }
 
     /// Decrements the remaining spell slots (innate casting) at a class level.
@@ -2049,12 +1766,10 @@ namespace NWN.Core.NWNX
     /// <param name="nSpellLevel">The spell level.</param>
     public static void DecrementRemainingSpellSlots(uint oCreature, int nClass, int nSpellLevel)
     {
-      const string sFunc = "DecrementRemainingSpellSlots";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(nSpellLevel);
-      VM.NWNX.StackPush(nClass);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushInt(nSpellLevel);
+      NWNXPushInt(nClass);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "DecrementRemainingSpellSlots");
     }
 
     /// Increments the remaining spell slots (innate casting) at a class level.
@@ -2063,12 +1778,10 @@ namespace NWN.Core.NWNX
     /// <param name="nSpellLevel">The spell level.</param>
     public static void IncrementRemainingSpellSlots(uint oCreature, int nClass, int nSpellLevel)
     {
-      const string sFunc = "IncrementRemainingSpellSlots";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(nSpellLevel);
-      VM.NWNX.StackPush(nClass);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushInt(nSpellLevel);
+      NWNXPushInt(nClass);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "IncrementRemainingSpellSlots");
     }
 
     /// Gets the maximum number of bonus attacks a creature can have from EffectModifyAttacks().
@@ -2076,11 +1789,9 @@ namespace NWN.Core.NWNX
     /// <returns>The maximum number of bonus attacks or 0 on error.</returns>
     public static int GetMaximumBonusAttacks(uint oCreature)
     {
-      const string sFunc = "GetMaximumBonusAttacks";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetMaximumBonusAttacks");
+      return NWNXPopInt();
     }
 
     /// Sets the maximum number of bonus attacks a creature can have from EffectModifyAttacks().
@@ -2091,12 +1802,10 @@ namespace NWN.Core.NWNX
     /// @note Persistence is enabled after a server reset by the first use of this function. Recommended to trigger on a dummy target OnModuleLoad to enable persistence.
     public static void SetMaximumBonusAttacks(uint oCreature, int nMaxBonusAttacks, int bPersist = FALSE)
     {
-      const string sFunc = "SetMaximumBonusAttacks";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(bPersist);
-      VM.NWNX.StackPush(nMaxBonusAttacks);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushInt(bPersist);
+      NWNXPushInt(nMaxBonusAttacks);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "SetMaximumBonusAttacks");
     }
 
     /// Inserts a cleave or great cleave attack into oCreature&apos;s current attack round against the nearest enemy within melee reach.
@@ -2104,10 +1813,8 @@ namespace NWN.Core.NWNX
     /// @note oCreature must have the cleave or great cleave feats, must be in combat, and must have available attacks remaining in their combat round to use for cleave attack.
     public static void DoCleaveAttack(uint oCreature)
     {
-      const string sFunc = "DoCleaveAttack";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "DoCleaveAttack");
     }
 
     /// Gets the current object oCreature&apos;s orientation is locked to.
@@ -2115,11 +1822,9 @@ namespace NWN.Core.NWNX
     /// <returns>The object oCreature&apos;s orientation is locked to, or OBJECT_INVALID if oCreature&apos;s orientation is not locked.</returns>
     public static uint GetLockOrientationToObject(uint oCreature)
     {
-      const string sFunc = "GetLockOrientationToObject";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopObject();
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetLockOrientationToObject");
+      return NWNXPopObject();
     }
 
     /// Locks oCreature&apos;s orientation to always face oTarget.
@@ -2127,11 +1832,9 @@ namespace NWN.Core.NWNX
     /// <param name="oTarget">The target to lock oCreature&apos;s orientation to. Use OBJECT_INVALID to remove the orientation lock.</param>
     public static void SetLockOrientationToObject(uint oCreature, uint oTarget)
     {
-      const string sFunc = "SetLockOrientationToObject";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oTarget);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushObject(oTarget);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "SetLockOrientationToObject");
     }
 
     /// Causes oCreature to broadcast an Attack of Opportunity against themself.
@@ -2140,12 +1843,10 @@ namespace NWN.Core.NWNX
     /// <param name="bMovement">Whether the Attack of Opportunity was caused by movement.</param>
     public static void BroadcastAttackOfOpportunity(uint oCreature, uint oSingleCreature = OBJECT_INVALID, int bMovement = FALSE)
     {
-      const string sFunc = "BroadcastAttackOfOpportunity";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(bMovement);
-      VM.NWNX.StackPush(oSingleCreature);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushInt(bMovement);
+      NWNXPushObject(oSingleCreature);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "BroadcastAttackOfOpportunity");
     }
 
     /// Returns the maximum price oStore will buy items from oCreature for.
@@ -2154,12 +1855,10 @@ namespace NWN.Core.NWNX
     /// <returns>The max buy price override. -1 = No maximum buy price, -2 = No override set.</returns>
     public static int GetMaxSellToStorePriceOverride(uint oCreature, uint oStore)
     {
-      const string sFunc = "GetMaxSellToStorePriceOverride";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oStore);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(oStore);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetMaxSellToStorePriceOverride");
+      return NWNXPopInt();
     }
 
     /// Overrides the maximum price oStore will buy items from oCreature for.
@@ -2168,12 +1867,10 @@ namespace NWN.Core.NWNX
     /// <param name="nMaxSellToPrice">The maximum buy price override. -1 = No maximum buy price, -2 = Remove the override.</param>
     public static void SetMaxSellToStorePriceOverride(uint oCreature, uint oStore, int nMaxSellToPrice)
     {
-      const string sFunc = "SetMaxSellToStorePriceOverride";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(nMaxSellToPrice);
-      VM.NWNX.StackPush(oStore);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushInt(nMaxSellToPrice);
+      NWNXPushObject(oStore);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "SetMaxSellToStorePriceOverride");
     }
 
     /// Returns the creature&apos;s ability increase for nLevel.
@@ -2182,12 +1879,10 @@ namespace NWN.Core.NWNX
     /// <returns>An ABILITY_* constant, NWNX_CREATURE_ABILITY_NONE or -1 on error</returns>
     public static int GetAbilityIncreaseByLevel(uint oCreature, int nLevel)
     {
-      const string sFunc = "GetAbilityIncreaseByLevel";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(nLevel);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(nLevel);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetAbilityIncreaseByLevel");
+      return NWNXPopInt();
     }
 
     /// Sets the creature&apos;s ability increase for nLevel.
@@ -2196,12 +1891,10 @@ namespace NWN.Core.NWNX
     /// <param name="nAbility">ABILITY_* constant or NWNX_CREATURE_ABILITY_NONE</param>
     public static void SetAbilityIncreaseByLevel(uint oCreature, int nLevel, int nAbility)
     {
-      const string sFunc = "SetAbilityIncreaseByLevel";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(nAbility);
-      VM.NWNX.StackPush(nLevel);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
+      NWNXPushInt(nAbility);
+      NWNXPushInt(nLevel);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "SetAbilityIncreaseByLevel");
     }
 
     /// Returns the creature&apos;s maximum attack range to a target
@@ -2210,12 +1903,38 @@ namespace NWN.Core.NWNX
     /// <returns>The maximum attack range for oCreature to oTarget</returns>
     public static float GetMaxAttackRange(uint oCreature, uint oTarget)
     {
-      const string sFunc = "GetMaxAttackRange";
-      VM.NWNX.SetFunction(NWNX_Creature, sFunc);
-      VM.NWNX.StackPush(oTarget);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopFloat();
+      NWNXPushObject(oTarget);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetMaxAttackRange");
+      return NWNXPopFloat();
+    }
+
+    /// Returns the creature&apos;s multiclass limit.
+    /// @note Only works on player characters.
+    /// <param name="oCreature">The creature object. Has to be a player character.</param>
+    /// <returns>The PCs multiclass limit. Returns 0 if no limit is set.</returns>
+    public static int GetMulticlassLimit(uint oCreature)
+    {
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetMulticlassLimit");
+      return NWNXPopInt();
+    }
+
+    /// Sets the creature&apos;s multiclass limit.
+    /// @note Only works on player characters and only for future level ups.
+    /// Classes already taken will continue to be available on level up.
+    /// The limit must be lower than the server limit set in ruleset.2da MULTICLASS_LIMIT.
+    /// Setting a value of 0 will remove the limit.
+    /// <param name="oCreature">The creature object. Has to be a player character.</param>
+    /// <param name="nLimit">The multiclass limit.</param>
+    /// <param name="bPersist">Whether the limit should persist to the .bic file.</param>
+    /// @note Persistence is enabled after a server reset by the first use of this function.
+    public static void SetMulticlassLimit(uint oCreature, int nLimit, int bPersist = FALSE)
+    {
+      NWNXPushInt(bPersist);
+      NWNXPushInt(nLimit);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "SetMulticlassLimit");
     }
 
     // @}

@@ -5,6 +5,10 @@ namespace NWN.Core.NWNX
   [NWNXPlugin(NWNX_Effect)]
   public class EffectPlugin
   {
+    /// @addtogroup effect Effect
+    /// Utility functions to manipulate the builtin effect type.
+    /// @{
+    /// @file nwnx_effect.nss
     public const string NWNX_Effect = "NWNX_Effect";
 
     ///&lt; @private
@@ -28,11 +32,9 @@ namespace NWN.Core.NWNX
     /// <returns>A constructed NWNX_EffectUnpacked.</returns>
     public static NWNX_EffectUnpacked UnpackEffect(System.IntPtr e)
     {
-      const string sFunc = "UnpackEffect";
-      VM.NWNX.SetFunction(NWNX_Effect, sFunc);
-      VM.NWNX.StackPush(ENGINE_STRUCTURE_EFFECT, e);
-      VM.NWNX.Call();
-      return __NWNX_Effect_ResolveUnpack( sFunc);
+      NWNXPushEffect(e);
+      NWNXCall(NWNX_Effect, "UnpackEffect");
+      return __NWNX_Effect_ResolveUnpack( );
     }
 
     /// Convert unpacked effect structure to native type.
@@ -40,11 +42,9 @@ namespace NWN.Core.NWNX
     /// <returns>The effect.</returns>
     public static System.IntPtr PackEffect(NWNX_EffectUnpacked e)
     {
-      const string sFunc = "PackEffect";
-      VM.NWNX.SetFunction(NWNX_Effect, sFunc);
-      __NWNX_Effect_ResolvePack(sFunc, e);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      __NWNX_Effect_ResolvePack(e);
+      NWNXCall(NWNX_Effect, "PackEffect");
+      return NWNXPopEffect();
     }
 
     /// replace an already applied effect on an object
@@ -53,13 +53,11 @@ namespace NWN.Core.NWNX
     /// <returns>Number of internal effects updated.</returns>
     public static int ReplaceEffect(uint obj, System.IntPtr eOld, System.IntPtr eNew)
     {
-      const string sFunc = "ReplaceEffect";
-      VM.NWNX.SetFunction(NWNX_Effect, sFunc);
-      VM.NWNX.StackPush(ENGINE_STRUCTURE_EFFECT, eNew);
-      VM.NWNX.StackPush(ENGINE_STRUCTURE_EFFECT, eOld);
-      VM.NWNX.StackPush(obj);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushEffect(eNew);
+      NWNXPushEffect(eOld);
+      NWNXPushObject(obj);
+      NWNXCall(NWNX_Effect, "ReplaceEffect");
+      return NWNXPopInt();
     }
 
     /// Gets the true effect count
@@ -67,11 +65,9 @@ namespace NWN.Core.NWNX
     /// <returns>the number of effects (item properties and other non-exposed effects included)</returns>
     public static int GetTrueEffectCount(uint oObject)
     {
-      const string sFunc = "GetTrueEffectCount";
-      VM.NWNX.SetFunction(NWNX_Effect, sFunc);
-      VM.NWNX.StackPush(oObject);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(oObject);
+      NWNXCall(NWNX_Effect, "GetTrueEffectCount");
+      return NWNXPopInt();
     }
 
     /// Gets a specific effect on an object. This can grab effects normally hidden from developers, such as item properties.
@@ -80,12 +76,10 @@ namespace NWN.Core.NWNX
     /// <returns>A constructed NWNX_EffectUnpacked.</returns>
     public static NWNX_EffectUnpacked GetTrueEffect(uint oObject, int nIndex)
     {
-      const string sFunc = "GetTrueEffect";
-      VM.NWNX.SetFunction(NWNX_Effect, sFunc);
-      VM.NWNX.StackPush(nIndex);
-      VM.NWNX.StackPush(oObject);
-      VM.NWNX.Call();
-      return __NWNX_Effect_ResolveUnpack( sFunc, FALSE);
+      NWNXPushInt(nIndex);
+      NWNXPushObject(oObject);
+      NWNXCall(NWNX_Effect, "GetTrueEffect");
+      return __NWNX_Effect_ResolveUnpack( FALSE);
     }
 
     /// Replaces an already applied effect with another.
@@ -95,12 +89,10 @@ namespace NWN.Core.NWNX
     /// @note Cannot replace an effect with a different type or ID.
     public static void ReplaceEffectByIndex(uint oObject, int nIndex, NWNX_EffectUnpacked e)
     {
-      const string sFunc = "ReplaceEffectByIndex";
-      VM.NWNX.SetFunction(NWNX_Effect, sFunc);
-      __NWNX_Effect_ResolvePack(sFunc, e, TRUE);
-      VM.NWNX.StackPush(nIndex);
-      VM.NWNX.StackPush(oObject);
-      VM.NWNX.Call();
+      __NWNX_Effect_ResolvePack(e, TRUE);
+      NWNXPushInt(nIndex);
+      NWNXPushObject(oObject);
+      NWNXCall(NWNX_Effect, "ReplaceEffectByIndex");
     }
 
     /// Removes effect by ID
@@ -109,12 +101,10 @@ namespace NWN.Core.NWNX
     /// <returns>FALSE/0 on failure TRUE/1 on success.</returns>
     public static int RemoveEffectById(uint oObject, string sID)
     {
-      const string sFunc = "RemoveEffectById";
-      VM.NWNX.SetFunction(NWNX_Effect, sFunc);
-      VM.NWNX.StackPush(sID);
-      VM.NWNX.StackPush(oObject);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushString(sID);
+      NWNXPushObject(oObject);
+      NWNXCall(NWNX_Effect, "RemoveEffectById");
+      return NWNXPopInt();
     }
 
     /// Applys an effect, bypassing any processing done by ApplyEffectToObject
@@ -122,11 +112,9 @@ namespace NWN.Core.NWNX
     /// <param name="oObject">The object to apply it to.</param>
     public static void Apply(System.IntPtr eEffect, uint oObject)
     {
-      const string sFunc = "Apply";
-      VM.NWNX.SetFunction(NWNX_Effect, sFunc);
-      VM.NWNX.StackPush(oObject);
-      VM.NWNX.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
-      VM.NWNX.Call();
+      NWNXPushObject(oObject);
+      NWNXPushEffect(eEffect);
+      NWNXCall(NWNX_Effect, "Apply");
     }
 
     /// Sets an effect creator.
@@ -135,12 +123,10 @@ namespace NWN.Core.NWNX
     /// <returns>The effect with creator field set.</returns>
     public static System.IntPtr SetEffectCreator(System.IntPtr eEffect, uint oObject)
     {
-      const string sFunc = "SetEffectCreator";
-      VM.NWNX.SetFunction(NWNX_Effect, sFunc);
-      VM.NWNX.StackPush(oObject);
-      VM.NWNX.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      NWNXPushObject(oObject);
+      NWNXPushEffect(eEffect);
+      NWNXCall(NWNX_Effect, "SetEffectCreator");
+      return NWNXPopEffect();
     }
 
     /// Checks if the given effect is valid. Unlike the game builtin, this call considers internal types too.
@@ -148,11 +134,9 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if the effect is valid (including internal types).</returns>
     public static int GetIsEffectValid(System.IntPtr eEffect)
     {
-      const string sFunc = "GetIsEffectValid";
-      VM.NWNX.SetFunction(NWNX_Effect, sFunc);
-      VM.NWNX.StackPush(ENGINE_STRUCTURE_EFFECT, eEffect);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushEffect(eEffect);
+      NWNXCall(NWNX_Effect, "GetIsEffectValid");
+      return NWNXPopInt();
     }
 
     /// Returns the number of applied effects on the given object.
@@ -160,11 +144,9 @@ namespace NWN.Core.NWNX
     /// <returns>The number of applied effects, including internal.</returns>
     public static int GetAppliedEffectCount(uint oObject)
     {
-      const string sFunc = "GetAppliedEffectCount";
-      VM.NWNX.SetFunction(NWNX_Effect, sFunc);
-      VM.NWNX.StackPush(oObject);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(oObject);
+      NWNXCall(NWNX_Effect, "GetAppliedEffectCount");
+      return NWNXPopInt();
     }
 
     /// Returns the nNth applied effect on a object.
@@ -174,128 +156,116 @@ namespace NWN.Core.NWNX
     /// <returns>A copy of the applied game effect, or a invalid effect.</returns>
     public static System.IntPtr GetAppliedEffect(uint oObject, int nNth)
     {
-      const string sFunc = "GetAppliedEffect";
-      VM.NWNX.SetFunction(NWNX_Effect, sFunc);
-      VM.NWNX.StackPush(nNth);
-      VM.NWNX.StackPush(oObject);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+      NWNXPushInt(nNth);
+      NWNXPushObject(oObject);
+      NWNXCall(NWNX_Effect, "GetAppliedEffect");
+      return NWNXPopEffect();
     }
 
     // @}
-    public static NWNX_EffectUnpacked __NWNX_Effect_ResolveUnpack(string sFunc, int bLink = TRUE)
+    public static NWNX_EffectUnpacked __NWNX_Effect_ResolveUnpack(int bLink = TRUE)
     {
       NWNX_EffectUnpacked n = default;
-      n.sItemProp = VM.NWNX.StackPopString();
-      n.sTag = VM.NWNX.StackPopString();
-      float fZ = VM.NWNX.StackPopFloat();
-      float fY = VM.NWNX.StackPopFloat();
-      float fX = VM.NWNX.StackPopFloat();
-      n.vParam1 = new System.Numerics.Vector3(fX, fY, fZ);
-      fZ = VM.NWNX.StackPopFloat();
-      fY = VM.NWNX.StackPopFloat();
-      fX = VM.NWNX.StackPopFloat();
-      n.vParam0 = new System.Numerics.Vector3(fX, fY, fZ);
-      n.oParam3 = VM.NWNX.StackPopObject();
-      n.oParam2 = VM.NWNX.StackPopObject();
-      n.oParam1 = VM.NWNX.StackPopObject();
-      n.oParam0 = VM.NWNX.StackPopObject();
-      n.sParam5 = VM.NWNX.StackPopString();
-      n.sParam4 = VM.NWNX.StackPopString();
-      n.sParam3 = VM.NWNX.StackPopString();
-      n.sParam2 = VM.NWNX.StackPopString();
-      n.sParam1 = VM.NWNX.StackPopString();
-      n.sParam0 = VM.NWNX.StackPopString();
-      n.fParam3 = VM.NWNX.StackPopFloat();
-      n.fParam2 = VM.NWNX.StackPopFloat();
-      n.fParam1 = VM.NWNX.StackPopFloat();
-      n.fParam0 = VM.NWNX.StackPopFloat();
-      n.nParam7 = VM.NWNX.StackPopInt();
-      n.nParam6 = VM.NWNX.StackPopInt();
-      n.nParam5 = VM.NWNX.StackPopInt();
-      n.nParam4 = VM.NWNX.StackPopInt();
-      n.nParam3 = VM.NWNX.StackPopInt();
-      n.nParam2 = VM.NWNX.StackPopInt();
-      n.nParam1 = VM.NWNX.StackPopInt();
-      n.nParam0 = VM.NWNX.StackPopInt();
-      n.nNumIntegers = VM.NWNX.StackPopInt();
+      n.sItemProp = NWNXPopString();
+      n.sTag = NWNXPopString();
+      n.vParam1 = NWNXPopVector();
+      n.vParam0 = NWNXPopVector();
+      n.oParam3 = NWNXPopObject();
+      n.oParam2 = NWNXPopObject();
+      n.oParam1 = NWNXPopObject();
+      n.oParam0 = NWNXPopObject();
+      n.sParam5 = NWNXPopString();
+      n.sParam4 = NWNXPopString();
+      n.sParam3 = NWNXPopString();
+      n.sParam2 = NWNXPopString();
+      n.sParam1 = NWNXPopString();
+      n.sParam0 = NWNXPopString();
+      n.fParam3 = NWNXPopFloat();
+      n.fParam2 = NWNXPopFloat();
+      n.fParam1 = NWNXPopFloat();
+      n.fParam0 = NWNXPopFloat();
+      n.nParam7 = NWNXPopInt();
+      n.nParam6 = NWNXPopInt();
+      n.nParam5 = NWNXPopInt();
+      n.nParam4 = NWNXPopInt();
+      n.nParam3 = NWNXPopInt();
+      n.nParam2 = NWNXPopInt();
+      n.nParam1 = NWNXPopInt();
+      n.nParam0 = NWNXPopInt();
+      n.nNumIntegers = NWNXPopInt();
       if (bLink == TRUE)
       {
-        n.bLinkRightValid = VM.NWNX.StackPopInt();
-        n.eLinkRight = VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
-        n.bLinkLeftValid = VM.NWNX.StackPopInt();
-        n.eLinkLeft = VM.NWNX.StackPopStruct(ENGINE_STRUCTURE_EFFECT);
+        n.bLinkRightValid = NWNXPopInt();
+        n.eLinkRight = NWNXPopEffect();
+        n.bLinkLeftValid = NWNXPopInt();
+        n.eLinkLeft = NWNXPopEffect();
       }
       else
       {
         n.bLinkRightValid = FALSE;
         n.bLinkLeftValid = FALSE;
       }
-      n.nCasterLevel = VM.NWNX.StackPopInt();
-      n.bShowIcon = VM.NWNX.StackPopInt();
-      n.bExpose = VM.NWNX.StackPopInt();
-      n.nSpellId = VM.NWNX.StackPopInt();
-      n.oCreator = VM.NWNX.StackPopObject();
-      n.nExpiryTimeOfDay = VM.NWNX.StackPopInt();
-      n.nExpiryCalendarDay = VM.NWNX.StackPopInt();
-      n.fDuration = VM.NWNX.StackPopFloat();
-      n.nSubType = VM.NWNX.StackPopInt();
-      n.nType = VM.NWNX.StackPopInt();
-      n.sID = VM.NWNX.StackPopString();
+      n.nCasterLevel = NWNXPopInt();
+      n.bShowIcon = NWNXPopInt();
+      n.bExpose = NWNXPopInt();
+      n.nSpellId = NWNXPopInt();
+      n.oCreator = NWNXPopObject();
+      n.nExpiryTimeOfDay = NWNXPopInt();
+      n.nExpiryCalendarDay = NWNXPopInt();
+      n.fDuration = NWNXPopFloat();
+      n.nSubType = NWNXPopInt();
+      n.nType = NWNXPopInt();
+      n.sID = NWNXPopString();
       return n;
     }
 
-    public static void __NWNX_Effect_ResolvePack(string sFunc, NWNX_EffectUnpacked e, int bReplace = FALSE)
+    public static void __NWNX_Effect_ResolvePack(NWNX_EffectUnpacked e, int bReplace = FALSE)
     {
       if (bReplace == FALSE)
-      VM.NWNX.StackPush(e.nType);
-      VM.NWNX.StackPush(e.nSubType);
-      VM.NWNX.StackPush(e.fDuration);
-      VM.NWNX.StackPush(e.nExpiryCalendarDay);
-      VM.NWNX.StackPush(e.nExpiryTimeOfDay);
-      VM.NWNX.StackPush(e.oCreator);
-      VM.NWNX.StackPush(e.nSpellId);
-      VM.NWNX.StackPush(e.bExpose);
-      VM.NWNX.StackPush(e.bShowIcon);
-      VM.NWNX.StackPush(e.nCasterLevel);
+      NWNXPushInt(e.nType);
+      NWNXPushInt(e.nSubType);
+      NWNXPushFloat(e.fDuration);
+      NWNXPushInt(e.nExpiryCalendarDay);
+      NWNXPushInt(e.nExpiryTimeOfDay);
+      NWNXPushObject(e.oCreator);
+      NWNXPushInt(e.nSpellId);
+      NWNXPushInt(e.bExpose);
+      NWNXPushInt(e.bShowIcon);
+      NWNXPushInt(e.nCasterLevel);
       if (bReplace == FALSE)
       {
-        VM.NWNX.StackPush(ENGINE_STRUCTURE_EFFECT, e.eLinkLeft);
-        VM.NWNX.StackPush(e.bLinkLeftValid);
-        VM.NWNX.StackPush(ENGINE_STRUCTURE_EFFECT, e.eLinkRight);
-        VM.NWNX.StackPush(e.bLinkRightValid);
+        NWNXPushEffect(e.eLinkLeft);
+        NWNXPushInt(e.bLinkLeftValid);
+        NWNXPushEffect(e.eLinkRight);
+        NWNXPushInt(e.bLinkRightValid);
       }
-      VM.NWNX.StackPush(e.nNumIntegers);
-      VM.NWNX.StackPush(e.nParam0);
-      VM.NWNX.StackPush(e.nParam1);
-      VM.NWNX.StackPush(e.nParam2);
-      VM.NWNX.StackPush(e.nParam3);
-      VM.NWNX.StackPush(e.nParam4);
-      VM.NWNX.StackPush(e.nParam5);
-      VM.NWNX.StackPush(e.nParam6);
-      VM.NWNX.StackPush(e.nParam7);
-      VM.NWNX.StackPush(e.fParam0);
-      VM.NWNX.StackPush(e.fParam1);
-      VM.NWNX.StackPush(e.fParam2);
-      VM.NWNX.StackPush(e.fParam3);
-      VM.NWNX.StackPush(e.sParam0);
-      VM.NWNX.StackPush(e.sParam1);
-      VM.NWNX.StackPush(e.sParam2);
-      VM.NWNX.StackPush(e.sParam3);
-      VM.NWNX.StackPush(e.sParam4);
-      VM.NWNX.StackPush(e.sParam5);
-      VM.NWNX.StackPush(e.oParam0);
-      VM.NWNX.StackPush(e.oParam1);
-      VM.NWNX.StackPush(e.oParam2);
-      VM.NWNX.StackPush(e.oParam3);
-      VM.NWNX.StackPush(e.vParam0.X);
-      VM.NWNX.StackPush(e.vParam0.Y);
-      VM.NWNX.StackPush(e.vParam0.Z);
-      VM.NWNX.StackPush(e.vParam1.X);
-      VM.NWNX.StackPush(e.vParam1.Y);
-      VM.NWNX.StackPush(e.vParam1.Z);
-      VM.NWNX.StackPush(e.sTag);
-      VM.NWNX.StackPush(e.sItemProp);
+      NWNXPushInt(e.nNumIntegers);
+      NWNXPushInt(e.nParam0);
+      NWNXPushInt(e.nParam1);
+      NWNXPushInt(e.nParam2);
+      NWNXPushInt(e.nParam3);
+      NWNXPushInt(e.nParam4);
+      NWNXPushInt(e.nParam5);
+      NWNXPushInt(e.nParam6);
+      NWNXPushInt(e.nParam7);
+      NWNXPushFloat(e.fParam0);
+      NWNXPushFloat(e.fParam1);
+      NWNXPushFloat(e.fParam2);
+      NWNXPushFloat(e.fParam3);
+      NWNXPushString(e.sParam0);
+      NWNXPushString(e.sParam1);
+      NWNXPushString(e.sParam2);
+      NWNXPushString(e.sParam3);
+      NWNXPushString(e.sParam4);
+      NWNXPushString(e.sParam5);
+      NWNXPushObject(e.oParam0);
+      NWNXPushObject(e.oParam1);
+      NWNXPushObject(e.oParam2);
+      NWNXPushObject(e.oParam3);
+      NWNXPushVector(e.vParam0);
+      NWNXPushVector(e.vParam1);
+      NWNXPushString(e.sTag);
+      NWNXPushString(e.sItemProp);
     }
 
   }

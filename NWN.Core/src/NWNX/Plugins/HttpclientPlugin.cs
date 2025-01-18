@@ -5,6 +5,10 @@ namespace NWN.Core.NWNX
   [NWNXPlugin(NWNX_HTTPClient)]
   public class HttpclientPlugin
   {
+    /// @addtogroup httpclient HTTPClient
+    /// NWNX HTTPClient
+    /// @{
+    /// @file nwnx_httpclient.nss
     public const string NWNX_HTTPClient = "NWNX_HTTPClient";
 
     ///&lt; @private
@@ -48,21 +52,19 @@ namespace NWN.Core.NWNX
     /// <returns>A unique identifier for the request for later access in the REQUEST_ID event data.</returns>
     public static int SendRequest(Request s)
     {
-      const string sFunc = "SendRequest";
-      VM.NWNX.SetFunction(NWNX_HTTPClient, sFunc);
-      VM.NWNX.StackPush(s.sHeaders);
-      VM.NWNX.StackPush(s.nPort);
-      VM.NWNX.StackPush(s.sAuthPassword);
-      VM.NWNX.StackPush(s.sAuthUserOrToken);
-      VM.NWNX.StackPush(s.nAuthType);
-      VM.NWNX.StackPush(s.sData);
-      VM.NWNX.StackPush(s.nContentType);
-      VM.NWNX.StackPush(s.sPath);
-      VM.NWNX.StackPush(s.sHost);
-      VM.NWNX.StackPush(s.nRequestMethod);
-      VM.NWNX.StackPush(s.sTag);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushString(s.sHeaders);
+      NWNXPushInt(s.nPort);
+      NWNXPushString(s.sAuthPassword);
+      NWNXPushString(s.sAuthUserOrToken);
+      NWNXPushInt(s.nAuthType);
+      NWNXPushString(s.sData);
+      NWNXPushInt(s.nContentType);
+      NWNXPushString(s.sPath);
+      NWNXPushString(s.sHost);
+      NWNXPushInt(s.nRequestMethod);
+      NWNXPushString(s.sTag);
+      NWNXCall(NWNX_HTTPClient, "SendRequest");
+      return NWNXPopInt();
     }
 
     /// Returns an NWNX_HTTP_Client_Request structure
@@ -70,22 +72,20 @@ namespace NWN.Core.NWNX
     /// <returns>The structured NWNX_HTTPClient_Request information</returns>
     public static Request GetRequest(int nRequestId)
     {
-      const string sFunc = "GetRequest";
-      VM.NWNX.SetFunction(NWNX_HTTPClient, sFunc);
-      VM.NWNX.StackPush(nRequestId);
-      VM.NWNX.Call();
+      NWNXPushInt(nRequestId);
+      NWNXCall(NWNX_HTTPClient, "GetRequest");
       Request s = default;
-      s.sTag = VM.NWNX.StackPopString();
-      s.nRequestMethod = VM.NWNX.StackPopInt();
-      s.sHost = VM.NWNX.StackPopString();
-      s.sPath = VM.NWNX.StackPopString();
-      s.nContentType = VM.NWNX.StackPopInt();
-      s.sData = VM.NWNX.StackPopString();
-      s.nAuthType = VM.NWNX.StackPopInt();
-      s.sAuthUserOrToken = VM.NWNX.StackPopString();
-      s.sAuthPassword = VM.NWNX.StackPopString();
-      s.nPort = VM.NWNX.StackPopInt();
-      s.sHeaders = VM.NWNX.StackPopString();
+      s.sTag = NWNXPopString();
+      s.nRequestMethod = NWNXPopInt();
+      s.sHost = NWNXPopString();
+      s.sPath = NWNXPopString();
+      s.nContentType = NWNXPopInt();
+      s.sData = NWNXPopString();
+      s.nAuthType = NWNXPopInt();
+      s.sAuthUserOrToken = NWNXPopString();
+      s.sAuthPassword = NWNXPopString();
+      s.nPort = NWNXPopInt();
+      s.sHeaders = NWNXPopString();
       return s;
     }
 

@@ -5,6 +5,10 @@ namespace NWN.Core.NWNX
   [NWNXPlugin(NWNX_Events)]
   public class EventsPlugin
   {
+    /// @addtogroup events Events
+    /// Provides an interface for plugins to create event-based systems, and exposes some events through that interface.
+    /// @{
+    /// @file nwnx_events.nss
     public const string NWNX_Events = "NWNX_Events";
 
     ///&lt; @private
@@ -564,6 +568,11 @@ namespace NWN.Core.NWNX
         - NWNX_ON_CLIENT_DISCONNECT_AFTER
     
         `OBJECT_SELF` = The player disconnecting from the server
+    
+        Event Data Tag        | Type   | Notes
+        ----------------------|--------|-------
+        PLAYER_NAME           | string | Player name of the disconnecting client
+        CDKEY                 | string | Public cdkey of the disconnecting client
     
         @note This event also runs when a player connects to the server but cancels out of character select.
         OBJECT_SELF will be OBJECT_INVALID in this case.
@@ -1654,6 +1663,18 @@ namespace NWN.Core.NWNX
               \endcode
               `TARGET_OBJECT_ID` will be `OBJECT_INVALID` if the projectile is cast at a location
     _______________________________________
+        ## SetExperience Events
+        - NWNX_ON_SET_EXPERIENCE_BEFORE
+        - NWNX_ON_SET_EXPERIENCE_AFTER
+    
+        `OBJECT_SELF` = The player the xp is being set on
+    
+        Event Data Tag        | Type   | Notes
+        ----------------------|--------|-------
+        XP                    | int    | The xp value to be set. |
+    
+        @note To set a different xp value in the BEFORE event: Skip the event and call NWNX_Events_SetEventResult() with the new value.
+    _______________________________________
         ## Broadcast Attack of Opportunity Events
         - NWNX_ON_BROADCAST_ATTACK_OF_OPPORTUNITY_BEFORE
         - NWNX_ON_BROADCAST_ATTACK_OF_OPPORTUNITY_AFTER
@@ -2198,11 +2219,9 @@ namespace NWN.Core.NWNX
     /// <param name="script">The script to call when the event fires.</param>
     public static void SubscribeEvent(string evt, string script)
     {
-      const string sFunc = "SubscribeEvent";
-      VM.NWNX.SetFunction(NWNX_Events, sFunc);
-      VM.NWNX.StackPush(script);
-      VM.NWNX.StackPush(evt);
-      VM.NWNX.Call();
+      NWNXPushString(script);
+      NWNXPushString(evt);
+      NWNXCall(NWNX_Events, "SubscribeEvent");
     }
 
     /// Unsubscribe a script from an event
@@ -2210,21 +2229,17 @@ namespace NWN.Core.NWNX
     /// <param name="script">The script.</param>
     public static void UnsubscribeEvent(string evt, string script)
     {
-      const string sFunc = "UnsubscribeEvent";
-      VM.NWNX.SetFunction(NWNX_Events, sFunc);
-      VM.NWNX.StackPush(script);
-      VM.NWNX.StackPush(evt);
-      VM.NWNX.Call();
+      NWNXPushString(script);
+      NWNXPushString(evt);
+      NWNXCall(NWNX_Events, "UnsubscribeEvent");
     }
 
     /// Unsubscribe all scripts from all events starting with prefix.
     /// <param name="prefix">the prefix to match against. Can be empty.</param>
     public static void UnsubscribeAllStartingWith(string prefix)
     {
-      const string sFunc = "UnsubscribeAllStartingWith";
-      VM.NWNX.SetFunction(NWNX_Events, sFunc);
-      VM.NWNX.StackPush(prefix);
-      VM.NWNX.Call();
+      NWNXPushString(prefix);
+      NWNXCall(NWNX_Events, "UnsubscribeAllStartingWith");
     }
 
     /// Script chunks can subscribe to events.
@@ -2236,12 +2251,10 @@ namespace NWN.Core.NWNX
     /// <param name="bWrapIntoMain">TRUE if the script chunk needs to be wrapped into a void main(){}.</param>
     public static void SubscribeEventScriptChunk(string sEvent, string sScriptChunk, int bWrapIntoMain = TRUE)
     {
-      const string sFunc = "SubscribeEventScriptChunk";
-      VM.NWNX.SetFunction(NWNX_Events, sFunc);
-      VM.NWNX.StackPush(bWrapIntoMain);
-      VM.NWNX.StackPush(sScriptChunk);
-      VM.NWNX.StackPush(sEvent);
-      VM.NWNX.Call();
+      NWNXPushInt(bWrapIntoMain);
+      NWNXPushString(sScriptChunk);
+      NWNXPushString(sEvent);
+      NWNXCall(NWNX_Events, "SubscribeEventScriptChunk");
     }
 
     /// Unsubscribe a script chunk from an event
@@ -2250,23 +2263,19 @@ namespace NWN.Core.NWNX
     /// <param name="bWrapIntoMain">TRUE if the script chunk needs to be wrapped into a void main(){}. Must match the value used when subscribing.</param>
     public static void UnsubscribeEventScriptChunk(string sEvent, string sScriptChunk, int bWrapIntoMain = TRUE)
     {
-      const string sFunc = "UnsubscribeEventScriptChunk";
-      VM.NWNX.SetFunction(NWNX_Events, sFunc);
-      VM.NWNX.StackPush(bWrapIntoMain);
-      VM.NWNX.StackPush(sScriptChunk);
-      VM.NWNX.StackPush(sEvent);
-      VM.NWNX.Call();
+      NWNXPushInt(bWrapIntoMain);
+      NWNXPushString(sScriptChunk);
+      NWNXPushString(sEvent);
+      NWNXCall(NWNX_Events, "UnsubscribeEventScriptChunk");
     }
 
     /// Pushes event data at the provided tag, which subscribers can access with GetEventData.
     /// This should be called BEFORE SignalEvent.
     public static void PushEventData(string tag, string data)
     {
-      const string sFunc = "PushEventData";
-      VM.NWNX.SetFunction(NWNX_Events, sFunc);
-      VM.NWNX.StackPush(data);
-      VM.NWNX.StackPush(tag);
-      VM.NWNX.Call();
+      NWNXPushString(data);
+      NWNXPushString(tag);
+      NWNXCall(NWNX_Events, "PushEventData");
     }
 
     /// Signals an event. This will dispatch a notification to all subscribed handlers.
@@ -2274,23 +2283,19 @@ namespace NWN.Core.NWNX
     /// @remark target will be available as OBJECT_SELF in subscribed event scripts.
     public static int SignalEvent(string evt, uint target)
     {
-      const string sFunc = "SignalEvent";
-      VM.NWNX.SetFunction(NWNX_Events, sFunc);
-      VM.NWNX.StackPush(target);
-      VM.NWNX.StackPush(evt);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(target);
+      NWNXPushString(evt);
+      NWNXCall(NWNX_Events, "SignalEvent");
+      return NWNXPopInt();
     }
 
     /// Retrieves the event data for the currently executing script.
     /// THIS SHOULD ONLY BE CALLED FROM WITHIN AN EVENT HANDLER.
     public static string GetEventData(string tag)
     {
-      const string sFunc = "GetEventData";
-      VM.NWNX.SetFunction(NWNX_Events, sFunc);
-      VM.NWNX.StackPush(tag);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopString();
+      NWNXPushString(tag);
+      NWNXCall(NWNX_Events, "GetEventData");
+      return NWNXPopString();
     }
 
     /// Skips execution of the currently executing event.
@@ -2343,11 +2348,10 @@ namespace NWN.Core.NWNX
     /// - Broadcast Safe Projectile event
     /// - Attack of Opportunity events
     /// - Creature Jump events
+    /// - SetExperience Events
     public static void SkipEvent()
     {
-      const string sFunc = "SkipEvent";
-      VM.NWNX.SetFunction(NWNX_Events, sFunc);
-      VM.NWNX.Call();
+      NWNXCall(NWNX_Events, "SkipEvent");
     }
 
     /// Set the return value of the event.
@@ -2370,10 +2374,8 @@ namespace NWN.Core.NWNX
     /// - Attack target change event -&gt; The new target object. Convert to string with ObjectToString()
     public static void SetEventResult(string data)
     {
-      const string sFunc = "SetEventResult";
-      VM.NWNX.SetFunction(NWNX_Events, sFunc);
-      VM.NWNX.StackPush(data);
-      VM.NWNX.Call();
+      NWNXPushString(data);
+      NWNXCall(NWNX_Events, "SetEventResult");
     }
 
     /// Returns the current event name
@@ -2381,44 +2383,36 @@ namespace NWN.Core.NWNX
     /// Returns &quot;&quot; on error
     public static string GetCurrentEvent()
     {
-      const string sFunc = "GetCurrentEvent";
-      VM.NWNX.SetFunction(NWNX_Events, sFunc);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopString();
+      NWNXCall(NWNX_Events, "GetCurrentEvent");
+      return NWNXPopString();
     }
 
     /// Toggles DispatchListMode for sEvent+sScript(Chunk)
     /// If enabled, sEvent for sScript(Chunk) will only be signalled if the target object is on its dispatch list.
     public static void ToggleDispatchListMode(string sEvent, string sScriptOrChunk, int bEnable)
     {
-      const string sFunc = "ToggleDispatchListMode";
-      VM.NWNX.SetFunction(NWNX_Events, sFunc);
-      VM.NWNX.StackPush(bEnable);
-      VM.NWNX.StackPush(sScriptOrChunk);
-      VM.NWNX.StackPush(sEvent);
-      VM.NWNX.Call();
+      NWNXPushInt(bEnable);
+      NWNXPushString(sScriptOrChunk);
+      NWNXPushString(sEvent);
+      NWNXCall(NWNX_Events, "ToggleDispatchListMode");
     }
 
     /// Add oObject to the dispatch list for sEvent+sScript(Chunk).
     public static void AddObjectToDispatchList(string sEvent, string sScriptOrChunk, uint oObject)
     {
-      const string sFunc = "AddObjectToDispatchList";
-      VM.NWNX.SetFunction(NWNX_Events, sFunc);
-      VM.NWNX.StackPush(oObject);
-      VM.NWNX.StackPush(sScriptOrChunk);
-      VM.NWNX.StackPush(sEvent);
-      VM.NWNX.Call();
+      NWNXPushObject(oObject);
+      NWNXPushString(sScriptOrChunk);
+      NWNXPushString(sEvent);
+      NWNXCall(NWNX_Events, "AddObjectToDispatchList");
     }
 
     /// Remove oObject from the dispatch list for sEvent+sScript(Chunk).
     public static void RemoveObjectFromDispatchList(string sEvent, string sScriptOrChunk, uint oObject)
     {
-      const string sFunc = "RemoveObjectFromDispatchList";
-      VM.NWNX.SetFunction(NWNX_Events, sFunc);
-      VM.NWNX.StackPush(oObject);
-      VM.NWNX.StackPush(sScriptOrChunk);
-      VM.NWNX.StackPush(sEvent);
-      VM.NWNX.Call();
+      NWNXPushObject(oObject);
+      NWNXPushString(sScriptOrChunk);
+      NWNXPushString(sEvent);
+      NWNXCall(NWNX_Events, "RemoveObjectFromDispatchList");
     }
 
     /// Toggle the whitelisting of IDs for sEvent. If whitelisting is enabled, the event will only fire for IDs that are
@@ -2436,11 +2430,9 @@ namespace NWN.Core.NWNX
     /// <param name="bEnable">TRUE to enable the whitelist, FALSE to disable</param>
     public static void ToggleIDWhitelist(string sEvent, int bEnable)
     {
-      const string sFunc = "ToggleIDWhitelist";
-      VM.NWNX.SetFunction(NWNX_Events, sFunc);
-      VM.NWNX.StackPush(bEnable);
-      VM.NWNX.StackPush(sEvent);
-      VM.NWNX.Call();
+      NWNXPushInt(bEnable);
+      NWNXPushString(sEvent);
+      NWNXCall(NWNX_Events, "ToggleIDWhitelist");
     }
 
     /// Add nID to the whitelist of sEvent.
@@ -2449,11 +2441,9 @@ namespace NWN.Core.NWNX
     /// <param name="nID">The ID.</param>
     public static void AddIDToWhitelist(string sEvent, int nID)
     {
-      const string sFunc = "AddIDToWhitelist";
-      VM.NWNX.SetFunction(NWNX_Events, sFunc);
-      VM.NWNX.StackPush(nID);
-      VM.NWNX.StackPush(sEvent);
-      VM.NWNX.Call();
+      NWNXPushInt(nID);
+      NWNXPushString(sEvent);
+      NWNXCall(NWNX_Events, "AddIDToWhitelist");
     }
 
     /// Remove nID from the whitelist of sEvent.
@@ -2462,11 +2452,9 @@ namespace NWN.Core.NWNX
     /// <param name="nID">The ID.</param>
     public static void RemoveIDFromWhitelist(string sEvent, int nID)
     {
-      const string sFunc = "RemoveIDFromWhitelist";
-      VM.NWNX.SetFunction(NWNX_Events, sFunc);
-      VM.NWNX.StackPush(nID);
-      VM.NWNX.StackPush(sEvent);
-      VM.NWNX.Call();
+      NWNXPushInt(nID);
+      NWNXPushString(sEvent);
+      NWNXCall(NWNX_Events, "RemoveIDFromWhitelist");
     }
 
     /// Get the number of subscribers to sEvent.
@@ -2474,11 +2462,9 @@ namespace NWN.Core.NWNX
     /// <returns>The number of subscribers sEvent has or 0 on error.</returns>
     public static int GetNumSubscribers(string sEvent)
     {
-      const string sFunc = "GetNumSubscribers";
-      VM.NWNX.SetFunction(NWNX_Events, sFunc);
-      VM.NWNX.StackPush(sEvent);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushString(sEvent);
+      NWNXCall(NWNX_Events, "GetNumSubscribers");
+      return NWNXPopInt();
     }
 
     // @}

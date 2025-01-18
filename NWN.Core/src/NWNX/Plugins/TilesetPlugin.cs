@@ -5,6 +5,10 @@ namespace NWN.Core.NWNX
   [NWNXPlugin(NWNX_Tileset)]
   public class TilesetPlugin
   {
+    /// @addtogroup tileset Tileset
+    /// An advanced plugin that exposes additional tileset and tile properties and allows builders to override the tiles of an area created with CreateArea().
+    /// @{
+    /// @file nwnx_tileset.nss
     public const string NWNX_Tileset = "NWNX_Tileset";
 
     ///&lt; @private
@@ -18,21 +22,21 @@ namespace NWN.Core.NWNX
     /// <returns>A NWNX_Tileset_TilesetData struct.</returns>
     public static TilesetData GetTilesetData(string sTileset)
     {
-      VM.NWNX.StackPush(sTileset);
-      VM.NWNX.Call();
+      NWNXPushString(sTileset);
+      NWNXCall(NWNX_Tileset, "GetTilesetData");
       TilesetData str = default;
-      str.bHasHeightTransition = VM.NWNX.StackPopInt();
-      str.bInterior = VM.NWNX.StackPopInt();
-      str.sUnlocalizedName = VM.NWNX.StackPopString();
-      str.nDisplayNameStrRef = VM.NWNX.StackPopInt();
-      str.sFloorTerrain = VM.NWNX.StackPopString();
-      str.sDefaultTerrain = VM.NWNX.StackPopString();
-      str.sBorderTerrain = VM.NWNX.StackPopString();
-      str.nNumGroups = VM.NWNX.StackPopInt();
-      str.nNumCrossers = VM.NWNX.StackPopInt();
-      str.nNumTerrain = VM.NWNX.StackPopInt();
-      str.fHeightTransition = VM.NWNX.StackPopFloat();
-      str.nNumTileData = VM.NWNX.StackPopInt();
+      str.bHasHeightTransition = NWNXPopInt();
+      str.bInterior = NWNXPopInt();
+      str.sUnlocalizedName = NWNXPopString();
+      str.nDisplayNameStrRef = NWNXPopInt();
+      str.sFloorTerrain = NWNXPopString();
+      str.sDefaultTerrain = NWNXPopString();
+      str.sBorderTerrain = NWNXPopString();
+      str.nNumGroups = NWNXPopInt();
+      str.nNumCrossers = NWNXPopInt();
+      str.nNumTerrain = NWNXPopInt();
+      str.fHeightTransition = NWNXPopFloat();
+      str.nNumTileData = NWNXPopInt();
       return str;
     }
 
@@ -42,10 +46,10 @@ namespace NWN.Core.NWNX
     /// <returns>The terrain name or &quot;&quot; on error.</returns>
     public static string GetTilesetTerrain(string sTileset, int nIndex)
     {
-      VM.NWNX.StackPush(nIndex);
-      VM.NWNX.StackPush(sTileset);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopString();
+      NWNXPushInt(nIndex);
+      NWNXPushString(sTileset);
+      NWNXCall(NWNX_Tileset, "GetTilesetTerrain");
+      return NWNXPopString();
     }
 
     /// Get the name of sTileset&apos;s crosser at nIndex.
@@ -54,10 +58,10 @@ namespace NWN.Core.NWNX
     /// <returns>The crosser name or &quot;&quot; on error.</returns>
     public static string GetTilesetCrosser(string sTileset, int nIndex)
     {
-      VM.NWNX.StackPush(nIndex);
-      VM.NWNX.StackPush(sTileset);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopString();
+      NWNXPushInt(nIndex);
+      NWNXPushString(sTileset);
+      NWNXCall(NWNX_Tileset, "GetTilesetCrosser");
+      return NWNXPopString();
     }
 
     /// Get general data of the group at nIndex in sTileset.
@@ -66,14 +70,14 @@ namespace NWN.Core.NWNX
     /// <returns>A NWNX_Tileset_TilesetGroupData struct.</returns>
     public static TilesetGroupData GetTilesetGroupData(string sTileset, int nIndex)
     {
-      VM.NWNX.StackPush(nIndex);
-      VM.NWNX.StackPush(sTileset);
-      VM.NWNX.Call();
+      NWNXPushInt(nIndex);
+      NWNXPushString(sTileset);
+      NWNXCall(NWNX_Tileset, "GetTilesetGroupData");
       TilesetGroupData str = default;
-      str.nColumns = VM.NWNX.StackPopInt();
-      str.nRows = VM.NWNX.StackPopInt();
-      str.nStrRef = VM.NWNX.StackPopInt();
-      str.sName = VM.NWNX.StackPopString();
+      str.nColumns = NWNXPopInt();
+      str.nRows = NWNXPopInt();
+      str.nStrRef = NWNXPopInt();
+      str.sName = NWNXPopString();
       return str;
     }
 
@@ -84,11 +88,11 @@ namespace NWN.Core.NWNX
     /// <returns>The tile ID or 0 on error.</returns>
     public static int GetTilesetGroupTile(string sTileset, int nGroupIndex, int nTileIndex)
     {
-      VM.NWNX.StackPush(nTileIndex);
-      VM.NWNX.StackPush(nGroupIndex);
-      VM.NWNX.StackPush(sTileset);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(nTileIndex);
+      NWNXPushInt(nGroupIndex);
+      NWNXPushString(sTileset);
+      NWNXCall(NWNX_Tileset, "GetTilesetGroupTile");
+      return NWNXPopInt();
     }
 
     /// Get the model name of a tile in sTileset.
@@ -97,10 +101,10 @@ namespace NWN.Core.NWNX
     /// <returns>The model name or &quot;&quot; on error.</returns>
     public static string GetTileModel(string sTileset, int nTileID)
     {
-      VM.NWNX.StackPush(nTileID);
-      VM.NWNX.StackPush(sTileset);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopString();
+      NWNXPushInt(nTileID);
+      NWNXPushString(sTileset);
+      NWNXCall(NWNX_Tileset, "GetTileModel");
+      return NWNXPopString();
     }
 
     /// Get the minimap texture name of a tile in sTileset.
@@ -109,10 +113,10 @@ namespace NWN.Core.NWNX
     /// <returns>The minimap texture name or &quot;&quot; on error.</returns>
     public static string GetTileMinimapTexture(string sTileset, int nTileID)
     {
-      VM.NWNX.StackPush(nTileID);
-      VM.NWNX.StackPush(sTileset);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopString();
+      NWNXPushInt(nTileID);
+      NWNXPushString(sTileset);
+      NWNXCall(NWNX_Tileset, "GetTileMinimapTexture");
+      return NWNXPopString();
     }
 
     /// Get the edges and corners of a tile in sTileset.
@@ -121,18 +125,18 @@ namespace NWN.Core.NWNX
     /// <returns>A NWNX_Tileset_TileEdgesAndCorners struct.</returns>
     public static TileEdgesAndCorners GetTileEdgesAndCorners(string sTileset, int nTileID)
     {
-      VM.NWNX.StackPush(nTileID);
-      VM.NWNX.StackPush(sTileset);
-      VM.NWNX.Call();
+      NWNXPushInt(nTileID);
+      NWNXPushString(sTileset);
+      NWNXCall(NWNX_Tileset, "GetTileEdgesAndCorners");
       TileEdgesAndCorners str = default;
-      str.sLeft = VM.NWNX.StackPopString();
-      str.sBottomLeft = VM.NWNX.StackPopString();
-      str.sBottom = VM.NWNX.StackPopString();
-      str.sBottomRight = VM.NWNX.StackPopString();
-      str.sRight = VM.NWNX.StackPopString();
-      str.sTopRight = VM.NWNX.StackPopString();
-      str.sTop = VM.NWNX.StackPopString();
-      str.sTopLeft = VM.NWNX.StackPopString();
+      str.sLeft = NWNXPopString();
+      str.sBottomLeft = NWNXPopString();
+      str.sBottom = NWNXPopString();
+      str.sBottomRight = NWNXPopString();
+      str.sRight = NWNXPopString();
+      str.sTopRight = NWNXPopString();
+      str.sTop = NWNXPopString();
+      str.sTopLeft = NWNXPopString();
       return str;
     }
 
@@ -142,10 +146,10 @@ namespace NWN.Core.NWNX
     /// <returns>The amount of doors.</returns>
     public static int GetTileNumDoors(string sTileset, int nTileID)
     {
-      VM.NWNX.StackPush(nTileID);
-      VM.NWNX.StackPush(sTileset);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(nTileID);
+      NWNXPushString(sTileset);
+      NWNXCall(NWNX_Tileset, "GetTileNumDoors");
+      return NWNXPopInt();
     }
 
     /// Get the door data of a tile in sTileset.
@@ -155,16 +159,16 @@ namespace NWN.Core.NWNX
     /// <returns>A NWNX_Tileset_TileDoorData struct.</returns>
     public static TileDoorData GetTileDoorData(string sTileset, int nTileID, int nIndex = 0)
     {
-      VM.NWNX.StackPush(nIndex);
-      VM.NWNX.StackPush(nTileID);
-      VM.NWNX.StackPush(sTileset);
-      VM.NWNX.Call();
+      NWNXPushInt(nIndex);
+      NWNXPushInt(nTileID);
+      NWNXPushString(sTileset);
+      NWNXCall(NWNX_Tileset, "GetTileDoorData");
       TileDoorData str = default;
-      str.fOrientation = VM.NWNX.StackPopFloat();
-      str.fZ = VM.NWNX.StackPopFloat();
-      str.fY = VM.NWNX.StackPopFloat();
-      str.fX = VM.NWNX.StackPopFloat();
-      str.nType = VM.NWNX.StackPopInt();
+      str.fOrientation = NWNXPopFloat();
+      str.fZ = NWNXPopFloat();
+      str.fY = NWNXPopFloat();
+      str.fX = NWNXPopFloat();
+      str.nType = NWNXPopInt();
       return str;
     }
 
@@ -173,9 +177,9 @@ namespace NWN.Core.NWNX
     /// <param name="sOverrideName">The name of the override containing the custom tile data or &quot;&quot; to remove the override.</param>
     public static void SetAreaTileOverride(string sAreaResRef, string sOverrideName)
     {
-      VM.NWNX.StackPush(sOverrideName);
-      VM.NWNX.StackPush(sAreaResRef);
-      VM.NWNX.Call();
+      NWNXPushString(sOverrideName);
+      NWNXPushString(sAreaResRef);
+      NWNXCall(NWNX_Tileset, "SetAreaTileOverride");
     }
 
     /// Create a tile override named sOverrideName.
@@ -185,11 +189,11 @@ namespace NWN.Core.NWNX
     /// <param name="nHeight">The height of the area. Valid values: 1-32.</param>
     public static void CreateTileOverride(string sOverrideName, string sTileSet, int nWidth, int nHeight)
     {
-      VM.NWNX.StackPush(nHeight);
-      VM.NWNX.StackPush(nWidth);
-      VM.NWNX.StackPush(sTileSet);
-      VM.NWNX.StackPush(sOverrideName);
-      VM.NWNX.Call();
+      NWNXPushInt(nHeight);
+      NWNXPushInt(nWidth);
+      NWNXPushString(sTileSet);
+      NWNXPushString(sOverrideName);
+      NWNXCall(NWNX_Tileset, "CreateTileOverride");
     }
 
     /// Delete a tile override named sOverrideName.
@@ -197,8 +201,8 @@ namespace NWN.Core.NWNX
     /// <param name="sOverrideName">The name of the override.</param>
     public static void DeleteTileOverride(string sOverrideName)
     {
-      VM.NWNX.StackPush(sOverrideName);
-      VM.NWNX.Call();
+      NWNXPushString(sOverrideName);
+      NWNXCall(NWNX_Tileset, "DeleteTileOverride");
     }
 
     /// Set custom tile data for the tile at nIndex in sOverrideName.
@@ -208,19 +212,19 @@ namespace NWN.Core.NWNX
     /// <param name="strCustomTileData">A NWNX_Tileset_CustomTileData struct.</param>
     public static void SetOverrideTileData(string sOverrideName, int nIndex, CustomTileData strCustomTileData)
     {
-      VM.NWNX.StackPush(strCustomTileData.bAnimLoop3);
-      VM.NWNX.StackPush(strCustomTileData.bAnimLoop2);
-      VM.NWNX.StackPush(strCustomTileData.bAnimLoop1);
-      VM.NWNX.StackPush(strCustomTileData.nSourceLightColor2);
-      VM.NWNX.StackPush(strCustomTileData.nSourceLightColor1);
-      VM.NWNX.StackPush(strCustomTileData.nMainLightColor2);
-      VM.NWNX.StackPush(strCustomTileData.nMainLightColor1);
-      VM.NWNX.StackPush(strCustomTileData.nHeight);
-      VM.NWNX.StackPush(strCustomTileData.nOrientation);
-      VM.NWNX.StackPush(strCustomTileData.nTileID);
-      VM.NWNX.StackPush(nIndex);
-      VM.NWNX.StackPush(sOverrideName);
-      VM.NWNX.Call();
+      NWNXPushInt(strCustomTileData.bAnimLoop3);
+      NWNXPushInt(strCustomTileData.bAnimLoop2);
+      NWNXPushInt(strCustomTileData.bAnimLoop1);
+      NWNXPushInt(strCustomTileData.nSourceLightColor2);
+      NWNXPushInt(strCustomTileData.nSourceLightColor1);
+      NWNXPushInt(strCustomTileData.nMainLightColor2);
+      NWNXPushInt(strCustomTileData.nMainLightColor1);
+      NWNXPushInt(strCustomTileData.nHeight);
+      NWNXPushInt(strCustomTileData.nOrientation);
+      NWNXPushInt(strCustomTileData.nTileID);
+      NWNXPushInt(nIndex);
+      NWNXPushString(sOverrideName);
+      NWNXCall(NWNX_Tileset, "SetOverrideTileData");
     }
 
     /// Delete custom tile data of the tile at nIndex in sOverrideName.
@@ -228,9 +232,9 @@ namespace NWN.Core.NWNX
     /// <param name="nIndex">The tile&apos;s index or -1 to remove all custom tile data.</param>
     public static void DeleteOverrideTileData(string sOverrideName, int nIndex)
     {
-      VM.NWNX.StackPush(nIndex);
-      VM.NWNX.StackPush(sOverrideName);
-      VM.NWNX.Call();
+      NWNXPushInt(nIndex);
+      NWNXPushString(sOverrideName);
+      NWNXCall(NWNX_Tileset, "DeleteOverrideTileData");
     }
 
     // @}

@@ -5,6 +5,10 @@ namespace NWN.Core.NWNX
   [NWNXPlugin(NWNX_Player)]
   public class PlayerPlugin
   {
+    /// @addtogroup player
+    /// Functions exposing additional player properties.
+    /// @{
+    /// @file nwnx_player.nss
     public const string NWNX_Player = "NWNX_Player";
 
     ///&lt; @private
@@ -53,11 +57,9 @@ namespace NWN.Core.NWNX
     /// <param name="placeable">The placeable object.</param>
     public static void ForcePlaceableExamineWindow(uint player, uint placeable)
     {
-      const string sFunc = "ForcePlaceableExamineWindow";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(placeable);
-      VM.NWNX.StackPush(player);
-      VM.NWNX.Call();
+      NWNXPushObject(placeable);
+      NWNXPushObject(player);
+      NWNXCall(NWNX_Player, "ForcePlaceableExamineWindow");
     }
 
     /// Force opens the target object&apos;s inventory for the player.
@@ -72,11 +74,9 @@ namespace NWN.Core.NWNX
     /// <param name="placeable">The placeable object.</param>
     public static void ForcePlaceableInventoryWindow(uint player, uint placeable)
     {
-      const string sFunc = "ForcePlaceableInventoryWindow";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(placeable);
-      VM.NWNX.StackPush(player);
-      VM.NWNX.Call();
+      NWNXPushObject(placeable);
+      NWNXPushObject(player);
+      NWNXCall(NWNX_Player, "ForcePlaceableInventoryWindow");
     }
 
     /// Starts displaying a timing bar.
@@ -87,17 +87,15 @@ namespace NWN.Core.NWNX
     /// @remark Only one timing bar can be ran at the same time.
     public static void StartGuiTimingBar(uint player, float seconds, string script = "", int type = NWNX_PLAYER_TIMING_BAR_CUSTOM)
     {
-      if (GetLocalInt(player,  "NWNX_PLAYER_GUI_TIMING_ACTIVE") == TRUE)
+      if (GetLocalInt(player, "NWNX_PLAYER_GUI_TIMING_ACTIVE") == TRUE)
       return ;
-      const string sFunc = "StartGuiTimingBar";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(type);
-      VM.NWNX.StackPush(seconds);
-      VM.NWNX.StackPush(player);
-      VM.NWNX.Call();
+      NWNXPushInt(type);
+      NWNXPushFloat(seconds);
+      NWNXPushObject(player);
+      NWNXCall(NWNX_Player, "StartGuiTimingBar");
       int id = GetLocalInt( player, "NWNX_PLAYER_GUI_TIMING_ID") +1;
-      SetLocalInt(player,  "NWNX_PLAYER_GUI_TIMING_ACTIVE", id);
-      SetLocalInt(player,  "NWNX_PLAYER_GUI_TIMING_ID", id);
+      SetLocalInt(player, "NWNX_PLAYER_GUI_TIMING_ACTIVE", id);
+      SetLocalInt(player, "NWNX_PLAYER_GUI_TIMING_ID", id);
       DelayCommand(seconds, () => INTERNAL_StopGuiTimingBar(player, script, id));
     }
 
@@ -115,11 +113,9 @@ namespace NWN.Core.NWNX
     /// @remark Clicking on the ground or using WASD will trigger walking instead of running.
     public static void SetAlwaysWalk(uint player, int bWalk = TRUE)
     {
-      const string sFunc = "SetAlwaysWalk";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(bWalk);
-      VM.NWNX.StackPush(player);
-      VM.NWNX.Call();
+      NWNXPushInt(bWalk);
+      NWNXPushObject(player);
+      NWNXCall(NWNX_Player, "SetAlwaysWalk");
     }
 
     /// Gets the player&apos;s quickbar slot info
@@ -128,25 +124,23 @@ namespace NWN.Core.NWNX
     /// <returns>An NWNX_Player_QuickBarSlot struct.</returns>
     public static QuickBarSlot GetQuickBarSlot(uint player, int slot)
     {
-      const string sFunc = "GetQuickBarSlot";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
       QuickBarSlot qbs = default;
-      VM.NWNX.StackPush(slot);
-      VM.NWNX.StackPush(player);
-      VM.NWNX.Call();
-      qbs.oAssociate = VM.NWNX.StackPopObject();
-      qbs.nAssociateType = VM.NWNX.StackPopInt();
-      qbs.nDomainLevel = VM.NWNX.StackPopInt();
-      qbs.nMetaType = VM.NWNX.StackPopInt();
-      qbs.nINTParam1 = VM.NWNX.StackPopInt();
-      qbs.sToolTip = VM.NWNX.StackPopString();
-      qbs.sCommandLine = VM.NWNX.StackPopString();
-      qbs.sCommandLabel = VM.NWNX.StackPopString();
-      qbs.sResRef = VM.NWNX.StackPopString();
-      qbs.nMultiClass = VM.NWNX.StackPopInt();
-      qbs.nObjectType = VM.NWNX.StackPopInt();
-      qbs.oSecondaryItem = VM.NWNX.StackPopObject();
-      qbs.oItem = VM.NWNX.StackPopObject();
+      NWNXPushInt(slot);
+      NWNXPushObject(player);
+      NWNXCall(NWNX_Player, "GetQuickBarSlot");
+      qbs.oAssociate = NWNXPopObject();
+      qbs.nAssociateType = NWNXPopInt();
+      qbs.nDomainLevel = NWNXPopInt();
+      qbs.nMetaType = NWNXPopInt();
+      qbs.nINTParam1 = NWNXPopInt();
+      qbs.sToolTip = NWNXPopString();
+      qbs.sCommandLine = NWNXPopString();
+      qbs.sCommandLabel = NWNXPopString();
+      qbs.sResRef = NWNXPopString();
+      qbs.nMultiClass = NWNXPopInt();
+      qbs.nObjectType = NWNXPopInt();
+      qbs.oSecondaryItem = NWNXPopObject();
+      qbs.oItem = NWNXPopObject();
       return qbs;
     }
 
@@ -156,24 +150,22 @@ namespace NWN.Core.NWNX
     /// <param name="qbs">An NWNX_Player_QuickBarSlot struct.</param>
     public static void SetQuickBarSlot(uint player, int slot, QuickBarSlot qbs)
     {
-      const string sFunc = "SetQuickBarSlot";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(qbs.oItem);
-      VM.NWNX.StackPush(qbs.oSecondaryItem);
-      VM.NWNX.StackPush(qbs.nObjectType);
-      VM.NWNX.StackPush(qbs.nMultiClass);
-      VM.NWNX.StackPush(qbs.sResRef);
-      VM.NWNX.StackPush(qbs.sCommandLabel);
-      VM.NWNX.StackPush(qbs.sCommandLine);
-      VM.NWNX.StackPush(qbs.sToolTip);
-      VM.NWNX.StackPush(qbs.nINTParam1);
-      VM.NWNX.StackPush(qbs.nMetaType);
-      VM.NWNX.StackPush(qbs.nDomainLevel);
-      VM.NWNX.StackPush(qbs.nAssociateType);
-      VM.NWNX.StackPush(qbs.oAssociate);
-      VM.NWNX.StackPush(slot);
-      VM.NWNX.StackPush(player);
-      VM.NWNX.Call();
+      NWNXPushObject(qbs.oItem);
+      NWNXPushObject(qbs.oSecondaryItem);
+      NWNXPushInt(qbs.nObjectType);
+      NWNXPushInt(qbs.nMultiClass);
+      NWNXPushString(qbs.sResRef);
+      NWNXPushString(qbs.sCommandLabel);
+      NWNXPushString(qbs.sCommandLine);
+      NWNXPushString(qbs.sToolTip);
+      NWNXPushInt(qbs.nINTParam1);
+      NWNXPushInt(qbs.nMetaType);
+      NWNXPushInt(qbs.nDomainLevel);
+      NWNXPushInt(qbs.nAssociateType);
+      NWNXPushObject(qbs.oAssociate);
+      NWNXPushInt(slot);
+      NWNXPushObject(player);
+      NWNXCall(NWNX_Player, "SetQuickBarSlot");
     }
 
     /// Get the name of the .bic file associated with the player&apos;s character.
@@ -181,11 +173,9 @@ namespace NWN.Core.NWNX
     /// <returns>The filename for this player&apos;s bic. (Not including the &quot;.bic&quot;)</returns>
     public static string GetBicFileName(uint player)
     {
-      const string sFunc = "GetBicFileName";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(player);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopString();
+      NWNXPushObject(player);
+      NWNXCall(NWNX_Player, "GetBicFileName");
+      return NWNXPopString();
     }
 
     /// Plays the VFX at the target position in current area for the given player only
@@ -197,21 +187,13 @@ namespace NWN.Core.NWNX
     /// <param name="rotate">A rotation vector to rotate the effect</param>
     public static void ShowVisualEffect(uint player, int effectId, System.Numerics.Vector3 position, float scale = 1.0f, System.Numerics.Vector3 translate = default, System.Numerics.Vector3 rotate = default)
     {
-      const string sFunc = "ShowVisualEffect";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(rotate.X);
-      VM.NWNX.StackPush(rotate.Y);
-      VM.NWNX.StackPush(rotate.Z);
-      VM.NWNX.StackPush(translate.X);
-      VM.NWNX.StackPush(translate.Y);
-      VM.NWNX.StackPush(translate.Z);
-      VM.NWNX.StackPush(scale);
-      VM.NWNX.StackPush(position.X);
-      VM.NWNX.StackPush(position.Y);
-      VM.NWNX.StackPush(position.Z);
-      VM.NWNX.StackPush(effectId);
-      VM.NWNX.StackPush(player);
-      VM.NWNX.Call();
+      NWNXPushVector(rotate);
+      NWNXPushVector(translate);
+      NWNXPushFloat(scale);
+      NWNXPushVector(position);
+      NWNXPushInt(effectId);
+      NWNXPushObject(player);
+      NWNXCall(NWNX_Player, "ShowVisualEffect");
     }
 
     /// Changes the daytime music track for the given player only
@@ -219,12 +201,10 @@ namespace NWN.Core.NWNX
     /// <param name="track">The track id to play.</param>
     public static void MusicBackgroundChangeDay(uint player, int track)
     {
-      const string sFunc = "ChangeBackgroundMusic";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(track);
-      VM.NWNX.StackPush(TRUE);
-      VM.NWNX.StackPush(player);
-      VM.NWNX.Call();
+      NWNXPushInt(track);
+      NWNXPushInt(TRUE);
+      NWNXPushObject(player);
+      NWNXCall(NWNX_Player, "ChangeBackgroundMusic");
     }
 
     /// Changes the nighttime music track for the given player only
@@ -232,34 +212,28 @@ namespace NWN.Core.NWNX
     /// <param name="track">The track id to play.</param>
     public static void MusicBackgroundChangeNight(uint player, int track)
     {
-      const string sFunc = "ChangeBackgroundMusic";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(track);
-      VM.NWNX.StackPush(FALSE);
-      VM.NWNX.StackPush(player);
-      VM.NWNX.Call();
+      NWNXPushInt(track);
+      NWNXPushInt(FALSE);
+      NWNXPushObject(player);
+      NWNXCall(NWNX_Player, "ChangeBackgroundMusic");
     }
 
     /// Starts the background music for the given player only
     /// <param name="player">The player object.</param>
     public static void MusicBackgroundStart(uint player)
     {
-      const string sFunc = "PlayBackgroundMusic";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(TRUE);
-      VM.NWNX.StackPush(player);
-      VM.NWNX.Call();
+      NWNXPushInt(TRUE);
+      NWNXPushObject(player);
+      NWNXCall(NWNX_Player, "PlayBackgroundMusic");
     }
 
     /// Stops the background music for the given player only
     /// <param name="player">The player object.</param>
     public static void MusicBackgroundStop(uint player)
     {
-      const string sFunc = "PlayBackgroundMusic";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(FALSE);
-      VM.NWNX.StackPush(player);
-      VM.NWNX.Call();
+      NWNXPushInt(FALSE);
+      NWNXPushObject(player);
+      NWNXCall(NWNX_Player, "PlayBackgroundMusic");
     }
 
     /// Changes the battle music track for the given player only
@@ -267,33 +241,27 @@ namespace NWN.Core.NWNX
     /// <param name="track">The track id to play.</param>
     public static void MusicBattleChange(uint player, int track)
     {
-      const string sFunc = "ChangeBattleMusic";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(track);
-      VM.NWNX.StackPush(player);
-      VM.NWNX.Call();
+      NWNXPushInt(track);
+      NWNXPushObject(player);
+      NWNXCall(NWNX_Player, "ChangeBattleMusic");
     }
 
     /// Starts the battle music for the given player only
     /// <param name="player">The player object.</param>
     public static void MusicBattleStart(uint player)
     {
-      const string sFunc = "PlayBattleMusic";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(TRUE);
-      VM.NWNX.StackPush(player);
-      VM.NWNX.Call();
+      NWNXPushInt(TRUE);
+      NWNXPushObject(player);
+      NWNXCall(NWNX_Player, "PlayBattleMusic");
     }
 
     /// Stops the battle music for the given player only
     /// <param name="player">The player object.</param>
     public static void MusicBattleStop(uint player)
     {
-      const string sFunc = "PlayBattleMusic";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(FALSE);
-      VM.NWNX.StackPush(player);
-      VM.NWNX.Call();
+      NWNXPushInt(FALSE);
+      NWNXPushObject(player);
+      NWNXCall(NWNX_Player, "PlayBattleMusic");
     }
 
     /// Play a sound at the location of target for the given player only
@@ -303,12 +271,10 @@ namespace NWN.Core.NWNX
     /// will play at the location of the player.
     public static void PlaySound(uint player, string sound, uint target = OBJECT_INVALID)
     {
-      const string sFunc = "PlaySound";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(target);
-      VM.NWNX.StackPush(sound);
-      VM.NWNX.StackPush(player);
-      VM.NWNX.Call();
+      NWNXPushObject(target);
+      NWNXPushString(sound);
+      NWNXPushObject(player);
+      NWNXCall(NWNX_Player, "PlaySound");
     }
 
     /// Toggle a placeable&apos;s usable flag for the given player only
@@ -317,12 +283,10 @@ namespace NWN.Core.NWNX
     /// <param name="usable">TRUE for usable.</param>
     public static void SetPlaceableUsable(uint player, uint placeable, int usable)
     {
-      const string sFunc = "SetPlaceableUsable";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(usable);
-      VM.NWNX.StackPush(placeable);
-      VM.NWNX.StackPush(player);
-      VM.NWNX.Call();
+      NWNXPushInt(usable);
+      NWNXPushObject(placeable);
+      NWNXPushObject(player);
+      NWNXCall(NWNX_Player, "SetPlaceableUsable");
     }
 
     /// Override player&apos;s rest duration
@@ -330,11 +294,9 @@ namespace NWN.Core.NWNX
     /// <param name="duration">The duration of rest in milliseconds, 1000 = 1 second. Minimum duration of 10ms. -1 clears the override.</param>
     public static void SetRestDuration(uint player, int duration)
     {
-      const string sFunc = "SetRestDuration";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(duration);
-      VM.NWNX.StackPush(player);
-      VM.NWNX.Call();
+      NWNXPushInt(duration);
+      NWNXPushObject(player);
+      NWNXCall(NWNX_Player, "SetRestDuration");
     }
 
     /// Apply visualeffect to target that only player can see
@@ -347,19 +309,13 @@ namespace NWN.Core.NWNX
     /// @note Only works with instant effects: VFX_COM_*, VFX_FNF_*, VFX_IMP_*
     public static void ApplyInstantVisualEffectToObject(uint player, uint target, int visualeffect, float scale = 1.0f, System.Numerics.Vector3 translate = default, System.Numerics.Vector3 rotate = default)
     {
-      const string sFunc = "ApplyInstantVisualEffectToObject";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(rotate.Z);
-      VM.NWNX.StackPush(rotate.Y);
-      VM.NWNX.StackPush(rotate.X);
-      VM.NWNX.StackPush(translate.Z);
-      VM.NWNX.StackPush(translate.Y);
-      VM.NWNX.StackPush(translate.X);
-      VM.NWNX.StackPush(scale);
-      VM.NWNX.StackPush(visualeffect);
-      VM.NWNX.StackPush(target);
-      VM.NWNX.StackPush(player);
-      VM.NWNX.Call();
+      NWNXPushVector(rotate);
+      NWNXPushVector(translate);
+      NWNXPushFloat(scale);
+      NWNXPushInt(visualeffect);
+      NWNXPushObject(target);
+      NWNXPushObject(player);
+      NWNXCall(NWNX_Player, "ApplyInstantVisualEffectToObject");
     }
 
     /// Refreshes the players character sheet
@@ -368,10 +324,8 @@ namespace NWN.Core.NWNX
     /// through nwnx and forcing a UI refresh, 0.5s seemed to be fine
     public static void UpdateCharacterSheet(uint player)
     {
-      const string sFunc = "UpdateCharacterSheet";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(player);
-      VM.NWNX.Call();
+      NWNXPushObject(player);
+      NWNXCall(NWNX_Player, "UpdateCharacterSheet");
     }
 
     /// Allows player to open target&apos;s inventory
@@ -381,12 +335,10 @@ namespace NWN.Core.NWNX
     /// @remark Only works if player and target are in the same area.
     public static void OpenInventory(uint player, uint target, int open = TRUE)
     {
-      const string sFunc = "OpenInventory";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(open);
-      VM.NWNX.StackPush(target);
-      VM.NWNX.StackPush(player);
-      VM.NWNX.Call();
+      NWNXPushInt(open);
+      NWNXPushObject(target);
+      NWNXPushObject(player);
+      NWNXCall(NWNX_Player, "OpenInventory");
     }
 
     /// Get player&apos;s area exploration state
@@ -395,12 +347,10 @@ namespace NWN.Core.NWNX
     /// <returns>A string representation of the tiles explored for that area.</returns>
     public static string GetAreaExplorationState(uint player, uint area)
     {
-      const string sFunc = "GetAreaExplorationState";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(area);
-      VM.NWNX.StackPush(player);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopString();
+      NWNXPushObject(area);
+      NWNXPushObject(player);
+      NWNXCall(NWNX_Player, "GetAreaExplorationState");
+      return NWNXPopString();
     }
 
     /// Set player&apos;s area exploration state.
@@ -409,12 +359,10 @@ namespace NWN.Core.NWNX
     /// <param name="str">An encoded string obtained with NWNX_Player_GetAreaExplorationState()</param>
     public static void SetAreaExplorationState(uint player, uint area, string str)
     {
-      const string sFunc = "SetAreaExplorationState";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(str);
-      VM.NWNX.StackPush(area);
-      VM.NWNX.StackPush(player);
-      VM.NWNX.Call();
+      NWNXPushString(str);
+      NWNXPushObject(area);
+      NWNXPushObject(player);
+      NWNXCall(NWNX_Player, "SetAreaExplorationState");
     }
 
     /// Override player&apos;s rest animation.
@@ -424,11 +372,9 @@ namespace NWN.Core.NWNX
     /// the NWNX equivalent. -1 to clear the override.
     public static void SetRestAnimation(uint oPlayer, int nAnimation)
     {
-      const string sFunc = "SetRestAnimation";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(nAnimation);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
+      NWNXPushInt(nAnimation);
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "SetRestAnimation");
     }
 
     /// Override a visual transform on the given object that only player will see.
@@ -438,13 +384,11 @@ namespace NWN.Core.NWNX
     /// <param name="fValue">Depends on the transformation to apply.</param>
     public static void SetObjectVisualTransformOverride(uint oPlayer, uint oObject, int nTransform, float fValue)
     {
-      const string sFunc = "SetObjectVisualTransformOverride";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(fValue);
-      VM.NWNX.StackPush(nTransform);
-      VM.NWNX.StackPush(oObject);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
+      NWNXPushFloat(fValue);
+      NWNXPushInt(nTransform);
+      NWNXPushObject(oObject);
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "SetObjectVisualTransformOverride");
     }
 
     /// Apply a looping visualeffect to a target that only player can see
@@ -455,12 +399,10 @@ namespace NWN.Core.NWNX
     /// reentering the area and the object is in view or when they come back in view range.
     public static void ApplyLoopingVisualEffectToObject(uint player, uint target, int visualeffect)
     {
-      const string sFunc = "ApplyLoopingVisualEffectToObject";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(visualeffect);
-      VM.NWNX.StackPush(target);
-      VM.NWNX.StackPush(player);
-      VM.NWNX.Call();
+      NWNXPushInt(visualeffect);
+      NWNXPushObject(target);
+      NWNXPushObject(player);
+      NWNXCall(NWNX_Player, "ApplyLoopingVisualEffectToObject");
     }
 
     /// Override the name of placeable for player only
@@ -469,12 +411,10 @@ namespace NWN.Core.NWNX
     /// <param name="name">The name for the placeable for this player, &quot;&quot; to clear the override.</param>
     public static void SetPlaceableNameOverride(uint player, uint placeable, string name)
     {
-      const string sFunc = "SetPlaceableNameOverride";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(name);
-      VM.NWNX.StackPush(placeable);
-      VM.NWNX.StackPush(player);
-      VM.NWNX.Call();
+      NWNXPushString(name);
+      NWNXPushObject(placeable);
+      NWNXPushObject(player);
+      NWNXCall(NWNX_Player, "SetPlaceableNameOverride");
     }
 
     /// Gets whether a quest has been completed by a player
@@ -483,12 +423,10 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if the quest has been completed. -1 if the player does not have the journal entry.</returns>
     public static int GetQuestCompleted(uint player, string sQuestName)
     {
-      const string sFunc = "GetQuestCompleted";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(sQuestName);
-      VM.NWNX.StackPush(player);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushString(sQuestName);
+      NWNXPushObject(player);
+      NWNXCall(NWNX_Player, "GetQuestCompleted");
+      return NWNXPopInt();
     }
 
     /// Place waypoints on module load representing where a PC should start
@@ -504,13 +442,11 @@ namespace NWN.Core.NWNX
     /// of just every server restart.
     public static void SetPersistentLocation(string sCDKeyOrCommunityName, string sBicFileName, uint oWP, int bFirstConnectOnly = TRUE)
     {
-      const string sFunc = "SetPersistentLocation";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(bFirstConnectOnly);
-      VM.NWNX.StackPush(oWP);
-      VM.NWNX.StackPush(sBicFileName);
-      VM.NWNX.StackPush(sCDKeyOrCommunityName);
-      VM.NWNX.Call();
+      NWNXPushInt(bFirstConnectOnly);
+      NWNXPushObject(oWP);
+      NWNXPushString(sBicFileName);
+      NWNXPushString(sCDKeyOrCommunityName);
+      NWNXCall(NWNX_Player, "SetPersistentLocation");
     }
 
     /// Force an item name to be updated.
@@ -519,11 +455,9 @@ namespace NWN.Core.NWNX
     /// <param name="oItem">The item object.</param>
     public static void UpdateItemName(uint oPlayer, uint oItem)
     {
-      const string sFunc = "UpdateItemName";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(oItem);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
+      NWNXPushObject(oItem);
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "UpdateItemName");
     }
 
     /// Possesses a creature by temporarily making them a familiar
@@ -542,25 +476,21 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if possession succeeded.</returns>
     public static int PossessCreature(uint oPossessor, uint oPossessed, int bMindImmune = TRUE, int bCreateDefaultQB = FALSE)
     {
-      const string sFunc = "PossessCreature";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(bCreateDefaultQB);
-      VM.NWNX.StackPush(bMindImmune);
-      VM.NWNX.StackPush(oPossessed);
-      VM.NWNX.StackPush(oPossessor);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(bCreateDefaultQB);
+      NWNXPushInt(bMindImmune);
+      NWNXPushObject(oPossessed);
+      NWNXPushObject(oPossessor);
+      NWNXCall(NWNX_Player, "PossessCreature");
+      return NWNXPopInt();
     }
 
     /// Returns the platform ID of the given player (NWNX_PLAYER_PLATFORM_*)
     /// <param name="oPlayer">The player object.</param>
     public static int GetPlatformId(uint oPlayer)
     {
-      const string sFunc = "GetPlatformId";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "GetPlatformId");
+      return NWNXPopInt();
     }
 
     /// Returns the game language of the given player (uses NWNX_DIALOG_LANGUAGE_*)
@@ -569,11 +499,9 @@ namespace NWN.Core.NWNX
     /// <param name="oPlayer">The player object.</param>
     public static int GetLanguage(uint oPlayer)
     {
-      const string sFunc = "GetLanguage";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "GetLanguage");
+      return NWNXPopInt();
     }
 
     /// Override sOldResName with sNewResName of nResType for oPlayer.
@@ -584,13 +512,11 @@ namespace NWN.Core.NWNX
     /// <param name="sNewResName">The new res name or &quot;&quot; to clear a previous override, 16 characters or less.</param>
     public static void SetResManOverride(uint oPlayer, int nResType, string sOldResName, string sNewResName)
     {
-      const string sFunc = "SetResManOverride";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(sNewResName);
-      VM.NWNX.StackPush(sOldResName);
-      VM.NWNX.StackPush(nResType);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
+      NWNXPushString(sNewResName);
+      NWNXPushString(sOldResName);
+      NWNXPushInt(nResType);
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "SetResManOverride");
     }
 
     /// Set nCustomTokenNumber to sTokenValue for oPlayer only.
@@ -600,12 +526,10 @@ namespace NWN.Core.NWNX
     /// <param name="sTokenValue">The token text.</param>
     public static void SetCustomToken(uint oPlayer, int nCustomTokenNumber, string sTokenValue)
     {
-      const string sFunc = "SetCustomToken";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(sTokenValue);
-      VM.NWNX.StackPush(nCustomTokenNumber);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
+      NWNXPushString(sTokenValue);
+      NWNXPushInt(nCustomTokenNumber);
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "SetCustomToken");
     }
 
     /// Override the name of creature for player only
@@ -614,12 +538,10 @@ namespace NWN.Core.NWNX
     /// <param name="sName">The name for the creature for this player, &quot;&quot; to clear the override.</param>
     public static void SetCreatureNameOverride(uint oPlayer, uint oCreature, string sName)
     {
-      const string sFunc = "SetCreatureNameOverride";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(sName);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
+      NWNXPushString(sName);
+      NWNXPushObject(oCreature);
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "SetCreatureNameOverride");
     }
 
     /// Display floaty text above oCreature for oPlayer only.
@@ -630,13 +552,11 @@ namespace NWN.Core.NWNX
     /// <param name="bChatWindow">If TRUE, sText will be displayed in oPlayer&apos;s chat window.</param>
     public static void FloatingTextStringOnCreature(uint oPlayer, uint oCreature, string sText, int bChatWindow = TRUE)
     {
-      const string sFunc = "FloatingTextStringOnCreature";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(bChatWindow);
-      VM.NWNX.StackPush(sText);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
+      NWNXPushInt(bChatWindow);
+      NWNXPushString(sText);
+      NWNXPushObject(oCreature);
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "FloatingTextStringOnCreature");
     }
 
     /// Toggle oPlayer&apos;s PlayerDM status.
@@ -645,11 +565,9 @@ namespace NWN.Core.NWNX
     /// <param name="bIsDM">TRUE to toggle dm mode on, FALSE for off.</param>
     public static void ToggleDM(uint oPlayer, int bIsDM)
     {
-      const string sFunc = "ToggleDM";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(bIsDM);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
+      NWNXPushInt(bIsDM);
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "ToggleDM");
     }
 
     /// Override the mouse cursor of oObject for oPlayer only
@@ -658,12 +576,10 @@ namespace NWN.Core.NWNX
     /// <param name="nCursor">The cursor, one of MOUSECURSOR_*. -1 to clear the override.</param>
     public static void SetObjectMouseCursorOverride(uint oPlayer, uint oObject, int nCursor)
     {
-      const string sFunc = "SetObjectMouseCursorOverride";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(nCursor);
-      VM.NWNX.StackPush(oObject);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
+      NWNXPushInt(nCursor);
+      NWNXPushObject(oObject);
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "SetObjectMouseCursorOverride");
     }
 
     /// Override the hilite color of oObject for oPlayer only
@@ -672,12 +588,10 @@ namespace NWN.Core.NWNX
     /// <param name="nColor">The color in 0xRRGGBB format, -1 to clear the override.</param>
     public static void SetObjectHiliteColorOverride(uint oPlayer, uint oObject, int nColor)
     {
-      const string sFunc = "SetObjectHiliteColorOverride";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(nColor);
-      VM.NWNX.StackPush(oObject);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
+      NWNXPushInt(nColor);
+      NWNXPushObject(oObject);
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "SetObjectHiliteColorOverride");
     }
 
     /// Remove effects with sEffectTag from oPlayer&apos;s TURD
@@ -686,11 +600,9 @@ namespace NWN.Core.NWNX
     /// <param name="sEffectTag">The effect tag.</param>
     public static void RemoveEffectFromTURD(uint oPlayer, string sEffectTag)
     {
-      const string sFunc = "RemoveEffectFromTURD";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(sEffectTag);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
+      NWNXPushString(sEffectTag);
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "RemoveEffectFromTURD");
     }
 
     /// Set the location oPlayer will spawn when logging in to the server.
@@ -699,26 +611,17 @@ namespace NWN.Core.NWNX
     /// <param name="locSpawn">The location.</param>
     public static void SetSpawnLocation(uint oPlayer, System.IntPtr locSpawn)
     {
-      const string sFunc = "SetSpawnLocation";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      System.Numerics.Vector3 vPosition = GetPositionFromLocation(locSpawn);
-      VM.NWNX.StackPush(GetFacingFromLocation(locSpawn));
-      VM.NWNX.StackPush(vPosition.Z);
-      VM.NWNX.StackPush(vPosition.Y);
-      VM.NWNX.StackPush(vPosition.X);
-      VM.NWNX.StackPush(GetAreaFromLocation(locSpawn));
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
+      NWNXPushLocation(locSpawn);
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "SetSpawnLocation");
     }
 
     /// Resends palettes to a DM.
     /// <param name="oPlayer">- the DM to send them to.</param>
     public static void SendDMAllCreatorLists(uint oPlayer)
     {
-      const string sFunc = "SendDMAllCreatorLists";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "SendDMAllCreatorLists");
     }
 
     /// Give a custom journal entry to oPlayer.
@@ -731,22 +634,20 @@ namespace NWN.Core.NWNX
     /// will only increase if you add new entries with unique tags
     public static int AddCustomJournalEntry(uint oPlayer, JournalEntry journalEntry, int nSilentUpdate = 0)
     {
-      const string sFunc = "AddCustomJournalEntry";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(nSilentUpdate);
-      VM.NWNX.StackPush(journalEntry.nTimeOfDay);
-      VM.NWNX.StackPush(journalEntry.nCalendarDay);
-      VM.NWNX.StackPush(journalEntry.nUpdated);
-      VM.NWNX.StackPush(journalEntry.nQuestDisplayed);
-      VM.NWNX.StackPush(journalEntry.nQuestCompleted);
-      VM.NWNX.StackPush(journalEntry.nPriority);
-      VM.NWNX.StackPush(journalEntry.nState);
-      VM.NWNX.StackPush(journalEntry.sTag);
-      VM.NWNX.StackPush(journalEntry.sText);
-      VM.NWNX.StackPush(journalEntry.sName);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(nSilentUpdate);
+      NWNXPushInt(journalEntry.nTimeOfDay);
+      NWNXPushInt(journalEntry.nCalendarDay);
+      NWNXPushInt(journalEntry.nUpdated);
+      NWNXPushInt(journalEntry.nQuestDisplayed);
+      NWNXPushInt(journalEntry.nQuestCompleted);
+      NWNXPushInt(journalEntry.nPriority);
+      NWNXPushInt(journalEntry.nState);
+      NWNXPushString(journalEntry.sTag);
+      NWNXPushString(journalEntry.sText);
+      NWNXPushString(journalEntry.sName);
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "AddCustomJournalEntry");
+      return NWNXPopInt();
     }
 
     /// Returns a struct containing a journal entry that can then be modified.
@@ -758,25 +659,23 @@ namespace NWN.Core.NWNX
     /// that is the active one that the player currently sees.
     public static JournalEntry GetJournalEntry(uint oPlayer, string questTag)
     {
-      const string sFunc = "GetJournalEntry";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
       JournalEntry entry = default;
-      VM.NWNX.StackPush(questTag);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
-      entry.nUpdated = VM.NWNX.StackPopInt();
+      NWNXPushString(questTag);
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "GetJournalEntry");
+      entry.nUpdated = NWNXPopInt();
       if (entry.nUpdated==-1)
       {
         return entry;
       }
-      entry.nQuestDisplayed = VM.NWNX.StackPopInt();
-      entry.nQuestCompleted = VM.NWNX.StackPopInt();
-      entry.nPriority = VM.NWNX.StackPopInt();
-      entry.nState = VM.NWNX.StackPopInt();
-      entry.nTimeOfDay = VM.NWNX.StackPopInt();
-      entry.nCalendarDay = VM.NWNX.StackPopInt();
-      entry.sName = VM.NWNX.StackPopString();
-      entry.sText = VM.NWNX.StackPopString();
+      entry.nQuestDisplayed = NWNXPopInt();
+      entry.nQuestCompleted = NWNXPopInt();
+      entry.nPriority = NWNXPopInt();
+      entry.nState = NWNXPopInt();
+      entry.nTimeOfDay = NWNXPopInt();
+      entry.nCalendarDay = NWNXPopInt();
+      entry.sName = NWNXPopString();
+      entry.sText = NWNXPopString();
       entry.sTag = questTag;
       return entry;
     }
@@ -785,10 +684,8 @@ namespace NWN.Core.NWNX
     /// <param name="oPlayer">The player object.</param>
     public static void CloseStore(uint oPlayer)
     {
-      const string sFunc = "CloseStore";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "CloseStore");
     }
 
     /// Override nStrRef from the TlkTable with sOverride for oPlayer only.
@@ -799,23 +696,19 @@ namespace NWN.Core.NWNX
     /// @note Overrides will not persist through relogging.
     public static void SetTlkOverride(uint oPlayer, int nStrRef, string sOverride, int bRestoreGlobal = TRUE)
     {
-      const string sFunc = "SetTlkOverride";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(bRestoreGlobal);
-      VM.NWNX.StackPush(sOverride);
-      VM.NWNX.StackPush(nStrRef);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
+      NWNXPushInt(bRestoreGlobal);
+      NWNXPushString(sOverride);
+      NWNXPushInt(nStrRef);
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "SetTlkOverride");
     }
 
     /// Make the player reload it&apos;s TlkTable.
     /// <param name="oPlayer">The player.</param>
     public static void ReloadTlk(uint oPlayer)
     {
-      const string sFunc = "ReloadTlk";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "ReloadTlk");
     }
 
     /// Update wind for oPlayer only.
@@ -826,16 +719,12 @@ namespace NWN.Core.NWNX
     /// <param name="fPitch">The Wind&apos;s pitch.</param>
     public static void UpdateWind(uint oPlayer, System.Numerics.Vector3 vDirection, float fMagnitude, float fYaw, float fPitch)
     {
-      const string sFunc = "UpdateWind";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(fPitch);
-      VM.NWNX.StackPush(fYaw);
-      VM.NWNX.StackPush(fMagnitude);
-      VM.NWNX.StackPush(vDirection.X);
-      VM.NWNX.StackPush(vDirection.Y);
-      VM.NWNX.StackPush(vDirection.Z);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
+      NWNXPushFloat(fPitch);
+      NWNXPushFloat(fYaw);
+      NWNXPushFloat(fMagnitude);
+      NWNXPushVector(vDirection);
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "UpdateWind");
     }
 
     /// Update the SkyBox for oPlayer only.
@@ -843,11 +732,9 @@ namespace NWN.Core.NWNX
     /// <param name="nSkyBox">The Skybox ID.</param>
     public static void UpdateSkyBox(uint oPlayer, int nSkyBox)
     {
-      const string sFunc = "UpdateSkyBox";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(nSkyBox);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
+      NWNXPushInt(nSkyBox);
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "UpdateSkyBox");
     }
 
     /// Update Sun and Moon Fog Color for oPlayer only.
@@ -856,12 +743,10 @@ namespace NWN.Core.NWNX
     /// <param name="nMoonFogColor">The int value of Moon Fog color.</param>
     public static void UpdateFogColor(uint oPlayer, int nSunFogColor, int nMoonFogColor)
     {
-      const string sFunc = "UpdateFogColor";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(nMoonFogColor);
-      VM.NWNX.StackPush(nSunFogColor);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
+      NWNXPushInt(nMoonFogColor);
+      NWNXPushInt(nSunFogColor);
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "UpdateFogColor");
     }
 
     /// Update Sun and Moon Fog Amount for oPlayer only.
@@ -870,12 +755,10 @@ namespace NWN.Core.NWNX
     /// <param name="nMoonFogAmount">The int value of Moon Fog amount (range 0-255).</param>
     public static void UpdateFogAmount(uint oPlayer, int nSunFogAmount, int nMoonFogAmount)
     {
-      const string sFunc = "UpdateFogAmount";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(nMoonFogAmount);
-      VM.NWNX.StackPush(nSunFogAmount);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
+      NWNXPushInt(nMoonFogAmount);
+      NWNXPushInt(nSunFogAmount);
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "UpdateFogAmount");
     }
 
     /// Return&apos;s the currently-possessed game object of a player.
@@ -883,11 +766,9 @@ namespace NWN.Core.NWNX
     /// <returns>the actual game object of oPlayer, or OBJECT_INVALID on error.</returns>
     public static uint GetGameObject(uint oPlayer)
     {
-      const string sFunc = "GetGameObject";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopObject();
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "GetGameObject");
+      return NWNXPopObject();
     }
 
     /// Override the ui discovery mask of oObject for oPlayer only
@@ -896,12 +777,10 @@ namespace NWN.Core.NWNX
     /// <param name="nMask">A mask of OBJECT_UI_DISCOVERY_*, or -1 to clear the override</param>
     public static void SetObjectUiDiscoveryMaskOverride(uint oPlayer, uint oObject, int nMask)
     {
-      const string sFunc = "SetObjectUiDiscoveryMaskOverride";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(nMask);
-      VM.NWNX.StackPush(oObject);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
+      NWNXPushInt(nMask);
+      NWNXPushObject(oObject);
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "SetObjectUiDiscoveryMaskOverride");
     }
 
     /// Send a party invite from oInviter to oPlayer
@@ -911,13 +790,11 @@ namespace NWN.Core.NWNX
     /// <param name="bHideDialog">TRUE: Does not show the party invitation dialog</param>
     public static void SendPartyInvite(uint oPlayer, uint oInviter, int bForceInvite = FALSE, int bHideDialog = FALSE)
     {
-      const string sFunc = "SendPartyInvite";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(bHideDialog);
-      VM.NWNX.StackPush(bForceInvite);
-      VM.NWNX.StackPush(oInviter);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
+      NWNXPushInt(bHideDialog);
+      NWNXPushInt(bForceInvite);
+      NWNXPushObject(oInviter);
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "SendPartyInvite");
     }
 
     /// Get the TURD for oPlayer
@@ -925,36 +802,30 @@ namespace NWN.Core.NWNX
     /// <returns>the TURD object of oPlayer, or OBJECT_INVALID if no TURD exists</returns>
     public static uint GetTURD(uint oPlayer)
     {
-      const string sFunc = "GetTURD";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopObject();
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "GetTURD");
+      return NWNXPopObject();
     }
 
     /// Reloads the color palettes for oPlayer
     /// <param name="oPlayer">The player to reload the color palette for</param>
     public static void ReloadColorPalettes(uint oPlayer)
     {
-      const string sFunc = "ReloadColorPalettes";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "ReloadColorPalettes");
     }
 
     // @}
     public static void INTERNAL_StopGuiTimingBar(uint player, string script = "", int id = -1)
     {
-      int activeId = GetLocalInt(player,  "NWNX_PLAYER_GUI_TIMING_ACTIVE");
+      int activeId = GetLocalInt(player, "NWNX_PLAYER_GUI_TIMING_ACTIVE");
       if (activeId==0)
       return ;
       if (id!=-1&&id!=activeId)
       return ;
-      DeleteLocalInt(player,  "NWNX_PLAYER_GUI_TIMING_ACTIVE");
-      const string sFunc = "StopGuiTimingBar";
-      VM.NWNX.SetFunction(NWNX_Player, sFunc);
-      VM.NWNX.StackPush(player);
-      VM.NWNX.Call();
+      DeleteLocalInt(player, "NWNX_PLAYER_GUI_TIMING_ACTIVE");
+      NWNXPushObject(player);
+      NWNXCall(NWNX_Player, "StopGuiTimingBar");
       if (script!="")
       {
         ExecuteScript(script, player);

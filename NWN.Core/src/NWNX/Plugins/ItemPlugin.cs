@@ -5,6 +5,10 @@ namespace NWN.Core.NWNX
   [NWNXPlugin(NWNX_Item)]
   public class ItemPlugin
   {
+    /// @addtogroup item Item
+    /// Functions exposing additional item properties.
+    /// @{
+    /// @file nwnx_item.nss
     public const string NWNX_Item = "NWNX_Item";
 
     ///&lt; @private
@@ -14,11 +18,9 @@ namespace NWN.Core.NWNX
     /// <param name="weight">The weight, note this is in tenths of pounds.</param>
     public static void SetWeight(uint oItem, int w)
     {
-      const string sFunc = "SetWeight";
-      VM.NWNX.SetFunction(NWNX_Item, sFunc);
-      VM.NWNX.StackPush(w);
-      VM.NWNX.StackPush(oItem);
-      VM.NWNX.Call();
+      NWNXPushInt(w);
+      NWNXPushObject(oItem);
+      NWNXCall(NWNX_Item, "SetWeight");
     }
 
     /// Set an item&apos;s base value in gold pieces.
@@ -30,11 +32,9 @@ namespace NWN.Core.NWNX
     /// <param name="gold">The base gold value.</param>
     public static void SetBaseGoldPieceValue(uint oItem, int g)
     {
-      const string sFunc = "SetBaseGoldPieceValue";
-      VM.NWNX.SetFunction(NWNX_Item, sFunc);
-      VM.NWNX.StackPush(g);
-      VM.NWNX.StackPush(oItem);
-      VM.NWNX.Call();
+      NWNXPushInt(g);
+      NWNXPushObject(oItem);
+      NWNXCall(NWNX_Item, "SetBaseGoldPieceValue");
     }
 
     /// Set an item&apos;s additional value in gold pieces.
@@ -44,11 +44,9 @@ namespace NWN.Core.NWNX
     /// <param name="gold">The additional gold value.</param>
     public static void SetAddGoldPieceValue(uint oItem, int g)
     {
-      const string sFunc = "SetAddGoldPieceValue";
-      VM.NWNX.SetFunction(NWNX_Item, sFunc);
-      VM.NWNX.StackPush(g);
-      VM.NWNX.StackPush(oItem);
-      VM.NWNX.Call();
+      NWNXPushInt(g);
+      NWNXPushObject(oItem);
+      NWNXCall(NWNX_Item, "SetAddGoldPieceValue");
     }
 
     /// Get an item&apos;s base value in gold pieces.
@@ -56,11 +54,9 @@ namespace NWN.Core.NWNX
     /// <returns>The base gold piece value for the item.</returns>
     public static int GetBaseGoldPieceValue(uint oItem)
     {
-      const string sFunc = "GetBaseGoldPieceValue";
-      VM.NWNX.SetFunction(NWNX_Item, sFunc);
-      VM.NWNX.StackPush(oItem);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(oItem);
+      NWNXCall(NWNX_Item, "GetBaseGoldPieceValue");
+      return NWNXPopInt();
     }
 
     /// Get an item&apos;s additional value in gold pieces.
@@ -68,11 +64,9 @@ namespace NWN.Core.NWNX
     /// <returns>The additional gold piece value for the item.</returns>
     public static int GetAddGoldPieceValue(uint oItem)
     {
-      const string sFunc = "GetAddGoldPieceValue";
-      VM.NWNX.SetFunction(NWNX_Item, sFunc);
-      VM.NWNX.StackPush(oItem);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(oItem);
+      NWNXCall(NWNX_Item, "GetAddGoldPieceValue");
+      return NWNXPopInt();
     }
 
     /// Set an item&apos;s base item type.
@@ -82,11 +76,9 @@ namespace NWN.Core.NWNX
     /// <param name="nBaseItem">The new base item.</param>
     public static void SetBaseItemType(uint oItem, int nBaseItem)
     {
-      const string sFunc = "SetBaseItemType";
-      VM.NWNX.SetFunction(NWNX_Item, sFunc);
-      VM.NWNX.StackPush(nBaseItem);
-      VM.NWNX.StackPush(oItem);
-      VM.NWNX.Call();
+      NWNXPushInt(nBaseItem);
+      NWNXPushObject(oItem);
+      NWNXCall(NWNX_Item, "SetBaseItemType");
     }
 
     /// Make a single change to the appearance of an item.
@@ -120,14 +112,12 @@ namespace NWN.Core.NWNX
     /// <param name="bUpdateCreatureAppearance">If TRUE, also update the appearance of oItem&apos;s possessor. Only works for armor/helmets/cloaks. Will remove the item from the quickbar as side effect.</param>
     public static void SetItemAppearance(uint oItem, int nType, int nIndex, int nValue, int bUpdateCreatureAppearance = FALSE)
     {
-      const string sFunc = "SetItemAppearance";
-      VM.NWNX.SetFunction(NWNX_Item, sFunc);
-      VM.NWNX.StackPush(bUpdateCreatureAppearance);
-      VM.NWNX.StackPush(nValue);
-      VM.NWNX.StackPush(nIndex);
-      VM.NWNX.StackPush(nType);
-      VM.NWNX.StackPush(oItem);
-      VM.NWNX.Call();
+      NWNXPushInt(bUpdateCreatureAppearance);
+      NWNXPushInt(nValue);
+      NWNXPushInt(nIndex);
+      NWNXPushInt(nType);
+      NWNXPushObject(oItem);
+      NWNXCall(NWNX_Item, "SetItemAppearance");
     }
 
     /// Return a string containing the entire appearance for an item.
@@ -136,11 +126,9 @@ namespace NWN.Core.NWNX
     /// <returns>A string representing the item&apos;s appearance.</returns>
     public static string GetEntireItemAppearance(uint oItem)
     {
-      const string sFunc = "GetEntireItemAppearance";
-      VM.NWNX.SetFunction(NWNX_Item, sFunc);
-      VM.NWNX.StackPush(oItem);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopString();
+      NWNXPushObject(oItem);
+      NWNXCall(NWNX_Item, "GetEntireItemAppearance");
+      return NWNXPopString();
     }
 
     /// Restores an item&apos;s appearance using the value retrieved through NWNX_Item_GetEntireItemAppearance().
@@ -148,11 +136,9 @@ namespace NWN.Core.NWNX
     /// <param name="sApp">A string representing the item&apos;s appearance.</param>
     public static void RestoreItemAppearance(uint oItem, string sApp)
     {
-      const string sFunc = "RestoreItemAppearance";
-      VM.NWNX.SetFunction(NWNX_Item, sFunc);
-      VM.NWNX.StackPush(sApp);
-      VM.NWNX.StackPush(oItem);
-      VM.NWNX.Call();
+      NWNXPushString(sApp);
+      NWNXPushObject(oItem);
+      NWNXCall(NWNX_Item, "RestoreItemAppearance");
     }
 
     /// Get an item&apos;s base armor class
@@ -160,11 +146,9 @@ namespace NWN.Core.NWNX
     /// <returns>The base armor class.</returns>
     public static int GetBaseArmorClass(uint oItem)
     {
-      const string sFunc = "GetBaseArmorClass";
-      VM.NWNX.SetFunction(NWNX_Item, sFunc);
-      VM.NWNX.StackPush(oItem);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(oItem);
+      NWNXCall(NWNX_Item, "GetBaseArmorClass");
+      return NWNXPopInt();
     }
 
     /// Get an item&apos;s minimum level required to equip.
@@ -172,11 +156,9 @@ namespace NWN.Core.NWNX
     /// <returns>The minimum level required to equip the item.</returns>
     public static int GetMinEquipLevel(uint oItem)
     {
-      const string sFunc = "GetMinEquipLevel";
-      VM.NWNX.SetFunction(NWNX_Item, sFunc);
-      VM.NWNX.StackPush(oItem);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(oItem);
+      NWNXCall(NWNX_Item, "GetMinEquipLevel");
+      return NWNXPopInt();
     }
 
     /// Move oItem to oTarget
@@ -187,13 +169,11 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if the item was successfully moved to the target, otherwise FALSE</returns>
     public static int MoveTo(uint oItem, uint oTarget, int bHideAllFeedback = FALSE)
     {
-      const string sFunc = "MoveTo";
-      VM.NWNX.SetFunction(NWNX_Item, sFunc);
-      VM.NWNX.StackPush(bHideAllFeedback);
-      VM.NWNX.StackPush(oTarget);
-      VM.NWNX.StackPush(oItem);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(bHideAllFeedback);
+      NWNXPushObject(oTarget);
+      NWNXPushObject(oItem);
+      NWNXCall(NWNX_Item, "MoveTo");
+      return NWNXPopInt();
     }
 
     /// Set a modifier to the Minimum Level to Equip (Item Level Restriction).
@@ -204,23 +184,19 @@ namespace NWN.Core.NWNX
     /// @warning if Persistence is FALSE, or not renabled, beware characters may trigger ELC logging in with now-invalid ItemLevelRestrictions equipped.
     public static void SetMinEquipLevelModifier(uint oItem, int nModifier, int bPersist = TRUE)
     {
-      const string sFunc = "SetMinEquipLevelModifier";
-      VM.NWNX.SetFunction(NWNX_Item, sFunc);
-      VM.NWNX.StackPush(bPersist);
-      VM.NWNX.StackPush(nModifier);
-      VM.NWNX.StackPush(oItem);
-      VM.NWNX.Call();
+      NWNXPushInt(bPersist);
+      NWNXPushInt(nModifier);
+      NWNXPushObject(oItem);
+      NWNXCall(NWNX_Item, "SetMinEquipLevelModifier");
     }
 
     /// Gets the applied modifier to the Minimum Level to Equip (Item Level Restriction).
     /// <param name="oItem">The item object.</param>
     public static int GetMinEquipLevelModifier(uint oItem)
     {
-      const string sFunc = "GetMinEquipLevelModifier";
-      VM.NWNX.SetFunction(NWNX_Item, sFunc);
-      VM.NWNX.StackPush(oItem);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(oItem);
+      NWNXCall(NWNX_Item, "GetMinEquipLevelModifier");
+      return NWNXPopInt();
     }
 
     /// Set an override to the Minimum Level to Equip (Item Level Restriction).
@@ -231,23 +207,19 @@ namespace NWN.Core.NWNX
     /// @warning if Persistence is FALSE, or not renabled, beware characters may trigger ELC logging in with now-invalid ItemLevelRestrictions equipped.
     public static void SetMinEquipLevelOverride(uint oItem, int nOverride, int bPersist = TRUE)
     {
-      const string sFunc = "SetMinEquipLevelOverride";
-      VM.NWNX.SetFunction(NWNX_Item, sFunc);
-      VM.NWNX.StackPush(bPersist);
-      VM.NWNX.StackPush(nOverride);
-      VM.NWNX.StackPush(oItem);
-      VM.NWNX.Call();
+      NWNXPushInt(bPersist);
+      NWNXPushInt(nOverride);
+      NWNXPushObject(oItem);
+      NWNXCall(NWNX_Item, "SetMinEquipLevelOverride");
     }
 
     /// Gets the applied override to the Minimum Level to Equip (Item Level Restriction).
     /// <param name="oItem">The item object.</param>
     public static int GetMinEquipLevelOverride(uint oItem)
     {
-      const string sFunc = "GetMinEquipLevelOverride";
-      VM.NWNX.SetFunction(NWNX_Item, sFunc);
-      VM.NWNX.StackPush(oItem);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushObject(oItem);
+      NWNXCall(NWNX_Item, "GetMinEquipLevelOverride");
+      return NWNXPopInt();
     }
 
     // @}

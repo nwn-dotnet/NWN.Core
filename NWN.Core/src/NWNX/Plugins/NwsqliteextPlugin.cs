@@ -5,6 +5,10 @@ namespace NWN.Core.NWNX
   [NWNXPlugin(NWNX_NWSQLiteExtensions)]
   public class NwsqliteextPlugin
   {
+    /// @addtogroup nwsqliteextensions NWSQLiteExtensions
+    /// Various extensions for the game&apos;s built-in sqlite database.
+    /// @{
+    /// @file nwnx_nwsqliteext.nss
     public const string NWNX_NWSQLiteExtensions = "NWNX_NWSQLiteExtensions";
 
     ///&lt; @private
@@ -15,11 +19,11 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if the virtual table was created.</returns>
     public static int CreateVirtual2DATable(string s2DA, string sColumnTypeHints = "", string sTableName = "")
     {
-      VM.NWNX.StackPush(sTableName);
-      VM.NWNX.StackPush(sColumnTypeHints);
-      VM.NWNX.StackPush(s2DA);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushString(sTableName);
+      NWNXPushString(sColumnTypeHints);
+      NWNXPushString(s2DA);
+      NWNXCall(NWNX_NWSQLiteExtensions, "CreateVirtual2DATable");
+      return NWNXPopInt();
     }
 
     // @}

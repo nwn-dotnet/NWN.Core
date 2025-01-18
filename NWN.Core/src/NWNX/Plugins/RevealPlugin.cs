@@ -5,6 +5,10 @@ namespace NWN.Core.NWNX
   [NWNXPlugin(NWNX_Reveal)]
   public class RevealPlugin
   {
+    /// @addtogroup reveal Reveal
+    /// Allows the selective revealing of a stealthing character to another character or their party.
+    /// @{
+    /// @file nwnx_reveal.nss
     public const string NWNX_Reveal = "NWNX_Reveal";
 
     ///&lt; @private
@@ -23,12 +27,10 @@ namespace NWN.Core.NWNX
     /// <param name="iDetectionMethod">Can be specified to determine whether the hidden creature is seen or heard.</param>
     public static void RevealTo(uint oHiding, uint oObserver, int iDetectionMethod = NWNX_REVEAL_HEARD)
     {
-      const string sFunc = "RevealTo";
-      VM.NWNX.SetFunction(NWNX_Reveal, sFunc);
-      VM.NWNX.StackPush(iDetectionMethod);
-      VM.NWNX.StackPush(oObserver);
-      VM.NWNX.StackPush(oHiding);
-      VM.NWNX.Call();
+      NWNXPushInt(iDetectionMethod);
+      NWNXPushObject(oObserver);
+      NWNXPushObject(oHiding);
+      NWNXCall(NWNX_Reveal, "RevealTo");
     }
 
     /// Sets whether a character remains visible to their party through stealth.
@@ -37,12 +39,10 @@ namespace NWN.Core.NWNX
     /// <param name="iDetectionMethod">Can be specified to determine whether the hidden creature is seen or heard.</param>
     public static void SetRevealToParty(uint oHiding, int bReveal, int iDetectionMethod = NWNX_REVEAL_HEARD)
     {
-      const string sFunc = "SetRevealToParty";
-      VM.NWNX.SetFunction(NWNX_Reveal, sFunc);
-      VM.NWNX.StackPush(iDetectionMethod);
-      VM.NWNX.StackPush(bReveal);
-      VM.NWNX.StackPush(oHiding);
-      VM.NWNX.Call();
+      NWNXPushInt(iDetectionMethod);
+      NWNXPushInt(bReveal);
+      NWNXPushObject(oHiding);
+      NWNXCall(NWNX_Reveal, "SetRevealToParty");
     }
 
     // @}

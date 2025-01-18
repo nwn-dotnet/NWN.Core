@@ -5,6 +5,10 @@ namespace NWN.Core.NWNX
   [NWNXPlugin(NWNX_Feat)]
   public class FeatPlugin
   {
+    /// @addtogroup feat Feat
+    /// Define feat bonuses/penalties
+    /// @{
+    /// @file nwnx_feat.nss
     public const string NWNX_Feat = "NWNX_Feat";
 
     ///&lt; @private
@@ -51,15 +55,13 @@ namespace NWN.Core.NWNX
     /// <param name="iParam1,">iParam2, iParam3, iParam4 The parameters for this feat modifier.</param>
     public static void SetFeatModifier(int iFeat, int iMod, int iParam1 = -559038737, int iParam2 = -559038737, int iParam3 = -559038737, int iParam4 = -559038737)
     {
-      const string sFunc = "SetFeatModifier";
-      VM.NWNX.SetFunction(NWNX_Feat, sFunc);
-      VM.NWNX.StackPush(iParam4);
-      VM.NWNX.StackPush(iParam3);
-      VM.NWNX.StackPush(iParam2);
-      VM.NWNX.StackPush(iParam1);
-      VM.NWNX.StackPush(iMod);
-      VM.NWNX.StackPush(iFeat);
-      VM.NWNX.Call();
+      NWNXPushInt(iParam4);
+      NWNXPushInt(iParam3);
+      NWNXPushInt(iParam2);
+      NWNXPushInt(iParam1);
+      NWNXPushInt(iMod);
+      NWNXPushInt(iFeat);
+      NWNXCall(NWNX_Feat, "SetFeatModifier");
     }
 
     // @}

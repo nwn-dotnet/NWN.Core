@@ -5,6 +5,10 @@ namespace NWN.Core.NWNX
   [NWNXPlugin(NWNX_Appearance)]
   public class AppearancePlugin
   {
+    /// @addtogroup appearance Appearance
+    /// Allows the appearance and some other things of creatures to be overridden per player.
+    /// @{
+    /// @file nwnx_appearance.nss
     public const string NWNX_Appearance = "NWNX_Appearance";
 
     ///&lt; @private
@@ -58,13 +62,11 @@ namespace NWN.Core.NWNX
     /// <param name="nValue">The new value for the appearance type.</param>
     public static void SetOverride(uint oPlayer, uint oCreature, int nType, int nValue)
     {
-      const string sFunc = "SetOverride";
-      VM.NWNX.SetFunction(NWNX_Appearance, sFunc);
-      VM.NWNX.StackPush(nValue);
-      VM.NWNX.StackPush(nType);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
+      NWNXPushInt(nValue);
+      NWNXPushInt(nType);
+      NWNXPushObject(oCreature);
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Appearance, "SetOverride");
     }
 
     /// Get a creature&apos;s appearance type for a player.
@@ -74,13 +76,11 @@ namespace NWN.Core.NWNX
     /// <returns>The value for the appearance type or -1 when not set.</returns>
     public static int GetOverride(uint oPlayer, uint oCreature, int nType)
     {
-      const string sFunc = "GetOverride";
-      VM.NWNX.SetFunction(NWNX_Appearance, sFunc);
-      VM.NWNX.StackPush(nType);
-      VM.NWNX.StackPush(oCreature);
-      VM.NWNX.StackPush(oPlayer);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushInt(nType);
+      NWNXPushObject(oCreature);
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Appearance, "GetOverride");
+      return NWNXPopInt();
     }
 
     // @}
