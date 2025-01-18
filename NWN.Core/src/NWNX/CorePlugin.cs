@@ -1,3 +1,5 @@
+using static NWN.Core.NWScript;
+
 namespace NWN.Core.NWNX
 {
   [NWNXPlugin(NWNX_Core)]
@@ -11,11 +13,9 @@ namespace NWN.Core.NWNX
     /// <returns>TRUE if the plugin exists and is enabled, otherwise FALSE.</returns>
     public static int PluginExists(string sPlugin)
     {
-      const string sFunc = "PluginExists";
-      VM.NWNX.SetFunction(NWNX_Core, sFunc);
-      VM.NWNX.StackPush(sPlugin);
-      VM.NWNX.Call();
-      return VM.NWNX.StackPopInt();
+      NWNXPushString(sPlugin);
+      NWNXCall(NWNX_Core, "PluginExists");
+      return NWNXPopInt();
     }
   }
 }
