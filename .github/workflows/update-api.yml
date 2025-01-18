@@ -102,9 +102,9 @@ jobs:
 
       - name: Convert
         run: |
-          su -c "rm -fv ${GITHUB_WORKSPACE}/repo/src/NWNX/Plugins/*"
-          dotnet /app/Nss2CSharp.dll "${GITHUB_WORKSPACE}/scripts/nwn" "${GITHUB_WORKSPACE}/repo/src/NWN" "${GITHUB_WORKSPACE}/scripts/nwnx" "${GITHUB_WORKSPACE}/repo/src/NWNX/Plugins"
-          if [ -z "$(ls -A ${GITHUB_WORKSPACE}/repo/src/NWNX/Plugins)" ]; then
+          su -c "rm -fv ${GITHUB_WORKSPACE}/repo/NWN.Core/src/NWNX/Plugins/*"
+          dotnet /app/Nss2CSharp.dll "${GITHUB_WORKSPACE}/scripts/nwn" "${GITHUB_WORKSPACE}/repo/NWN.Core/src/NWN" "${GITHUB_WORKSPACE}/scripts/nwnx" "${GITHUB_WORKSPACE}/repo/NWN.Core/src/NWNX/Plugins"
+          if [ -z "$(ls -A ${GITHUB_WORKSPACE}/repo/NWN.Core/src/NWNX/Plugins)" ]; then
             exit 1
           fi
 
