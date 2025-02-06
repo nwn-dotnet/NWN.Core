@@ -815,6 +815,16 @@ namespace NWN.Core.NWNX
       NWNXCall(NWNX_Player, "ReloadColorPalettes");
     }
 
+    /// Get the current open store of oPlayer.
+    /// <param name="oPlayer">The player.</param>
+    /// <returns>The open store or OBJECT_INVALID if no store is open.</returns>
+    public static uint GetOpenStore(uint oPlayer)
+    {
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "GetOpenStore");
+      return NWNXPopObject();
+    }
+
     // @}
     public static void INTERNAL_StopGuiTimingBar(uint player, string script = "", int id = -1)
     {
