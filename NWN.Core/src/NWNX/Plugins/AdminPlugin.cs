@@ -289,7 +289,7 @@ namespace NWN.Core.NWNX
     ///
     /// <param name="playerName">The community (login name).</param>
     /// <param name="characterName">The character name.</param>
-    /// <returns>Returns TRUE if successful</returns>
+    /// <returns>Returns TRUE if successful.</returns>
     public static int DeleteTURD(string playerName, string characterName)
     {
       NWNXPushString(characterName);
