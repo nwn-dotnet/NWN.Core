@@ -1937,6 +1937,33 @@ namespace NWN.Core.NWNX
       NWNXCall(NWNX_Creature, "SetMulticlassLimit");
     }
 
+    /// Gets the creature&apos;s number of bonus spells.
+    /// <param name="oCreature">The creature object.</param>
+    /// <param name="nMultiClass">The character class position, starting at 0.</param>
+    /// <param name="nSpellLevel">The spell level, 0 to 9.</param>
+    public static int GetNumberOfBonusSpells(uint oCreature, int nMultiClass, int nSpellLevel)
+    {
+      NWNXPushInt(nSpellLevel);
+      NWNXPushInt(nMultiClass);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "GetNumberOfBonusSpells");
+      return NWNXPopInt();
+    }
+
+    /// Modifies the creature&apos;s number of bonus spells.
+    /// <param name="oCreature">The creature object.</param>
+    /// <param name="nMultiClass">The character class position, starting at 0.</param>
+    /// <param name="nSpellLevel">The spell level, 0 to 9.</param>
+    /// <param name="nDelta">The value to change the number of bonus spells by. Can be negative.</param>
+    public static void ModifyNumberBonusSpells(uint oCreature, int nMultiClass, int nSpellLevel, int nDelta)
+    {
+      NWNXPushInt(nDelta);
+      NWNXPushInt(nSpellLevel);
+      NWNXPushInt(nMultiClass);
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Creature, "ModifyNumberBonusSpells");
+    }
+
     // @}
   }
 
