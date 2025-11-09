@@ -131,8 +131,8 @@ namespace NWN.Core.NWNX
       NWNXCall(NWNX_SQL, "PreparedNULL");
     }
 
-    /// Set the Json value of a prepared statement at given position. 
-    /// Convienence function to match other Prepared(type) functions.
+    /// Set the Json value of a prepared statement at given position.
+    /// Convenience function to match other Prepared(type) functions.
     /// <param name="position">The nth ? in a prepared statement.</param>
     /// <param name="value">The value to set.</param>
     public static void PreparedJson(int position, System.IntPtr value)
@@ -198,7 +198,7 @@ namespace NWN.Core.NWNX
       return NWNXPopString();
     }
 
-    /// Gets the number of parameteres expected by a prepared query.
+    /// Gets the number of parameters expected by a prepared query.
     /// <returns>Returns the number of parameters expected by the prepared query or -1 if no query is prepared.</returns>
     public static int GetPreparedQueryParamCount()
     {

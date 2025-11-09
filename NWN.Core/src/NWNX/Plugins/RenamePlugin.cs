@@ -62,7 +62,7 @@ namespace NWN.Core.NWNX
 
     /// Clears an overridden PC Name.
     /// <param name="oTarget">The PC whose overridden name to clear, use OBJECT_INVALID if you&apos;re clearing all overrides for an observer.</param>
-    /// <param name="oObserver">The observer whose overriden name of oTarget is being cleared.</param>
+    /// <param name="oObserver">The observer whose overridden name of oTarget is being cleared.</param>
     /// If oTarget is OBJECT_INVALID then all overrides are cleared.
     /// <param name="clearAll">If true, both the global and personal overrides will be cleared for that target PC.</param>
     /// Requires oObserver be OBJECT_INVALID.

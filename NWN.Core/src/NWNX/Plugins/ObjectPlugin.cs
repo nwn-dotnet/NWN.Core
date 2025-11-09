@@ -507,7 +507,7 @@ namespace NWN.Core.NWNX
     /// Checks for specific spell immunity. Should only be called in spellscripts
     /// <param name="oDefender">The object defending against the spell.</param>
     /// <param name="oCaster">The object casting the spell.</param>
-    /// <param name="nSpellId">The casted spell id. Default value is -1, which corrresponds to the normal game behaviour.</param>
+    /// <param name="nSpellId">The casted spell id. Default value is -1, which corresponds to the normal game behaviour.</param>
     /// <returns>-1 if defender has no immunity, 2 if the defender is immune</returns>
     public static int DoSpellImmunity(uint oDefender, uint oCaster, int nSpellId = -1)
     {
@@ -521,9 +521,9 @@ namespace NWN.Core.NWNX
     /// Checks for spell school/level immunities and mantles. Should only be called in spellscripts
     /// <param name="oDefender">The object defending against the spell.</param>
     /// <param name="oCaster">The object casting the spell.</param>
-    /// <param name="nSpellId">The casted spell id. Default value is -1, which corrresponds to the normal game behaviour.</param>
-    /// <param name="nSpellLevel">The level of the casted spell. Default value is -1, which corrresponds to the normal game behaviour.</param>
-    /// <param name="nSpellSchool">The school of the casted spell (SPELL_SCHOOL_* constant). Default value is -1, which corrresponds to the normal game behaviour.</param>
+    /// <param name="nSpellId">The casted spell id. Default value is -1, which corresponds to the normal game behaviour.</param>
+    /// <param name="nSpellLevel">The level of the casted spell. Default value is -1, which corresponds to the normal game behaviour.</param>
+    /// <param name="nSpellSchool">The school of the casted spell (SPELL_SCHOOL_* constant). Default value is -1, which corresponds to the normal game behaviour.</param>
     /// <returns>-1 defender no immunity. 2 if immune. 3 if immune, but the immunity has a limit (example: mantles)</returns>
     public static int DoSpellLevelAbsorption(uint oDefender, uint oCaster, int nSpellId = -1, int nSpellLevel = -1, int nSpellSchool = -1)
     {

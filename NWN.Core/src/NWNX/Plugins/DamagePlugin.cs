@@ -172,6 +172,7 @@ namespace NWN.Core.NWNX
       data.iAttackType = NWNXPopInt();
       data.iToHitRoll = NWNXPopInt();
       data.iToHitModifier = NWNXPopInt();
+      data.bRangedAttack = NWNXPopInt();
       return data;
     }
 
@@ -345,8 +346,9 @@ namespace NWN.Core.NWNX
     public int iAttackResult;
     public int iWeaponAttackType;
     public int iSneakAttack;
-    public int iAttackType;
+    public int bRangedAttack;
     public int bKillingBlow;
+    public int iAttackType;
     public int iToHitRoll;
     public int iToHitModifier;
   }

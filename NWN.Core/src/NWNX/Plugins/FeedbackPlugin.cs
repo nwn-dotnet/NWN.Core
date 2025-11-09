@@ -108,7 +108,7 @@ namespace NWN.Core.NWNX
     public const int NWNX_FEEDBACK_SKILL_HEAL_VALID_TARGETS = 56;
     public const int NWNX_FEEDBACK_SKILL_STEALTH_IN_COMBAT = 60;
 
-    /// Miscellaneous Targetting Messages
+    /// Miscellaneous Targeting Messages
     public const int NWNX_FEEDBACK_TARGET_UNAWARE = 6;
     public const int NWNX_FEEDBACK_ACTION_NOT_POSSIBLE_STATUS = 7;
     public const int NWNX_FEEDBACK_ACTION_NOT_POSSIBLE_PVP = 187;

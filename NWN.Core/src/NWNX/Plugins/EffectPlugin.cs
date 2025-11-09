@@ -107,7 +107,7 @@ namespace NWN.Core.NWNX
       return NWNXPopInt();
     }
 
-    /// Applys an effect, bypassing any processing done by ApplyEffectToObject
+    /// Applies an effect, bypassing any processing done by ApplyEffectToObject
     /// <param name="eEffect">The effect to be applied.</param>
     /// <param name="oObject">The object to apply it to.</param>
     public static void Apply(System.IntPtr eEffect, uint oObject)

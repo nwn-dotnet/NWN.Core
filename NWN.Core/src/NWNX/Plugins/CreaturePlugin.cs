@@ -570,7 +570,7 @@ namespace NWN.Core.NWNX
     }
 
     /// Set the ranks in a skill for creature assigned at a level.
-    /// @note It only affect the leveling array, to know what to do on level-down. To effectivly change the skill rank on the current level, NWNX_Creature_SetSkillRank is also needed.
+    /// @note It only affect the leveling array, to know what to do on level-down. To effectively change the skill rank on the current level, NWNX_Creature_SetSkillRank is also needed.
     /// <param name="creature">The creature object.</param>
     /// <param name="skill">The skill id.</param>
     /// <param name="level">The level they gained skill ranks.</param>
@@ -1180,7 +1180,7 @@ namespace NWN.Core.NWNX
     /// Gets the critical hit multiplier modifier for the Creature
     /// <param name="oCreature">The target creature</param>
     /// <param name="nHand">0 for all attacks, 1 for Mainhand, 2 for Offhand</param>
-    /// <param name="nBaseItem">The baseitem modifer to retrieve. BASE_ITEM_GLOVES for Unarmed, &apos;-1&apos; for all</param>
+    /// <param name="nBaseItem">The baseitem modifier to retrieve. BASE_ITEM_GLOVES for Unarmed, &apos;-1&apos; for all</param>
     /// <returns>the current critical hit multiplier modifier for the creature</returns>
     public static int GetCriticalMultiplierModifier(uint oCreature, int nHand = 0, int nBaseItem = -1)
     {
@@ -1242,7 +1242,7 @@ namespace NWN.Core.NWNX
     /// Gets the critical hit range modifier for the creature.
     /// <param name="oCreature">The target creature</param>
     /// <param name="nHand">0 for all attacks, 1 for Mainhand, 2 for Offhand</param>
-    /// <param name="nBaseItem">The baseitem modifer to retrieve. BASE_ITEM_GLOVES for Unarmed, &apos;-1&apos; for all</param>
+    /// <param name="nBaseItem">The baseitem modifier to retrieve. BASE_ITEM_GLOVES for Unarmed, &apos;-1&apos; for all</param>
     /// <returns>the current critical hit range modifier for the creature</returns>
     public static int GetCriticalRangeModifier(uint oCreature, int nHand = 0, int nBaseItem = -1)
     {

@@ -118,7 +118,7 @@ namespace NWN.Core.NWNX
       NWNXCall(NWNX_Area, "SetAreaSpotModifier");
     }
 
-    /// Get the listen modifer of area
+    /// Get the listen modifier of area
     /// <param name="area">The area object.</param>
     /// <returns>The value of the Listen skill modifier for this area.</returns>
     public static int GetAreaListenModifier(uint area)
@@ -626,7 +626,7 @@ namespace NWN.Core.NWNX
 
     /// Set the default discoverability mask for objects in an area.
     /// <param name="oArea">The area or OBJECT_INVALID to set a global mask for all areas. Per area masks will override the global mask.</param>
-    /// <param name="nObjectTypes">A mask of OBJECT_TYPE_* constants or OBJECT_TYPE_ALL for all suitable object types. Currently only works on Creatures, Doors (Hilite only), Items and Useable Placeables.</param>
+    /// <param name="nObjectTypes">A mask of OBJECT_TYPE_* constants or OBJECT_TYPE_ALL for all suitable object types. Currently only works on Creatures, Doors (Hilite only), Items and Usable Placeables.</param>
     /// <param name="nMask">A mask of OBJECT_UI_DISCOVERY_*</param>
     /// <param name="bForceUpdate">If TRUE, will update the discovery mask of ALL objects in the area or module(if oArea == OBJECT_INVALID), according to the current mask. Use with care.</param>
     public static void SetDefaultObjectUiDiscoveryMask(uint oArea, int nObjectTypes, int nMask, int bForceUpdate = FALSE)
