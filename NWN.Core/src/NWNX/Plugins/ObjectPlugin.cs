@@ -780,6 +780,40 @@ namespace NWN.Core.NWNX
       NWNXCall(NWNX_Object, sFunc);
     }
 
+    /// Return the description of the object for nLanguage.
+    /// <param name="oObject">an object</param>
+    /// <param name="nLanguage">A PLAYER_LANGUAGE constant.</param>
+    /// <param name="nGender">Gender to use, 0 or 1.</param>
+    /// <returns>The localized string.</returns>
+    /// <param name="bIdentified"> Only for items, identified description or not</param>
+    public static string GetLocalizedDescription(uint oObject, int nLanguage, int nGender = 0, int bIdentified = 1)
+    {
+      const string sFunc = "GetLocalizedDescription";
+      NWNXPushInt(bIdentified);
+      NWNXPushInt(nGender);
+      NWNXPushInt(nLanguage);
+      NWNXPushObject(oObject);
+      NWNXCall(NWNX_Object, sFunc);
+      return NWNXPopString();
+    }
+
+    /// Set the description of the object as set in the toolset for nLanguage.
+    /// <param name="oObject">an object</param>
+    /// <param name="sDescription">New value to set</param>
+    /// <param name="nLanguage">A PLAYER_LANGUAGE constant.</param>
+    /// <param name="nGender">Gender to use, 0 or 1.</param>
+    /// <param name="bIdentified">Only for items, identified description or not</param>
+    public static void SetLocalizedDescription(uint oObject, string sDescription, int nLanguage, int nGender = 0, int bIdentified = 1)
+    {
+      const string sFunc = "SetLocalizedDescription";
+      NWNXPushInt(bIdentified);
+      NWNXPushInt(nGender);
+      NWNXPushInt(nLanguage);
+      NWNXPushString(sDescription);
+      NWNXPushObject(oObject);
+      NWNXCall(NWNX_Object, sFunc);
+    }
+
     // @}
   }
 

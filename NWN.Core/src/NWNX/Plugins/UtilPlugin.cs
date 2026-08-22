@@ -492,6 +492,28 @@ namespace NWN.Core.NWNX
       return NWNXPopInt();
     }
 
+    /// Set the starting location.
+    /// <param name="sResRef">ResRef of area.</param>
+    /// <param name="locLocation">The location to move the starting point to.</param>
+    /// <param name="vDirection"> Direction of starting point.</param>
+    /// <returns>TRUE if successful, FALSE on error.</returns>
+    public static int SetStartingLocation(string sResRef, System.IntPtr locLocation, System.Numerics.Vector3 vDirection)
+    {
+      NWNXPushVector(vDirection);
+      NWNXPushLocation(locLocation);
+      NWNXPushString(sResRef);
+      NWNXCall(NWNX_Util, "SetStartingLocation");
+      return NWNXPopInt();
+    }
+
+    /// Print a string with no log decorations.
+    /// <param name="sString">String to print</param>
+    public static void RawPrint(string sString)
+    {
+      NWNXPushString(sString);
+      NWNXCall(NWNX_Util, "RawPrint");
+    }
+
     // @}
   }
 

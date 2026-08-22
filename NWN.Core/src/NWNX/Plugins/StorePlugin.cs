@@ -94,6 +94,26 @@ namespace NWN.Core.NWNX
       return NWNXPopInt();
     }
 
+    /// Return the black market status
+    /// <param name="oStore">The store object.</param>
+    /// <returns>status, -1 on error</returns>
+    public static int GetBlackMarket(uint oStore)
+    {
+      NWNXPushObject(oStore);
+      NWNXCall(NWNX_Store, "GetBlackMarket");
+      return NWNXPopInt();
+    }
+
+    /// Set the black market status
+    /// <param name="oStore">The store object.</param>
+    /// <param name="nValue">TRUE/FALSE.</param>
+    public static void SetBlackMarket(uint oStore, int nValue)
+    {
+      NWNXPushInt(nValue);
+      NWNXPushObject(oStore);
+      NWNXCall(NWNX_Store, "SetBlackMarket");
+    }
+
     // @}
   }
 }
