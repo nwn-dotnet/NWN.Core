@@ -755,7 +755,7 @@ namespace NWN.Core.NWNX
         ITEM_OBJECT_ID        | object | Convert to object with StringToObject() |
         ITEM_PROPERTY_INDEX   | int    | |
         MOVE_TO_TARGET        | int    | |
-        ACTION_RESULT         | int    | |
+        ACTION_RESULT         | int    | ACTION_IN_PROGRESS=1, ACTION_COMPLETE=2, ACTION_FAILED=3 |
     
     _______________________________________
         ## Healing Events
@@ -2344,6 +2344,14 @@ namespace NWN.Core.NWNX
       return NWNXPopString();
     }
 
+    /// Returns true if the event data tag exists for the currently executing script.
+    public static int PeekEventData(string tag)
+    {
+      NWNXPushString(tag);
+      NWNXCall(NWNX_Events, "PeekEventData");
+      return NWNXPopInt();
+    }
+
     /// Skips execution of the currently executing event.
     /// If this is a NWNX event, that means that the base function call won&apos;t be called.
     /// This won&apos;t impact any other subscribers, nor dispatch for before / after functions.
@@ -2460,6 +2468,15 @@ namespace NWN.Core.NWNX
       NWNXPushString(sScriptOrChunk);
       NWNXPushString(sEvent);
       NWNXCall(NWNX_Events, "RemoveObjectFromDispatchList");
+    }
+
+    /// Remove oObject from the dispatch list of every event.
+    /// <param name="oObject">The object to remove.</param>
+    /// @note The lists themselves stay enabled, they just no longer contain oObject.
+    public static void RemoveObjectFromAllDispatchLists(uint oObject)
+    {
+      NWNXPushObject(oObject);
+      NWNXCall(NWNX_Events, "RemoveObjectFromAllDispatchLists");
     }
 
     /// Toggle the whitelisting of IDs for sEvent. If whitelisting is enabled, the event will only fire for IDs that are

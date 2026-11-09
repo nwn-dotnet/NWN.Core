@@ -281,9 +281,11 @@ namespace NWN.Core.NWNX
       return NWNXPopInt();
     }
 
-    /// Sets the base AC for the creature.
+    /// Sets the base AC of a creature.
     /// <param name="creature">The creature object.</param>
-    /// <param name="ac">The base AC to set for the creature.</param>
+    /// <param name="ac">The base AC to set.</param>
+    /// @note While polymorphed, the engine uses a separate variable for AC calculation.
+    /// Use NWNX_Creature_SetBaseACPolymorph() when the creature is polymorphed.
     public static void SetBaseAC(uint creature, int ac)
     {
       NWNXPushInt(ac);
@@ -291,13 +293,37 @@ namespace NWN.Core.NWNX
       NWNXCall(NWNX_Creature, "SetBaseAC");
     }
 
-    /// Get the base AC for the creature.
+    /// Gets the base AC of a creature.
     /// <param name="creature">The creature object.</param>
     /// <returns>The base AC.</returns>
+    /// @note While polymorphed, the engine uses a separate variable for AC calculation.
+    /// Use NWNX_Creature_GetBaseACPolymorph() when the creature is polymorphed.
     public static int GetBaseAC(uint creature)
     {
       NWNXPushObject(creature);
       NWNXCall(NWNX_Creature, "GetBaseAC");
+      return NWNXPopInt();
+    }
+
+    /// Sets the AC of a polymorphed creature.
+    /// <param name="creature">The creature object.</param>
+    /// <param name="ac">The AC to set.</param>
+    /// @note This value is only used by the engine when the creature is polymorphed.
+    public static void SetBaseACPolymorph(uint creature, int ac)
+    {
+      NWNXPushInt(ac);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetBaseACPolymorph");
+    }
+
+    /// Gets the AC of a polymorphed creature.
+    /// <param name="creature">The creature object.</param>
+    /// <returns>The polymorph AC.</returns>
+    /// @note This value is only used by the engine when the creature is polymorphed.
+    public static int GetBaseACPolymorph(uint creature)
+    {
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetBaseACPolymorph");
       return NWNXPopInt();
     }
 
@@ -399,7 +425,7 @@ namespace NWN.Core.NWNX
     /// <param name="creature">The creature object.</param>
     /// <param name="class">The class id from classes.2da. (Not class index 0-2)</param>
     /// <param name="level">The spell level.</param>
-    /// <param name="spellId">The spell to remove.</param>
+    /// <param name="spellId">The spell to add.</param>
     public static void AddKnownSpell(uint creature, int @class, int level, int spellId)
     {
       NWNXPushInt(spellId);

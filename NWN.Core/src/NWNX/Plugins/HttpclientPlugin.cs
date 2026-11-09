@@ -52,6 +52,9 @@ namespace NWN.Core.NWNX
     /// <returns>A unique identifier for the request for later access in the REQUEST_ID event data.</returns>
     public static int SendRequest(Request s)
     {
+      NWNXPushString(s.sCustom3);
+      NWNXPushString(s.sCustom2);
+      NWNXPushString(s.sCustom1);
       NWNXPushString(s.sHeaders);
       NWNXPushInt(s.nPort);
       NWNXPushString(s.sAuthPassword);
@@ -86,6 +89,9 @@ namespace NWN.Core.NWNX
       s.sAuthPassword = NWNXPopString();
       s.nPort = NWNXPopInt();
       s.sHeaders = NWNXPopString();
+      s.sCustom1 = NWNXPopString();
+      s.sCustom2 = NWNXPopString();
+      s.sCustom3 = NWNXPopString();
       return s;
     }
 
@@ -96,6 +102,9 @@ namespace NWN.Core.NWNX
   {
     public int nRequestMethod;
     public string sTag;
+    public string sCustom1;
+    public string sCustom2;
+    public string sCustom3;
     public string sHost;
     public string sPath;
     public string sData;
