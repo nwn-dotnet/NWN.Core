@@ -358,6 +358,33 @@ namespace NWN.Core.NWNX
       NWNXCall(NWNX_Administration, "SetMaxLevel");
     }
 
+    /// Get the NWSync manifest hash the server advertises.
+    /// <returns>The hash, or &quot;&quot; if NWSync isn&apos;t advertised.</returns>
+    public static string GetNWSyncAdvertHash()
+    {
+      NWNXCall(NWNX_Administration, "GetNWSyncAdvertHash");
+      return NWNXPopString();
+    }
+
+    /// Get the NWSync URL the server advertises.
+    /// <returns>The URL, or &quot;&quot; if NWSync isn&apos;t advertised.</returns>
+    public static string GetNWSyncAdvertUrl()
+    {
+      NWNXCall(NWNX_Administration, "GetNWSyncAdvertUrl");
+      return NWNXPopString();
+    }
+
+    /// Set the NWSync manifest and URL the server advertises, without a restart.
+    /// @note Only clients that connect afterwards sync to it. Additional manifests are dropped.
+    /// <param name="sHash">The manifest&apos;s SHA1 hash, or &quot;&quot; to stop advertising NWSync.</param>
+    /// <param name="sUrl">The NWSync repository URL, or &quot;&quot; to stop advertising NWSync.</param>
+    public static void SetNWSyncAdvert(string sHash, string sUrl)
+    {
+      NWNXPushString(sUrl);
+      NWNXPushString(sHash);
+      NWNXCall(NWNX_Administration, "SetNWSyncAdvert");
+    }
+
     // @}
   }
 }
