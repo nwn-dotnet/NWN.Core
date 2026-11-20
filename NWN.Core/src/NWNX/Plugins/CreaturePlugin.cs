@@ -496,6 +496,8 @@ namespace NWN.Core.NWNX
 
     /// Sets the creature&apos;s current movement rate factor.
     /// @note Base movement rate factor is 1.0.
+    /// @note The engine resets this whenever movement speed effects or encumbrance change.
+    /// For a lasting change use NWNX_Creature_SetMovementRateFactorModifier().
     /// <param name="creature">The creature object.</param>
     /// <param name="rate">The rate to set.</param>
     public static void SetMovementRateFactor(uint creature, float factor)
@@ -525,6 +527,28 @@ namespace NWN.Core.NWNX
       NWNXPushFloat(cap);
       NWNXPushObject(creature);
       NWNXCall(NWNX_Creature, "SetMovementRateFactorCap");
+    }
+
+    /// Returns the creature&apos;s movement rate factor modifier.
+    /// <param name="creature">The creature object.</param>
+    /// <returns>The modifier, 1.0 if not set.</returns>
+    public static float GetMovementRateFactorModifier(uint creature)
+    {
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "GetMovementRateFactorModifier");
+      return NWNXPopFloat();
+    }
+
+    /// Multiplies the creature&apos;s movement rate factor by modifier.
+    /// @note Applied after the engine&apos;s own factor (effects, encumbrance, monk/barbarian speed and caps),
+    /// so it keeps working when those change. 1.0 removes it.
+    /// <param name="creature">The creature object.</param>
+    /// <param name="modifier">The modifier, greater than 0.0.</param>
+    public static void SetMovementRateFactorModifier(uint creature, float modifier)
+    {
+      NWNXPushFloat(modifier);
+      NWNXPushObject(creature);
+      NWNXCall(NWNX_Creature, "SetMovementRateFactorModifier");
     }
 
     /// Returns the creature&apos;s current movement type

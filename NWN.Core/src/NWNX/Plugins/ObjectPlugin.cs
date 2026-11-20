@@ -89,6 +89,27 @@ namespace NWN.Core.NWNX
       return var;
     }
 
+    /// Gets all local variables of an object in one call.
+    /// <param name="oObject">The object.</param>
+    /// <param name="nTypeFilter">Only return variables of this @ref object_localvar_types &quot;type&quot;, or -1 for all types.</param>
+    /// <param name="sPrefix">Only return variables whose name starts with this (case-sensitive), or &quot;&quot; for all names.</param>
+    /// @note A name holding values of more than one type (e.g. both a local int and a local string)
+    ///       appears once for each type.
+    /// @note Like NWNX_Object_GetLocalVariable(), a variable holding the default value for its type
+    ///       (0/0.0/&quot;&quot;/OBJECT_INVALID/JsonNull()) is not set and is not returned; cassowary variables
+    ///       are returned with type NWNX_OBJECT_LOCALVAR_TYPE_UNKNOWN. The order is unspecified.
+    /// @note Reads the variable table directly, so it is far cheaper than looping over
+    ///       NWNX_Object_GetLocalVariable(), which takes O(n) time per call.
+    /// <returns>A json array of objects {&quot;key&quot;: string, &quot;type&quot;: int}, an empty array if oObject is invalid.</returns>
+    public static System.IntPtr GetLocalVariables(uint oObject, int nTypeFilter = -1, string sPrefix = "")
+    {
+      NWNXPushString(sPrefix);
+      NWNXPushInt(nTypeFilter);
+      NWNXPushObject(oObject);
+      NWNXCall(NWNX_Object, "GetLocalVariables");
+      return NWNXPopJson();
+    }
+
     /// Set oObject&apos;s position.
     /// <param name="oObject">The object.</param>
     /// <param name="vPosition">A vector position.</param>

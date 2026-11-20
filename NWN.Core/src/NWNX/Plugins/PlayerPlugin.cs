@@ -51,6 +51,21 @@ namespace NWN.Core.NWNX
     public const int NWNX_PLAYER_PLATFORM_SONY_PS4 = 70;
 
     // @}
+    /// @name Reload Resources Flags
+    /// @anchor reload_resources_flags
+    ///
+    /// Flags for NWNX_Player_ReloadResources(), combine them with |.
+    /// @{
+    /// Rebuild all cached textures and materials, as the client does when joining a module. Expect a short hitch.
+    public const int NWNX_PLAYER_RELOAD_RESOURCES_TEXTURES = 0x2;
+
+    /// Reload the mouse cursors.
+    public const int NWNX_PLAYER_RELOAD_RESOURCES_CURSORS = 0x4;
+
+    /// Reload the NUI skin (nui_skin.tml, its images and fonts) on the next frame, as a GUI scale change does.
+    public const int NWNX_PLAYER_RELOAD_RESOURCES_NUI_SKIN = 0x200;
+
+    // @}
     /// Force display placeable examine window for player
     /// @note If used on a placeable in a different area than the player, the portrait will not be shown.
     /// <param name="player">The player object.</param>
@@ -823,6 +838,17 @@ namespace NWN.Core.NWNX
       NWNXPushObject(oPlayer);
       NWNXCall(NWNX_Player, "GetOpenStore");
       return NWNXPopObject();
+    }
+
+    /// Make oPlayer&apos;s client reload some of its cached resources.
+    /// @note Use after SetTextureOverride() or NWNX_Player_SetResManOverride() to show the new resources without a relog.
+    /// <param name="oPlayer">The player.</param>
+    /// <param name="nFlags">One or more @ref reload_resources_flags &quot;NWNX_PLAYER_RELOAD_RESOURCES_*&quot; flags combined with |.</param>
+    public static void ReloadResources(uint oPlayer, int nFlags)
+    {
+      NWNXPushInt(nFlags);
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Player, "ReloadResources");
     }
 
     // @}

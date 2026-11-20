@@ -31,6 +31,22 @@ namespace NWN.Core.NWNX
       return NWNXPopInt();
     }
 
+    /// Set the number of creatures in the encounter list
+    /// @note Existing entries are kept up to the new size. New entries are empty
+    /// and must be set with NWNX_Encounter_SetEncounterCreatureByIndex().
+    /// @note The list is sorted by challenge rating, highest first, so shrinking it
+    /// removes the weakest creatures.
+    /// @note After inserting creatures with NWNX_Encounter_SetEncounterCreatureByIndex,
+    /// calling this function with the current size is recommended to ensure array is sorted.
+    /// <param name="encounter">The encounter object.</param>
+    /// <param name="count">The new number of creatures in the encounter list, 0 or more.</param>
+    public static void SetNumberOfCreaturesInEncounterList(uint oEncounter, int nCount)
+    {
+      NWNXPushInt(nCount);
+      NWNXPushObject(oEncounter);
+      NWNXCall(NWNX_Encounter, "SetNumberOfCreaturesInEncounterList");
+    }
+
     /// Gets the encounter creature list entry at the specified index
     /// <param name="encounter">The encounter object.</param>
     /// <param name="index">The index of the creature in the encounter list.</param>
@@ -185,6 +201,26 @@ namespace NWN.Core.NWNX
       NWNXPushObject(encounter);
       NWNXCall(NWNX_Encounter, "GetMaxNumSpawned");
       return NWNXPopInt();
+    }
+
+    /// Set the minimum amount of creatures that encounter will spawn.
+    /// <param name="encounter">The encounter object.</param>
+    /// <param name="minNumSpawned">The minimal amount, 1 or more, and no greater than the current maximum.</param>
+    public static void SetMinNumSpawned(uint encounter, int minNumSpawned)
+    {
+      NWNXPushInt(minNumSpawned);
+      NWNXPushObject(encounter);
+      NWNXCall(NWNX_Encounter, "SetMinNumSpawned");
+    }
+
+    /// Set the maximum amount of creatures that encounter will spawn.
+    /// <param name="encounter">The encounter object.</param>
+    /// <param name="maxNumSpawned">The maximal amount, 1 or more, and no less than the current minimum.</param>
+    public static void SetMaxNumSpawned(uint encounter, int maxNumSpawned)
+    {
+      NWNXPushInt(maxNumSpawned);
+      NWNXPushObject(encounter);
+      NWNXCall(NWNX_Encounter, "SetMaxNumSpawned");
     }
 
     /// Get the current number of creatures that are spawned and alive
