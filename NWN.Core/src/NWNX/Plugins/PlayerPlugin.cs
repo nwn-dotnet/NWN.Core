@@ -786,6 +786,19 @@ namespace NWN.Core.NWNX
       return NWNXPopObject();
     }
 
+    /// Get the player controlling oCreature.
+    /// @note This is the reverse of NWNX_Player_GetGameObject(): if oCreature is possessed by a DM, a possessed
+    /// familiar, or a creature taken over with NWNX_Player_PossessCreature(), this returns the player&apos;s own
+    /// creature that was left behind. A player&apos;s own creature that is not possessing anything returns itself.
+    /// <param name="oCreature">The creature.</param>
+    /// <returns>The player object (e.g. as returned by GetFirst/NextPC()) controlling oCreature, or OBJECT_INVALID if no player controls it.</returns>
+    public static uint GetControllingPlayer(uint oCreature)
+    {
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Player, "GetControllingPlayer");
+      return NWNXPopObject();
+    }
+
     /// Override the ui discovery mask of oObject for oPlayer only
     /// <param name="oPlayer">The player object.</param>
     /// <param name="oObject">The target object.</param>

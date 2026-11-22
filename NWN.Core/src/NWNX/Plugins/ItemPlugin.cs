@@ -88,7 +88,7 @@ namespace NWN.Core.NWNX
     /// ```
     /// nType                            nIndex                              nValue
     /// ITEM_APPR_TYPE_SIMPLE_MODEL      [Ignored]                           Model #
-    /// ITEM_APPR_TYPE_WEAPON_COLOR      ITEM_APPR_WEAPON_COLOR_*            0-255
+    /// ITEM_APPR_TYPE_WEAPON_COLOR      ITEM_APPR_WEAPON_COLOR_*            0-9
     /// ITEM_APPR_TYPE_WEAPON_MODEL      ITEM_APPR_WEAPON_MODEL_*            Model #
     /// ITEM_APPR_TYPE_ARMOR_MODEL       ITEM_APPR_ARMOR_MODEL_*             Model #
     /// ITEM_APPR_TYPE_ARMOR_COLOR       ITEM_APPR_ARMOR_COLOR_* [0]         0-255 [1]
@@ -109,7 +109,7 @@ namespace NWN.Core.NWNX
     /// <param name="nType">The type</param>
     /// <param name="nIndex">The index</param>
     /// <param name="nValue">The value</param>
-    /// <param name="bUpdateCreatureAppearance">If TRUE, also update the appearance of oItem&apos;s possessor. Only works for armor/helmets/cloaks. Will remove the item from the quickbar as side effect.</param>
+    /// <param name="bUpdateCreatureAppearance">If TRUE, also update the appearance of oItem&apos;s possessor. Only works for armor/helmets/cloaks; for an item held in either hand, call NWNX_Item_RefreshWieldedItems() after a short delay instead. Will remove the item from the quickbar as side effect.</param>
     public static void SetItemAppearance(uint oItem, int nType, int nIndex, int nValue, int bUpdateCreatureAppearance = FALSE)
     {
       NWNXPushInt(bUpdateCreatureAppearance);
@@ -118,6 +118,28 @@ namespace NWN.Core.NWNX
       NWNXPushInt(nType);
       NWNXPushObject(oItem);
       NWNXCall(NWNX_Item, "SetItemAppearance");
+    }
+
+    /// Close and reopen a player&apos;s inventory window and resend everything in it.
+    /// @remark The client keeps showing a worn item&apos;s old icon while its inventory window is open. Call this
+    /// a moment (e.g. DelayCommand 0.5) after NWNX_Item_SetItemAppearance() so the window shows the new look.
+    /// Does nothing if the window is closed.
+    /// <param name="oPlayer">The player whose inventory window to refresh.</param>
+    public static void RefreshInventoryWindow(uint oPlayer)
+    {
+      NWNXPushObject(oPlayer);
+      NWNXCall(NWNX_Item, "RefreshInventoryWindow");
+    }
+
+    /// Make every player resend what oCreature holds in its hands, without destroying the items.
+    /// @remark After the client recreates a wielded weapon or shield whose appearance changed, it can&apos;t draw it
+    /// straight away, so the hand looks empty. Calling this every 0.05 s for about 0.5 s afterwards puts it back
+    /// as soon as the client can draw it. Players see a re-equip motion; nothing is unequipped on the server.
+    /// <param name="oCreature">The creature holding the items.</param>
+    public static void RefreshWieldedItems(uint oCreature)
+    {
+      NWNXPushObject(oCreature);
+      NWNXCall(NWNX_Item, "RefreshWieldedItems");
     }
 
     /// Return a string containing the entire appearance for an item.
