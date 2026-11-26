@@ -70,6 +70,24 @@ namespace NWN.Core.NWNX
 
     ///&lt; Random Elemental VFX
     // @}
+    /// @name Level Up Bypass Flags
+    /// @anchor levelup_bypass_flags
+    ///
+    /// Used with NWNX_Creature_LevelUp() to skip class requirement checks. Combine with a bitwise OR.
+    /// @{
+    public const int NWNX_CREATURE_LEVELUP_BYPASS_NONE = 0;
+
+    ///&lt; Check all class requirements
+    public const int NWNX_CREATURE_LEVELUP_BYPASS_PREREQUISITES = 1;
+
+    ///&lt; Skip prestige class prerequisites
+    public const int NWNX_CREATURE_LEVELUP_BYPASS_ALIGNMENT = 2;
+
+    ///&lt; Skip class alignment restrictions
+    public const int NWNX_CREATURE_LEVELUP_BYPASS_ALL = 0xFF;
+
+    ///&lt; Skip all class requirements, including the class&apos;s MaxLevel and EpicLevel
+    // @}
     public const int NWNX_CREATURE_ABILITY_NONE = 6;
 
     /// @struct NWNX_Creature_SpecialAbility
@@ -826,14 +844,17 @@ namespace NWN.Core.NWNX
       NWNXCall(NWNX_Creature, "SetBaseSavingThrow");
     }
 
-    /// Add levels of class to the creature, bypassing all validation
+    /// Add levels of class to the creature, bypassing level up validation.
     /// <param name="creature">The creature object.</param>
     /// <param name="class">The class id.</param>
     /// <param name="count">The amount of levels of class to add.</param>
     /// <param name="package">The class package to use for leveling up (PACKAGE_INVALID = starting package)</param>
+    /// <param name="bypass">The class requirements to skip, a @ref levelup_bypass_flags &quot;Level Up Bypass Flag&quot; or a combination of them.</param>
     /// @note This will not work on player characters.
-    public static void LevelUp(uint creature, int @class, int count = 1, int package = PACKAGE_INVALID)
+    /// @note Unless bypassed, the creature must still be able to take the class: its alignment, the class&apos;s prerequisites, MaxLevel and EpicLevel.
+    public static void LevelUp(uint creature, int @class, int count = 1, int package = PACKAGE_INVALID, int bypass = NWNX_CREATURE_LEVELUP_BYPASS_NONE)
     {
+      NWNXPushInt(bypass);
       NWNXPushInt(package);
       NWNXPushInt(count);
       NWNXPushInt(@class);
